@@ -39,7 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="border-bottom:none;">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -56,6 +56,17 @@
                 </div>
             </div>
         </div>
+        <div class="bottomNav" style="background-color:#222222; height:50px; border-bottom-left-radius:5px;border-bottom-right-radius:5px;">
+        <div class="container">             
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/About">Inventory</a></li>
+                        <li><a runat="server" href="~/Contact">Market</a></li>
+                    </ul>
+                </div>
+            </div>
+   </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
