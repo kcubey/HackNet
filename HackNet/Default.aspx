@@ -20,17 +20,26 @@
                         </div>
                        
                         <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                        <div class="progress-bar " role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
                           <asp:Label runat="server">???/???</asp:Label>
                         </div>                           
                       </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 col-md-4">
-
+            <div class="col-xs-6 col-md-4" style="border:1px dotted blue;">
+                Medals
+                <asp:BulletedList runat="server">
+                   <asp:ListItem>
+                       Script kiddie
+                   </asp:ListItem>
+                </asp:BulletedList>
             </div>
         </div>
+    </div>
+
+    <div>
+
     </div>
 
   
