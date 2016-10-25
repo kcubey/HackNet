@@ -54,14 +54,7 @@
         <div class="navbar navbar-fixed-top mainnav" style="border-bottom: none;">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" runat="server" href="~/">HackNet</a>
-                </div>
-                <div class="navbar-collapse navbar-left collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Game/Inventory">Inventory</a></li>
-                        <li><a runat="server" href="~/Game/Market">Market</a></li>
-                    </ul>
+                    <a class="navbar-brand" runat="server" href="~/">HackNet<span class="blinking">_</span></a>
                 </div>
                 <div class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
