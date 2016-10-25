@@ -9,16 +9,24 @@
     <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%: Scripts.Render("~/bundles/modernizr") %> 
     </asp:PlaceHolder>
-
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
     <script>
+    	$(window).keydown(function (e) {
+    		if ((e.metaKey || e.ctrlKey) && e.keyCode == 67) {
+				console.log("Control-C KEY PRESSED")
+    			location.assign("/");
+    			e.preventDefault();
+    			return false;
+    		}
+    	});
+
         window.setInterval(function () {
-            $('.blinking').toggle();
+        	$('.blinking').toggle();
         }, 500);
     </script>
     <form runat="server">
