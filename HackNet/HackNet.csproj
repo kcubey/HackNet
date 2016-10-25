@@ -124,12 +124,11 @@
     <Content Include="Content\Images\hackerpic.jpg" />
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />
+    <Content Include="Content\MainPage.css" />
+    <Content Include="Content\Images\grungebg.png" />
+    <Content Include="Content\onepage-scroll.css" />
     <Content Include="Content\Images\use_your_illusion.png" />
     <Content Include="Content\Images\vertical_cloth.png" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\Site.min.css">
-      <DependentUpon>Site.css</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -153,6 +152,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery.onepage-scroll.js" />
     <Content Include="Scripts\Lines.txt" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />

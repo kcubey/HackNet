@@ -1,39 +1,38 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Lekton');
+$basicfont: 'Lekton', san-serif;
+$contentfg: greenyellow;
+$contentbg: rgba(0, 0, 0, 0.9);
+$overallbg: url('./Images/grungebg.png');
 
 body {
     padding-top: 50px;
     color:white;
-    padding-bottom: 20px;
-    background-color: lightslategray;
+    background: $overallbg;
 }
 
-table {
-    border: 1px solid white;
-}
-
-.panel {
+.panel, .btn-default {
+	// clear existing borders
     border: 0;
 }
 
-.btn-default {
-    border: 0;  
-}
-
 .panel-body {
-    font-family: 'Lekton', sans-serif;
-    color: greenyellow;
-    background-color: black;
+    font-family: $basicfont;
+    color: $contentfg;
+    background-color: $contentbg;
+	border-radius:5px;
 }
 
 .navbar-fixed-top {
-    font-family: 'Lekton', sans-serif;
+    font-family: $basicfont;
+    color: $contentfg;
     background: black;
-    color: greenyellow;
 }
 
-.navbar-fixed-top a {
-    background-color:black;
-    color:greenyellow;
+.navbar-fixed-top {
+	a {
+		background-color:$contentbg;
+		color:greenyellow;
+	}
 }
 
 .nav > li > a:hover {
@@ -51,6 +50,9 @@ table {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+	background-color: rgba(0,0,0,0.2);
+	min-height:110vh;
+	padding-bottom:50px;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -67,9 +69,6 @@ textarea {
         margin-top: 20px;
     }
 
-    .body-content {
-        padding: 0;
-    }
 }
 
 /*Overiding styles for testing of GUI only*/

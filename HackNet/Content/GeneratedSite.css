@@ -2,30 +2,24 @@
 body {
   padding-top: 50px;
   color: white;
-  padding-bottom: 20px;
-  background-color: lightslategray; }
+  background: url("Images/grungebg.png"); }
 
-table {
-  border: 1px solid white; }
-
-.panel {
-  border: 0; }
-
-.btn-default {
+.panel, .btn-default {
   border: 0; }
 
 .panel-body {
-  font-family: 'Lekton', sans-serif;
+  font-family: "Lekton", san-serif;
   color: greenyellow;
-  background-color: black; }
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5px; }
 
 .navbar-fixed-top {
-  font-family: 'Lekton', sans-serif;
-  background: black;
-  color: greenyellow; }
+  font-family: "Lekton", san-serif;
+  color: greenyellow;
+  background: black; }
 
 .navbar-fixed-top a {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
   color: greenyellow; }
 
 .nav > li > a:hover {
@@ -40,7 +34,10 @@ table {
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+  min-height: 110vh;
+  padding-bottom: 50px; }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
@@ -51,9 +48,7 @@ textarea {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .jumbotron {
-    margin-top: 20px; }
-  .body-content {
-    padding: 0; } }
+    margin-top: 20px; } }
 
 /*Overiding styles for testing of GUI only*/
 
