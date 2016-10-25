@@ -1,7 +1,17 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    color:white;
     padding-bottom: 20px;
+    background-image: url("./Images/vertical_cloth.png");
+}
+
+table {
+    border: 1px solid white;
+}
+
+div.panel {
+    color:black;
 }
 
 /* Wrapping element */
