@@ -37,7 +37,9 @@ body {
   padding-right: 15px;
   background-color: rgba(0, 0, 0, 0.2);
   min-height: 110vh;
-  padding-bottom: 50px; }
+  padding-bottom: 50px;
+  border-left: 1px solid greenyellow;
+  border-right: 1px solid greenyellow; }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,

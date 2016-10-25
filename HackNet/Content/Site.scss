@@ -53,6 +53,8 @@ body {
 	background-color: rgba(0,0,0,0.2);
 	min-height:110vh;
 	padding-bottom:50px;
+	border-left: 1px solid $contentfg;
+	border-right: 1px solid $contentfg;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
