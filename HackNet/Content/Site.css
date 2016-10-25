@@ -3,15 +3,47 @@ body {
     padding-top: 50px;
     color:white;
     padding-bottom: 20px;
-    background-image: url("./Images/vertical_cloth.png");
+    background-color: lightslategray;
 }
 
 table {
     border: 1px solid white;
 }
 
-div.panel {
-    color:black;
+.panel {
+    border: 0;
+}
+
+.btn-default {
+    border: 0;  
+}
+
+.panel-body {
+    font-family: Courier New, Courier, monospace;
+    color: greenyellow;
+    background-color: black;
+}
+
+.navbar-fixed-top {
+    font-family: Courier New, Courier, monospace;
+    background: black;
+    color: greenyellow;
+    font: monospaced;
+}
+
+.navbar-fixed-top a {
+    background-color:black;
+    color:greenyellow;
+}
+
+.nav > li > a:hover {
+    background-color:darkgreen;
+    color:white;
+}
+
+.btn {
+    background-color: black;
+    color:greenyellow;
 }
 
 /* Wrapping element */

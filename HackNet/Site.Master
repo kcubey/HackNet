@@ -17,6 +17,11 @@
 
 </head>
 <body>
+    <script>
+        window.setInterval(function () {
+            $('.blinking').toggle();
+        }, 500);
+    </script>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -39,17 +44,23 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-fixed-top" style="border-bottom: none; background-color: white;">
+        <div class="navbar navbar-fixed-top mainnav" style="border-bottom: none;">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" runat="server" href="~/">HackNet</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a runat="server" href="~/">Home</a></li>
-                    <li><a runat="server" href="~/About">Inventory</a></li>
-                    <li><a runat="server" href="~/Contact">Market</a></li>
-                </ul>
+                <div class="navbar-collapse navbar-left collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Game/Inventory">Inventory</a></li>
+                        <li><a runat="server" href="~/Game/Market">Market</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse navbar-right collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/Auth/Login">Preferences</a></li>
+                        <li><a runat="server" href="~/Auth/Register">Security</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
