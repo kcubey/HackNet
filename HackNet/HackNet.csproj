@@ -121,9 +121,11 @@
     <Content Include="Content\GeneratedSite.min.css">
       <DependentUpon>GeneratedSite.css</DependentUpon>
     </Content>
+    <Content Include="Content\Images\console.png" />
     <Content Include="Content\Images\hackerpic.jpg" />
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />
+    <Content Include="Content\Images\doge.png" />
     <Content Include="Content\MainPage.css" />
     <Content Include="Content\Images\grungebg.png" />
     <Content Include="Content\onepage-scroll.css" />
@@ -144,7 +146,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\Site.scss" />
+    <Content Include="Styling.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

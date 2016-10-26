@@ -317,7 +317,8 @@ header {
 }
 
 .main section.page3 {
-	background: url(tilted-phone.png) no-repeat 156px -150px;
+	background: url('Images/denim.png') 150px 150px;
+    background-size: 300px;
 }
 
 	.main section.page3 .page_container {
@@ -333,10 +334,39 @@ header {
 		margin-bottom: 0;
 		font-size: 70px;
 		letter-spacing: -1px;
-		color: black;
+		color: white;
 	}
 
 	.main section.page3 h2 {
+		color: rgba(255,255,255,0.85);
+		text-align: left;
+		line-height: 160%;
+		font-weight: 100;
+		font-size: 21px;
+	}
+
+.main section.page4 {
+	background: url('Images/doge.png') no-repeat 150px 150px;
+    background-size: 300px;
+}
+
+	.main section.page4 .page_container {
+		overflow: hidden;
+		max-width: 500px;
+		width: 100%;
+		right: -285px;
+	}
+
+	.main section.page4 h1 {
+		text-align: left;
+		padding: 0;
+		margin-bottom: 0;
+		font-size: 70px;
+		letter-spacing: -1px;
+		color: black;
+	}
+
+	.main section.page4 h2 {
 		color: rgba(0,0,0,0.85);
 		text-align: left;
 		line-height: 160%;
@@ -420,6 +450,10 @@ body .socials {
 	display: block;
 	float: left;
 	clear: both;
+}
+
+.onepage-pagination li a {
+    filter: invert(100%);
 }
 
 @media (max-width: 500px) {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="HackNet.Game.Home" %>
+﻿<%@ Page Title="Home" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="HackNet.Game.Home" %>
 <asp:Content ID="HomePageContent" ContentPlaceHolderID="GameContent" runat="server">
 
     <div class="panel panel-default">

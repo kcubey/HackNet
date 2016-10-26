@@ -1,8 +1,12 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Lekton');
-$basicfont: 'Lekton', san-serif;
+﻿@import url('https://fonts.googleapis.com/css?family=Exo');
+$basicfont: 'Exo', san-serif;
 $contentfg: greenyellow;
 $contentbg: rgba(0, 0, 0, 0.9);
-$overallbg: url('./Images/grungebg.png');
+$overallbg: url('./Content/Images/grungebg.png');
+
+* {
+    font-family: $basicfont;
+}
 
 body {
     padding-top: 50px;
@@ -16,14 +20,12 @@ body {
 }
 
 .panel-body {
-    font-family: $basicfont;
     color: $contentfg;
     background-color: $contentbg;
 	border-radius:5px;
 }
 
 .navbar-fixed-top {
-    font-family: $basicfont;
     color: $contentfg;
     background: black;
 }
@@ -43,6 +45,10 @@ body {
 .btn {
     background-color: black;
     color:greenyellow;
+}
+
+footer {
+    color: black;
 }
 
 /* Wrapping element */

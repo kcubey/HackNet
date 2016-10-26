@@ -1,6 +1,6 @@
 ﻿[
   {
     "outputFile": "Content/GeneratedSite.css",
-    "inputFile": "Content/Site.scss"
+    "inputFile": "Styling.scss"
   }
 ]

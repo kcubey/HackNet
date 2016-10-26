@@ -1,4 +1,7 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Lekton");
+﻿@import url("https://fonts.googleapis.com/css?family=Exo");
+* {
+  font-family: "Exo", san-serif; }
+
 body {
   padding-top: 50px;
   color: white;
@@ -8,13 +11,11 @@ body {
   border: 0; }
 
 .panel-body {
-  font-family: "Lekton", san-serif;
   color: greenyellow;
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 5px; }
 
 .navbar-fixed-top {
-  font-family: "Lekton", san-serif;
   color: greenyellow;
   background: black; }
 
@@ -29,6 +30,9 @@ body {
 .btn {
   background-color: black;
   color: greenyellow; }
+
+footer {
+  color: black; }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
