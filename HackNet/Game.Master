@@ -49,7 +49,7 @@
     </div>
     <div class="row text-center">
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">Announcement</button>
+            <button type="button" class="btn btn-default">Announcements</button>
             <button type="button" class="btn btn-default">Hackspace</button>
             <button type="button" class="btn btn-default">Missions</button>
             <button type="button" class="btn btn-default">Events</button>
