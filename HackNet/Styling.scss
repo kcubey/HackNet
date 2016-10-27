@@ -1,7 +1,9 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Exo');
 $basicfont: 'Exo', san-serif;
 $contentfg: greenyellow;
-$contentbg: rgba(0, 0, 0, 0.9);
+$contentbg: rgba(10, 10, 10, 0.9);
+$headingfg: greenyellow;
+$headingbg: rgba(60, 60, 60, 0.9);
 $overallbg: url('./Content/Images/grungebg.png');
 
 * {
@@ -17,24 +19,32 @@ body {
 .panel, .btn-default {
 	// clear existing borders
     border: 0;
-}
+	background-color: $headingbg;
+	
+	.panel-heading {
+		background-color: $headingbg;
+		color: $headingfg;
+	}
 
-.panel-body {
+	.panel-body {
     color: $contentfg;
     background-color: $contentbg;
 	border-radius:5px;
-}
-
-.navbar-fixed-top {
-    color: $contentfg;
-    background: black;
-}
-
-.navbar-fixed-top {
-	a {
-		background-color:$contentbg;
-		color:greenyellow;
 	}
+}
+
+.navbar-fixed-top {
+
+    background: black;
+
+	a {
+		color: $contentfg;
+	}
+}
+
+.jumbotron {
+	color: $contentfg;
+	background-color: $contentbg;
 }
 
 .nav > li > a:hover {
@@ -49,6 +59,87 @@ body {
 
 footer {
     color: black;
+}
+
+/* LOGIN STUFF */
+
+.loginTable{
+	margin-bottom: 25px;
+	width: 650px;
+
+	input {
+		background-color: black;
+		color:greenyellow;
+	}
+
+	input[type="text"], input[type="password"] {
+		width:240px;
+	}
+
+	input[type="radio"] {
+		margin: 0;
+	}
+
+	td:nth-child(3) {
+		width:200px;
+	}
+
+	tr, td {
+		padding: 0 5px 10px 0;
+	}
+}
+
+.regBtn {
+	display:none;
+}
+
+/* Styling for Sign Up page*/
+
+.regTable {
+	background-color:#ffffff;
+
+	input[type="text"], input[type="password"] {
+		width:270px;
+	}
+
+	td:nth-child(1) {
+		width:180px;
+	}
+
+	td:nth-child(3) {
+		width:200px;
+	}
+
+	tr, td {
+		padding: 0 5px 10px 0;
+	}
+
+}
+
+/* Styling for OTP page */
+
+.otpTable td {
+	padding:10px;
+}
+
+.setupRowLeft{
+    float:left;
+    width:70%;
+    overflow:auto;
+}
+
+.setupRowRight{
+    float:right;
+    overflow:auto;
+}
+
+.otpSetupValue{
+    width:100%;
+    margin-bottom:10px;
+}
+.qrPlaceholder{
+    height:300px;
+    width:300px;
 }
 
 /* Wrapping element */
