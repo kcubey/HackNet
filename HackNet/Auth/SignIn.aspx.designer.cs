@@ -13,22 +13,22 @@ namespace HackNet.Auth {
     public partial class SignIn {
         
         /// <summary>
-        /// UserName control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserName;
+        protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// UserNameValidator control.
+        /// EmailValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator UserNameValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailValidator;
         
         /// <summary>
         /// UserPass control.
@@ -65,14 +65,5 @@ namespace HackNet.Auth {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button LoginButton;
-        
-        /// <summary>
-        /// RegisterButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RegisterButton;
     }
 }

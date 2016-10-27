@@ -13,13 +13,13 @@
 		<div class="panel-body">
 			<table runat="server" class="loginTable">
 				<tr>
-					<td><strong>Username:</strong></td>
+					<td><strong>Email:</strong></td>
 					<td>
-						<asp:TextBox ID="UserName" runat="server" CssClass="form-control" /></td>
+						<asp:TextBox ID="Email" runat="server" CssClass="form-control" /></td>
 					<td>
 						<asp:RequiredFieldValidator
-							ID="UserNameValidator"
-							ControlToValidate="UserName"
+							ID="EmailValidator"
+							ControlToValidate="Email"
 							Display="Dynamic"
 							ErrorMessage="*"
 							ValidationGroup="valGroup1"
@@ -51,10 +51,8 @@
 					<td><strong>I am a...</strong></td>
 					<td>
 						<div class="radio">
-							<asp:RadioButtonList runat="server" RepeatLayout="flow">
-								<asp:ListItem Text=" Returning User" Value="false" Selected="True" />
-								<asp:ListItem Text=" New User" Value="true" />
-							</asp:RadioButtonList>
+							<input type="radio" name="userstate" id="ret" value="returning" checked="checked"><label for="ret">Returning User</label><br>
+							<input type="radio" name="userstate" id="new" value="new"><label for="new">New User</label><br>
 						</div>
 					</td>
 				</tr>
@@ -64,12 +62,13 @@
 				CssClass="btn btn-primary loginBtn"
 				OnClick="LoginClick"
 				runat="server" />
-			<asp:Button ID="RegisterButton"
-				Text="Sign Up"
-				ValidationGroup="valGroup1"
-				CssClass="btn btn-success regBtn"
-				OnClick="RegisterClick"
-				runat="server" />
+			<script>
+				$(function () {
+					$("#new").on('click', function (e) {
+						window.location = "SignUp.aspx"
+					});
+				});
+			</script>
 		</div>
 	</div>
 </asp:Content>

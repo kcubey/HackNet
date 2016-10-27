@@ -41,7 +41,7 @@
             <div class="col-sm-12 col-md-3" style="box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9); background-color: darkred; color: white;">
                 Medals
                  <asp:BulletedList runat="server">
-                     <asp:ListItem> Script Kiddie Medal </asp:ListItem>
+                     <asp:ListItem> Script Kiddie Meal </asp:ListItem>
                  </asp:BulletedList>
                 <br />
             </div>
