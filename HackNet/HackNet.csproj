@@ -127,6 +127,7 @@
     <Content Include="Content\Images\hekingbg.jpg" />
     <Content Include="Content\Images\doge.png" />
     <Content Include="Content\Images\mission.jpg" />
+    <Content Include="Content\Images\mission.png" />
     <Content Include="Content\MainPage.css" />
     <Content Include="Content\Images\grungebg.png" />
     <Content Include="Content\onepage-scroll.css" />
@@ -239,6 +240,7 @@
     <Compile Include="Game\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Game\Machine.cs" />
     <Compile Include="Game\Mission.aspx.cs">
       <DependentUpon>Mission.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
