@@ -51,7 +51,7 @@
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
             <button type="button" class="btn btn-default">Announcements</button>
             <button type="button" class="btn btn-default">Hackspace</button>
-            <button type="button" class="btn btn-default">Missions</button>
+            <button type="button" class="btn btn-default"><a runat="server" href="~/Game/Mission.aspx">Missions</a></button>
             <button type="button" class="btn btn-default">Events</button>
             <button type="button" class="btn btn-default">Logs</button>
             <button type="button" class="btn btn-default">Inventory</button>
