@@ -55,7 +55,7 @@
             <button type="button" class="btn btn-default">Events</button>
             <button type="button" class="btn btn-default">Logs</button>
             <button type="button" class="btn btn-default">Inventory</button>
-            <button type="button" class="btn btn-default">Market</button>
+            <button type="button" class="btn btn-default"><a runat="server" href="~/Market/Market.aspx">Market</a></button>
         </div>
     </div>
     <br />
