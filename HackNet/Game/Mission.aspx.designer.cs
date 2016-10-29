@@ -11,5 +11,32 @@ namespace HackNet.Game {
     
     
     public partial class Mission {
+        
+        /// <summary>
+        /// AttackTypeHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AttackTypeHeader;
+        
+        /// <summary>
+        /// AttackLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AttackLink;
+        
+        /// <summary>
+        /// LogPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel LogPanel;
     }
 }
