@@ -26,7 +26,8 @@
            
         </div>
         <div class="panel-footer" style="background-color:#091012; border-top:1px solid white; padding:0;">
-            <asp:TextBox runat="server"></asp:TextBox>
+            <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
+            <asp:TextBox runat="server" BackColor="#091012" BorderStyle="None" style="min-width:70%; padding:5px;"></asp:TextBox>
         </div>
         
     </div>
