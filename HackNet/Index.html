@@ -16,7 +16,7 @@
 	<!--- DOM THE CSS IS IN THE BELOWMENTIONED FILE --->
 	<link href="/Content/MainPage.css" rel="stylesheet" type="text/css" />
 
-	<script>
+    <script>
 	  $(document).ready(function(){
       $(".main").onepage_scroll({
         sectionContainer: "section",
@@ -24,6 +24,16 @@
         responsiveFallback: false
       });
 		});
+
+
+    	$(window).keydown(function (e) {
+    		if (e.keyCode == 13) {
+				console.log("ENTER KEY PRESSED")
+    			location.assign("/Game/Home.aspx");
+    			e.preventDefault();
+    			return false;
+    		}
+    	});
 
 	</script>
 </head>
