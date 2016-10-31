@@ -8,20 +8,24 @@ body {
   background: url("Images/grungebg.png"); }
 
 .panel, .btn-default {
-  border: 0; }
-
-.panel-body {
-  color: greenyellow;
-  background-color: rgba(0, 0, 0, 0.9);
-  border-radius: 5px; }
+  border: 0;
+  background-color: rgba(60, 60, 60, 0.9); }
+  .panel .panel-heading, .btn-default .panel-heading {
+    background-color: rgba(60, 60, 60, 0.9);
+    color: greenyellow; }
+  .panel .panel-body, .btn-default .panel-body {
+    color: greenyellow;
+    background-color: rgba(10, 10, 10, 0.9);
+    border-radius: 5px; }
 
 .navbar-fixed-top {
-  color: greenyellow;
   background: black; }
+  .navbar-fixed-top a {
+    color: greenyellow; }
 
-.navbar-fixed-top a {
-  background-color: rgba(0, 0, 0, 0.9);
-  color: greenyellow; }
+.jumbotron {
+  color: greenyellow;
+  background-color: rgba(10, 10, 10, 0.9); }
 
 .nav > li > a:hover {
   background-color: darkgreen;
@@ -33,6 +37,58 @@ body {
 
 footer {
   color: black; }
+
+/* LOGIN STUFF */
+.loginTable {
+  margin-bottom: 25px;
+  width: 650px; }
+  .loginTable input {
+    background-color: black;
+    color: greenyellow; }
+  .loginTable input[type="text"], .loginTable input[type="password"] {
+    width: 240px; }
+  .loginTable input[type="radio"] {
+    margin: 0; }
+  .loginTable td:nth-child(3) {
+    width: 200px; }
+  .loginTable tr, .loginTable td {
+    padding: 0 5px 10px 0; }
+
+.regBtn {
+  display: none; }
+
+/* Styling for Sign Up page*/
+.regTable {
+  background-color: #ffffff; }
+  .regTable input[type="text"], .regTable input[type="password"] {
+    width: 270px; }
+  .regTable td:nth-child(1) {
+    width: 180px; }
+  .regTable td:nth-child(3) {
+    width: 200px; }
+  .regTable tr, .regTable td {
+    padding: 0 5px 10px 0; }
+
+/* Styling for OTP page */
+.otpTable td {
+  padding: 10px; }
+
+.setupRowLeft {
+  float: left;
+  width: 70%;
+  overflow: auto; }
+
+.setupRowRight {
+  float: right;
+  overflow: auto; }
+
+.otpSetupValue {
+  width: 100%;
+  margin-bottom: 10px; }
+
+.qrPlaceholder {
+  height: 300px;
+  width: 300px; }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */

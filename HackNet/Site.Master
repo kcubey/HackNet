@@ -58,8 +58,8 @@
                 </div>
                 <div class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Auth/Login">Preferences</a></li>
-                        <li><a runat="server" href="~/Auth/Register">Security</a></li>
+                        <li><a runat="server" href="~/Auth/SignIn">Login</a></li>
+                        <li><a runat="server" href="~/Auth/Register">Register</a></li>
                     </ul>
                 </div>
             </div>

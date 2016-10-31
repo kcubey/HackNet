@@ -41,7 +41,7 @@
             <div class="col-sm-12 col-md-3" style="box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9); background-color: darkred; color: white;">
                 Medals
                  <asp:BulletedList runat="server">
-                     <asp:ListItem> Script Kiddie Medal </asp:ListItem>
+                     <asp:ListItem> Script Kiddie Meal </asp:ListItem>
                  </asp:BulletedList>
                 <br />
             </div>
@@ -51,11 +51,11 @@
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
             <button type="button" class="btn btn-default">Announcements</button>
             <button type="button" class="btn btn-default">Hackspace</button>
-            <button type="button" class="btn btn-default">Missions</button>
+            <button type="button" class="btn btn-default"><a runat="server" href="~/Game/Mission.aspx">Missions</a></button>
             <button type="button" class="btn btn-default">Events</button>
             <button type="button" class="btn btn-default">Logs</button>
             <button type="button" class="btn btn-default">Inventory</button>
-            <button type="button" class="btn btn-default">Market</button>
+            <button type="button" class="btn btn-default"><a runat="server" href="~/Market/Market.aspx">Market</a></button>
         </div>
     </div>
     <br />
