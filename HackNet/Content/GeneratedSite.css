@@ -44,7 +44,7 @@ footer {
   width: 650px; }
   .loginTable input {
     background-color: black;
-    color: greenyellow; }
+    color: white; }
   .loginTable input[type="text"], .loginTable input[type="password"] {
     width: 240px; }
   .loginTable input[type="radio"] {
@@ -53,6 +53,10 @@ footer {
     width: 200px; }
   .loginTable tr, .loginTable td {
     padding: 0 5px 10px 0; }
+
+.form-control:focus {
+  border-color: greenyellow;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.8); }
 
 .regBtn {
   display: none; }

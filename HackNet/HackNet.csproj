@@ -142,7 +142,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Game\Home.aspx" />
-    <Content Include="Game\Mission.aspx" />
+    <Content Include="Game\Missions.aspx" />
     <Content Include="Index.html" />
     <Content Include="Market\Market.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -251,12 +251,12 @@
     <Compile Include="Game\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Mission.aspx.cs">
-      <DependentUpon>Mission.aspx</DependentUpon>
+    <Compile Include="Game\Missions.aspx.cs">
+      <DependentUpon>Missions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Game\Mission.aspx.designer.cs">
-      <DependentUpon>Mission.aspx</DependentUpon>
+    <Compile Include="Game\Missions.aspx.designer.cs">
+      <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Mission.cs" />
     <Compile Include="Global.asax.cs">
@@ -270,6 +270,7 @@
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\User.cs" />
     <Compile Include="Site.Master.cs">

@@ -10,7 +10,7 @@
 namespace HackNet.Game {
     
     
-    public partial class Mission {
+    public partial class Missions {
         
         /// <summary>
         /// AttackTypeHeader control.

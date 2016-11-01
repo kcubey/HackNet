@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Mission" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Mission.aspx.cs" Inherits="HackNet.Game.Mission" %>
+﻿<%@ Page Title="Mission" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Missions.aspx.cs" Inherits="HackNet.Game.Missions" %>
 
 <asp:Content ID="MissionPageContent" ContentPlaceHolderID="GameContent" runat="server">
 
