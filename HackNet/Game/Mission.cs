@@ -17,10 +17,12 @@ namespace HackNet.Game
 
         }
 
-        public List<string> scanMission(Mission mission)
+        public List<string> scanMission(Mission mission,string username)
         {
+
+
             List<string> scanList = new List<string>();
-            scanList.Add("");
+            scanList.Add("Starting Hmap 8.88 at " + DateTime.Now);
 
 
 
