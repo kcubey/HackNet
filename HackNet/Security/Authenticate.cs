@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,6 +12,8 @@ namespace HackNet.Security
     {
         internal string Hash(byte[] password, byte[] salt = null)
         {
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
             byte[] hashedbytes;
             if (salt == null)
             {
@@ -21,6 +24,8 @@ namespace HackNet.Security
             {
                 hashedbytes = kdf.GetBytes(128);
             }
+			sw.Stop();
+			Debug.WriteLine(sw.Elapsed);
 
             return Convert.ToBase64String(hashedbytes);
         }
