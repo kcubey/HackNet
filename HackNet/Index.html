@@ -38,6 +38,10 @@
 	</script>
 
     <style>
+        .btnsspanbr{
+           display: none;
+        }
+
         @media screen and (max-width: 480px) {
             ul.onepage-pagination {
                 visibility:hidden;
@@ -102,6 +106,15 @@
             margin-top:30px;
           }
         }
+
+        @media screen and (max-width: 370px) {
+          .btnsspan {
+              display: none;
+          }
+          .btnsspanbr {
+              display: inline;
+          }
+        }
     </style>
 </head>
 <body>
@@ -118,7 +131,7 @@
 
 					<div class="btns">
 						<a class="reload btn" href="/Game/Home.aspx">Play Now</a>
-						<p class="text-btn">Here is <a href="/Game/Home.aspx">SOME LINK</a><span style="color:#fff;"> | </span><a href="/Game/Home.aspx">ANOTHER LINK</a> version</p>
+						<p class="text-btn">Here is <a href="/Game/Home.aspx">SOME LINK</a><span class="btnsspan" style="color:#fff;"> | </span><br class="btnsspanbr"/><a href="/Game/Home.aspx">ANOTHER LINK</a> version</p>
 					</div>
 				</div>
 				<img class="consolepngimg" src="Content/Images/console.png" alt="imghere" height="128">
