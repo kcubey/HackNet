@@ -17,10 +17,15 @@ namespace HackNet.Game
 
         protected void AttackLink_Click(object sender, EventArgs e)
         {
-            ArrayList arrList = new ArrayList();
-            arrList.Add("Port Scan: activated");
-            arrList.Add("Scanning in progress");
-            arrList.Add("10 open ports found");
+            Mission mis = new Mission();
+            mis.IPaddress = "192.168.10.10";
+            mis.numOfFirewall = 10;
+            mis.Objective = "Steal Data";
+            mis.numOfPorts = 10;
+
+
+
+            List<string> arrList = mis.scanMission(mis,"testuser");
 
             string username = "testuser"+"@HackNet:~#  ";
             for(int i=0;i<arrList.Count;i++)
