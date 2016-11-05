@@ -23,15 +23,12 @@ namespace HackNet.Game
             mis.Objective = "Steal Data";
             mis.numOfPorts = 10;
 
-
-
             List<string> arrList = mis.scanMission(mis,"testuser");
 
-            string username = "testuser"+"@HackNet:~#  ";
             for(int i=0;i<arrList.Count;i++)
             {
                 Label lbl = new Label();
-                lbl.Text = username+arrList[i].ToString();
+                lbl.Text = arrList[i].ToString();
                 LogPanel.Controls.Add(lbl);
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }

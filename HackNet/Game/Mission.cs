@@ -19,11 +19,13 @@ namespace HackNet.Game
 
         public List<string> scanMission(Mission mission,string username)
         {
+            string console=username+ "@HackNet: ~#  ";
 
-
-            List<string> scanList = new List<string>();
+            List <string> scanList = new List<string>();
+            scanList.Add(console + "Hmap "+mission.IPaddress);
             scanList.Add("Starting Hmap 8.88 at " + DateTime.Now);
-
+            scanList.Add("Host is up");
+            scanList.Add("Server Info: ");
 
 
 
