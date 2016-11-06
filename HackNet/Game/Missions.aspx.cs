@@ -13,6 +13,7 @@ namespace HackNet.Game
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
         }
 
         protected void AttackLink_Click(object sender, EventArgs e)
