@@ -145,6 +145,7 @@
     <Content Include="Game\Missions.aspx" />
     <Content Include="Index.html" />
     <Content Include="Market\Market.aspx" />
+    <Content Include="Market\market.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

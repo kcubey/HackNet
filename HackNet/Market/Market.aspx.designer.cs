@@ -10,6 +10,6 @@
 namespace HackNet.Market {
     
     
-    public partial class Market2 {
+    public partial class Market {
     }
 }
