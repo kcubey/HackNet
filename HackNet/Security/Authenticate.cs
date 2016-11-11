@@ -52,6 +52,14 @@ namespace HackNet.Security
             }
         }
 
+        internal static string GetEmail()
+        {
+            if (!IsAuthenticated())
+                throw new AuthException("Not logged in");
+
+            return HttpContext.Current.User.Identity.Name;
+        }
+
         internal static byte[] Generate(int size)
         {
             if (size == 0) // Guard clause
