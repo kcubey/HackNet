@@ -13,6 +13,24 @@ namespace HackNet {
     public partial class SiteMaster {
         
         /// <summary>
+        /// LeftBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor LeftBtn;
+        
+        /// <summary>
+        /// RightBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor RightBtn;
+        
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

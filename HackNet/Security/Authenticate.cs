@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Text;
 
 namespace HackNet.Security
 {
@@ -32,10 +33,26 @@ namespace HackNet.Security
 
         internal byte[] Encode(string str)
         {
-            return Convert.FromBase64String(str);
+            return Encoding.UTF8.GetBytes(str);
         }
 
-        internal byte[] Generate(int size)
+        internal string Decode(byte[] arr)
+        {
+            return Encoding.UTF8.GetString(arr);
+        }
+
+        internal static bool IsAuthenticated(string email = null)
+        {
+            if (email == null)
+            {
+                return HttpContext.Current.User.Identity.IsAuthenticated;
+            } else
+            {
+                return (HttpContext.Current.User.Identity.Name.Equals(email.ToLower()));
+            }
+        }
+
+        internal static byte[] Generate(int size)
         {
             if (size == 0) // Guard clause
                 return null;

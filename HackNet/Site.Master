@@ -59,8 +59,8 @@
                 </div>
                 <div class="navbar-collapse navbar-right collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Auth/SignIn">Login</a></li>
-                        <li><a runat="server" href="~/Auth/SignUp">Register</a></li>
+                        <li><a ID="LeftBtn" runat="server">Left</a></li>
+                        <li><a ID="RightBtn" runat="server">Right</a></li>
                     </ul>
                 </div>
             </div>

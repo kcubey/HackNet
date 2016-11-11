@@ -49,8 +49,8 @@
     </div>
     <div class="row text-center">
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Announcements" OnClick="LnkAnn"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Workstation" OnClick="LnkWsn" />
+            <asp:HyperLink runat="server" CssClass="btn btn-default" Text="Announcements" OnClick="LnkAnn"/>
+            <asp:HyperLink runat="server" CssClass="btn btn-default" Text="Workstation" OnClick="LnkWsn" />
             <asp:Button runat="server" CssClass="btn btn-default" Text="Missions" OnClick="LnkMis"/>
             <asp:Button runat="server" CssClass="btn btn-default" Text="Events" OnClick="LnkEvt"/>
             <asp:Button runat="server" CssClass="btn btn-default" Text="Mission Logs" OnClick="LnkMLog"/>
