@@ -63,7 +63,7 @@ footer {
 
 /* Styling for Sign Up page*/
 .regTable {
-  background-color: #ffffff; }
+  background-color: rgba(10, 10, 10, 0.9); }
   .regTable input[type="text"], .regTable input[type="password"] {
     width: 270px; }
   .regTable td:nth-child(1) {
