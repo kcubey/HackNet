@@ -10,6 +10,7 @@
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %> 
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/Content/Images/console.png" rel="shortcut icon" type="image/x-icon" />

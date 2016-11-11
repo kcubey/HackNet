@@ -2,10 +2,14 @@
 
 <asp:Content ID="SignInContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="jumbotron">
-		<h1>Sign In</h1>
+		<h1><%= Page.Title %></h1>
 		<p>Sign in or register to access our full range of features<span class="blinking">_</span></p>
 	</div>
-
+    	<ol class="breadcrumb" style="margin-bottom: 5px;">
+		<li><a href="<%= ResolveUrl("~/Auth/signin") %>">Authentication</a></li>
+		<li><a href="<%= ResolveUrl("~/Auth/signup") %>">Registration</a></li>
+		<li class="active">Details</li>
+	</ol>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Sign In

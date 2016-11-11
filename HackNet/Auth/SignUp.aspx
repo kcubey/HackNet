@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="HackNet.Auth.SignUp" %>
+﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="HackNet.Auth.SignUp" %>
 <asp:Content ID="SignUpContent" ContentPlaceHolderID="MainContent" runat="server">
     	<div class="jumbotron">
 		<h1><%: Title %></h1>
@@ -119,7 +119,7 @@
 					<tr>
 						<td><strong>Captcha:</strong></td>
 						<td>
-							<div class="g-recaptcha" data-sitekey="6Ld6kiETAAAAAMplec1OuKhJ3VKCBOhZmOcAkZsg"></div>
+							<div class="g-recaptcha" data-sitekey="6LdUsQsUAAAAAHcvokhKFSxCtVsYGSI5MO5ZI2Ke"></div>
 						</td>
 					</tr>
 				</table>
