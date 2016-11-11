@@ -144,6 +144,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Missions.aspx" />
+    <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
@@ -268,6 +269,13 @@
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Mission.cs" />
+    <Compile Include="Game\Workstation.aspx.cs">
+      <DependentUpon>Workstation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Workstation.aspx.designer.cs">
+      <DependentUpon>Workstation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
