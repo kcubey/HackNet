@@ -46,13 +46,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td></td>
-					<td>
-						<asp:CheckBox ID="Persist" runat="server" />
-						<strong>Remember Login</strong>
-					</td>
-				</tr>
-				<tr>
 					<td><strong>I am a...</strong></td>
 					<td>
 						<div class="radio">
