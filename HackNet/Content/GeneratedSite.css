@@ -23,6 +23,13 @@ body {
   .navbar-fixed-top a {
     color: greenyellow; }
 
+.breadcrumb {
+  background-color: rgba(10, 10, 10, 0.9); }
+  .breadcrumb > .active {
+    color: white; }
+  .breadcrumb a {
+    color: greenyellow; }
+
 .jumbotron {
   color: greenyellow;
   background-color: rgba(10, 10, 10, 0.9); }

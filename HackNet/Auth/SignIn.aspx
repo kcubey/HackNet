@@ -10,6 +10,7 @@
 		<li><a href="<%= ResolveUrl("~/Auth/signup") %>">Registration</a></li>
 		<li class="active">Details</li>
 	</ol>
+   	<br />
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Sign In

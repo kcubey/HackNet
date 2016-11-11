@@ -42,6 +42,19 @@ body {
 	}
 }
 
+.breadcrumb {
+
+    background-color: $contentbg;
+
+    > .active {
+        color: white;
+    }
+
+    a {
+        color: $contentfg;
+    }
+}
+
 .jumbotron {
 	color: $contentfg;
 	background-color: $contentbg;
