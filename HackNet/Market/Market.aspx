@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Market.aspx.cs" Inherits="HackNet.Market.Market" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
 
+    <link rel="stylesheet" href="/Market/market.css" />
+
     <fieldset>
         <legend>In Game Boosts:</legend>
         2 GB Ram <a href="#">+</a>    5 coin<br>
@@ -23,5 +25,32 @@
         1000 buck <a href="#">+</a>    $3<br>
         10000 buck <a href="#">+</a>    $5<br>
     </fieldset>
+
+        
+        ACCORDION: 
+
+        <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].onclick = function () {
+                this.classList.toggle("active");
+                this.nextElementSibling.classList.toggle("show");
+            }
+        }
+    </script>
+
+    <button class="accordion">Section 1</button>
+    <div class="panel">
+       <p>testing</p>
+    </div>
+
+    <button class="accordion">Section 2</button>
+    <div class="panel">
+        <p>testing</p>
+    </div>
+
+       
 
 </asp:Content>

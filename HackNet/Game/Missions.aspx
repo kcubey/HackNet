@@ -26,7 +26,18 @@
     <div class="panel panel-default">
         <div class="panel panel-body">
             <div class="col-sm-12 col-md-9" style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
-                 <asp:LinkButton ID="AttackLink" OnClick="AttackLink_Click" runat="server" Text="Attack" CssClass="btn btn-default"></asp:LinkButton>
+                 <asp:LinkButton 
+                     ID="AttackLink" 
+                     OnClick="AttackLink_Click" 
+                     runat="server"
+                      Text="Attack" 
+                     CssClass="btn btn-default" ></asp:LinkButton>
+                <asp:LinkButton 
+                     ID="AttackLink2" 
+                     OnClick="AttackLink_Click" 
+                     runat="server"
+                      Text="Attack" 
+                     CssClass="btn btn-default" ></asp:LinkButton>
             </div>
             <div class="col-sm-12 col-md-3" style="border: 1px solid green;">
                 Types of attacks:
@@ -54,7 +65,7 @@
                 <asp:Label runat="server" Text="user"></asp:Label>@HackNetHost:~
             </h4>
         </div>
-        <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 400px; height: 350px;">
+        <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 400px; height: 250px;">
             <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
 
 
