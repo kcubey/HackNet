@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Game.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,16 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Workstations workstn = Workstations.Getworkstation("Testuser");
+            WorkstationNameLbl.Text=workstn.WorkstnName;
+            ProcessorLbl.Text = workstn.Processor;
+            GraphicLbl.Text = workstn.Graphicard;
+            MemoryLbl.Text = workstn.Memory;
+            PwsupLbl.Text = workstn.Powersupply;
+
+
 
         }
+
     }
 }

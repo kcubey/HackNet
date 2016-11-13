@@ -22,12 +22,12 @@ namespace HackNet
 
         protected void LnkWsn(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Home");
+            Response.Redirect("~/Game/Workstation");
         }
 
         protected void LnkMis(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Workstation");
+            Response.Redirect("~/Game/Mission");
         }
 
         protected void LnkEvt(object sender, EventArgs e)

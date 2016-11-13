@@ -254,6 +254,7 @@
     <Compile Include="Game.Master.designer.cs">
       <DependentUpon>Game.Master</DependentUpon>
     </Compile>
+    <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -268,7 +269,7 @@
     <Compile Include="Game\Missions.aspx.designer.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Mission.cs" />
+    <Compile Include="Game\Class\Mission.cs" />
     <Compile Include="Game\Workstation.aspx.cs">
       <DependentUpon>Workstation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
