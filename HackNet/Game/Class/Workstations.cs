@@ -26,7 +26,7 @@ namespace HackNet.Game.Class
         {
             Workstations workstn = new Workstations();
             workstn.WorkstnName = "Frost's Super Computer";
-            workstn.Processor = "I7?";
+            workstn.Processor = "Intel I7 5th Generation";
             workstn.Graphicard = "Myvidia";
             workstn.Memory = "1mb";
             workstn.Powersupply = "100watts";

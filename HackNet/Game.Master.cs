@@ -27,7 +27,7 @@ namespace HackNet
 
         protected void LnkMis(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Mission");
+            Response.Redirect("~/Game/Missions");
         }
 
         protected void LnkEvt(object sender, EventArgs e)
