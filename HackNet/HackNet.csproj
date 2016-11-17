@@ -148,6 +148,7 @@
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
+    <Content Include="Payment\Checkout.aspx" />
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -287,6 +288,13 @@
     </Compile>
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment\Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
