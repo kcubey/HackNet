@@ -13,5 +13,10 @@ namespace HackNet.Payment
         {
 
         }
+
+        protected void pkgConfirm_indexChange(object sender, EventArgs e)
+        {
+            pkgConfirm.Text = PackageList.SelectedItem.Text;
+        }
     }
 }

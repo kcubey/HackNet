@@ -156,8 +156,10 @@
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
+    <Content Include="Payment\backend\paymentCSS.css" />
     <Content Include="Payment\Checkout.aspx" />
     <Content Include="Payment\Payment.aspx" />
+    <Content Include="Payment\backend\paymentJS.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
