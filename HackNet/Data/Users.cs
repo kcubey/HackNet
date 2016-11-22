@@ -9,14 +9,12 @@ namespace HackNet.Data
 {
     public class Users
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Number")]
+		[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
         public string UserName { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
         public string FullName { get; set; }
 
         public string Email { get; set; }
@@ -36,6 +34,8 @@ namespace HackNet.Data
         public int ByteDollars { get; set; }
 
         public AccessLevel AccessLevel { get; set;  }
+
+		public bool isAdmin { get; set; }
     }
 
     public enum AccessLevel

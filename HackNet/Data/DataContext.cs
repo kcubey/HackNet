@@ -10,16 +10,14 @@ namespace HackNet.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<Users> Users { get; set; }
-        public DbSet<Logs> Logs { get; set; }
-        public DbSet<Missions> Missions { get; set; }
-        public DbSet<Inventory> Inventory { get; set; }
-        public DbSet<Machines> Machines { get; set; }
+		public DataContext() : base("DefaultConnection")
+		{
+			System.Diagnostics.Debug.WriteLine("Data context created");
+		}
 
-        public DataContext() : base("DefaultConnection")
-        {
 
-        }
-        
+		public DbSet<Users> Users { get; set; }
+
+
     }
 }

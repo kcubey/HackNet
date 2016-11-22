@@ -6,7 +6,7 @@ using System.Web;
 namespace HackNet.Security {
 	public class User {
 
-		internal int UserId { get; set; }
+		internal int Id { get; set; }
 		internal string UserName { get; set; }
 		internal string FullName { get; set; }
 		internal string Email { get; set; }

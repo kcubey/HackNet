@@ -260,7 +260,6 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\DataContext.cs" />
-    <Compile Include="Data\DataInitializer.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\Inventory.cs" />
     <Compile Include="Data\Logs.cs" />
@@ -306,6 +305,7 @@
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
