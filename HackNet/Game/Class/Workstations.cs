@@ -12,7 +12,7 @@ namespace HackNet.Game.Class
         public string Graphicard { get; set; }
         public string Memory { get; set; }
         public string Powersupply { get; set; }
-
+        // Workstation attributes
         public int HpAtrb { get; set; }
         public int AtkAtrb { get; set; }
         public int DefAtrb { get; set; }
@@ -30,7 +30,10 @@ namespace HackNet.Game.Class
             workstn.Graphicard = "Myvidia";
             workstn.Memory = "1mb";
             workstn.Powersupply = "100watts";
-
+            workstn.HpAtrb = 10;
+            workstn.AtkAtrb = 10;
+            workstn.DefAtrb = 10;
+            workstn.SpeedAtrb = 10;
             return workstn;
         }
 

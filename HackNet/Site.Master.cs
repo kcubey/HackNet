@@ -19,7 +19,7 @@ namespace HackNet {
                 RightBtn.HRef = "~/Auth/SignOut.aspx";
             }
             else
-            {
+            {  
                 LeftBtn.InnerText = "Sign In";
                 LeftBtn.HRef = "~/Auth/SignIn.aspx";
 
