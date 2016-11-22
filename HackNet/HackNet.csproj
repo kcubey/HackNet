@@ -257,6 +257,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Data\DataInitializer.cs" />
+    <Compile Include="Data\DataLogging.cs" />
+    <Compile Include="Data\Inventory.cs" />
+    <Compile Include="Data\Logs.cs" />
+    <Compile Include="Data\Machines.cs" />
+    <Compile Include="Data\Users.cs" />
     <Compile Include="Game.Master.cs">
       <DependentUpon>Game.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,6 +324,7 @@
     <Compile Include="Security\Crypto.cs" />
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
+    <Compile Include="Security\Logger.cs" />
     <Compile Include="Security\User.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -340,7 +348,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
