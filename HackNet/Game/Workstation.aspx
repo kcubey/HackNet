@@ -1,6 +1,58 @@
 ﻿<%@ Page Title="Workstation" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Workstation.aspx.cs" Inherits="HackNet.Game.Workstation" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
+    <div id="upgradeModel" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="color:black;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3>Upgrade Model</h3>
+                </div>
+                <div class="modal-body">
+                  <asp:Label runat="server" Font-Size="XX-Large">Workstation Name</asp:Label>
+                     <div class="form-group row">
+                        <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                        <asp:DropDownList runat="server" Width="150px">
+                            <asp:ListItem>I7</asp:ListItem>
+                            <asp:ListItem>I5</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group row">
+                        <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                        <asp:DropDownList runat="server" Width="150px">
+                            <asp:ListItem>Mevidia</asp:ListItem>
+                            <asp:ListItem>Nividia</asp:ListItem>
+                            <asp:ListItem>Wovidia</asp:ListItem>
+                            <asp:ListItem>Uvidia</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group row">
+                        <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                       <asp:DropDownList runat="server" Width="150px">
+                            <asp:ListItem>1GB</asp:ListItem>
+                            <asp:ListItem>2GB</asp:ListItem>
+                            <asp:ListItem>3GB</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group row">
+                        <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                       <asp:DropDownList runat="server" Width="150px">
+                            <asp:ListItem>1W</asp:ListItem>
+                            <asp:ListItem>100W</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default">Upgrade</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
     <div class="panel panel-default">
         <div class="panel panel-body">
             <div class="row">
@@ -68,7 +120,7 @@
                         <asp:Label runat="server" Text="Speed: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
                         <asp:Label runat="server" ID="SpeedattrLabel" Font-Size="Larger"></asp:Label>
                     </div>
-                    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large"></asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large"  data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
                 </div>
             </div>
         </div>
