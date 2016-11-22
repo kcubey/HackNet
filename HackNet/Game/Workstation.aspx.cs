@@ -19,6 +19,11 @@ namespace HackNet.Game
             MemoryLbl.Text = workstn.Memory;
             PwsupLbl.Text = workstn.Powersupply;
 
+            HpattrLabel.Text = workstn.HpAtrb.ToString();
+            AtkattrLabel.Text = workstn.AtkAtrb.ToString();
+            DefattrLabel.Text = workstn.DefAtrb.ToString();
+            SpeedattrLabel.Text = workstn.SpeedAtrb.ToString();
+
 
 
         }
