@@ -13,25 +13,55 @@ namespace HackNet.Security
     {
         internal string Hash(byte[] password, byte[] salt = null)
         {
+			// Start the stopwatch
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
             byte[] hashedbytes;
+			// If no salt specified, use default salt value
             if (salt == null)
-            {
                 salt = Convert.FromBase64String("DefaultSalt=");
-            }
-           
+			// RFC2898 Implements HMAC Based SHA1, which is FIPS Compliant
             using (var kdf = new Rfc2898DeriveBytes(password, salt, 999))
-            {
                 hashedbytes = kdf.GetBytes(128);
-            }
+			// Stop the stopwatch
 			sw.Stop();
 			Debug.WriteLine(sw.Elapsed);
-
+			// Return the hash
             return Convert.ToBase64String(hashedbytes);
         }
 
-        internal byte[] Encode(string str)
+		public string SHA512Hash(string plaintext, byte[] salt = null)
+		{
+			// Obtain base variables
+			byte[] ptBytes = Encoding.UTF8.GetBytes(plaintext);
+			byte[] combinedBytes;
+			string newHash;
+
+			// If salt is present, append it to plaintext
+			if (salt == null)
+			{
+				combinedBytes = new byte[ptBytes.Length];
+				ptBytes.CopyTo(combinedBytes, 0);
+			}
+			else
+			{
+				combinedBytes = new byte[ptBytes.Length + salt.Length];
+				ptBytes.CopyTo(combinedBytes, 0);
+				salt.CopyTo(combinedBytes, ptBytes.Length);
+			}
+
+			// Do the hashing
+			using (SHA512 shaCalc = new SHA512Managed())
+			{
+				newHash = Convert.ToBase64String(shaCalc.ComputeHash(combinedBytes));
+			}
+
+			// Return the hash
+			return newHash;
+
+		}
+
+		internal byte[] Encode(string str)
         {
             return Encoding.UTF8.GetBytes(str);
         }

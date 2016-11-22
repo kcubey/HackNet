@@ -152,9 +152,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Missions.aspx" />
+    <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
+    <Content Include="Payment\Checkout.aspx" />
+    <Content Include="Payment\Payment.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -261,6 +264,7 @@
     <Compile Include="Game.Master.designer.cs">
       <DependentUpon>Game.Master</DependentUpon>
     </Compile>
+    <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,7 +279,14 @@
     <Compile Include="Game\Missions.aspx.designer.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Mission.cs" />
+    <Compile Include="Game\Class\Mission.cs" />
+    <Compile Include="Game\Workstation.aspx.cs">
+      <DependentUpon>Workstation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Workstation.aspx.designer.cs">
+      <DependentUpon>Workstation.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,9 +297,24 @@
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Payment\Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Captcha.cs" />
+    <Compile Include="Security\Crypto.cs" />
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
     <Compile Include="Security\User.cs" />
