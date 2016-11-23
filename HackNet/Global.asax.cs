@@ -9,7 +9,6 @@ using System.Web.Security;
 using System.Web.SessionState;
 
 using HackNet.Data;
-using HackNet.Migrations;
 
 namespace HackNet {
     public class Global : HttpApplication {
@@ -17,7 +16,7 @@ namespace HackNet {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-			Database.SetInitializer<DataContext>(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
 
 		}
 	}

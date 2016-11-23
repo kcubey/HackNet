@@ -305,7 +305,7 @@
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Data\Configuration.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
