@@ -327,7 +327,6 @@
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
     <Compile Include="Security\Logger.cs" />
-    <Compile Include="Security\User.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
