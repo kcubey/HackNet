@@ -150,8 +150,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Game\Currency.aspx" />
     <Content Include="Game\Home.aspx" />
+    <Content Include="Game\Market1.aspx" />
     <Content Include="Game\Missions.aspx" />
+    <Content Include="Game\Parts.aspx" />
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
@@ -265,12 +268,26 @@
       <DependentUpon>Game.Master</DependentUpon>
     </Compile>
     <Compile Include="Game\Class\Workstations.cs" />
+    <Compile Include="Game\Currency.aspx.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Currency.aspx.designer.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Game\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Market1.aspx.cs">
+      <DependentUpon>Market1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Market1.aspx.designer.cs">
+      <DependentUpon>Market1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Missions.aspx.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
@@ -280,6 +297,13 @@
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Class\Mission.cs" />
+    <Compile Include="Game\Parts.aspx.cs">
+      <DependentUpon>Parts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Parts.aspx.designer.cs">
+      <DependentUpon>Parts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game\Workstation.aspx.cs">
       <DependentUpon>Workstation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

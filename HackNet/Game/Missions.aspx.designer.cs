@@ -31,7 +31,7 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.LinkButton AttackLink;
         
         /// <summary>
-        /// AttackLink 2 control.
+        /// AttackLink2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
