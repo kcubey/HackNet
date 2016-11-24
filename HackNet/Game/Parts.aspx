@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/Market1/market1.css" />
 
     <fieldset>
-        <legend>Market</legend>]
+        <legend>Market</legend>
 
         <div>
             <h1>Parts</h1>
