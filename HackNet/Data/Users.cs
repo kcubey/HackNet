@@ -33,7 +33,7 @@ namespace HackNet.Data
         public string Salt { get; set; }
 
 		[DataType(DataType.Date)]
-		public DateTime BirthDate { get; set; }
+		public DateTime BirthDay { get; set; }
 
         public DateTime Registered { get; set; }
 
@@ -44,6 +44,9 @@ namespace HackNet.Data
         public int ByteDollars { get; set; }
 
         public AccessLevel AccessLevel { get; set;  }
+
+		public bool isAdmin { get; set; }
+
 
     }
 

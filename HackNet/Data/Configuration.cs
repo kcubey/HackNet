@@ -27,7 +27,8 @@ namespace HackNet.Data
 			var Users = new List<Users>();
 			Users.Add(new Users
 			{
-				UserName = "WinnerGamer",
+				UserID = 1,
+				UserName = "LoserGamer",
 				FullName = "Wen Liang",
 				Email = "wugglelord@gmail.com",
 				Hash = "SomeHashHere",
