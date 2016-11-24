@@ -61,12 +61,14 @@ namespace HackNet.Security
 
 		}
 
-		internal byte[] Encode(string str)
+
+		// Static utility methods
+		internal static byte[] Encode64(string str)
         {
             return Encoding.UTF8.GetBytes(str);
         }
 
-        internal string Decode(byte[] arr)
+        internal static string Decode64(byte[] arr)
         {
             return Encoding.UTF8.GetString(arr);
         }
