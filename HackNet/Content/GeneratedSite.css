@@ -104,9 +104,9 @@ footer {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: rgba(0, 0, 0, 0.2);
+  padding-left: 25px;
+  padding-right: 25px;
+  background-color: rgba(0, 0, 0, 0.3);
   min-height: 110vh;
   padding-bottom: 50px;
   border-left: 1px solid greenyellow;
