@@ -69,12 +69,12 @@
         <div style="clear:both;"></div>
         -->
 
-        <!--Left div--><!-- GeneratedSite.css textarea max width -->
+        <!--Left div--><!--  GeneratedSite.css textarea max width  -->
         <asp:Button runat="server" class="PartsDiv" Text="Parts" OnClick="LnkPts"/>
-        <!--Right div--><!-- GeneratedSite.css textarea max width -->
+        <!--Right div--><!--  GeneratedSite.css textarea max width  -->
         <asp:Button runat="server" class="CurrencyDiv" Text="Currency" OnClick="LnkCurr"/>
 
-
+        
     </fieldset>
 
 </asp:Content>
