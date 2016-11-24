@@ -14,7 +14,9 @@ namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e) {
             Msg.Text = "IMPLEMENTING: Enter any username and password you want to bypass";
-
+            DataContext ctx = new DataContext();
+            ctx.Users.Find(1).Email = "wtfgoogle@gmail.com";
+            Msg.Text = ctx.Users.Find(1).Email;
 
         }
 

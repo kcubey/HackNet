@@ -16,7 +16,7 @@ namespace HackNet {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>("DefaultConnection"));
 
 		}
 	}
