@@ -61,6 +61,12 @@
 				CssClass="btn btn-primary loginBtn"
 				OnClick="LoginClick"
 				runat="server" />
+			<asp:Button ID="BypassButton"
+				Text="Bypass Login"
+				CssClass="btn btn-warning loginBtn"
+				OnClick="BypassClick"
+				CausesValidation="false"
+				runat="server" />
 			<script>
 				$(function () {
 					$("#new").on('click', function (e) {

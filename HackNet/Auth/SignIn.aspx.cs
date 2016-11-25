@@ -13,26 +13,26 @@ using System.Web.Security;
 namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
-        {
-
-			string newsalt = Authenticate.Decode64(Authenticate.Generate(64));
-			Msg.Text = newsalt;
+		{
             DataContext ctx = new DataContext();
-            ctx.Users.Find(1).Email = "wtfgoogle@gmail.com";
+			Msg.Text = "For actual user, please login with EMAIL 1@2.co and PASSWORD 123";
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
-			byte[] passwordbytes = Authenticate.Encode64(UserPass.Text);
 			using (Authenticate auth = new Authenticate())
             {
-				System.Diagnostics.Debug.WriteLine(auth.Hash(passwordbytes));
-				Msg.Text = auth.Hash(passwordbytes);
+				auth.ValidateLogin(Email.Text, UserPass.Text);
 
                 // Privileged Execution
-                FormsAuthentication.RedirectFromLoginPage("Prototyper", false);
+                FormsAuthentication.RedirectFromLoginPage(Email.Text, false);
 
             }
         }
+
+		protected void BypassClick(object sender, EventArgs e)
+		{
+			FormsAuthentication.RedirectFromLoginPage("Bypasser", false);
+		}
 	}
 }

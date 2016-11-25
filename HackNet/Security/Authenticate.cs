@@ -11,7 +11,12 @@ namespace HackNet.Security
 {
     public class Authenticate : IDisposable
     {
-        internal string Hash(byte[] password, byte[] salt = null)
+		internal bool ValidateLogin(string email, string password)
+		{
+			return true;
+		}
+
+        internal byte[] Hash(byte[] password, byte[] salt = null)
         {
 			// Start the stopwatch
 			Stopwatch sw = new Stopwatch();
@@ -21,21 +26,21 @@ namespace HackNet.Security
             if (salt == null)
                 salt = Convert.FromBase64String("DefaultSalt=");
 			// RFC2898 Implements HMAC Based SHA1, which is FIPS Compliant
-            using (var kdf = new Rfc2898DeriveBytes(password, salt, 999))
+            using (var kdf = new Rfc2898DeriveBytes(password, salt, 5000))
                 hashedbytes = kdf.GetBytes(128);
 			// Stop the stopwatch
 			sw.Stop();
 			Debug.WriteLine(sw.Elapsed);
 			// Return the hash
-            return Convert.ToBase64String(hashedbytes);
+            return hashedbytes;
         }
 
-		public string SHA512Hash(string plaintext, byte[] salt = null)
+		public byte[] SHA512Hash(string plaintext, byte[] salt = null)
 		{
 			// Obtain base variables
 			byte[] ptBytes = Encoding.UTF8.GetBytes(plaintext);
 			byte[] combinedBytes;
-			string newHash;
+			byte[] newHash;
 
 			// If salt is present, append it to plaintext
 			if (salt == null)
@@ -48,12 +53,12 @@ namespace HackNet.Security
 				combinedBytes = new byte[ptBytes.Length + salt.Length];
 				ptBytes.CopyTo(combinedBytes, 0);
 				salt.CopyTo(combinedBytes, ptBytes.Length);
-			}
+			}  
 
 			// Do the hashing
 			using (SHA512 shaCalc = new SHA512Managed())
 			{
-				newHash = Convert.ToBase64String(shaCalc.ComputeHash(combinedBytes));
+				newHash = shaCalc.ComputeHash(combinedBytes);
 			}
 
 			// Return the hash
@@ -65,14 +70,16 @@ namespace HackNet.Security
 		// Static utility methods
 		internal static byte[] Encode64(string str)
         {
-            return Encoding.UTF8.GetBytes(str);
-        }
 
-        internal static string Decode64(byte[] arr)
+			return Convert.FromBase64String(str);
+		}
+
+		internal static string Decode64(byte[] arr)
         {
-            return Encoding.UTF8.GetString(arr);
+			return Convert.ToBase64String(arr);
         }
 
+		// Check if authenticated
         internal static bool IsAuthenticated(string email = null)
         {
             if (email == null)
@@ -84,6 +91,7 @@ namespace HackNet.Security
             }
         }
 
+		// Get email of authenticated user
         internal static string GetEmail()
         {
             if (!IsAuthenticated())
@@ -92,6 +100,7 @@ namespace HackNet.Security
             return HttpContext.Current.User.Identity.Name;
         }
 
+		// Generate bytes from RNGCryptoServiceProvider
         internal static byte[] Generate(int size)
         {
             if (size == 0) // Guard clause
