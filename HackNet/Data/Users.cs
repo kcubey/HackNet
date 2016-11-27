@@ -45,9 +45,6 @@ namespace HackNet.Data
 
         public AccessLevel AccessLevel { get; set;  }
 
-		public bool isAdmin { get; set; }
-
-
     }
 
     public enum AccessLevel

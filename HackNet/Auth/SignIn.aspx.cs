@@ -9,25 +9,40 @@ using HackNet.Security;
 using HackNet.Data;
 
 using System.Web.Security;
+using static HackNet.Security.Authenticate;
 
 namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
             DataContext ctx = new DataContext();
-			Msg.Text = "For actual user, please login with EMAIL 1@2.co and PASSWORD 123";
+			Msg.Text = "Sign in with your Google Drive email and password as 123";
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
 			using (Authenticate auth = new Authenticate())
             {
-				auth.ValidateLogin(Email.Text, UserPass.Text);
+				LoginResult result = auth.ValidateLogin(Email.Text, UserPass.Text);
+				switch(result)
+				{
+					case (LoginResult.Success):
+						FormsAuthentication.RedirectFromLoginPage(Email.Text, false);
+						break;
+					case (LoginResult.PasswordIncorrect):
+						Msg.Text = "User and/or password not found (1)";
+						break;
+					case (LoginResult.UserNotFound):
+						Msg.Text = "User and/or password not found (2)";
+						break;
+					default:
+						Msg.Text = "Unhandled error has occured";
+						break;
+				}
 
-                // Privileged Execution
-                FormsAuthentication.RedirectFromLoginPage(Email.Text, false);
+				// Privileged Execution
 
-            }
+			}
         }
 
 		protected void BypassClick(object sender, EventArgs e)

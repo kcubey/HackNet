@@ -6,14 +6,41 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Text;
+using HackNet.Data;
 
 namespace HackNet.Security
 {
-    public class Authenticate : IDisposable
+    internal class Authenticate : IDisposable
     {
-		internal bool ValidateLogin(string email, string password)
+		Stopwatch sw = new Stopwatch();
+		internal Authenticate()
 		{
-			return true;
+
+		}
+
+		internal LoginResult ValidateLogin(string email, string password)
+		{
+			using (DataContext db = new DataContext())
+			{
+				Users user = (from u in db.Users
+							 where u.Email == email
+							 select u).FirstOrDefault();
+				if (user == null)
+					return LoginResult.UserNotFound;
+				byte[] bSalt = user.Salt;
+				byte[] bPassword = Encoding.UTF8.GetBytes(password);
+				byte[] bHashed = Hash(bPassword, bSalt);
+				byte[] dbHash = user.Hash;
+				if (bHashed.SequenceEqual(dbHash))
+				{
+					return LoginResult.Success;
+				} else
+				{
+					return LoginResult.PasswordIncorrect;
+				}
+			}
+				 
+			throw new AuthException("Error connecting to database");
 		}
 
         internal byte[] Hash(byte[] password, byte[] salt = null)
@@ -95,10 +122,26 @@ namespace HackNet.Security
         internal static string GetEmail()
         {
             if (!IsAuthenticated())
-                throw new AuthException("Not logged in");
+                throw new AuthException("User is not logged in");
 
             return HttpContext.Current.User.Identity.Name;
         }
+
+		internal static Users GetUser()
+		{
+			string email = GetEmail();
+			using (DataContext db = new DataContext())
+			{
+				Users user = (from u in db.Users
+							  where u.Email == email
+							  select u).FirstOrDefault();
+				if (user != null)
+					return user;
+				else
+					throw new UserException("User not found");
+
+			}
+		}
 
 		// Generate bytes from RNGCryptoServiceProvider
         internal static byte[] Generate(int size)
@@ -110,6 +153,14 @@ namespace HackNet.Security
                 rng.GetBytes(random);
             return random;
         }
+
+		internal enum LoginResult
+		{
+			Success = 0,
+			UserNotFound = 1,
+			PasswordIncorrect = 2,
+			OtherError = 3
+		}
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
