@@ -12,8 +12,17 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            regatkList.DataSource = getRegAtkList();
+            regatkList.DataBind();
 
+        }
 
+        private List<string> getRegAtkList()
+        {
+            List<string> atkList = new List<string>();
+            atkList.Add("Local");
+            atkList.Add("America");
+            return atkList;
         }
 
         protected void AttackLink_Click(object sender, EventArgs e)
@@ -34,6 +43,14 @@ namespace HackNet.Game
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
             
+        }
+
+        protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("testing:" +e.CommandArgument.ToString());
+            AttackTypeHeader.Text = e.CommandArgument.ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
+
         }
     }
 }
