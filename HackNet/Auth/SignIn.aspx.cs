@@ -15,6 +15,8 @@ namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			if (IsAuthenticated())
+				Response.Redirect("~/Game/Home");
             DataContext ctx = new DataContext();
 			Msg.Text = "Sign in with your Google Drive email and password as 123";
         }
@@ -27,7 +29,7 @@ namespace HackNet.Auth {
 				switch(result)
 				{
 					case (LoginResult.Success):
-						FormsAuthentication.RedirectFromLoginPage(Email.Text, false);
+						FormsAuthentication.RedirectFromLoginPage(Email.Text, true);
 						break;
 					case (LoginResult.PasswordIncorrect):
 						Msg.Text = "User and/or password not found (1)";
@@ -39,9 +41,6 @@ namespace HackNet.Auth {
 						Msg.Text = "Unhandled error has occured";
 						break;
 				}
-
-				// Privileged Execution
-
 			}
         }
 
