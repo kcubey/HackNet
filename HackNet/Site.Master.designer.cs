@@ -13,22 +13,49 @@ namespace HackNet {
     public partial class SiteMaster {
         
         /// <summary>
-        /// Dropdown control.
+        /// PublicLeft control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Dropdown;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PublicLeft;
         
         /// <summary>
-        /// LeftBtn control.
+        /// PublicRight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor LeftBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PublicRight;
+        
+        /// <summary>
+        /// PrivateLeft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PrivateLeft;
+        
+        /// <summary>
+        /// PrivateLeftAnchor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor PrivateLeftAnchor;
+        
+        /// <summary>
+        /// PrivateRight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PrivateRight;
         
         /// <summary>
         /// RightBtn control.

@@ -59,21 +59,35 @@
 				</div>
 				<div class="navbar-collapse navbar-right collapse">
 					<ul class="nav navbar-nav">
-						<li id="Dropdown" class="dropdown" runat="server">
-							<a id="LeftBtn" runat="server" class="dropdown-toggle" role="button" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-								Left
+						<li id="PublicLeft" visible="false" runat="server">
+							<a href="/Auth/SignIn">Sign In</a>
+						</li>
 
+						<li id="PublicRight" visible="false" runat="server">
+							<a href="/Auth/SignUp">Sign Up</a>
+						</li>
+
+						<li id="PrivateLeft" visible="false" runat="server">
+							<a ID="PrivateLeftAnchor" runat="server"> HELLO, Player!</a>
+						</li>
+
+						<li id="PrivateRight" visible="false" runat="server">
+							<a id="RightBtn" runat="server" class="dropdown-toggle" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Preferences
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
+								<li><a href="#">Profile</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">Separated link</a></li>
+								<li><a href="#">User Preferences</a></li>
+								<li><a href="#">Security Preferences</a></li>
+								<li><a href="#">Access Logs</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">About Us & FAQ</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="/Auth/SignOut.aspx">Sign Out</a></li>
 							</ul>
 						</li>
-						<li><a id="RightBtn" runat="server">Right</a></li>
 					</ul>
 				</div>
 			</div>
