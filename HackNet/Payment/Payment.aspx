@@ -46,6 +46,11 @@
 
     <h3>JS v3</h3>
 
+    <h6>added from v2</h6>
+    <button id="braintree-paypal-button" class="paypal is-active " title="Pay with PayPal">
+      <span class="paypal-button-logo"></span>
+  </button>
+
   <div id="error-message"></div>
 
   <br /><label for="card-number">Card Number: </label>
