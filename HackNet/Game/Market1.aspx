@@ -5,12 +5,12 @@
 
     <style>
         .PartsDiv {
-            background-color:#4b5320; 
-            float:left; 
-            width:48.92%; 
-            margin-left:1%; 
-            padding-top:200px; 
-            padding-bottom:200px;
+            background-color: #4b5320;
+            float: left;
+            width: 48.92%;
+            margin-left: 1%;
+            padding-top: 200px;
+            padding-bottom: 200px;
             /*padding-left:22%;*/
             -webkit-transition-duration: 1s;
             -moz-transition-duration: 1s;
