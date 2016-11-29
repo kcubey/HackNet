@@ -25,4 +25,11 @@ namespace HackNet.Security
         internal InputException(string str) : base(str) { }
         internal InputException(string str, Exception inner) : base(str, inner) { }
     }
+
+	internal class ConnectionException : Exception
+	{
+		internal ConnectionException() : base() { }
+		internal ConnectionException(string str) : base(str) { }
+		internal ConnectionException(string str, Exception inner) : base(str, inner) { }
+	}
 }

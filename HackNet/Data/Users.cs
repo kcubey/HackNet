@@ -28,12 +28,12 @@ namespace HackNet.Data
 		[EmailAddress(ErrorMessage = "Ensure that the email address is properly entered!")]
 		public string Email { get; set; }
    
-        public string Hash { get; set; }
+        public byte[] Hash { get; set; }
 
-        public string Salt { get; set; }
+        public byte[] Salt { get; set; }
 
 		[DataType(DataType.Date)]
-		public DateTime BirthDay { get; set; }
+		public DateTime BirthDate { get; set; }
 
         public DateTime Registered { get; set; }
 
@@ -44,9 +44,6 @@ namespace HackNet.Data
         public int ByteDollars { get; set; }
 
         public AccessLevel AccessLevel { get; set;  }
-
-		public bool isAdmin { get; set; }
-
 
     }
 

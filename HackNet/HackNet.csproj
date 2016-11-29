@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Auth\SignIn.aspx" />
+    <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -247,6 +248,13 @@
     </Compile>
     <Compile Include="Auth\SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\SignOut.aspx.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\SignOut.aspx.designer.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
     </Compile>
     <Compile Include="Auth\SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>

@@ -6,12 +6,44 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Text;
+using HackNet.Data;
 
 namespace HackNet.Security
 {
-    public class Authenticate : IDisposable
+    internal class Authenticate : IDisposable
     {
-        internal string Hash(byte[] password, byte[] salt = null)
+		Stopwatch sw = new Stopwatch();
+		internal Authenticate()
+		{
+
+		}
+
+		internal LoginResult ValidateLogin(string email, string password)
+		{
+			using (DataContext db = new DataContext())
+			{
+				Users user = (from u in db.Users
+							 where u.Email == email
+							 select u).FirstOrDefault();
+				if (user == null)
+					return LoginResult.UserNotFound;
+				byte[] bSalt = user.Salt;
+				byte[] bPassword = Encoding.UTF8.GetBytes(password);
+				byte[] bHashed = Hash(bPassword, bSalt);
+				byte[] dbHash = user.Hash;
+				if (bHashed.SequenceEqual(dbHash))
+				{
+					return LoginResult.Success;
+				} else
+				{
+					return LoginResult.PasswordIncorrect;
+				}
+			}
+				 
+			throw new AuthException("Error connecting to database");
+		}
+
+        internal byte[] Hash(byte[] password, byte[] salt = null)
         {
 			// Start the stopwatch
 			Stopwatch sw = new Stopwatch();
@@ -21,21 +53,21 @@ namespace HackNet.Security
             if (salt == null)
                 salt = Convert.FromBase64String("DefaultSalt=");
 			// RFC2898 Implements HMAC Based SHA1, which is FIPS Compliant
-            using (var kdf = new Rfc2898DeriveBytes(password, salt, 999))
+            using (var kdf = new Rfc2898DeriveBytes(password, salt, 5000))
                 hashedbytes = kdf.GetBytes(128);
 			// Stop the stopwatch
 			sw.Stop();
 			Debug.WriteLine(sw.Elapsed);
 			// Return the hash
-            return Convert.ToBase64String(hashedbytes);
+            return hashedbytes;
         }
 
-		public string SHA512Hash(string plaintext, byte[] salt = null)
+		public byte[] SHA512Hash(string plaintext, byte[] salt = null)
 		{
 			// Obtain base variables
 			byte[] ptBytes = Encoding.UTF8.GetBytes(plaintext);
 			byte[] combinedBytes;
-			string newHash;
+			byte[] newHash;
 
 			// If salt is present, append it to plaintext
 			if (salt == null)
@@ -48,12 +80,12 @@ namespace HackNet.Security
 				combinedBytes = new byte[ptBytes.Length + salt.Length];
 				ptBytes.CopyTo(combinedBytes, 0);
 				salt.CopyTo(combinedBytes, ptBytes.Length);
-			}
+			}  
 
 			// Do the hashing
 			using (SHA512 shaCalc = new SHA512Managed())
 			{
-				newHash = Convert.ToBase64String(shaCalc.ComputeHash(combinedBytes));
+				newHash = shaCalc.ComputeHash(combinedBytes);
 			}
 
 			// Return the hash
@@ -61,16 +93,20 @@ namespace HackNet.Security
 
 		}
 
-		internal byte[] Encode(string str)
+
+		// Static utility methods
+		internal static byte[] Encode64(string str)
         {
-            return Encoding.UTF8.GetBytes(str);
+
+			return Convert.FromBase64String(str);
+		}
+
+		internal static string Decode64(byte[] arr)
+        {
+			return Convert.ToBase64String(arr);
         }
 
-        internal string Decode(byte[] arr)
-        {
-            return Encoding.UTF8.GetString(arr);
-        }
-
+		// Check if authenticated
         internal static bool IsAuthenticated(string email = null)
         {
             if (email == null)
@@ -82,14 +118,32 @@ namespace HackNet.Security
             }
         }
 
+		// Get email of authenticated user
         internal static string GetEmail()
         {
             if (!IsAuthenticated())
-                throw new AuthException("Not logged in");
+                throw new AuthException("User is not logged in");
 
             return HttpContext.Current.User.Identity.Name;
         }
 
+		internal static Users GetUser()
+		{
+			string email = GetEmail();
+			using (DataContext db = new DataContext())
+			{
+				Users user = (from u in db.Users
+							  where u.Email == email
+							  select u).FirstOrDefault();
+				if (user != null)
+					return user;
+				else
+					throw new UserException("User not found");
+
+			}
+		}
+
+		// Generate bytes from RNGCryptoServiceProvider
         internal static byte[] Generate(int size)
         {
             if (size == 0) // Guard clause
@@ -99,6 +153,14 @@ namespace HackNet.Security
                 rng.GetBytes(random);
             return random;
         }
+
+		internal enum LoginResult
+		{
+			Success = 0,
+			UserNotFound = 1,
+			PasswordIncorrect = 2,
+			OtherError = 3
+		}
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

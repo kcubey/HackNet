@@ -31,7 +31,10 @@ braintree.client.create({
         client: clientInstance,
         styles: {
             'input': {
-                'font-size': '14pt'
+                'font-size': 'inherit'
+            },
+            'input': {
+                'font-family': '"Exo", sans-serif'
             },
             'input.invalid': {
                 'color': 'red'

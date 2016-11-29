@@ -9,6 +9,8 @@ using System.Web.Security;
 using System.Web.SessionState;
 
 using HackNet.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace HackNet {
     public class Global : HttpApplication {
@@ -16,8 +18,28 @@ namespace HackNet {
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>("DefaultConnection"));
+			if (SqlConnAvailable)
+				Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Data.Configuration>("DefaultConnection"));
 
+		}
+
+		private static bool SqlConnAvailable
+		{
+			get
+			{
+				string connStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+				using (SqlConnection connection = new SqlConnection(connStr))
+					try
+					{
+						connection.Open();
+						System.Diagnostics.Debug.WriteLine("Connection to database = SUCCEEDED");
+						return true;
+					} catch (SqlException)
+					{
+						System.Diagnostics.Debug.WriteLine("Connection to database = FAILED");
+						return false;
+					}
+			}
 		}
 	}
 }

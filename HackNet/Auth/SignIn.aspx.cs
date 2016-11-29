@@ -9,29 +9,44 @@ using HackNet.Security;
 using HackNet.Data;
 
 using System.Web.Security;
+using static HackNet.Security.Authenticate;
 
 namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
-        {
-            Msg.Text = "IMPLEMENTING: Enter any username and password you want to bypass";
+		{
+			if (IsAuthenticated())
+				Response.Redirect("~/Game/Home");
             DataContext ctx = new DataContext();
-            ctx.Users.Find(1).Email = "wtfgoogle@gmail.com";
-            Msg.Text = ctx.Users.Find(1).Email;
+			Msg.Text = "Sign in with your Google Drive email and password as 123";
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
-            using (Authenticate auth = new Authenticate())
+			using (Authenticate auth = new Authenticate())
             {
-                byte[] passwordbytes = auth.Encode(UserPass.Text);
-                System.Diagnostics.Debug.WriteLine(auth.Hash(passwordbytes));
-                Msg.Text = auth.Hash(passwordbytes);
-
-                // Privileged Execution
-                FormsAuthentication.RedirectFromLoginPage("Prototype User", false);
-
-            }
+				LoginResult result = auth.ValidateLogin(Email.Text, UserPass.Text);
+				switch(result)
+				{
+					case (LoginResult.Success):
+						FormsAuthentication.RedirectFromLoginPage(Email.Text, true);
+						break;
+					case (LoginResult.PasswordIncorrect):
+						Msg.Text = "User and/or password not found (1)";
+						break;
+					case (LoginResult.UserNotFound):
+						Msg.Text = "User and/or password not found (2)";
+						break;
+					default:
+						Msg.Text = "Unhandled error has occured";
+						break;
+				}
+			}
         }
+
+		protected void BypassClick(object sender, EventArgs e)
+		{
+			FormsAuthentication.RedirectFromLoginPage("Bypasser", false);
+		}
 	}
 }
