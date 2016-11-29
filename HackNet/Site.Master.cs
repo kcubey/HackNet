@@ -12,10 +12,10 @@ namespace HackNet {
         protected void Page_Load(object sender, EventArgs e) {
             if (Authenticate.IsAuthenticated())
             {
-                LeftBtn.InnerText = "Email: " + Authenticate.GetEmail();
+                LeftBtn.InnerText = "Hello, " + Authenticate.GetUser().UserName;
                 LeftBtn.HRef = "#";
 
-                RightBtn.InnerText = "Sign Out";
+                RightBtn.InnerText = "Preferences";
                 RightBtn.HRef = "~/Auth/SignOut.aspx";
             }
             else

@@ -26,9 +26,13 @@
 						<asp:RequiredFieldValidator
 							ID="EmailValidator"
 							ControlToValidate="Email"
-							Display="Dynamic"
 							ErrorMessage="*"
-							ValidationGroup="valGroup1"
+							runat="server" />
+						<asp:RegularExpressionValidator
+							ID="EmailRegExValidator"
+							ControlToValidate="Email"
+							ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
+							ErrorMessage="Invalid Email Address"
 							runat="server" />
 					</td>
 				</tr>
@@ -60,6 +64,13 @@
 				Text="Sign In"
 				CssClass="btn btn-primary loginBtn"
 				OnClick="LoginClick"
+				CausesValidation="true"
+				runat="server" />
+			<asp:Button ID="BypassButton"
+				Text="Bypass Login"
+				CssClass="btn btn-warning loginBtn"
+				OnClick="BypassClick"
+				CausesValidation="false"
 				runat="server" />
 			<script>
 				$(function () {

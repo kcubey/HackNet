@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace HackNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+			PlayerName.Text = Authenticate.GetUser().UserName; 
         }
 
         #region Navigation Links
@@ -48,6 +49,11 @@ namespace HackNet
         protected void LnkMkt(object sender, EventArgs e)
         {
             Response.Redirect("~/Game/Market");
+        }
+
+        protected void LnkMkt1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Game/Market1");
         }
         #endregion
 

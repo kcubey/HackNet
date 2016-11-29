@@ -123,6 +123,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Auth\SignIn.aspx" />
+    <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -150,8 +151,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Game\Currency.aspx" />
     <Content Include="Game\Home.aspx" />
+    <Content Include="Game\Market1.aspx" />
     <Content Include="Game\Missions.aspx" />
+    <Content Include="Game\Parts.aspx" />
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
@@ -245,6 +249,13 @@
     <Compile Include="Auth\SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Auth\SignOut.aspx.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\SignOut.aspx.designer.cs">
+      <DependentUpon>SignOut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auth\SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -259,6 +270,12 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Data\DataLogging.cs" />
+    <Compile Include="Data\Inventory.cs" />
+    <Compile Include="Data\Audit.cs" />
+    <Compile Include="Data\Machines.cs" />
+    <Compile Include="Data\Users.cs" />
     <Compile Include="Game.Master.cs">
       <DependentUpon>Game.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -267,12 +284,26 @@
       <DependentUpon>Game.Master</DependentUpon>
     </Compile>
     <Compile Include="Game\Class\Workstations.cs" />
+    <Compile Include="Game\Currency.aspx.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Currency.aspx.designer.cs">
+      <DependentUpon>Currency.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Game\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Market1.aspx.cs">
+      <DependentUpon>Market1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Market1.aspx.designer.cs">
+      <DependentUpon>Market1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Missions.aspx.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
@@ -282,6 +313,13 @@
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Class\Mission.cs" />
+    <Compile Include="Game\Parts.aspx.cs">
+      <DependentUpon>Parts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Parts.aspx.designer.cs">
+      <DependentUpon>Parts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game\Workstation.aspx.cs">
       <DependentUpon>Workstation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -299,6 +337,7 @@
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Configuration.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,7 +358,7 @@
     <Compile Include="Security\Crypto.cs" />
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
-    <Compile Include="Security\User.cs" />
+    <Compile Include="Security\Logger.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -342,7 +381,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
