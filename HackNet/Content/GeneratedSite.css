@@ -34,9 +34,13 @@ body {
   color: greenyellow;
   background-color: rgba(10, 10, 10, 0.9); }
 
-.nav > li > a:hover {
-  background-color: darkgreen;
-  color: white; }
+.nav > li a:hover {
+  background-color: greenyellow;
+  color: black; }
+
+.nav > li a:active {
+  background-color: unset;
+  color: unset; }
 
 .btn {
   background-color: black;

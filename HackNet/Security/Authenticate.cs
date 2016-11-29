@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Text;
 using HackNet.Data;
+using System.Data.Entity.Core;
 
 namespace HackNet.Security
 {
@@ -22,11 +23,19 @@ namespace HackNet.Security
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = (from u in db.Users
-							 where u.Email == email
-							 select u).FirstOrDefault();
+				Users user;
+				try {
+					user = (from u in db.Users
+							where u.Email == email
+							select u).FirstOrDefault();
+				} catch (EntityCommandExecutionException)
+				{
+					throw new ConnectionException("Database link failure has occured");
+				}
+
 				if (user == null)
 					return LoginResult.UserNotFound;
+
 				byte[] bSalt = user.Salt;
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
 				byte[] bHashed = Hash(bPassword, bSalt);
