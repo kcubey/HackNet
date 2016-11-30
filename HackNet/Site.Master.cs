@@ -12,21 +12,15 @@ namespace HackNet {
         protected void Page_Load(object sender, EventArgs e) {
             if (Authenticate.IsAuthenticated())
             {
-                LeftBtn.InnerText = "Hello, " + Authenticate.GetUser().UserName + "▼";
+				PrivateLeft.Visible = true;
+				PrivateRight.Visible = true;
 
-				LeftBtn.HRef = "#";
-
-                RightBtn.InnerText = "Preferences";
-                RightBtn.HRef = "~/Auth/SignOut.aspx";
+                PrivateLeftAnchor.InnerText = "Hello, " + Authenticate.GetUser().UserName;
             }
             else
-            {  
-                LeftBtn.InnerText = "Sign In";
-                LeftBtn.HRef = "~/Auth/SignIn.aspx";
-
-
-                RightBtn.InnerText = "Register";
-                RightBtn.HRef = "~/Auth/SignUp.aspx";
+            {
+				PublicLeft.Visible = true;
+				PublicRight.Visible = true;
             }
         }
     }

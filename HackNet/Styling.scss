@@ -58,16 +58,21 @@ body {
 	background-color: $contentbg;
 }
 
-.nav > li {
+.nav  {
 
-	a:hover {
+	> li a:hover {
 		background-color: $contentfg;
 		color: black;
 	}
 
-	a:active {
+	> li a:active {
 		background-color:unset;
 		color:unset;
+	}
+
+	.open > a, .open > a:hover {
+		background-color: $contentfg;
+		color: black;
 	}
 }
 
