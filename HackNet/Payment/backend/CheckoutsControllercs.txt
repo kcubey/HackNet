@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace HackNet.Payment.backend
 {
     public class CheckoutsController : Controller
-    {/*
+    {
         public IBraintreeConfiguration config = new BraintreeConfiguration();
 
         public static readonly TransactionStatus[] transactionSuccessStatuses = {
@@ -99,6 +99,6 @@ namespace HackNet.Payment.backend
 
             ViewBag.Transaction = transaction;
             return View();
-        }*/
+        }
     }
 }

@@ -163,6 +163,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="App_Code\BraintreeConfigurationcs.txt" />
+    <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
+    <Content Include="App_Start\addtoRouteConfig.txt" />
+    <Content Include="App_Start\FilterConfigcs.txt" />
+    <Content Include="App_Start\WebApiConfigcs.txt" />
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
@@ -206,6 +211,7 @@
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
+    <Content Include="Payment\backend\CheckoutsControllercs.txt" />
     <Content Include="Payment\backend\paymentCSS.css" />
     <Content Include="Payment\Checkout.aspx" />
     <Content Include="Payment\Layout.aspx" />
@@ -286,8 +292,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\BraintreeConfiguration.cs" />
-    <Content Include="App_Code\IBraintreeConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -296,9 +300,7 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -395,7 +397,6 @@
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
-    <Compile Include="Payment\backend\CheckoutsController.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
