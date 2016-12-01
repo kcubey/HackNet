@@ -1,4 +1,15 @@
-﻿//JSv2
+﻿//Taken from demo code
+//========================
+var checkout = new Demo({
+    formID: "payment-form"
+});
+var client_token = "@ViewBag.ClientToken";
+braintree.setup(client_token, "dropin", {
+    container: "bt-dropin"
+});
+
+
+//JSv2
 //========================
 
 // We generated a client token for you so you can test out this code

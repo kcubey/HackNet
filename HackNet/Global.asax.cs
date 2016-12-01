@@ -11,6 +11,8 @@ using System.Web.SessionState;
 using HackNet.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Mvc;
+using System.Web.Http;
 
 namespace HackNet {
     public class Global : HttpApplication {
@@ -41,5 +43,19 @@ namespace HackNet {
 					}
 			}
 		}
-	}
+        // Braintree
+/*
+        public class MvcApplication : System.Web.HttpApplication
+        {
+            protected void Application_Start()
+            {
+                AreaRegistration.RegisterAllAreas();
+
+                WebApiConfig.Register(GlobalConfiguration.Configuration);
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+            }
+        }
+*/
+    }
 }
