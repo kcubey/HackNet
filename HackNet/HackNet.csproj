@@ -171,6 +171,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\FontAwesome\font-awesome.css" />
+    <Content Include="Content\FontAwesome\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\GeneratedSite.css" />
     <Content Include="Content\GeneratedSite.min.css">
       <DependentUpon>GeneratedSite.css</DependentUpon>
@@ -180,14 +183,16 @@
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />
     <Content Include="Content\Images\doge.png" />
-    <Content Include="Content\Images\mission.jpg" />
     <Content Include="Content\Images\mission.png" />
+    <Content Include="Content\Images\workstation.png" />
     <Content Include="Content\MainPage.css" />
     <Content Include="Content\Images\grungebg.png" />
     <Content Include="Content\onepage-scroll.css" />
     <Content Include="Content\Images\use_your_illusion.png" />
     <Content Include="Content\Images\vertical_cloth.png" />
     <Content Include="Content\Images\page2.png" />
+    <Content Include="Content\Tutorial\intro.js" />
+    <Content Include="Content\Tutorial\introjs.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -220,6 +225,11 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Game.Master" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\HackNet Azure Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />

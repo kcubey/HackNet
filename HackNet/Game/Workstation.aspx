@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Workstation" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Workstation.aspx.cs" Inherits="HackNet.Game.Workstation" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
+
     <div id="upgradeModel" class="modal fade" role="dialog">
         <div class="modal-dialog" style="color:black;">
 
@@ -55,6 +56,7 @@
 
     <div class="panel panel-default">
         <div class="panel panel-body">
+            <asp:LinkButton runat="server" CssClass="glyphicon glyphicon-question-sign" Style="float: right;" Font-Size="X-Large" Font-Strikeout="False" ForeColor="Lime" />
             <div class="row">
                 <div class="col-xs-6 col-md-4">
                     <img src="../Content/Images/workstation.png" />
@@ -80,7 +82,7 @@
                 </div>
                 <div class="col-xs-12 col-md-8">
                     <asp:Label runat="server" ID="WorkstationNameLbl" Font-Size="XX-Large"></asp:Label>
-                    <asp:LinkButton runat="server" CssClass="glyphicon glyphicon-question-sign" Style="float: right;" Font-Size="X-Large" Font-Strikeout="False" ForeColor="Lime" />
+                    
 
                     <br />
                     <br />
