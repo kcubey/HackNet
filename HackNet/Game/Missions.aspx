@@ -30,7 +30,7 @@
 
     <div class="panel panel-default">
         <div class="panel panel-body">           
-            <a class="btn btn-large" href="javascript:void(0);" onclick="javascript:introJs().start();">Show me how</a>
+            <a class="glyphicon glyphicon-question-sign" Style="float: right; color:greenyellow; font-size:25px; text-decoration:none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
             <div class="col-sm-12 col-md-9">
                 <div class="form-group row" data-step="1" data-intro="This is how you attack" data-position='right'>
                     <asp:Label runat="server" Text="Region of attack: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
