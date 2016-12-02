@@ -17,10 +17,11 @@
     <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
 
 
-    <h1>Welcome!</h1>
+    <h1>Confirm your Details</h1><hr />
+    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
     <p>You have chosen to use REAL currency to pay for premium items.
         <br />
-        If you have NOT chosen to do so, <a href="#">click to go back</a>.
+        If you have NOT chosen to do so, <asp:LinkButton ID="backButton" runat="server" postbackurl="~/Game/Market.aspx">click to go back</asp:LinkButton>
     </p>
     <h3>Payment Details</h3>
         <asp:DropDownList ID="PackageList" runat="server" ForeColor="Black" 
@@ -30,6 +31,7 @@
             <asp:ListItem Text="Package C - SGD$30" Value="2"></asp:ListItem>
             <asp:ListItem Text="Package D - SGD$40" Value="3"></asp:ListItem>
         </asp:DropDownList>
+    <br />
     <asp:Label ID="pkgConfirm" runat="server" ForeColor="Black" ClientIDMode="Static"></asp:Label>
     
     <h3>JS v2</h3>
@@ -65,6 +67,9 @@
     <br />
   <input type="hidden" name="payment-method-nonce">
   <input type="submit" value="Pay $10" disabled>
+
+    <br /><br />
+    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
 
 
 </asp:Content>

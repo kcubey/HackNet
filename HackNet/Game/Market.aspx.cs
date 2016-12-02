@@ -13,5 +13,16 @@ namespace HackNet.Market
         {
 
         }
+/*
+        protected void Pay_Redirect_Click(Object sender, EventArgs e)
+        {
+            Response.Redirect("/game/payment/Checkout.aspx", false);
+            /*
+             * or Server.Transfer("Checkout.aspx",true);
+             * reference stackoverflow.com/questions/224569
+             * reference forums.asp.net/t/1331559 for storing information in cookies
+             
+        }
+    */
     }
 }

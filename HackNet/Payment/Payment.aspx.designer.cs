@@ -13,6 +13,24 @@ namespace HackNet.Payment {
     public partial class Payment {
         
         /// <summary>
+        /// warning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label warning;
+        
+        /// <summary>
+        /// backButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton backButton;
+        
+        /// <summary>
         /// PackageList control.
         /// </summary>
         /// <remarks>
