@@ -7,35 +7,34 @@ $headingbg: rgba(60, 60, 60, 0.9);
 $overallbg: url('./Content/Images/grungebg.png');
 
 * {
-    font-family: $basicfont;
+	font-family: $basicfont;
 }
 
 body {
-    padding-top: 50px;
-    color:white;
-    background: $overallbg;
+	padding-top: 50px;
+	color: white;
+	background: $overallbg;
 }
 
 .panel, .btn-default {
 	// clear existing borders
-    border: 0;
+	border: 0;
 	background-color: $headingbg;
-	
+
 	.panel-heading {
 		background-color: $headingbg;
 		color: $headingfg;
 	}
 
 	.panel-body {
-    color: $contentfg;
-    background-color: $contentbg;
-	border-radius:5px;
+		color: $contentfg;
+		background-color: $contentbg;
+		border-radius: 5px;
 	}
 }
 
 .navbar-fixed-top {
-
-    background: black;
+	background: black;
 
 	a {
 		color: $contentfg;
@@ -43,16 +42,15 @@ body {
 }
 
 .breadcrumb {
+	background-color: $contentbg;
 
-    background-color: $contentbg;
+	> .active {
+		color: white;
+	}
 
-    > .active {
-        color: white;
-    }
-
-    a {
-        color: $contentfg;
-    }
+	a {
+		color: $contentfg;
+	}
 }
 
 .jumbotron {
@@ -60,33 +58,46 @@ body {
 	background-color: $contentbg;
 }
 
-.nav > li > a:hover {
-    background-color:darkgreen;
-    color:white;
+.nav  {
+
+	> li a:hover {
+		background-color: $contentfg;
+		color: black;
+	}
+
+	> li a:active {
+		background-color:unset;
+		color:unset;
+	}
+
+	.open > a, .open > a:hover {
+		background-color: $contentfg;
+		color: black;
+	}
 }
 
 .btn {
-    background-color: black;
-    color:greenyellow;
+	background-color: black;
+	color: greenyellow;
 }
 
 footer {
-    color: black;
+	color: black;
 }
 
 /* LOGIN STUFF */
 
-.loginTable{
+.loginTable {
 	margin-bottom: 25px;
 	width: 650px;
 
 	input {
 		background-color: black;
-		color:white;
+		color: white;
 	}
 
 	input[type="text"], input[type="password"] {
-		width:240px;
+		width: 240px;
 	}
 
 	input[type="radio"] {
@@ -94,7 +105,7 @@ footer {
 	}
 
 	td:nth-child(3) {
-		width:200px;
+		width: 200px;
 	}
 
 	tr, td {
@@ -103,12 +114,12 @@ footer {
 }
 
 .form-control:focus {
-  border-color: $contentfg;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.8);
+	border-color: $contentfg;
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .regBtn {
-	display:none;
+	display: none;
 }
 
 
@@ -119,57 +130,57 @@ footer {
 	background-color: $contentbg;
 
 	input[type="text"], input[type="password"] {
-		width:270px;
+		width: 270px;
 	}
 
 	td:nth-child(1) {
-		width:180px;
+		width: 180px;
 	}
 
 	td:nth-child(3) {
-		width:200px;
+		width: 200px;
 	}
 
 	tr, td {
 		padding: 0 5px 10px 0;
 	}
-
 }
 
 /* Styling for OTP page */
 
 .otpTable td {
-	padding:10px;
+	padding: 10px;
 }
 
-.setupRowLeft{
-    float:left;
-    width:70%;
-    overflow:auto;
+.setupRowLeft {
+	float: left;
+	width: 70%;
+	overflow: auto;
 }
 
-.setupRowRight{
-    float:right;
-    overflow:auto;
+.setupRowRight {
+	float: right;
+	overflow: auto;
 }
 
-.otpSetupValue{
-    width:100%;
-    margin-bottom:10px;
+.otpSetupValue {
+	width: 100%;
+	margin-bottom: 10px;
 }
-.qrPlaceholder{
-    height:300px;
-    width:300px;
+
+.qrPlaceholder {
+	height: 300px;
+	width: 300px;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 25px;
-    padding-right: 25px;
+	padding-left: 25px;
+	padding-right: 25px;
 	background-color: rgba(0,0,0,0.3);
-	min-height:110vh;
-	padding-bottom:50px;
+	min-height: 110vh;
+	padding-bottom: 50px;
 	border-left: 1px solid $contentfg;
 	border-right: 1px solid $contentfg;
 }
@@ -178,16 +189,15 @@ footer {
 input,
 select,
 textarea {
-    max-width: 280px;
+	max-width: 280px;
 }
 
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .jumbotron {
-        margin-top: 20px;
-    }
-
+	.jumbotron {
+		margin-top: 20px;
+	}
 }
 
 /*Overiding styles for testing of GUI only*/
