@@ -1,67 +1,103 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Game.Master.cs" Inherits="HackNet.GameMaster" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadPlaceholder" runat="server">
+
+		<asp:ContentPlaceHolder ID="GameHeadPH" runat="server" />
+</asp:Content>
+
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="col-sm-12 col-md-9">
-                <div class="col-sm-12 col-md-2" style="display:inline-block;">
-                    <asp:Image runat="server" ImageUrl="~/Content/Images/hackerpic.jpg" Height="96px" Width="96px"/>
-                </div>
-                <div class="col-sm-12 col-md-1">
-                </div>
-                <div class="col-sm-12 col-md-5">
-                    <div class="row">
-                        <asp:Label runat="server" ID="PlayerName">ERROR</asp:Label>
-                    </div>
-                    <div class="row">
-                        Level
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="col-sm-12 col-md-9">
+				<div class="col-sm-12 col-md-2" style="display: inline-block;">
+					<asp:Image runat="server" ImageUrl="~/Content/Images/hackerpic.jpg" Height="96px" Width="96px" />
+				</div>
+				<div class="col-sm-12 col-md-1">
+				</div>
+				<div class="col-sm-12 col-md-5">
+					<div class="row">
+						<asp:Label runat="server" ID="PlayerName">ERROR</asp:Label>
+					</div>
+					<div class="row">
+						Level
                         <asp:Label runat="server" ID="LevelsLbl" Text="4" Font-Bold="true"></asp:Label>
-                    </div>
+					</div>
 
-                    <div class="row">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                <asp:Label runat="server" Text="7000/10000XP (70%)"></asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-3">
-                    <div class="row" style="text-align: right">
-                        Coins
+					<div class="row">
+						<div class="progress">
+							<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+								<asp:Label runat="server" Text="7000/10000XP (70%)"></asp:Label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-3">
+					<div class="row" style="text-align: right">
+						Coins
                         <asp:Label runat="server" ID="CoinsLbl" Text="999" Font-Bold="true"></asp:Label>
-                    </div>
-                    <div class="row" style="text-align: right">
-                        Bucks
+					</div>
+					<div class="row" style="text-align: right">
+						Bucks
                         <asp:Label runat="server" ID="BucksLbl" Text="10" Font-Bold="true"></asp:Label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-3" style="box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9); background-color: darkred; color: white;">
-                Medals
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-3" style="box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9); background-color: darkred; color: white;">
+				Medals
                  <asp:BulletedList runat="server">
-                     <asp:ListItem> Script Kiddie Meal </asp:ListItem>
-                 </asp:BulletedList>
-                <br />
-            </div>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Announcements" OnClick="LnkAnn"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Workstation" OnClick="LnkWsn" />
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Missions" OnClick="LnkMis"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Events" OnClick="LnkEvt"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Mission Logs" OnClick="LnkMLog"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Inventory" OnClick="LnkInv"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Market" OnClick="LnkMkt"/>
-            <asp:Button runat="server" CssClass="btn btn-default" Text="Market1" OnClick="LnkMkt1"/>
-        </div>
-    </div>
-    <br />
-    <asp:ContentPlaceHolder runat="server" ID="GameContent">
-    </asp:ContentPlaceHolder>
+					 <asp:ListItem> Script Kiddie Meal </asp:ListItem>
+				 </asp:BulletedList>
+				<br />
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-compass" aria-hidden="true"></i> MENU</span>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<asp:LinkButton runat="server" Text="Home" OnClick="LnkHome" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Workstation" OnClick="LnkWsn" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Missions" OnClick="LnkMis" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Mission Logs" OnClick="LnkMLog" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Inventory" OnClick="LnkInv" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Chat" OnClick="LnkChat" /></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Market <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<asp:LinkButton runat="server" Text="Market" OnClick="LnkMkt" /></li>
+							<li>
+								<asp:LinkButton runat="server" Text="Market1" OnClick="LnkMkt1" /></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<br />
+	<asp:ContentPlaceHolder runat="server" ID="GameContent" />
 
 
 </asp:Content>

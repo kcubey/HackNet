@@ -15,6 +15,8 @@
 	<webopt:BundleReference runat="server" Path="~/Content/css" />
 	<link href="~/Content/Images/console.png" rel="shortcut icon" type="image/x-icon" />
 	<link href="~/Content/FontAwesome/font-awesome.min.css" rel="stylesheet">
+
+	<asp:ContentPlaceHolder ID="HeadPlaceholder" runat="server" />
 </head>
 <body>
 	<script>
@@ -54,8 +56,13 @@
 		</asp:ScriptManager>
 
 		<div class="navbar navbar-fixed-top mainnav" style="border-bottom: none;">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 					<a class="navbar-brand" runat="server" href="~/">HackNet<span class="blinking">_</span></a>
 				</div>
 				<div class="navbar-collapse navbar-right collapse">
@@ -69,16 +76,15 @@
 						</li>
 
 						<li id="PrivateLeft" visible="false" runat="server">
-							<a ID="PrivateLeftAnchor" runat="server"> HELLO, Player!</a>
+							<a id="PrivateLeftAnchor" runat="server">HELLO, Player!</a>
 						</li>
 
 						<li id="PrivateRight" visible="false" runat="server">
 							<a id="RightBtn" runat="server" class="dropdown-toggle" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Preferences
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Preferences
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">User Preferences</a></li>
 								<li><a href="#">Security Preferences</a></li>
