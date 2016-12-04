@@ -4,12 +4,14 @@
 	<link rel="stylesheet" href="../Content/Chat.css" />
 </asp:Content>
 <asp:Content ID="ChatContent" ContentPlaceHolderID="GameContent" runat="server">
-	<nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">HackNet Chat</a>
-    </div>
-	<input type="text" class="form-control" style="top:20px;" placeholder="Recipient Username">
-</nav>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">HackNet Chat</h3>
+		</div>
+		<div class="panel-body">
+			Select a recipient <asp:TextBox placeholder="Enter Username" runat="server" CssClass="form-control" />
+		</div>
+	</div>
 	<div class="chatsection">
 		<div class="ChatTitle">Chatting with Wuggle</div>
 		<ol class="chat">

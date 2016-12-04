@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="HackNet.Auth.SignUp" %>
-
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadPlaceholder">
+			<script src='https://www.google.com/recaptcha/api.js'></script>
+</asp:Content>
 <asp:Content ID="SignUpContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="jumbotron">
         <h1><%: Title %></h1>

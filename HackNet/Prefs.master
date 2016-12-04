@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Prefs.master.cs" Inherits="HackNet.PrefsMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsible">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-lock" aria-hidden="true"></i> SECURITY</span>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="collapsible">
+				<ul class="nav navbar-nav">
+					<li>
+						<asp:LinkButton runat="server" Text="Profile Settings" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Change Password" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Configure 2-FA" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Login Notifications" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Security Logs" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Chat Settings" /></li>
+					<li>
+						<asp:LinkButton runat="server" Text="Admin Dashboard" /></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+</asp:Content>
