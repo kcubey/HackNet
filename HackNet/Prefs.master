@@ -18,19 +18,19 @@
 			<div class="collapse navbar-collapse" id="collapsible">
 				<ul class="nav navbar-nav">
 					<li>
-						<asp:LinkButton runat="server" Text="Profile Settings" /></li>
+						<asp:HyperLink runat="server" Text="Profile Settings" NavigateUrl="~/Prefs/ProfileSettings" /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Change Password" /></li>
+						<asp:HyperLink runat="server" Text="Change Password" NavigateUrl="~/Prefs/ChangePassword" /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Configure 2-FA" /></li>
+						<asp:HyperLink runat="server" Text="Configure 2FA" NavigateUrl="~/Prefs/OtpSetup" /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Login Notifications" /></li>
+						<asp:HyperLink runat="server" Text="Login Notifications" NavigateUrl="#" /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Security Logs" /></li>
+						<asp:HyperLink runat="server" Text="Security Logs" NavigateUrl="~/Prefs/AccessLogs" /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Chat Settings" /></li>
+						<asp:HyperLink runat="server" Text="Chat Settings" NavigateUrl="#"  /></li>
 					<li>
-						<asp:LinkButton runat="server" Text="Admin Dashboard" /></li>
+						<asp:HyperLink runat="server" Text="Admin Dashboard" NavigateUrl="#" ID="AdminDash"/></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

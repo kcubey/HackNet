@@ -222,7 +222,10 @@
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
     <Content Include="Payment\ViewStart.aspx" />
+    <Content Include="Prefs\AccessLogs.aspx" />
     <Content Include="Prefs\ChangePassword.aspx" />
+    <Content Include="Prefs\OtpSetup.aspx" />
+    <Content Include="Prefs\ProfileSettings.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -445,6 +448,13 @@
     <Compile Include="Prefs.master.designer.cs">
       <DependentUpon>Prefs.master</DependentUpon>
     </Compile>
+    <Compile Include="Prefs\AccessLogs.aspx.cs">
+      <DependentUpon>AccessLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\AccessLogs.aspx.designer.cs">
+      <DependentUpon>AccessLogs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Prefs\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -452,6 +462,21 @@
     <Compile Include="Prefs\ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Prefs\OtpSetup.aspx.cs">
+      <DependentUpon>OtpSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\OtpSetup.aspx.designer.cs">
+      <DependentUpon>OtpSetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prefs\ProfileSettings.aspx.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\ProfileSettings.aspx.designer.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Captcha.cs" />

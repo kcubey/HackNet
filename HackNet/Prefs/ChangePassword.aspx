@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="Change Password" Language="C#" MasterPageFile="~/Prefs.master" AutoEventWireup="true" CodeBehind="ChangePassword.aspx.cs" Inherits="HackNet.Prefs.ChangePassword" %>
+
 <asp:Content ID="ChangePWContent" ContentPlaceHolderID="PrefsContent" runat="server">
-		<div class="panel panel-default">
+	<ol class="breadcrumb" style="margin-bottom: 5px;">
+		<li><a href="<%= ResolveUrl("~/Default") %>">HackNet</a></li>
+		<li>Security Preferences</li>
+		<li>Authentication Configuration</li>
+		<li class="active"><%: Page.Title %></li>
+	</ol>
+	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Change Password</h3>
 		</div>
@@ -10,9 +17,9 @@
 				<tr>
 					<td><strong>Username:</strong></td>
 					<td>
-						<strong><asp:Label ID="LoggedInUsername" runat="server" /></strong></td>
-					<td>
-					</td>
+						<strong>
+							<asp:Label ID="LoggedInUsername" runat="server" /></strong></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td><strong>Old Password:</strong></td>
@@ -65,5 +72,5 @@
 
 	<p>
 		<asp:Label ID="Msg" ForeColor="red" runat="server" />
-</p>
+	</p>
 </asp:Content>

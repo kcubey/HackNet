@@ -85,9 +85,9 @@
 							<ul class="dropdown-menu" runat="server">
 								<li><asp:HyperLink NavigateUrl="#" runat="server"><i class="fa fa-user" aria-hidden="true"></i> Profile</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
-								<li><asp:HyperLink NavigateUrl="#" runat="server">Profile Options</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">Profile Options</asp:HyperLink></li>
 								<li><asp:HyperLink NavigateUrl="~/Prefs/ChangePassword" runat="server">Security Settings</asp:HyperLink></li>
-								<li><asp:HyperLink NavigateUrl="#" runat="server">Security Logs</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">Security Logs</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
 								<li><asp:HyperLink NavigateUrl="#" runat="server">About Us & FAQ</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
