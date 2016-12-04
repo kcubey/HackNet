@@ -1,6 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Exo');
 $basicfont: 'Exo', san-serif;
 $contentfg: greenyellow;
+$contentselected: #419f48;
 $contentbg: rgba(10, 10, 10, 0.9);
 $headingfg: greenyellow;
 $headingbg: rgba(60, 60, 60, 0.9);
@@ -15,6 +16,7 @@ body {
 	color: white;
 	background: $overallbg;
 }
+
 
 .panel, .btn-default {
 	// clear existing borders
@@ -38,6 +40,21 @@ body {
 
 	a {
 		color: $contentfg;
+	}
+}
+
+.navbar-default {
+	background-color: black;
+
+	.navbar-nav > li {
+
+		a {
+			color: $contentfg;
+		}
+
+		> a:hover, > a:active, a:focus, .current {
+			color: $contentselected;
+		}
 	}
 }
 

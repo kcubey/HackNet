@@ -13,6 +13,15 @@ namespace HackNet {
     public partial class SiteMaster {
         
         /// <summary>
+        /// HeadPlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadPlaceholder;
+        
+        /// <summary>
         /// PublicLeft control.
         /// </summary>
         /// <remarks>
