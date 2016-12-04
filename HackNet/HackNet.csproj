@@ -176,6 +176,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chat.css" />
     <Content Include="Content\FontAwesome\font-awesome.css" />
     <Content Include="Content\FontAwesome\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -202,6 +203,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Game\Chat.aspx" />
     <Content Include="Game\Currency.aspx" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Market1.aspx" />
@@ -212,12 +214,18 @@
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
     <Content Include="Payment\backend\CheckoutsControllercs.txt" />
+    <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
+    <Content Include="Payment\backend\redirectImageButton.css" />
     <Content Include="Payment\Checkout.aspx" />
     <Content Include="Payment\Layout.aspx" />
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
     <Content Include="Payment\ViewStart.aspx" />
+    <Content Include="Prefs\AccessLogs.aspx" />
+    <Content Include="Prefs\ChangePassword.aspx" />
+    <Content Include="Prefs\OtpSetup.aspx" />
+    <Content Include="Prefs\ProfileSettings.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -236,6 +244,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Prefs.master" />
     <None Include="Properties\PublishProfiles\HackNet Azure Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -342,6 +351,13 @@
     <Compile Include="Game.Master.designer.cs">
       <DependentUpon>Game.Master</DependentUpon>
     </Compile>
+    <Compile Include="Game\Chat.aspx.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Chat.aspx.designer.cs">
+      <DependentUpon>Chat.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
@@ -425,6 +441,42 @@
     <Compile Include="Payment\ViewStart.aspx.designer.cs">
       <DependentUpon>ViewStart.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Prefs.master.cs">
+      <DependentUpon>Prefs.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs.master.designer.cs">
+      <DependentUpon>Prefs.master</DependentUpon>
+    </Compile>
+    <Compile Include="Prefs\AccessLogs.aspx.cs">
+      <DependentUpon>AccessLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\AccessLogs.aspx.designer.cs">
+      <DependentUpon>AccessLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prefs\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prefs\OtpSetup.aspx.cs">
+      <DependentUpon>OtpSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\OtpSetup.aspx.designer.cs">
+      <DependentUpon>OtpSetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Prefs\ProfileSettings.aspx.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Prefs\ProfileSettings.aspx.designer.cs">
+      <DependentUpon>ProfileSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Captcha.cs" />

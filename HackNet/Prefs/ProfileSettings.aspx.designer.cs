@@ -7,63 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackNet {
+namespace HackNet.Prefs {
     
     
-    public partial class GameMaster {
+    public partial class ProfileSettings {
         
         /// <summary>
-        /// GameHeadPH control.
+        /// usernameTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder GameHeadPH;
+        protected global::System.Web.UI.WebControls.TextBox usernameTxt;
         
         /// <summary>
-        /// PlayerName control.
+        /// emailTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PlayerName;
+        protected global::System.Web.UI.WebControls.TextBox emailTxt;
         
         /// <summary>
-        /// LevelsLbl control.
+        /// FNameTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LevelsLbl;
+        protected global::System.Web.UI.WebControls.TextBox FNameTxt;
         
         /// <summary>
-        /// CoinsLbl control.
+        /// LNameTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CoinsLbl;
+        protected global::System.Web.UI.WebControls.TextBox LNameTxt;
         
         /// <summary>
-        /// BucksLbl control.
+        /// DobTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label BucksLbl;
+        protected global::System.Web.UI.WebControls.TextBox DobTxt;
         
         /// <summary>
-        /// GameContent control.
+        /// Msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder GameContent;
+        protected global::System.Web.UI.WebControls.Label Msg;
+        
+        /// <summary>
+        /// ProfileChangeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ProfileChangeBtn;
     }
 }

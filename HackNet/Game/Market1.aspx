@@ -59,20 +59,11 @@
             <div>ByteDollar</div>
         -->
         
-        <!--
-        <div runat="server" class="PartsDiv" onclick="LnkPts">
-            <p>Parts</p>
-        </div>
-        <div runat="server" class="CurrencyDiv" onclick="LnkCurr">
-            <p>Currency</p>
-        </div>
-        <div style="clear:both;"></div>
-        -->
 
         <!--Left div--><!--  GeneratedSite.css textarea max width  -->
-        <asp:Button runat="server" class="PartsDiv" Text="Parts" OnClick="LnkPts"/>
+        <asp:Button Style="max-width:none;" runat="server" class="PartsDiv" Text="Parts" OnClick="LnkPts" />
         <!--Right div--><!--  GeneratedSite.css textarea max width  -->
-        <asp:Button runat="server" class="CurrencyDiv" Text="Currency" OnClick="LnkCurr"/>
+        <asp:Button Style="max-width:none;" runat="server" class="CurrencyDiv" Text="Currency" OnClick="LnkCurr"/>
 
         
     </fieldset>

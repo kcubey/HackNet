@@ -7,63 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackNet {
+namespace HackNet.Prefs {
     
     
-    public partial class GameMaster {
+    public partial class OtpSetup {
         
         /// <summary>
-        /// GameHeadPH control.
+        /// ExistingOTP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder GameHeadPH;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ExistingOTP;
         
         /// <summary>
-        /// PlayerName control.
+        /// OTPCancelBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PlayerName;
+        protected global::System.Web.UI.WebControls.Button OTPCancelBtn;
         
         /// <summary>
-        /// LevelsLbl control.
+        /// GeneratedSecret control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LevelsLbl;
+        protected global::System.Web.UI.WebControls.Label GeneratedSecret;
         
         /// <summary>
-        /// CoinsLbl control.
+        /// CurrPw control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CoinsLbl;
+        protected global::System.Web.UI.WebControls.TextBox CurrPw;
         
         /// <summary>
-        /// BucksLbl control.
+        /// OTPVal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label BucksLbl;
+        protected global::System.Web.UI.WebControls.TextBox OTPVal;
         
         /// <summary>
-        /// GameContent control.
+        /// Msg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder GameContent;
+        protected global::System.Web.UI.WebControls.Label Msg;
+        
+        /// <summary>
+        /// OTPSubmitBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button OTPSubmitBtn;
+        
+        /// <summary>
+        /// QRCodeHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl QRCodeHolder;
+        
+        /// <summary>
+        /// OTPQrCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image OTPQrCode;
     }
 }

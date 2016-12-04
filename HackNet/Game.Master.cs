@@ -16,7 +16,7 @@ namespace HackNet
         }
 
         #region Navigation Links
-        protected void LnkAnn(object sender, EventArgs e)
+        protected void LnkHome(object sender, EventArgs e)
         {
             Response.Redirect("~/Game/Home");
         }
@@ -31,11 +31,6 @@ namespace HackNet
             Response.Redirect("~/Game/Missions");
         }
 
-        protected void LnkEvt(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Game/Home");
-        }
-
         protected void LnkMLog(object sender, EventArgs e)
         {
             Response.Redirect("~/Game/Home");
@@ -45,6 +40,11 @@ namespace HackNet
         {
             Response.Redirect("~/Game/Home");
         }
+
+		protected void LnkChat(object sender, EventArgs e)
+		{
+			Response.Redirect("~/Game/Chat");
+		}
 
         protected void LnkMkt(object sender, EventArgs e)
         {
