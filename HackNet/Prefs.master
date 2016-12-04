@@ -37,4 +37,5 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	<asp:ContentPlaceHolder ID="PrefsContent" runat="server" />
 </asp:Content>

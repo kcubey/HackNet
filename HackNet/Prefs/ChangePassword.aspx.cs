@@ -13,5 +13,10 @@ namespace HackNet.Prefs
 		{
 
 		}
+
+		protected void ChangePassClick(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
