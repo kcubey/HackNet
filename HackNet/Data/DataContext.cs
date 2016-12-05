@@ -20,6 +20,13 @@ namespace HackNet.Data
 
 		public DbSet<Audit> Audit { get; set; }
 
+		public DbSet<Machines> Machines { get; set; }
+
+		public DbSet<MissionLogs> MissionLogs { get; set; }
+
+		public DbSet<MissionData> MissionData { get; set; }
+
+		public DbSet<InventoryItem> InventoryItem { get; set; }
 
     }
 }

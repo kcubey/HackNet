@@ -18,12 +18,14 @@ namespace HackNet.Data
 
 		public DateTime Timestamp { get; set; }
 
+		public string IpAddress { get; set; }
+
 		[Required]
 		public string Description { get; set; }
 
+		[ForeignKey("User")]
 		public int UserId { get; set; }
 
-		[ForeignKey("UserId")]
 		public Users User { get; set; }
     }
 
