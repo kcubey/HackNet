@@ -20,7 +20,8 @@ namespace HackNet.Data
 		protected override void Seed(DataContext context)
 		{
 			System.Diagnostics.Debug.WriteLine("Users table initializing");
-			InitUsers().ForEach(s => context.Users.AddOrUpdate(s));
+			if (!context.Users.Any())
+				InitUsers().ForEach(s => context.Users.AddOrUpdate(s));
 			context.SaveChanges();
 		}
 
@@ -29,7 +30,6 @@ namespace HackNet.Data
 			var Users = new List<Users>();
 			Users.Add(new Users
 			{
-				UserID = 1,
 				UserName = "Wuggle",
 				FullName = "Wen Liang",
 				Email = "wenlianggg@gmail.com",
@@ -37,11 +37,17 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1998-03-17"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Parse("2016-10-11")
+				LastLogin = DateTime.Now,
+				UserKeyStore = new UserKeyStore
+				{
+					UserId = 1,
+					RsaPub = new byte[0],
+					RsaPriv = new byte[0],
+					AesIv = new byte[0]
+				}
 			});
 			Users.Add(new Users
 			{
-				UserID = 2,
 				UserName = "RoyceFrost",
 				FullName = "Roy Tang Qing Long",
 				Email = "butterfrost90@gmail.com",
@@ -49,11 +55,10 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Parse("2016-10-11")
+				LastLogin = DateTime.Now
 			});
 			Users.Add(new Users
 			{
-				UserID = 3,
 				UserName = "KeziaKew",
 				FullName = "Kezia Kew",
 				Email = "keziakew98@gmail.com",
@@ -61,11 +66,10 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Parse("2016-10-11")
+				LastLogin = DateTime.Now
 			});
 			Users.Add(new Users
 			{
-				UserID = 4,
 				UserName = "DomSwag",
 				FullName = "Dominic Gian",
 				Email = "keeleyswag@gmail.com",
@@ -73,7 +77,7 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Parse("2016-10-11")
+				LastLogin = DateTime.Now
 			});
 			using (Authenticate auth = new Authenticate())
 			{

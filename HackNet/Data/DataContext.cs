@@ -32,15 +32,13 @@ namespace HackNet.Data
 		{
 			base.OnModelCreating(modelBuilder);
 
-			// Machines
-			modelBuilder.Entity<Machines>()
-						.HasRequired(mch => mch.User)
-						.WithOptional(u => u.Machine);
-
-			// UserKeyStore
-			modelBuilder.Entity<UserKeyStore>()
-						.HasRequired(ks => ks.User)
-						.WithOptional(u => u.UserKeyStore);
+			// Users
+			modelBuilder.Entity<Users>()
+						.HasOptional(us => us.Machine)
+						.WithRequired(mch => mch.User);
+			modelBuilder.Entity<Users>()
+						.HasOptional(usr => usr.UserKeyStore)
+						.WithRequired(ks => ks.User);
 
 			// Items
 			modelBuilder.Entity<InventoryItem>()

@@ -14,6 +14,7 @@ namespace HackNet.Data
 		public int UserID { get; set; }
 
 		[Required]
+		[Index(IsUnique = true)]
 		[Display(Name = "User Name")]
 		[StringLength(15, ErrorMessage = "Username must be between 4 to 15 characters", MinimumLength = 4)]
 		public string UserName { get; set; }
@@ -24,7 +25,9 @@ namespace HackNet.Data
 		public string FullName { get; set; }
 
 		[Required]
+		[Index(IsUnique = true)]
 		[Display(Name = "Email address")]
+		[StringLength(70)]
 		[EmailAddress(ErrorMessage = "Ensure that the email address is properly entered!")]
 		public string Email { get; set; }
 

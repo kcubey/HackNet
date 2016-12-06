@@ -13,11 +13,14 @@ namespace HackNet.Data
 		[ForeignKey("User")]
 		public int UserId { get; set; }
 
+		[Required]
 		public byte[] RsaPub { get; set; }
 
+		[Required]
 		public byte[] RsaPriv { get; set; }
 
-		public byte[] aesIv { get; set; }
+		[Required]
+		public byte[] AesIv { get; set; }
 
 		// Foreign key reference
 		public virtual Users User { get; set; }
