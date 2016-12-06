@@ -55,7 +55,14 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Now
+				LastLogin = DateTime.Now,
+				UserKeyStore = new UserKeyStore
+				{
+					UserId = 1,
+					RsaPub = new byte[0],
+					RsaPriv = new byte[0],
+					AesIv = new byte[0]
+				}
 			});
 			Users.Add(new Users
 			{
@@ -66,7 +73,14 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Now
+				LastLogin = DateTime.Now,
+				UserKeyStore = new UserKeyStore
+				{
+					UserId = 1,
+					RsaPub = new byte[0],
+					RsaPriv = new byte[0],
+					AesIv = new byte[0]
+				}
 			});
 			Users.Add(new Users
 			{
@@ -77,7 +91,14 @@ namespace HackNet.Data
 				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
-				LastLogin = DateTime.Now
+				LastLogin = DateTime.Now,
+				UserKeyStore = new UserKeyStore
+				{
+					UserId = 1,
+					RsaPub = new byte[0],
+					RsaPriv = new byte[0],
+					AesIv = new byte[0]
+				}
 			});
 			using (Authenticate auth = new Authenticate())
 			{

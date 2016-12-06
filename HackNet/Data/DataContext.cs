@@ -35,10 +35,13 @@ namespace HackNet.Data
 			// Users
 			modelBuilder.Entity<Users>()
 						.HasOptional(us => us.Machine)
-						.WithRequired(mch => mch.User);
+						.WithRequired(mch => mch.User)
+						.WillCascadeOnDelete(false);
 			modelBuilder.Entity<Users>()
 						.HasOptional(usr => usr.UserKeyStore)
-						.WithRequired(ks => ks.User);
+						.WithRequired(ks => ks.User)
+						.WillCascadeOnDelete(false);
+
 
 			// Items
 			modelBuilder.Entity<InventoryItem>()
