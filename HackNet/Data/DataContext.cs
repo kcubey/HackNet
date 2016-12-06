@@ -18,7 +18,7 @@ namespace HackNet.Data
 
 		public DbSet<Users> Users { get; set; }
 
-		public DbSet<Audit> Audit { get; set; }
+		public DbSet<Logs> Logs { get; set; }
 
 		public DbSet<Machines> Machines { get; set; }
 
