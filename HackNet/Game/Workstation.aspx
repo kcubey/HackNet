@@ -126,7 +126,9 @@
                             <asp:Label runat="server" ID="SpeedattrLabel" Font-Size="Larger"></asp:Label>
                         </div>
                     </div>
-                    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large" data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
+                    <div data-step="2" data-intro="This is how you attack" data-position='right'>
+                        <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large" data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>

@@ -49,6 +49,7 @@ tr.introjs-showElement > th {
 tr.introjs-showElement > td,
 tr.introjs-showElement > th {
   position: relative;
+  background-color:black;
 }
 
 .introjs-helperLayer {

@@ -206,6 +206,7 @@
     <Content Include="Game\Chat.aspx" />
     <Content Include="Game\Currency.aspx" />
     <Content Include="Game\Home.aspx" />
+    <Content Include="Game\Inventory.aspx" />
     <Content Include="Game\Market1.aspx" />
     <Content Include="Game\Missions.aspx" />
     <Content Include="Game\Parts.aspx" />
@@ -374,6 +375,13 @@
     </Compile>
     <Compile Include="Game\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Inventory.aspx.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Inventory.aspx.designer.cs">
+      <DependentUpon>Inventory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Market1.aspx.cs">
       <DependentUpon>Market1.aspx</DependentUpon>

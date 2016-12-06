@@ -38,7 +38,7 @@ namespace HackNet
 
         protected void LnkInv(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Home");
+            Response.Redirect("~/Game/Inventory");
         }
 
 		protected void LnkChat(object sender, EventArgs e)
