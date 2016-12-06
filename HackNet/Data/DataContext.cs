@@ -12,7 +12,9 @@ namespace HackNet.Data
     {
 		public DataContext() : base("DefaultConnection")
 		{
-			System.Diagnostics.Debug.WriteLine("Data context created");
+			System.Diagnostics.Debug.WriteLine("Data context accessed");
+			Configuration.ProxyCreationEnabled = true;
+			Configuration.LazyLoadingEnabled = true;
 		}
 
 
