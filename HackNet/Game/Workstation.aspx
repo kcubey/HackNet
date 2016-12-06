@@ -1,19 +1,20 @@
 ﻿<%@ Page Title="Workstation" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Workstation.aspx.cs" Inherits="HackNet.Game.Workstation" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
+    <link href="../Content/Tutorial/introjs.css" rel="stylesheet">
 
     <div id="upgradeModel" class="modal fade" role="dialog">
-        <div class="modal-dialog" style="color:black;">
+        <div class="modal-dialog" style="color: black;">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3>Upgrade Model</h3>
+                    <h3>Upgrade Model</h3>
                 </div>
                 <div class="modal-body">
-                  <asp:Label runat="server" Font-Size="XX-Large">Workstation Name</asp:Label>
-                     <div class="form-group row">
+                    <asp:Label runat="server" Font-Size="XX-Large">Workstation Name</asp:Label>
+                    <div class="form-group row">
                         <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
                         <asp:DropDownList runat="server" Width="150px">
                             <asp:ListItem>I7</asp:ListItem>
@@ -31,7 +32,7 @@
                     </div>
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                       <asp:DropDownList runat="server" Width="150px">
+                        <asp:DropDownList runat="server" Width="150px">
                             <asp:ListItem>1GB</asp:ListItem>
                             <asp:ListItem>2GB</asp:ListItem>
                             <asp:ListItem>3GB</asp:ListItem>
@@ -39,7 +40,7 @@
                     </div>
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                       <asp:DropDownList runat="server" Width="150px">
+                        <asp:DropDownList runat="server" Width="150px">
                             <asp:ListItem>1W</asp:ListItem>
                             <asp:ListItem>100W</asp:ListItem>
                         </asp:DropDownList>
@@ -56,7 +57,8 @@
 
     <div class="panel panel-default">
         <div class="panel panel-body">
-            <asp:LinkButton runat="server" CssClass="glyphicon glyphicon-question-sign" Style="float: right;" Font-Size="X-Large" Font-Strikeout="False" ForeColor="Lime" />
+            <a class="glyphicon glyphicon-question-sign" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
+
             <div class="row">
                 <div class="col-xs-6 col-md-4">
                     <img src="../Content/Images/workstation.png" />
@@ -82,51 +84,54 @@
                 </div>
                 <div class="col-xs-12 col-md-8">
                     <asp:Label runat="server" ID="WorkstationNameLbl" Font-Size="XX-Large"></asp:Label>
-                    
+
 
                     <br />
                     <br />
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="ProcessorLbl" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="GraphicLbl" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="MemoryLbl" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="PwsupLbl" Font-Size="Larger"></asp:Label>
-                    </div>
+                    <div data-step="1" data-intro="This is how you attack" data-position='right'>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="ProcessorLbl" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="GraphicLbl" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="MemoryLbl" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="PwsupLbl" Font-Size="Larger"></asp:Label>
+                        </div>
 
-                    <hr />
-                    <h2>Workstation Stats</h2>
-                    <br />
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="HP: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="HpattrLabel" Font-Size="Larger"></asp:Label>
+                        <hr />
+                        <h2>Workstation Stats</h2>
+                        <br />
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="HP: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="HpattrLabel" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Atk: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="AtkattrLabel" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Def: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="DefattrLabel" Font-Size="Larger"></asp:Label>
+                        </div>
+                        <div class="form-group row">
+                            <asp:Label runat="server" Text="Speed: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
+                            <asp:Label runat="server" ID="SpeedattrLabel" Font-Size="Larger"></asp:Label>
+                        </div>
                     </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Atk: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="AtkattrLabel" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Def: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="DefattrLabel" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Speed: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:Label runat="server" ID="SpeedattrLabel" Font-Size="Larger"></asp:Label>
-                    </div>
-                    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large"  data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large" data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
                 </div>
             </div>
         </div>
 
 
     </div>
+    <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
 </asp:Content>
