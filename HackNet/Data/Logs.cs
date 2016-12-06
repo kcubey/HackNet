@@ -14,7 +14,7 @@ namespace HackNet.Data
 		public string LogId { get; set; }
 
 		[Required]
-		public AuditType Type { get; set;}
+		public LogType Type { get; set;}
 
 		public DateTime Timestamp { get; set; }
 
@@ -26,10 +26,11 @@ namespace HackNet.Data
 		[ForeignKey("User")]
 		public int UserId { get; set; }
 
-		public Users User { get; set; }
+		// Foreign key references
+		public virtual Users User { get; set; }
     }
 
-	public enum AuditType
+	public enum LogType
 	{
 		Normal = 0,
 		AuthFailure = 1,

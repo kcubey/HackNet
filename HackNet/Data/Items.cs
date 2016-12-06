@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +9,7 @@ namespace HackNet.Data
 {
 	public class Items
 	{
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ItemId { get; set; }
 		public int ItemName { get; set; }
 		public ItemType ItemType { get; set; }
