@@ -343,9 +343,12 @@
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />
     <Compile Include="Data\Audit.cs" />
+    <Compile Include="Data\Items.cs" />
     <Compile Include="Data\Machines.cs" />
+    <Compile Include="Data\Messages.cs" />
     <Compile Include="Data\MissionLogs.cs" />
     <Compile Include="Data\MissionData.cs" />
+    <Compile Include="Data\UserKeyStore.cs" />
     <Compile Include="Data\Users.cs" />
     <Compile Include="Game.Master.cs">
       <DependentUpon>Game.Master</DependentUpon>
