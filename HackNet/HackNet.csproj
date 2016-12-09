@@ -290,7 +290,6 @@
     </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -342,8 +341,8 @@
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />
-    <Compile Include="Data\Logs.cs" />
     <Compile Include="Data\Items.cs" />
+    <Compile Include="Data\Logs.cs" />
     <Compile Include="Data\Machines.cs" />
     <Compile Include="Data\MarketListings.cs" />
     <Compile Include="Data\Messages.cs" />
