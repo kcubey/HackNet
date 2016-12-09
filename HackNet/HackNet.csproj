@@ -222,6 +222,7 @@
     <Content Include="Payment\Layout.aspx" />
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
+    <Content Include="Payment\ReAuth.aspx" />
     <Content Include="Payment\ViewStart.aspx" />
     <Content Include="Prefs\AccessLogs.aspx" />
     <Content Include="Prefs\ChangePassword.aspx" />
@@ -448,6 +449,13 @@
     </Compile>
     <Compile Include="Payment\Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\ReAuth.aspx.cs">
+      <DependentUpon>ReAuth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\ReAuth.aspx.designer.cs">
+      <DependentUpon>ReAuth.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment\ViewStart.aspx.cs">
       <DependentUpon>ViewStart.aspx</DependentUpon>
