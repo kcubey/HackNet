@@ -4,15 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 
 namespace HackNet.Data
 {
     public class DataContext : DbContext
     {
+
+		private static int ctr;
+
 		public DataContext() : base("DefaultConnection")
 		{
-			System.Diagnostics.Debug.WriteLine("Data context accessed");
+			System.Diagnostics.Debug.WriteLine("DATACONTEXT ACCESSED (" + ++ctr + ")");
 			Configuration.ProxyCreationEnabled = true;
 			Configuration.LazyLoadingEnabled = true;
 		}

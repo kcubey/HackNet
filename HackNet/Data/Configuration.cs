@@ -19,10 +19,10 @@ namespace HackNet.Data
 
 		protected override void Seed(DataContext context)
 		{
-			System.Diagnostics.Debug.WriteLine("Users table initializing");
 			if (!context.Users.Any())
 				InitUsers().ForEach(s => context.Users.AddOrUpdate(s));
 			context.SaveChanges();
+			System.Diagnostics.Debug.WriteLine("Seed method execution complete");
 		}
 
 		private static List<Users> InitUsers()

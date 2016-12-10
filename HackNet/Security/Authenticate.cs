@@ -150,10 +150,24 @@ namespace HackNet.Security
 			return HttpContext.Current.User.Identity.Name;
 		}
 
-		internal static Users GetCurrentUser()
+
+		internal static Users GetCurrentUser(bool ReadOnly = true, DataContext db = null)
 		{
 			string email = GetEmail();
-			using (DataContext db = new DataContext())
+			if (ReadOnly == false && db == null)
+				throw new ArgumentNullException("DataContext cannot be null if it is not read-only");
+			if (ReadOnly == true)
+				using (DataContext db1 = new DataContext())
+				{
+					Users user = (from u in db1.Users
+								  where u.Email == email
+								  select u).FirstOrDefault();
+					if (user != null)
+						return user;
+					else
+						throw new UserException("User not found");
+				}
+			else
 			{
 				Users user = (from u in db.Users
 							  where u.Email == email
@@ -163,6 +177,8 @@ namespace HackNet.Security
 				else
 					throw new UserException("User not found");
 			}
+
+
 		}
 
 		// Generate bytes from RNGCryptoServiceProvider
