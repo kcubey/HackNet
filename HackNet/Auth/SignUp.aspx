@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="HackNet.Auth.SignUp" %>
-<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadPlaceholder">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 			<script src='https://www.google.com/recaptcha/api.js'></script>
 </asp:Content>
 <asp:Content ID="SignUpContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -103,14 +103,14 @@
                     <tr>
                         <td><strong>Full Name:</strong></td>
                         <td>
-                            <asp:TextBox ID="FirstName" CssClass="form-control" runat="server" />
+                            <asp:TextBox ID="FullName" CssClass="form-control" runat="server" />
                         </td>
                         <td>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="FirstName" ForeColor="Red"
-                                ErrorMessage="First Name is required" Text="*" runat="server" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="FullName" ForeColor="Red"
+                                ErrorMessage="Full Name is required" Text="*" runat="server" />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
-                                ErrorMessage="First name can only contain alphabets and spaces up to 50 characters"
-                                ControlToValidate="FirstName" Display="None" ValidationExpression="^[a-zA-Z ]{1,50}$" />
+                                ErrorMessage="Full name can only contain alphabets and spaces up to 50 characters"
+                                ControlToValidate="FullName" Display="None" ValidationExpression="^[a-zA-Z ]{1,50}$" />
                         </td>
                     </tr>
                     <tr>

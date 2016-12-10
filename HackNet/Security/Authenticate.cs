@@ -24,7 +24,7 @@ namespace HackNet.Security
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindUser(email, db);
+				Users user = Users.FindEmail(email, db);
 				if (user == null)
 					return AuthResult.UserNotFound;
 
@@ -42,7 +42,7 @@ namespace HackNet.Security
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindUser(email, db);
+				Users user = Users.FindEmail(email, db);
 				if (user == null)
 					return AuthResult.UserNotFound;
 				if (user.UpdatePassword(newpass, oldpass))
@@ -53,6 +53,40 @@ namespace HackNet.Security
 				else
 					return AuthResult.PasswordIncorrect;
 			}
+		}
+
+		internal RegisterResult CreateUser(string email, string username, string fullname, string password, DateTime birthdate)
+		{
+			if (Users.FindEmail(email) != null)
+				return RegisterResult.EmailTaken;
+
+				Users u = new Users()
+				{
+					Email = email,
+					UserName = username,
+					FullName = fullname,
+					BirthDate = birthdate,
+					Registered = DateTime.Now,
+					LastLogin = DateTime.Now,
+					Coins = 0,
+					ByteDollars = 0
+				};
+				u.UpdatePassword(password);
+
+				using (DataContext db = new DataContext())
+				{
+					db.Users.Add(u);
+					db.SaveChanges();
+					Debug.WriteLine("User creation attempted");
+				}
+
+
+			if (Users.FindEmail(email) != null)
+			{
+				return RegisterResult.Success;
+			}
+
+			return RegisterResult.OtherException;
 		}
 
 		internal bool PasswordStrong(string password)
@@ -198,6 +232,15 @@ namespace HackNet.Security
 			UserNotFound = 1,
 			PasswordIncorrect = 2,
 			OtherError = 3
+		}
+
+		internal enum RegisterResult
+		{
+			Success = 0,
+			UsernameTaken = 1,
+			EmailTaken = 2,
+			ValidationException = 3,
+			OtherException = 4
 		}
 
 		#region IDisposable Support

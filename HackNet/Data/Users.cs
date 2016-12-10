@@ -77,7 +77,7 @@ namespace HackNet.Data
 		}
 
 		// Static useful methods
-		internal static Users FindUser(string email, DataContext db)
+		internal static Users FindEmail(string email, DataContext db = null)
 		{
 			Users user;
 			try
@@ -88,8 +88,28 @@ namespace HackNet.Data
 			} catch (EntityCommandExecutionException)
 			{
 				throw new ConnectionException("Database link failure has occured");
+			} catch (Exception)
+			{
+				return null;
 			}
-			
+
+			// Returns NULL if no such user found
+			return user;
+		}
+
+		internal static Users FindUsername(string username, DataContext db = null)
+		{
+			Users user;
+			try
+			{
+				user = (from u in db.Users
+						where u.UserName == username
+						select u).FirstOrDefault();
+			} catch (EntityCommandExecutionException)
+			{
+				throw new ConnectionException("Database link failure has occured");
+			}
+
 			// Returns NULL if no such user found
 			return user;
 		}
