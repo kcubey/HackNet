@@ -25,16 +25,16 @@ namespace HackNet.Auth {
         {
 			using (Authenticate auth = new Authenticate())
             {
-				LoginResult result = auth.ValidateLogin(Email.Text, UserPass.Text);
+				AuthResult result = auth.ValidateLogin(Email.Text, UserPass.Text);
 				switch(result)
 				{
-					case (LoginResult.Success):
+					case (AuthResult.Success):
 						FormsAuthentication.RedirectFromLoginPage(Email.Text, true);
 						break;
-					case (LoginResult.PasswordIncorrect):
+					case (AuthResult.PasswordIncorrect):
 						Msg.Text = "User and/or password not found (1)";
 						break;
-					case (LoginResult.UserNotFound):
+					case (AuthResult.UserNotFound):
 						Msg.Text = "User and/or password not found (2)";
 						break;
 					default:

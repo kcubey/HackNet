@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class MissionData
+	public partial class MissionData
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]

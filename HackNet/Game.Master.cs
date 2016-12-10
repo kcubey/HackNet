@@ -12,7 +12,7 @@ namespace HackNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			PlayerName.Text = Authenticate.GetUser().UserName; 
+			PlayerName.Text = Authenticate.GetCurrentUser().UserName; 
         }
 
         #region Navigation Links

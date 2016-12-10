@@ -15,7 +15,7 @@ namespace HackNet {
 				PrivateLeft.Visible = true;
 				PrivateRight.Visible = true;
 
-                PrivateLeftAnchor.InnerText = "Hello, " + Authenticate.GetUser().UserName;
+                PrivateLeftAnchor.InnerText = "Hello, " + Authenticate.GetCurrentUser().UserName;
             }
             else
             {

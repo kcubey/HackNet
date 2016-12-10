@@ -33,8 +33,6 @@ namespace HackNet.Data
 				UserName = "Wuggle",
 				FullName = "Wen Liang",
 				Email = "wenlianggg@gmail.com",
-				Hash = new byte[0],
-				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1998-03-17"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now,
@@ -51,8 +49,6 @@ namespace HackNet.Data
 				UserName = "RoyceFrost",
 				FullName = "Roy Tang Qing Long",
 				Email = "butterfrost90@gmail.com",
-				Hash = new byte[0],
-				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now,
@@ -69,8 +65,6 @@ namespace HackNet.Data
 				UserName = "KeziaKew",
 				FullName = "Kezia Kew",
 				Email = "keziakew98@gmail.com",
-				Hash = new byte[0],
-				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now,
@@ -87,8 +81,6 @@ namespace HackNet.Data
 				UserName = "DomSwag",
 				FullName = "Dominic Gian",
 				Email = "keeleyswag@gmail.com",
-				Hash = new byte[0],
-				Salt = Convert.FromBase64String("YK3q1SefESBO1YlwYWykXKQHYy7L/ZazkSQKxL8Hqt0BqA9MKd9SBgzzf1/uffQ/UkXzosJQqqeE7QKyMmXQYg=="),
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now,
@@ -100,13 +92,12 @@ namespace HackNet.Data
 					AesIv = new byte[0]
 				}
 			});
+
 			using (Authenticate auth = new Authenticate())
 			{
-				var bPassword = Encoding.UTF8.GetBytes("123");
-				byte[] bDefaultHash = auth.Hash(bPassword, Users[0].Salt);
 				foreach (Users u in Users)
 				{
-					u.Hash = bDefaultHash;
+					u.UpdatePassword("123", null);
 				}
 			}
 			System.Diagnostics.Debug.WriteLine("Users table initializing");

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class UserKeyStore
+	public partial class UserKeyStore
 	{
 		[Key]
 		[ForeignKey("User")]

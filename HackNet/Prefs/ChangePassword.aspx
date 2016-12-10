@@ -22,6 +22,20 @@
 					<td></td>
 				</tr>
 				<tr>
+					<td><strong>Name:</strong></td>
+					<td>
+						<strong>
+							<asp:Label ID="LoggedInName" runat="server" /></strong></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><strong>Registered On:</strong></td>
+					<td>
+						<strong>
+							<asp:Label ID="RegisteredDate" runat="server" /></strong></td>
+					<td></td>
+				</tr>
+				<tr>
 					<td><strong>Old Password:</strong></td>
 					<td>
 						<asp:TextBox ID="OldUserPass" CssClass="pwdfield form-control" TextMode="Password" runat="server" />
@@ -66,11 +80,13 @@
 				CssClass="btn btn-primary loginBtn"
 				OnClick="ChangePassClick"
 				runat="server" />
+				<p>
+					<br />
+					<asp:Label ID="Msg" ForeColor="red" runat="server" />
+				</p>
 		</div>
 	</div>
 
 
-	<p>
-		<asp:Label ID="Msg" ForeColor="red" runat="server" />
-	</p>
+
 </asp:Content>

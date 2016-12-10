@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class Packages
+	public partial class Packages
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int PackageId { get; set; }

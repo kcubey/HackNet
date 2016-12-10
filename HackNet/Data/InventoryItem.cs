@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HackNet.Data
 {
-    public class InventoryItem
+    public partial class InventoryItem
     {
 		[Key, Column(Order = 1)]
 		public int UserId { get; set; }

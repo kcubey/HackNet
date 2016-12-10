@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class Logs
+	public partial class Logs
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]

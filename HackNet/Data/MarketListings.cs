@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class MarketListings
+	public partial class MarketListings
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ListingId { get; set; }

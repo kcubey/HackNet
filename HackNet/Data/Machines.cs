@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HackNet.Data
 {
-    public class Machines
+    public partial class Machines
     {
 		[Key, ForeignKey("User")]
 		public int UserId {get; set;}

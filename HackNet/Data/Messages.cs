@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class Messages
+	public partial class Messages
 	{
 
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
