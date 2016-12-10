@@ -4,7 +4,7 @@
 
     <h1>Your payment has been confirmed!</h1>
     You have purchased <asp:Label ID="packageBought" runat="server" Text="Package A"></asp:Label> at 
-    <asp:Label ID="packagePrice" runat="server" Text="SGD$10"></asp:Label>
+    <asp:Label ID="packagePrice" runat="server" Text="SGD$10"></asp:Label>. Your items have been added to your inventory.
 
 
     <!-- Braintree codes

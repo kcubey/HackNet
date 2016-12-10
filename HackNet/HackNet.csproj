@@ -222,6 +222,7 @@
     <Content Include="Payment\Layout.aspx" />
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
+    <Content Include="Payment\ReAuth.aspx" />
     <Content Include="Payment\ViewStart.aspx" />
     <Content Include="Prefs\AccessLogs.aspx" />
     <Content Include="Prefs\ChangePassword.aspx" />
@@ -290,7 +291,6 @@
     </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -342,8 +342,8 @@
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />
-    <Compile Include="Data\Logs.cs" />
     <Compile Include="Data\Items.cs" />
+    <Compile Include="Data\Logs.cs" />
     <Compile Include="Data\Machines.cs" />
     <Compile Include="Data\MarketListings.cs" />
     <Compile Include="Data\Messages.cs" />
@@ -448,6 +448,13 @@
     </Compile>
     <Compile Include="Payment\Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\ReAuth.aspx.cs">
+      <DependentUpon>ReAuth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment\ReAuth.aspx.designer.cs">
+      <DependentUpon>ReAuth.aspx</DependentUpon>
     </Compile>
     <Compile Include="Payment\ViewStart.aspx.cs">
       <DependentUpon>ViewStart.aspx</DependentUpon>
