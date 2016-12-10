@@ -14,9 +14,8 @@ namespace HackNet
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings, new SiteMobileMasterDisable());
-			routes.MapPageRoute("DefaultRedirect",
-			"Default",
-			"~/Game/Home.aspx");
+			routes.MapPageRoute("DefRedirect", "Default", "~/Game/Home.aspx");
+			routes.MapPageRoute("DefAspxRedirect", "Default.aspx", "~/Game/Home.aspx");
 		}
 
     }

@@ -41,7 +41,6 @@ namespace HackNet.Data
 					UserId = 1,
 					RsaPub = new byte[0],
 					RsaPriv = new byte[0],
-					AesIv = new byte[0]
 				}
 			});
 			Users.Add(new Users
@@ -57,7 +56,6 @@ namespace HackNet.Data
 					UserId = 1,
 					RsaPub = new byte[0],
 					RsaPriv = new byte[0],
-					AesIv = new byte[0]
 				}
 			});
 			Users.Add(new Users
@@ -73,7 +71,6 @@ namespace HackNet.Data
 					UserId = 1,
 					RsaPub = new byte[0],
 					RsaPriv = new byte[0],
-					AesIv = new byte[0]
 				}
 			});
 			Users.Add(new Users
@@ -89,7 +86,6 @@ namespace HackNet.Data
 					UserId = 1,
 					RsaPub = new byte[0],
 					RsaPriv = new byte[0],
-					AesIv = new byte[0]
 				}
 			});
 

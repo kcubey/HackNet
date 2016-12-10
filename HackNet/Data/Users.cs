@@ -51,7 +51,6 @@ namespace HackNet.Data
 
 		public AccessLevel AccessLevel { get; set; }
 
-		public string TOTPSecret { get; set; }
 
 		// Foreign Key References
 		public virtual Machines Machine { get; set; }
