@@ -63,9 +63,14 @@ namespace HackNet.Security
 			client.Credentials = new NetworkCredential(SmtpClientLogin, SmtpClientPasswd);
 			client.EnableSsl = true;
 
-			client.Send(mail);
-
-			return true;
+			try
+			{
+				client.Send(mail);
+				return true;
+			} catch (Exception)
+			{
+				return false;
+			}
 		}
 
 		#region IDisposable Support
