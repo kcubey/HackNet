@@ -249,7 +249,12 @@ ModelManifest.xml
 /HackNet/App_Data/Se*.*
 Secrets.config
 Secrets.xml
+Secrets.txt
 Secret.config
 Secret.xml
+Secret.txt
+Database.config
+Database.xml
+Database.txt
 
 
