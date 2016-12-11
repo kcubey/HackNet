@@ -245,10 +245,11 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-Secret.config
-Secret.xml
+
+/HackNet/App_Data/Se*.*
 Secrets.config
 Secrets.xml
-/HackNet/App_Data/*
+Secret.config
+Secret.xml
 
 
