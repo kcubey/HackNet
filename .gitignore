@@ -247,5 +247,6 @@ ModelManifest.xml
 .fake/
 
 Secrets.config
-DatabaseConn.config
-/HackNet/App_Data/Secrets.config
+Secrets.xml
+/HackNet/App_Data/*
+

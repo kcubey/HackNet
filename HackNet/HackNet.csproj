@@ -236,7 +236,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Styling.scss" />
-    <Content Include="App_Data\Secrets.config" />
+    <Content Include="App_Data\Secrets.xml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

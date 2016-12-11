@@ -16,8 +16,9 @@ namespace HackNet.Auth
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Users u = Authenticate.GetCurrentUser();
 			if (Authenticate.IsAuthenticated())
+			{
+				Users u = Authenticate.GetCurrentUser();
 				using (MailClient mc = new MailClient(u.Email))
 				{
 					mc.Subject = "Verify your Email Address";
@@ -26,6 +27,7 @@ namespace HackNet.Auth
 					mc.AddLine("Kindly verify your email address by clicking on the link below");
 					mc.Send(u.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
 				}
+			}
 		}
 	}
 }
