@@ -19,9 +19,17 @@ namespace HackNet.Auth
 
 		protected void RegisterClick(object sender, EventArgs e)
 		{
+			// Getting the captcha response for validation
 			string captchaResponse = Request.Form["g-Recaptcha-Response"];
 
 			// Guard clauses
+
+			if (!Captcha.Validate(captchaResponse))
+			{
+				Msg.Text = "Please ensure that the CAPTCHA is done correctly";
+				return;
+			}
+
 			if (!UserPassCfm.Text.Equals(UserPass.Text))
 			{
 				Msg.Text = "Passwords do not match";
@@ -34,17 +42,12 @@ namespace HackNet.Auth
 				return;
 			}
 
-			if (!Captcha.Validate(captchaResponse))
-			{
-				Msg.Text = "Please ensure that the CAPTCHA is done correctly";
-				return;
-			}
-
 			// Calling the controller class
 			using (Authenticate a = new Authenticate())
 				switch (a.CreateUser(UserEmail.Text, UserName.Text, FullName.Text, UserPass.Text, DateTime.Now))
 				{
 					case RegisterResult.Success:
+						Msg.ForeColor = System.Drawing.Color.LimeGreen;
 						Msg.Text = "Registration successful";
 						break;
 					case RegisterResult.EmailTaken:

@@ -80,11 +80,20 @@ namespace HackNet.Data
 		internal static Users FindEmail(string email, DataContext db = null)
 		{
 			Users user;
+
+
 			try
 			{
-				user = (from u in db.Users
+				if (db != null)
+					user = (from u in db.Users
 						where u.Email == email
 						select u).FirstOrDefault();
+				else
+					using (DataContext db1 = new DataContext())
+						user = (from u in db1.Users
+								where u.Email == email
+								select u).FirstOrDefault();
+
 			} catch (EntityCommandExecutionException)
 			{
 				throw new ConnectionException("Database link failure has occured");
@@ -102,9 +111,16 @@ namespace HackNet.Data
 			Users user;
 			try
 			{
-				user = (from u in db.Users
+				if (db != null)
+					user = (from u in db.Users
 						where u.UserName == username
 						select u).FirstOrDefault();
+				else
+					using (DataContext db1 = new DataContext())
+						user = (from u in db1.Users
+								where u.UserName == username
+								select u).FirstOrDefault();
+
 			} catch (EntityCommandExecutionException)
 			{
 				throw new ConnectionException("Database link failure has occured");
@@ -118,7 +134,7 @@ namespace HackNet.Data
 
 public enum AccessLevel
 {
-	Banned = -1,
+	Unverified = -1,
 	User = 0,
 	Staff = 1,
 	Admin = 2

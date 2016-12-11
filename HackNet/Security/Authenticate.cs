@@ -20,13 +20,17 @@ namespace HackNet.Security
 
 		}
 
-		internal AuthResult ValidateLogin(string email, string password)
+		internal AuthResult ValidateLogin(string email, string password, bool checkEmailValidity = true)
 		{
 			using (DataContext db = new DataContext())
 			{
 				Users user = Users.FindEmail(email, db);
+
 				if (user == null)
 					return AuthResult.UserNotFound;
+
+				if (checkEmailValidity && user.AccessLevel == AccessLevel.Unverified)
+					return AuthResult.EmailNotVerified;
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
 
@@ -60,30 +64,38 @@ namespace HackNet.Security
 			if (Users.FindEmail(email) != null)
 				return RegisterResult.EmailTaken;
 
-				Users u = new Users()
-				{
-					Email = email,
-					UserName = username,
-					FullName = fullname,
-					BirthDate = birthdate,
-					Registered = DateTime.Now,
-					LastLogin = DateTime.Now,
-					Coins = 0,
-					ByteDollars = 0
-				};
-				u.UpdatePassword(password);
-
-				using (DataContext db = new DataContext())
-				{
-					db.Users.Add(u);
-					db.SaveChanges();
-					Debug.WriteLine("User creation attempted");
-				}
-
-
-			if (Users.FindEmail(email) != null)
+			Users u = new Users()
 			{
-				return RegisterResult.Success;
+				Email = email,
+				UserName = username,
+				FullName = fullname,
+				BirthDate = birthdate,
+				Registered = DateTime.Now,
+				LastLogin = DateTime.Now,
+				Coins = 0,
+				ByteDollars = 0
+			};
+			u.UpdatePassword(password);
+
+			using (DataContext db = new DataContext())
+			{
+				db.Users.Add(u);
+				db.SaveChanges();
+				Debug.WriteLine("User creation attempted");
+
+				Users createduser = Users.FindEmail(email, db);
+				if (createduser != null)
+				{
+					using (MailClient mc = new MailClient(createduser.Email))
+					{
+						mc.Subject = "Verify your Email Address";
+						mc.AddLine("Thank you for registering with HackNet!");
+						mc.AddLine("We hope you enjoy your gaming experience with us,");
+						mc.AddLine("Kindly verify your email address by clicking on the link below");
+						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
+					}
+					return RegisterResult.Success;
+				}
 			}
 
 			return RegisterResult.OtherException;
@@ -231,7 +243,8 @@ namespace HackNet.Security
 			Success = 0,
 			UserNotFound = 1,
 			PasswordIncorrect = 2,
-			OtherError = 3
+			EmailNotVerified = 3,
+			OtherError = 4
 		}
 
 		internal enum RegisterResult

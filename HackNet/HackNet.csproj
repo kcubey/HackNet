@@ -158,16 +158,16 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
+    <Content Include="App_Data\basic.html" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
     <Content Include="App_Start\WebApiConfigcs.txt" />
+    <Content Include="Auth\Debug.aspx" />
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
@@ -236,6 +236,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Styling.scss" />
+    <Content Include="App_Data\Secrets.config" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -311,6 +312,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\Debug.aspx.cs">
+      <DependentUpon>Debug.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\Debug.aspx.designer.cs">
+      <DependentUpon>Debug.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auth\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -498,6 +506,7 @@
     <Compile Include="Prefs\ProfileSettings.aspx.designer.cs">
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Security\MailClient.cs" />
     <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
