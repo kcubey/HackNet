@@ -25,7 +25,7 @@ namespace HackNet.Game.Class
         public static Workstations Getworkstation(string username)
         {
             Workstations workstn = new Workstations();
-            workstn.WorkstnName = "Frost's Super Computer";
+            workstn.WorkstnName = username + "'s Computer";
             workstn.Processor = "Intel I7 5th Generation";
             workstn.Graphicard = "Myvidia";
             workstn.Memory = "1mb";

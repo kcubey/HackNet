@@ -12,7 +12,9 @@ namespace HackNet.Data
 {
 	public partial class Users
 	{
-		[Key]
+        internal readonly string username;
+
+        [Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int UserID { get; set; }
 

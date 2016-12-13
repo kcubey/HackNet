@@ -1,4 +1,6 @@
-﻿using HackNet.Game.Class;
+﻿using HackNet.Data;
+using HackNet.Game.Class;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +14,9 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Workstations workstn = Workstations.Getworkstation("Testuser");
-            WorkstationNameLbl.Text=workstn.WorkstnName;
-            ProcessorLbl.Text = workstn.Processor;
-            GraphicLbl.Text = workstn.Graphicard;
-            MemoryLbl.Text = workstn.Memory;
-            PwsupLbl.Text = workstn.Powersupply;
-
-            HpattrLabel.Text = workstn.HpAtrb.ToString();
-            AtkattrLabel.Text = workstn.AtkAtrb.ToString();
-            DefattrLabel.Text = workstn.DefAtrb.ToString();
-            SpeedattrLabel.Text = workstn.SpeedAtrb.ToString();
-
+            using (DataContext db = new DataContext()) {
+                Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+            }
 
 
         }

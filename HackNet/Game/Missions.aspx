@@ -27,7 +27,6 @@
         </div>
     </div>
 
-
     <div class="panel panel-default">
         <div class="panel panel-body">           
             <a class="glyphicon glyphicon-question-sign" Style="float: right; color:greenyellow; font-size:25px; text-decoration:none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
