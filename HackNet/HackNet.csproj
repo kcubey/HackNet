@@ -165,6 +165,7 @@
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
+    <Content Include="App_Data\Database.config" />
     <None Include="App_Data\Secrets.config" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
@@ -510,6 +511,7 @@
     <Compile Include="Prefs\ProfileSettings.aspx.designer.cs">
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Security\Base32.cs" />
     <Compile Include="Security\MailClient.cs" />
     <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
