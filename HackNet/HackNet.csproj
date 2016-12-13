@@ -161,6 +161,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="anonymousedited.jpg" />
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
@@ -172,6 +173,7 @@
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
+    <Content Include="binarywallpaper.jpg" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
