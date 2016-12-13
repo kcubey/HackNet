@@ -13,6 +13,7 @@ namespace HackNet.Data
 		public int ItemId { get; set; }
 		public int ItemName { get; set; }
 		public ItemType ItemType { get; set; }
+        public int ItemBonus { get; set; }
 	}
 
 	public enum ItemType
