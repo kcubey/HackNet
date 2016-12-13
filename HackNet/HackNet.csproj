@@ -165,6 +165,7 @@
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
+    <Content Include="App_Data\Database.config" />
     <None Include="App_Data\Secrets.config" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
