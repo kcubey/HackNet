@@ -12,11 +12,11 @@ namespace HackNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			PlayerName.Text = Authenticate.GetUser().UserName; 
+			PlayerName.Text = Authenticate.GetCurrentUser().UserName; 
         }
 
         #region Navigation Links
-        protected void LnkAnn(object sender, EventArgs e)
+        protected void LnkHome(object sender, EventArgs e)
         {
             Response.Redirect("~/Game/Home");
         }
@@ -31,11 +31,6 @@ namespace HackNet
             Response.Redirect("~/Game/Missions");
         }
 
-        protected void LnkEvt(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Game/Home");
-        }
-
         protected void LnkMLog(object sender, EventArgs e)
         {
             Response.Redirect("~/Game/Home");
@@ -43,8 +38,13 @@ namespace HackNet
 
         protected void LnkInv(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Home");
+            Response.Redirect("~/Game/Inventory");
         }
+
+		protected void LnkChat(object sender, EventArgs e)
+		{
+			Response.Redirect("~/Game/Chat");
+		}
 
         protected void LnkMkt(object sender, EventArgs e)
         {

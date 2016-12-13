@@ -32,4 +32,11 @@ namespace HackNet.Security
 		internal ConnectionException(string str) : base(str) { }
 		internal ConnectionException(string str, Exception inner) : base(str, inner) { }
 	}
+
+	internal class MailException : Exception
+	{
+		internal MailException() : base() { }
+		internal MailException(string str) : base(str) { }
+		internal MailException(string str, Exception inner) : base(str, inner) { }
+	}
 }

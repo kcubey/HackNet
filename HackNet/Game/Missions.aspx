@@ -108,7 +108,7 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" data-step="5" data-intro="This is your terminal" data-position='right'>
         <div class="panel-header" style="background-color: grey;">
             <h4 style="text-align: center; margin-bottom: 0;">
                 <asp:Label runat="server" Text="user"></asp:Label>@HackNetHost:~
@@ -119,7 +119,7 @@
 
 
         </div>
-        <div class="panel-footer" style="background-color: #091012; border-top: 1px solid white; padding: ;">
+        <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white; padding: ;">
             <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
             <asp:TextBox runat="server" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
         </div>

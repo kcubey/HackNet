@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -42,7 +43,7 @@ namespace HackNet.Security
             WebClient wc = new WebClient();
             var googleReply = wc.DownloadString(
                                 string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}",
-                                "6LdUsQsUAAAAAJx-BwDeWZreLPAPA6otMupIyTsr",
+								ConfigurationManager.AppSettings["MailServerLogin"],
                                 EncodedResponse
                                 ));
             var captchaResponse = JsonConvert.DeserializeObject<Captcha>(googleReply);

@@ -23,6 +23,13 @@ body {
   .navbar-fixed-top a {
     color: greenyellow; }
 
+.navbar-default {
+  background-color: black; }
+  .navbar-default .navbar-nav > li a {
+    color: greenyellow; }
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active, .navbar-default .navbar-nav > li a:focus, .navbar-default .navbar-nav > li .current {
+    color: #419f48; }
+
 .breadcrumb {
   background-color: rgba(10, 10, 10, 0.9); }
   .breadcrumb > .active {

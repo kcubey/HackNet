@@ -7,27 +7,30 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public class Audit
+	public partial class Logs
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string LogId { get; set; }
 
 		[Required]
-		public AuditType Type { get; set;}
+		public LogType Type { get; set;}
 
 		public DateTime Timestamp { get; set; }
+
+		public string IpAddress { get; set; }
 
 		[Required]
 		public string Description { get; set; }
 
+		[ForeignKey("User")]
 		public int UserId { get; set; }
 
-		[ForeignKey("UserId")]
-		public Users User { get; set; }
+		// Foreign key references
+		public virtual Users User { get; set; }
     }
 
-	public enum AuditType
+	public enum LogType
 	{
 		Normal = 0,
 		AuthFailure = 1,

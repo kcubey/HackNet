@@ -10,11 +10,12 @@
 
 	<asp:PlaceHolder runat="server">
 		<%: Scripts.Render("~/bundles/modernizr") %>
-		<script src='https://www.google.com/recaptcha/api.js'></script>
 	</asp:PlaceHolder>
 	<webopt:BundleReference runat="server" Path="~/Content/css" />
 	<link href="~/Content/Images/console.png" rel="shortcut icon" type="image/x-icon" />
 	<link href="~/Content/FontAwesome/font-awesome.min.css" rel="stylesheet">
+
+	<asp:ContentPlaceHolder ID="HeadPlaceholder" runat="server" />
 </head>
 <body>
 	<script>
@@ -54,11 +55,16 @@
 		</asp:ScriptManager>
 
 		<div class="navbar navbar-fixed-top mainnav" style="border-bottom: none;">
-			<div class="container">
+			<div class="container container-fluid">
 				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnav">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 					<a class="navbar-brand" runat="server" href="~/">HackNet<span class="blinking">_</span></a>
 				</div>
-				<div class="navbar-collapse navbar-right collapse">
+				<div class="navbar-collapse navbar-right collapse" id="mainnav">
 					<ul class="nav navbar-nav">
 						<li id="PublicLeft" visible="false" runat="server">
 							<a href="/Auth/SignIn">Sign In</a>
@@ -69,24 +75,23 @@
 						</li>
 
 						<li id="PrivateLeft" visible="false" runat="server">
-							<a ID="PrivateLeftAnchor" runat="server"> HELLO, Player!</a>
+							<a id="PrivateLeftAnchor" runat="server">HELLO, Player!</a>
 						</li>
 
 						<li id="PrivateRight" visible="false" runat="server">
 							<a id="RightBtn" runat="server" class="dropdown-toggle" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Preferences
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Preferences
 							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+							<ul class="dropdown-menu" runat="server">
+								<li><asp:HyperLink NavigateUrl="#" runat="server"><i class="fa fa-user" aria-hidden="true"></i> Profile</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">User Preferences</a></li>
-								<li><a href="#">Security Preferences</a></li>
-								<li><a href="#">Access Logs</a></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">Profile Options</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/ChangePassword" runat="server">Security Settings</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">Security Logs</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">About Us & FAQ</a></li>
+								<li><asp:HyperLink NavigateUrl="#" runat="server">About Us & FAQ</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="/Auth/SignOut.aspx">Sign Out</a></li>
+								<li><asp:HyperLink NavigateUrl="/Auth/SignOut.aspx" runat="server">Sign Out</asp:HyperLink></li>
 							</ul>
 						</li>
 					</ul>
