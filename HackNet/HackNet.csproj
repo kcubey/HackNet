@@ -193,6 +193,8 @@
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />
     <Content Include="Content\Images\doge.png" />
+    <Content Include="Content\Images\ignlogo.png" />
+    <Content Include="Content\Images\Metacriticlogo.png" />
     <Content Include="Content\Images\mission.png" />
     <Content Include="Content\Images\workstation.png" />
     <Content Include="Content\MainPage.css" />
