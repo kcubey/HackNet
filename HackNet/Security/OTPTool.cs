@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace HackNet.Prefs
 {
-	public class OTPTool
+	public class OTPTool : IDisposable
 	{
 		private bool disposed = false;
 
@@ -18,45 +18,13 @@ namespace HackNet.Prefs
 		private int _OTPNow;
 		private int[] _OTPRange = new int[5];
 
+		public OTPTool() { }
+
 		public OTPTool(string base32sec)
 		{
 			SecretBase32 = base32sec;
 		}
 
-		public OTPTool()
-		{
-		}
-
-		~OTPTool()
-		{
-			Dispose();
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		protected void Dispose(bool disposing)
-		{
-
-			if (disposed)
-				throw new ObjectDisposedException("OTPTool");
-
-			if (disposing)
-			{
-				if (_secret != null)
-					Array.Clear(_secret, 0, _secret.Length);
-				if (_hmac != null)
-					Array.Clear(_hmac, 0, _hmac.Length);
-				if (_OTPRange != null)
-					Array.Clear(_OTPRange, 0, _OTPRange.Length);
-				_OTPNow = 0;
-			}
-
-			disposed = true;
-		}
 
 		public int SecondsToGo
 		{
@@ -236,5 +204,40 @@ namespace HackNet.Prefs
 		{
 			return Convert.ToInt64(Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds));
 		}
+
+		#region IDisposable Implementation
+		~OTPTool()
+		{
+			Dispose();
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected void Dispose(bool disposing)
+		{
+
+			if (disposed)
+				throw new ObjectDisposedException("OTPTool");
+
+			if (disposing)
+			{
+				if (_secret != null)
+					Array.Clear(_secret, 0, _secret.Length);
+				if (_hmac != null)
+					Array.Clear(_hmac, 0, _hmac.Length);
+				if (_OTPRange != null)
+					Array.Clear(_OTPRange, 0, _OTPRange.Length);
+				_OTPNow = 0;
+			}
+
+			disposed = true;
+		}
+
+		#endregion
+
 	}
 }
