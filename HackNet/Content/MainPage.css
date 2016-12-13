@@ -291,7 +291,7 @@ header {
 		}
 
 		.main section.page2 .page_container {
-			margin-top: 240px;
+			margin-top: 180px;
 			overflow: hidden;
 		}
 
@@ -302,6 +302,7 @@ header {
 			font-size: 50px;
 			letter-spacing: -1px;
 			color: white;
+            font-weight: 500;
 		}
 
 		.main section.page2 h2 {
