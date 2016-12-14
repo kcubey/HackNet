@@ -13,14 +13,6 @@ namespace HackNet {
 
 
         }
-
-        protected void btnSubmit_Click(object sender, EventArgs e)
-        {
-            MailClient mc = new MailClient("hacknet@wlgoh.com");
-            mc.Subject = Subjecttxt.Text;
-            mc.AddLine(contenttxt.Text);
-            mc.AddLine("This content was User-Generated from " + useremail.Text);
-            mc.Send("HackNet Team", "go to website", "www.pussy.com");
-        }
+        
     }
 }
