@@ -1,4 +1,5 @@
 ﻿using HackNet.Security;
+using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core;
@@ -7,23 +8,23 @@ namespace HackNet.Data
 {
     public partial class Machines
     {
-		[Key, ForeignKey("User")]
-		public int UserId {get; set;}
-		public string MachineName { get; set; }
+        [Key, ForeignKey("User")]
+        public int UserId { get; set; }
+        public string MachineName { get; set; }
         public string MachineProcessor { get; set; }
         public string MachineGraphicCard { get; set; }
         public string MachineMemory { get; set; }
         public string MachinePowerSupply { get; set; }
-		public int Health{get; set;}
-		public int Speed{get; set;}
-		public int Attack{get; set;}
-		public int Defence{get; set;}
-		// Foreign key references
-		public virtual Users User { get; set; }
+        public int Health { get; set; }
+        public int Speed { get; set; }
+        public int Attack { get; set; }
+        public int Defence { get; set; }
+        // Foreign key references
+        public virtual Users User { get; set; }
 
         internal static void DefaultMachine(Users user, DataContext db)
         {
-            Machines machines=new Machines();
+            Machines machines = new Machines();
             machines.UserId = user.UserID;
             machines.MachineName = user.UserName + "'s Machine";
             machines.MachineProcessor = "Intell® Atom™ x5-Z8300 Processor";
@@ -46,26 +47,24 @@ namespace HackNet.Data
             }
         }
 
-        internal static Machines GetUserMachine(string username, DataContext db = null)
+        internal static Machines GetUserMachine(Users user, DataContext db)
         {
-            Machines machines;
-            Users user = Users.FindUsername(username);
+            Machines machines;          
             try
             {
-                if (db != null)
-                {
-                    
-                }
+                machines = (from m in db.Machines
+                            where m.UserId == user.UserID
+                            select m).FirstOrDefault();
             }
-            catch(EntityCommandExecutionException)
+            catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
 
             }
 
-            return null;
+            return machines;
         }
-        
+
         internal static void UpgradeUserMachine()
         {
 

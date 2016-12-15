@@ -15,7 +15,20 @@ namespace HackNet.Game
         protected void Page_Load(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext()) {
-                Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+                //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+                Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+                // Text Labels
+                WorkstationNameLbl.Text = m.MachineName;
+                ProcessorLbl.Text = m.MachineProcessor;
+                GraphicLbl.Text = m.MachineGraphicCard;
+                MemoryLbl.Text = m.MachineMemory;
+                PwsupLbl.Text = m.MachinePowerSupply;
+                // Attribute Labels
+                HpattrLabel.Text = m.Health.ToString();
+                AtkattrLabel.Text = m.Attack.ToString();
+                DefattrLabel.Text = m.Defence.ToString();
+                SpeedattrLabel.Text = m.Speed.ToString();
+
             }
 
 
