@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -161,9 +162,11 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="anonymousedited.jpg" />
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
+    <Content Include="App_Data\Database.config" />
     <None Include="App_Data\Secrets.config" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
@@ -172,6 +175,7 @@
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
+    <Content Include="binarywallpaper.jpg" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -190,6 +194,8 @@
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />
     <Content Include="Content\Images\doge.png" />
+    <Content Include="Content\Images\ignlogo.png" />
+    <Content Include="Content\Images\Metacriticlogo.png" />
     <Content Include="Content\Images\mission.png" />
     <Content Include="Content\Images\workstation.png" />
     <Content Include="Content\MainPage.css" />
@@ -501,6 +507,7 @@
     <Compile Include="Prefs\ProfileSettings.aspx.designer.cs">
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Security\Base32.cs" />
     <Compile Include="Security\MailClient.cs" />
     <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

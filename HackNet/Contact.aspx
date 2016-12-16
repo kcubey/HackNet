@@ -2,7 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
-    <h3>Your contact page.</h3>
     <address>
         One Microsoft Way<br />
         Redmond, WA 98052-6399<br />
@@ -14,4 +13,13 @@
         <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
+
+    <h3>Get in touch with us</h3>
+    <span title="subject"> Subject </span>
+    <asp:TextBox ID="Subjecttxt" runat="server" CssClass="form-control" placeholder="Your subject" style="Width:100%; border-width:3px;"/> 
+    <span title="content"> Text </span>
+    <asp:TextBox ID="contenttxt" runat="server" CssClass="form-control" placeholder="Your text" style="Width:100%; border-width:3px;"/> 
+    <span title="useremail"> Your Email </span>
+    <asp:TextBox ID="useremail" runat="server" CssClass="form-control" type="email" placeholder="Your email" style="Width:100%; border-width:3px;"/> 
+    <asp:Button ID="btnSubmit" runat="server" CssClass="btn" Text="Submit" OnClick="btnSubmit_Click" style="margin-top:10px;" />
 </asp:Content>

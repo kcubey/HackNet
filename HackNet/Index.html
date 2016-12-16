@@ -1,4 +1,11 @@
-﻿<!doctype html>
+﻿<!--
+  ___ ___                __         __  .__                              __     
+ /   |   \_____    ____ |  | __   _/  |_|  |__   ____       ____   _____/  |_   
+/    ~    \__  \ _/ ___\|  |/ /   \   __\  |  \_/ __ \     /    \_/ __ \   __\  
+\    Y    // __ \\  \___|    <     |  | |   Y  \  ___/    |   |  \  ___/|  |    
+ \___|_  /(____  /\___  >__|_ \    |__| |___|  /\___  >   |___|  /\___  >__| 
+-->
+<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -29,7 +36,7 @@
     	$(window).keydown(function (e) {
     		if (e.keyCode == 13) {
 				console.log("ENTER KEY PRESSED")
-    			location.assign("/Game/Home.aspx");
+				location.assign("/Game/Home.aspx");
     			e.preventDefault();
     			return false;
     		}
@@ -123,7 +130,7 @@
 
 		<div class="main">
 
-			<section class="page1">
+			<section id="page1" class="page1" style="background-image: url('anonymousedited.jpg'); ">
 				<div class="page_container">
 					<h1>HackNet</h1>
 					<h2>Get ready and participate in a <br />Cyber Warfare simulation today!</h2>
@@ -134,42 +141,71 @@
 						<p class="text-btn">Here is <a href="/Auth/SignIn.aspx">SOME LINK</a><span class="btnsspan" style="color:#fff;"> | </span><br class="btnsspanbr"/><a href="/Game/Home.aspx">ANOTHER LINK</a> version</p>
 					</div>
 				</div>
+                <!--
 				<img class="consolepngimg" src="Content/Images/console.png" alt="imghere" height="128">
+                    -->
 			</section>
 
-			<section class="page2" style="background-image:url(./Content/Images/page2.png);">
+			<section id="page2" class="page2" style="background-image:url(./Content/Images/page2.png);">
 				<div class="page_container">
-					<h1>About Us</h1>
-					<h2>Description of our game</h2>
+					<h1>Hack the net.</h1>
+                    <h2>Now, the hacker becomes you</h2>
 					<code class="html">
-						&lt;div class="main"&gt;<br>
-						&lt;section&gt;...&lt;/section&gt;<br>
-						&lt;section&gt;...&lt;/section&gt;<br>
-						...<br>
-						&lt;/div&gt;
+                        user@HackNetHost:~#
 					</code>
 					<code class="js">
-						$(".main").onepage_scroll();
+                        &lt;Distributed_Denial_of_Service&gt;<br>
+                        &lt;Man_in_the_Middle&gt;<br>
+                        &lt;Cross_Site_Scripting&gt;<br>
+                        &lt;Password_Attacks&gt;<br>
+                        &lt;SQL_injection&gt;
 					</code>
 				</div>
 			</section>
 
-			<section class="page3">
-				<div class="page_container">
-					<h1>Sign Up Now</h1>
-					<h2>Such Amaze, Much Hacking, Very Wow</h2>
-					<div class="btns">
-						<a class="reload btn" href="/Auth/SignUp.aspx">Sign Up</a>
+			<section id="page3" class="page3">
+				<div class="page_container" style="float:left;">
+                    <div style="float:left;">
+                        <img class="consolepngimg" src="Content/Images/console.png" alt="imghere" height="128">
+                    </div>
+                    <div>
+					    <h1>Sign Up Now</h1>
+					    <h2>Such Amaze, Much Hacking, Very Wow</h2>
+					    <div class="btns">
+						    <a class="reload btn" href="/Auth/SignUp.aspx">Sign Up</a>
+                        </div>
 					</div>
 				</div>
 			</section>
-
+            <!--
             <section class="page4">
                 <div class="page_container">
                     <h1>Doge Approved</h1>
                     <h2>Such Amaze, Much Hacking, Very Wow</h2>
                     <div class="btns">
                         <a class="reload btn" href="/Auth/SignUp.aspx">Sign Up</a>
+                    </div>
+                </div>
+            </section>
+            -->
+
+            <section id="page5" class="page5" style="height:auto; margin-top:10px;">
+                <div class="page_container">
+                    <img src="Content/Images/doge.png" style="width:150px; height:150px;" />
+                    <h2>Such Amaze, Much Hacking, Very Wow</h2><br />
+                    <img src="Content/Images/ignlogo.png" style="width:350px; height:150px;"/><br />
+                    <h2>69/10</h2><br />
+                    <img src="Content/Images/Metacriticlogo.png" style="width:450px; height:150px;" /><br />
+                    <h2>3hacker5me</h2>
+                </div>
+            </section>
+
+            <section class="page6">
+                <div class="page_container">
+                    <h1><span style="background:none;color:#d33232;font-size:100%;">Question?</span></h1>
+                    <h2>Email <a href="About.aspx"><span>The Team</span></a> your enquires <a href="Contact.aspx">here</a></h2>
+                    <div class="btns">
+                        
                     </div>
                 </div>
             </section>

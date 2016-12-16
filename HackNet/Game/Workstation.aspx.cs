@@ -1,4 +1,6 @@
-﻿using HackNet.Game.Class;
+﻿using HackNet.Data;
+using HackNet.Game.Class;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +14,22 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Workstations workstn = Workstations.Getworkstation("Testuser");
-            WorkstationNameLbl.Text=workstn.WorkstnName;
-            ProcessorLbl.Text = workstn.Processor;
-            GraphicLbl.Text = workstn.Graphicard;
-            MemoryLbl.Text = workstn.Memory;
-            PwsupLbl.Text = workstn.Powersupply;
+            using (DataContext db = new DataContext()) {
+                //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+                Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+                // Text Labels
+                WorkstationNameLbl.Text = m.MachineName;
+                ProcessorLbl.Text = m.MachineProcessor;
+                GraphicLbl.Text = m.MachineGraphicCard;
+                MemoryLbl.Text = m.MachineMemory;
+                PwsupLbl.Text = m.MachinePowerSupply;
+                // Attribute Labels
+                HpattrLabel.Text = m.Health.ToString();
+                AtkattrLabel.Text = m.Attack.ToString();
+                DefattrLabel.Text = m.Defence.ToString();
+                SpeedattrLabel.Text = m.Speed.ToString();
 
-            HpattrLabel.Text = workstn.HpAtrb.ToString();
-            AtkattrLabel.Text = workstn.AtkAtrb.ToString();
-            DefattrLabel.Text = workstn.DefAtrb.ToString();
-            SpeedattrLabel.Text = workstn.SpeedAtrb.ToString();
-
-
-
+            }
         }
 
     }

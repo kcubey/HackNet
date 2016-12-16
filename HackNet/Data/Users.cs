@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Text;
 using System.Linq;
+using System.Data.Entity.Core;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using HackNet.Security;
-using System.Text;
-using System.Data.Entity.Core;
+
 
 namespace HackNet.Data
 {
 	public partial class Users
 	{
-		[Key]
+        internal readonly string username;
+
+        [Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int UserID { get; set; }
 
@@ -80,7 +83,6 @@ namespace HackNet.Data
 		internal static Users FindEmail(string email, DataContext db = null)
 		{
 			Users user;
-
 
 			try
 			{
