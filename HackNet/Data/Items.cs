@@ -11,7 +11,7 @@ namespace HackNet.Data
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int ItemId { get; set; }
-		public int ItemName { get; set; }
+		public string ItemName { get; set; }
 		public ItemType ItemType { get; set; }
         public int ItemBonus { get; set; }
 	}

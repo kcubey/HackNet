@@ -33,19 +33,18 @@
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-
-            <asp:DropDownList runat="server">
-                <asp:ListItem>Processor</asp:ListItem>
-                <asp:ListItem>Graphic Card</asp:ListItem>
-                <asp:ListItem>Memory</asp:ListItem>
-                <asp:ListItem>Power Supply</asp:ListItem>
-                <asp:ListItem>Booster</asp:ListItem>
+            <asp:DropDownList runat="server" ID="ItemTypeList" >
+                <asp:ListItem Value="1">Processor</asp:ListItem>
+                <asp:ListItem Value="4">Graphic Card</asp:ListItem>
+                <asp:ListItem Value="2">Memory</asp:ListItem>
+                <asp:ListItem Value="3">Power Supply</asp:ListItem>
+                <asp:ListItem Value="0">Booster</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Stat: " CssClass="col-xs-3 col-form-label"></asp:Label>
-
             <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
         </div>
+        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item"/>
     </div>
 </asp:Content>

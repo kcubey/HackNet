@@ -22,6 +22,7 @@ namespace HackNet.Game
             List<string> atkList = new List<string>();
             atkList.Add("Local");
             atkList.Add("America");
+            atkList.Add("Asia");
             return atkList;
         }
 
@@ -50,6 +51,11 @@ namespace HackNet.Game
             System.Diagnostics.Debug.WriteLine("testing:" +e.CommandArgument.ToString());
             AttackTypeHeader.Text = e.CommandArgument.ToString();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
+
+        }
+
+        protected void AtkBtn_Click(object sender, EventArgs e)
+        {
 
         }
     }

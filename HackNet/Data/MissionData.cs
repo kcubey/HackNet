@@ -12,7 +12,13 @@ namespace HackNet.Data
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int MissionId { get; set; }
-
 		public string MissionName { get; set; }
+        public MissionType MissionType { get; set; }
+
 	}
+    public enum MissionType
+    {
+        AtkTypDdos=1,
+        AtkTyp
+    }
 }

@@ -26,6 +26,28 @@
 
         </div>
     </div>
+    <div id="attackSummaryModel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
+                </div>
+                <div class="modal-body" style="color:black;">
+                    <p>Use Password Attack</p>
+                </div>
+                <div class="modal-footer">
+                    <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="panel panel-default">
         <div class="panel panel-body">           
@@ -49,23 +71,21 @@
                         </asp:TableHeaderRow>
                         <asp:TableRow runat="server">
                             <asp:TableCell>192.168.10.2</asp:TableCell>
-                            <asp:TableCell>Denial of service attack</asp:TableCell>
+                            <asp:TableCell>Password attack</asp:TableCell>
                             <asp:TableCell>10</asp:TableCell>
-                            <asp:TableCell>1</asp:TableCell>
-                            <asp:TableCell><asp:Button runat="server" Text="Attack" data-step="3" data-intro="Ok, wasn't that fun?" data-position='right'/></asp:TableCell>
+                            <asp:TableCell>1</asp:TableCell>                        
+                            <asp:TableCell><asp:LinkButton runat="server" Text="View" data-toggle="modal" data-target="#attackSummaryModel" data-step="3" data-intro="Ok, wasn't that fun?" data-position='right'/></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow runat="server">
                             <asp:TableCell>192.168.10.2</asp:TableCell>
                             <asp:TableCell>Man In the Middle attack</asp:TableCell>
                             <asp:TableCell>10</asp:TableCell>
                             <asp:TableCell>1</asp:TableCell>
-                            <asp:TableCell><asp:Button runat="server" Text="Attack"/></asp:TableCell>
+                            <asp:TableCell><asp:Button runat="server" Text="View"/></asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </div>
             </div>
-
-
             <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>
                 <h4>Types of attacks:</h4>
                 <ul class="list-group">

@@ -30,8 +30,6 @@ namespace HackNet.Game
                 SpeedattrLabel.Text = m.Speed.ToString();
 
             }
-
-
         }
 
     }

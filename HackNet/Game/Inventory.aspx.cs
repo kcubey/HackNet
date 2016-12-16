@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,5 +15,17 @@ namespace HackNet.Game
 
         }
 
+        protected void btnAddItem_Click(object sender, EventArgs e)
+        {
+            Items item = new Items();
+            item.ItemName = ItemName.Text;
+            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
+            item.ItemBonus = Int32.Parse(ItemStat.Text);
+            using(DataContext db=new DataContext())
+            {
+                db.Items.Add(item);
+                db.SaveChanges();
+            }
+        }
     }
 }
