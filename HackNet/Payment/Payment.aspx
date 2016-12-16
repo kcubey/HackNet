@@ -5,13 +5,18 @@
 
 
     <!-- JSv2-->
-    <script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>
+    <!--<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>-->
+    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
+
 
     <!-- JS v3-->
     <!-- Load the Client component. -->
-    <script src="https://js.braintreegateway.com/web/3.6.0/js/client.min.js"></script>
+    <!--<script src="https://js.braintreegateway.com/web/3.6.0/js/client.min.js"></script>-->
+    <script src="/Payment/backend/JSv3Client.js" lang="javascript" type="text/javascript"></script>
+
     <!-- Load the Hosted Fields component. -->
-    <script src="https://js.braintreegateway.com/web/3.6.0/js/hosted-fields.min.js"></script>
+    <!--<script src="https://js.braintreegateway.com/web/3.6.0/js/hosted-fields.min.js"></script>-->
+    <script src="/Payment/backend/JSv3HostedFields.js" lang="javascript" type="text/javascript"></script>
 
     <!-- all-->
     <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
@@ -35,14 +40,9 @@
     <asp:Label ID="pkgConfirm" runat="server" ForeColor="Black" ClientIDMode="Static"></asp:Label>
     
     <h3>JS v2</h3>
-    <div id="payment-form"></div>
-    <input type="submit" value="Pay $10" />
-
-            <div class="input-wrapper amount-wrapper">
-                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-            </div>            
-
-            <button class="button" type="submit"><span>Test Transaction</span></button>
+    <div class="dropinBox">
+        <div id="payment-form"></div>
+    </div>
 
     <br /><br />
 
@@ -69,7 +69,7 @@
   <input type="submit" value="Pay $10" disabled>
 
     <br /><br />
-    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
+    <asp:LinkButton runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
 
 
 </asp:Content>

@@ -161,13 +161,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="App_Code\BraintreeConfigurationcs.txt" />
-    <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
     <None Include="App_Data\Secrets.config" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
-    <Content Include="App_Start\FilterConfigcs.txt" />
-    <Content Include="App_Start\WebApiConfigcs.txt" />
     <Content Include="Auth\Debug.aspx" />
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
@@ -216,6 +212,9 @@
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
     <Content Include="Payment\backend\CheckoutsControllercs.txt" />
+    <Content Include="Payment\backend\JSv2.js" />
+    <Content Include="Payment\backend\JSv3Client.js" />
+    <Content Include="Payment\backend\JSv3HostedFields.js" />
     <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
     <Content Include="Payment\backend\redirectImageButton.css" />
@@ -224,7 +223,6 @@
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
     <Content Include="Payment\ReAuth.aspx" />
-    <Content Include="Payment\ViewStart.aspx" />
     <Content Include="Prefs\AccessLogs.aspx" />
     <Content Include="Prefs\ChangePassword.aspx" />
     <Content Include="Prefs\OtpSetup.aspx" />
@@ -303,6 +301,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\BraintreeConfiguration.cs" />
+    <Content Include="App_Code\IBraintreeConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -311,7 +311,9 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\Debug.aspx.cs">
       <DependentUpon>Debug.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,13 +465,6 @@
     </Compile>
     <Compile Include="Payment\ReAuth.aspx.designer.cs">
       <DependentUpon>ReAuth.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Payment\ViewStart.aspx.cs">
-      <DependentUpon>ViewStart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Payment\ViewStart.aspx.designer.cs">
-      <DependentUpon>ViewStart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prefs.master.cs">
       <DependentUpon>Prefs.master</DependentUpon>

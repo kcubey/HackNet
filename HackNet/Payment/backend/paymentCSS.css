@@ -4,3 +4,24 @@
     height: 25px;
     display: inline-block;
 }
+
+.dropinBox {
+    background-color: #FFF;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    box-shadow: 0 12px 32px 0 rgba(0,0,0,0.2);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+#braintree-paypal-button{
+    width: 50px;
+}
+
+* {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}

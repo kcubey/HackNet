@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-//Braintree related
+//Braintree file
 
 namespace HackNet.App_Start
 {
