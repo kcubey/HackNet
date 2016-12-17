@@ -222,6 +222,9 @@
     <Content Include="Game\Market.aspx" />
     <Content Include="Game\market.css" />
     <Content Include="Payment\backend\CheckoutsControllercs.txt" />
+    <Content Include="Payment\backend\JSv2.js" />
+    <Content Include="Payment\backend\JSv3Client.js" />
+    <Content Include="Payment\backend\JSv3HostedFields.js" />
     <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
     <Content Include="Payment\backend\redirectImageButton.css" />
@@ -230,7 +233,6 @@
     <Content Include="Payment\Payment.aspx" />
     <Content Include="Payment\backend\paymentJS.js" />
     <Content Include="Payment\ReAuth.aspx" />
-    <Content Include="Payment\ViewStart.aspx" />
     <Content Include="Prefs\AccessLogs.aspx" />
     <Content Include="Prefs\ChangePassword.aspx" />
     <Content Include="Prefs\OtpSetup.aspx" />
@@ -469,13 +471,6 @@
     </Compile>
     <Compile Include="Payment\ReAuth.aspx.designer.cs">
       <DependentUpon>ReAuth.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Payment\ViewStart.aspx.cs">
-      <DependentUpon>ViewStart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Payment\ViewStart.aspx.designer.cs">
-      <DependentUpon>ViewStart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Prefs.master.cs">
       <DependentUpon>Prefs.master</DependentUpon>

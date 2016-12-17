@@ -53,20 +53,22 @@
         <asp:Repeater ID="repPosts" runat="server">
             <ItemTemplate>
                 <figure class="postSnip">
-                    <img class="postImg" runat="server" src='<%# Eval("PostImage") %>' >
-              //          <img class="postImg" src="https://67.media.tumblr.com/93446adc3eeb10d4a492f8ce2eb70760/tumblr_o8pil6Czqe1rk63wco2_500.gif">
+                    <img class="postImg" runat="server" src='<[]%# Eval("PostImage") %>' >
+                        <img class="postImg" src="https://67.media.tumblr.com/93446adc3eeb10d4a492f8ce2eb70760/tumblr_o8pil6Czqe1rk63wco2_500.gif">
                     <figcaption class="postTitle">
-                //        <asp:Label ID="lblPostTitle" runat="server" Text='<%# Eval("PostName") %>'
-                 //           onclick='window.location="IdeasPost?PostId=<%# Eval("PostId") %>"' />
-                       <a href='IdeasPost?PostId=<%# Eval("PostId") %>' 
-                           title='<%# Eval("PostName") %>' id="postTitleAnchor"><%# Eval("PostName") %></a>
+                        <asp:Label ID="lblPostTitle" runat="server" Text='<[]%# Eval("PostName") %>'
+                            onclick='window.location="IdeasPost?PostId=<[]%# Eval("PostId") %>"' />
+                       <a href='IdeasPost?PostId=<[]%# Eval("PostId") %>' 
+                           title='<[]%# Eval("PostName") %>' id="postTitleAnchor"><[]%# Eval("PostName") %></a>
                     </figcaption>
                     <figcaption class="postContent">
-                        <asp:Label ID="lblPostDescription" runat="server" Text='<%# Eval("PostDescription") %>' />
+                        <asp:Label ID="lblPostDescription" runat="server" Text='<[]%# Eval("PostDescription") %>' />
                     </figcaption>
 	            </figure>
             </ItemTemplate>
         </asp:Repeater>
+
+        *** Remove[] brackets
     -->
     
     
