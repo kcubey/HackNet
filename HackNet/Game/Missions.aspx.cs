@@ -31,10 +31,13 @@ namespace HackNet.Game
         
         private void LoadMissionList()
         { 
-            MissionData misData = MissionData.GetMis();
-            //dtMission.Load();
+            /*MissionData misData = MissionData.GetMis();
+            
+            IDataReader data = (IDataReader)misData;
+            dtMission.Load(data);
             AtkTableView.DataSource = dtMission;
             AtkTableView.DataBind();
+            */
         }
         protected void AttackLink_Click(object sender, EventArgs e)
         {
