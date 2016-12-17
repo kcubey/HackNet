@@ -1,6 +1,8 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,11 +12,12 @@ namespace HackNet.Game
 {
     public partial class Missions : System.Web.UI.Page
     {
+        DataTable dtMission;
         protected void Page_Load(object sender, EventArgs e)
         {
             regatkList.DataSource = getRegAtkList();
             regatkList.DataBind();
-
+            LoadMissionList();
         }
 
         private List<string> getRegAtkList()
@@ -25,12 +28,18 @@ namespace HackNet.Game
             atkList.Add("Asia");
             return atkList;
         }
-
+        
+        private void LoadMissionList()
+        { 
+            MissionData misData = MissionData.GetMis();
+            //dtMission.Load();
+            AtkTableView.DataSource = dtMission;
+            AtkTableView.DataBind();
+        }
         protected void AttackLink_Click(object sender, EventArgs e)
         {
             Mission mis = new Mission();
-            mis.IPaddress = "192.168.10.10";
-            mis.numOfFirewall = 10;
+            mis.IPaddress = Mission.GetRandomIp();
             mis.Objective = "Steal Data";
             mis.numOfPorts = 10;
 
@@ -43,15 +52,11 @@ namespace HackNet.Game
                 LogPanel.Controls.Add(lbl);
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
+
             
         }
 
-        protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("testing:" +e.CommandArgument.ToString());
-            AttackTypeHeader.Text = e.CommandArgument.ToString();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
-        }
+      
 
         protected void AtkTextBx_TextChanged(object sender, EventArgs e)
         {
@@ -66,12 +71,43 @@ namespace HackNet.Game
         }
         internal bool checkMissionType(string atkType)
         {
+            if (atkType.Equals("PWDAtk"))
+                return true;
+            if (atkType.Equals("DDOS"))
+                return true;
             if (atkType.Equals("MITM"))
                 return true;
             if (atkType.Equals("SQL"))
                 return true;
+            if (atkType.Equals("XXS"))
+                return true;
 
             return false;
+        }
+        // this is to display about attack information
+        protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
+        {          
+            System.Diagnostics.Debug.WriteLine("testing:" + e.CommandArgument.ToString());
+            AttackTypeHeader.Text = e.CommandArgument.ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
+        }
+
+        protected void ViewVicBtn_Command(object sender, CommandEventArgs e)
+        {
+
+        }
+
+        protected void btnAddMis_Click(object sender, EventArgs e)
+        {
+            MissionData misdata = new MissionData();
+            misdata.MissionName = MisName.Text;
+            misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
+            misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
+            using(DataContext db=new DataContext())
+            {
+                db.MissionData.Add(misdata);
+                db.SaveChanges();
+            }
         }
     }
 }
