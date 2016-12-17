@@ -140,9 +140,9 @@
         </div>
         <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white; padding: ;">
             <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
-            <asp:TextBox runat="server" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
+            <asp:TextBox runat="server" ID="AtkTextBx" OnTextChanged="AtkTextBx_TextChanged" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
         </div>
-
+        <asp:Label runat="server" ID="errorLbl"></asp:Label>
     </div>
 
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>

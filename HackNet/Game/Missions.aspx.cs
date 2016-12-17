@@ -51,12 +51,27 @@ namespace HackNet.Game
             System.Diagnostics.Debug.WriteLine("testing:" +e.CommandArgument.ToString());
             AttackTypeHeader.Text = e.CommandArgument.ToString();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
-
         }
 
-        protected void AtkBtn_Click(object sender, EventArgs e)
+        protected void AtkTextBx_TextChanged(object sender, EventArgs e)
         {
+            string attackType=AtkTextBx.Text;
+            if (checkMissionType(attackType))
+            {
 
+            }else
+            {
+                errorLbl.Text = "THIS IS WRONG TRY AGAIN";
+            }
+        }
+        internal bool checkMissionType(string atkType)
+        {
+            if (atkType.Equals("MITM"))
+                return true;
+            if (atkType.Equals("SQL"))
+                return true;
+
+            return false;
         }
     }
 }
