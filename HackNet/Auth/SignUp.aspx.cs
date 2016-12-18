@@ -43,29 +43,28 @@ namespace HackNet.Auth
 			}
 
 			// Calling the controller class
-			using (Authenticate a = new Authenticate())
-				switch (a.CreateUser(UserEmail.Text, UserName.Text, FullName.Text, UserPass.Text, DateTime.Now))
-				{
-					case RegisterResult.Success:
-						Msg.ForeColor = System.Drawing.Color.LimeGreen;
-						Msg.Text = "Registration successful";
-						break;
-					case RegisterResult.EmailTaken:
-						Msg.Text = "Email has already been registered with another user";
-						break;
-					case RegisterResult.UsernameTaken:
-						Msg.Text = "Username has already been taken by another user";
-						break;
-					case RegisterResult.ValidationException:
-						Msg.Text = "Please recheck your input";
-						break;
-					case RegisterResult.OtherException:
-						Msg.Text = "An unexpected error has occured";
-						break;
-					default:
-						Msg.Text = "Nothing interesting happened";
-						break;
-				}
+			switch (Authenticate.CreateUser(UserEmail.Text, UserName.Text, FullName.Text, UserPass.Text, DateTime.Now))
+			{
+				case RegisterResult.Success:
+					Msg.ForeColor = System.Drawing.Color.LimeGreen;
+					Msg.Text = "Registration successful";
+					break;
+				case RegisterResult.EmailTaken:
+					Msg.Text = "Email has already been registered with another user";
+					break;
+				case RegisterResult.UsernameTaken:
+					Msg.Text = "Username has already been taken by another user";
+					break;
+				case RegisterResult.ValidationException:
+					Msg.Text = "Please recheck your input";
+					break;
+				case RegisterResult.OtherException:
+					Msg.Text = "An unexpected error has occured";
+					break;
+				default:
+					Msg.Text = "Nothing interesting happened";
+					break;
+			}
 		}
 	}
 }

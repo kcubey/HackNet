@@ -8,13 +8,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using HackNet.Security;
 
-
 namespace HackNet.Data
 {
 	public partial class Users
 	{
-        internal readonly string username;
-
         [Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int UserID { get; set; }
@@ -54,7 +51,6 @@ namespace HackNet.Data
 
 		public AccessLevel AccessLevel { get; set; }
 
-
 		// Foreign Key References
 		public virtual Machines Machine { get; set; }
 
@@ -66,20 +62,33 @@ namespace HackNet.Data
 
 		public virtual ICollection<Messages> ReceivedMessages { get; set; }
 
-		// Controller-ish Business Logic-ish Layer
-		internal bool UpdatePassword(string newpassword, string oldpassword = null)
+		// Accessor for User Key Store
+		internal UserKeyStore KeyStore
 		{
-			using (Authenticate a = new Authenticate())
+			get
 			{
-				if (oldpassword != null && (a.ValidateLogin(Email, oldpassword) != Authenticate.AuthResult.Success))
-					return false;
-				Salt = Authenticate.Generate(64);
-				Hash = a.Hash(Encoding.UTF8.GetBytes(newpassword), Salt);
-				return true;
+				if (UserKeyStore == null)
+				{
+					UserKeyStore = new UserKeyStore
+					{
+						RsaPriv = new byte[0],
+						RsaPub = new byte[0],
+						TOTPSecret = null,
+						UserId = this.UserID
+					};
+				}
+				return this.UserKeyStore;
 			}
 		}
 
-		// Static useful methods
+		// Simple method for password hash and salt updating
+		internal void UpdatePassword(string newpassword)
+		{
+			Salt = Crypt.Instance.Generate(64);
+			Hash = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(newpassword), Salt);
+		}
+
+		// Find users by email or username
 		internal static Users FindEmail(string email, DataContext db = null)
 		{
 			Users user;

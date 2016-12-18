@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace HackNet.Prefs
+namespace HackNet.Security
 {
 	public class OTPTool : IDisposable
 	{

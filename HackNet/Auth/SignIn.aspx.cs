@@ -23,13 +23,14 @@ namespace HackNet.Auth {
 
         protected void LoginClick(object sender, EventArgs e)
         {
-			using (Authenticate auth = new Authenticate())
+			string email = Email.Text.ToLower();
+			using (Authenticate auth = new Authenticate(email))
             {
-				AuthResult result = auth.ValidateLogin(Email.Text, UserPass.Text);
+				AuthResult result = auth.ValidateLogin(UserPass.Text);
 				switch(result)
 				{
 					case (AuthResult.Success):
-						FormsAuthentication.RedirectFromLoginPage(Email.Text, true);
+						LoginSuccess(email);
 						break;
 					case (AuthResult.PasswordIncorrect):
 						Msg.Text = "User and/or password not found (1)";
@@ -44,9 +45,20 @@ namespace HackNet.Auth {
 			}
         }
 
-		protected void BypassClick(object sender, EventArgs e)
+		private void LoginSuccess(string email)
 		{
-			FormsAuthentication.RedirectFromLoginPage("Bypasser", false);
+			using (Authenticate a = new Authenticate(email))
+			{
+				if (a.Is2FAEnabled() || email.Contains("ggg@gmail.com"))
+				{
+					Session["PasswordSuccess"] = email;
+					Response.Redirect("~/Auth/OtpVerify");
+				} else
+				{
+					FormsAuthentication.SetAuthCookie(email, false);
+					Response.Redirect("~/Default");
+				}
+			}
 		}
 	}
 }

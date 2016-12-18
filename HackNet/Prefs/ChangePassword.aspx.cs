@@ -31,7 +31,7 @@ namespace HackNet.Prefs
 			{
 				if (a.PasswordStrong(NewUserPass.Text))
 				{
-					switch (a.UpdatePassword(Authenticate.GetEmail(), OldUserPass.Text, NewUserPass.Text))
+					switch (a.UpdatePassword(OldUserPass.Text, NewUserPass.Text))
 					{
 						case (Authenticate.AuthResult.Success):
 							Msg.ForeColor = System.Drawing.Color.LimeGreen;

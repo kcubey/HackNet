@@ -172,6 +172,7 @@
     <Content Include="App_Start\FilterConfigcs.txt" />
     <Content Include="App_Start\WebApiConfigcs.txt" />
     <Content Include="Auth\Debug.aspx" />
+    <Content Include="Auth\OtpVerify.aspx" />
     <Content Include="Auth\SignIn.aspx" />
     <Content Include="Auth\SignOut.aspx" />
     <Content Include="Auth\SignUp.aspx" />
@@ -326,6 +327,13 @@
     </Compile>
     <Compile Include="Auth\Debug.aspx.designer.cs">
       <DependentUpon>Debug.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\OtpVerify.aspx.cs">
+      <DependentUpon>OtpVerify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\OtpVerify.aspx.designer.cs">
+      <DependentUpon>OtpVerify.aspx</DependentUpon>
     </Compile>
     <Compile Include="Auth\SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -513,7 +521,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Captcha.cs" />
-    <Compile Include="Security\Crypto.cs" />
+    <Compile Include="Security\Crypt.cs" />
     <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
     <Compile Include="Security\Logger.cs" />

@@ -14,27 +14,33 @@ namespace HackNet.Security
 {
 	internal class Authenticate : IDisposable
 	{
+		internal string Email { get; private set; } 
 		Stopwatch sw = new Stopwatch();
+
 		internal Authenticate()
 		{
-
+			Email = GetCurrentUser(ReadOnly: true).Email;
 		}
 
-		internal AuthResult ValidateLogin(string email, string password, bool checkEmailValidity = true)
+		internal Authenticate(string email)
+		{
+			Email = Users.FindEmail(email: email).Email;
+		}
+
+		internal AuthResult ValidateLogin(string password, bool checkEmailValidity = true)
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindEmail(email, db);
+				Users user = Users.FindEmail(this.Email, db);
 
 				if (user == null)
 					return AuthResult.UserNotFound;
-
 				if (checkEmailValidity && user.AccessLevel == AccessLevel.Unverified)
 					return AuthResult.EmailNotVerified;
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
-
-				if (user.Hash.SequenceEqual(Hash(bPassword, user.Salt)))
+				byte[] bHash = Crypt.Instance.Hash(bPassword, user.Salt);
+				if (user.Hash.SequenceEqual(bHash))
 					return AuthResult.Success;
 				else
 					return AuthResult.PasswordIncorrect;
@@ -42,24 +48,72 @@ namespace HackNet.Security
 			throw new AuthException("Error connecting to database");
 		}
 
-		internal AuthResult UpdatePassword(string email, string oldpass, string newpass)
+		internal AuthResult UpdatePassword(string oldpass, string newpass)
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindEmail(email, db);
-				if (user == null)
+				Users u = Users.FindEmail(this.Email, db);
+				if (u == null)
 					return AuthResult.UserNotFound;
-				if (user.UpdatePassword(newpass, oldpass))
-				{
-					db.SaveChanges();
-					return AuthResult.Success;
-				}
-				else
-					return AuthResult.PasswordIncorrect;
+				AuthResult oldpwres = ValidateLogin(oldpass);
+				if (oldpwres != AuthResult.Success)
+					return oldpwres;
+				u.UpdatePassword(newpass);
+				db.SaveChanges();
+				return AuthResult.Success;
 			}
 		}
 
-		internal RegisterResult CreateUser(string email, string username, string fullname, string password, DateTime birthdate)
+
+
+		internal bool PasswordStrong(string password)
+		{
+			if (password.Length < 8)
+				return false;
+			if (!Regex.IsMatch(password, "^[a-zA-Z0-9]*$"))
+				return false;
+			return true;
+
+		}
+
+		internal bool Is2FAEnabled()
+		{
+			using (DataContext db = new DataContext())
+			{
+				Users u = Users.FindEmail(this.Email, db);
+				string sec = u.KeyStore.TOTPSecret;
+				if (!string.IsNullOrEmpty(sec))
+					return true;
+				else
+					return false;
+			}
+		}
+
+		internal bool Validate2FA(int totp)
+		{
+			string base32sec;
+			using (DataContext db = new DataContext())
+			{
+				var u = Users.FindEmail(this.Email, db);
+				var uks = u.KeyStore;
+				base32sec = uks.TOTPSecret;
+			}
+			using (OTPTool ot = new OTPTool(base32sec))
+			{
+				int[] validtotp = ot.OneTimePasswordRange;
+				foreach(int i in validtotp)
+					if (i == totp)
+						return true;
+					else
+						return false;
+			}
+			throw new Exception("TOTP Generation Exception");
+		}
+
+
+
+		// User creation method (adds to database)
+		internal static RegisterResult CreateUser(string email, string username, string fullname, string password, DateTime birthdate)
 		{
 			if (Users.FindEmail(email) != null)
 				return RegisterResult.EmailTaken;
@@ -99,66 +153,6 @@ namespace HackNet.Security
 			}
 
 			return RegisterResult.OtherException;
-		}
-
-		internal bool PasswordStrong(string password)
-		{
-			if (password.Length < 8)
-				return false;
-			if (!Regex.IsMatch(password, "^[a-zA-Z0-9]*$"))
-				return false;
-			return true;
-
-		}
-
-		internal byte[] Hash(byte[] password, byte[] salt = null)
-		{
-			// Start the stopwatch
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
-			byte[] hashedbytes;
-			// If no salt specified, use default salt value
-			if (salt == null)
-				salt = Convert.FromBase64String("DefaultSalt=");
-			// RFC2898 Implements HMAC Based SHA1, which is FIPS Compliant
-			using (var kdf = new Rfc2898DeriveBytes(password, salt, 5000))
-				hashedbytes = kdf.GetBytes(128);
-			// Stop the stopwatch
-			sw.Stop();
-			Debug.WriteLine(sw.Elapsed);
-			// Return the hash
-			return hashedbytes;
-		}
-
-		public byte[] SHA512Hash(string plaintext, byte[] salt = null)
-		{
-			// Obtain base variables
-			byte[] ptBytes = Encoding.UTF8.GetBytes(plaintext);
-			byte[] combinedBytes;
-			byte[] newHash;
-
-			// If salt is present, append it to plaintext
-			if (salt == null)
-			{
-				combinedBytes = new byte[ptBytes.Length];
-				ptBytes.CopyTo(combinedBytes, 0);
-			}
-			else
-			{
-				combinedBytes = new byte[ptBytes.Length + salt.Length];
-				ptBytes.CopyTo(combinedBytes, 0);
-				salt.CopyTo(combinedBytes, ptBytes.Length);
-			}
-
-			// Do the hashing
-			using (SHA512 shaCalc = new SHA512Managed())
-			{
-				newHash = shaCalc.ComputeHash(combinedBytes);
-			}
-
-			// Return the hash
-			return newHash;
-
 		}
 
 
@@ -227,16 +221,7 @@ namespace HackNet.Security
 
 		}
 
-		// Generate bytes from RNGCryptoServiceProvider
-		internal static byte[] Generate(int size)
-		{
-			if (size == 0) // Guard clause
-				return null;
-			byte[] random = new byte[size];
-			using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-				rng.GetBytes(random);
-			return random;
-		}
+
 
 		internal enum AuthResult
 		{
