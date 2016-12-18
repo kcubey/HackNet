@@ -66,11 +66,10 @@
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
                     <asp:GridView ID="AtkTableView" runat="server" AutoGenerateColumns="true" ShowHeaderWhenEmpty="True">
-                        <Columns>
-                            
+                        <Columns>                        
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="ViewMis" runat="server" Text="View" CssClass="btn btn-default" OnCommand="ViewMis_Command"></asp:LinkButton>
+                                    <asp:LinkButton ID="ViewMis" runat="server" Text="View" CssClass="btn btn-default" OnCommand="ViewMis_Command" ></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
