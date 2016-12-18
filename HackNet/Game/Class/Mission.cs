@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,7 @@ namespace HackNet.Game
         }
 
         
-        private string randomSystem()
+        private static string randomSystem()
         {
 
             List<string> sysList = new List<string>();
@@ -37,16 +38,16 @@ namespace HackNet.Game
             return system;
         }
 
-        public List<string> scanMission(Mission mission, string username)
+        public static List<string> scanMission(MissionData mission, string username)
         {
             Random rnd = new Random();
             string console = username + "@HackNet: ~#  ";
             int current = rnd.Next(10, 1000);
 
             List<string> scanList = new List<string>();
-            scanList.Add(console + "Hmap " + mission.IPaddress);
+            scanList.Add(console + "Hmap " + mission.MissionIP);
             scanList.Add("Starting Hmap 8.88 at " + DateTime.Now);
-            scanList.Add("Interesting Ports on " + mission.IPaddress);
+            scanList.Add("Interesting Ports on " + mission.MissionIP);
             scanList.Add("Number of ports exposed: " + current);
             scanList.Add("Ports  " + "&nbsp;&nbsp;" + "  STATE  " + "&nbsp;&nbsp;" + "  SERVICE");
             scanList.Add("22/tcp  " + "&nbsp;&nbsp;" + "  open  " + "&nbsp;&nbsp;" + "  ssh");
@@ -54,7 +55,7 @@ namespace HackNet.Game
             scanList.Add("53/tcp  " + "&nbsp;&nbsp;" + "  open  " + "&nbsp;&nbsp;" + "  domain");
             scanList.Add("==============================================");
             scanList.Add("Server Info: ");
-            scanList.Add("System: "+ randomSystem());
+            scanList.Add("System: "+ Mission.randomSystem());
 
 
 

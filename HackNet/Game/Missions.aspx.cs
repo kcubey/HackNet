@@ -17,6 +17,7 @@ namespace HackNet.Game
         {
             regatkList.DataSource = getRegAtkList();
             regatkList.DataBind();
+
             LoadMissionList();
         }
 
@@ -30,23 +31,33 @@ namespace HackNet.Game
         }
         
         private void LoadMissionList()
-        { 
-            /*MissionData misData = MissionData.GetMis();
+        {
+            List<MissionData> misdatalist = MissionData.GetMisList();
+
+            dtMission = new DataTable();
+            dtMission.Columns.Add("IP Address", typeof(string));
+            dtMission.Columns.Add("Mission Name", typeof(string));
+            dtMission.Columns.Add("Recommneded Level", typeof(string));
             
-            IDataReader data = (IDataReader)misData;
-            dtMission.Load(data);
+          
+            foreach (MissionData misdata in misdatalist)
+            {
+                dtMission.Rows.Add(misdata.MissionIP, misdata.MissionName, misdata.RecommendLevel);
+            }
+            
             AtkTableView.DataSource = dtMission;
             AtkTableView.DataBind();
-            */
         }
+
+        protected void ViewMis_Command(object sender, CommandEventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattackinfo();", true);
+        }
+
         protected void AttackLink_Click(object sender, EventArgs e)
         {
-            Mission mis = new Mission();
-            mis.IPaddress = Mission.GetRandomIp();
-            mis.Objective = "Steal Data";
-            mis.numOfPorts = 10;
-
-            List<string> arrList = mis.scanMission(mis,"testuser");
+            MissionData mis = new MissionData();
+            List<string> arrList = Mission.scanMission(mis,"testuser");
 
             for(int i=0;i<arrList.Count;i++)
             {
@@ -55,8 +66,7 @@ namespace HackNet.Game
                 LogPanel.Controls.Add(lbl);
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
-
-            
+           
         }
 
       
@@ -95,15 +105,11 @@ namespace HackNet.Game
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
-        protected void ViewVicBtn_Command(object sender, CommandEventArgs e)
-        {
-
-        }
-
         protected void btnAddMis_Click(object sender, EventArgs e)
         {
             MissionData misdata = new MissionData();
             misdata.MissionName = MisName.Text;
+            misdata.MissionIP = Mission.GetRandomIp();
             misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
             misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
             using(DataContext db=new DataContext())
@@ -111,6 +117,8 @@ namespace HackNet.Game
                 db.MissionData.Add(misdata);
                 db.SaveChanges();
             }
+            LoadMissionList();
         }
+
     }
 }

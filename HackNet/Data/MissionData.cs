@@ -15,25 +15,29 @@ namespace HackNet.Data
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int MissionId { get; set; }
 		public string MissionName { get; set; }
+        public string MissionIP { get; set; }
         public MissionType MissionType { get; set; }
         public RecommendLevel RecommendLevel { get; set; }
 
-        public static MissionData GetMis()
+        public static List<MissionData> GetMisList()
         {
-            MissionData misdata = new MissionData();
+            List<MissionData> misdatalist = new List<MissionData>();
+           // MissionData misdata = new MissionData();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    misdata = (from mis in db.MissionData select mis).FirstOrDefault();
+                    var query = from mis in db.MissionData select mis;
+                    return query.ToList();
                 }
             }
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
+                return null;
             }
 
-            return misdata;
+            
         }
 	}
     public enum RecommendLevel

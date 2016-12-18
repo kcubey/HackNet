@@ -6,6 +6,9 @@
         function showPopupattackinfo() {
             $('#attackTypeModel').modal('show');
         }
+        function showPopupattacksummary(){
+            $('#attackSummaryModel').modal('show');
+        }
     </script>
     <div id="attackTypeModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -62,32 +65,17 @@
 
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
-                    <asp:GridView ID="AtkTableView" runat="server" AutoGenerateColumns="False" DataKeyNames="MissionId,MissionName,MissionType" ShowHeaderWhenEmpty="True">
+                    <asp:GridView ID="AtkTableView" runat="server" AutoGenerateColumns="true" ShowHeaderWhenEmpty="True">
                         <Columns>
-                            <asp:TemplateField HeaderText="IP Address" ControlStyle-Font-Size="Medium" HeaderStyle-Font-Size="Large">
+                            
+                            <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:Label runat="server" ID="IPLbl"></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Mission Name" ControlStyle-Font-Size="Medium" HeaderStyle-Font-Size="Large">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="MisNameLbl"></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Recommended Level" ControlStyle-Font-Size="Medium" HeaderStyle-Font-Size="Large">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="RecomLvlLbl"></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="" ControlStyle-Font-Size="Medium" HeaderStyle-Font-Size="Large">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="ViewVicBtn" OnCommand="ViewVicBtn_Command" CommandArgument='<%# Eval("MissionId") %>' Text="View" runat="server" ></asp:LinkButton>
+                                    <asp:LinkButton ID="ViewMis" runat="server" Text="View" CssClass="btn btn-default" OnCommand="ViewMis_Command"></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-
                     </asp:GridView>
-                    <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack"/>
+                    <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
                 </div>
             </div>
             <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>
@@ -140,7 +128,7 @@
         <asp:Label runat="server" ID="errorLbl"></asp:Label>
     </div>
 
-    <div class="container-fluid" style="color: black; background-color:gray;">
+    <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Mission Editor</h2>
         <div class="form-group row">
             <asp:Label runat="server" Text="Mission Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
@@ -148,7 +136,7 @@
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Mission Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:DropDownList runat="server" ID="AtkTypeList" >
+            <asp:DropDownList runat="server" ID="AtkTypeList">
                 <asp:ListItem Value="0">AtkTypPwdAtks</asp:ListItem>
                 <asp:ListItem Value="1">AtkTypDdos</asp:ListItem>
                 <asp:ListItem Value="2">AtkTypMITM</asp:ListItem>
@@ -158,14 +146,14 @@
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Mission Recommend Level: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:DropDownList runat="server" ID="RecomLvlList" >
+            <asp:DropDownList runat="server" ID="RecomLvlList">
                 <asp:ListItem Value="0">Lvl1to5</asp:ListItem>
                 <asp:ListItem Value="1">Lvl6to10</asp:ListItem>
                 <asp:ListItem Value="2">Lvl11to15</asp:ListItem>
                 <asp:ListItem Value="3">Lvl16to20</asp:ListItem>
             </asp:DropDownList>
         </div>
-        <asp:Button runat="server" ID="btnAddMis" CssClass="btn btn-default" OnClick="btnAddMis_Click" Text="Add Item"/>
+        <asp:Button runat="server" ID="btnAddMis" CssClass="btn btn-default" OnClick="btnAddMis_Click" Text="Add Item" />
     </div>
 
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
