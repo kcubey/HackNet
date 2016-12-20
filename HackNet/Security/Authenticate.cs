@@ -24,7 +24,45 @@ namespace HackNet.Security
 
 		internal Authenticate(string email)
 		{
+			// To ensure email casing is correct
 			Email = Users.FindEmail(email: email).Email;
+		}
+
+		internal bool Is2FAEnabled
+		{
+			get
+			{
+				using (DataContext db = new DataContext())
+				{
+					Users u = Users.FindEmail(this.Email, db);
+					string sec = u.KeyStore.TOTPSecret;
+					if (!string.IsNullOrEmpty(sec))
+						return true;
+					else
+						return false;
+				}
+			}
+		}
+
+		internal bool Validate2FA(int totp)
+		{
+			string base32sec;
+			using (DataContext db = new DataContext())
+			{
+				var u = Users.FindEmail(this.Email, db);
+				var uks = u.KeyStore;
+				base32sec = uks.TOTPSecret;
+			}
+			using (OTPTool ot = new OTPTool(base32sec))
+			{
+				int[] validtotp = ot.OneTimePasswordRange;
+				foreach (int i in validtotp)
+					if (i == totp)
+						return true;
+					else
+						return false;
+			}
+			throw new Exception("TOTP Generation Exception");
 		}
 
 		internal AuthResult ValidateLogin(string password, bool checkEmailValidity = true)
@@ -75,41 +113,6 @@ namespace HackNet.Security
 			return true;
 
 		}
-
-		internal bool Is2FAEnabled()
-		{
-			using (DataContext db = new DataContext())
-			{
-				Users u = Users.FindEmail(this.Email, db);
-				string sec = u.KeyStore.TOTPSecret;
-				if (!string.IsNullOrEmpty(sec))
-					return true;
-				else
-					return false;
-			}
-		}
-
-		internal bool Validate2FA(int totp)
-		{
-			string base32sec;
-			using (DataContext db = new DataContext())
-			{
-				var u = Users.FindEmail(this.Email, db);
-				var uks = u.KeyStore;
-				base32sec = uks.TOTPSecret;
-			}
-			using (OTPTool ot = new OTPTool(base32sec))
-			{
-				int[] validtotp = ot.OneTimePasswordRange;
-				foreach(int i in validtotp)
-					if (i == totp)
-						return true;
-					else
-						return false;
-			}
-			throw new Exception("TOTP Generation Exception");
-		}
-
 
 
 		// User creation method (adds to database)
@@ -220,7 +223,6 @@ namespace HackNet.Security
 
 
 		}
-
 
 
 		internal enum AuthResult
