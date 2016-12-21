@@ -14,29 +14,39 @@ namespace HackNet.Auth
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["PasswordSuccess"] == null)
-			{
 				Response.Redirect("~/Default");
-			}
 		}
 
 		protected void ConfirmOTP(object sender, EventArgs e)
 		{
-			int totp;
-			int.TryParse(OTPValue.Text, out totp);
+			if (Session["PasswordSuccess"] == null)
+			{
+				Response.Redirect("~/Default");
+				return;
+			}
+
 			string email = Session["PasswordSuccess"] as string;
 			using (Authenticate a = new Authenticate(email))
 			{
-				if (a.Validate2FA(totp))
+				switch (a.Validate2FA(OTPValue.Text))
 				{
-					Session["PasswordSuccess"] = null;
-					FormsAuthentication.SetAuthCookie(email, false);
-					Response.Redirect("~/Default");
+					case OtpResult.Success:
+						Session["PasswordSuccess"] = null;
+						FormsAuthentication.SetAuthCookie(email, false);
+						Response.Redirect("~/Default");
+						break;
+					case OtpResult.NotInt:
+						Msg.Text = "You entered non-numbers, please check again";
+						break;
+					case OtpResult.WrongLength:
+						Msg.Text = "You entered an OTP with malformed length";
+						break;
+					case OtpResult.WrongOtp:
+						Msg.Text = "OTP Entered does not match, please try again";
+						break;
 				}
-				else
-					Msg.Text = "Incorrect OTP entered!";
 			}
 		}
-
 
 		protected void CancelOTP(object sender, EventArgs e)
 		{

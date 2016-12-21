@@ -11,15 +11,15 @@ namespace HackNet.Data
 	{
 		[Key]
 		[ForeignKey("User")]
-		public int UserId { get; set; }
+		public int UserId { get; set; } 
 
-		public byte[] RsaPub { get; set; }
+		public byte[] RsaPub { get; set; } // Blank array if not enabled
 
-		public byte[] RsaPriv { get; set; }
+		public byte[] RsaPriv { get; set; } // Blank array if not enabled
 
-		public string TOTPSecret { get; set; }
+		public string TOTPSecret { get; set; } // Null if not enabled
 
-		// Foreign key reference
+		// Foreign key references
 		public virtual Users User { get; set; }
 	}
 }

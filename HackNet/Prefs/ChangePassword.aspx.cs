@@ -29,18 +29,18 @@ namespace HackNet.Prefs
 			}
 			using (Authenticate a = new Authenticate())
 			{
-				if (a.PasswordStrong(NewUserPass.Text))
+				if (Authenticate.PasswordStrong(NewUserPass.Text))
 				{
 					switch (a.UpdatePassword(OldUserPass.Text, NewUserPass.Text))
 					{
-						case (Authenticate.AuthResult.Success):
+						case (AuthResult.Success):
 							Msg.ForeColor = System.Drawing.Color.LimeGreen;
 							Msg.Text = "Password successfully changed";
 							return;
-						case (Authenticate.AuthResult.PasswordIncorrect):
+						case (AuthResult.PasswordIncorrect):
 							Msg.Text = "Old password did not match";
 							return;
-						case (Authenticate.AuthResult.UserNotFound):
+						case (AuthResult.UserNotFound):
 							Msg.Text = "User not found! You may have been logged out";
 							return;
 						default:

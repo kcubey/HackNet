@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web;
 using System.Text;
 using HackNet.Data;
-using System.Data.Entity.Core;
 using System.Text.RegularExpressions;
 
 namespace HackNet.Security
@@ -25,51 +21,17 @@ namespace HackNet.Security
 		internal Authenticate(string email)
 		{
 			// To ensure email casing is correct
-			Email = Users.FindEmail(email: email).Email;
+			Email = Users.FindByEmail(email: email).Email;
 		}
-
-		internal bool Is2FAEnabled
-		{
-			get
-			{
-				using (DataContext db = new DataContext())
-				{
-					Users u = Users.FindEmail(this.Email, db);
-					string sec = u.KeyStore.TOTPSecret;
-					if (!string.IsNullOrEmpty(sec))
-						return true;
-					else
-						return false;
-				}
-			}
-		}
-
-		internal bool Validate2FA(int totp)
-		{
-			string base32sec;
-			using (DataContext db = new DataContext())
-			{
-				var u = Users.FindEmail(this.Email, db);
-				var uks = u.KeyStore;
-				base32sec = uks.TOTPSecret;
-			}
-			using (OTPTool ot = new OTPTool(base32sec))
-			{
-				int[] validtotp = ot.OneTimePasswordRange;
-				foreach (int i in validtotp)
-					if (i == totp)
-						return true;
-					else
-						return false;
-			}
-			throw new Exception("TOTP Generation Exception");
-		}
-
+		
+		/*
+		 * PASSWORD CONF INSTANCE METHODS
+		 */
 		internal AuthResult ValidateLogin(string password, bool checkEmailValidity = true)
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindEmail(this.Email, db);
+				Users user = Users.FindByEmail(this.Email, db);
 
 				if (user == null)
 					return AuthResult.UserNotFound;
@@ -90,7 +52,7 @@ namespace HackNet.Security
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users u = Users.FindEmail(this.Email, db);
+				Users u = Users.FindByEmail(this.Email, db);
 				if (u == null)
 					return AuthResult.UserNotFound;
 				AuthResult oldpwres = ValidateLogin(oldpass);
@@ -102,9 +64,61 @@ namespace HackNet.Security
 			}
 		}
 
+		/*
+		 * 2FA CONF INSTANCE METHODS
+		 */
+		internal bool Is2FAEnabled
+		{
+			get
+			{
+				using (DataContext db = new DataContext())
+				{
+					Users u = Users.FindByEmail(this.Email, db);
+					string sec = u.KeyStore.TOTPSecret;
+					if (!string.IsNullOrEmpty(sec))
+						return true;
+					else
+						return false;
+				}
+			}
+		}
+
+		internal OtpResult Validate2FA(string totp)
+		{
+			string base32sec;
+			using (DataContext db = new DataContext())
+			{
+				var u = Users.FindByEmail(this.Email, db);
+				var uks = u.KeyStore;
+				base32sec = uks.TOTPSecret;
+			}
+			using (OTPTool ot = new OTPTool(base32sec))
+			{
+				return ot.Validate(totp);
+			}
+			throw new Exception("TOTP Generation Exception");
+		}
+
+		internal bool Set2FASecret(string b32sec)
+		{
+			if (b32sec.Length != 16 && b32sec != null)
+			{
+				Debug.WriteLine("Malformed base32 secret length: " + b32sec.Length);
+				return false;
+			}
+			using (DataContext db = new DataContext()) {
+				Users u = Users.FindByEmail(Email);
+				u.KeyStore.TOTPSecret = b32sec;
+				return true;
+			}
+		}
 
 
-		internal bool PasswordStrong(string password)
+
+		/*
+		 *  Authentication STATIC methods
+		 */
+		internal static bool PasswordStrong(string password)
 		{
 			if (password.Length < 8)
 				return false;
@@ -118,7 +132,7 @@ namespace HackNet.Security
 		// User creation method (adds to database)
 		internal static RegisterResult CreateUser(string email, string username, string fullname, string password, DateTime birthdate)
 		{
-			if (Users.FindEmail(email) != null)
+			if (Users.FindByEmail(email) != null)
 				return RegisterResult.EmailTaken;
 
 			Users u = new Users()
@@ -140,7 +154,7 @@ namespace HackNet.Security
 				db.SaveChanges();
 				Debug.WriteLine("User creation attempted");
 
-				Users createduser = Users.FindEmail(email, db);
+				Users createduser = Users.FindByEmail(email, db);
 				if (createduser != null)
 				{
 					using (MailClient mc = new MailClient(createduser.Email))
@@ -156,19 +170,6 @@ namespace HackNet.Security
 			}
 
 			return RegisterResult.OtherException;
-		}
-
-
-		// Static utility methods
-		internal static byte[] Encode64(string str)
-		{
-
-			return Convert.FromBase64String(str);
-		}
-
-		internal static string Decode64(byte[] arr)
-		{
-			return Convert.ToBase64String(arr);
 		}
 
 		// Check if authenticated
@@ -223,26 +224,7 @@ namespace HackNet.Security
 
 
 		}
-
-
-		internal enum AuthResult
-		{
-			Success = 0,
-			UserNotFound = 1,
-			PasswordIncorrect = 2,
-			EmailNotVerified = 3,
-			OtherError = 4
-		}
-
-		internal enum RegisterResult
-		{
-			Success = 0,
-			UsernameTaken = 1,
-			EmailTaken = 2,
-			ValidationException = 3,
-			OtherException = 4
-		}
-
+		
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls
 
@@ -278,5 +260,31 @@ namespace HackNet.Security
 		}
 		#endregion
 
+	}
+
+	internal enum AuthResult
+	{
+		Success = 0,
+		UserNotFound = 1,
+		PasswordIncorrect = 2,
+		EmailNotVerified = 3,
+		OtherError = 4
+	}
+
+	internal enum RegisterResult
+	{
+		Success = 0,
+		UsernameTaken = 1,
+		EmailTaken = 2,
+		ValidationException = 3,
+		OtherException = 4
+	}
+
+	public enum OtpResult
+	{
+		Success = 0,
+		WrongOtp = 1,
+		WrongLength = 2,
+		NotInt = 3
 	}
 }

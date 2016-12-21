@@ -22,15 +22,6 @@ namespace HackNet.Prefs {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ExistingOTP;
         
         /// <summary>
-        /// OTPCancelBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button OTPCancelBtn;
-        
-        /// <summary>
         /// OTPStep1 control.
         /// </summary>
         /// <remarks>
@@ -49,13 +40,22 @@ namespace HackNet.Prefs {
         protected global::System.Web.UI.WebControls.TextBox CurrPWTxt;
         
         /// <summary>
-        /// OTPSubmitBtn control.
+        /// VerifyForConfigure control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button OTPSubmitBtn;
+        protected global::System.Web.UI.WebControls.Button VerifyForConfigure;
+        
+        /// <summary>
+        /// VerifyForDisable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button VerifyForDisable;
         
         /// <summary>
         /// Msg control.
@@ -103,13 +103,13 @@ namespace HackNet.Prefs {
         protected global::System.Web.UI.WebControls.Label Msg2;
         
         /// <summary>
-        /// Button1 control.
+        /// VerifyOTP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button VerifyOTP;
         
         /// <summary>
         /// Div1 control.
@@ -128,5 +128,41 @@ namespace HackNet.Prefs {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
+        /// OTPDisable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl OTPDisable;
+        
+        /// <summary>
+        /// DisableTotpTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DisableTotpTxt;
+        
+        /// <summary>
+        /// DisableTotpLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DisableTotpLbl;
+        
+        /// <summary>
+        /// Disable2FABtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Disable2FABtn;
     }
 }

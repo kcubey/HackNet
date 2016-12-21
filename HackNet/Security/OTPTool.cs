@@ -1,5 +1,6 @@
 ﻿using HackNet.Security;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
@@ -8,39 +9,37 @@ namespace HackNet.Security
 	public class OTPTool : IDisposable
 	{
 		private bool disposed = false;
-
-		private int _secondsToGo;
 		private string _identity;
 		private byte[] _secret = new byte[14];
-		private long _timestamp;
 		private byte[] _hmac;
 		private int _offset;
-		private int _OTPNow;
-		private int[] _OTPRange = new int[5];
 
-		public OTPTool() { }
+		public OTPTool()
+		{
+			SecretBase32 = RandomiseSecret();
+		}
 
 		public OTPTool(string base32sec)
 		{
 			SecretBase32 = base32sec;
 		}
 
-
-		public int SecondsToGo
+		public OtpResult Validate(string input)
 		{
-			get
-			{
-				return _secondsToGo;
-			}
-			private set
-			{
-				_secondsToGo = value;
-				if (SecondsToGo == 30) CalculateCurrentOTP();
-			}
+			List<int> range = OTPRange;
+			int intput = 0;
+			if (input.Length != 6)
+				return OtpResult.WrongLength;
+			if (!int.TryParse(input, out intput))
+				return OtpResult.NotInt;
+			if (range.Contains(intput))
+				return OtpResult.Success;
+			else
+				return OtpResult.WrongOtp;
 		}
 
 
-		public string Identity
+		internal string Identity
 		{
 			get
 			{
@@ -49,12 +48,11 @@ namespace HackNet.Security
 			set
 			{
 				_identity = value;
-				CalculateCurrentOTP();
 			}
 		}
 
 
-		public string SecretBase32
+		internal string SecretBase32
 		{
 			get
 			{
@@ -70,7 +68,7 @@ namespace HackNet.Security
 		}
 
 
-		public byte[] Secret
+		private byte[] Secret
 		{
 			get { return _secret; }
 			set
@@ -80,81 +78,13 @@ namespace HackNet.Security
 					_secret = new byte[14];
 				}
 				_secret = value;
-				CalculateCurrentOTP();
 			}
 		}
 
-		public string QRCodeUrl
+
+		internal string QRCodeUrl
 		{
 			get { return GetQRCodeUrl(); }
-		}
-
-
-		public Int64 Timestamp
-		{
-			get { return _timestamp; }
-			private set
-			{
-				_timestamp = value;
-			}
-		}
-
-
-		public byte[] Hmac
-		{
-			get { return _hmac; }
-			private set { _hmac = value; }
-		}
-
-
-		public byte[] HmacPart1
-		{
-			get { return _hmac.Take(Offset).ToArray(); }
-		}
-
-		public byte[] HmacPart2
-		{
-			get { return _hmac.Skip(Offset).Take(4).ToArray(); }
-		}
-
-		public byte[] HmacPart3
-		{
-			get { return _hmac.Skip(Offset + 4).ToArray(); }
-		}
-
-
-		public int Offset
-		{
-			get { return _offset; }
-			private set { _offset = value; }
-		}
-
-
-		public int OneTimePassword
-		{
-			get
-			{
-				CalculateCurrentOTP();
-				return _OTPNow;
-			}
-		}
-
-		public int[] OneTimePasswordRange
-		{
-			get
-			{
-				LenientCalculateOTP();
-				return _OTPRange;
-			}
-		}
-
-		public string generateSecret()
-		{
-			using (RNGCryptoServiceProvider cryptrng = new RNGCryptoServiceProvider())
-			{
-				cryptrng.GetBytes(Secret);
-			}
-			return SecretBase32;
 		}
 
 		public string GetQRCodeUrl()
@@ -165,39 +95,86 @@ namespace HackNet.Security
 		}
 
 
-		// ONE MINUTE BEFORE AND ONE MINUTE AFTER
-		private void LenientCalculateOTP()
+		private byte[] Hmac
 		{
-			// https://tools.ietf.org/html/rfc4226
-			Array.Clear(_OTPRange, 0, _OTPRange.Length);
-			Timestamp = Convert.ToInt64(GetUnixTimestamp() / 30) - 2;
-			for (int i = 0; i < 5; i++)
+			get { return _hmac; }
+			set { _hmac = value; }
+		}
+
+
+		private byte[] HmacPart1
+		{
+			get { return _hmac.Take(Offset).ToArray(); }
+		}
+
+		private byte[] HmacPart2
+		{
+			get { return _hmac.Skip(Offset).Take(4).ToArray(); }
+		}
+
+		private byte[] HmacPart3
+		{
+			get { return _hmac.Skip(Offset + 4).ToArray(); }
+		}
+
+
+		private int Offset
+		{
+			get { return _offset; }
+			set { _offset = value; }
+		}
+
+
+		internal string RandomiseSecret()
+		{
+			using (RNGCryptoServiceProvider cryptrng = new RNGCryptoServiceProvider())
 			{
-				var data = BitConverter.GetBytes(Timestamp + i).Reverse().ToArray();
+				cryptrng.GetBytes(Secret);
+			}
+			return SecretBase32;
+		}
+
+		// Two intervals before and after
+		private List<int> OTPRange
+		{
+			get
+			{
+				List<int> range = new List<int>();
+				long timestamp = Convert.ToInt64(GetUnixTimestamp() / 30) - 2;
+				for (int i = 0; i < 5; i++)
+				{
+					var data = BitConverter.GetBytes(timestamp + i).Reverse().ToArray();
+					Hmac = new HMACSHA1(Secret).ComputeHash(data);
+					Offset = Hmac.Last() & 0x0F;
+					range.Add((
+						((Hmac[Offset + 0] & 0x7f) << 24) |
+						((Hmac[Offset + 1] & 0xff) << 16) |
+						((Hmac[Offset + 2] & 0xff) << 8) |
+						(Hmac[Offset + 3] & 0xff)
+						) % 1000000);
+				}
+				return range;
+			}
+		}
+
+		private int OTPNow
+		{
+			get
+			{
+				// https://tools.ietf.org/html/rfc4226
+				long timestamp = Convert.ToInt64(GetUnixTimestamp() / 30);
+				var data = BitConverter.GetBytes(timestamp).Reverse().ToArray();
 				Hmac = new HMACSHA1(Secret).ComputeHash(data);
 				Offset = Hmac.Last() & 0x0F;
-				_OTPRange[i] = (
+				int otpnow = (
 					((Hmac[Offset + 0] & 0x7f) << 24) |
 					((Hmac[Offset + 1] & 0xff) << 16) |
 					((Hmac[Offset + 2] & 0xff) << 8) |
 					(Hmac[Offset + 3] & 0xff)
 					) % 1000000;
-			}
-		}
 
-		private void CalculateCurrentOTP()
-		{
-			// https://tools.ietf.org/html/rfc4226
-			Timestamp = Convert.ToInt64(GetUnixTimestamp() / 30);
-			var data = BitConverter.GetBytes(Timestamp).Reverse().ToArray();
-			Hmac = new HMACSHA1(Secret).ComputeHash(data);
-			Offset = Hmac.Last() & 0x0F;
-			_OTPNow = (
-				((Hmac[Offset + 0] & 0x7f) << 24) |
-				((Hmac[Offset + 1] & 0xff) << 16) |
-				((Hmac[Offset + 2] & 0xff) << 8) |
-				(Hmac[Offset + 3] & 0xff)
-				) % 1000000;
+				return otpnow;
+			}
 		}
 
 		private static long GetUnixTimestamp()
@@ -229,15 +206,11 @@ namespace HackNet.Security
 					Array.Clear(_secret, 0, _secret.Length);
 				if (_hmac != null)
 					Array.Clear(_hmac, 0, _hmac.Length);
-				if (_OTPRange != null)
-					Array.Clear(_OTPRange, 0, _OTPRange.Length);
-				_OTPNow = 0;
 			}
 
 			disposed = true;
 		}
 
 		#endregion
-
 	}
 }

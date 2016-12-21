@@ -34,8 +34,8 @@ namespace HackNet.Data
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
-                return null;
-            }
+				// Your return statement here was giving warnings (unreachable code) - WL
+			}
 
             
         }

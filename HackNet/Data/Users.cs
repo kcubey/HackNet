@@ -89,7 +89,7 @@ namespace HackNet.Data
 		}
 
 		// Find users by email or username
-		internal static Users FindEmail(string email, DataContext db = null)
+		internal static Users FindByEmail(string email, DataContext db = null)
 		{
 			Users user;
 
