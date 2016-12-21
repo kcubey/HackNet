@@ -37,7 +37,7 @@ namespace HackNet.Game
             dtMission = new DataTable();
             dtMission.Columns.Add("IP Address", typeof(string));
             dtMission.Columns.Add("Mission Name", typeof(string));
-            dtMission.Columns.Add("Recommneded Level", typeof(string));
+            dtMission.Columns.Add("Recommended Level", typeof(string));
             
           
             foreach (MissionData misdata in misdatalist)

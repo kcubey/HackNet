@@ -68,7 +68,7 @@
                     <asp:GridView ID="AtkTableView" runat="server" CssClass="table"
                         AutoGenerateColumns="true" 
                         ShowHeaderWhenEmpty="True">
-                        <Columns>                        
+                        <Columns>                                                
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="ViewMis" runat="server" Text="View" CssClass="btn btn-default" OnCommand="ViewMis_Command" ></asp:LinkButton>
