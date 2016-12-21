@@ -65,7 +65,9 @@
 
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
-                    <asp:GridView ID="AtkTableView" runat="server" AutoGenerateColumns="true" ShowHeaderWhenEmpty="True">
+                    <asp:GridView ID="AtkTableView" runat="server" CssClass="table"
+                        AutoGenerateColumns="true" 
+                        ShowHeaderWhenEmpty="True">
                         <Columns>                        
                             <asp:TemplateField>
                                 <ItemTemplate>
