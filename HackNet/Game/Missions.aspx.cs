@@ -15,29 +15,27 @@ namespace HackNet.Game
         DataTable dtMission;
         protected void Page_Load(object sender, EventArgs e)
         {
-            regatkList.DataSource = getRegAtkList();
-            regatkList.DataBind();
 
-            LoadMissionList();
         }
 
-        private List<string> getRegAtkList()
+        protected void regatkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<string> atkList = new List<string>();
-            atkList.Add("Local");
-            atkList.Add("America");
-            atkList.Add("Asia");
-            return atkList;
+            int recomLvl = Int32.Parse(regatkList.SelectedValue);
+            if (recomLvl == -1)
+            {
+                AtkTableView.DataSource = null;
+                AtkTableView.DataBind();
+            }
+            LoadMissionList(recomLvl);
         }
-        
-        private void LoadMissionList()
+        private void LoadMissionList(int recomLvl)
         {
-            List<MissionData> misdatalist = MissionData.GetMisList();
+            List<MissionData> misdatalist = MissionData.GetMisList(recomLvl);
 
             dtMission = new DataTable();
             dtMission.Columns.Add("IP Address", typeof(string));
             dtMission.Columns.Add("Mission Name", typeof(string));
-            dtMission.Columns.Add("Recommneded Level", typeof(string));
+            dtMission.Columns.Add("Recommended Level", typeof(string));
             
           
             foreach (MissionData misdata in misdatalist)
@@ -51,7 +49,15 @@ namespace HackNet.Game
 
         protected void ViewMis_Command(object sender, CommandEventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattackinfo();", true);
+            LinkButton linkview = sender as LinkButton;
+            GridViewRow gvrow = linkview.NamingContainer as GridViewRow;
+            int index = gvrow.RowIndex;
+            string test = gvrow.Cells[1].Text;
+
+            MissionTitleLbl.Text = gvrow.Cells[2].Text;
+
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
 
         protected void AttackLink_Click(object sender, EventArgs e)
@@ -117,8 +123,9 @@ namespace HackNet.Game
                 db.MissionData.Add(misdata);
                 db.SaveChanges();
             }
-            LoadMissionList();
+            //LoadMissionList();
         }
+
 
     }
 }
