@@ -39,7 +39,8 @@
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="modal-body" style="color: black;">
-                    <p>Use Password Attack</p>
+                    <p>Victim Description</p>
+                    <p>Use a certain attack</p>
                 </div>
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
@@ -58,9 +59,14 @@
             <div class="col-sm-12 col-md-9">
                 <div class="form-group row" data-step="1" data-intro="This is how you attack" data-position='right'>
                     <asp:Label runat="server" Text="Region of attack: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                    <asp:DropDownList runat="server" ID="regatkList"
-                        CssClass="col-xs-3 col-form"
+                    <asp:DropDownList runat="server" AutoPostBack="true" ID="regatkList" OnSelectedIndexChanged="regatkList_SelectedIndexChanged"
+                        CssClass="col-xs-4 col-form"
                         BackColor="Black">
+                        <asp:ListItem Value="-1" Text="--Select Region of attack--"></asp:ListItem>
+                        <asp:ListItem Value="0" Text="Local"></asp:ListItem>
+                        <asp:ListItem Value="1" Text="America"></asp:ListItem>
+                        <asp:ListItem Value="2" Text="Europe"></asp:ListItem>
+                        <asp:ListItem Value="3" Text="South Asia"></asp:ListItem>
                     </asp:DropDownList>
 
                 </div>
@@ -71,12 +77,14 @@
                         <Columns>                                                
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="ViewMis" runat="server" Text="View" CssClass="btn btn-default" OnCommand="ViewMis_Command" ></asp:LinkButton>
+                                    <asp:LinkButton ID="ViewMis" runat="server" 
+                                        Text="View" CssClass="btn btn-default" 
+                                        OnCommand="ViewMis_Command" ></asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
-                    <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
+                    
                 </div>
             </div>
             <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>

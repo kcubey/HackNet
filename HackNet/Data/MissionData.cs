@@ -19,15 +19,17 @@ namespace HackNet.Data
         public MissionType MissionType { get; set; }
         public RecommendLevel RecommendLevel { get; set; }
 
-        public static List<MissionData> GetMisList()
+        public static List<MissionData> GetMisList(int recomLvl)
         {
             List<MissionData> misdatalist = new List<MissionData>();
+            MissionData m=new MissionData();
+            m.RecommendLevel =(RecommendLevel) recomLvl;
            // MissionData misdata = new MissionData();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from mis in db.MissionData select mis;
+                    var query = from mis in db.MissionData where mis.RecommendLevel == m.RecommendLevel select mis;
                     return query.ToList();
                 }
             }
