@@ -121,13 +121,13 @@ namespace HackNet.Prefs {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
         
         /// <summary>
-        /// Image1 control.
+        /// OTPUriQrImg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Image OTPUriQrImg;
         
         /// <summary>
         /// OTPDisable control.

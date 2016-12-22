@@ -52,34 +52,15 @@ namespace HackNet.Data
 		public AccessLevel AccessLevel { get; set; }
 
 		// Foreign Key References
-		public virtual Machines Machine { get; set; }
+		public Machines Machine { get; set; }
 
-		public virtual UserKeyStore UserKeyStore { get; set; }
+		public UserKeyStore UserKeyStore { get; set; }
 
 		public virtual ICollection<InventoryItem> Inventory { get; set; }
 
 		public virtual ICollection<Messages> SentMessages { get; set; }
 
 		public virtual ICollection<Messages> ReceivedMessages { get; set; }
-
-		// Accessor for User Key Store
-		internal UserKeyStore KeyStore
-		{
-			get
-			{
-				if (UserKeyStore == null)
-				{
-					UserKeyStore = new UserKeyStore
-					{
-						RsaPriv = new byte[0],
-						RsaPub = new byte[0],
-						TOTPSecret = null,
-						UserId = this.UserID
-					};
-				}
-				return this.UserKeyStore;
-			}
-		}
 
 		// Simple method for password hash and salt updating
 		internal void UpdatePassword(string newpassword)

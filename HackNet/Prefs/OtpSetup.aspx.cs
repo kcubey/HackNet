@@ -42,6 +42,8 @@ namespace HackNet.Prefs
 					OTPStep1.Visible = false;
 					OTPStep2.Visible = true;
 					Base32Lbl.Text = GenerateOtp();
+					if (ViewState["GeneratedSecret"] != null && ViewState["GeneratedSecret"] is string)
+						OTPUriQrImg.ImageUrl = OTPTool.QrCodeUrl(ViewState["GeneratedSecret"] as string);
 				} else
 				{
 					Msg.Text = "Incorrect password entered, please try again.";
@@ -65,23 +67,28 @@ namespace HackNet.Prefs
 			}
 		}
 
-		protected void VerifyOTP_Button(object sender, EventArgs e)
+		protected void VerifyToSetOTP_Button(object sender, EventArgs e)
 		{
+			string b32sec = ViewState["GeneratedSecret"] as string;
+			if (string.IsNullOrEmpty(b32sec))
+				return;				
 			using (Authenticate a = new Authenticate())
 			{
-				switch (a.Validate2FA(DisableTotpTxt.Text))
+				switch (a.Validate2FA(GeneratedOtpTxt.Text, b32sec))
 				{
 					case OtpResult.Success:
-						a.Set2FASecret(null);
+						a.Set2FASecret(b32sec);
+						Msg2.Text = "Successfully set 2FA, redirecting you in 5 seconds";
+						Response.AddHeader("REFRESH", "5;URL=/");
 						break;
 					case OtpResult.NotInt:
-						Msg.Text = "You entered non-numbers, please check again";
+						Msg2.Text = "You entered non-numbers, please check again";
 						break;
 					case OtpResult.WrongLength:
-						Msg.Text = "You entered an OTP with malformed length";
+						Msg2.Text = "You entered an OTP with malformed length";
 						break;
 					case OtpResult.WrongOtp:
-						Msg.Text = "OTP Entered does not match, please try again";
+						Msg2.Text = "OTP Entered does not match, please try again";
 						break;
 				}
 			}
@@ -95,6 +102,7 @@ namespace HackNet.Prefs
 				{
 					case OtpResult.Success:
 						a.Set2FASecret(null);
+						Msg.Text = "Successfully disabled your 2FA, thus your account is less secure.";
 						break;
 					case OtpResult.NotInt:
 						Msg.Text = "You entered non-numbers, please check again";
@@ -114,6 +122,7 @@ namespace HackNet.Prefs
 			string b32secret;
 			using (OTPTool otp = new OTPTool())
 				b32secret = otp.SecretBase32;
+			ViewState["GeneratedSecret"] = b32secret;
 			string spacedsecret = b32secret.Substring(0, 4) + "&nbsp";
 			spacedsecret += b32secret.Substring(4, 4) + "&nbsp";
 			spacedsecret += b32secret.Substring(8, 4) + "&nbsp";

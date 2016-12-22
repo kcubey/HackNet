@@ -45,7 +45,7 @@
 					<ol>
 						<li>Download any OTP Generator app, E.g. Authy, Google Authenticator, etc.</li>
 						<li>Open the app, then scan the QR code to the right or manually enter this code: <code>
-							<asp:Label runat="server" ID="Base32Lbl" Text="TOTPSECRETHERE"></asp:Label></code></li>
+							<asp:Label runat="server" ID="Base32Lbl" Text="TOTP SECR ETHE RE!!"></asp:Label></code></li>
 						<li>Enter the current six-digit numerical passcode from the application to verify that your device is properly configured</li>
 					</ol>
 					<br />
@@ -58,10 +58,10 @@
 					</table>
 					<br />
 					<asp:Label runat="server" ID="Msg2" ForeColor="Red" /><br>
-					<asp:Button ID="VerifyOTP" runat="server" Text="Submit 2FA" CssClass="btn btn-success otpEnable" OnClick="VerifyOTP_Button" />
+					<asp:Button ID="VerifyOTP" runat="server" Text="Submit 2FA" CssClass="btn btn-success otpEnable" OnClick="VerifyToSetOTP_Button" />
 				</div>
 				<div class="col-md-4 col-xs-12" runat="server" id="Div1">
-					<asp:Image ID="Image1" runat="server" AlternateText="QR Code Not Available" Height="300px" Width="300px" />
+					<asp:Image ID="OTPUriQrImg" runat="server" AlternateText="QR Code Not Available" Height="300px" Width="300px" />
 				</div>
 			</div>
 		</div>

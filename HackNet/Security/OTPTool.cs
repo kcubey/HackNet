@@ -82,19 +82,6 @@ namespace HackNet.Security
 		}
 
 
-		internal string QRCodeUrl
-		{
-			get { return GetQRCodeUrl(); }
-		}
-
-		public string GetQRCodeUrl()
-		{
-			return string.Format("https://chart.googleapis.com/chart?chs=400x400&chld=M|0&cht=qr&chl=otpauth://totp/{0}?secret={1}",
-								Identity,
-								SecretBase32);
-		}
-
-
 		private byte[] Hmac
 		{
 			get { return _hmac; }
@@ -180,6 +167,12 @@ namespace HackNet.Security
 		private static long GetUnixTimestamp()
 		{
 			return Convert.ToInt64(Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds));
+		}
+
+		public static string QrCodeUrl(string b32sec)
+		{
+			return string.Format("https://chart.googleapis.com/chart?chs=500x500&chld=M|0&cht=qr&chl=otpauth://totp/HackNet?secret={0}",
+								b32sec);
 		}
 
 		#region IDisposable Implementation

@@ -5,6 +5,7 @@ using System.Web;
 using System.Text;
 using HackNet.Data;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 
 namespace HackNet.Security
 {
@@ -16,14 +17,16 @@ namespace HackNet.Security
 		internal Authenticate()
 		{
 			Email = GetCurrentUser(ReadOnly: true).Email;
+			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
 
 		internal Authenticate(string email)
 		{
 			// To ensure email casing is correct
 			Email = Users.FindByEmail(email: email).Email;
+			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
-		
+
 		/*
 		 * PASSWORD CONF INSTANCE METHODS
 		 */
@@ -74,7 +77,7 @@ namespace HackNet.Security
 				using (DataContext db = new DataContext())
 				{
 					Users u = Users.FindByEmail(this.Email, db);
-					string sec = u.KeyStore.TOTPSecret;
+					string sec = GetKeyStore(db).TOTPSecret;
 					if (!string.IsNullOrEmpty(sec))
 						return true;
 					else
@@ -83,15 +86,15 @@ namespace HackNet.Security
 			}
 		}
 
-		internal OtpResult Validate2FA(string totp)
+		internal OtpResult Validate2FA(string totp, string base32sec = null)
 		{
-			string base32sec;
-			using (DataContext db = new DataContext())
-			{
-				var u = Users.FindByEmail(this.Email, db);
-				var uks = u.KeyStore;
-				base32sec = uks.TOTPSecret;
-			}
+			if (base32sec == null)
+				using (DataContext db = new DataContext())
+				{
+					var u = Users.FindByEmail(Email, db);
+					var uks = GetKeyStore(db);
+					base32sec = uks.TOTPSecret;
+				}
 			using (OTPTool ot = new OTPTool(base32sec))
 			{
 				return ot.Validate(totp);
@@ -101,19 +104,40 @@ namespace HackNet.Security
 
 		internal bool Set2FASecret(string b32sec)
 		{
-			if (b32sec.Length != 16 && b32sec != null)
+			if (b32sec != null && b32sec.Length != 16)
 			{
 				Debug.WriteLine("Malformed base32 secret length: " + b32sec.Length);
 				return false;
 			}
 			using (DataContext db = new DataContext()) {
-				Users u = Users.FindByEmail(Email);
-				u.KeyStore.TOTPSecret = b32sec;
+				GetKeyStore(db).TOTPSecret = b32sec;
+				db.SaveChanges();
 				return true;
 			}
 		}
 
+		/*
+		 *  UserKeyStore related methods
+		 */
 
+		internal UserKeyStore GetKeyStore(DataContext db)
+		{
+			Users u = Users.FindByEmail(Email, db);
+			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+			if (u.UserKeyStore == null)
+			{
+				UserKeyStore uks = new UserKeyStore
+				{
+					RsaPub = null,
+					RsaPriv = new byte[0],
+					TOTPSecret = null,
+					UserId = u.UserID
+				};
+				db.UserKeyStore.Add(uks);
+				db.SaveChanges();
+			}
+			return u.UserKeyStore;
+		}
 
 		/*
 		 *  Authentication STATIC methods
@@ -199,7 +223,10 @@ namespace HackNet.Security
 		{
 			string email = GetEmail();
 			if (ReadOnly == false && db == null)
+			{
+				Debug.WriteLine("GetCurrentUser raised an error!");
 				throw new ArgumentNullException("DataContext cannot be null if it is not read-only");
+			}
 			if (ReadOnly == true)
 				using (DataContext db1 = new DataContext())
 				{

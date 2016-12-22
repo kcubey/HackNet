@@ -13,7 +13,7 @@ namespace HackNet.Data
 		[ForeignKey("User")]
 		public int UserId { get; set; } 
 
-		public byte[] RsaPub { get; set; } // Blank array if not enabled
+		public string RsaPub { get; set; } // Blank array if not enabled
 
 		public byte[] RsaPriv { get; set; } // Blank array if not enabled
 
