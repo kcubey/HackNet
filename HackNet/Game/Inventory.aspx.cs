@@ -14,13 +14,19 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            ProcessList.DataSource = LoadInventory(1);
+            ProcessList.DataBind();
+
+            GPUList.DataSource = LoadInventory(4);
+            GPUList.DataBind();
+
+
         }
 
         private DataTable LoadInventory(int itemType)
         {
                   
-            List<Items> ilist = HackNet.Data.Items.GetItems();
+            List<Items> ilist = Data.Items.GetItems(itemType);
             string imageurlstring;
             string url;
             DataTable dt = new DataTable();
@@ -33,8 +39,8 @@ namespace HackNet.Game
                 dt.Rows.Add(i.ItemName,url);
             }
             
-            ProcessList.DataSource = dt;
-            ProcessList.DataBind();
+            //ProcessList.DataSource = dt;
+            //ProcessList.DataBind();
             return dt;
         }
 

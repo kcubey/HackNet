@@ -21,14 +21,14 @@ namespace HackNet.Data
         public int ItemBonus { get; set; }
 
 
-        internal static List<Items> GetItems()
+        internal static List<Items> GetItems(int itemType)
         {
             List<Items> itemList = new List<Items>();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from i in db.Items select i ;
+                    var query = from i in db.Items where i.ItemType == (ItemType)itemType select i ;
                     return query.ToList();
                 }
             }

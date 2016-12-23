@@ -16,18 +16,30 @@
             <div class="panel-body">
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1default">
+                        
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">
                         <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
                                 <asp:Image ID="itemImg" runat="server" 
                                     Width="200px" Height="200px"     
                                     ImageUrl='<%#Eval("ItemPic")%>'/>
                             </ItemTemplate>
                         </asp:DataList>
-
                     </div>
-                    <div class="tab-pane fade" id="tab2default">Default 2</div>
-                    <div class="tab-pane fade" id="tab3default">Default 3</div>
+                    <div class="tab-pane fade" id="tab3default">
+                        <asp:DataList ID="GPUList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server" 
+                                    Width="200px" Height="200px"     
+                                    ImageUrl='<%#Eval("ItemPic")%>'/>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
                     <div class="tab-pane fade" id="tab4default">Default 4</div>
                     <div class="tab-pane fade" id="tab5default">Default 5</div>
                     <div class="tab-pane fade" id="tab6default">Default 6</div>
