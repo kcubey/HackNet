@@ -45,6 +45,7 @@ namespace HackNet.Data
             {
                 throw new ConnectionException("Database link failure has occured");
             }
+            
         }
 
         internal static Machines GetUserMachine(Users user, DataContext db)

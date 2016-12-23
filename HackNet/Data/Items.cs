@@ -12,9 +12,11 @@ namespace HackNet.Data
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ItemId { get; set; }
+        public int ItemId { get; set; }    
+        
         public string ItemName { get; set; }
         public ItemType ItemType { get; set; }
+        public byte[] ItemPic { get; set; }
         public string ItemDesc { get; set; }
         public int ItemPrice { get; set; }
         public int ItemBonus { get; set; }

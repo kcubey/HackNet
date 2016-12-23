@@ -17,7 +17,6 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1default">
                         <asp:DataList ID="DataList1" runat="server" RepeatColumns="2" RepeatLayout="Table" Width="500px">
-                            
                         </asp:DataList>
 
                     </div>
@@ -47,7 +46,20 @@
             </asp:DropDownList>
         </div>
         <div class="form-group row">
-            <asp:Label runat="server" Text="Item Stat: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:FileUpload ID="UploadPhoto" runat="server" />
+            <asp:Image ID="imgViewFile" runat="server" />
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemDesc" TextMode="MultiLine"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemPrice"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
         </div>
         <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />

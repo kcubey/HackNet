@@ -16,7 +16,7 @@ namespace HackNet.Game
         {
             using (DataContext db = new DataContext()) {
                 //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
-                Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+               /*Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
                 ProcessorLbl.Text = m.MachineProcessor;
@@ -28,7 +28,7 @@ namespace HackNet.Game
                 AtkattrLabel.Text = m.Attack.ToString();
                 DefattrLabel.Text = m.Defence.ToString();
                 SpeedattrLabel.Text = m.Speed.ToString();
-
+                */
             }
         }
 
