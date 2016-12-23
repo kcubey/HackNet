@@ -15,7 +15,12 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">Default 1</div>
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <asp:DataList ID="DataList1" runat="server" RepeatColumns="2" RepeatLayout="Table" Width="500px">
+                            
+                        </asp:DataList>
+
+                    </div>
                     <div class="tab-pane fade" id="tab2default">Default 2</div>
                     <div class="tab-pane fade" id="tab3default">Default 3</div>
                     <div class="tab-pane fade" id="tab4default">Default 4</div>
@@ -25,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="color: black; background-color:gray;">
+    <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Item Editor</h2>
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
@@ -33,7 +38,7 @@
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:DropDownList runat="server" ID="ItemTypeList" >
+            <asp:DropDownList runat="server" ID="ItemTypeList">
                 <asp:ListItem Value="1">Processor</asp:ListItem>
                 <asp:ListItem Value="4">Graphic Card</asp:ListItem>
                 <asp:ListItem Value="2">Memory</asp:ListItem>
@@ -45,6 +50,6 @@
             <asp:Label runat="server" Text="Item Stat: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
         </div>
-        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item"/>
+        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
     </div>
 </asp:Content>
