@@ -12,8 +12,7 @@ namespace HackNet.Data
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ItemId { get; set; }    
-        
+        public int ItemId { get; set; }           
         public string ItemName { get; set; }
         public ItemType ItemType { get; set; }
         public byte[] ItemPic { get; set; }
@@ -22,16 +21,15 @@ namespace HackNet.Data
         public int ItemBonus { get; set; }
 
 
-        public static Items GetItem()
+        internal static List<Items> GetItems()
         {
-            Items item;
+            List<Items> itemList = new List<Items>();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    item = (from i in db.Items
-
-                            select i).FirstOrDefault();
+                    var query = from i in db.Items select i ;
+                    return query.ToList();
                 }
             }
             catch (EntityCommandExecutionException)
@@ -39,9 +37,7 @@ namespace HackNet.Data
                 throw new ConnectionException("Database link failure has occured");
 
             }
-
-            return item;
-
+        
         }
 
     }

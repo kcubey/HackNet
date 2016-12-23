@@ -16,7 +16,13 @@
             <div class="panel-body">
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="tab1default">
-                        <asp:DataList ID="DataList1" runat="server" RepeatColumns="2" RepeatLayout="Table" Width="500px">
+                        <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <asp:Image ID="itemImg" runat="server" 
+                                    Width="200px" Height="200px"     
+                                    ImageUrl='<%#Eval("ItemPic")%>'/>
+                            </ItemTemplate>
                         </asp:DataList>
 
                     </div>

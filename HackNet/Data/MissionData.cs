@@ -21,7 +21,7 @@ namespace HackNet.Data
 
         public static List<MissionData> GetMisList(int recomLvl)
         {
-            List<MissionData> misdatalist = new List<MissionData>();
+            
             MissionData m=new MissionData();
             m.RecommendLevel =(RecommendLevel) recomLvl;
            // MissionData misdata = new MissionData();
@@ -37,7 +37,7 @@ namespace HackNet.Data
             {
                 throw new ConnectionException("Database link failure has occured");
             }
-            return null;
+
             
         }
 	}
