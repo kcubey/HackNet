@@ -21,8 +21,10 @@ namespace HackNet.Data
 		{
 			if (!context.Users.Any())
 				InitUsers().ForEach(s => context.Users.AddOrUpdate(s));
-			if (!context.Items.Any())
+            /*
+            if (!context.Items.Any())
 				InitItems().ForEach(i => context.Items.AddOrUpdate(i));
+                */
 			context.SaveChanges();
 			System.Diagnostics.Debug.WriteLine("Seed method execution complete");
 		}
