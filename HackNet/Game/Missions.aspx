@@ -6,7 +6,7 @@
         function showPopupattackinfo() {
             $('#attackTypeModel').modal('show');
         }
-        function showPopupattacksummary(){
+        function showPopupattacksummary() {
             $('#attackSummaryModel').modal('show');
         }
     </script>
@@ -71,20 +71,39 @@
 
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
-                    <asp:GridView ID="AtkTableView" runat="server" CssClass="table"
-                        AutoGenerateColumns="true" 
-                        ShowHeaderWhenEmpty="True">
-                        <Columns>                                                
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="ViewMis" runat="server" 
-                                        Text="View" CssClass="btn btn-default" 
-                                        OnCommand="ViewMis_Command" ></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                    
+                    <asp:DataList ID="AtkListView" runat="server" RepeatLayout="Table" Width="100%">                       
+                        <HeaderTemplate>
+                            <asp:Table runat="server" CssClass="table">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell Font-Bold="true" Font-Size="Large">IP address</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell Font-Bold="true" Font-Size="Large">Mission Name</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell Font-Bold="true" Font-Size="Large">Recommended Level</asp:TableHeaderCell>
+                                    <asp:TableHeaderCell></asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Table runat="server" CssClass="table">
+                                <asp:TableRow>
+                                    <asp:TableCell Width="180px">
+                                                <asp:Label runat="server" Text='<%#Eval("IP Address") %>'></asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell Width="250px">
+                                                <asp:Label runat="server" Text='<%#Eval("Mission Name") %>'></asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell Width="300px">
+                                                <asp:Label runat="server" Text='<%#Eval("Recommended Level") %>'></asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <asp:LinkButton ID="ViewMis" runat="server"
+                                            Text="View" CssClass="btn btn-default" CommandArgument='<%# Eval("MissionId") %>'
+                                            OnCommand="ViewMis_Command"></asp:LinkButton>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+
+                        </ItemTemplate>
+                    </asp:DataList>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>

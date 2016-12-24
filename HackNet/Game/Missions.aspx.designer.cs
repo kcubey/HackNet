@@ -40,13 +40,13 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DropDownList regatkList;
         
         /// <summary>
-        /// AtkTableView control.
+        /// AtkListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AtkTableView;
+        protected global::System.Web.UI.WebControls.DataList AtkListView;
         
         /// <summary>
         /// LogPanel control.

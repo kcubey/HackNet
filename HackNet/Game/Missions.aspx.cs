@@ -23,8 +23,8 @@ namespace HackNet.Game
             int recomLvl = Int32.Parse(regatkList.SelectedValue);
             if (recomLvl == -1)
             {
-                AtkTableView.DataSource = null;
-                AtkTableView.DataBind();
+                AtkListView.DataSource = null;
+                AtkListView.DataBind();
             }
             LoadMissionList(recomLvl);
         }
@@ -33,18 +33,18 @@ namespace HackNet.Game
             List<MissionData> misdatalist = MissionData.GetMisList(recomLvl);
 
             dtMission = new DataTable();
+            dtMission.Columns.Add("MissionId",typeof(int));
             dtMission.Columns.Add("IP Address", typeof(string));
             dtMission.Columns.Add("Mission Name", typeof(string));
             dtMission.Columns.Add("Recommended Level", typeof(string));
-            
-          
+                                
             foreach (MissionData misdata in misdatalist)
             {
-                dtMission.Rows.Add(misdata.MissionIP, misdata.MissionName, misdata.RecommendLevel);
+                dtMission.Rows.Add(misdata.MissionId,misdata.MissionIP, misdata.MissionName, misdata.RecommendLevel);
             }
-            
-            AtkTableView.DataSource = dtMission;
-            AtkTableView.DataBind();
+
+            AtkListView.DataSource = dtMission;
+            AtkListView.DataBind();
         }
 
         protected void ViewMis_Command(object sender, CommandEventArgs e)
