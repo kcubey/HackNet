@@ -2,6 +2,7 @@
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -79,6 +80,7 @@ namespace HackNet.Prefs
 				{
 					case OtpResult.Success:
 						a.Set2FASecret(b32sec);
+						Msg2.ForeColor = Color.White;
 						Msg2.Text = "Successfully set 2FA, redirecting you to our homepage in 5 seconds";
 						Response.AddHeader("REFRESH", "5;URL=/Default");
 						break;
@@ -103,19 +105,20 @@ namespace HackNet.Prefs
 				{
 					case OtpResult.Success:
 						a.Set2FASecret(null);
+						DisableTotpLbl.ForeColor = Color.White;
 						DisableTotpLbl.Text = 
 							@"Successfully disabled your 2FA, thus making your account less secure. <br>
 							You will be redirected to our home page in 5 seconds";
 						Response.AddHeader("REFRESH", "5;URL=/Default");
 						break;
 					case OtpResult.NotInt:
-						Msg.Text = "You entered non-numbers, please check again";
+						DisableTotpLbl.Text = "You entered non-numbers, please check again";
 						break;
 					case OtpResult.WrongLength:
-						Msg.Text = "You entered an OTP with malformed length";
+						DisableTotpLbl.Text = "You entered an OTP with malformed length";
 						break;
 					case OtpResult.WrongOtp:
-						Msg.Text = "OTP Entered does not match, please try again";
+						DisableTotpLbl.Text = "OTP Entered does not match, please try again";
 						break;
 				}
 			}
