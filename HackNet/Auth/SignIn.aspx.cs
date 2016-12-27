@@ -49,7 +49,7 @@ namespace HackNet.Auth {
 		{
 			using (Authenticate a = new Authenticate(email))
 			{
-				if (a.Is2FAEnabled || email.Contains("ggg@gmail.com"))
+				if (a.Is2FAEnabled)
 				{
 					Session["PasswordSuccess"] = email;
 					Response.Redirect("~/Auth/OtpVerify");

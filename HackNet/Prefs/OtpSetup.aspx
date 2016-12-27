@@ -13,7 +13,7 @@
 	</div>
 	<div runat="server" ID="OTPStep1" class="panel panel-primary">
 		<div class="panel-heading">
-			<h3 class="panel-title">Two-Factor Authentication (Step 1)</h3>
+			<h3 class="panel-title">Two-Factor Authentication One-Time Password Setup (Step 1)</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">
@@ -36,7 +36,7 @@
 	</div>
 	<div runat="server" ID="OTPStep2" class="panel panel-primary" visible="false">
 		<div class="panel-heading">
-			<h3 class="panel-title">Two-Factor Authentication Configuration (Step 2)</h3>
+			<h3 class="panel-title">Two-Factor Authentication One-Time Password Setup (Step 2)</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">
@@ -68,7 +68,7 @@
 	</div>
 	<div runat="server" ID="OTPDisable" class="panel panel-primary" visible="false">
 		<div class="panel-heading">
-			<h3 class="panel-title">Disable Two-Factor Authentication (Step 2)</h3>
+			<h3 class="panel-title">Disable Two-Factor Authentication One-Time Password (Step 2)</h3>
 		</div>
 		<div class="panel-body">
 			<div class="row">

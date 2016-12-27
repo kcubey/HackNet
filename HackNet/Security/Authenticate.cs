@@ -5,7 +5,6 @@ using System.Web;
 using System.Text;
 using HackNet.Data;
 using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
 
 namespace HackNet.Security
 {
