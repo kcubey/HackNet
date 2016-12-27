@@ -27,13 +27,14 @@ namespace HackNet.Data
 		public DbSet<Logs> Logs { get; set; }
 		public DbSet<Machines> Machines { get; set; }
 		public DbSet<MissionData> MissionData { get; set; }
-		public DbSet<Messages> Messages { get; set; }
+        public DbSet<AttackData> AttackData { get; set; }
+        public DbSet<Messages> Messages { get; set; }
 		public DbSet<Items> Items { get; set; }
 		public DbSet<InventoryItem> InventoryItem { get; set; }
 		public DbSet<Packages> Packages { get; set; }
 		public DbSet<PackageItems> PackageItems { get; set; }
 		public DbSet<MarketListings> MarketListings { get; set; }
-
+        
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);

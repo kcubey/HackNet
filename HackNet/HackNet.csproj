@@ -363,6 +363,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\AttackData.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />

@@ -13,13 +13,31 @@ namespace HackNet.Game {
     public partial class Missions {
         
         /// <summary>
-        /// AttackTypeHeader control.
+        /// AttackTypeHeaderLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AttackTypeHeader;
+        protected global::System.Web.UI.WebControls.Label AttackTypeHeaderLbl;
+        
+        /// <summary>
+        /// AttackTypeDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AttackTypeDesc;
+        
+        /// <summary>
+        /// AtkTypePic1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image AtkTypePic1;
         
         /// <summary>
         /// MissionTitleLbl control.
@@ -29,6 +47,15 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MissionTitleLbl;
+        
+        /// <summary>
+        /// MisDesLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisDesLbl;
         
         /// <summary>
         /// regatkList control.
@@ -76,6 +103,42 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label errorLbl;
         
         /// <summary>
+        /// AtkName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AtkName;
+        
+        /// <summary>
+        /// AtkInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AtkInfo;
+        
+        /// <summary>
+        /// UploadAttack1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload UploadAttack1;
+        
+        /// <summary>
+        /// btnAtkInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAtkInfo;
+        
+        /// <summary>
         /// MisName control.
         /// </summary>
         /// <remarks>
@@ -83,6 +146,15 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox MisName;
+        
+        /// <summary>
+        /// MisDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MisDesc;
         
         /// <summary>
         /// AtkTypeList control.
