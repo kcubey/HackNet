@@ -22,13 +22,13 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label AttackTypeHeaderLbl;
         
         /// <summary>
-        /// AttackTypeDesc control.
+        /// AttackTypeInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AttackTypeDesc;
+        protected global::System.Web.UI.WebControls.Label AttackTypeInfo;
         
         /// <summary>
         /// AtkTypePic1 control.
@@ -74,6 +74,15 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList AtkListView;
+        
+        /// <summary>
+        /// TypeAtkListView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList TypeAtkListView;
         
         /// <summary>
         /// LogPanel control.

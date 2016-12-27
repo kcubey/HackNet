@@ -31,14 +31,29 @@ namespace HackNet.Data
                     atkdata = (from a in db.AttackData
                                where a.AttackId == atkid
                                select a).FirstOrDefault();
+                    return atkdata;
                 }
             }
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
             }
-            return null;
         }
 
+        public static List<AttackData> GetAttackDataList()
+        {
+            try
+            {
+                using(DataContext db=new DataContext())
+                {
+                    var query = from a in db.AttackData select a;
+                    return query.ToList();
+                }
+            }
+            catch (EntityCommandExecutionException)
+            {
+                throw new ConnectionException("Database link failure has occured");
+            }
+        }
     }
 }
