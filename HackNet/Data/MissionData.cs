@@ -16,29 +16,44 @@ namespace HackNet.Data
 		public int MissionId { get; set; }
 		public string MissionName { get; set; }
         public string MissionIP { get; set; }
+        public string MissionDesc { get; set; }
         public MissionType MissionType { get; set; }
         public RecommendLevel RecommendLevel { get; set; }
 
-        public static List<MissionData> GetMisList(int recomLvl)
+        public static MissionData GetMissionData(int missId)
         {
-            
-            MissionData m=new MissionData();
-            m.RecommendLevel =(RecommendLevel) recomLvl;
-           // MissionData misdata = new MissionData();
             try
             {
-                using (DataContext db = new DataContext())
+                using(DataContext db=new DataContext())
                 {
-                    var query = from mis in db.MissionData where mis.RecommendLevel == m.RecommendLevel select mis;
-                    return query.ToList();
+                    MissionData mis;
+                    mis = (from m in db.MissionData
+                           where m.MissionId == missId
+                           select m).FirstOrDefault();
+
+                    return mis;
                 }
             }
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
             }
+        }
 
-            
+        public static List<MissionData> GetMisList(int recomLvl)
+        {           
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    var query = from mis in db.MissionData where mis.RecommendLevel == (RecommendLevel)recomLvl select mis;
+                    return query.ToList();
+                }
+            }
+            catch (EntityCommandExecutionException)
+            {
+                throw new ConnectionException("Database link failure has occured");
+            }           
         }
 	}
     public enum RecommendLevel

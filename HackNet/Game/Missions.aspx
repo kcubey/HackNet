@@ -12,26 +12,31 @@
     </script>
     <div id="attackTypeModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <asp:Label runat="server" ID="AttackTypeHeader" ForeColor="Black"></asp:Label>
+                    <asp:Label runat="server" ID="AttackTypeHeaderLbl" ForeColor="Black" Font-Size="Larger"></asp:Label>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8">
+                            <asp:Label runat="server" ID="AttackTypeInfo" ForeColor="Black"></asp:Label>
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <asp:Image runat="server" ID="AtkTypePic1" Width="150px" Height="150px" />
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
     <div id="attackSummaryModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -39,13 +44,13 @@
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="modal-body" style="color: black;">
-                    <p>Victim Description</p>
-                    <p>Use a certain attack</p>
+                    <asp:Label runat="server" ID="MisDesLbl"></asp:Label>
+
+                    <p>Use a password attack</p>
                 </div>
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
                 </div>
             </div>
 
@@ -71,7 +76,7 @@
 
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
-                    <asp:DataList ID="AtkListView" runat="server" RepeatLayout="Table" Width="100%">                       
+                    <asp:DataList ID="AtkListView" runat="server" RepeatLayout="Table" Width="100%">
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
                                 <asp:TableHeaderRow>
@@ -101,40 +106,24 @@
                                     </asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
-
                         </ItemTemplate>
                     </asp:DataList>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>
                 <h4>Types of attacks:</h4>
-                <ul class="list-group">
-                    <li class="list-group-item" style="background: #666666;">Password Attack
-                        <asp:LinkButton runat="server" OnCommand="abtAtkInfo_Command" CommandArgument="Password Attack"
-                            CssClass="glyphicon glyphicon-question-sign"
-                            ForeColor="GreenYellow" Style="float: right;" />
-                    </li>
-                    <li class="list-group-item" style="background: #666666;">Denial-of-Service Attack
-                        <asp:LinkButton runat="server" OnCommand="abtAtkInfo_Command" CommandArgument="Denial of Service Attack"
-                            CssClass="glyphicon glyphicon-question-sign"
-                            ForeColor="GreenYellow" Style="float: right;" />
-                    </li>
-                    <li class="list-group-item" style="background: #666666;">Man-in-the-Middle Attack
-                        <asp:LinkButton runat="server" OnCommand="abtAtkInfo_Command" CommandArgument="Man-in-the-Middle Attack"
-                            CssClass="glyphicon glyphicon-question-sign"
-                            ForeColor="GreenYellow" Style="float: right;" />
-                    </li>
-                    <li class="list-group-item" style="background: #666666;">SQL Injection Attack
-                        <asp:LinkButton runat="server" OnCommand="abtAtkInfo_Command" CommandArgument="SQL Injection Attack"
-                            CssClass="glyphicon glyphicon-question-sign"
-                            ForeColor="GreenYellow" Style="float: right;" />
-                    </li>
-                    <li class="list-group-item" style="background: #666666;">Cross Site Scripting Attack
-                        <asp:LinkButton runat="server" OnCommand="abtAtkInfo_Command" CommandArgument="Cross Site Scripting Attack"
-                            CssClass="glyphicon glyphicon-question-sign"
-                            ForeColor="GreenYellow" Style="float: right;" />
-                    </li>
-                </ul>
+                <asp:DataList ID="TypeAtkListView" runat="server">
+                    <ItemTemplate>
+                        <li class="list-group-item" style="background: #666666; width:250px;">
+                            <asp:Label runat="server" Text='<%#Eval("AttackName") %>'></asp:Label>
+                            <asp:LinkButton runat="server"
+                                OnCommand="abtAtkInfo_Command"
+                                CommandArgument='<%#Eval("AttackId") %>'
+                                CssClass="glyphicon glyphicon-question-sign"
+                                ForeColor="GreenYellow" Style="float: right;"></asp:LinkButton>
+                        </li>
+                    </ItemTemplate>
+                </asp:DataList>
             </div>
         </div>
     </div>
@@ -146,8 +135,6 @@
         </div>
         <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 400px; height: 250px;">
             <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
-
-
         </div>
         <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white; padding: ;">
             <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
@@ -157,10 +144,31 @@
     </div>
 
     <div class="container-fluid" style="color: black; background-color: gray;">
+        <h2>Attack Info Editor</h2>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Attack Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="AtkName"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Attack Information: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="AtkInfo" TextMode="MultiLine"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Attack Image1: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:FileUpload ID="UploadAttack1" runat="server" />
+        </div>
+        <asp:Button runat="server" ID="btnAtkInfo" CssClass="btn btn-default" OnClick="btnAtkInfo_Click" />
+    </div>
+
+    <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Mission Editor</h2>
         <div class="form-group row">
             <asp:Label runat="server" Text="Mission Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:TextBox runat="server" ID="MisName"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Mission Desc: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="MisDesc" TextMode="MultiLine"></asp:TextBox>
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Mission Type: " CssClass="col-xs-3 col-form-label"></asp:Label>

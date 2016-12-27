@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,9 +14,11 @@ namespace HackNet.Game
     public partial class Missions : System.Web.UI.Page
     {
         DataTable dtMission;
+        DataTable dtAttack;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadAttackList();
         }
 
         protected void regatkList_SelectedIndexChanged(object sender, EventArgs e)
@@ -27,6 +30,27 @@ namespace HackNet.Game
                 AtkListView.DataBind();
             }
             LoadMissionList(recomLvl);
+        }
+
+        private void LoadAttackList()
+        {
+            List<AttackData> atkdatalist = AttackData.GetAttackDataList();
+            string imageurlstring;
+            string url;
+            dtAttack = new DataTable();
+            dtAttack.Columns.Add("AttackId",typeof(int));
+            dtAttack.Columns.Add("AttackName",typeof(string));
+            dtAttack.Columns.Add("AttackInfo", typeof(string));
+            dtAttack.Columns.Add("AttackPic1", typeof(string));
+            foreach(AttackData atkdata in atkdatalist)
+            { 
+                imageurlstring = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+                url = "data:image/png;base64," + imageurlstring;
+                dtAttack.Rows.Add(atkdata.AttackId,atkdata.AttackName,atkdata.AttackInfo,url);
+            }
+            TypeAtkListView.DataSource = dtAttack;
+            TypeAtkListView.DataBind();
+
         }
         private void LoadMissionList(int recomLvl)
         {
@@ -49,12 +73,10 @@ namespace HackNet.Game
 
         protected void ViewMis_Command(object sender, CommandEventArgs e)
         {
-            LinkButton linkview = sender as LinkButton;
-            GridViewRow gvrow = linkview.NamingContainer as GridViewRow;
-            int index = gvrow.RowIndex;
-            string test = gvrow.Cells[1].Text;
+            MissionData mis = MissionData.GetMissionData(Int32.Parse(e.CommandArgument.ToString()));
+            MissionTitleLbl.Text = mis.MissionName;
+            MisDesLbl.Text = mis.MissionDesc;
 
-            MissionTitleLbl.Text = gvrow.Cells[2].Text;
 
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
@@ -103,18 +125,26 @@ namespace HackNet.Game
 
             return false;
         }
-        // this is to display about attack information
+
+        // This is to display about Attack information
         protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
-        {          
-            System.Diagnostics.Debug.WriteLine("testing:" + e.CommandArgument.ToString());
-            AttackTypeHeader.Text = e.CommandArgument.ToString();
+        {
+            AttackData atkdata = AttackData.GetAttackData(Int32.Parse(e.CommandArgument.ToString()));
+            AttackTypeHeaderLbl.Text = atkdata.AttackName;
+            AttackTypeInfo.Text = atkdata.AttackInfo;
+            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+            AtkTypePic1.ImageUrl = "data:image/png;base64," + atkpicurl;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
+
+        // For temp only
         protected void btnAddMis_Click(object sender, EventArgs e)
         {
             MissionData misdata = new MissionData();
             misdata.MissionName = MisName.Text;
+            misdata.MissionDesc = MisDesc.Text;
             misdata.MissionIP = Mission.GetRandomIp();
             misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
             misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
@@ -126,6 +156,21 @@ namespace HackNet.Game
             //LoadMissionList();
         }
 
+        protected void btnAtkInfo_Click(object sender, EventArgs e)
+        {
+            AttackData atkdata = new AttackData();
+            atkdata.AttackName = AtkName.Text;
+            atkdata.AttackInfo = AtkInfo.Text;
 
+            Stream strm = UploadAttack1.PostedFile.InputStream;
+            BinaryReader br = new BinaryReader(strm);
+            atkdata.AttackPic1 = br.ReadBytes((int)strm.Length);
+
+            using(DataContext db=new DataContext())
+            {
+                db.AttackData.Add(atkdata);
+                db.SaveChanges();
+            }
+        }
     }
 }
