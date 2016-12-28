@@ -8,6 +8,20 @@ namespace HackNet.Loggers
 {
 	public class AuthLogger : Logger
 	{
+		private static AuthLogger _inst;
+		private AuthLogger() { }
+
+		public static AuthLogger Instance
+		{
+			get
+			{
+				if (_inst == null)
+					_inst = new AuthLogger();
+				return _inst;
+			}
+		}
+
+
 		internal void FailedLogin(string email, string ip)
 		{
 			LogEntry entry = new LogEntry()

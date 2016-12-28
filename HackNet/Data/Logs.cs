@@ -11,7 +11,7 @@ namespace HackNet.Data
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public string LogId { get; set; }
+		public int LogId { get; set; }
 
 		[Required]
 		public int Severity { get; set;}
@@ -19,12 +19,13 @@ namespace HackNet.Data
 		[Required]
 		public int Type { get; set; }
 
+		[Required]
 		public DateTime Timestamp { get; set; }
-
-		public string IPAddress { get; set; }
 
 		[Required]
 		public string Description { get; set; }
+
+		public string IPAddress { get; set; }
 
 		[ForeignKey("User")]
 		public int UserId { get; set; }

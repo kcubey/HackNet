@@ -7,15 +7,15 @@ using System.Web.UI.WebControls;
 
 using HackNet.Security;
 using HackNet.Data;
+using HackNet.Loggers;
 
 using System.Web.Security;
-using static HackNet.Security.Authenticate;
 
 namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (IsAuthenticated())
+			if (Authenticate.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
             DataContext ctx = new DataContext();
 			Msg.Text = "Sign in with your Google Drive email and password as 123";
@@ -33,6 +33,7 @@ namespace HackNet.Auth {
 						LoginSuccess(email);
 						break;
 					case (AuthResult.PasswordIncorrect):
+						AuthLogger.Instance.FailedLogin(email, "1.2.3.4");
 						Msg.Text = "User and/or password not found (1)";
 						break;
 					case (AuthResult.UserNotFound):

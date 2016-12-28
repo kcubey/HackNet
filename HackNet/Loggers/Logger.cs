@@ -23,7 +23,7 @@ namespace HackNet.Loggers
 
 		internal abstract void LogAll(ICollection<LogEntry> entries);
 
-		internal void LogToDB(LogEntry entry)
+		internal int LogToDB(LogEntry entry)
 		{
 			// Get related user
 			Users u = Users.FindByEmail(entry.EmailAddress, db);
@@ -44,11 +44,12 @@ namespace HackNet.Loggers
 			};
 
 			db.Logs.Add(logForDb);
+			return db.SaveChanges();
 		}
 
 		internal void LogToFile(LogEntry entry)
 		{
-			throw new NotImplementedException();
+			
 		}
 	}
 }
