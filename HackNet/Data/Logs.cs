@@ -21,7 +21,7 @@ namespace HackNet.Data
 
 		public DateTime Timestamp { get; set; }
 
-		public string IpAddress { get; set; }
+		public string IPAddress { get; set; }
 
 		[Required]
 		public string Description { get; set; }

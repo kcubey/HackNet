@@ -20,7 +20,14 @@ namespace HackNet.Loggers
 
 		public string Description { get; set; } // Cannot be blank
 
-		public string IpAddress { get; set; }
+		public string IPAddress { get; set; }
+
+		public string EmailAddress { get; set; }
+
+		public LogEntry()
+		{
+			Timestamp = DateTime.Now;
+		}
 
 		public bool IsValid()
 		{
@@ -54,6 +61,8 @@ namespace HackNet.Loggers
 		Game = 0,
 		Security = 1,
 		Payment = 2,
-		Database = 3
+		Profile = 3,
+		Mission = 4,
+		Database = 5
 	}
 }

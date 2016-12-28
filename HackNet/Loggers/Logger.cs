@@ -1,42 +1,54 @@
 ﻿using HackNet.Data;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace HackNet.Loggers
 {
-	public class Logger
+	public abstract class Logger
 	{
-		private static Logger _instance;
-		private DataContext db;
+		private AuthLogger Auth;
+		private static DataContext db;
 
-		internal static Logger Instance
+		public Logger()
 		{
-			get
+			if (db == null)
+				db = new DataContext();
+		}
+
+		internal abstract void Log(LogEntry entry);
+
+		internal abstract void LogAll(ICollection<LogEntry> entries);
+
+		internal void LogToDB(LogEntry entry)
+		{
+			// Get related user
+			Users u = Users.FindByEmail(entry.EmailAddress, db);
+
+			if (u == null)
+				entry.UserId = 0;
+			else
+				entry.UserId = u.UserID;
+
+			Logs logForDb = new Logs()
 			{
-				if (_instance == null)
-					_instance = new Logger();
-				return _instance;
-			}
+				UserId = entry.UserId,
+				Type = (int)entry.Type,
+				Severity = (int)entry.Severity,
+				Description = entry.Description,
+				IPAddress = entry.IPAddress,
+				Timestamp = entry.Timestamp,
+			};
+
+			db.Logs.Add(logForDb);
 		}
 
-		private Logger()
+		internal void LogToFile(LogEntry entry)
 		{
-			db = new DataContext();
+			throw new NotImplementedException();
 		}
-
-		internal void Log(LogEntry entry)
-		{
-
-		}
-
-		internal void LogAll(ICollection<LogEntry> entry)
-		{
-
-		}
-
-		
-
 	}
 }
