@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +9,9 @@ namespace HackNet.Loggers
 	public class Logger
 	{
 		private static Logger _instance;
+		private DataContext db;
 
-		private Logger()
-		{
-
-		}
-
-		internal Logger Instance
+		internal static Logger Instance
 		{
 			get
 			{
@@ -23,6 +20,23 @@ namespace HackNet.Loggers
 				return _instance;
 			}
 		}
+
+		private Logger()
+		{
+			db = new DataContext();
+		}
+
+		internal void Log(LogEntry entry)
+		{
+
+		}
+
+		internal void LogAll(ICollection<LogEntry> entry)
+		{
+
+		}
+
+		
 
 	}
 }

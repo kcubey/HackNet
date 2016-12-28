@@ -453,6 +453,8 @@
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\AuthLogger.cs" />
+    <Compile Include="Loggers\LogEntry.cs" />
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>

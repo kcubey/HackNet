@@ -14,7 +14,10 @@ namespace HackNet.Data
 		public string LogId { get; set; }
 
 		[Required]
-		public LogType Type { get; set;}
+		public int Severity { get; set;}
+
+		[Required]
+		public int Type { get; set; }
 
 		public DateTime Timestamp { get; set; }
 
@@ -30,11 +33,5 @@ namespace HackNet.Data
 		public virtual Users User { get; set; }
     }
 
-	public enum LogType
-	{
-		Normal = 0,
-		AuthFailure = 1,
-		Validation = 2,
-		SysError = 3
-	}
+
 }
