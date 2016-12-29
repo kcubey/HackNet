@@ -73,18 +73,19 @@ namespace HackNet.Game
 
         protected void ViewMis_Command(object sender, CommandEventArgs e)
         {
-            MissionData mis = MissionData.GetMissionData(Int32.Parse(e.CommandArgument.ToString()));
+            MissionData mis = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
             MissionTitleLbl.Text = mis.MissionName;
             MisDesLbl.Text = mis.MissionDesc;
 
-
+            Session["MissID"] = mis.MissionId;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
 
         protected void AttackLink_Click(object sender, EventArgs e)
         {
-            MissionData mis = new MissionData();
+            int id = int.Parse(Session["MissID"].ToString());
+            MissionData mis = MissionData.GetMissionData(id);
             List<string> arrList = Mission.scanMission(mis,"testuser");
 
             for(int i=0;i<arrList.Count;i++)
@@ -104,21 +105,20 @@ namespace HackNet.Game
             string attackType=AtkTextBx.Text;
             if (checkMissionType(attackType))
             {
-
-            }else
+                
+            }
+            else
             {
                 errorLbl.Text = "THIS IS WRONG TRY AGAIN";
             }
         }
         internal bool checkMissionType(string atkType)
         {
-            if (atkType.Equals("PWDAtk"))
+            if (atkType.Equals("PWDATK"))
                 return true;
-            if (atkType.Equals("DDOS"))
+            if (atkType.Equals("SQLIN"))
                 return true;
             if (atkType.Equals("MITM"))
-                return true;
-            if (atkType.Equals("SQL"))
                 return true;
             if (atkType.Equals("XXS"))
                 return true;
@@ -138,7 +138,7 @@ namespace HackNet.Game
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
-
+        
         // For temp only
         protected void btnAddMis_Click(object sender, EventArgs e)
         {
@@ -155,7 +155,7 @@ namespace HackNet.Game
             }
             //LoadMissionList();
         }
-
+       
         protected void btnAtkInfo_Click(object sender, EventArgs e)
         {
             AttackData atkdata = new AttackData();
@@ -172,5 +172,6 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
+        
     }
 }

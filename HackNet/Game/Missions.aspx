@@ -42,6 +42,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
+                    
                 </div>
                 <div class="modal-body" style="color: black;">
                     <asp:Label runat="server" ID="MisDesLbl"></asp:Label>
@@ -142,7 +143,7 @@
         </div>
         <asp:Label runat="server" ID="errorLbl"></asp:Label>
     </div>
-
+    <!--
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Attack Info Editor</h2>
         <div class="form-group row">
@@ -191,6 +192,6 @@
         </div>
         <asp:Button runat="server" ID="btnAddMis" CssClass="btn btn-default" OnClick="btnAddMis_Click" Text="Add Item" />
     </div>
-
+    -->
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
 </asp:Content>
