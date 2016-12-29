@@ -213,6 +213,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Game\Chat.aspx" />
     <Content Include="Game\Currency.aspx" />
+    <Content Include="Game\Gameplay\PwdAtk.aspx" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Inventory.aspx" />
     <Content Include="Game\Market1.aspx" />
@@ -398,6 +399,13 @@
     </Compile>
     <Compile Include="Game\Currency.aspx.designer.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Gameplay\PwdAtk.aspx.cs">
+      <DependentUpon>PwdAtk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Gameplay\PwdAtk.aspx.designer.cs">
+      <DependentUpon>PwdAtk.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

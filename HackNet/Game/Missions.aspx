@@ -9,6 +9,7 @@
         function showPopupattacksummary() {
             $('#attackSummaryModel').modal('show');
         }
+       
     </script>
     <div id="attackTypeModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -42,7 +43,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
-                    
+
                 </div>
                 <div class="modal-body" style="color: black;">
                     <asp:Label runat="server" ID="MisDesLbl"></asp:Label>
@@ -115,7 +116,7 @@
                 <h4>Types of attacks:</h4>
                 <asp:DataList ID="TypeAtkListView" runat="server">
                     <ItemTemplate>
-                        <li class="list-group-item" style="background: #666666; width:250px;">
+                        <li class="list-group-item" style="background: #666666; width: 250px;">
                             <asp:Label runat="server" Text='<%#Eval("AttackName") %>'></asp:Label>
                             <asp:LinkButton runat="server"
                                 OnCommand="abtAtkInfo_Command"
@@ -141,7 +142,7 @@
             <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
             <asp:TextBox runat="server" ID="AtkTextBx" OnTextChanged="AtkTextBx_TextChanged" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
         </div>
-        <asp:Label runat="server" ID="errorLbl"></asp:Label>
+
     </div>
     <!--
     <div class="container-fluid" style="color: black; background-color: gray;">

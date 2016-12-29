@@ -44,7 +44,7 @@ namespace HackNet.Game
             return system;
         }
 
-        public static List<string> scanMission(MissionData mission, string username)
+        public static List<string> scanMission(MissionData mission, string username,bool cond)
         {
             Random rnd = new Random();
             string console = username + "@HackNet: ~#  ";
@@ -66,15 +66,18 @@ namespace HackNet.Game
             scanList.Add("Device Type: general purpose");
             scanList.Add("System: "+ GetrandomSystem());
             scanList.Add("==============================================");
-            scanList.Add("Choose Mode of Attack: ");
-            scanList.Add("1. Password Attack (PWDATK) ");
-            scanList.Add("2. SQL Injection (SQLIN) ");
-            scanList.Add("3. Cross Site Scripting (XSS) ");
-            scanList.Add("4. Man in the Middle Attack (MITM) ");
-            scanList.Add("&nbsp;&nbsp; To choose attack type in the acronym in the (_) ");
-            scanList.Add("&nbsp;&nbsp; For Example; ");
-            scanList.Add("&nbsp;&nbsp; To choose password attack, key in PWDATK");
-            scanList.Add("==============================================");
+            if (cond)
+            {
+                scanList.Add("Choose Mode of Attack: ");
+                scanList.Add("1. Password Attack (PWDATK) ");
+                scanList.Add("2. SQL Injection (SQLIN) ");
+                scanList.Add("3. Cross Site Scripting (XSS) ");
+                scanList.Add("4. Man in the Middle Attack (MITM) ");
+                scanList.Add("&nbsp;&nbsp; To choose attack type in the acronym in the (_) ");
+                scanList.Add("&nbsp;&nbsp; For Example; ");
+                scanList.Add("&nbsp;&nbsp; To choose password attack, key in PWDATK");
+                scanList.Add("==============================================");
+            }
             return scanList;
         }
 

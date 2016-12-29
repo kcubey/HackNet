@@ -86,7 +86,7 @@ namespace HackNet.Game
         {
             int id = int.Parse(Session["MissID"].ToString());
             MissionData mis = MissionData.GetMissionData(id);
-            List<string> arrList = Mission.scanMission(mis,"testuser");
+            List<string> arrList = Mission.scanMission(mis,"testuser",true);
 
             for(int i=0;i<arrList.Count;i++)
             {
@@ -105,11 +105,11 @@ namespace HackNet.Game
             string attackType=AtkTextBx.Text;
             if (checkMissionType(attackType))
             {
-                
+                Server.Transfer("Gameplay/PwdAtk.aspx", true);
             }
             else
             {
-                errorLbl.Text = "THIS IS WRONG TRY AGAIN";
+                
             }
         }
         internal bool checkMissionType(string atkType)
