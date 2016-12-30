@@ -86,7 +86,7 @@ namespace HackNet.Game
         {
             int id = int.Parse(Session["MissID"].ToString());
             MissionData mis = MissionData.GetMissionData(id);
-            List<string> arrList = Mission.scanMission(mis,"testuser",true);
+            List<string> arrList = Mission.scanMission(mis,Context.User.Identity.Name,true);
 
             for(int i=0;i<arrList.Count;i++)
             {
