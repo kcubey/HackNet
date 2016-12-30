@@ -1,15 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PwdAtk.aspx.cs" Inherits="HackNet.Game.Gameplay.PwdAtk" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="panel panel-default">
-        <div class="row" style="border:1px solid black;">
+    
+        <div class="row" style="border:1px solid black; height:200px; margin-left:0; margin-right:0;">
+            <div class="col-xs-12 col-sm-6 col-md-8" style="border:1px solid black; height:200px; padding:0; ">
+                <div class="panel-header" style="background-color:slategray; margin:0; padding:5px;">
+                    <h4 style="margin:0;">Test</h4>
+                </div>
+                <div class="panel-body">
 
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4" style="border:1px solid black; height:200px; ">
+
+            </div>
 
 
         </div>
-    </div>
-    
-    
+
+        
+   
     <div class="panel panel-default" data-step="5" data-intro="This is your terminal" data-position='right'>
         <div class="panel-header" style="background-color: grey;">
             <h4 style="text-align: center; margin-bottom: 0;">
@@ -25,4 +35,6 @@
         </div>
 
     </div>
+    
+    
 </asp:Content>
