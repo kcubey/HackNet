@@ -5,6 +5,7 @@ using System.Web;
 using System.Text;
 using HackNet.Data;
 using System.Text.RegularExpressions;
+using HackNet.Loggers;
 
 namespace HackNet.Security
 {
@@ -43,9 +44,15 @@ namespace HackNet.Security
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
 				byte[] bHash = Crypt.Instance.Hash(bPassword, user.Salt);
 				if (user.Hash.SequenceEqual(bHash))
+				{
+					AuthLogger.Instance.PasswordSuccess(Email);
 					return AuthResult.Success;
+				}
 				else
+				{
+					AuthLogger.Instance.PasswordFail(Email);
 					return AuthResult.PasswordIncorrect;
+				}
 			}
 			throw new AuthException("Error connecting to database");
 		}
@@ -62,6 +69,7 @@ namespace HackNet.Security
 					return oldpwres;
 				u.UpdatePassword(newpass);
 				db.SaveChanges();
+				AuthLogger.Instance.PasswordFail(Email);
 				return AuthResult.Success;
 			}
 		}
@@ -109,6 +117,10 @@ namespace HackNet.Security
 				return false;
 			}
 			using (DataContext db = new DataContext()) {
+				if (b32sec == null)
+					AuthLogger.Instance.TOTPDisabled(Email);
+				else
+					AuthLogger.Instance.TOTPChanged(Email);
 				GetKeyStore(db).TOTPSecret = b32sec;
 				db.SaveChanges();
 				return true;
@@ -188,6 +200,7 @@ namespace HackNet.Security
 						mc.AddLine("Kindly verify your email address by clicking on the link below");
 						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
 					}
+					AuthLogger.Instance.UserRegistered(email);
 					return RegisterResult.Success;
 				}
 			}

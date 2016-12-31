@@ -22,14 +22,98 @@ namespace HackNet.Loggers
 		}
 
 
-		internal void FailedLogin(string email, string ip)
+		internal void PasswordFail(string email)
 		{
 			LogEntry entry = new LogEntry()
 			{
 				EmailAddress = email,
-				IPAddress = ip,
+				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
-				Description = "Password login failed for user " + email
+				Description = "Password login failed for user"
+			};
+			Log(entry);
+		}
+
+		internal void PasswordSuccess(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "Password login successful for user"
+			};
+			Log(entry);
+		}
+
+		internal void PasswordChanged(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "Password was changed by user"
+			};
+			Log(entry);
+		}
+
+		internal void TOTPFail(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.WARN,
+				Description = "One-time password authentication failed"
+			};
+			Log(entry);
+		}
+
+		internal void TOTPSuccess(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "One-time password authentication successful"
+			};
+			Log(entry);
+		}
+
+		internal void TOTPChanged(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "One-time password authentication reconfigured by user"
+			};
+			Log(entry);
+		}
+
+		internal void TOTPDisabled(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "One-time password authentication disabled by user"
+			};
+			Log(entry);
+		}
+
+		internal void UserRegistered(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = email,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.INFO,
+				Description = "New user has been registered"
 			};
 			Log(entry);
 		}
@@ -40,6 +124,7 @@ namespace HackNet.Loggers
 				{
 					LogToDB(entry);
 					LogToFile(entry);
+					LogConsole(entry);
 				}
 			);
 			t.Start();

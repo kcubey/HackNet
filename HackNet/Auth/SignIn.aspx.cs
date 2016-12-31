@@ -33,7 +33,6 @@ namespace HackNet.Auth {
 						LoginSuccess(email);
 						break;
 					case (AuthResult.PasswordIncorrect):
-						AuthLogger.Instance.FailedLogin(email, "1.2.3.4");
 						Msg.Text = "User and/or password not found (1)";
 						break;
 					case (AuthResult.UserNotFound):
