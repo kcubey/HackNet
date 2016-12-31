@@ -10,27 +10,28 @@
                     hydra
                 </h3>
             </div>
-            <div class="panel-body" style="background-color: #f5f5f5; color:black;">
-                <label style="width:20%;" class="col-xs-3 col-form-label">Target IP: </label>
-                <asp:TextBox ID="TargetIPLbl" runat="server" style="width:150px;"></asp:TextBox>
-                
-                <fieldset style="margin-top:2%;">
-                    <legend style="font-size:15px;">Connection Options</legend>                   
-                    <label style="width:20%;" class="col-xs-3 col-form-label">Port: </label>
+            <div class="panel-body" style="background-color: #f5f5f5; color: black;">
+                <label style="width: 20%;" class="col-xs-3 col-form-label">Target IP: </label>
+                <asp:TextBox ID="TargetIPLbl" runat="server" Style="width: 150px;"></asp:TextBox>
+
+                <fieldset style="margin-top: 2%;">
+                    <legend style="font-size: 15px;">Connection Options</legend>
+                    <label style="width: 20%;" class="col-xs-3 col-form-label">Port: </label>
                     <asp:TextBox ID="TargetPortLbl" runat="server" Text="22" Enabled="false" CssClass="col-xs-3 col-form-label"></asp:TextBox>
-                    <label style="width:20%;" class="col-xs-3 col-form-label">Protocol: </label>
-                    <asp:TextBox  runat="server" Text="SSH" Enabled="false" CssClass="col-xs-3 col-form-label"></asp:TextBox>
+                    <label style="width: 20%;" class="col-xs-3 col-form-label">Protocol: </label>
+                    <asp:TextBox runat="server" Text="SSH" Enabled="false" CssClass="col-xs-3 col-form-label"></asp:TextBox>
                 </fieldset>
-                <fieldset style="margin-top:2%;">
-                    <legend style="font-size:15px;">Advanced Options</legend>
-                    <label style="width:20%;" class="col-xs-3 col-form-label">Target User: </label>
+                <fieldset style="margin-top: 2%;">
+                    <legend style="font-size: 15px;">Advanced Options</legend>
+                    <label style="width: 20%;" class="col-xs-3 col-form-label">Target User: </label>
                     <asp:TextBox ID="TargetTxtBox" runat="server" CssClass="col-xs-3 col-form-label"></asp:TextBox>
                     <label class="col-xs-3 col-form-label">Method of Attack: </label>
                     <asp:DropDownList ID="TargetAtkTypeList" runat="server">
                         <asp:ListItem>Dictionary Attack</asp:ListItem>
                         <asp:ListItem>Brute Force Attack</asp:ListItem>
                     </asp:DropDownList>
-                </fieldset><br />
+                </fieldset>
+                <br />
                 <asp:Label runat="server" ID="ErrorLbl"></asp:Label>
                 <br />
                 <asp:Button runat="server" ID="ConfigBtn" CssClass="btn-primary" Text="Configure" OnClick="ConfigBtn_Click" />
@@ -46,7 +47,7 @@
             </div>
             <div class="panel-body" style="background-color: #f5f5f5; height: 100%;">
                 <h4 style="color: black;">Steps for Password Attack</h4>
-                <ol class="list-group" style="color:black;">
+                <ol class="list-group" style="color: black;">
                     <li class="list-group-item">1. Configure hydra</li>
                     <li class="list-group-item">2. Run hydra</li>
                     <li class="list-group-item">3. Gain Root Access</li>
@@ -56,21 +57,48 @@
             </div>
         </div>
     </div>
-
-    <div class="panel panel-default">
-        <div class="panel-header" style="background-color: grey;">
-            <h4 style="text-align: center; margin-bottom: 0;">
-                <asp:Label runat="server" Text="user"></asp:Label>@HackNetHost:~
-            </h4>
+    <div class="row" >
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-header" style="background-color: grey;">
+                    <h4 style="text-align: center; margin-bottom: 0;">
+                        @HackNetHost:~
+                    </h4>
+                </div>
+                <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 350px; height: 250px;">
+                    <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
+                </div>
+                <div class="panel-footer" style="background-color: #091012; border-top: 1px solid white;">
+                    <asp:Label runat="server" Text="@HackNet:~#" Width="20%"></asp:Label>
+                    <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
+                    <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
+                </div>
+                
+            </div>
         </div>
-        <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 350px; height: 250px;">
-            <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
-        </div>
-        <div class="panel-footer" style="background-color: #091012; border-top: 1px solid white;">
-            <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
-            <asp:TextBox runat="server"  ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-header" style="background-color: grey;">
+                    <h4 style="text-align: center; margin-bottom: 0;">
+                        Hacked Password List
+                    </h4>
+                </div>
+                <div class="panel-body" style="background-color:black;">
+                     <asp:DataList ID="PwdListView" runat="server">
+                         <HeaderTemplate>
+                             <h4>Possible Password List</h4>
+                         </HeaderTemplate>
+                    <ItemTemplate>
+                        <li class="list-group-item" style="background: #666666; width: 220px; margin:0 auto;">
+                            <asp:Label runat="server" Text='<%#Eval("Posspwd") %>'></asp:Label>
+                        </li>
+                    </ItemTemplate>
+                </asp:DataList>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
+
+
+
 </asp:Content>

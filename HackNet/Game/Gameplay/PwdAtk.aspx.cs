@@ -2,6 +2,7 @@
 using HackNet.Game.Class;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -33,20 +34,30 @@ namespace HackNet.Game.Gameplay
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
         }
-
-
-
-        protected void CmdTextBox_TextChanged(object sender, EventArgs e)
+        private void LoadPwdList(List<string> arrList)
         {
-            if(CmdTextBox.Text=="run hydra")
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Posspwd", typeof(string));
+            foreach (string pwd in arrList)
+            {
+                dt.Rows.Add(pwd);
+            }
+            PwdListView.DataSource = dt;
+            PwdListView.DataBind();
+        }
+        protected void SubCmdBtn_Click(object sender, EventArgs e)
+        {
+            if (CmdTextBox.Text == "run hydra")
             {
                 List<string> arrList = Mission.scanMission(mis, Context.User.Identity.Name, false);
+                arrList.Add("List of possible passwords");
                 List<string> pwdList = MissionPwdAtk.LoadPwdList();
-                foreach(string s in pwdList)
+                foreach (string s in pwdList)
                 {
                     arrList.Add(s);
                 }
                 LoadScanInfo(arrList);
+                LoadPwdList(pwdList);
             }
         }
 
@@ -89,5 +100,7 @@ namespace HackNet.Game.Gameplay
                 ErrorLbl.Text = error;
             }
         }
+
+      
     }
 }
