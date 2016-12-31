@@ -13,13 +13,14 @@ namespace HackNet.Game.Gameplay
     public partial class PwdAtk : System.Web.UI.Page
     {
         MissionData mis = MissionData.GetMissionData(1);
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Cache["Configure"] = false;
             if (!IsPostBack)
             {
-                LoadScanInfo(Mission.scanMission(mis, Context.User.Identity.Name, false));
+                Cache["ScanList"] = Mission.scanMission(mis, Context.User.Identity.Name, false);
+                LoadScanInfo((List<string>)Cache["ScanList"]);
             }
 
         }
@@ -34,6 +35,7 @@ namespace HackNet.Game.Gameplay
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
         }
+
         private void LoadPwdList(List<string> arrList)
         {
             DataTable dt = new DataTable();
@@ -45,19 +47,36 @@ namespace HackNet.Game.Gameplay
             PwdListView.DataSource = dt;
             PwdListView.DataBind();
         }
+
         protected void SubCmdBtn_Click(object sender, EventArgs e)
         {
-            if (CmdTextBox.Text == "run hydra")
+            bool config = (bool)Cache["Configure"];
+            if (config)
             {
-                List<string> arrList = Mission.scanMission(mis, Context.User.Identity.Name, false);
-                arrList.Add("List of possible passwords");
-                List<string> pwdList = MissionPwdAtk.LoadPwdList();
-                foreach (string s in pwdList)
+                if (CmdTextBox.Text == "run hydra")
                 {
-                    arrList.Add(s);
+                    List<string> arrList = (List<string>)Cache["ScanList"];
+                    arrList.Add("List of possible passwords");
+                    List<string> pwdList = MissionPwdAtk.LoadPwdList();
+                    foreach (string s in pwdList)
+                    {
+                        arrList.Add(s);
+                    }
+                    LoadScanInfo(arrList);
+                    LoadPwdList(pwdList);
                 }
-                LoadScanInfo(arrList);
-                LoadPwdList(pwdList);
+                else
+                {
+                    LoadScanInfo((List<string>)Cache["ScanList"]);
+                    CmdError.Text = "Unrecognised Command";
+                    CmdError.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            else
+            {
+                LoadScanInfo((List<string>)Cache["ScanList"]);
+                CmdError.Text = "hydra has not been configure";
+                CmdError.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -89,13 +108,13 @@ namespace HackNet.Game.Gameplay
                 TargetIPLbl.Enabled = false;
                 TargetTxtBox.Enabled = false;
                 TargetAtkTypeList.Enabled = false;
-
+                Cache["Configure"] = true;
                 ErrorLbl.ForeColor = System.Drawing.Color.Green;
                 ErrorLbl.Text = "Successful Configurations";
             }
             else
             {
-                LoadScanInfo(Mission.scanMission(mis, Context.User.Identity.Name, false));
+                LoadScanInfo((List<string>)Cache["ScanList"]);
                 ErrorLbl.ForeColor = System.Drawing.Color.Red;
                 ErrorLbl.Text = error;
             }

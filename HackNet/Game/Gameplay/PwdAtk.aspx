@@ -57,6 +57,7 @@
             </div>
         </div>
     </div>
+
     <div class="row" >
         <div class="col-md-9">
             <div class="panel panel-default">
@@ -72,12 +73,13 @@
                     <asp:Label runat="server" Text="@HackNet:~#" Width="20%"></asp:Label>
                     <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
                     <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
+                    <asp:Label runat="server" ID="CmdError"></asp:Label>
                 </div>
                 
             </div>
         </div>
         <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="height:320px;">
                 <div class="panel-header" style="background-color: grey;">
                     <h4 style="text-align: center; margin-bottom: 0;">
                         Hacked Password List
