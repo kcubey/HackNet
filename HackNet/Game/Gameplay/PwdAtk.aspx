@@ -68,7 +68,7 @@
         </div>
         <div class="panel-footer" style="background-color: #091012; border-top: 1px solid white;">
             <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
-            <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
+            <asp:TextBox runat="server"  ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
         </div>
     </div>
     
