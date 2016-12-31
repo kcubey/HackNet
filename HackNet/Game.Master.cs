@@ -1,4 +1,5 @@
-﻿using HackNet.Security;
+﻿using HackNet.Data;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace HackNet
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			PlayerName.Text = Authenticate.GetCurrentUser().UserName; 
+			Users u = Authenticate.GetCurrentUser();
+			PlayerName.Text = u.UserName;
+			CoinsLbl.Text = u.Coins.ToString();
+			BucksLbl.Text = u.ByteDollars.ToString();
         }
 
         #region Navigation Links

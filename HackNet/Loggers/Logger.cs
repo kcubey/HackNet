@@ -25,13 +25,16 @@ namespace HackNet.Loggers
 
 		internal int LogToDB(LogEntry entry)
 		{
-			// Get related user
-			Users u = Users.FindByEmail(entry.EmailAddress, db);
-			// Check if user is null or does it actually exist
-			if (u == null)
-				entry.UserId = 0;
-			else
-				entry.UserId = u.UserID;
+			if (entry.UserId == 0 && entry.EmailAddress != null)
+			{
+				// Get related user
+				Users u = Users.FindByEmail(entry.EmailAddress, db);
+				// Check if user is null or does it actually exist
+				if (u == null)
+					entry.UserId = 0;
+				else
+					entry.UserId = u.UserID;
+			}
 			// Create EF object for insertion into DB
 			Logs logForDb = new Logs()
 			{

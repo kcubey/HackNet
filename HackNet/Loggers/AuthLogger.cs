@@ -118,6 +118,18 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
+		internal void UserNotFound(string email)
+		{
+			LogEntry entry = new LogEntry()
+			{
+				EmailAddress = null,
+				IPAddress = GetIP(),
+				Severity = LogSeverity.WARN,
+				Description = "User was not found when authenticating " + email
+			};
+			Log(entry);
+		}
+
 		internal override void Log(LogEntry entry)
 		{
 			entry.Type = LogType.Security;

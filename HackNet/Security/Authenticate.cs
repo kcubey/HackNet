@@ -37,7 +37,10 @@ namespace HackNet.Security
 				Users user = Users.FindByEmail(this.Email, db);
 
 				if (user == null)
+				{
+					AuthLogger.Instance.UserNotFound(Email);
 					return AuthResult.UserNotFound;
+				}
 				if (checkEmailValidity && user.AccessLevel == AccessLevel.Unverified)
 					return AuthResult.EmailNotVerified;
 

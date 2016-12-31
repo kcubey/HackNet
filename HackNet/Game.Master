@@ -36,11 +36,11 @@
 				<div class="col-sm-12 col-md-3">
 					<div class="row" style="text-align: right">
 						Coins
-                        <asp:Label runat="server" ID="CoinsLbl" Text="999" Font-Bold="true"></asp:Label>
+                        <asp:Label runat="server" ID="CoinsLbl" Text="x" Font-Bold="true"></asp:Label>
 					</div>
 					<div class="row" style="text-align: right">
 						Bucks
-                        <asp:Label runat="server" ID="BucksLbl" Text="10" Font-Bold="true"></asp:Label>
+                        <asp:Label runat="server" ID="BucksLbl" Text="x" Font-Bold="true"></asp:Label>
 					</div>
 				</div>
 			</div>
