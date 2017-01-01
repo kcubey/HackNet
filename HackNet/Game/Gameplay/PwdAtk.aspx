@@ -3,14 +3,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row" style="border: 1px solid black; margin-left: 0; margin-right: 0;">
-        <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black; padding: 0;">
+        <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;  padding: 0;">
             <div class="panel-header" style="background-color: slategray; margin: 0; padding: 5px;">
                 <h3 style="margin: 0;">
                     <asp:Image ImageUrl="~/Content/Images/kali.png" Width="25px" runat="server" />
                     hydra
                 </h3>
             </div>
-            <div class="panel-body" style="background-color: #f5f5f5; color: black;">
+            <div class="panel-body" style="background-color: #f5f5f5; color: black; min-height:300px;">
                 <label style="width: 20%;" class="col-xs-3 col-form-label">Target IP: </label>
                 <asp:TextBox ID="TargetIPLbl" runat="server" Style="width: 150px;"></asp:TextBox>
 
@@ -45,7 +45,7 @@
                     Instruction
                 </h3>
             </div>
-            <div class="panel-body" style="background-color: #f5f5f5; height: 100%;">
+            <div class="panel-body" style="background-color: #f5f5f5; min-height:300px;">
                 <h4 style="color: black;">Steps for Password Attack</h4>
                 <ol class="list-group" style="color: black;">
                     <li class="list-group-item">1. Configure hydra</li>
@@ -77,9 +77,34 @@
                 </div>
                 
             </div>
+            <div class="panel panel-default">
+                <div class="panel-header" style="background-color: grey;">
+                    <h4 style="text-align: center; margin-bottom: 0;">
+                         Nautilus
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <asp:Button ID="StealInfo" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false"/>
+                    <asp:Button ID="DeleteInfo" runat="server" CssClass="btn btn-default" Text="Delete" Enabled="false" />
+                    <asp:DataList runat="server" RepeatLayout="Table" >
+                        <HeaderTemplate>
+                            <asp:Table runat="server" CssClass="table">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell Width="150px">
+                                        Name
+                                    </asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>
+                                        Last Modified
+                                    </asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </HeaderTemplate>
+                    </asp:DataList>
+                </div>
+            </div>
         </div>
         <div class="col-md-3">
-            <div class="panel panel-default" style="height:320px;">
+            <div class="panel panel-default" style="height:390px;">
                 <div class="panel-header" style="background-color: grey;">
                     <h4 style="text-align: center; margin-bottom: 0;">
                         Hacked Password List
