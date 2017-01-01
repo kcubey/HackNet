@@ -2,7 +2,9 @@
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -35,6 +37,7 @@ namespace HackNet.Loggers
 				else
 					entry.UserId = u.UserID;
 			}
+
 			// Create EF object for insertion into DB
 			Logs logForDb = new Logs()
 			{
@@ -45,6 +48,7 @@ namespace HackNet.Loggers
 				IPAddress = entry.IPAddress,
 				Timestamp = entry.Timestamp,
 			};
+
 			// Add and save changes
 			db.Logs.Add(logForDb);
 			return db.SaveChanges();
@@ -52,7 +56,21 @@ namespace HackNet.Loggers
 
 		internal void LogToFile(LogEntry entry)
 		{
-			
+			string severity = Enum.GetName(typeof(LogSeverity), entry.Severity);
+			string type = Enum.GetName(typeof(LogType), entry.Type);
+			string time = DateTime.Now.ToString();
+			string directory = HttpRuntime.AppDomainAppPath + "App_Data\\HackNet.log";
+			string LogString = string.Format("[{0} {1}] {2}: {3} by {4}", severity, time, type, entry.Description, entry.IPAddress);
+			try
+			{
+				File.AppendAllText(directory, LogString + Environment.NewLine);
+			} catch (UnauthorizedAccessException)
+			{
+				System.Diagnostics.Debug.WriteLine("File logging failed with exception (UnauthorizedAccessException)");
+			} catch (SecurityException)
+			{
+				System.Diagnostics.Debug.WriteLine("File logging failed with exception (SecurityException)");
+			}
 		}
 
 		internal void LogConsole(LogEntry entry)
