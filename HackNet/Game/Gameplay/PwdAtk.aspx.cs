@@ -63,10 +63,13 @@ namespace HackNet.Game.Gameplay
                         List<string> pwdList = MissionPwdAtk.LoadPwdList();
                         Random rnd = new Random();
                         int r = rnd.Next(pwdList.Count);
+                        System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
                         Session["AnswerForPwd"] = pwdList[r];
                         Cache["PWDCalculated"] = true;
                         LoadScanInfo((List<string>)Cache["ScanList"]);
                         LoadPwdListToGrid(pwdList);
+                        CmdError.Text = "hydra is running......";
+                        CmdError.ForeColor = System.Drawing.Color.Green;
                     }
                     else
                     {
@@ -79,7 +82,9 @@ namespace HackNet.Game.Gameplay
                 {
                     if (CmdTextBox.Text.Equals(Session["AnswerForPwd"].ToString()))
                     {
-
+                        CmdError.Text = "Password Correct!";
+                        CmdError.ForeColor = System.Drawing.Color.Green;
+                        LoadScanInfo(MissionPwdAtk.LoadSuccessPwd(mis));
                     }
                     else
                     {

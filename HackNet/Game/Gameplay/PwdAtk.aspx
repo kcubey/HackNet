@@ -60,7 +60,7 @@
 
     <div class="row" >
         <div class="col-md-9">
-            <div class="panel panel-default" style="">
+            <div class="panel panel-default">
                 <div class="panel-header" style="background-color: grey;">
                     <h4 style="text-align: center; margin-bottom: 0;">
                         @HackNetHost:~
@@ -76,6 +76,31 @@
                     <asp:Label runat="server" ID="CmdError"></asp:Label>
                 </div>
                 
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-header" style="background-color: grey;">
+                    <h4 style="text-align: center; margin-bottom: 0;">
+                         Nautilus
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <asp:Button ID="StealInfo" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false"/>
+                    <asp:Button ID="DeleteInfo" runat="server" CssClass="btn btn-default" Text="Delete" Enabled="false" />
+                    <asp:DataList runat="server" RepeatLayout="Table" >
+                        <HeaderTemplate>
+                            <asp:Table runat="server" CssClass="table">
+                                <asp:TableHeaderRow>
+                                    <asp:TableHeaderCell Width="150px">
+                                        Name
+                                    </asp:TableHeaderCell>
+                                    <asp:TableHeaderCell>
+                                        Last Modified
+                                    </asp:TableHeaderCell>
+                                </asp:TableHeaderRow>
+                            </asp:Table>
+                        </HeaderTemplate>
+                    </asp:DataList>
+                </div>
             </div>
         </div>
         <div class="col-md-3">
