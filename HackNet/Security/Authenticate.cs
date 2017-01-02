@@ -6,6 +6,8 @@ using System.Text;
 using HackNet.Data;
 using System.Text.RegularExpressions;
 using HackNet.Loggers;
+using System.Collections.Generic;
+using System.Web.Security;
 
 namespace HackNet.Security
 {
@@ -74,6 +76,54 @@ namespace HackNet.Security
 				db.SaveChanges();
 				AuthLogger.Instance.PasswordFail(Email);
 				return AuthResult.Success;
+			}
+		}
+
+		// Returns a string array containing the user's roles
+		internal string[] UserRoles
+		{
+			get
+			{
+				using (DataContext db = new DataContext())
+				{
+					Users u = Users.FindByEmail(this.Email, db);
+					if (u == null)
+						return new string[0];
+					switch (u.AccessLevel)
+					{
+						case AccessLevel.Admin:
+							return new string[] { "Admin", "Staff", "User" };
+						case AccessLevel.Staff:
+							return new string[] { "Staff", "User" };
+						case AccessLevel.User:
+							return new string[] { "User" };
+						default:
+							return new string[0];
+					}
+						
+				}
+			}
+		}
+
+		internal HttpCookie AuthCookie
+		{
+			get
+			{
+				string roles = (UserRoles.Length == 0) ? "" : string.Join(",", UserRoles);
+				Debug.WriteLine(roles);
+				FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+						version: 1,
+						name: this.Email,
+						issueDate: DateTime.Now,
+						expiration: DateTime.Now.AddSeconds(HttpContext.Current.Session.Timeout),
+						isPersistent: false,
+						userData: roles
+				);
+
+				string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+				HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+
+				return cookie;
 			}
 		}
 

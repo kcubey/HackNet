@@ -159,9 +159,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="anonymousedited.jpg" />
@@ -170,6 +168,7 @@
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
     <Content Include="App_Data\HackNet.log" />
+    <Content Include="Admin\Admin.master" />
     <None Include="App_Data\Secrets.config">
       <SubType>Designer</SubType>
     </None>
@@ -318,6 +317,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Admin.master.cs">
+      <DependentUpon>Admin.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.master.designer.cs">
+      <DependentUpon>Admin.master</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

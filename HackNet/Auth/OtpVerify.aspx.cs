@@ -13,18 +13,18 @@ namespace HackNet.Auth
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (Session["PasswordSuccess"] == null)
+			if (!(Session["Cookie"] is HttpCookie))
 				Response.Redirect("~/Default");
 		}
 
 		protected void ConfirmOTP(object sender, EventArgs e)
 		{
-			if (Session["PasswordSuccess"] == null)
+			if (!(Session["Cookie"] is HttpCookie))
 			{
 				Response.Redirect("~/Default");
 				return;
 			}
-
+			
 			string email = Session["PasswordSuccess"] as string;
 			using (Authenticate a = new Authenticate(email))
 			{
@@ -32,8 +32,7 @@ namespace HackNet.Auth
 				{
 					case OtpResult.Success:
 						Session["PasswordSuccess"] = null;
-						FormsAuthentication.SetAuthCookie(email, false);
-						Response.Redirect("~/Default");
+						LoginSuccess();						
 						break;
 					case OtpResult.NotInt:
 						Msg.Text = "You entered non-numbers, please check again";
@@ -50,8 +49,12 @@ namespace HackNet.Auth
 
 		protected void CancelOTP(object sender, EventArgs e)
 		{
-			string email = Session["PasswordSuccess"] as string;
-			FormsAuthentication.SetAuthCookie(email, false);
+			LoginSuccess();
+		}
+
+		private void LoginSuccess()
+		{
+			Response.Cookies.Add(Session["Cookie"] as HttpCookie);
 			Response.Redirect("~/Default");
 		}
 	}

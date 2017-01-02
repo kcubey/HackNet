@@ -51,11 +51,11 @@ namespace HackNet.Auth {
 			{
 				if (a.Is2FAEnabled)
 				{
-					Session["PasswordSuccess"] = email;
+					Session["Cookie"] = a.AuthCookie;
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
-					FormsAuthentication.SetAuthCookie(email, false);
+					Response.Cookies.Add(a.AuthCookie);
 					Response.Redirect("~/Default");
 				}
 			}
