@@ -221,7 +221,6 @@
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
-    <Content Include="Game\market.css" />
     <Content Include="Payment\backend\CheckoutsControllercs.txt" />
     <Content Include="Payment\backend\JSv2.js" />
     <Content Include="Payment\backend\JSv3Client.js" />

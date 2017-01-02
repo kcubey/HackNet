@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Market.aspx.cs" Inherits="HackNet.Market.Market" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
 
-    <link rel="stylesheet" href="/Market/market.css" />
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
     <fieldset>
@@ -35,6 +34,7 @@
             <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
             <br /><br />
             <asp:Label ID="pkgELbl" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>
+
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <!-- Item repeater
