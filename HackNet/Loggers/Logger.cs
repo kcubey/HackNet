@@ -23,7 +23,7 @@ namespace HackNet.Loggers
 
 		internal abstract void Log(LogEntry entry);
 
-		internal abstract void LogAll(ICollection<LogEntry> entries);
+		internal abstract List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end);
 
 		internal int LogToDB(LogEntry entry)
 		{
@@ -38,19 +38,15 @@ namespace HackNet.Loggers
 					entry.UserId = u.UserID;
 			}
 
-			// Create EF object for insertion into DB
-			Logs logForDb = new Logs()
-			{
-				UserId = entry.UserId,
-				Type = (int)entry.Type,
-				Severity = (int)entry.Severity,
-				Description = entry.Description,
-				IPAddress = entry.IPAddress,
-				Timestamp = entry.Timestamp,
-			};
+			// Convert to EF supported type
+			Logs dblog = null;
+			if (entry.IsValid)
+				dblog = entry.ConvertToDB();
 
 			// Add and save changes
-			db.Logs.Add(logForDb);
+			if (dblog != null)
+				db.Logs.Add(dblog);
+
 			return db.SaveChanges();
 		}
 
@@ -79,7 +75,7 @@ namespace HackNet.Loggers
 			{
 				string severity = Enum.GetName(typeof(LogSeverity), entry.Severity);
 				string type = Enum.GetName(typeof(LogType), entry.Type);
-				string LogString = string.Format("[{0}] {1}: {2} by {3}", severity, type, entry.Description, entry.IPAddress);
+				string LogString = string.Format("[{0}] {1}: {2} on {3} by {4}", severity, type, entry.Description, entry.EmailAddress, entry.IPAddress);
 				System.Diagnostics.Debug.WriteLine(LogString);
 			}
 		}

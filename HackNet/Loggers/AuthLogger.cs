@@ -143,13 +143,9 @@ namespace HackNet.Loggers
 			t.Start();
 		}
 
-		internal override void LogAll(ICollection<LogEntry> entries)
+		internal override List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end)
 		{
-			foreach(LogEntry e in entries)
-			{
-				LogToDB(e);
-				LogToFile(e);
-			}
+			return null;
 		}
 	}
 }
