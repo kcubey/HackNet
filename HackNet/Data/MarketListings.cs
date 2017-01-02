@@ -14,7 +14,9 @@ namespace HackNet.Data
 
 		public int ItemId { get; set; }
 
-		public string Description { get; set; }
+        public string ItemTitle { get; set; }
+
+        public string Description { get; set; }
 
 		public double Price { get; set; }
 	}
