@@ -37,8 +37,12 @@
         <span>Description</span>
         <asp:TextBox ID="ListingDescription" runat="server" CssClass="form-control" placeholder="Listing Description"/>
         <span>Price</span>
-        <asp:TextBox ID="ListingPrice" runat="server" CssClass="form-control" placeholder="Listing Description"/>
+        <asp:TextBox ID="ListingPrice" runat="server" CssClass="form-control" placeholder="Listing Price"/>
         <asp:Button runat="server" ID="btnAddListing" CssClass="btn btn-default" OnClick="btnAddListing_Click" Text="Add Listing" />
+    </fieldset>
+
+    <fieldset>
+        <h2>Retrieve Market Listings</h2>
 
     </fieldset>
 
