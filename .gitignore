@@ -249,6 +249,4 @@ ModelManifest.xml
 /HackNet/App_Data/*.txt
 /HackNet/App_Data/*.config
 /HackNet/App_Data/*.xml
-
-
-
+/HackNet/App_Data/*.log

@@ -7,82 +7,64 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackNet.Game {
+namespace HackNet.Game.Gameplay {
     
     
-    public partial class Missions {
+    public partial class PwdAtk {
         
         /// <summary>
-        /// AttackTypeHeaderLbl control.
+        /// TargetIPLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AttackTypeHeaderLbl;
+        protected global::System.Web.UI.WebControls.TextBox TargetIPLbl;
         
         /// <summary>
-        /// AttackTypeInfo control.
+        /// TargetPortLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label AttackTypeInfo;
+        protected global::System.Web.UI.WebControls.TextBox TargetPortLbl;
         
         /// <summary>
-        /// AtkTypePic1 control.
+        /// TargetTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image AtkTypePic1;
+        protected global::System.Web.UI.WebControls.TextBox TargetTxtBox;
         
         /// <summary>
-        /// MissionTitleLbl control.
+        /// TargetAtkTypeList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MissionTitleLbl;
+        protected global::System.Web.UI.WebControls.DropDownList TargetAtkTypeList;
         
         /// <summary>
-        /// MisDesLbl control.
+        /// ErrorLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisDesLbl;
+        protected global::System.Web.UI.WebControls.Label ErrorLbl;
         
         /// <summary>
-        /// regatkList control.
+        /// ConfigBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList regatkList;
-        
-        /// <summary>
-        /// AtkListView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList AtkListView;
-        
-        /// <summary>
-        /// TypeAtkListView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList TypeAtkListView;
+        protected global::System.Web.UI.WebControls.Button ConfigBtn;
         
         /// <summary>
         /// LogPanel control.
@@ -94,93 +76,57 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Panel LogPanel;
         
         /// <summary>
-        /// AtkTextBx control.
+        /// CmdTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AtkTextBx;
+        protected global::System.Web.UI.WebControls.TextBox CmdTextBox;
         
         /// <summary>
-        /// AtkName control.
+        /// SubCmdBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AtkName;
+        protected global::System.Web.UI.WebControls.Button SubCmdBtn;
         
         /// <summary>
-        /// AtkInfo control.
+        /// CmdError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AtkInfo;
+        protected global::System.Web.UI.WebControls.Label CmdError;
         
         /// <summary>
-        /// UploadAttack1 control.
+        /// StealInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload UploadAttack1;
+        protected global::System.Web.UI.WebControls.Button StealInfo;
         
         /// <summary>
-        /// btnAtkInfo control.
+        /// DeleteInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAtkInfo;
+        protected global::System.Web.UI.WebControls.Button DeleteInfo;
         
         /// <summary>
-        /// MisName control.
+        /// PwdListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MisName;
-        
-        /// <summary>
-        /// MisDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MisDesc;
-        
-        /// <summary>
-        /// AtkTypeList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList AtkTypeList;
-        
-        /// <summary>
-        /// RecomLvlList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList RecomLvlList;
-        
-        /// <summary>
-        /// btnAddMis control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddMis;
+        protected global::System.Web.UI.WebControls.DataList PwdListView;
     }
 }

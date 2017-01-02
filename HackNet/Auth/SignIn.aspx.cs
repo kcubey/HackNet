@@ -7,15 +7,15 @@ using System.Web.UI.WebControls;
 
 using HackNet.Security;
 using HackNet.Data;
+using HackNet.Loggers;
 
 using System.Web.Security;
-using static HackNet.Security.Authenticate;
 
 namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (IsAuthenticated())
+			if (Authenticate.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
             DataContext ctx = new DataContext();
 			Msg.Text = "Sign in with your Google Drive email and password as 123";
@@ -49,7 +49,7 @@ namespace HackNet.Auth {
 		{
 			using (Authenticate a = new Authenticate(email))
 			{
-				if (a.Is2FAEnabled || email.Contains("ggg@gmail.com"))
+				if (a.Is2FAEnabled)
 				{
 					Session["PasswordSuccess"] = email;
 					Response.Redirect("~/Auth/OtpVerify");

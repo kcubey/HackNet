@@ -2,6 +2,7 @@
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,18 +16,19 @@ namespace HackNet.Prefs
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
-			{                               // Initial page load only
+			{														// Initial page load only
 				using (Authenticate a = new Authenticate())         // Create auth instance with current user's email
 				{
 					if (a.Is2FAEnabled)                             // Check if 2FA is already enabled
 					{
-						VerifyForConfigure.Text = "Reconfigure OTP";
+						ExistingOTP.Visible = true;
+						VerifyForConfigure.Text = "Reconfigure 2FA";
 						VerifyOTP.Text = "Verify OTP and Reconfigure 2FA";
 					}
 					else
 					{
 						VerifyForDisable.Visible = false;
-						VerifyForConfigure.Text = "Configure OTP";
+						VerifyForConfigure.Text = "Configure and Enable 2FA";
 						VerifyOTP.Text = "Verify OTP and Enable 2FA";
 					}
 				}
@@ -78,8 +80,9 @@ namespace HackNet.Prefs
 				{
 					case OtpResult.Success:
 						a.Set2FASecret(b32sec);
-						Msg2.Text = "Successfully set 2FA, redirecting you in 5 seconds";
-						Response.AddHeader("REFRESH", "5;URL=/");
+						Msg2.ForeColor = Color.White;
+						Msg2.Text = "Successfully set 2FA, redirecting you to our homepage in 5 seconds";
+						Response.AddHeader("REFRESH", "5;URL=/Default");
 						break;
 					case OtpResult.NotInt:
 						Msg2.Text = "You entered non-numbers, please check again";
@@ -102,16 +105,20 @@ namespace HackNet.Prefs
 				{
 					case OtpResult.Success:
 						a.Set2FASecret(null);
-						Msg.Text = "Successfully disabled your 2FA, thus your account is less secure.";
+						DisableTotpLbl.ForeColor = Color.White;
+						DisableTotpLbl.Text = 
+							@"Successfully disabled your 2FA, thus making your account less secure. <br>
+							You will be redirected to our home page in 5 seconds";
+						Response.AddHeader("REFRESH", "5;URL=/Default");
 						break;
 					case OtpResult.NotInt:
-						Msg.Text = "You entered non-numbers, please check again";
+						DisableTotpLbl.Text = "You entered non-numbers, please check again";
 						break;
 					case OtpResult.WrongLength:
-						Msg.Text = "You entered an OTP with malformed length";
+						DisableTotpLbl.Text = "You entered an OTP with malformed length";
 						break;
 					case OtpResult.WrongOtp:
-						Msg.Text = "OTP Entered does not match, please try again";
+						DisableTotpLbl.Text = "OTP Entered does not match, please try again";
 						break;
 				}
 			}

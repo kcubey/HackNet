@@ -167,6 +167,7 @@
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
+    <Content Include="App_Data\HackNet.log" />
     <None Include="App_Data\Secrets.config" />
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
@@ -196,6 +197,7 @@
     <Content Include="Content\Images\hekingbg.jpg" />
     <Content Include="Content\Images\doge.png" />
     <Content Include="Content\Images\ignlogo.png" />
+    <Content Include="Content\Images\kali.png" />
     <Content Include="Content\Images\Metacriticlogo.png" />
     <Content Include="Content\Images\mission.png" />
     <Content Include="Content\Images\workstation.png" />
@@ -213,6 +215,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Game\Chat.aspx" />
     <Content Include="Game\Currency.aspx" />
+    <Content Include="Game\Gameplay\PwdAtk.aspx" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Inventory.aspx" />
     <Content Include="Game\Market1.aspx" />
@@ -362,6 +365,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\AttackData.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />
@@ -389,6 +393,7 @@
     <Compile Include="Game\Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Game\Class\MissionPwdAtk.cs" />
     <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
@@ -396,6 +401,13 @@
     </Compile>
     <Compile Include="Game\Currency.aspx.designer.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Gameplay\PwdAtk.aspx.cs">
+      <DependentUpon>PwdAtk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\Gameplay\PwdAtk.aspx.designer.cs">
+      <DependentUpon>PwdAtk.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -451,6 +463,10 @@
       <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\AuthLogger.cs" />
+    <Compile Include="Loggers\GameLogger.cs" />
+    <Compile Include="Loggers\LogEntry.cs" />
+    <Compile Include="Loggers\Logger.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
