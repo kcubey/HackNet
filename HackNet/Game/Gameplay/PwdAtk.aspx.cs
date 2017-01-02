@@ -61,7 +61,7 @@ namespace HackNet.Game.Gameplay
                 {
                     if (CmdTextBox.Text == "run hydra")
                     {
-                        List<string> pwdList = MissionPwdAtk.LoadPwdList();
+                        List<string> pwdList = Mission.LoadPwdList();
                         Random rnd = new Random();
                         int r = rnd.Next(pwdList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
@@ -87,7 +87,7 @@ namespace HackNet.Game.Gameplay
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
-                            LoadScanInfo(MissionPwdAtk.LoadSuccessPwd(mis));
+                            LoadScanInfo(Mission.LoadSuccessPwd(mis));
                             Cache["Bypass"] = true;
                         }
                         else
@@ -100,8 +100,9 @@ namespace HackNet.Game.Gameplay
                     {
                         if (CmdTextBox.Text.Equals("run nautilus"))
                         {
-                            LoadScanInfo(MissionPwdAtk.LoadSuccessPwd(mis,"run nautilus"));
+                            LoadScanInfo(Mission.LoadSuccessPwd(mis,"run nautilus"));
                             // run method to load the datalist for nautilus
+
                         }
                         else
                         {
@@ -141,12 +142,6 @@ namespace HackNet.Game.Gameplay
 
             if (errorchk == false)
             {
-                MissionPwdAtk misatk = new MissionPwdAtk();
-                misatk.mis = mis;
-                misatk.target = TargetTxtBox.Text;
-                misatk.atkMethod = TargetAtkTypeList.Text;
-                // Store Mission information into session
-                Session["MisAtk"] = misatk;
                 // Set cannot edit
                 TargetIPLbl.Enabled = false;
                 TargetTxtBox.Enabled = false;
