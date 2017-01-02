@@ -121,6 +121,15 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.Button DeleteInfo;
         
         /// <summary>
+        /// NautilusView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList NautilusView;
+        
+        /// <summary>
         /// PwdListView control.
         /// </summary>
         /// <remarks>

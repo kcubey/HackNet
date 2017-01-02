@@ -18,8 +18,9 @@ namespace HackNet.Game.Gameplay
         {
             if (!IsPostBack)
             {
-                Session["Configure"] = false;
+                Cache["Configure"] = false;
                 Cache["PWDCalculated"] = false;
+                Cache["Bypass"] = false;
                 Cache["ScanList"] = Mission.scanMission(mis, Context.User.Identity.Name, false);
                 LoadScanInfo((List<string>)Cache["ScanList"]);
             }
@@ -51,16 +52,31 @@ namespace HackNet.Game.Gameplay
             PwdListView.DataBind();
         }
 
-        // this is to run hydra to generate the password list
+        // This is to load the nautilus
+        private void LoadNautilus(List<string> mlist)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Fname", typeof(string));
+            dt.Columns.Add("LMD", typeof(DateTime));
+
+            foreach(string m in mlist)
+            {
+                dt.Rows.Add(m, DateTime.Now);
+            }
+            NautilusView.DataSource = dt;
+            NautilusView.DataBind();
+        }
+
+        // This is the command prompt that does everything
         protected void SubCmdBtn_Click(object sender, EventArgs e)
         {
-            if ((bool)Session["Configure"])
+            if ((bool)Cache["Configure"])
             {
                 if ((bool)Cache["PWDCalculated"] == false)
                 {
                     if (CmdTextBox.Text == "run hydra")
                     {
-                        List<string> pwdList = MissionPwdAtk.LoadPwdList();
+                        List<string> pwdList = Mission.LoadPwdList();
                         Random rnd = new Random();
                         int r = rnd.Next(pwdList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
@@ -80,17 +96,39 @@ namespace HackNet.Game.Gameplay
                 }
                 else
                 {
-                    if (CmdTextBox.Text.Equals(Session["AnswerForPwd"].ToString()))
+                    if ((bool)Cache["Bypass"] == false)
                     {
-                        CmdError.Text = "Password Correct!";
-                        CmdError.ForeColor = System.Drawing.Color.Green;
-                        LoadScanInfo(MissionPwdAtk.LoadSuccessPwd(mis));
-                    }
-                    else
+                        if (CmdTextBox.Text.Equals(Session["AnswerForPwd"].ToString()))
+                        {
+                            CmdError.Text = "Password Correct!";
+                            CmdError.ForeColor = System.Drawing.Color.Green;
+                            LoadScanInfo(Mission.LoadSuccessPwd(mis));
+                            Cache["Bypass"] = true;
+                        }
+                        else
+                        {
+                            LoadScanInfo((List<string>)Cache["ScanList"]);
+                            CmdError.Text = "Wrong Password";
+                            CmdError.ForeColor = System.Drawing.Color.Red;
+                        }
+                    }else
                     {
-                        LoadScanInfo((List<string>)Cache["ScanList"]);
-                        CmdError.Text = "Wrong Password";
-                        CmdError.ForeColor = System.Drawing.Color.Red;
+                        if (CmdTextBox.Text.Equals("run nautilus"))
+                        {
+                            LoadScanInfo(Mission.LoadSuccessPwd(mis,"run nautilus"));
+                            // run method to load the datalist for nautilus
+                            List<string> infoList = Mission.LoadNautilus();
+                            LoadNautilus(infoList);
+                            StealInfo.Enabled = true;
+                            DeleteInfo.Enabled = true;
+                            CmdError.Text = "Nautilus is running....";
+                            CmdError.ForeColor = System.Drawing.Color.Green;
+                        }
+                        else
+                        {
+                            CmdError.Text = "Unrecognised Command";
+                            CmdError.ForeColor = System.Drawing.Color.Red;
+                        }
                     }
                 }
             }
@@ -124,18 +162,12 @@ namespace HackNet.Game.Gameplay
 
             if (errorchk == false)
             {
-                MissionPwdAtk misatk = new MissionPwdAtk();
-                misatk.mis = mis;
-                misatk.target = TargetTxtBox.Text;
-                misatk.atkMethod = TargetAtkTypeList.Text;
-                // Store Mission information into session
-                Session["MisAtk"] = misatk;
                 // Set cannot edit
                 TargetIPLbl.Enabled = false;
                 TargetTxtBox.Enabled = false;
                 TargetAtkTypeList.Enabled = false;
                 // Set bool to true so that SubCmdBtn_Click() can check if hydra is configured
-                Session["Configure"] = true;
+                Cache["Configure"] = true;
                 
                 LoadScanInfo((List<string>)Cache["ScanList"]);
                 ErrorLbl.ForeColor = System.Drawing.Color.Green;

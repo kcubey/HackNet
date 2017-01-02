@@ -1,27 +1,26 @@
 ﻿using HackNet.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace HackNet.Game
 {
     public class Mission
     {
-        internal string IPaddress { get; set; }
-        internal string Objective { get; set; }
-        internal int numOfPorts { get; set; }
-        internal string system { get; set; }
-        public Mission()
-        {
+        internal MissionData mis { get; set;}
+        internal string foldername { get; set; }
+        internal DateTime lastmodified { get; set; }
 
-        }
-
+        // Randome Generation
         public static string GetRandomIp()
         {
             Random _random = new Random();
             return string.Format("{0}.{1}.{2}.{3}", _random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255));
         }
+
         public static string GetRandomMacAddress()
         {
             var random = new Random();
@@ -44,6 +43,7 @@ namespace HackNet.Game
             return system;
         }
 
+        // Scanning for general stuff
         public static List<string> scanMission(MissionData mission, string username,bool cond)
         {
             Random rnd = new Random();
@@ -79,6 +79,43 @@ namespace HackNet.Game
                 scanList.Add("==============================================");
             }
             return scanList;
+        }
+
+
+
+        // Gameplay for Password Attack
+
+        public static List<string> LoadNautilus()
+        {
+            List<string> mList = new List<string>();
+            mList.Add("bin");
+            mList.Add("root");
+            mList.Add("lib");
+            mList.Add("tmp");
+            mList.Add("secret");
+            mList.Add("audit.log");
+            return mList;
+        }
+
+        public static List<string> LoadSuccessPwd(MissionData mis, string command = null)
+        {
+            List<string> succList = new List<string>();
+            succList.Add("======================================");
+            succList.Add("Successful Access to server: " + mis.MissionIP);
+            succList.Add("Last Login: " + DateTime.Now);
+            succList.Add("@HacknetHost: " + command);
+            return succList;
+        }
+
+        public static List<string> LoadPwdList()
+        {
+            List<string> pwdList = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                string password = Membership.GeneratePassword(10, 4);
+                pwdList.Add(password);
+            }
+            return pwdList;
         }
 
     }

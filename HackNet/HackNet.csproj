@@ -228,7 +228,6 @@
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
-    <Content Include="Game\market.css" />
     <Content Include="Payment\backend\CheckoutsControllercs.txt" />
     <Content Include="Payment\backend\JSv2.js" />
     <Content Include="Payment\backend\JSv3Client.js" />
@@ -398,7 +397,6 @@
     <Compile Include="Game\Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Class\MissionPwdAtk.cs" />
     <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>

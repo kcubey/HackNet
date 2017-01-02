@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,17 @@ namespace HackNet.Game
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnAddListing_Click(object sender, EventArgs e)
+        {
+            MarketListings mklist = new MarketListings();
+
+            using (DataContext db = new DataContext())
+            {
+                db.MarketListings.Add(mklist);
+                db.SaveChanges();
+            }
         }
     }
 }
