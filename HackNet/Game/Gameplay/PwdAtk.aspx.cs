@@ -119,6 +119,8 @@ namespace HackNet.Game.Gameplay
                             // run method to load the datalist for nautilus
                             List<string> infoList = Mission.LoadNautilus();
                             LoadNautilus(infoList);
+                            StealInfo.Enabled = true;
+                            DeleteInfo.Enabled = true;
                             CmdError.Text = "Nautilus is running....";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                         }

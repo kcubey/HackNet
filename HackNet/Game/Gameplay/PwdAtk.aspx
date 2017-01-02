@@ -90,13 +90,13 @@
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
                                 <asp:TableHeaderRow>
-                                    <asp:TableHeaderCell Width="150px">
+                                    <asp:TableHeaderCell Width="50px">
                                         
                                     </asp:TableHeaderCell>
                                     <asp:TableHeaderCell Width="500px">
                                         Name
                                     </asp:TableHeaderCell>
-                                    <asp:TableHeaderCell >
+                                    <asp:TableHeaderCell Width="200px">
                                         Last Modified
                                     </asp:TableHeaderCell>
                                 </asp:TableHeaderRow>
@@ -105,13 +105,13 @@
                         <ItemTemplate>
                             <asp:Table runat="server" CssClass="table">
                                 <asp:TableRow>
-                                    <asp:TableCell>
+                                    <asp:TableCell Width="50px">
                                         <asp:CheckBox runat="server" />
                                     </asp:TableCell>
                                     <asp:TableCell Width="500px">
                                         <asp:Label runat="server" Text='<%#Eval("Fname") %>'></asp:Label>
                                     </asp:TableCell>
-                                    <asp:TableCell>
+                                    <asp:TableCell Width="200px">
                                         <asp:Label runat="server" Text='<%#Eval("LMD") %>'></asp:Label>
                                     </asp:TableCell>
                                 </asp:TableRow>
