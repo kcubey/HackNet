@@ -13,12 +13,13 @@ namespace HackNet.Game.Class
         internal string target { get; set; }
         internal string atkMethod { get; set; }
 
-        public static List<string> LoadSuccessPwd(MissionData mis)
+        public static List<string> LoadSuccessPwd(MissionData mis,string command=null)
         {
             List<string> succList = new List<string>();
             succList.Add("======================================");
             succList.Add("Successful Access to server: "+mis.MissionIP);
             succList.Add("Last Login: "+DateTime.Now);
+            succList.Add("@HacknetHost: "+command);
             return succList;
         }
 
