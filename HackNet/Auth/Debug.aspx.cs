@@ -18,20 +18,11 @@ namespace HackNet.Auth
 		{
 			if (Authenticate.IsAuthenticated())
 			{
-				if (User.IsInRole("Admin"))
-					Msg1.Text = "User is in admin role";
-				else
-					Msg1.Text = "Not in admin role";
+				Msg1.Text = "User ID: " + Authenticate.GetUserId().ToString();
 
-				if (User.IsInRole("Staff"))
-					Msg2.Text = "User is in staff role";
-				else
-					Msg2.Text = "Not in staff role";
+				Msg2.Text = "Username: " + Authenticate.GetUserName();
 
-				if (User.IsInRole("User"))
-					Msg3.Text = "User is in user role";
-				else
-					Msg3.Text = "Not in user role";
+				Msg3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), Authenticate.GetUserAccessLevel());
 
 				//Users u = Authenticate.GetCurrentUser();
 				//using (MailClient mc = new MailClient(u.Email))

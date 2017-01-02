@@ -50,12 +50,12 @@ namespace HackNet.Security
 				byte[] bHash = Crypt.Instance.Hash(bPassword, user.Salt);
 				if (user.Hash.SequenceEqual(bHash))
 				{
-					AuthLogger.Instance.PasswordSuccess(Email);
+					AuthLogger.Instance.PasswordSuccess();
 					return AuthResult.Success;
 				}
 				else
 				{
-					AuthLogger.Instance.PasswordFail(Email);
+					AuthLogger.Instance.PasswordFail();
 					return AuthResult.PasswordIncorrect;
 				}
 			}
@@ -74,7 +74,7 @@ namespace HackNet.Security
 					return oldpwres;
 				u.UpdatePassword(newpass);
 				db.SaveChanges();
-				AuthLogger.Instance.PasswordFail(Email);
+				AuthLogger.Instance.PasswordFail();
 				return AuthResult.Success;
 			}
 		}
@@ -109,13 +109,14 @@ namespace HackNet.Security
 		{
 			get
 			{
+				Users u = Users.FindByEmail(this.Email);
 				FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
 						version: 1,
 						name: this.Email,
 						issueDate: DateTime.Now,
 						expiration: DateTime.Now.AddSeconds(HttpContext.Current.Session.Timeout),
 						isPersistent: false,
-						userData: roles
+						userData: u.UserID + "," + u.UserName + "," + (int)u.AccessLevel
 				);
 
 				string encryptedTicket = FormsAuthentication.Encrypt(ticket);
@@ -169,9 +170,9 @@ namespace HackNet.Security
 			}
 			using (DataContext db = new DataContext()) {
 				if (b32sec == null)
-					AuthLogger.Instance.TOTPDisabled(Email);
+					AuthLogger.Instance.TOTPDisabled();
 				else
-					AuthLogger.Instance.TOTPChanged(Email);
+					AuthLogger.Instance.TOTPChanged();
 				GetKeyStore(db).TOTPSecret = b32sec;
 				db.SaveChanges();
 				return true;
@@ -251,7 +252,7 @@ namespace HackNet.Security
 						mc.AddLine("Kindly verify your email address by clicking on the link below");
 						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
 					}
-					AuthLogger.Instance.UserRegistered(email);
+					AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
 				}
 			}
@@ -262,6 +263,9 @@ namespace HackNet.Security
 		// Check if authenticated
 		internal static bool IsAuthenticated(string email = null)
 		{
+			if (HttpContext.Current == null)
+				throw new AuthException("Current HTTP Context is NULL");
+
 			if (email == null)
 			{
 				return HttpContext.Current.User.Identity.IsAuthenticated;
@@ -279,6 +283,50 @@ namespace HackNet.Security
 				throw new AuthException("User is not logged in");
 
 			return HttpContext.Current.User.Identity.Name;
+		}
+
+		internal static int GetUserId()
+		{
+			string[] UserData = GetUserData();
+			int UserId;
+			if (!int.TryParse(UserData[0], out UserId))
+				throw new AuthException("UserId is not an integer");
+
+			return UserId;
+		}
+
+		internal static string GetUserName()
+		{
+			string[] UserData = GetUserData();
+
+			return UserData[1];
+		}
+
+		internal static AccessLevel GetUserAccessLevel()
+		{
+			string[] UserData = GetUserData();
+			int AccessLevelNum;
+			if (!int.TryParse(UserData[2], out AccessLevelNum))
+				throw new AuthException("AccessLevel is not an integer");
+
+			if (!Enum.IsDefined(typeof(AccessLevel), (AccessLevel) AccessLevelNum))
+				throw new AuthException("Invalid Access Level" + AccessLevelNum);
+
+			return (AccessLevel) AccessLevelNum;
+		}
+
+		private static string[] GetUserData()
+		{
+			if (!IsAuthenticated())
+				throw new AuthException("User is not logged in");
+			FormsIdentity ident = HttpContext.Current.User.Identity as FormsIdentity;
+			if (ident == null)
+				throw new AuthException("Forms Authentication Identity is not authenticated");
+			string[] UserData = ident.Ticket.UserData.Split(',');
+			if (UserData.Length != 3)
+				throw new AuthException("UserData is of incorrect length");
+
+			return UserData;
 		}
 
 

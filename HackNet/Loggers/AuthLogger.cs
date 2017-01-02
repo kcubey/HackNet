@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HackNet.Data;
+using HackNet.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -22,11 +24,12 @@ namespace HackNet.Loggers
 		}
 
 
-		internal void PasswordFail(string email)
+		internal void PasswordFail()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "Password login failed for user"
@@ -34,11 +37,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void PasswordSuccess(string email)
+		internal void PasswordSuccess()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Password login successful for user"
@@ -46,11 +50,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void PasswordChanged(string email)
+		internal void PasswordChanged()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Password was changed by user"
@@ -58,11 +63,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPFail(string email)
+		internal void TOTPFail()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "One-time password authentication failed"
@@ -70,11 +76,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPSuccess(string email)
+		internal void TOTPSuccess()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "One-time password authentication successful"
@@ -82,11 +89,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPChanged(string email)
+		internal void TOTPChanged()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "One-time password authentication reconfigured by user"
@@ -94,23 +102,25 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPDisabled(string email)
+		internal void TOTPDisabled()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
-				Severity = LogSeverity.INFO,
+				Severity = LogSeverity.WARN,
 				Description = "One-time password authentication disabled by user"
 			};
 			Log(entry);
 		}
 
-		internal void UserRegistered(string email)
+		internal void UserRegistered()
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "New user has been registered"
@@ -145,7 +155,20 @@ namespace HackNet.Loggers
 
 		internal override List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end)
 		{
-			return null;
+			List<LogEntry> results = new List<LogEntry>();
+			using (DataContext db = new DataContext()) {
+				int logtype = (int)LogType.Security;
+				List<Logs> logs = (from log in db.Logs
+								   where log.Type == logtype
+								   select log).ToList();
+				foreach (Logs l in logs)
+				{
+					results.Add(LogEntry.ConvertFromDB(l));
+				}
+
+			}
+
+			return results;
 		}
 	}
 }

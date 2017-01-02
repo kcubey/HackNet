@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,11 +22,12 @@ namespace HackNet.Loggers
 			}
 		}
 
-		internal void MissionCompleted(string email, string missionname, string rewards)
+		internal void MissionCompleted(string missionname, string rewards)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Mission completed: " + missionname + ", Rewards: " + rewards
@@ -33,11 +35,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void ItemPurchased(string email, string purchaseditem, string cost)
+		internal void ItemPurchased(string purchaseditem, string cost)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = string.Format("Item was purchased from market: {0} for {1}", purchaseditem, cost)
@@ -45,11 +48,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void ItemSold(string email, string solditem, string cost)
+		internal void ItemSold(string solditem, string cost)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
+				EmailAddress = Authenticate.GetEmail(),
+				UserId = Authenticate.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = string.Format("Item was sold to market: {0} for {1}", solditem, cost)
