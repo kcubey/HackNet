@@ -30,4 +30,16 @@
         </div>
     </fieldset>
 
+    <fieldset>
+        <h2>Add New Market Listing</h2>
+        <span>Title</span>
+        <asp:TextBox ID="Listingtitle" runat="server" CssClass="form-control" placeholder="Listing Title"/>
+        <span>Description</span>
+        <asp:TextBox ID="ListingDescription" runat="server" CssClass="form-control" placeholder="Listing Description"/>
+        <span>Price</span>
+        <asp:TextBox ID="ListingPrice" runat="server" CssClass="form-control" placeholder="Listing Description"/>
+        <asp:Button runat="server" ID="btnAddListing" CssClass="btn btn-default" OnClick="btnAddListing_Click" Text="Add Listing" />
+
+    </fieldset>
+
 </asp:Content>
