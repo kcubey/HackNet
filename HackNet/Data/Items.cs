@@ -20,6 +20,24 @@ namespace HackNet.Data
         public int ItemPrice { get; set; }
         public int ItemBonus { get; set; }
 
+        internal static Items GetItem(int id)
+        {
+            Items itm = new Data.Items();
+            try
+            {
+                using(DataContext db=new DataContext())
+                {
+                    itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
+                }
+            }
+            catch (EntityCommandExecutionException)
+            {
+                throw new ConnectionException("Database link failure has occured");
+
+            }
+            return itm;
+        }
+
 
         internal static List<Items> GetItems(int itemType)
         {

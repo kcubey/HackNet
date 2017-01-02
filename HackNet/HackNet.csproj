@@ -225,6 +225,7 @@
     <Content Include="Game\Market1.aspx" />
     <Content Include="Game\Missions.aspx" />
     <Content Include="Game\Parts.aspx" />
+    <Content Include="Game\PartsInfo.aspx" />
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\Market.aspx" />
@@ -447,6 +448,13 @@
     </Compile>
     <Compile Include="Game\Parts.aspx.designer.cs">
       <DependentUpon>Parts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\PartsInfo.aspx.cs">
+      <DependentUpon>PartsInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\PartsInfo.aspx.designer.cs">
+      <DependentUpon>PartsInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Workstation.aspx.cs">
       <DependentUpon>Workstation.aspx</DependentUpon>
