@@ -86,19 +86,37 @@
                 <div class="panel-body">
                     <asp:Button ID="StealInfo" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false"/>
                     <asp:Button ID="DeleteInfo" runat="server" CssClass="btn btn-default" Text="Delete" Enabled="false" />
-                    <asp:DataList runat="server" RepeatLayout="Table" >
+                    <asp:DataList ID="NautilusView" runat="server" RepeatLayout="Table" >
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
                                 <asp:TableHeaderRow>
                                     <asp:TableHeaderCell Width="150px">
+                                        
+                                    </asp:TableHeaderCell>
+                                    <asp:TableHeaderCell Width="500px">
                                         Name
                                     </asp:TableHeaderCell>
-                                    <asp:TableHeaderCell>
+                                    <asp:TableHeaderCell >
                                         Last Modified
                                     </asp:TableHeaderCell>
                                 </asp:TableHeaderRow>
                             </asp:Table>
                         </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Table runat="server" CssClass="table">
+                                <asp:TableRow>
+                                    <asp:TableCell>
+                                        <asp:CheckBox runat="server" />
+                                    </asp:TableCell>
+                                    <asp:TableCell Width="500px">
+                                        <asp:Label runat="server" Text='<%#Eval("Fname") %>'></asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <asp:Label runat="server" Text='<%#Eval("LMD") %>'></asp:Label>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+                        </ItemTemplate>
                     </asp:DataList>
                 </div>
             </div>

@@ -52,7 +52,22 @@ namespace HackNet.Game.Gameplay
             PwdListView.DataBind();
         }
 
-        // this is to run hydra to generate the password list
+        // This is to load the nautilus
+        private void LoadNautilus(List<string> mlist)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Fname", typeof(string));
+            dt.Columns.Add("LMD", typeof(DateTime));
+
+            foreach(string m in mlist)
+            {
+                dt.Rows.Add(m, DateTime.Now);
+            }
+            NautilusView.DataSource = dt;
+            NautilusView.DataBind();
+        }
+
+        // This is the command prompt that does everything
         protected void SubCmdBtn_Click(object sender, EventArgs e)
         {
             if ((bool)Cache["Configure"])
@@ -102,7 +117,10 @@ namespace HackNet.Game.Gameplay
                         {
                             LoadScanInfo(Mission.LoadSuccessPwd(mis,"run nautilus"));
                             // run method to load the datalist for nautilus
-
+                            List<string> infoList = Mission.LoadNautilus();
+                            LoadNautilus(infoList);
+                            CmdError.Text = "Nautilus is running....";
+                            CmdError.ForeColor = System.Drawing.Color.Green;
                         }
                         else
                         {

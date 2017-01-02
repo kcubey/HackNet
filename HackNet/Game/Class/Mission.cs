@@ -1,6 +1,7 @@
 ﻿using HackNet.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -10,7 +11,8 @@ namespace HackNet.Game
     public class Mission
     {
         internal MissionData mis { get; set;}
-
+        internal string foldername { get; set; }
+        internal DateTime lastmodified { get; set; }
 
         // Randome Generation
         public static string GetRandomIp()
@@ -82,6 +84,19 @@ namespace HackNet.Game
 
 
         // Gameplay for Password Attack
+
+        public static List<string> LoadNautilus()
+        {
+            List<string> mList = new List<string>();
+            mList.Add("bin");
+            mList.Add("root");
+            mList.Add("lib");
+            mList.Add("tmp");
+            mList.Add("secret");
+            mList.Add("audit.log");
+            return mList;
+        }
+
         public static List<string> LoadSuccessPwd(MissionData mis, string command = null)
         {
             List<string> succList = new List<string>();
