@@ -1,5 +1,6 @@
 ﻿using HackNet.Data;
 using HackNet.Game.Class;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +22,7 @@ namespace HackNet.Game.Gameplay
                 Cache["Configure"] = false;
                 Cache["PWDCalculated"] = false;
                 Cache["Bypass"] = false;
-                Cache["ScanList"] = Mission.scanMission(mis, Context.User.Identity.Name, false);
+                Cache["ScanList"] = Mission.scanMission(mis, Authenticate.GetEmail(), false);
                 LoadScanInfo((List<string>)Cache["ScanList"]);
             }
 

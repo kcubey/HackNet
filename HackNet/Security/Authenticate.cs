@@ -109,8 +109,6 @@ namespace HackNet.Security
 		{
 			get
 			{
-				string roles = (UserRoles.Length == 0) ? "" : string.Join(",", UserRoles);
-				Debug.WriteLine(roles);
 				FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
 						version: 1,
 						name: this.Email,
