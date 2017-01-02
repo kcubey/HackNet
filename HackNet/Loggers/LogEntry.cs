@@ -29,21 +29,61 @@ namespace HackNet.Loggers
 			Timestamp = DateTime.Now;
 		}
 
-		public bool IsValid()
+		public bool IsValid
 		{
-			// Validates if entered data conforms to the standard
-			if (UserId < 0)
-				return false; 
-			if (Timestamp == null) // Timestamp cannot be null (C# doesnt allow that anyway)
-				return false;
-			if (string.IsNullOrWhiteSpace(Description)) // Description has to be filled
-				return false;
-			if (!Enum.IsDefined(typeof(LogSeverity), Severity)) // Enum has to be defined
-				return false;
-			if (!Enum.IsDefined(typeof(LogType), Type))
-				return false;
+			get
+			{
+				// Validates if entered data conforms to the standard
+				if (UserId < 0)
+					return false;
+				if (Timestamp == null) // Timestamp cannot be null (C# doesnt allow that anyway)
+					return false;
+				if (string.IsNullOrWhiteSpace(Description)) // Description has to be filled
+					return false;
+				if (!Enum.IsDefined(typeof(LogSeverity), Severity)) // Enum has to be defined
+					return false;
+				if (!Enum.IsDefined(typeof(LogType), Type))
+					return false;
+				// After all guard clauses have been checked
+				return true;
+			}
+		}
 
-			return true;
+		public Logs ConvertToDB()
+		{
+			if (IsValid)
+			{
+				// Create EF object for insertion into DB
+				Logs l = new Logs()
+				{
+					UserId = UserId,
+					Type = (int)Type,
+					Severity = (int)Severity,
+					Description = Description,
+					IPAddress = IPAddress,
+					Timestamp = Timestamp
+				};
+				return l;
+			} else
+				throw new LogEntryInvalidException("Exception occured while converting to database type");
+		}
+
+		public static LogEntry ConvertFromDB(Logs dbl)
+		{
+			LogEntry l = new LogEntry()
+			{
+				UserId = dbl.UserId,
+				Type = (LogType) dbl.Type,
+				Severity = (LogSeverity) dbl.Severity,
+				Description = dbl.Description,
+				IPAddress = dbl.IPAddress,
+				Timestamp = dbl.Timestamp
+			};
+
+			if (l.IsValid)
+				return l;
+			else
+				throw new LogEntryInvalidException("Exception occured while converting from database type");
 		}
 	}
 

@@ -159,7 +159,9 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Admin\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="anonymousedited.jpg" />
@@ -168,7 +170,9 @@
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
     <Content Include="App_Data\HackNet.log" />
-    <None Include="App_Data\Secrets.config" />
+    <None Include="App_Data\Secrets.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="App_Start\addtoRouteConfig.txt" />
     <Content Include="App_Start\FilterConfigcs.txt" />
     <Content Include="App_Start\WebApiConfigcs.txt" />
@@ -463,6 +467,7 @@
     </Compile>
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
+    <Compile Include="Loggers\Exceptions.cs" />
     <Compile Include="Loggers\GameLogger.cs" />
     <Compile Include="Loggers\LogEntry.cs" />
     <Compile Include="Loggers\Logger.cs" />
