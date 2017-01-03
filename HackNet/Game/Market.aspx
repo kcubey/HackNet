@@ -34,9 +34,13 @@
             <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
             <br /><br />
             <asp:Label ID="pkgELbl" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>
+    
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
+    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox> buck --> <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox> coin
+    <br />
+    <asp:Button ID="Button1" runat="server" Text="Convert" />
 
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <!-- Item repeater
 
         ===For Current===
