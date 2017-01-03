@@ -20,12 +20,12 @@
 <body>
 	<script>
 		$(window).keydown(function (e) {
-			if ((e.metaKey || e.ctrlKey) && e.keyCode == 67) {
-				console.log("Control-C KEY PRESSED")
-				location.assign("/");
+			if ((e.metaKey || e.ctrlKey) && e.keyCode == 65) {
+				console.log("Control-A KEY PRESSED");
+				location.assign(<% =ResolveUrl("~/Default/") %>);
 				e.preventDefault();
 				return false;
-			}
+			} 
 		});
 
 		window.setInterval(function () {

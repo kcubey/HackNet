@@ -493,6 +493,7 @@
     </Compile>
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
+    <Compile Include="Loggers\SearchFilter.cs" />
     <Compile Include="Loggers\Exceptions.cs" />
     <Compile Include="Loggers\GameLogger.cs" />
     <Compile Include="Loggers\LogEntry.cs" />
