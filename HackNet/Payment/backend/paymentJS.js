@@ -22,6 +22,29 @@ braintree.setup(clientToken, "dropin", {
     container: "payment-form"
 });
 
+/* to change to this once server token side done
+braintree.setup(CLIENT_TOKEN_FROM_SERVER, 'dropin', {
+    container: 'payment-form',
+    //extras
+    paypal: {
+        singleUse: true,
+        amount: INSERT_VALUE,
+        currency: 'SGD'
+        },
+    onError: function(obj){
+        if (obj.type=='VALIDATION'){
+            obj.details.invalidFields;
+        }
+        else if (obj.type=='SERVER'){
+            obj.message;
+
+            obj.message;
+            obj.details;
+        }
+    }
+});
+*/
+
 
 //JS v3
 //==================

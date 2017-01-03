@@ -23,6 +23,7 @@
     <br /><br />
     <h3>Pay by Paypal or Credit Card</h3>
     <hr /><p>For Paypal, click on the Paypal button. For Credit Card, enter a valid card number and expiration date.</p>
+    
     <div class="dropinBox">
         <div id="payment-form"></div>
     </div>
@@ -44,7 +45,7 @@
   <br /><label for="expiration-date">Expiration Date:</label>
   <div class="hosted-field" id="expiration-date"></div>
     -->
-  <input type="hidden" name="payment-method-nonce">
+  <input type="hidden" name="fake-valid-nonce">
 
     <br />
     <asp:LinkButton runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
@@ -64,6 +65,7 @@
     <script src="/Payment/backend/JSv3HostedFields.js" lang="javascript" type="text/javascript"></script>
 -->
     <!-- all-->
+    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
     <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
 
 </asp:Content>
