@@ -20,6 +20,9 @@ namespace HackNet.Admin
 		protected DataTable GetDataTable(LogType type)
 		{
 			List<LogEntry> entries = AuthLogger.Instance.Retrieve(0, null, null);
+
+			entries.Reverse();
+
 			DataTable dt = new DataTable();
 			dt.Columns.Add("Timestamp");
 			dt.Columns.Add("User ID");
@@ -38,6 +41,13 @@ namespace HackNet.Admin
 				dt.Rows.Add(row);
 			}
 			return dt;
+		}
+
+		protected void ResultGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
+		{
+			ResultGrid.PageIndex = e.NewPageIndex;
+			ResultGrid.DataSource = GetDataTable(LogType.Security);
+			ResultGrid.DataBind();
 		}
 	}
 }

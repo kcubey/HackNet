@@ -6,5 +6,5 @@
 		<li>Audit Logs</li>
 		<li class="active"><%: Page.Title %></li>
 	</ol>
-	<asp:GridView runat="server" ID="ResultGrid" CssClass="table table-striped table-hover" />
+	<asp:GridView runat="server" ID="ResultGrid" CssClass="table logTable" AllowPaging="true" OnPageIndexChanging="ResultGrid_PageIndexChanging" />
 </asp:Content>
