@@ -6,4 +6,5 @@
 		<li>Audit Logs</li>
 		<li class="active"><%: Page.Title %></li>
 	</ol>
+	<asp:GridView runat="server" ID="ResultGrid"></asp:GridView>
 </asp:Content>
