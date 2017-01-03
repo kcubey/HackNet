@@ -11,7 +11,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-lock" aria-hidden="true"></i> SECURITY</span>
+				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-lock" aria-hidden="true"></i> SETTINGS</span>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->

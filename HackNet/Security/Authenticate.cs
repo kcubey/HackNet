@@ -50,12 +50,12 @@ namespace HackNet.Security
 				byte[] bHash = Crypt.Instance.Hash(bPassword, user.Salt);
 				if (user.Hash.SequenceEqual(bHash))
 				{
-					AuthLogger.Instance.PasswordSuccess();
+					AuthLogger.Instance.PasswordSuccess(user.Email, user.UserID);
 					return AuthResult.Success;
 				}
 				else
 				{
-					AuthLogger.Instance.PasswordFail();
+					AuthLogger.Instance.PasswordFail(user.Email, user.UserID);
 					return AuthResult.PasswordIncorrect;
 				}
 			}
@@ -74,7 +74,7 @@ namespace HackNet.Security
 					return oldpwres;
 				u.UpdatePassword(newpass);
 				db.SaveChanges();
-				AuthLogger.Instance.PasswordFail();
+				AuthLogger.Instance.PasswordFail(u.Email, u.UserID);
 				return AuthResult.Success;
 			}
 		}
