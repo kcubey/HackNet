@@ -37,6 +37,7 @@ namespace HackNet.Data
 				UserName = "Wuggle",
 				FullName = "Wen Liang",
 				Email = "wenlianggg@gmail.com",
+				AccessLevel = AccessLevel.Admin,
 				BirthDate = DateTime.Parse("1998-03-17"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now
@@ -46,6 +47,7 @@ namespace HackNet.Data
 				UserName = "RoyceFrost",
 				FullName = "Roy Tang Qing Long",
 				Email = "butterfrost90@gmail.com",
+				AccessLevel = AccessLevel.Admin,
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now,
@@ -66,6 +68,7 @@ namespace HackNet.Data
 				UserName = "KeziaKew",
 				FullName = "Kezia Kew",
 				Email = "keziakew98@gmail.com",
+				AccessLevel = AccessLevel.Admin,
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now
@@ -75,6 +78,7 @@ namespace HackNet.Data
 				UserName = "DomSwag",
 				FullName = "Dominic Gian",
 				Email = "keeleyswag@gmail.com",
+				AccessLevel = AccessLevel.Admin,
 				BirthDate = DateTime.Parse("1997-01-01"),
 				Registered = DateTime.Parse("2016-10-10"),
 				LastLogin = DateTime.Now

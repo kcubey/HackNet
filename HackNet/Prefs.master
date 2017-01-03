@@ -11,26 +11,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-lock" aria-hidden="true"></i> SETTINGS</span>
+				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-lock" aria-hidden="true"></i> USER PREFERENCES</span>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="collapsible">
 				<ul class="nav navbar-nav">
-					<li>
-						<asp:HyperLink runat="server" Text="Profile Settings" NavigateUrl="~/Prefs/ProfileSettings" /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Change Password" NavigateUrl="~/Prefs/ChangePassword" /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Configure 2FA" NavigateUrl="~/Prefs/OtpSetup" /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Login Notifications" NavigateUrl="#" /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Security Logs" NavigateUrl="~/Prefs/AccessLogs" /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Chat Settings" NavigateUrl="#"  /></li>
-					<li>
-						<asp:HyperLink runat="server" Text="Admin Dashboard" NavigateUrl="#" ID="AdminDash"/></li>
+					<li><asp:HyperLink runat="server" Text="Profile Settings" NavigateUrl="~/Prefs/ProfileSettings" /></li>
+					<li><asp:HyperLink runat="server" Text="Change Password" NavigateUrl="~/Prefs/ChangePassword" /></li>
+					<li><asp:HyperLink runat="server" Text="Configure 2FA" NavigateUrl="~/Prefs/OtpSetup" /></li>
+					<li><asp:HyperLink runat="server" Text="Login Notifications" NavigateUrl="~/Prefs/LoginNotify" /></li>
+					<li><asp:HyperLink runat="server" Text="Security Logs" NavigateUrl="~/Prefs/AccessLogs" /></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

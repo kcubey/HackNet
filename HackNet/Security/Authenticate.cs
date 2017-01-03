@@ -302,7 +302,7 @@ namespace HackNet.Security
 			return UserData[1];
 		}
 
-		internal static AccessLevel GetUserAccessLevel()
+		internal static AccessLevel GetAccessLevel()
 		{
 			string[] UserData = GetUserData();
 			int AccessLevelNum;
