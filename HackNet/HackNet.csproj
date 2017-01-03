@@ -162,13 +162,15 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Admin\Default.aspx" />
+    <Content Include="Admin\Logs.aspx" />
     <Content Include="anonymousedited.jpg" />
     <Content Include="App_Code\BraintreeConfigurationcs.txt" />
     <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
     <Content Include="App_Data\HackNet.log" />
-    <Content Include="Admin\Admin.master" />
+    <Content Include="Admin.master" />
     <None Include="App_Data\Secrets.config">
       <SubType>Designer</SubType>
     </None>
@@ -314,12 +316,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\Admin.master.cs">
+    <Compile Include="Admin.master.cs">
       <DependentUpon>Admin.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Admin.master.designer.cs">
+    <Compile Include="Admin.master.designer.cs">
       <DependentUpon>Admin.master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Logs.aspx.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Logs.aspx.designer.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

@@ -11,7 +11,7 @@ namespace HackNet.Admin
 {
 
 
-	public partial class Admin
+	public partial class Logs
 	{
 	}
 }

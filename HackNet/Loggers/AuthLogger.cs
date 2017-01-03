@@ -24,12 +24,12 @@ namespace HackNet.Loggers
 		}
 
 
-		internal void PasswordFail()
+		internal void PasswordFail(string email, int userid)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = email,
+				UserId = userid,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "Password login failed for user"
@@ -37,12 +37,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void PasswordSuccess()
+		internal void PasswordSuccess(string email, int uid)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = email,
+				UserId = uid,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Password login successful for user"

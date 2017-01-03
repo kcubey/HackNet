@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="HackNet.AdminMaster" %>
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadPlaceholder" runat="server">
+</asp:Content>
+<asp:Content ID="MainAdminContent" ContentPlaceHolderID="MainContent" runat="server">
+			<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsible">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-wrench" aria-hidden="true"></i> ADMINISTRATION PANEL</span>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="collapsible">
+				<ul class="nav navbar-nav">
+					<li><asp:HyperLink runat="server" Text="Admin Dashboard" NavigateUrl="~/Admin/Default" ID="AdminDash"/></li>
+
+					<li><asp:HyperLink runat="server" Text="User Management" NavigateUrl="~/Admin/UserMgmt" /></li>
+					<li><asp:HyperLink runat="server" Text="Item Management" NavigateUrl="~/Admin/ItemMgmt" /></li>
+
+					<li><asp:HyperLink runat="server" Text="HackNet Logs" NavigateUrl="~/Admin/Logs" /></li>
+					<li><asp:HyperLink runat="server" Text="Local Logs" NavigateUrl="~/Admin/TextLogs" /></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<asp:ContentPlaceHolder ID="AdminPanelContent" runat="server" />
+</asp:Content>
