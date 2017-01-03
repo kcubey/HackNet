@@ -106,7 +106,7 @@ namespace HackNet.Game
             string attackType=AtkTextBx.Text;
             if (checkMissionType(attackType))
             {
-                Server.Transfer("Gameplay/PwdAtk.aspx", true);
+                Response.Redirect("Gameplay/PwdAtk.aspx");
             }
             else
             {
