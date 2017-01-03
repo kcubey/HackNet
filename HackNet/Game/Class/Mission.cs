@@ -85,7 +85,7 @@ namespace HackNet.Game
 
         // Gameplay for Password Attack
 
-        public static List<string> LoadNautilus()
+        public static List<string> LoadNautilus(string filename = null)
         {
             List<string> mList = new List<string>();
             mList.Add("bin");
@@ -94,6 +94,11 @@ namespace HackNet.Game
             mList.Add("tmp");
             mList.Add("secret");
             mList.Add("audit.log");
+
+            if (filename != null)
+            {
+                mList.Remove(filename);
+            }
             return mList;
         }
 

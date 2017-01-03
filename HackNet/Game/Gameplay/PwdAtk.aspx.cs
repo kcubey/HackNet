@@ -70,7 +70,7 @@ namespace HackNet.Game.Gameplay
 
         // This is the command prompt that does everything
         protected void SubCmdBtn_Click(object sender, EventArgs e)
-        {
+        {          
             if ((bool)Cache["Configure"])
             {
                 if ((bool)Cache["PWDCalculated"] == false)
@@ -120,8 +120,8 @@ namespace HackNet.Game.Gameplay
                             // run method to load the datalist for nautilus
                             List<string> infoList = Mission.LoadNautilus();
                             LoadNautilus(infoList);
-                            StealInfo.Enabled = true;
-                            DeleteInfo.Enabled = true;
+                            NautilusBtn.Enabled = true;
+                        
                             CmdError.Text = "Nautilus is running....";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                         }
@@ -182,6 +182,14 @@ namespace HackNet.Game.Gameplay
             }
         }
 
-      
+        protected void NautilusBtn_Command(object sender, CommandEventArgs e)
+        {
+
+            if (NautilusBtn.Text.Equals("Steal"))
+            {
+                
+                
+            }
+        }
     }
 }
