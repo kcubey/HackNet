@@ -18,7 +18,6 @@ namespace HackNet.Auth {
 			if (Authenticate.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
             DataContext ctx = new DataContext();
-			Msg.Text = "Sign in with your Google Drive email and password as 123";
         }
 
         protected void LoginClick(object sender, EventArgs e)

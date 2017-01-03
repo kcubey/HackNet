@@ -34,6 +34,8 @@ namespace HackNet.Admin
 				row["Description"] = e.Description;
 				row["Severity"] = e.Severity;
 				row["UA & IP"] = e.IPAddress;
+
+				dt.Rows.Add(row);
 			}
 			return dt;
 		}

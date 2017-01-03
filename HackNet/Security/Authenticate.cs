@@ -114,7 +114,7 @@ namespace HackNet.Security
 						version: 1,
 						name: this.Email,
 						issueDate: DateTime.Now,
-						expiration: DateTime.Now.AddSeconds(HttpContext.Current.Session.Timeout),
+						expiration: DateTime.Now.AddMinutes(HttpContext.Current.Session.Timeout),
 						isPersistent: false,
 						userData: u.UserID + "," + u.UserName + "," + (int)u.AccessLevel
 				);
