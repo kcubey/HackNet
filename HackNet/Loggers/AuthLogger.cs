@@ -162,9 +162,7 @@ namespace HackNet.Loggers
 								   where log.Type == logtype
 								   select log).ToList();
 				foreach (Logs l in logs)
-				{
 					results.Add(LogEntry.ConvertFromDB(l));
-				}
 
 			}
 

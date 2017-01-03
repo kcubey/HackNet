@@ -15,7 +15,7 @@ namespace HackNet {
 				PrivateLeft.Visible = true;
 				PrivateRight.Visible = true;
 
-                PrivateLeftAnchor.InnerText = "Hello, " + Authenticate.GetCurrentUser().UserName;
+                PrivateLeftAnchor.InnerText = "Hello, " + Authenticate.GetUserName();
 
 				AccessLevel al = Authenticate.GetAccessLevel();
 				if (al == AccessLevel.Admin || al == AccessLevel.Staff)
