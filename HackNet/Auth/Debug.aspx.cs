@@ -22,7 +22,7 @@ namespace HackNet.Auth
 
 				Msg2.Text = "Username: " + Authenticate.GetUserName();
 
-				Msg3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), Authenticate.GetUserAccessLevel());
+				Msg3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), Authenticate.GetAccessLevel());
 
 				//Users u = Authenticate.GetCurrentUser();
 				//using (MailClient mc = new MailClient(u.Email))
