@@ -1,4 +1,5 @@
-﻿using HackNet.Security;
+﻿using HackNet.Data;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,9 +75,21 @@ namespace HackNet.Loggers
 			t.Start();
 		}
 
-		internal override List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end)
+		internal override List<LogEntry> Retrieve(SearchFilter sf)
 		{
-			return null;
+			List<LogEntry> results = new List<LogEntry>();
+			using (DataContext db = new DataContext())
+			{
+				int logtype = (int)LogType.Game;
+				List<Logs> logs = (from log in db.Logs
+								   where log.Type == logtype
+								   select log).ToList();
+				foreach (Logs l in logs)
+					results.Add(LogEntry.ConvertFromDB(l));
+
+			}
+
+			return results;
 		}
 	}
 }

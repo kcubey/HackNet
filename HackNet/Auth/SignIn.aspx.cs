@@ -17,8 +17,9 @@ namespace HackNet.Auth {
 		{
 			if (Authenticate.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
-            DataContext ctx = new DataContext();
-			Msg.Text = "Sign in with your Google Drive email and password as 123";
+			if (Request.QueryString["ReturnUrl"] != null)
+				Session["ReturnUrl"] = Request.QueryString["ReturnUrl"];
+			DataContext ctx = new DataContext();
         }
 
         protected void LoginClick(object sender, EventArgs e)
@@ -56,7 +57,10 @@ namespace HackNet.Auth {
 				} else
 				{
 					Response.Cookies.Add(a.AuthCookie);
-					Response.Redirect("~/Default");
+					if (Session["ReturnUrl"] != null)
+						Response.Redirect("~" + Session["ReturnUrl"]);
+					else
+						Response.Redirect("/Default");
 				}
 			}
 		}

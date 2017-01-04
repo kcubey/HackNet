@@ -116,6 +116,11 @@ footer {
   height: 300px;
   width: 300px; }
 
+/* Log Table */
+.logTable {
+  background-color: black;
+  color: white; }
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {

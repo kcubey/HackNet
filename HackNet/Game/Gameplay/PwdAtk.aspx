@@ -84,13 +84,12 @@
                     </h4>
                 </div>
                 <div class="panel-body">
-                    <asp:Button ID="StealInfo" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false"/>
-                    <asp:Button ID="DeleteInfo" runat="server" CssClass="btn btn-default" Text="Delete" Enabled="false" />
-                    <asp:DataList ID="NautilusView" runat="server" RepeatLayout="Table" >
+                    <asp:Button ID="NautilusBtn" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false" OnCommand="NautilusBtn_Command"/>                   
+                     <asp:DataList ID="NautilusView" runat="server" RepeatLayout="Table" >
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
                                 <asp:TableHeaderRow>
-                                    <asp:TableHeaderCell Width="50px">
+                                    <asp:TableHeaderCell Width="70px">
                                         
                                     </asp:TableHeaderCell>
                                     <asp:TableHeaderCell Width="500px">
@@ -103,10 +102,10 @@
                             </asp:Table>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <asp:Table runat="server" CssClass="table">
+                            <asp:Table runat="server" CssClass="table" ID="NautilusFileTable">
                                 <asp:TableRow>
-                                    <asp:TableCell Width="50px">
-                                        <asp:CheckBox runat="server" />
+                                    <asp:TableCell Width="70px">                                     
+                                        <asp:CheckBox runat="server" ID="NautilusCheck"/>
                                     </asp:TableCell>
                                     <asp:TableCell Width="500px">
                                         <asp:Label runat="server" Text='<%#Eval("Fname") %>'></asp:Label>

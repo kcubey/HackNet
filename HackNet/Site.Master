@@ -20,12 +20,12 @@
 <body>
 	<script>
 		$(window).keydown(function (e) {
-			if ((e.metaKey || e.ctrlKey) && e.keyCode == 67) {
-				console.log("Control-C KEY PRESSED")
-				location.assign("/");
+			if ((e.metaKey || e.ctrlKey) && e.keyCode == 65) {
+				console.log("Control-A KEY PRESSED");
+				location.assign(<% =ResolveUrl("~/Default/") %>);
 				e.preventDefault();
 				return false;
-			}
+			} 
 		});
 
 		window.setInterval(function () {
@@ -85,9 +85,9 @@
 							<ul class="dropdown-menu" runat="server">
 								<li><asp:HyperLink NavigateUrl="#" runat="server"><i class="fa fa-user" aria-hidden="true"></i> Profile</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
-								<li><asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">Profile Options</asp:HyperLink></li>
-								<li><asp:HyperLink NavigateUrl="~/Prefs/ChangePassword" runat="server">Security Settings</asp:HyperLink></li>
-								<li><asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">Security Logs</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">User Options</asp:HyperLink></li>
+								<li><asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">Account Security</asp:HyperLink></li>
+								<li runat="server" visible="false" ID="ap"><asp:HyperLink NavigateUrl="~/Admin/Default" runat="server">Administration</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>
 								<li><asp:HyperLink NavigateUrl="#" runat="server">About Us & FAQ</asp:HyperLink></li>
 								<li role="separator" class="divider"></li>

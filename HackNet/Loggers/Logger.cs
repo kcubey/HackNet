@@ -23,7 +23,22 @@ namespace HackNet.Loggers
 
 		internal abstract void Log(LogEntry entry);
 
-		internal abstract List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end);
+		internal abstract List<LogEntry> Retrieve(SearchFilter sf);
+
+		internal static Logger GetRetriever(SearchFilter sf)
+		{
+			switch (sf.Type) {
+				case LogType.Game:
+					return GameLogger.Instance;
+				case LogType.Security:
+					return AuthLogger.Instance;
+				case LogType.Payment:
+				case LogType.Profile:
+				case LogType.Error:
+				default:
+					return null;
+			}
+		}
 
 		internal int LogToDB(LogEntry entry)
 		{

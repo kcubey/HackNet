@@ -153,21 +153,18 @@ namespace HackNet.Loggers
 			t.Start();
 		}
 
-		internal override List<LogEntry> Retrieve(int UserId, DateTime? start, DateTime? end)
+		internal override List<LogEntry> Retrieve(SearchFilter sf)
 		{
 			List<LogEntry> results = new List<LogEntry>();
 			using (DataContext db = new DataContext()) {
-				int logtype = (int)LogType.Security;
 				List<Logs> logs = (from log in db.Logs
-								   where log.Type == logtype
+								   where log.Type == sf.TypeInt 
+								   && DateTime.Compare(sf.End, log.Timestamp) >= 0
+								   && DateTime.Compare(sf.Start, log.Timestamp) <= 0
 								   select log).ToList();
 				foreach (Logs l in logs)
-				{
 					results.Add(LogEntry.ConvertFromDB(l));
-				}
-
 			}
-
 			return results;
 		}
 	}

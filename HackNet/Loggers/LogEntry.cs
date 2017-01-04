@@ -102,7 +102,6 @@ namespace HackNet.Loggers
 		Security = 1,
 		Payment = 2,
 		Profile = 3,
-		Mission = 4,
-		Database = 5
+		Error = 4
 	}
 }

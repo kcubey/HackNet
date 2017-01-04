@@ -20,7 +20,7 @@
 				27/10 - Patch notes for HackNet Update 0.4.2<br />
 
 				<br />
-				<strong>Enter CONTROL-C to exit back to main menu<span class="blinking">_</span></strong>
+				<strong>Enter CONTROL-A to exit back to main menu<span class="blinking">_</span></strong>
             </p>
         </div>
     </div>
