@@ -135,8 +135,10 @@
             <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
         </div>
         <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white;">
-            <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
-            <asp:TextBox runat="server" ID="AtkTextBx" OnTextChanged="AtkTextBx_TextChanged" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
+            <asp:Label runat="server" Text="username@HackNet:~#" Width="20%"></asp:Label>
+            <asp:TextBox runat="server" ID="AtkTextBx" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
+            <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
+            <asp:Label runat="server" ID="CMDError" ></asp:Label>
         </div>
 
     </div>

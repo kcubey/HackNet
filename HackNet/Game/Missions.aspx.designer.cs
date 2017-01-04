@@ -103,6 +103,24 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.TextBox AtkTextBx;
         
         /// <summary>
+        /// SubCmdBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SubCmdBtn;
+        
+        /// <summary>
+        /// CMDError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CMDError;
+        
+        /// <summary>
         /// AtkName control.
         /// </summary>
         /// <remarks>
