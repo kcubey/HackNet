@@ -52,9 +52,45 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
-                    <div class="tab-pane fade" id="tab4default">Default 4</div>
-                    <div class="tab-pane fade" id="tab5default">Default 5</div>
-                    <div class="tab-pane fade" id="tab6default">Default 6</div>
+                    <div class="tab-pane fade" id="tab4default">
+                        <asp:DataList ID="MemoryList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px" style="margin:0 auto;">
+                            <ItemTemplate>
+                                <div style="width:300px">
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server" 
+                                    Width="200px" Height="200px"     
+                                    ImageUrl='<%#Eval("ItemPic")%>'/>
+                                </div>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <div class="tab-pane fade" id="tab5default">
+                        <asp:DataList ID="PowerSupList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px" style="margin:0 auto;">
+                            <ItemTemplate>
+                                <div style="width:300px">
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server" 
+                                    Width="200px" Height="200px"     
+                                    ImageUrl='<%#Eval("ItemPic")%>'/>
+                                </div>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <div class="tab-pane fade" id="tab6default">
+                        <asp:DataList ID="BonusList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px" style="margin:0 auto;">
+                            <ItemTemplate>
+                                <div style="width:300px">
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server" 
+                                    Width="200px" Height="200px"     
+                                    ImageUrl='<%#Eval("ItemPic")%>'/>
+                                </div>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,6 +40,33 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DataList GPUList;
         
         /// <summary>
+        /// MemoryList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList MemoryList;
+        
+        /// <summary>
+        /// PowerSupList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList PowerSupList;
+        
+        /// <summary>
+        /// BonusList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList BonusList;
+        
+        /// <summary>
         /// UserIDLbl control.
         /// </summary>
         /// <remarks>
