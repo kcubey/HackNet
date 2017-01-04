@@ -1,5 +1,4 @@
 ﻿using HackNet.Data;
-using HackNet.Game.Class;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -204,18 +203,24 @@ namespace HackNet.Game.Gameplay
                 MisIPLbl.Text = mis.MissionIP;
                 MisSumLbl.Text = "";
                 MisExpLbl.Text = "";
+                MisCoinLbl.Text = "";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
 
             }
             else
             {
+                // Title
+                SummaryTitle.Text = "Mission Failed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Red;
+
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
             }
         }
 
         protected void ExitBtn_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Missions.aspx");
         }
     }
 }

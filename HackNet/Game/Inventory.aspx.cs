@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using HackNet.Security;
 
 namespace HackNet.Game
 {
@@ -14,19 +15,22 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            AllPartList.DataSource = LoadInventory(0);
+            AllPartList.DataBind();
+
             ProcessList.DataSource = LoadInventory(1);
             ProcessList.DataBind();
 
             GPUList.DataSource = LoadInventory(4);
             GPUList.DataBind();
 
-
         }
 
         private DataTable LoadInventory(int itemType)
         {
-                  
-            List<Items> ilist = Data.Items.GetItems(itemType);
+            List<InventoryItem> invList = InventoryItem.GetUserInvList(Authenticate.GetCurrentUser());
+            List<Items> ilist = InventoryItem.GetUserInvItems(invList,itemType);
+           
             string imageurlstring;
             string url;
             DataTable dt = new DataTable();
@@ -39,11 +43,8 @@ namespace HackNet.Game
                 dt.Rows.Add(i.ItemName,url);
             }
             
-            //ProcessList.DataSource = dt;
-            //ProcessList.DataBind();
             return dt;
         }
-
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -63,18 +64,17 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
+
+        protected void AddItemIntoUserBtn_Click(object sender, EventArgs e)
         {
-            if (UploadPhoto.HasFile)
+            InventoryItem invitem = new InventoryItem();
+            invitem.UserId = int.Parse(UserIDLbl.Text);
+            invitem.ItemId = int.Parse(ItemIDLbl.Text);
+            invitem.Quantity = int.Parse(QuanLbl.Text);
+            using (DataContext db = new DataContext())
             {
-                Stream strm = UploadPhoto.PostedFile.InputStream;
-                BinaryReader br = new BinaryReader(strm);
-                // this is the thing u need to throw into the database
-                byte[] imageByte = br.ReadBytes((int)strm.Length);
-
-                string base64string = Convert.ToBase64String(imageByte, 0, imageByte.Length);
-                imgViewFile.ImageUrl = "data:image/png;base64," + base64string;
-
+                db.InventoryItem.Add(invitem);
+                db.SaveChanges();
             }
         }
     }
