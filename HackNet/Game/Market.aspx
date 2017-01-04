@@ -38,12 +38,12 @@
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     
-    <asp:TextBox ID="buckTextBox" runat="server" ForeColor="Black" OnTextChanged="buckTextBox_TextChanged"></asp:TextBox>
+    <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" ForeColor="Black" OnTextChanged="buckTextBox_TextChanged"></asp:TextBox>
         <asp:Label ID="lblError" runat="server" Text="*"  ForeColor="Red" Visible="False"></asp:Label>
      buck --> 
-    <asp:TextBox ID="coinTextBox" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox> coin
+    <asp:TextBox ID="coinTextBox" CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox> coin
     
-    <br />
+    <br /><br />
     <asp:Button ID="Button1" runat="server" CssClass="btn btn-success" Text="Check Value"/>
     <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
 
