@@ -18,7 +18,11 @@ namespace HackNet.Game
         DataTable dtAttack;
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadAttackList();
+            if (!IsPostBack)
+            {
+                Cache["SelectedMis"] = false;
+                LoadAttackList();
+            }
         }
 
         protected void regatkList_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +75,19 @@ namespace HackNet.Game
             AtkListView.DataBind();
         }
 
+        private void LoadScanInformation(MissionData mis)
+        {
+            List<string> arrList = Mission.scanMission(mis, Authenticate.GetEmail(), true);
+
+            for (int i = 0; i < arrList.Count; i++)
+            {
+                Label lbl = new Label();
+                lbl.Text = arrList[i].ToString();
+                LogPanel.Controls.Add(lbl);
+                LogPanel.Controls.Add(new LiteralControl("<br/>"));
+            }
+        }
+
         protected void ViewMis_Command(object sender, CommandEventArgs e)
         {
             MissionData mis = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
@@ -84,47 +101,33 @@ namespace HackNet.Game
 
         protected void AttackLink_Click(object sender, EventArgs e)
         {
-
-            MissionData mis = (MissionData)Session["MissionData"];
-            List<string> arrList = Mission.scanMission(mis,Authenticate.GetEmail(), true);
-
-            for(int i=0;i<arrList.Count;i++)
-            {
-                Label lbl = new Label();
-                lbl.Text = arrList[i].ToString();
-                LogPanel.Controls.Add(lbl);
-                LogPanel.Controls.Add(new LiteralControl("<br/>"));
-            }
-           
+            Cache["SelectedMis"] = true;
+            LoadScanInformation((MissionData)Session["MissionData"]);
         }
 
-      
-
-        protected void AtkTextBx_TextChanged(object sender, EventArgs e)
+        protected void SubCmdBtn_Click(object sender, EventArgs e)
         {
-            string attackType=AtkTextBx.Text;
-            if (checkMissionType(attackType))
+            string attackType = AtkTextBx.Text;
+            if ((bool)Cache["SelectedMis"])
             {
-                Response.Redirect("Gameplay/PwdAtk.aspx");
-            }
-            else
+                if (Mission.checkMissionType(attackType))
+                {
+                    Response.Redirect("Gameplay/PwdAtk.aspx");
+                }
+                else
+                {
+                    LoadScanInformation((MissionData)Session["MissionData"]);
+                    CMDError.Text = "Invalid Attack Type";
+                    CMDError.ForeColor = System.Drawing.Color.Red;
+                }
+            }else
             {
-                
+                CMDError.Text = "Please Choose a Mission";
+                CMDError.ForeColor = System.Drawing.Color.Red;
             }
         }
-        internal bool checkMissionType(string atkType)
-        {
-            if (atkType.Equals("PWDATK"))
-                return true;
-            if (atkType.Equals("SQLIN"))
-                return true;
-            if (atkType.Equals("MITM"))
-                return true;
-            if (atkType.Equals("XXS"))
-                return true;
 
-            return false;
-        }
+        
 
         // This is to display about Attack information
         protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
@@ -172,6 +175,7 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
-        
+
+      
     }
 }

@@ -81,7 +81,20 @@ namespace HackNet.Game
             return scanList;
         }
 
+        //Check mission type
+        public static bool checkMissionType(string atkType)
+        {
+            if (atkType.Equals("PWDATK"))
+                return true;
+            if (atkType.Equals("SQLIN"))
+                return true;
+            if (atkType.Equals("MITM"))
+                return true;
+            if (atkType.Equals("XXS"))
+                return true;
 
+            return false;
+        }
 
         // Gameplay for Password Attack
 
