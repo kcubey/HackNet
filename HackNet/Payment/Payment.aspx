@@ -11,14 +11,14 @@
     </p>
     <h3>Payment Details</h3>
         <asp:DropDownList ID="PackageList" runat="server" ForeColor="Black" 
-            AutoPostBack="true" onselectedindexchanged="pkgConfirm_indexChange" ClientIDMode="Static">
+            AutoPostBack="true" onselectedindexchanged="pkgConfirm_indexChange">
             <asp:ListItem Text="Package A - SGD$10" Value="0"></asp:ListItem>
             <asp:ListItem Text="Package B - SGD$20" Value="1"></asp:ListItem>
             <asp:ListItem Text="Package C - SGD$30" Value="2"></asp:ListItem>
             <asp:ListItem Text="Package D - SGD$40" Value="3"></asp:ListItem>
         </asp:DropDownList>
     <br />
-    <asp:Label ID="pkgConfirm" runat="server" ForeColor="Black" ClientIDMode="Static"></asp:Label>
+    <asp:Label ID="pkgConfirm" runat="server" ForeColor="Black"></asp:Label>
    
     <br /><br />
     <h3>Pay by Paypal or Credit Card</h3>

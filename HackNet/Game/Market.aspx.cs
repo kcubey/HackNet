@@ -2,6 +2,7 @@
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,33 +18,77 @@ namespace HackNet.Market
         {
             buckTextBox.Text = "";
             coinTextBox.Text = "";
-
+            lblError.Visible = false;
         }
 
-        public void getCoinsBucksDB(object sender, EventArgs e)
+        public void validateBuck()
         {
-            using (DataContext db = new DataContext())
+            Users u = Authenticate.GetCurrentUser();
+            int pBuck = u.ByteDollars;
+
+            try
             {
-                Users u = Authenticate.GetCurrentUser();
-                int pCoin = u.Coins;
-                int pBuck = u.ByteDollars;
+                int numBuck = int.Parse(buckTextBox.Text);
+                if (numBuck < pBuck || numBuck > pBuck)
+                {
+                    lblError.Visible = true;
+                }
             }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+      
+        public void PrintMessage(String message)
+        {
+            string alert = message;
+            Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
 
         }
 
         public void buckTextBox_TextChanged(object sender, EventArgs e)
         {
-            int numCoin = Convert.ToInt32(buckTextBox.Text) * 100;
-            coinTextBox.Text = Convert.ToString(numCoin);
-        }
+            string message = "";
+            validateBuck();
 
+            if (lblError.Visible == false)
+            {
+                try
+                {
+                    int numCoin = int.Parse(buckTextBox.Text) * 100;
+                    coinTextBox.Text = Convert.ToString(numCoin);
+
+                }catch(Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+
+            }
+            else
+            {
+                message = "Please enter a valid number of bucks to convert.";
+                PrintMessage(message);
+            }
+        }
+        
         public void ConversionButton_Click(Object sender, EventArgs e)
         {
-            string numBuck = buckTextBox.Text;
-            string numCoin = coinTextBox.Text;
-            string message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+            string message = "";
 
-            Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");
+            if (lblError.Visible == true)
+            {
+                message = "Please enter a valid number of bucks to convert.";
+            }
+            else if (lblError.Visible == false)
+            {
+                string numBuck = buckTextBox.Text;
+                string numCoin = coinTextBox.Text;
+                message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+            }
+            PrintMessage(message);
+
+            //Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");
 
             //    Response.Write("<script type='text/javascript'>window.open('Page.aspx?ID=" + YourTextField.Text.ToString() + "','_blank');</script>");
 
