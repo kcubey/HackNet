@@ -16,7 +16,6 @@ namespace HackNet.Game
     {
         DataTable dtMission;
         DataTable dtAttack;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadAttackList();
@@ -78,15 +77,15 @@ namespace HackNet.Game
             MissionTitleLbl.Text = mis.MissionName;
             MisDesLbl.Text = mis.MissionDesc;
 
-            Session["MissID"] = mis.MissionId;
+            Session["MissionData"] = mis;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
 
         protected void AttackLink_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(Session["MissID"].ToString());
-            MissionData mis = MissionData.GetMissionData(id);
+
+            MissionData mis = (MissionData)Session["MissionData"];
             List<string> arrList = Mission.scanMission(mis,Authenticate.GetEmail(), true);
 
             for(int i=0;i<arrList.Count;i++)

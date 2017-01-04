@@ -13,7 +13,7 @@ namespace HackNet.Game.Gameplay
 {
     public partial class PwdAtk : System.Web.UI.Page
     {
-        MissionData mis = MissionData.GetMissionData(1);
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +22,7 @@ namespace HackNet.Game.Gameplay
                 Cache["Configure"] = false;
                 Cache["PWDCalculated"] = false;
                 Cache["Bypass"] = false;
-                Cache["ScanList"] = Mission.scanMission(mis, Authenticate.GetEmail(), false);
+                Cache["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
                 LoadScanInfo((List<string>)Cache["ScanList"]);
             }
 
@@ -103,7 +103,7 @@ namespace HackNet.Game.Gameplay
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
-                            LoadScanInfo(Mission.LoadSuccessPwd(mis));
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             Cache["Bypass"] = true;
                         }
                         else
@@ -116,12 +116,11 @@ namespace HackNet.Game.Gameplay
                     {
                         if (CmdTextBox.Text.Equals("run nautilus"))
                         {
-                            LoadScanInfo(Mission.LoadSuccessPwd(mis,"run nautilus"));
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"], "run nautilus"));
                             // run method to load the datalist for nautilus
                             List<string> infoList = Mission.LoadNautilus();
                             LoadNautilus(infoList);
-                            NautilusBtn.Enabled = true;
-                        
+                    
                             CmdError.Text = "Nautilus is running....";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                         }
@@ -146,7 +145,7 @@ namespace HackNet.Game.Gameplay
         {
             string error = "Error input for: ";
             bool errorchk = false;
-
+            MissionData mis = (MissionData)Session["MissionData"];
             // check if IP is configured correctly
             if (TargetIPLbl.Text != mis.MissionIP)
             {
@@ -182,13 +181,24 @@ namespace HackNet.Game.Gameplay
             }
         }
 
-        protected void NautilusBtn_Command(object sender, CommandEventArgs e)
+        protected void StealLinkBtn_Command(object sender, CommandEventArgs e)
         {
-
-            if (NautilusBtn.Text.Equals("Steal"))
+            MissionData mis = (MissionData)Session["MissionData"];
+            string stolenFile = e.CommandArgument.ToString();
+            if (Mission.CheckStolenFile(stolenFile))
             {
-                
-                
+                // Title
+                SummaryTitle.Text = "Congratulations, Mission Completed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Green;
+                // Summary
+                MisNameLbl.Text = mis.MissionName;
+                MisIPLbl.Text = mis.MissionIP;
+                MisSumLbl.Text = "";
+                MisExpLbl.Text = "";
+            }
+            else
+            {
+
             }
         }
     }

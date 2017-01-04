@@ -38,17 +38,13 @@
     </div>
     <div id="attackSummaryModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
-
                 </div>
                 <div class="modal-body" style="color: black;">
                     <asp:Label runat="server" ID="MisDesLbl"></asp:Label>
-
-                    <p>Use a password attack</p>
                 </div>
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
