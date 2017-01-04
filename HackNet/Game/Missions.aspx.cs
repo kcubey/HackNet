@@ -124,6 +124,7 @@ namespace HackNet.Game
             {
                 CMDError.Text = "Please Choose a Mission";
                 CMDError.ForeColor = System.Drawing.Color.Red;
+               
             }
         }
 

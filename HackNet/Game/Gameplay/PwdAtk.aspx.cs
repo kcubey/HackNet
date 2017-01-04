@@ -25,7 +25,6 @@ namespace HackNet.Game.Gameplay
                 Cache["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
                 LoadScanInfo((List<string>)Cache["ScanList"]);
             }
-
         }
 
         // This is to load a static output
@@ -87,12 +86,14 @@ namespace HackNet.Game.Gameplay
                         LoadPwdListToGrid(pwdList);
                         CmdError.Text = "hydra is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
+                        CmdTextBox.Text = string.Empty;
                     }
                     else
                     {
                         LoadScanInfo((List<string>)Cache["ScanList"]);
                         CmdError.Text = "Unrecognised Command";
                         CmdError.ForeColor = System.Drawing.Color.Red;
+                        CmdTextBox.Text = string.Empty;
                     }
                 }
                 else
@@ -103,6 +104,7 @@ namespace HackNet.Game.Gameplay
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
+                            CmdTextBox.Text = string.Empty;
                             LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             Cache["Bypass"] = true;
                         }
@@ -111,6 +113,7 @@ namespace HackNet.Game.Gameplay
                             LoadScanInfo((List<string>)Cache["ScanList"]);
                             CmdError.Text = "Wrong Password";
                             CmdError.ForeColor = System.Drawing.Color.Red;
+                            CmdTextBox.Text = string.Empty;
                         }
                     }else
                     {
@@ -123,11 +126,15 @@ namespace HackNet.Game.Gameplay
                     
                             CmdError.Text = "Nautilus is running....";
                             CmdError.ForeColor = System.Drawing.Color.Green;
+                            CmdTextBox.Text = string.Empty;
+                            CmdTextBox.Enabled = false;
                         }
                         else
                         {
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             CmdError.Text = "Unrecognised Command";
                             CmdError.ForeColor = System.Drawing.Color.Red;
+                            CmdTextBox.Text = string.Empty;
                         }
                     }
                 }
@@ -137,6 +144,7 @@ namespace HackNet.Game.Gameplay
                 LoadScanInfo((List<string>)Cache["ScanList"]);
                 CmdError.Text = "hydra has not been configure";
                 CmdError.ForeColor = System.Drawing.Color.Red;
+                CmdTextBox.Text = string.Empty;
             }
         }
 
@@ -178,6 +186,7 @@ namespace HackNet.Game.Gameplay
                 LoadScanInfo((List<string>)Cache["ScanList"]);
                 ErrorLbl.ForeColor = System.Drawing.Color.Red;
                 ErrorLbl.Text = error;
+
             }
         }
 
@@ -195,11 +204,18 @@ namespace HackNet.Game.Gameplay
                 MisIPLbl.Text = mis.MissionIP;
                 MisSumLbl.Text = "";
                 MisExpLbl.Text = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+
             }
             else
             {
-
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
             }
+        }
+
+        protected void ExitBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
