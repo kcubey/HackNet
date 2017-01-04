@@ -15,35 +15,37 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AllPartList.DataSource = LoadInventory(0);
-            AllPartList.DataBind();
-
-            ProcessList.DataSource = LoadInventory(1);
-            ProcessList.DataBind();
-
-            GPUList.DataSource = LoadInventory(4);
-            GPUList.DataBind();
-
+            LoadInventory(AllPartList,-1);
+            LoadInventory(ProcessList,1);
+            LoadInventory(GPUList ,4);
         }
 
-        private DataTable LoadInventory(int itemType)
+        private void LoadInventory(DataList dl,int itemType)
         {
             List<InventoryItem> invList = InventoryItem.GetUserInvList(Authenticate.GetCurrentUser());
             List<Items> ilist = InventoryItem.GetUserInvItems(invList,itemType);
-           
-            string imageurlstring;
-            string url;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ItemName",typeof(string));
-            dt.Columns.Add("ItemPic", typeof(string));
-            foreach(Items i in ilist)
+            if (ilist[0]!=null)
             {
-                imageurlstring=Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                url= "data:image/png;base64," + imageurlstring;               
-                dt.Rows.Add(i.ItemName,url);
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ItemName", typeof(string));
+                dt.Columns.Add("ItemPic", typeof(string));
+                foreach (Items i in ilist)
+                {
+                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(i.ItemName, url);
+                }
+                dl.DataSource = dt;
+                dl.DataBind();
+            }
+            else
+            {
+                dl.DataSource = null;
+                dl.DataBind();
             }
             
-            return dt;
         }
 
         protected void btnAddItem_Click(object sender, EventArgs e)
