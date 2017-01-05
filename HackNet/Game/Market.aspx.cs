@@ -10,6 +10,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
+
 namespace HackNet.Market
 {
     public partial class Market : System.Web.UI.Page
@@ -18,75 +19,56 @@ namespace HackNet.Market
         {
             buckTextBox.Text = "";
             coinTextBox.Text = "";
-            lblError.Visible = false;
-        }
 
-        public void validateBuck()
-        {
             Users u = Authenticate.GetCurrentUser();
-            int pBuck = u.ByteDollars;
+            int pBuck = 30;
+                //u.ByteDollars;
 
-            try
-            {
-                int numBuck = int.Parse(buckTextBox.Text);
-                if (numBuck < pBuck || numBuck > pBuck)
-                {
-                    lblError.Visible = true;
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+            buckValidator.MaximumValue = pBuck.ToString();
         }
-      
+
+        
         public void PrintMessage(String message)
         {
             string alert = message;
             Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
 
+            Debug.WriteLine("exiting printmessage");
+
         }
 
-        public void buckTextBox_TextChanged(object sender, EventArgs e)
+        public void CheckValueButton_Click(Object sender, EventArgs e)
         {
-            string message = "";
-            validateBuck();
+            int numBuck = Convert.ToInt32(buckTextBox.Text);
+            coinLabel.Text = (numBuck * 100).ToString();
 
-            if (lblError.Visible == false)
-            {
-                try
-                {
-                    int numCoin = int.Parse(buckTextBox.Text) * 100;
-                    coinTextBox.Text = Convert.ToString(numCoin);
+            //Calculate();
+        }
 
-                }catch(Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
-
-            }
-            else
-            {
-                message = "Please enter a valid number of bucks to convert.";
-                PrintMessage(message);
-            }
+        public string Calculate()
+        {
+            int numBuck = Convert.ToInt32(buckTextBox.Text);
+            coinTextBox.Text = (numBuck * 100).ToString();
+            return coinTextBox.Text;
         }
         
         public void ConversionButton_Click(Object sender, EventArgs e)
         {
             string message = "";
-
-            if (lblError.Visible == true)
-            {
-                message = "Please enter a valid number of bucks to convert.";
-            }
-            else if (lblError.Visible == false)
-            {
+            
                 string numBuck = buckTextBox.Text;
-                string numCoin = coinTextBox.Text;
+                string numCoin = Calculate(); //check this function
+                Debug.WriteLine("check value buck" + numBuck);
+                Debug.WriteLine("check value coin" + numCoin);
+
                 message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
-            }
+            
             PrintMessage(message);
+
+
+
+
+            Debug.WriteLine("exiting conversion event");
 
             //Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");
 
@@ -97,39 +79,7 @@ namespace HackNet.Market
 
         }
 
-        /*
-        protected void ConversionButton_Convert(object sender, EventArgs e)
-        {
-            if ((Information.IsNumeric(buckTextBox.Text) == false))
-            {
-                lblError.Visible = true;
-            }
-            else if ((string.IsNullOrEmpty(buckTextBox.Text)))
-            {
-                lblError.Visible = true;
-            }
-            else
-            {
-                lblError.Visible = false;
-                buckTextBox.Text = buckTextBox.Text * 0.72387;
-            }
-        }
-        */
-
-
-        /*private void buckTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                lblError.Visible = true;
-            }
-        }
-        */
+       
 
 
         /*

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Market.aspx.cs" Inherits="HackNet.Market.Market" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
 
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
@@ -37,14 +38,52 @@
     
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
+   <asp:TextBox ID="buckTextBox"  clientidmode="Static" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox><asp:Label ID="Label1" runat="server" Text="Bucks"></asp:Label>
+    <asp:RangeValidator ID="buckValidator" ControlToValidate="buckTextBox" 
+            MinimumValue="0" Type="Integer" runat="server"
+        ErrorMessage="* Please enter a valid number" ForeColor="Red"></asp:RangeValidator>
+            
+    <asp:TextBox ID="coinTextBox"  clientidmode="Static" CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox>
+    <asp:Label ID="coinLabel" runat="server" Text=""></asp:Label>    
+    <asp:Label ID="Label2" runat="server" Text="Coins"></asp:Label>
+
+      <hr />
+   <asp:TextBox ID="buckTextBox1"  type="number" clientidmode="Static" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox>
+    <asp:Label ID="Label3" runat="server" Text="Bucks"></asp:Label>
+    <br />Coins=<asp:Label ID="coinTotal" runat="server" Text=""></asp:Label>    
+
+    <hr />
+    Pages: <input type="number" class="form-control" id="pages" />
+<br/><br/>
+Total: <span id="totall">0.00</span>
     
-    <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" ForeColor="Black" OnTextChanged="buckTextBox_TextChanged"></asp:TextBox>
-        <asp:Label ID="lblError" runat="server" Text="*"  ForeColor="Red" Visible="False"></asp:Label>
-     buck --> 
-    <asp:TextBox ID="coinTextBox" CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox> coin
-    
+    <script>
+        $('#pages').change(function(ev){
+    var total = $('#pages').val() * 2;
+    $('#totall').html((total).toFixed(2));
+        });
+
+        $('#pages').keyup(function (ev) {
+            var total = $('#pages').val() * 2;
+            $('#totall').html((total).toFixed(2));
+        });
+
+  $('#buckTextBox1').keyup(function(ev){
+    var total = $('#buckTextBox1').val() * 2;
+      document.getElementById("coinTotal").innerHTML = total;
+    // $('#coinTotal').html(total);
+  });
+
+  $('#buckTextBox1').change(function (ev) {
+      var total = $('#buckTextBox1').val() * 2;
+      document.getElementById("coinTotal").innerHTML = total;
+     // $('#coinTotal').html(total);
+  });
+
+    </script>
+
     <br /><br />
-    <asp:Button ID="Button1" runat="server" CssClass="btn btn-success" Text="Check Value"/>
+    <asp:Button ID="CheckValueButton" runat="server" CssClass="btn btn-success" Text="Check Value" onclick="CheckValueButton_Click"/>
     <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
 
 
