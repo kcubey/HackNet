@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 using HackNet.Security;
+using HackNet.Data;
 
 namespace HackNet.Data
 {
@@ -45,8 +46,13 @@ namespace HackNet.Data
 
 		public DateTime LastLogin { get; set; }
 
+		[Required]
+		public int TotalExp { get; set; }
+
+		[Required]
 		public int Coins { get; set; }
 
+		[Required]
 		public int ByteDollars { get; set; }
 
 		public AccessLevel AccessLevel { get; set; }
@@ -67,6 +73,14 @@ namespace HackNet.Data
 		{
 			Salt = Crypt.Instance.Generate(64);
 			Hash = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(newpassword), Salt);
+		}
+
+		internal Level Level
+		{
+			get
+			{
+				return new Level(this);
+			}
 		}
 
 		// Find users by email or username
@@ -98,7 +112,7 @@ namespace HackNet.Data
 			return user;
 		}
 
-		internal static Users FindUsername(string username, DataContext db = null)
+		internal static Users FindByUsername(string username, DataContext db = null)
 		{
 			Users user;
 			try
@@ -124,6 +138,57 @@ namespace HackNet.Data
 	}
 }
 
+internal class Level
+{
+	Users player;
+
+	// Constructor
+	internal Level(Users player)
+	{
+		this.player = player;
+	}
+
+	/// <summary>
+	/// Gets current level of the user
+	/// </summary>
+	internal int GetLevel() {
+		int totalexp = player.TotalExp;
+		if (totalexp >= TotalExpNeededFor(40)) // MAX LEVEL 40
+			return 40;
+		for (int i = 1; i < 40; i++)
+			if (totalexp >= TotalExpNeededFor(i) && totalexp < TotalExpNeededFor(i + 1))
+				return i;
+		return -1; // If all else fails
+	}
+
+	/// <summary>
+	/// Cumulative EXP needed to reach next level (ignores progress in current level)
+	/// </summary>
+	internal int TotalForNextLevel()
+	{
+		return TotalExpNeededFor(GetLevel() + 1);
+	}
+
+	/// <summary>
+	/// Amount of EXP needed for THIS user to reach next level
+	/// </summary>
+	internal int AmountToReachNextLevel()
+	{
+		return TotalForNextLevel() - player.TotalExp;
+	}
+
+	/// <summary>
+	/// STATIC METHOD: Total exp needed for a given level
+	/// </summary>
+	internal static int TotalExpNeededFor(int lvl)
+	{
+		if (lvl <= 1)
+			return 0;
+		else
+			return (int)(TotalExpNeededFor(--lvl) * 1.4 + 10);
+	}
+}
+
 public enum AccessLevel
 {
 	Unverified = -1,
@@ -131,3 +196,4 @@ public enum AccessLevel
 	Staff = 1,
 	Admin = 2
 }
+
