@@ -1,5 +1,4 @@
 ﻿using HackNet.Data;
-using HackNet.Game.Class;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -15,8 +14,9 @@ namespace HackNet.Game
         protected void Page_Load(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext()) {
-                //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
-               /*Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+               // This is to add a new default machine.
+               //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+                Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
                 ProcessorLbl.Text = m.MachineProcessor;
@@ -28,7 +28,7 @@ namespace HackNet.Game
                 AtkattrLabel.Text = m.Attack.ToString();
                 DefattrLabel.Text = m.Defence.ToString();
                 SpeedattrLabel.Text = m.Speed.ToString();
-                */
+                
             }
         }
 

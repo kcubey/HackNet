@@ -81,11 +81,24 @@ namespace HackNet.Game
             return scanList;
         }
 
+        //Check mission type
+        public static bool checkMissionType(string atkType)
+        {
+            if (atkType.Equals("PWDATK"))
+                return true;
+            if (atkType.Equals("SQLIN"))
+                return true;
+            if (atkType.Equals("MITM"))
+                return true;
+            if (atkType.Equals("XXS"))
+                return true;
 
+            return false;
+        }
 
         // Gameplay for Password Attack
 
-        public static List<string> LoadNautilus(string filename = null)
+        public static List<string> LoadNautilus()
         {
             List<string> mList = new List<string>();
             mList.Add("bin");
@@ -94,12 +107,18 @@ namespace HackNet.Game
             mList.Add("tmp");
             mList.Add("secret");
             mList.Add("audit.log");
-
-            if (filename != null)
-            {
-                mList.Remove(filename);
-            }
             return mList;
+        }
+        
+        public static bool CheckStolenFile(string fileName)
+        {
+            if (fileName.Equals("secret"))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
         public static List<string> LoadSuccessPwd(MissionData mis, string command = null)

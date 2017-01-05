@@ -1,6 +1,73 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PwdAtk.aspx.cs" Inherits="HackNet.Game.Gameplay.PwdAtk" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function showFinishPrompt() {
+            $('#missionSumModel').modal('show');
+        }
+    </script>
+    <div id="missionSumModel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <asp:Label runat="server" ID="SummaryTitle" Font-Size="Larger"></asp:Label>
+                </div>
+                <div class="modal-body">
+                    <asp:Table runat="server" ForeColor="Black" CssClass="table">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell ColumnSpan="4">Mission Summary</asp:TableHeaderCell>                            
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission Name: </label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisNameLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission IP Address:</label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisIPLbl"></asp:Label>
+                            </asp:TableCell>                         
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission Summary:</label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisSumLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Rewards</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>EXP: </label>
+                            </asp:TableCell>
+                            <asp:TableCell> 
+                                <asp:Label runat="server" ID="MisExpLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <label>Coins Earned: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="MisCoinLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="ExitBtn" runat="server" CssClass="btn btn-default" OnClick="ExitBtn_Click" Text="Exit" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row" style="border: 1px solid black; margin-left: 0; margin-right: 0;">
         <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black;  padding: 0;">
@@ -51,8 +118,7 @@
                     <li class="list-group-item">1. Configure hydra</li>
                     <li class="list-group-item">2. Run hydra</li>
                     <li class="list-group-item">3. Gain Root Access</li>
-                    <li class="list-group-item">4. Steal files</li>
-                    <li class="list-group-item">5. Wipe all traces</li>
+                    <li class="list-group-item">4. Steal Secret File</li>
                 </ol>
             </div>
         </div>
@@ -74,8 +140,7 @@
                     <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
                     <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
                     <asp:Label runat="server" ID="CmdError"></asp:Label>
-                </div>
-                
+                </div>                
             </div>
             <div class="panel panel-default">
                 <div class="panel-header" style="background-color: grey;">
@@ -83,8 +148,7 @@
                          Nautilus
                     </h4>
                 </div>
-                <div class="panel-body">
-                    <asp:Button ID="NautilusBtn" runat="server" CssClass="btn btn-default" Text="Steal" Enabled="false" OnCommand="NautilusBtn_Command"/>                   
+                <div class="panel-body">                 
                      <asp:DataList ID="NautilusView" runat="server" RepeatLayout="Table" >
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
@@ -104,8 +168,8 @@
                         <ItemTemplate>
                             <asp:Table runat="server" CssClass="table" ID="NautilusFileTable">
                                 <asp:TableRow>
-                                    <asp:TableCell Width="70px">                                     
-                                        <asp:CheckBox runat="server" ID="NautilusCheck"/>
+                                    <asp:TableCell Width="70px">       
+                                        <asp:LinkButton runat="server" ID="StealLinkBtn" OnCommand="StealLinkBtn_Command" CommandArgument='<%#Eval("Fname") %>' Text="Steal"></asp:LinkButton>                                        
                                     </asp:TableCell>
                                     <asp:TableCell Width="500px">
                                         <asp:Label runat="server" Text='<%#Eval("Fname") %>'></asp:Label>

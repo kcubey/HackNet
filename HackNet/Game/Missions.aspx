@@ -38,17 +38,13 @@
     </div>
     <div id="attackSummaryModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <asp:Label runat="server" ID="MissionTitleLbl" ForeColor="Black"></asp:Label>
-
                 </div>
                 <div class="modal-body" style="color: black;">
                     <asp:Label runat="server" ID="MisDesLbl"></asp:Label>
-
-                    <p>Use a password attack</p>
                 </div>
                 <div class="modal-footer">
                     <asp:LinkButton CssClass="btn btn-default" runat="server" OnClick="AttackLink_Click" Text="Attack" />
@@ -139,8 +135,10 @@
             <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
         </div>
         <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white;">
-            <asp:Label runat="server" Text="username@HackNet:~#"></asp:Label>
-            <asp:TextBox runat="server" ID="AtkTextBx" OnTextChanged="AtkTextBx_TextChanged" BackColor="#091012" BorderStyle="None" Style="min-width: 50%; width: 80%; padding: 5px;"></asp:TextBox>
+            <asp:Label runat="server" Text="username@HackNet:~#" Width="20%"></asp:Label>
+            <asp:TextBox runat="server" ID="AtkTextBx" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
+            <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
+            <asp:Label runat="server" ID="CMDError" ></asp:Label>
         </div>
 
     </div>

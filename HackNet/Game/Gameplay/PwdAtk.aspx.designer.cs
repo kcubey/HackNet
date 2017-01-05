@@ -13,6 +13,69 @@ namespace HackNet.Game.Gameplay {
     public partial class PwdAtk {
         
         /// <summary>
+        /// SummaryTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryTitle;
+        
+        /// <summary>
+        /// MisNameLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisNameLbl;
+        
+        /// <summary>
+        /// MisIPLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisIPLbl;
+        
+        /// <summary>
+        /// MisSumLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisSumLbl;
+        
+        /// <summary>
+        /// MisExpLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisExpLbl;
+        
+        /// <summary>
+        /// MisCoinLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisCoinLbl;
+        
+        /// <summary>
+        /// ExitBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ExitBtn;
+        
+        /// <summary>
         /// TargetIPLbl control.
         /// </summary>
         /// <remarks>
@@ -101,15 +164,6 @@ namespace HackNet.Game.Gameplay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label CmdError;
-        
-        /// <summary>
-        /// NautilusBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button NautilusBtn;
         
         /// <summary>
         /// NautilusView control.

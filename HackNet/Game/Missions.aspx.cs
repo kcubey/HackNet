@@ -16,10 +16,13 @@ namespace HackNet.Game
     {
         DataTable dtMission;
         DataTable dtAttack;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadAttackList();
+            if (!IsPostBack)
+            {
+                Cache["SelectedMis"] = false;
+                LoadAttackList();
+            }
         }
 
         protected void regatkList_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,60 +75,60 @@ namespace HackNet.Game
             AtkListView.DataBind();
         }
 
-        protected void ViewMis_Command(object sender, CommandEventArgs e)
+        private void LoadScanInformation(MissionData mis)
         {
-            MissionData mis = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
-            MissionTitleLbl.Text = mis.MissionName;
-            MisDesLbl.Text = mis.MissionDesc;
+            List<string> arrList = Mission.scanMission(mis, Authenticate.GetEmail(), true);
 
-            Session["MissID"] = mis.MissionId;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
-        }
-
-        protected void AttackLink_Click(object sender, EventArgs e)
-        {
-            int id = int.Parse(Session["MissID"].ToString());
-            MissionData mis = MissionData.GetMissionData(id);
-            List<string> arrList = Mission.scanMission(mis,Authenticate.GetEmail(), true);
-
-            for(int i=0;i<arrList.Count;i++)
+            for (int i = 0; i < arrList.Count; i++)
             {
                 Label lbl = new Label();
                 lbl.Text = arrList[i].ToString();
                 LogPanel.Controls.Add(lbl);
                 LogPanel.Controls.Add(new LiteralControl("<br/>"));
             }
-           
         }
 
-      
-
-        protected void AtkTextBx_TextChanged(object sender, EventArgs e)
+        protected void ViewMis_Command(object sender, CommandEventArgs e)
         {
-            string attackType=AtkTextBx.Text;
-            if (checkMissionType(attackType))
-            {
-                Response.Redirect("Gameplay/PwdAtk.aspx");
-            }
-            else
-            {
-                
-            }
-        }
-        internal bool checkMissionType(string atkType)
-        {
-            if (atkType.Equals("PWDATK"))
-                return true;
-            if (atkType.Equals("SQLIN"))
-                return true;
-            if (atkType.Equals("MITM"))
-                return true;
-            if (atkType.Equals("XXS"))
-                return true;
+            MissionData mis = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
+            MissionTitleLbl.Text = mis.MissionName;
+            MisDesLbl.Text = mis.MissionDesc;
 
-            return false;
+            Session["MissionData"] = mis;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
+
+        protected void AttackLink_Click(object sender, EventArgs e)
+        {
+            Cache["SelectedMis"] = true;
+            LoadScanInformation((MissionData)Session["MissionData"]);
+        }
+
+        protected void SubCmdBtn_Click(object sender, EventArgs e)
+        {
+            string attackType = AtkTextBx.Text;
+            if ((bool)Cache["SelectedMis"])
+            {
+                if (Mission.checkMissionType(attackType))
+                {
+                    Response.Redirect("Gameplay/PwdAtk.aspx");
+                }
+                else
+                {
+                    LoadScanInformation((MissionData)Session["MissionData"]);
+                    CMDError.Text = "Invalid Attack Type";
+                    CMDError.ForeColor = System.Drawing.Color.Red;
+                }
+            }else
+            {
+                CMDError.Text = "Please Choose a Mission";
+                CMDError.ForeColor = System.Drawing.Color.Red;
+               
+            }
+        }
+
+        
 
         // This is to display about Attack information
         protected void abtAtkInfo_Command(object sender, CommandEventArgs e)
@@ -173,6 +176,7 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
-        
+
+      
     }
 }

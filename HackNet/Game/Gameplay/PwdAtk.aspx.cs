@@ -1,5 +1,4 @@
 ﻿using HackNet.Data;
-using HackNet.Game.Class;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ namespace HackNet.Game.Gameplay
 {
     public partial class PwdAtk : System.Web.UI.Page
     {
-        MissionData mis = MissionData.GetMissionData(1);
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,10 +21,9 @@ namespace HackNet.Game.Gameplay
                 Cache["Configure"] = false;
                 Cache["PWDCalculated"] = false;
                 Cache["Bypass"] = false;
-                Cache["ScanList"] = Mission.scanMission(mis, Authenticate.GetEmail(), false);
+                Cache["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
                 LoadScanInfo((List<string>)Cache["ScanList"]);
             }
-
         }
 
         // This is to load a static output
@@ -87,12 +85,14 @@ namespace HackNet.Game.Gameplay
                         LoadPwdListToGrid(pwdList);
                         CmdError.Text = "hydra is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
+                        CmdTextBox.Text = string.Empty;
                     }
                     else
                     {
                         LoadScanInfo((List<string>)Cache["ScanList"]);
                         CmdError.Text = "Unrecognised Command";
                         CmdError.ForeColor = System.Drawing.Color.Red;
+                        CmdTextBox.Text = string.Empty;
                     }
                 }
                 else
@@ -103,7 +103,8 @@ namespace HackNet.Game.Gameplay
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
-                            LoadScanInfo(Mission.LoadSuccessPwd(mis));
+                            CmdTextBox.Text = string.Empty;
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             Cache["Bypass"] = true;
                         }
                         else
@@ -111,24 +112,28 @@ namespace HackNet.Game.Gameplay
                             LoadScanInfo((List<string>)Cache["ScanList"]);
                             CmdError.Text = "Wrong Password";
                             CmdError.ForeColor = System.Drawing.Color.Red;
+                            CmdTextBox.Text = string.Empty;
                         }
                     }else
                     {
                         if (CmdTextBox.Text.Equals("run nautilus"))
                         {
-                            LoadScanInfo(Mission.LoadSuccessPwd(mis,"run nautilus"));
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"], "run nautilus"));
                             // run method to load the datalist for nautilus
                             List<string> infoList = Mission.LoadNautilus();
                             LoadNautilus(infoList);
-                            NautilusBtn.Enabled = true;
-                        
+                    
                             CmdError.Text = "Nautilus is running....";
                             CmdError.ForeColor = System.Drawing.Color.Green;
+                            CmdTextBox.Text = string.Empty;
+                            CmdTextBox.Enabled = false;
                         }
                         else
                         {
+                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             CmdError.Text = "Unrecognised Command";
                             CmdError.ForeColor = System.Drawing.Color.Red;
+                            CmdTextBox.Text = string.Empty;
                         }
                     }
                 }
@@ -138,6 +143,7 @@ namespace HackNet.Game.Gameplay
                 LoadScanInfo((List<string>)Cache["ScanList"]);
                 CmdError.Text = "hydra has not been configure";
                 CmdError.ForeColor = System.Drawing.Color.Red;
+                CmdTextBox.Text = string.Empty;
             }
         }
 
@@ -146,7 +152,7 @@ namespace HackNet.Game.Gameplay
         {
             string error = "Error input for: ";
             bool errorchk = false;
-
+            MissionData mis = (MissionData)Session["MissionData"];
             // check if IP is configured correctly
             if (TargetIPLbl.Text != mis.MissionIP)
             {
@@ -179,17 +185,42 @@ namespace HackNet.Game.Gameplay
                 LoadScanInfo((List<string>)Cache["ScanList"]);
                 ErrorLbl.ForeColor = System.Drawing.Color.Red;
                 ErrorLbl.Text = error;
+
             }
         }
 
-        protected void NautilusBtn_Command(object sender, CommandEventArgs e)
+        protected void StealLinkBtn_Command(object sender, CommandEventArgs e)
         {
-
-            if (NautilusBtn.Text.Equals("Steal"))
+            MissionData mis = (MissionData)Session["MissionData"];
+            string stolenFile = e.CommandArgument.ToString();
+            if (Mission.CheckStolenFile(stolenFile))
             {
-                
-                
+                // Title
+                SummaryTitle.Text = "Congratulations, Mission Completed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Green;
+                // Summary
+                MisNameLbl.Text = mis.MissionName;
+                MisIPLbl.Text = mis.MissionIP;
+                MisSumLbl.Text = "";
+                MisExpLbl.Text = "";
+                MisCoinLbl.Text = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+
             }
+            else
+            {
+                // Title
+                SummaryTitle.Text = "Mission Failed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Red;
+
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+            }
+        }
+
+        protected void ExitBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Missions.aspx");
         }
     }
 }
