@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using HackNet.Security;
 
 namespace HackNet.Game
 {
@@ -14,36 +15,38 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProcessList.DataSource = LoadInventory(1);
-            ProcessList.DataBind();
-
-            GPUList.DataSource = LoadInventory(4);
-            GPUList.DataBind();
-
-
+            LoadInventory(AllPartList,-1);
+            LoadInventory(ProcessList,1);
+            LoadInventory(GPUList ,4);
         }
 
-        private DataTable LoadInventory(int itemType)
+        private void LoadInventory(DataList dl,int itemType)
         {
-                  
-            List<Items> ilist = Data.Items.GetItems(itemType);
-            string imageurlstring;
-            string url;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ItemName",typeof(string));
-            dt.Columns.Add("ItemPic", typeof(string));
-            foreach(Items i in ilist)
+            List<InventoryItem> invList = InventoryItem.GetUserInvList(Authenticate.GetCurrentUser());
+            List<Items> ilist = InventoryItem.GetUserInvItems(invList,itemType);
+            if (ilist[0]!=null)
             {
-                imageurlstring=Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                url= "data:image/png;base64," + imageurlstring;               
-                dt.Rows.Add(i.ItemName,url);
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ItemName", typeof(string));
+                dt.Columns.Add("ItemPic", typeof(string));
+                foreach (Items i in ilist)
+                {
+                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(i.ItemName, url);
+                }
+                dl.DataSource = dt;
+                dl.DataBind();
+            }
+            else
+            {
+                dl.DataSource = null;
+                dl.DataBind();
             }
             
-            //ProcessList.DataSource = dt;
-            //ProcessList.DataBind();
-            return dt;
         }
-
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -63,18 +66,17 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
+
+        protected void AddItemIntoUserBtn_Click(object sender, EventArgs e)
         {
-            if (UploadPhoto.HasFile)
+            InventoryItem invitem = new InventoryItem();
+            invitem.UserId = int.Parse(UserIDLbl.Text);
+            invitem.ItemId = int.Parse(ItemIDLbl.Text);
+            invitem.Quantity = int.Parse(QuanLbl.Text);
+            using (DataContext db = new DataContext())
             {
-                Stream strm = UploadPhoto.PostedFile.InputStream;
-                BinaryReader br = new BinaryReader(strm);
-                // this is the thing u need to throw into the database
-                byte[] imageByte = br.ReadBytes((int)strm.Length);
-
-                string base64string = Convert.ToBase64String(imageByte, 0, imageByte.Length);
-                imgViewFile.ImageUrl = "data:image/png;base64," + base64string;
-
+                db.InventoryItem.Add(invitem);
+                db.SaveChanges();
             }
         }
     }

@@ -433,7 +433,6 @@
     <Compile Include="Game\Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Class\Workstations.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

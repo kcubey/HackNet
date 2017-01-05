@@ -3,10 +3,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script>
         function showFinishPrompt() {
-            $('#attackTypeModel').modal('show');
+            $('#missionSumModel').modal('show');
         }
     </script>
-    <div id="attackTypeModel" class="modal fade" role="dialog">
+    <div id="missionSumModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -14,15 +14,15 @@
                     <asp:Label runat="server" ID="SummaryTitle" Font-Size="Larger"></asp:Label>
                 </div>
                 <div class="modal-body">
-                    <asp:Table runat="server">
+                    <asp:Table runat="server" ForeColor="Black" CssClass="table">
                         <asp:TableHeaderRow>
-                            <asp:TableHeaderCell>Mission Summary</asp:TableHeaderCell>
+                            <asp:TableHeaderCell ColumnSpan="4">Mission Summary</asp:TableHeaderCell>                            
                         </asp:TableHeaderRow>
                         <asp:TableRow>
                             <asp:TableCell>
                                 <label>Mission Name: </label>
                             </asp:TableCell>
-                            <asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
                                 <asp:Label runat="server" ID="MisNameLbl"></asp:Label>
                             </asp:TableCell>
                         </asp:TableRow>
@@ -30,7 +30,7 @@
                             <asp:TableCell>
                                 <label>Mission IP Address:</label>
                             </asp:TableCell>
-                            <asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
                                 <asp:Label runat="server" ID="MisIPLbl"></asp:Label>
                             </asp:TableCell>                         
                         </asp:TableRow>
@@ -38,7 +38,7 @@
                             <asp:TableCell>
                                 <label>Mission Summary:</label>
                             </asp:TableCell>
-                            <asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
                                 <asp:Label runat="server" ID="MisSumLbl"></asp:Label>
                             </asp:TableCell>
                         </asp:TableRow>
@@ -55,11 +55,14 @@
                             <asp:TableCell>
                                 <label>Coins Earned: </label>
                             </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="MisCoinLbl"></asp:Label>
+                            </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <asp:Button ID="ExitBtn" runat="server" CssClass="btn btn-default" OnClick="ExitBtn_Click" Text="Exit" />
                 </div>
             </div>
         </div>
@@ -137,8 +140,7 @@
                     <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
                     <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
                     <asp:Label runat="server" ID="CmdError"></asp:Label>
-                </div>
-                
+                </div>                
             </div>
             <div class="panel panel-default">
                 <div class="panel-header" style="background-color: grey;">

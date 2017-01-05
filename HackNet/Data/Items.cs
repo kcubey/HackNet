@@ -20,14 +20,23 @@ namespace HackNet.Data
         public int ItemPrice { get; set; }
         public int ItemBonus { get; set; }
 
-        internal static Items GetItem(int id)
+        internal static Items GetItem(int id, int itemType=-1)
         {
             Items itm = new Data.Items();
             try
             {
                 using(DataContext db=new DataContext())
                 {
-                    itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
+                    if (itemType ==-1)
+                    {
+                        itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
+                        System.Diagnostics.Debug.WriteLine("Name: " + itm.ItemName);
+                    }
+                    else
+                    {                    
+                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();
+                        
+                    }
                 }
             }
             catch (EntityCommandExecutionException)
