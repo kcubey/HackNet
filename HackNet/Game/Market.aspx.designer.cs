@@ -22,69 +22,6 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Label warning;
         
         /// <summary>
-        /// virMarkt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton virMarkt;
-        
-        /// <summary>
-        /// panelNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton panelNew;
-        
-        /// <summary>
-        /// blogImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image blogImg;
-        
-        /// <summary>
-        /// pkgALbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgALbl;
-        
-        /// <summary>
-        /// panelNew2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton panelNew2;
-        
-        /// <summary>
-        /// sellImg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image sellImg;
-        
-        /// <summary>
-        /// pkgBLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgBLbl;
-        
-        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
@@ -103,13 +40,13 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// pkgCLbl control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgCLbl;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// LinkButton2 control.
@@ -130,13 +67,13 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
-        /// pkgDLbl control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgDLbl;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// LinkButton3 control.
@@ -157,13 +94,67 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
-        /// pkgELbl control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgELbl;
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// LinkButton4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        
+        /// <summary>
+        /// Image4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image4;
+        
+        /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
+        /// LinkButton5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton5;
+        
+        /// <summary>
+        /// Image5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image5;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// buckTextBox control.
@@ -202,22 +193,13 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.TextBox buckTextBox1;
         
         /// <summary>
-        /// Label3 control.
+        /// coinLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// coinTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label coinTotal;
+        protected global::System.Web.UI.WebControls.Label coinLabel;
         
         /// <summary>
         /// CheckValueButton control.

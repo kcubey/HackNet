@@ -52,6 +52,11 @@ namespace HackNet.Market
             return coinTextBox.Text;
         }
         
+        public void RedirectButton_Click(Object sender, EventArgs e)
+        {
+            Response.Redirect("~/payment/Reauth", false);
+        }
+
         public void ConversionButton_Click(Object sender, EventArgs e)
         {
             string message = "";

@@ -17,6 +17,11 @@ namespace HackNet.Payment
             DataContext ctx = new DataContext();
         }
 
+        public void CancelClick(Object sender, EventArgs e)
+        {
+            Response.Redirect("~/game/market");
+        }
+
         protected void AuthClick(object sender, EventArgs e)
         {
             string email = Email.Text.ToLower();
@@ -49,5 +54,8 @@ namespace HackNet.Payment
                 Response.Redirect("~/payment/payment");
             }
         }
+
+        
+
     }
 }

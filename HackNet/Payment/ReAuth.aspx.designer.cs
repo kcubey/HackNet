@@ -13,13 +13,13 @@ namespace HackNet.Payment {
     public partial class ReAuth {
         
         /// <summary>
-        /// pkgName control.
+        /// PackageLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pkgName;
+        protected global::System.Web.UI.WebControls.Label PackageLbl;
         
         /// <summary>
         /// Msg control.
@@ -40,22 +40,22 @@ namespace HackNet.Payment {
         protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// EmailValidator control.
+        /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// EmailRegExValidator control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailRegExValidator;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
         /// UserPass control.
@@ -67,13 +67,13 @@ namespace HackNet.Payment {
         protected global::System.Web.UI.WebControls.TextBox UserPass;
         
         /// <summary>
-        /// UserPassValidator control.
+        /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator UserPassValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// AuthButton control.
@@ -85,21 +85,30 @@ namespace HackNet.Payment {
         protected global::System.Web.UI.WebControls.Button AuthButton;
         
         /// <summary>
-        /// TextBox1 control.
+        /// CancelButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.Button CancelButton;
         
         /// <summary>
-        /// TextBox2 control.
+        /// TextBox77 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox TextBox77;
+        
+        /// <summary>
+        /// TextBox23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox23;
     }
 }
