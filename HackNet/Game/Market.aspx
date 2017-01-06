@@ -42,17 +42,27 @@
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             
             <div id="convertArea">
+                <asp:UpdatePanel ID="ConversionPanel" runat="server">
+                <ContentTemplate>
+        
                 <br />Bucks:
                 <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
-                <asp:RangeValidator ID="buckValidator" ControlToValidate="buckTextBox" 
-                MinimumValue="0" Type="Integer" runat="server"
-            ErrorMessage="* Please enter a valid number" ForeColor="Red"></asp:RangeValidator>
-               <br /> <asp:RegularExpressionValidator ID="buckExValidator" runat="server" 
+                <asp:RangeValidator 
+                    ID="buckValidator" ControlToValidate="buckTextBox" 
+                    MinimumValue="0" Type="Integer" runat="server"
+                    ErrorMessage="* Please enter a valid number" ForeColor="Red">
+                </asp:RangeValidator>
+               <br />
+               <asp:RegularExpressionValidator 
+                    ID="buckExValidator" runat="server" 
                     ErrorMessage="* Please use whole numbers only" ValidationExpression="^[1-9]\d$"
-                     ControlToValidate="buckTextBox" ForeColor="Red"></asp:RegularExpressionValidator>
+                    ControlToValidate="buckTextBox" ForeColor="Red">
+               </asp:RegularExpressionValidator>
 
                 <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
-
+                
+                </ContentTemplate>
+                </asp:UpdatePanel>
  <!--               <hr />
                 demo code
                 Pages: <input type="number" class="form-control" id="pages" step="1"/>

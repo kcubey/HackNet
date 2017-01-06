@@ -57,12 +57,12 @@ namespace HackNet.Market
                 }
                 else if (numBuck > dbBuck || numBuck < 0)
                 {
-                    convertedCoinLabel.Text = "Unable to convert";
+                    ClearText();
                 }
             }
             catch (Exception ex)
             {
-                convertedCoinLabel.Text = "Unable to convert";
+                ClearText();
                 Debug.WriteLine(ex);
             }
         }
@@ -78,9 +78,6 @@ namespace HackNet.Market
             
             PrintMessage(message);
 
-            //Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");
-
-            //    Response.Write("<script type='text/javascript'>window.open('Page.aspx?ID=" + YourTextField.Text.ToString() + "','_blank');</script>");
 
             //insert add numCoin db code
             //insert minus numBuck db code
