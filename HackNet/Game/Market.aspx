@@ -4,30 +4,6 @@
 
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
-    <script>
-        $('#pages').change(function (ev) {
-            var total = $('#pages').val() * 2;
-            $('#totall').html(total);
-        });
-
-        $('#pages').keyup(function (ev) {
-            var total = $('#pages').val() * 2;
-            $('#totall').html(total);
-        });
-
-        $('#buckTextBox1').keyup(function(ev){
-            var total = $('#buckTextBox1').val() * 2;
-            document.getElementById("coinTotal").innerHTML = total;
-            // $('#coinTotal').html(total);
-        });
-
-        $('#buckTextBox1').change(function (ev) {
-           var total = $('#buckTextBox1').val() * 2;
-           document.getElementById("coinTotal").innerHTML = total;
-           // $('#coinTotal').html(total);
-        });
-    </script>
-
     <div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Market - Currency</h3>
@@ -73,6 +49,9 @@
                 <asp:RangeValidator ID="buckValidator" ControlToValidate="buckTextBox" 
                 MinimumValue="0" Type="Integer" runat="server"
             ErrorMessage="* Please enter a valid number" ForeColor="Red"></asp:RangeValidator>
+                <asp:RegularExpressionValidator ID="buckTBExValidator" runat="server" 
+                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d{3}-\d{2}-\d{4}$"
+                     ControlToValidate="buckTextBox"></asp:RegularExpressionValidator>
 
                 Coins: 
                 <asp:TextBox ID="coinTextBox"  CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox>
@@ -87,7 +66,7 @@
                 demo code
                 Pages: <input type="number" class="form-control" id="pages" step="1"/>
                 <br/><br/>
-                Total: <span id="totall">0.00</span>
+                Total: <span id="totall">0</span>
     
                 <br /><br />
 
@@ -97,6 +76,29 @@
         </div>
 	</div>
 
+    <script>
+        $('#pages').change(function (ev) {
+            var total = $('#pages').val() * 2;
+            $('#totall').html((total).toFixed(0));
+        });
+
+        $('#pages').keyup(function (ev) {
+            var total = $('#pages').val() * 2;
+            $('#totall').html((total).toFixed(0));
+        });
+
+        $('#buckTextBox1').keyup(function(ev){
+            var total = $('#buckTextBox1').val() * 2;
+            document.getElementById("coinTotal").innerHTML = total;
+            // $('#coinTotal').html(total);
+        });
+
+        $('#buckTextBox1').change(function (ev) {
+           var total = $('#buckTextBox1').val() * 2;
+           document.getElementById("coinTotal").innerHTML = total;
+           // $('#coinTotal').html(total);
+        });
+    </script>
         
 
     <!-- Item repeater

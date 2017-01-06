@@ -70,9 +70,6 @@ namespace HackNet.Market
             
             PrintMessage(message);
 
-
-
-
             Debug.WriteLine("exiting conversion event");
 
             //Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");

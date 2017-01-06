@@ -53,7 +53,7 @@
 
             <input type="hidden" name="fake-valid-nonce">
 
-            <asp:LinkButton runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
+            <asp:LinkButton id="checkoutLnkBtn" runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" onclick="checkoutClick"></asp:LinkButton>
 
         </div>
     </div>

@@ -175,6 +175,15 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.RangeValidator buckValidator;
         
         /// <summary>
+        /// buckTBExValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator buckTBExValidator;
+        
+        /// <summary>
         /// coinTextBox control.
         /// </summary>
         /// <remarks>

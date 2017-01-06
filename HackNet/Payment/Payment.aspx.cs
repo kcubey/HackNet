@@ -22,6 +22,11 @@ namespace HackNet.Payment
             pkgConfirm.Text = PackageList.SelectedItem.Text;
         }
 
+        public void checkoutClick(Object sender, EventArgs e)
+        {
+            Response.Redirect("~/payment/checkout");
+        }
+
         //Braintree stuff
         /*
             var gateway = new BraintreeGateway 
