@@ -168,15 +168,15 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\ItemMgmt.aspx" />
     <Content Include="Admin\Logs.aspx" />
     <Content Include="anonymousedited.jpg" />
-    <Content Include="App_Code\BraintreeConfigurationcs.txt" />
-    <Content Include="App_Code\IBraintreeConfigurationcs.txt" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
     <Content Include="App_Data\HackNet.log" />

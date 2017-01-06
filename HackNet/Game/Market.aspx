@@ -42,35 +42,25 @@
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             
             <div id="convertArea">
-                <hr />
-                original w rangevalidator
                 <br />Bucks:
-                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox>
+                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
                 <asp:RangeValidator ID="buckValidator" ControlToValidate="buckTextBox" 
                 MinimumValue="0" Type="Integer" runat="server"
             ErrorMessage="* Please enter a valid number" ForeColor="Red"></asp:RangeValidator>
-                <asp:RegularExpressionValidator ID="buckTBExValidator" runat="server" 
-                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d{3}-\d{2}-\d{4}$"
-                     ControlToValidate="buckTextBox"></asp:RegularExpressionValidator>
+               <br /> <asp:RegularExpressionValidator ID="buckExValidator" runat="server" 
+                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^[1-9]\d$"
+                     ControlToValidate="buckTextBox" ForeColor="Red"></asp:RegularExpressionValidator>
 
-                Coins: 
-                <asp:TextBox ID="coinTextBox"  CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox>
+                <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
 
-                <hr />
-                change to JS math
-                Bucks: 
-                <asp:TextBox ID="buckTextBox1"  type="number" clientidmode="Static" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox>
-                <br />Coins: <asp:Label ID="coinLabel" runat="server" Text=""></asp:Label>    
-
-                <hr />
+ <!--               <hr />
                 demo code
                 Pages: <input type="number" class="form-control" id="pages" step="1"/>
                 <br/><br/>
                 Total: <span id="totall">0</span>
-    
+ -->   
                 <br /><br />
 
-                <asp:Button ID="CheckValueButton" runat="server" CssClass="btn btn-success" Text="Check Value" onclick="CheckValueButton_Click"/>
                 <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
                 </div>
         </div>
