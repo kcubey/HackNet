@@ -203,7 +203,9 @@ namespace HackNet.Game.Gameplay
                 MisIPLbl.Text = mis.MissionIP;
                 MisSumLbl.Text = "";
                 MisExpLbl.Text = mis.MissionExp.ToString();
-                MisCoinLbl.Text = mis.MissionCoin.ToString();
+                MisCoinLbl.Text = mis.MissionCoin.ToString();            
+
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
 
             }
@@ -220,7 +222,7 @@ namespace HackNet.Game.Gameplay
 
         protected void ExitBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Missions.aspx");
+            Response.Redirect("~Missions.aspx");
         }
     }
 }
