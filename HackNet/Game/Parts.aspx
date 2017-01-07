@@ -35,6 +35,15 @@
         </div>
     </fieldset>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
     <fieldset>
         <h2>Add New Market Listing</h2>
         <span>Title</span>
@@ -47,6 +56,15 @@
 
     </fieldset>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
     <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
         <ItemTemplate>
             <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -57,6 +75,16 @@
             <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
         </ItemTemplate>
     </asp:DataList>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Item Editor</h2>
         <div class="form-group row">
