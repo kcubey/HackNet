@@ -19,6 +19,11 @@ namespace HackNet.Data
         public string MissionDesc { get; set; }
         public MissionType MissionType { get; set; }
         public RecommendLevel RecommendLevel { get; set; }
+        [Required]
+        public int MissionExp { get; set; }
+        [Required]
+        public int MissionCoin { get; set; }
+
 
         public static MissionData GetMissionData(int missId)
         {
