@@ -28,9 +28,37 @@ namespace HackNet.Game
                 AtkattrLabel.Text = m.Attack.ToString();
                 DefattrLabel.Text = m.Defence.ToString();
                 SpeedattrLabel.Text = m.Speed.ToString();
-                
+                // Upgrade Panel
+                WorkStnUpgradeName.Text = m.MachineName;
+                LoadItemIntoList(ProcessList, 1);
+                LoadItemIntoList(GraphicList, 4);
+                LoadItemIntoList(MemoryList, 4);
+                LoadItemIntoList(PowerSupList, 4);
             }
         }
+        private void LoadItemIntoList(DropDownList ddList,int itemType)
+        {
+            List<Items> itmList = 
+                InventoryItem.GetUserInvItems(
+                    InventoryItem.GetUserInvList(Authenticate.GetCurrentUser()), itemType);
+            System.Diagnostics.Debug.WriteLine("Num of items: "+itmList.Count);
+            if (itmList[0] != null)
+            {
+                ddList.DataTextField = "ItemName";
+                ddList.DataValueField = "ItemBonus";
+                ddList.DataSource = itmList;
+                ddList.DataBind();
+            }else
+            {
+                ddList.Items.Add("No Parts in Inventory");
+                ddList.Enabled = false;
+            }  
+        }
 
+
+        protected void MarLnkBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Market1.aspx");
+        }
     }
 }
