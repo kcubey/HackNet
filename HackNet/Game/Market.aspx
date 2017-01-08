@@ -13,27 +13,27 @@
 			    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
                 <p>These premium packages require the use of REAL money.</p> 
 
-                <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="RedirectButton_Click" Font-Underline="False">
+                <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
                     <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package A - SGD$10"></asp:Label></asp:LinkButton>
 
-                <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False">
+                <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
                     <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package B - SGD$100"></asp:Label></asp:LinkButton>
 
-                <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False">
+                <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
                     <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package C - SGD$50"></asp:Label></asp:LinkButton>
 
-                <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False"> 
+                <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
                     <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
                     <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package D - SGD$20"></asp:Label></asp:LinkButton>
 
-                <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False"> 
+                <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
                     <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
                     <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>

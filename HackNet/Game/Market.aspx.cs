@@ -67,9 +67,15 @@ namespace HackNet.Market
             }
         }
         
-        public void RedirectButton_Click(Object sender, EventArgs e)
+        public void buyPackage_Click(Object sender, EventArgs e)
         {
-            Response.Redirect("~/payment/Reauth", false);
+            int packageId = 123;
+            int packagePrice = 30;
+            // change to retreive package id & price from button
+
+            Session["packageId"] = packageId;
+            Session["packagePrice"] = packagePrice;
+            Response.Redirect("~/payment/Reauth");
         }
 
         public void ConversionButton_Click(Object sender, EventArgs e)
