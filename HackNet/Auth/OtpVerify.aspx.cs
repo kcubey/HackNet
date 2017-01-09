@@ -26,6 +26,9 @@ namespace HackNet.Auth
 			}
 			
 			string email = Session["PasswordSuccess"] as string;
+			if (email == null)
+				Response.Redirect("~/Default");
+
 			using (Authenticate a = new Authenticate(email))
 			{
 				switch (a.Validate2FA(OTPValue.Text))
@@ -52,13 +55,17 @@ namespace HackNet.Auth
 			LoginSuccess();
 		}
 
-		private void LoginSuccess()
-		{
-			Response.Cookies.Add(Session["Cookie"] as HttpCookie);
-			if (Session["ReturnUrl"] != null)
+		private void LoginSuccess() { 
+			string returnurl = Session["ReturnUrl"] as string;
+			HttpCookie cookie = Session["Cookie"] as HttpCookie;
+			Response.Cookies.Add(cookie);
+			Session["ReturnUrl"] = null;
+			Session["LoginSuccess"] = null;
+			Session["Cookie"] = null;
+			if (returnurl != null)
 				Response.Redirect("~" + Session["ReturnUrl"]);
 			else
-				Response.Redirect("/Default");
+				Response.Redirect("~/Default");
 		}
 	}
 }

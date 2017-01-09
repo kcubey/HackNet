@@ -251,6 +251,7 @@ namespace HackNet.Security
 						mc.AddLine("We hope you enjoy your gaming experience with us,");
 						mc.AddLine("Kindly verify your email address by clicking on the link below");
 						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
+						// TODO: Actual email verification (WL)
 					}
 					AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
