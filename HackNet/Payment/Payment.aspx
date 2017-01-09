@@ -15,9 +15,7 @@
         <script src="/Payment/backend/JSv3HostedFields.js" lang="javascript" type="text/javascript"></script>
     -->
         <!-- all-->
-        <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
-        <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
-
+        
     <link rel="stylesheet" href="/payment/backend/paymentCSS.css" />
 
     <div class="panel panel-default">
@@ -33,15 +31,10 @@
             </p>
 
             <h3>Payment Details</h3>
-                <asp:DropDownList ID="PackageList" runat="server" ForeColor="Black" 
-                    AutoPostBack="true" onselectedindexchanged="pkgConfirm_indexChange">
-                    <asp:ListItem Text="Package A - SGD$10" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="Package B - SGD$20" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="Package C - SGD$30" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="Package D - SGD$40" Value="3"></asp:ListItem>
-                </asp:DropDownList>
+             
             <br />
-            <asp:Label ID="pkgConfirm" runat="server"></asp:Label>
+            <asp:Label ID="packageNameLbl" runat="server" ></asp:Label>
+                 - <asp:Label ID="packagePriceLbl" runat="server"></asp:Label>
    
             <br /><br />
             <h3>Pay by Paypal or Credit Card</h3>
@@ -51,12 +44,15 @@
                 <div id="payment-form"></div>
             </div>
 
-            <input type="hidden" name="fake-valid-nonce">
-
-            <asp:LinkButton runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" PostBackUrl="~/Payment/Checkout.aspx"></asp:LinkButton>
-
+            <br /><br />
+            <asp:Button id="checkoutBtn" runat="server" CssClass="btn btn-success" Text="Checkout" onclick="checkoutClick"></asp:Button>
+            <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
         </div>
     </div>
+
+    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
+    <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
+
 
 <!--
     <h3>JS v3</h3>

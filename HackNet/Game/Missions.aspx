@@ -142,7 +142,7 @@
         </div>
 
     </div>
-    <!--
+    
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Attack Info Editor</h2>
         <div class="form-group row">
@@ -189,8 +189,16 @@
                 <asp:ListItem Value="3">Lvl16to20</asp:ListItem>
             </asp:DropDownList>
         </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Mission Exp: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="MisExp"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Mission Coin: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="MisCoin"></asp:TextBox>
+        </div>
         <asp:Button runat="server" ID="btnAddMis" CssClass="btn btn-default" OnClick="btnAddMis_Click" Text="Add Item" />
     </div>
-    -->
+    
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
 </asp:Content>

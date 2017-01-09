@@ -15,6 +15,8 @@ namespace HackNet.Payment
         protected void Page_Load(object sender, EventArgs e)
         {
             DataContext ctx = new DataContext();
+            packageNameLbl.Text = "Package " + Session["packageId"].ToString();
+            packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
         }
 
         public void CancelClick(Object sender, EventArgs e)

@@ -7,61 +7,110 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Braintree;
 using System.Configuration;
+using System.Net;
+using System.Diagnostics;
+
 
 namespace HackNet.Payment
 {
     public partial class Payment : System.Web.UI.Page
     {
+        protected int price;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            Debug.WriteLine("enter pageload payment.aspx");
+
+            Debug.WriteLine("enter pageload payment.aspxwrite form id");
+            Form.ID = "checkout-form";
+            packageNameLbl.Text = "Package " + Session["packageId"].ToString();
+            packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
+            getPkgPrice();
+            //Braintree codes
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
+            Debug.WriteLine("exit pageload payment");
         }
 
-        protected void pkgConfirm_indexChange(object sender, EventArgs e)
+        public void getPkgPrice()
         {
-            pkgConfirm.Text = PackageList.SelectedItem.Text;
+            //insert code to get pkg price from pkg id
+            //price = 50;
+            //below code to convert for transaction
+            Debug.WriteLine("enter getpkgprice");
+
+            price = Convert.ToInt32(Session["packagePrice"])*100;
+
+            Debug.WriteLine("exit getpkgprice");
         }
 
-        //Braintree stuff
-        /*
-            var gateway = new BraintreeGateway 
-                    {
-                        Environment = Braintree.Environment.SANDBOX,
-                        MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"],
-                        PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"],
-                        PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"],
-                    };
-        
-        public class ClientTokenHandler : IHttpHandler
+        public void CancelClick(Object sender, EventArgs e)
         {
-            public void ProcessRequest(HttpContext context)
+            Response.Redirect("~/game/market");
+        }
+
+        public void checkoutClick(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("enter checkoutclick");
+
+            Debug.WriteLine("create gateway");
+            BraintreeGateway Gateway = new BraintreeGateway
             {
-                var clientToken = gateway.ClientToken.generate();
-                context.Response.Write(clientToken);
-            }
-        }
+                Environment = Braintree.Environment.SANDBOX,
+                PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
+                PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
+                MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
 
-        [HttpPost]
-        public ActionResult CreatePurchase(FormCollection collection)
-        {
-            string nonceFromTheClient = collection["fake-valid-nonce"];
-            // Use payment method nonce here
-        }
+                /*
+                PublicKey = "YOURPUBLICKEYHERE",
+                PrivateKey = "YOURPRIVATEKEYHERE",
+                MerchantId = "YOURMERCHANTIDHERE"
+                */
+            };
+            Debug.WriteLine("gateway done");
 
-
-        var request = new TransactionRequest
-        {
-            Amount = 10.00M,
-            PaymentMethodNonce = nonceFromTheClient,
-            Options = new TransactionOptionsRequest
+            Debug.WriteLine("create transactionRequest");
+            TransactionRequest transactionRequest = new TransactionRequest
             {
-                SubmitForSettlement = true
-            }
-        };
+                Amount = (decimal)price/100,
+                PaymentMethodNonce = "fake-valid-nonce",
+                Options = new TransactionOptionsRequest
+                {
+                    SubmitForSettlement = true
+                }
+            };
+            Debug.WriteLine("transactionRequest done");
 
-        Result<Transaction> result = gateway.Transaction.Sale(request);
+            Debug.WriteLine("submit transactionRequest");
+            Result<Transaction> result = Gateway.Transaction.Sale(transactionRequest);
+            Debug.WriteLine("transactionRequest submitted");
+
+            Debug.WriteLine("check result");
+            if (result.IsSuccess())
+            {
+                Debug.WriteLine("successful");
+                Response.Redirect("~/payment/checkout");
+                Debug.WriteLine("redirect checkout");
+            }
+
+            else
+            {
+                Debug.WriteLine("failed");
+                string errorMessages = "";
+                foreach (ValidationError error in result.Errors.DeepAll())
+                {
+                    errorMessages += "Error: " + (int)error.Code + " - " + error.Message + "\n";
+                }
+
+                Debug.WriteLine("store message");
+                Session["transactionError"] = errorMessages;
+                Response.Redirect("~/payment/retry");
+                Debug.WriteLine("fail redirect");
+
+            }
+
+            Debug.WriteLine("exit checkoutclick");
+
+        }
     }
-
-    */
-}
 }

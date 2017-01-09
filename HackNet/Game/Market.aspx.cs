@@ -15,77 +15,89 @@ namespace HackNet.Market
 {
     public partial class Market : System.Web.UI.Page
     {
+        protected int dbBuck;
+        protected int numBuck;
+        protected int numCoin;
+        protected string strBuck;
+        protected string message;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            buckTextBox.Text = "";
-            coinTextBox.Text = "";
-
             Users u = Authenticate.GetCurrentUser();
-            int pBuck = 30;
+            dbBuck = 30;
                 //u.ByteDollars;
 
-            buckValidator.MaximumValue = pBuck.ToString();
+            buckValidator.MaximumValue = dbBuck.ToString();
         }
 
-        
+        public void buckTextBox_TextChanged(Object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
         public void PrintMessage(String message)
         {
             string alert = message;
             Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
 
-            Debug.WriteLine("exiting printmessage");
+            ClearText();
 
         }
 
-        public void CheckValueButton_Click(Object sender, EventArgs e)
+        public void Calculate()
         {
-            int numBuck = Convert.ToInt32(buckTextBox.Text);
-            coinLabel.Text = (numBuck * 100).ToString();
-
-            //Calculate();
-        }
-
-        public string Calculate()
-        {
-            int numBuck = Convert.ToInt32(buckTextBox.Text);
-            coinTextBox.Text = (numBuck * 100).ToString();
-            return coinTextBox.Text;
+            strBuck = buckTextBox.Text;
+            try
+            {
+                numBuck = Convert.ToInt32(strBuck);
+                if (numBuck < dbBuck && numBuck > 0)
+                {
+                    numCoin = (numBuck * 100);
+                    convertedCoinLabel.Text = numCoin.ToString();
+                }
+                else if (numBuck > dbBuck || numBuck < 0)
+                {
+                    ClearText();
+                }
+            }
+            catch (Exception ex)
+            {
+                ClearText();
+                Debug.WriteLine(ex);
+            }
         }
         
-        public void RedirectButton_Click(Object sender, EventArgs e)
+        public void buyPackage_Click(Object sender, EventArgs e)
         {
-            Response.Redirect("~/payment/Reauth", false);
+            int packageId = 123;
+            int packagePrice = 30;
+            // change to retreive package id & price from button
+
+            Session["packageId"] = packageId;
+            Session["packagePrice"] = packagePrice;
+            Response.Redirect("~/payment/Reauth");
         }
 
         public void ConversionButton_Click(Object sender, EventArgs e)
         {
-            string message = "";
-            
-                string numBuck = buckTextBox.Text;
-                string numCoin = Calculate(); //check this function
-                Debug.WriteLine("check value buck" + numBuck);
-                Debug.WriteLine("check value coin" + numCoin);
-
-                message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+            message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
             
             PrintMessage(message);
 
-
-
-
-            Debug.WriteLine("exiting conversion event");
-
-            //Response.Write("<script type='text/javascript'>alert('"+ message +"');</script>");
-
-            //    Response.Write("<script type='text/javascript'>window.open('Page.aspx?ID=" + YourTextField.Text.ToString() + "','_blank');</script>");
 
             //insert add numCoin db code
             //insert minus numBuck db code
 
         }
 
-       
+        public void ClearText()
+        {
+            buckTextBox.Text = string.Empty;
+            convertedCoinLabel.Text = string.Empty;
+        }
 
+       
+//======================================================================================================
 
         /*
                 protected void Pay_Redirect_Click(Object sender, EventArgs e)

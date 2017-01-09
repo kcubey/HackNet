@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackNet.Game {
+namespace HackNet.Payment {
     
     
-    public partial class PartsInfo {
+    public partial class Retry {
         
         /// <summary>
-        /// ItemName control.
+        /// transactionError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ItemName;
-        
-        /// <summary>
-        /// ItemDes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ItemDes;
+        protected global::System.Web.UI.WebControls.Label transactionError;
     }
 }

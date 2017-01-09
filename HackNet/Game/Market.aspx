@@ -4,15 +4,87 @@
 
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
+    <div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Market - Currency</h3>
+		</div>
+		<div class="panel-body">
+            <div id="marketArea">
+			    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
+                <p>These premium packages require the use of REAL money.</p> 
+
+                <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                    <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                    <br /><br />
+                    <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package A - SGD$10"></asp:Label></asp:LinkButton>
+
+                <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                    <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                    <br /><br />
+                    <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package B - SGD$100"></asp:Label></asp:LinkButton>
+
+                <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                    <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                    <br /><br />
+                    <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package C - SGD$50"></asp:Label></asp:LinkButton>
+
+                <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
+                    <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                    <br /><br />
+                    <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package D - SGD$20"></asp:Label></asp:LinkButton>
+
+                <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
+                    <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                    <br /><br />
+                    <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>
+            </div>
+            
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            
+            <div id="convertArea">
+                <asp:UpdatePanel ID="ConversionPanel" runat="server">
+                <ContentTemplate>
+        
+                <br />Bucks:
+                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
+                <asp:RangeValidator 
+                    ID="buckValidator" ControlToValidate="buckTextBox" 
+                    MinimumValue="0" Type="Integer" runat="server"
+                    ErrorMessage="* Please enter a valid number" ForeColor="Red">
+                </asp:RangeValidator>
+               <br />
+               <asp:RegularExpressionValidator 
+                    ID="buckExValidator" runat="server" 
+                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^[1-9]\d$"
+                    ControlToValidate="buckTextBox" ForeColor="Red">
+               </asp:RegularExpressionValidator>
+
+                <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
+                
+                </ContentTemplate>
+                </asp:UpdatePanel>
+ <!--               <hr />
+                demo code
+                Pages: <input type="number" class="form-control" id="pages" step="1"/>
+                <br/><br/>
+                Total: <span id="totall">0</span>
+ -->   
+                <br /><br />
+
+                <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
+                </div>
+        </div>
+	</div>
+
     <script>
         $('#pages').change(function (ev) {
             var total = $('#pages').val() * 2;
-            $('#totall').html(total);
+            $('#totall').html((total).toFixed(0));
         });
 
         $('#pages').keyup(function (ev) {
             var total = $('#pages').val() * 2;
-            $('#totall').html(total);
+            $('#totall').html((total).toFixed(0));
         });
 
         $('#buckTextBox1').keyup(function(ev){
@@ -27,76 +99,6 @@
            // $('#coinTotal').html(total);
         });
     </script>
-
-    <div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Market - Currency</h3>
-		</div>
-		<div class="panel-body">
-            <div id="marketArea">
-			    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
-                <p>These premium packages require the use of REAL money.</p> 
-
-                <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="RedirectButton_Click" Font-Underline="False">
-                    <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package A - SGD$10"></asp:Label></asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False">
-                    <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package B - SGD$100"></asp:Label></asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False">
-                    <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package C - SGD$50"></asp:Label></asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False"> 
-                    <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package D - SGD$20"></asp:Label></asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False"> 
-                    <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>
-            </div>
-            
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            
-            <div id="convertArea">
-                <hr />
-                original w rangevalidator
-                <br />Bucks:
-                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox>
-                <asp:RangeValidator ID="buckValidator" ControlToValidate="buckTextBox" 
-                MinimumValue="0" Type="Integer" runat="server"
-            ErrorMessage="* Please enter a valid number" ForeColor="Red"></asp:RangeValidator>
-
-                Coins: 
-                <asp:TextBox ID="coinTextBox"  CssClass="form-control" runat="server" ForeColor="Black" ReadOnly="True"></asp:TextBox>
-
-                <hr />
-                change to JS math
-                Bucks: 
-                <asp:TextBox ID="buckTextBox1"  type="number" clientidmode="Static" CssClass="form-control" runat="server" ForeColor="Black"></asp:TextBox>
-                <br />Coins: <asp:Label ID="coinLabel" runat="server" Text=""></asp:Label>    
-
-                <hr />
-                demo code
-                Pages: <input type="number" class="form-control" id="pages" step="1"/>
-                <br/><br/>
-                Total: <span id="totall">0.00</span>
-    
-                <br /><br />
-
-                <asp:Button ID="CheckValueButton" runat="server" CssClass="btn btn-success" Text="Check Value" onclick="CheckValueButton_Click"/>
-                <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
-                </div>
-        </div>
-	</div>
-
         
 
     <!-- Item repeater

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Braintree;
 
-using Braintree;
-
-//Braintree file
-
-namespace HackNet.App_Code
+namespace HackNet
 {
     public interface IBraintreeConfiguration
     {

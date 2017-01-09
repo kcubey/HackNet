@@ -157,6 +157,15 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
+        /// ConversionPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel ConversionPanel;
+        
+        /// <summary>
         /// buckTextBox control.
         /// </summary>
         /// <remarks>
@@ -175,40 +184,22 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.RangeValidator buckValidator;
         
         /// <summary>
-        /// coinTextBox control.
+        /// buckExValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox coinTextBox;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator buckExValidator;
         
         /// <summary>
-        /// buckTextBox1 control.
+        /// convertedCoinLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox buckTextBox1;
-        
-        /// <summary>
-        /// coinLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label coinLabel;
-        
-        /// <summary>
-        /// CheckValueButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CheckValueButton;
+        protected global::System.Web.UI.WebControls.Label convertedCoinLabel;
         
         /// <summary>
         /// ConversionButton control.

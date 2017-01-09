@@ -14,6 +14,7 @@ namespace HackNet.Game
         {
             Items item = (Items)Session["Item"];
             ItemName.Text = item.ItemName;
+            //ItemDes.Text = item.ItemDesc;
         }
     }
 }

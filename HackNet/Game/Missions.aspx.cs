@@ -152,7 +152,9 @@ namespace HackNet.Game
             misdata.MissionIP = Mission.GetRandomIp();
             misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
             misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
-            using(DataContext db=new DataContext())
+            misdata.MissionExp = int.Parse(MisExp.Text);
+            misdata.MissionCoin = int.Parse(MisCoin.Text);
+            using (DataContext db=new DataContext())
             {
                 db.MissionData.Add(misdata);
                 db.SaveChanges();
