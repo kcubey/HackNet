@@ -16,27 +16,35 @@
                 <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package A - SGD$10"></asp:Label></asp:LinkButton>
+                    <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
+                        <asp:Label ID="Label7" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
+                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="10"></asp:Label>
+                </asp:LinkButton>
 
                 <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package B - SGD$100"></asp:Label></asp:LinkButton>
+                    <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package 2 - SGD$100"></asp:Label>
+                </asp:LinkButton>
 
                 <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                     <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package C - SGD$50"></asp:Label></asp:LinkButton>
+                    <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package 3 - SGD$50"></asp:Label>
+                </asp:LinkButton>
 
                 <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
                     <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package D - SGD$20"></asp:Label></asp:LinkButton>
+                    <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package 4 - SGD$20"></asp:Label>
+                </asp:LinkButton>
 
                 <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
                     <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package E - SGD$350"></asp:Label></asp:LinkButton>
+                    <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package 5 - SGD$350"></asp:Label>
+                </asp:LinkButton>
             </div>
             
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -55,9 +63,10 @@
                <br />
                <asp:RegularExpressionValidator 
                     ID="buckExValidator" runat="server" 
-                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^[1-9]\d$"
+                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d+$"
                     ControlToValidate="buckTextBox" ForeColor="Red">
                </asp:RegularExpressionValidator>
+                    <!-- expressions: ^[1-9]\d$ || ^\d+$ || ^[0-9]*$ but allows space-->
 
                 <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
                 

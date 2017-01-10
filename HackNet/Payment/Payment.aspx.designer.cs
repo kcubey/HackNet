@@ -31,22 +31,13 @@ namespace HackNet.Payment {
         protected global::System.Web.UI.WebControls.LinkButton backButton;
         
         /// <summary>
-        /// packageNameLbl control.
+        /// packageDetailsLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label packageNameLbl;
-        
-        /// <summary>
-        /// packagePriceLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label packagePriceLbl;
+        protected global::System.Web.UI.WebControls.Label packageDetailsLbl;
         
         /// <summary>
         /// checkoutBtn control.
