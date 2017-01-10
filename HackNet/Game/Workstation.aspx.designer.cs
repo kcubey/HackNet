@@ -31,6 +31,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DropDownList ProcessList;
         
         /// <summary>
+        /// ProcessBonusLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ProcessBonusLbl;
+        
+        /// <summary>
         /// GraphicList control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton MarLnkBtn;
+        
+        /// <summary>
+        /// HelpBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor HelpBtn;
         
         /// <summary>
         /// WorkstationNameLbl control.

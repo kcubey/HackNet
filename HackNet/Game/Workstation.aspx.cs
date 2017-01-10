@@ -13,9 +13,11 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+
             using (DataContext db = new DataContext()) {
                // This is to add a new default machine.
-               //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+               // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
                 Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
@@ -32,17 +34,15 @@ namespace HackNet.Game
                 WorkStnUpgradeName.Text = m.MachineName;
                 LoadItemIntoList(ProcessList, 1);
                 LoadItemIntoList(GraphicList, 4);
-                LoadItemIntoList(MemoryList, 4);
-                LoadItemIntoList(PowerSupList, 4);
+                LoadItemIntoList(MemoryList, 2);
+                LoadItemIntoList(PowerSupList, 3);
             }
         }
         private void LoadItemIntoList(DropDownList ddList,int itemType)
         {
-            List<Items> itmList = 
-                InventoryItem.GetUserInvItems(
-                    InventoryItem.GetUserInvList(Authenticate.GetCurrentUser()), itemType);
-            System.Diagnostics.Debug.WriteLine("Num of items: "+itmList.Count);
-            if (itmList[0] != null)
+            List<Items> itmList = InventoryItem.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+
+            if (itmList.Count!=0)
             {
                 ddList.DataTextField = "ItemName";
                 ddList.DataValueField = "ItemBonus";

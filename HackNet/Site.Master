@@ -20,7 +20,7 @@
 <body>
 	<script>
 		$(window).keydown(function (e) {
-			if ((e.metaKey || e.ctrlKey) && e.keyCode == 65) {
+			if ((e.metaKey || e.ctrlKey) && (e.metaKey || e.shiftKey)  && e.keyCode == 90) {
 				console.log("Control-A KEY PRESSED");
 				location.assign(<% =ResolveUrl("~/Default/") %>);
 				e.preventDefault();

@@ -23,9 +23,7 @@ namespace HackNet.Payment
 
             Debug.WriteLine("enter pageload payment.aspxwrite form id");
             Form.ID = "checkout-form";
-            packageNameLbl.Text = "Package " + Session["packageId"].ToString();
-            packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
-            getPkgPrice();
+            packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() +" - $" + Session["packageprice"].ToString();
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
@@ -34,13 +32,9 @@ namespace HackNet.Payment
 
         public void getPkgPrice()
         {
-            //insert code to get pkg price from pkg id
-            //price = 50;
-            //below code to convert for transaction
+            //below code to convert for gateway
             Debug.WriteLine("enter getpkgprice");
-
             price = Convert.ToInt32(Session["packagePrice"])*100;
-
             Debug.WriteLine("exit getpkgprice");
         }
 

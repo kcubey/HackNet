@@ -130,15 +130,6 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.FileUpload UploadPhoto;
         
         /// <summary>
-        /// imgViewFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgViewFile;
-        
-        /// <summary>
         /// ItemDesc control.
         /// </summary>
         /// <remarks>

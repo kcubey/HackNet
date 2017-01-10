@@ -23,7 +23,6 @@
 			<h3 class="panel-title">Payment</h3>
 		</div>
 		<div class="panel-body">
-            <h1>Confirm your Details</h1><hr />
             <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
             <p>You have chosen to use REAL currency to pay for premium items.
                 <br />
@@ -31,20 +30,15 @@
             </p>
 
             <h3>Payment Details</h3>
-             
-            <br />
-            <asp:Label ID="packageNameLbl" runat="server" ></asp:Label>
-                 - <asp:Label ID="packagePriceLbl" runat="server"></asp:Label>
+            <asp:Label ID="packageDetailsLbl" runat="server" forecolor="Red"></asp:Label>
    
-            <br /><br />
-            <h3>Pay by Paypal or Credit Card</h3>
             <hr /><p>For Paypal, click on the Paypal button. For Credit Card, enter a valid card number and expiration date.</p>
     
             <div class="dropinBox">
                 <div id="payment-form"></div>
             </div>
 
-            <br /><br />
+            <br />
             <asp:Button id="checkoutBtn" runat="server" CssClass="btn btn-success" Text="Checkout" onclick="checkoutClick"></asp:Button>
             <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
         </div>
