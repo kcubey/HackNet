@@ -13,6 +13,8 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+
             using (DataContext db = new DataContext()) {
                // This is to add a new default machine.
                // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);

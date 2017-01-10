@@ -2,7 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
     <link href="../Content/Tutorial/introjs.css" rel="stylesheet">
-
+    <script>
+        function showTutorial() {
+            javascript:introJs().start();
+        }
+    </script>
     <div id="upgradeModel" class="modal fade" role="dialog">
         <div class="modal-dialog" style="color: black;">
 
@@ -49,7 +53,7 @@
 
     <div class="panel panel-default">
         <div class="panel panel-body">
-            <a class="glyphicon glyphicon-question-sign" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
+            <a class="glyphicon glyphicon-question-sign" runat="server" id="HelpBtn" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
 
             <div class="row">
                 <div class="col-xs-6 col-md-4">
