@@ -17,8 +17,7 @@ namespace HackNet.Auth {
 		{
 			if (Authenticate.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
-			if (Request.QueryString["ReturnUrl"] != null)
-				Session["ReturnUrl"] = Request.QueryString["ReturnUrl"];
+
 			DataContext ctx = new DataContext();
         }
 
@@ -53,14 +52,17 @@ namespace HackNet.Auth {
 				if (a.Is2FAEnabled)
 				{
 					Session["Cookie"] = a.AuthCookie;
+					Session["PasswordSuccess"] = email;
+					Session["ReturnUrl"] = Request.QueryString["ReturnUrl"];
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
+					Session["ReturnUrl"] = null;
 					Response.Cookies.Add(a.AuthCookie);
-					if (Session["ReturnUrl"] != null)
-						Response.Redirect("~" + Session["ReturnUrl"]);
+					if (Request.QueryString["ReturnUrl"] != null)
+						Response.Redirect("~" + Request.QueryString["ReturnUrl"]);
 					else
-						Response.Redirect("/Default");
+						Response.Redirect("~/Default");
 				}
 			}
 		}

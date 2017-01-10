@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HackNet</RootNamespace>
     <AssemblyName>HackNet</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -589,9 +589,7 @@
     <Compile Include="Security\Authenticate.cs" />
     <Compile Include="Security\Captcha.cs" />
     <Compile Include="Security\Crypt.cs" />
-    <Compile Include="Security\Data.cs" />
     <Compile Include="Security\Exceptions.cs" />
-    <Compile Include="Security\Logger.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

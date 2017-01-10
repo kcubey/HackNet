@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace HackNet.Security
 {
@@ -28,49 +23,110 @@ namespace HackNet.Security
 			}
 		}
 
-
-		public byte[] Encrypt(string plainText)
+		// Encrypt using a known public key
+		public byte[] EncryptRsa(byte[] plainBytes, string parameters)
 		{
-			var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-			using (AesManaged aes = new AesManaged())
-			{
-				aes.BlockSize = 128;
-				aes.KeySize = 256;
-				aes.Mode = CipherMode.CBC;
-				aes.Padding = PaddingMode.PKCS7;
-				using (var encryptor = aes.CreateEncryptor())
-				using (var memoryStream = new MemoryStream())
-				using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+			byte[] cipherBytes = new byte[0];
+			if (plainBytes.Length > 0)
+				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 				{
-					cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-					cryptoStream.FlushFinalBlock();
-					// Create the final bytes as a concatenation of the random salt bytes, the random iv bytes and the cipher bytes.
-					var cipherBytes = memoryStream.ToArray();
-					memoryStream.Close();
-					cryptoStream.Close();
-					return cipherBytes;
+					rsa.FromXmlString(parameters);
+					cipherBytes = rsa.Encrypt(plainBytes, false);
 				}
-			}
+			return cipherBytes;
+		}
+		
+		// Decrypt using a known private key
+		public byte[] DecryptRsa(byte[] cipherBytes, string parameters)
+		{
+			byte[] plainBytes = new byte[0];
+			if (cipherBytes.Length > 0)
+				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+				{
+					rsa.FromXmlString(parameters);
+					plainBytes = rsa.Decrypt(cipherBytes, false);
+				}
+			return plainBytes;
 		}
 
-		public string Decrypt(byte[] cipherBytes)
+		// Generate RSA Keys
+		public string GenerateRsaParameters()
 		{
-			using (AesManaged aes = new AesManaged())
+			string parameters;
+
+			using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+				parameters = rsa.ToXmlString(true);
+
+			return parameters;
+		}
+
+		// Get public key parameter from a key pair
+		public string RemovePrivateKey(string keypair)
+		{
+			string publicXml;
+			using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 			{
-				aes.BlockSize = 128;
-				aes.Mode = CipherMode.CBC;
-				aes.Padding = PaddingMode.PKCS7;
-				using (var decryptor = aes.CreateDecryptor())
-				using (var memoryStream = new MemoryStream(cipherBytes))
-				using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-				{
-					var plainTextBytes = new byte[cipherBytes.Length];
-					var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-					memoryStream.Close();
-					cryptoStream.Close();
-					return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
-				}
+				rsa.FromXmlString(keypair);
+				publicXml = rsa.ToXmlString(false);
 			}
+			return publicXml;
+		}
+
+		// Derive AES key from plaintext
+		public byte[] DeriveKey(string passwd, byte[] salt, byte[] initvector)
+		{
+			byte[] derivedKey;
+
+			if (passwd == null || salt == null || initvector == null)
+				throw new ArgumentNullException("Key derivation failed due to null argument");
+
+			using (var kdf = new Rfc2898DeriveBytes(passwd, salt))
+				derivedKey = kdf.CryptDeriveKey("AES", "SHA1", 128, initvector);
+
+			return derivedKey;
+		}
+
+
+		public byte[] EncryptAes(byte[] plainBytes, byte[] keyBytes)
+		{
+			byte[] cipherBytes = new byte[0];
+			try
+			{
+				using (AesManaged aes = new AesManaged())
+				{
+					aes.BlockSize = 128;
+					aes.Mode = CipherMode.CBC;
+					aes.Padding = PaddingMode.PKCS7;
+					aes.Key = keyBytes;
+					ICryptoTransform transform = aes.CreateEncryptor();
+					cipherBytes = transform.TransformFinalBlock(plainBytes, 0, cipherBytes.Length);
+				}
+			} catch (Exception e)
+			{
+				Debug.WriteLine("Exception caught: " + e.StackTrace);
+			}
+			return cipherBytes;
+		}
+
+		public byte[] DecryptAes(byte[] cipherBytes, byte[] keyBytes)
+		{
+			byte[] plainBytes = new byte[0];
+			try
+			{
+				using (AesManaged aes = new AesManaged())
+				{
+					aes.BlockSize = 128;
+					aes.Mode = CipherMode.CBC;
+					aes.Padding = PaddingMode.PKCS7;
+					aes.Key = keyBytes;
+					ICryptoTransform transform = aes.CreateDecryptor();
+					plainBytes = transform.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
+				}
+			} catch (Exception e)
+			{
+				Debug.WriteLine("Exception caught: " + e.StackTrace);
+			}
+			return plainBytes;
 		}
 
 		/*

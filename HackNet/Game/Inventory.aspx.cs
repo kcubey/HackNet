@@ -24,7 +24,7 @@ namespace HackNet.Game
         {
             List<InventoryItem> invList = InventoryItem.GetUserInvList(Authenticate.GetCurrentUser());
             List<Items> ilist = InventoryItem.GetUserInvItems(invList,itemType);
-            if (ilist[0]!=null)
+            if (ilist.Count!=0 && ilist[0]!=null)
             {
                 string imageurlstring;
                 string url;
