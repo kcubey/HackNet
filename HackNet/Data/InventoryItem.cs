@@ -18,16 +18,36 @@ namespace HackNet.Data
 		// Foreign key references
 		public virtual Users User { get; set; }
 
-        // May combine this both methods together
-        internal static List<InventoryItem> GetUserInvList(Users user)
+
+        internal static List<Items> GetUserInvItems(Users user,int itemType)
         {
-            int userid = user.UserID;
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from inv in db.InventoryItem where inv.UserId == userid select inv;
-                    return query.ToList();
+                    var query = from inv in db.InventoryItem where inv.UserId == user.UserID select inv;
+
+                    // For debugging Atm
+                    List<InventoryItem> invlist = query.ToList();
+                    foreach (InventoryItem inv in invlist)
+                    {
+                        System.Diagnostics.Debug.WriteLine("User Owns: " + inv.ItemId);
+                    }
+
+                    List<Items> itmList = new List<Items>();
+                    foreach (InventoryItem inv in invlist)
+                    {
+                        for (int i = 0; i < inv.Quantity; i++)
+                        {
+                            itmList.Add(Items.GetItem(inv.ItemId));
+                            System.Diagnostics.Debug.WriteLine("User Owns: " + Items.GetItem(inv.ItemId).ItemName);
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine("Count:  " + invlist.Count);
+
+                    itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
+                   
+                    return itmList;
                 }
 
             }
@@ -37,18 +57,6 @@ namespace HackNet.Data
 
             }
         }
-
-        internal static List<Items> GetUserInvItems(List<InventoryItem> invList,int itemType)
-        {
-            List<Items> itemsList=new List<Items>();
-            foreach(InventoryItem inv in invList)
-            {
-                for(int i = 0; i < inv.Quantity; i++)
-                {
-                    itemsList.Add(Items.GetItem(inv.ItemId, itemType));
-                }
-            }
-            return itemsList;
-        }
+  
     }
 }

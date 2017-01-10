@@ -34,8 +34,7 @@ namespace HackNet.Data
                     }
                     else
                     {                    
-                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();
-                        
+                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();                      
                     }
                 }
             }

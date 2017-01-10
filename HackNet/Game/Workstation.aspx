@@ -4,8 +4,9 @@
     <link href="../Content/Tutorial/introjs.css" rel="stylesheet">
     <script>
         function showTutorial() {
-            javascript:introJs().start();
+            javascript: introJs().start();
         }
+
     </script>
     <div id="upgradeModel" class="modal fade" role="dialog">
         <div class="modal-dialog" style="color: black;">
@@ -22,23 +23,27 @@
                     <br />
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="ProcessList">                           
+                        <asp:DropDownList runat="server" Width="200px" ID="ProcessList">
                         </asp:DropDownList>
+                        <asp:Label runat="server" ID="ProcessBonusLbl" AutoPostBack="true" UpdateMode="Conditional"></asp:Label>
                     </div>
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="GraphicList">                           
+                        <asp:DropDownList runat="server" Width="200px" ID="GraphicList">
                         </asp:DropDownList>
+                        <asp:Label runat="server"></asp:Label>
                     </div>
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="MemoryList">                           
+                        <asp:DropDownList runat="server" Width="200px" ID="MemoryList">
                         </asp:DropDownList>
+                        <asp:Label runat="server"></asp:Label>
                     </div>
                     <div class="form-group row">
                         <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="PowerSupList">                          
+                        <asp:DropDownList runat="server" Width="200px" ID="PowerSupList">
                         </asp:DropDownList>
+                        <asp:Label runat="server"></asp:Label>
                     </div>
                     <asp:LinkButton runat="server" ID="MarLnkBtn" OnClick="MarLnkBtn_Click" Text="Need a part? Head over to our market now!"></asp:LinkButton>
                 </div>
@@ -54,7 +59,6 @@
     <div class="panel panel-default">
         <div class="panel panel-body">
             <a class="glyphicon glyphicon-question-sign" runat="server" id="HelpBtn" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
-
             <div class="row">
                 <div class="col-xs-6 col-md-4">
                     <img src="../Content/Images/workstation.png" />

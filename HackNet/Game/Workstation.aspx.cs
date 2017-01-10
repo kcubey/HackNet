@@ -34,17 +34,15 @@ namespace HackNet.Game
                 WorkStnUpgradeName.Text = m.MachineName;
                 LoadItemIntoList(ProcessList, 1);
                 LoadItemIntoList(GraphicList, 4);
-                LoadItemIntoList(MemoryList, 4);
-                LoadItemIntoList(PowerSupList, 4);
+                LoadItemIntoList(MemoryList, 2);
+                LoadItemIntoList(PowerSupList, 3);
             }
         }
         private void LoadItemIntoList(DropDownList ddList,int itemType)
         {
-            List<Items> itmList = 
-                InventoryItem.GetUserInvItems(
-                    InventoryItem.GetUserInvList(Authenticate.GetCurrentUser()), itemType);
-            System.Diagnostics.Debug.WriteLine("Num of items: "+itmList.Count);
-            if (itmList.Count!=0 && itmList[0]!=null)
+            List<Items> itmList = InventoryItem.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+
+            if (itmList.Count!=0)
             {
                 ddList.DataTextField = "ItemName";
                 ddList.DataValueField = "ItemBonus";
