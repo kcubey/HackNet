@@ -13,9 +13,11 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+
             using (DataContext db = new DataContext()) {
                // This is to add a new default machine.
-               //Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+               // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
                 Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
@@ -42,7 +44,7 @@ namespace HackNet.Game
                 InventoryItem.GetUserInvItems(
                     InventoryItem.GetUserInvList(Authenticate.GetCurrentUser()), itemType);
             System.Diagnostics.Debug.WriteLine("Num of items: "+itmList.Count);
-            if (itmList[0] != null)
+            if (itmList.Count!=0 && itmList[0]!=null)
             {
                 ddList.DataTextField = "ItemName";
                 ddList.DataValueField = "ItemBonus";
