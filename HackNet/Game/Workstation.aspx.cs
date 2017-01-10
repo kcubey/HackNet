@@ -42,7 +42,7 @@ namespace HackNet.Game
                 InventoryItem.GetUserInvItems(
                     InventoryItem.GetUserInvList(Authenticate.GetCurrentUser()), itemType);
             System.Diagnostics.Debug.WriteLine("Num of items: "+itmList.Count);
-            if (itmList.Count==0)
+            if (itmList.Count!=0 && itmList[0]!=null)
             {
                 ddList.DataTextField = "ItemName";
                 ddList.DataValueField = "ItemBonus";
