@@ -5,6 +5,7 @@ using System.Web;
 
 namespace HackNet.Loggers
 {
+	[Serializable]
 	internal class LogEntryInvalidException : Exception
 	{
 		internal LogEntryInvalidException() : base() { }
@@ -12,6 +13,7 @@ namespace HackNet.Loggers
 		internal LogEntryInvalidException(string str, Exception inner) : base(str, inner) { }
 	}
 
+	[Serializable]
 	internal class LogTypeInvalidException : Exception
 	{
 		internal LogTypeInvalidException() : base() { }

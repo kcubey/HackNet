@@ -5,6 +5,7 @@ using System.Web;
 
 namespace HackNet.Security
 {
+	[Serializable]
     internal class AuthException : Exception
     {
         internal AuthException() : base() { }
@@ -12,20 +13,31 @@ namespace HackNet.Security
         internal AuthException(string str, Exception inner) : base(str, inner) { }
     }
 
-    internal class UserException : Exception
+	[Serializable]
+	internal class RegistrationException : Exception
+	{
+		internal RegistrationException() : base() { }
+		internal RegistrationException(string str) : base(str) { }
+		internal RegistrationException(string str, Exception inner) : base(str, inner) { }
+	}
+
+	[Serializable]
+	internal class UserException : Exception
     {
         internal UserException() : base() { }
         internal UserException(string str) : base(str) { }
         internal UserException(string str, Exception inner) : base(str, inner) { }
     }
 
-    internal class InputException : Exception
+	[Serializable]
+	internal class InputException : Exception
     {
         internal InputException() : base() { }
         internal InputException(string str) : base(str) { }
         internal InputException(string str, Exception inner) : base(str, inner) { }
     }
 
+	[Serializable]
 	internal class ConnectionException : Exception
 	{
 		internal ConnectionException() : base() { }
@@ -33,6 +45,7 @@ namespace HackNet.Security
 		internal ConnectionException(string str, Exception inner) : base(str, inner) { }
 	}
 
+	[Serializable]
 	internal class MailException : Exception
 	{
 		internal MailException() : base() { }

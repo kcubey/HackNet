@@ -231,8 +231,11 @@ namespace HackNet.Security
 				Registered = DateTime.Now,
 				LastLogin = DateTime.Now,
 				Coins = 0,
-				ByteDollars = 0
+				ByteDollars = 0,
+				TotalExp = 0,
+				AccessLevel = AccessLevel.User
 			};
+
 			u.UpdatePassword(password);
 
 			using (DataContext db = new DataContext())
@@ -242,7 +245,7 @@ namespace HackNet.Security
 				Debug.WriteLine("User creation attempted");
 
 				Users createduser = Users.FindByEmail(email, db);
-				if (createduser != null)
+				if (createduser is Users)
 				{
 					using (MailClient mc = new MailClient(createduser.Email))
 					{
@@ -253,12 +256,14 @@ namespace HackNet.Security
 						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
 						// TODO: Actual email verification (WL)
 					}
+					Machines.DefaultMachine(createduser, db);
 					AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
+				} else
+				{
+					throw new RegistrationException("User cannot be registered due to an error (NOT_TYPE_USER)");
 				}
 			}
-
-			return RegisterResult.OtherException;
 		}
 
 		// Check if authenticated
