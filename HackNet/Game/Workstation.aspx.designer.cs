@@ -31,13 +31,22 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DropDownList ProcessList;
         
         /// <summary>
-        /// ProcessBonusLbl control.
+        /// CurrentProcessStatLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProcessBonusLbl;
+        protected global::System.Web.UI.WebControls.Label CurrentProcessStatLbl;
+        
+        /// <summary>
+        /// UpgradeProcessTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UpgradeProcessTxtBox;
         
         /// <summary>
         /// GraphicList control.
@@ -49,6 +58,24 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DropDownList GraphicList;
         
         /// <summary>
+        /// CurrentGPUStatLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CurrentGPUStatLbl;
+        
+        /// <summary>
+        /// UpgradeGPUTxtbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UpgradeGPUTxtbox;
+        
+        /// <summary>
         /// MemoryList control.
         /// </summary>
         /// <remarks>
@@ -56,6 +83,24 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList MemoryList;
+        
+        /// <summary>
+        /// CurrentMemStatLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CurrentMemStatLbl;
+        
+        /// <summary>
+        /// UpgradeMemTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UpgradeMemTxtBox;
         
         /// <summary>
         /// PowerSupList control.
@@ -67,6 +112,24 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DropDownList PowerSupList;
         
         /// <summary>
+        /// CurrentPowStatLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CurrentPowStatLbl;
+        
+        /// <summary>
+        /// UpgradePowTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UpgradePowTxtBox;
+        
+        /// <summary>
         /// MarLnkBtn control.
         /// </summary>
         /// <remarks>
@@ -74,6 +137,15 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton MarLnkBtn;
+        
+        /// <summary>
+        /// UpgradeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpgradeBtn;
         
         /// <summary>
         /// HelpBtn control.

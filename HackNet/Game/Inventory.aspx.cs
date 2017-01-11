@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using HackNet.Security;
+using HackNet.Game.Class;
 
 namespace HackNet.Game
 {
@@ -21,7 +22,7 @@ namespace HackNet.Game
 
         private void LoadInventory(DataList dl,int itemType)
         {
-            List<Items> ilist = InventoryItem.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+            List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
             if (ilist.Count!=0)
             {
                 string imageurlstring;

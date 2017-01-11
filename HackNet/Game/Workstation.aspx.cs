@@ -1,4 +1,5 @@
 ﻿using HackNet.Data;
+using HackNet.Game.Class;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
 
             using (DataContext db = new DataContext()) {
-               // This is to add a new default machine.
-               // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
-                Machines m=Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+                // This is to add a new default machine.
+                // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
+
+                Machines m = Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+                Session["Machines"] = m;
+                Session["InvtoryList"] = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(),-1);
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
                 ProcessorLbl.Text = m.MachineProcessor;
@@ -32,29 +36,48 @@ namespace HackNet.Game
                 SpeedattrLabel.Text = m.Speed.ToString();
                 // Upgrade Panel
                 WorkStnUpgradeName.Text = m.MachineName;
-                LoadItemIntoList(ProcessList, 1);
-                LoadItemIntoList(GraphicList, 4);
-                LoadItemIntoList(MemoryList, 2);
-                LoadItemIntoList(PowerSupList, 3);
+                MachineLogic.LoadItemIntoList(ProcessList, 1);
+                MachineLogic.LoadItemIntoList(GraphicList, 4);
+                MachineLogic.LoadItemIntoList(MemoryList, 2);
+                MachineLogic.LoadItemIntoList(PowerSupList, 3);
+                CurrentProcessStatLbl.Text = m.Health.ToString();
+                CurrentGPUStatLbl.Text = m.Speed.ToString();
+                CurrentMemStatLbl.Text = m.Attack.ToString();
+                CurrentPowStatLbl.Text = m.Defence.ToString();
             }
         }
-        private void LoadItemIntoList(DropDownList ddList,int itemType)
+       
+
+        
+        protected void UpgradeBtn_Click(object sender, EventArgs e)
         {
-            List<Items> itmList = InventoryItem.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+            Machines m = (Machines)Session["Machines"];
 
-            if (itmList.Count!=0)
+
+            if (ProcessList.SelectedValue != "===Select Upgrade===")
             {
-                ddList.DataTextField = "ItemName";
-                ddList.DataValueField = "ItemBonus";
-                ddList.DataSource = itmList;
-                ddList.DataBind();
-            }else
+                m.MachineProcessor = ProcessList.SelectedItem.Text;
+                m.Health= int.Parse(ProcessList.SelectedValue);
+            }
+            if (GraphicList.SelectedValue != "===Select Upgrade===")
             {
-                ddList.Items.Add("No Parts in Inventory");
-                ddList.Enabled = false;
-            }  
+                m.MachineGraphicCard= GraphicList.SelectedItem.Text;
+                m.Speed = int.Parse(GraphicList.SelectedValue);
+            }
+            if (MemoryList.SelectedValue != "===Select Upgrade===")
+            {
+                m.MachineProcessor = MemoryList.SelectedItem.Text;
+                m.Attack = int.Parse(MemoryList.SelectedValue);
+            }
+            if (PowerSupList.SelectedValue != "===Select Upgrade===")
+            {
+                m.MachineProcessor = PowerSupList.SelectedItem.Text;
+                m.Defence = int.Parse(PowerSupList.SelectedValue);
+            }
+
+            MachineLogic.UpdateMachine(m);
+            Response.Redirect(Request.RawUrl);
         }
-
 
         protected void MarLnkBtn_Click(object sender, EventArgs e)
         {

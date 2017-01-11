@@ -439,6 +439,8 @@
     <Compile Include="Game\Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Game\Class\ItemLogic.cs" />
+    <Compile Include="Game\Class\MachineLogic.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -6,7 +6,26 @@
         function showTutorial() {
             javascript: introJs().start();
         }
-
+        $().ready(function () {
+            $('#<%=ProcessList.ClientID %>').change(function () {
+                $('#<%=UpgradeProcessTxtBox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());
+          });
+        });
+        $().ready(function () {
+            $('#<%=GraphicList.ClientID %>').change(function () {
+                $('#<%=UpgradeGPUTxtbox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());
+          });
+        });
+        $().ready(function () {
+            $('#<%=MemoryList.ClientID %>').change(function () {
+                $('#<%=UpgradeMemTxtBox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());
+          });
+        });
+        $().ready(function () {
+            $('#<%=PowerSupList.ClientID %>').change(function () {
+                $('#<%=UpgradePowTxtBox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());
+          });
+        });
     </script>
     <div id="upgradeModel" class="modal fade" role="dialog">
         <div class="modal-dialog" style="color: black;">
@@ -21,34 +40,87 @@
                     <asp:Label ID="WorkStnUpgradeName" runat="server" Font-Size="X-Large"></asp:Label>
                     <br />
                     <br />
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="ProcessList">
-                        </asp:DropDownList>
-                        <asp:Label runat="server" ID="ProcessBonusLbl" AutoPostBack="true" UpdateMode="Conditional"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="GraphicList">
-                        </asp:DropDownList>
-                        <asp:Label runat="server"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Memory: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="MemoryList">
-                        </asp:DropDownList>
-                        <asp:Label runat="server"></asp:Label>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" Width="200px" ID="PowerSupList">
-                        </asp:DropDownList>
-                        <asp:Label runat="server"></asp:Label>
-                    </div>
+                    <asp:Table runat="server" CssClass="table">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell ColumnSpan="2">
+                                <asp:Label runat="server">Parts: </asp:Label>
+                            </asp:TableHeaderCell>
+                            <asp:TableHeaderCell>
+                                <asp:Label runat="server">Current: </asp:Label>
+                            </asp:TableHeaderCell>
+                            <asp:TableHeaderCell>
+                                <asp:Label runat="server">Upgrade: </asp:Label>
+                            </asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label runat="server" Text="Processor: " Font-Size="Larger"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList runat="server" Width="200px" ID="ProcessList">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="CurrentProcessStatLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:TextBox runat="server" ID="UpgradeProcessTxtBox" Enabled="false"></asp:TextBox>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label runat="server" Text="Graphics Card: " Font-Size="Larger"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList runat="server" Width="200px" ID="GraphicList">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="CurrentGPUStatLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:TextBox runat="server" ID="UpgradeGPUTxtbox" Enabled="false"></asp:TextBox>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                 <asp:Label runat="server" Text="Memory: " Font-Size="Larger"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList runat="server" Width="200px" ID="MemoryList">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="CurrentMemStatLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:TextBox runat="server" ID="UpgradeMemTxtBox" Enabled="false"></asp:TextBox>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label runat="server" Text="Power Supply: " Font-Size="Larger" ></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList runat="server" Width="200px" ID="PowerSupList">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="CurrentPowStatLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:TextBox runat="server" ID="UpgradePowTxtBox" Enabled="false"></asp:TextBox>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                    <br />
+                    <br />
                     <asp:LinkButton runat="server" ID="MarLnkBtn" OnClick="MarLnkBtn_Click" Text="Need a part? Head over to our market now!"></asp:LinkButton>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default">Upgrade</button>
+                    <asp:Button runat="server" ID="UpgradeBtn" CssClass="btn btn-default" OnClick="UpgradeBtn_Click" Text="Upgrade"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
 

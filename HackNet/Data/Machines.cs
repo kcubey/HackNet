@@ -66,9 +66,10 @@ namespace HackNet.Data
             return machines;
         }
 
-        internal static void UpgradeUserMachine()
+        internal void UpgradeUserMachine(Machines m)
         {
-
+            MachineProcessor = m.MachineProcessor;
+            Health = m.Health;
         }
     }
 }

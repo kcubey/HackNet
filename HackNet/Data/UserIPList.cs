@@ -24,6 +24,7 @@ namespace HackNet.Data
             var query = from uip in db.UserIPList where uip.UserId == user.UserID select uip;
 
             List<UserIPList> uipList = query.ToList();
+
             foreach(UserIPList uip in uipList)
             {
                 if (!uip.UserIPStored.Equals(IP))
