@@ -153,35 +153,23 @@ namespace HackNet.Security
 			return hashedbytes;
 		}
 
-		public byte[] SHA512Hash(string plaintext, byte[] salt = null)
+		public byte[] Hash(string plaintext, string algorithm = "SHA1")
 		{
 			// Obtain base variables
-			byte[] ptBytes = Encoding.UTF8.GetBytes(plaintext);
-			byte[] combinedBytes;
-			byte[] newHash;
-
-			// If salt is present, append it to plaintext
-			if (salt == null)
-			{
-				combinedBytes = new byte[ptBytes.Length];
-				ptBytes.CopyTo(combinedBytes, 0);
-			}
-			else
-			{
-				combinedBytes = new byte[ptBytes.Length + salt.Length];
-				ptBytes.CopyTo(combinedBytes, 0);
-				salt.CopyTo(combinedBytes, ptBytes.Length);
-			}
+			byte[] plainBytes = Encoding.UTF8.GetBytes(plaintext);
+			byte[] hashBytes;
 
 			// Do the hashing
-			using (SHA512 shaCalc = new SHA512Managed())
+			using (HashAlgorithm calc = HashAlgorithm.Create(algorithm))
 			{
-				newHash = shaCalc.ComputeHash(combinedBytes);
+				if (calc is HashAlgorithm)
+					hashBytes = calc.ComputeHash(plainBytes);
+				else
+					hashBytes = new SHA1Managed().ComputeHash(plainBytes);
 			}
 
 			// Return the hash
-			return newHash;
-
+			return hashBytes;
 		}
 
 		// Generate bytes from RNGCryptoServiceProvider
