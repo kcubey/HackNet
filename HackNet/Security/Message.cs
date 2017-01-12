@@ -61,7 +61,7 @@ namespace HackNet.Security
 			this.RecipientId = RecipientId;
 			this.Content = Content;
 			Timestamp = DateTime.Now;
-			SHA1Sum = Crypt.Instance.Hash(Content);
+			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));
 		}
 
 		internal Message(int SenderId, int RecipientId, string Content, DateTime Timestamp)
@@ -70,8 +70,8 @@ namespace HackNet.Security
 			this.RecipientId = RecipientId;
 			this.Content = Content;
 			this.Timestamp = Timestamp;
-			SHA1Sum = Crypt.Instance.Hash(Content);
+			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));
 		}
-		
+
 	}
 }
