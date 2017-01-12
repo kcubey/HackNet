@@ -3,6 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="GameContent" runat="server">
     <h1>Oops, something went wrong!</h1>
-    Your transaction failed due to <asp:Label ID="transactionError" runat="server"></asp:Label>.
+    Your transaction has failed.
     Please try again later.
 </asp:Content>
