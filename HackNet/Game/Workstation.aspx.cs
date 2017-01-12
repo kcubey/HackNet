@@ -59,8 +59,7 @@ namespace HackNet.Game
             System.Diagnostics.Debug.WriteLine("Current Pros: " + m.MachineProcessor);
             System.Diagnostics.Debug.WriteLine("Upgrade Pros: " + ProcessList.SelectedItem.Text);
             if (ProcessList.SelectedItem.Text != "===Select Upgrade===")
-            {
-               
+            {            
                 m.MachineProcessor = ProcessList.SelectedItem.Text;
                 m.Health= int.Parse(ProcessList.SelectedValue);
             }
@@ -71,12 +70,12 @@ namespace HackNet.Game
             }
             if (MemoryList.SelectedItem.Text != "===Select Upgrade===")
             {
-                m.MachineProcessor = MemoryList.SelectedItem.Text;
+                m.MachineMemory = MemoryList.SelectedItem.Text;
                 m.Attack = int.Parse(MemoryList.SelectedValue);
             }
             if (PowerSupList.SelectedItem.Text != "===Select Upgrade===")
             {
-                m.MachineProcessor = PowerSupList.SelectedItem.Text;
+                m.MachinePowerSupply = PowerSupList.SelectedItem.Text;
                 m.Defence = int.Parse(PowerSupList.SelectedValue);
             }
 
