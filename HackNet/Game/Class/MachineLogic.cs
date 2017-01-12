@@ -37,6 +37,10 @@ namespace HackNet.Game.Class
         internal static void LoadItemIntoList(DropDownList ddList, int itemType)
         {
             List<Items> itmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+            foreach(Items i in itmList)
+            {
+                System.Diagnostics.Debug.WriteLine("ItemName in Workstation: "+i.ItemName);
+            }
             if (itmList.Count != 0)
             {
                 ddList.Items.Add("===Select Upgrade===");
