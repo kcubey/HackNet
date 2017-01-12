@@ -20,11 +20,13 @@ namespace HackNet.Game
             using (DataContext db = new DataContext())
             {
                 // Machines.DefaultMachine(Authenticate.GetCurrentUser(), db);
-                Machines m = Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
+                Machines m = Authenticate.GetCurrentUser().Machine;
                 Session["Machines"] = m;
                 List<Items> InvItmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1);
 
-                // ViewState["InvetoryList"] = InvItmList;
+                // Store into Encrypted Viewstate
+                ViewState["InvetoryList"] = InvItmList;
+
                 // Text Labels
                 WorkstationNameLbl.Text = m.MachineName;
                 ProcessorLbl.Text = m.MachineProcessor;
@@ -57,7 +59,9 @@ namespace HackNet.Game
 
         protected void UpgradeBtn_Click(object sender, EventArgs e)
         {
+
             Machines m = Session["Machines"] as Machines;
+            List<Items> invItemList = ViewState["InvetoryList"] as List<Items>;
 
             if (ProcessList.SelectedItem.Text != "===Select Upgrade===")
             {
