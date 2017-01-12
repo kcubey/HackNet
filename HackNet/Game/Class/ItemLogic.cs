@@ -10,7 +10,7 @@ namespace HackNet.Game.Class
 {
     public class ItemLogic
     {
-        // Inventory Logic
+        // Inventory Logic a
         internal static List<Items> GetUserInvItems(Users user, int itemType)
         {
             try

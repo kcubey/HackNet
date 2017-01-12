@@ -18,7 +18,7 @@ namespace HackNet.Game.Class
             using (DataContext db = new DataContext())
             {
                 Machines mac = Machines.GetUserMachine(Authenticate.GetCurrentUser(),db);
-                // Name of Machine Part
+                // Name of Machine Part 
                 mac.MachineProcessor = m.MachineProcessor;
                 mac.MachineGraphicCard = m.MachineGraphicCard;
                 mac.MachineMemory = m.MachineMemory;
