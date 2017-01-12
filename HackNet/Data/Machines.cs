@@ -3,6 +3,8 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core;
+using System.Collections.Generic;
+using HackNet.Game.Class;
 
 namespace HackNet.Data
 {
@@ -22,19 +24,23 @@ namespace HackNet.Data
         // Foreign key references
         public virtual Users User { get; set; }
 
+
+        // Creates a new machine
         internal static void DefaultMachine(Users user, DataContext db)
         {
             Machines machines = new Machines();
             machines.UserId = user.UserID;
             machines.MachineName = user.UserName + "'s Machine";
-            machines.MachineProcessor = "Intell® Atom™ x5-Z8300 Processor";
-            machines.MachineGraphicCard = "Intell® HD Graphics";
-            machines.MachineMemory = "DDR3L-RS 1600";
-            machines.MachinePowerSupply = "CROSSSAIR VS Series™ VS550";
-            machines.Health = 5;
-            machines.Attack = 1;
-            machines.Defence = 1;
-            machines.Speed = 2;
+            List<Items> defaultItemList = ItemLogic.GetDefaultParts();
+
+            machines.MachineProcessor = defaultItemList[0].ItemName;
+            machines.MachineGraphicCard = defaultItemList[1].ItemName;
+            machines.MachineMemory = defaultItemList[2].ItemName;
+            machines.MachinePowerSupply = defaultItemList[3].ItemName;
+            machines.Health = defaultItemList[0].ItemBonus;
+            machines.Attack = defaultItemList[1].ItemBonus;
+            machines.Defence = defaultItemList[2].ItemBonus;
+            machines.Speed = defaultItemList[3].ItemBonus;
 
             try
             {
@@ -65,11 +71,6 @@ namespace HackNet.Data
 
             return machines;
         }
-
-        internal void UpgradeUserMachine(Machines m)
-        {
-            MachineProcessor = m.MachineProcessor;
-            Health = m.Health;
-        }
+        
     }
 }

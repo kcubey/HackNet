@@ -10,6 +10,9 @@ namespace HackNet.Game.Class
 {
     public class MachineLogic
     {
+
+
+
         internal static void UpdateMachine(Machines m)
         {
             using (DataContext db = new DataContext())
@@ -26,21 +29,22 @@ namespace HackNet.Game.Class
                 mac.Attack = m.Attack;
                 mac.Defence = m.Defence;
                 mac.Speed = m.Speed;
-
-                mac.UpgradeUserMachine(m);
+                
                 db.SaveChanges();
             }
 
         }
 
-        // Load Item into Upgrade Panel
-        internal static void LoadItemIntoList(DropDownList ddList, int itemType)
+        // Load Item into Machine Upgrade Panel
+        internal static void LoadItemIntoList(DropDownList ddList,List<Items> itmList,int itemType)
         {
-            List<Items> itmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
             foreach(Items i in itmList)
             {
-                System.Diagnostics.Debug.WriteLine("ItemName in Workstation: "+i.ItemName);
+                System.Diagnostics.Debug.WriteLine("Item to load: "+i.ItemName);
             }
+
+
+            itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
             if (itmList.Count != 0)
             {
                 ddList.Items.Add("===Select Upgrade===");

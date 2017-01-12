@@ -15,16 +15,20 @@ namespace HackNet.Game
         protected void Page_Load(object sender, EventArgs e)
         {
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+            //ItemLogic.GetDefaultParts();
+            //ItemLogic.StoreDefaultParts(ItemLogic.GetDefaultParts());
+            
             if (!IsPostBack)
             {
                 using (DataContext db = new DataContext())
                 {
-                    // This is to add a new default machine.
-                    // Machines.DefaultMachine(Authenticate.GetCurrentUser(),db);
-
+                   // Machines.DefaultMachine(Authenticate.GetCurrentUser(), db);
                     Machines m = Machines.GetUserMachine(Authenticate.GetCurrentUser(), db);
                     Session["Machines"] = m;
-                    Session["InvtoryList"] = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1);
+                    List<Items> itmlist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(),-1);
+                   // ViewState["ItemsList"] = itmlist;
+
+
                     // Text Labels
                     WorkstationNameLbl.Text = m.MachineName;
                     ProcessorLbl.Text = m.MachineProcessor;
@@ -38,10 +42,10 @@ namespace HackNet.Game
                     SpeedattrLabel.Text = m.Speed.ToString();
                     // Upgrade Panel
                     WorkStnUpgradeName.Text = m.MachineName;
-                    MachineLogic.LoadItemIntoList(ProcessList, 1);
-                    MachineLogic.LoadItemIntoList(GraphicList, 4);
-                    MachineLogic.LoadItemIntoList(MemoryList, 2);
-                    MachineLogic.LoadItemIntoList(PowerSupList, 3);
+                    MachineLogic.LoadItemIntoList(ProcessList,itmlist,1);
+                    MachineLogic.LoadItemIntoList(GraphicList, itmlist,4);
+                    MachineLogic.LoadItemIntoList(MemoryList, itmlist,2);
+                    MachineLogic.LoadItemIntoList(PowerSupList, itmlist,3);
                     CurrentProcessStatLbl.Text = m.Health.ToString();
                     CurrentGPUStatLbl.Text = m.Speed.ToString();
                     CurrentMemStatLbl.Text = m.Attack.ToString();
@@ -54,12 +58,10 @@ namespace HackNet.Game
         
         protected void UpgradeBtn_Click(object sender, EventArgs e)
         {
-            Machines m = (Machines)Session["Machines"];
+            Machines m = Session["Machines"] as Machines;           
 
-            System.Diagnostics.Debug.WriteLine("Current Pros: " + m.MachineProcessor);
-            System.Diagnostics.Debug.WriteLine("Upgrade Pros: " + ProcessList.SelectedItem.Text);
             if (ProcessList.SelectedItem.Text != "===Select Upgrade===")
-            {            
+            {             
                 m.MachineProcessor = ProcessList.SelectedItem.Text;
                 m.Health= int.Parse(ProcessList.SelectedValue);
             }

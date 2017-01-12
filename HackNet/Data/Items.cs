@@ -9,6 +9,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
+    [Serializable]
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

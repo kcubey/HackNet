@@ -68,10 +68,8 @@ namespace HackNet.Game
 
         protected void AddItemIntoUserBtn_Click(object sender, EventArgs e)
         {
-            InventoryItem invitem = new InventoryItem();
-            invitem.UserId = int.Parse(UserIDLbl.Text);
-            invitem.ItemId = int.Parse(ItemIDLbl.Text);
-            invitem.Quantity = int.Parse(QuanLbl.Text);
+
+            InventoryItem invitem = new InventoryItem(int.Parse(UserIDLbl.Text), int.Parse(ItemIDLbl.Text), int.Parse(QuanLbl.Text));
             using (DataContext db = new DataContext())
             {
                 db.InventoryItem.Add(invitem);

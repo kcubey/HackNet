@@ -19,6 +19,17 @@ namespace HackNet.Data
 		public virtual Users User { get; set; }
 
 
+        public InventoryItem()
+        {
+
+        }
+        public InventoryItem(int userid,int itemid,int quantity)
+        {
+            this.UserId = userid;
+            this.ItemId = itemid;
+            this.Quantity = quantity;
+        }
+
         internal static List<Items> GetUserInvItems(Users user,int itemType)
         {
             try
@@ -29,21 +40,14 @@ namespace HackNet.Data
 
                     // For debugging Atm
                     List<InventoryItem> invlist = query.ToList();
-                    foreach (InventoryItem inv in invlist)
-                    {
-                        System.Diagnostics.Debug.WriteLine("User Owns: " + inv.ItemId);
-                    }
-
                     List<Items> itmList = new List<Items>();
                     foreach (InventoryItem inv in invlist)
                     {
                         for (int i = 0; i < inv.Quantity; i++)
                         {
                             itmList.Add(Items.GetItem(inv.ItemId));
-                            System.Diagnostics.Debug.WriteLine("User Owns: " + Items.GetItem(inv.ItemId).ItemName);
                         }
                     }
-                    System.Diagnostics.Debug.WriteLine("Count:  " + invlist.Count);
 
                     itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
                    
