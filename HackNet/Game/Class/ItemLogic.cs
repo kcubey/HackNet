@@ -10,7 +10,7 @@ namespace HackNet.Game.Class
 {
     public class ItemLogic
     {
-        // Inventory Logic a
+        // Inventory Logic
         internal static List<Items> GetUserInvItems(Users user, int itemType)
         {
             try
@@ -50,7 +50,7 @@ namespace HackNet.Game.Class
             List<Items> itmlist;
             using (DataContext db = new DataContext())
             {
-                var query = from i in db.Items where i.ItemId == 1 || i.ItemId == 8 || i.ItemId == 9 || i.ItemId == 10 select i;
+                var query = from i in db.Items where i.ItemId == 11 || i.ItemId == 8 || i.ItemId == 9 || i.ItemId == 10 select i;
                 itmlist = query.ToList();
             }
             return itmlist;

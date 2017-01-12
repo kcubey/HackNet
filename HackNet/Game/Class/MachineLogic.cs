@@ -33,22 +33,23 @@ namespace HackNet.Game.Class
 
         }
 
-        // Load Item into Machine Upgrade Panel
-        internal static void LoadItemIntoList(DropDownList ddList,List<Items> itmList,int itemType)
+        // Temp Filter?
+        internal static List<Items> FilterItems(List<Items> InvList, int itemType)
         {
-            foreach(Items i in itmList)
-            {
-                System.Diagnostics.Debug.WriteLine("Item to load: "+i.ItemName);
-            }
+            InvList.RemoveAll(element => element.ItemType != (ItemType)itemType);
+            return InvList;
+        }
 
-
-            itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
-            if (itmList.Count != 0)
+        // Load Item into Machine Upgrade Panel
+        internal static void LoadItemIntoList(DropDownList ddList,List<Items> InvList,int itemType)
+        {
+            if (InvList.Count != 0)
             {
                 ddList.Items.Add("===Select Upgrade===");
-                foreach (Items i in itmList)
+                foreach (Items i in InvList)
                 {
-                    ddList.Items.Add(new ListItem(i.ItemName, i.ItemBonus.ToString()));
+                    if(i.ItemType==(ItemType)itemType)
+                        ddList.Items.Add(new ListItem(i.ItemName, i.ItemBonus.ToString()));
                 }
             }
             else
