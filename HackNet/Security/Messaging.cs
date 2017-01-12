@@ -10,6 +10,18 @@ namespace HackNet.Security
 	{
 		public static List<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, byte[] aesKey)
 		{
+			using (DataContext db = new DataContext())
+			{
+				string SenderEmail, ReceiverEmail;
+				UserKeyStore SenderUKS, ReceiverUKS;
+				ReceiverEmail = db.Users.Find(Receiver).Email;
+				SenderEmail = db.Users.Find(Sender).Email;
+				using (Authenticate a = new Authenticate(ReceiverEmail))
+					{ ReceiverUKS = a.GetKeyStore(db); }
+				using (Authenticate a = new Authenticate(SenderEmail))
+					{ SenderUKS = a.GetKeyStore(db); }
+				List<Messages> msgs = db.Messages
+			}
 			return null;
 		}
 
