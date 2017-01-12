@@ -8,7 +8,7 @@
         }
         $().ready(function () {
             $('#<%=ProcessList.ClientID %>').change(function () {
-                $('#<%=UpgradeProcessTxtBox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());
+                $('#<%=UpgradeProcessTxtBox.ClientID %>').val($(this).val() == "0" ? "" : $(this).val());        
           });
         });
         $().ready(function () {
@@ -46,10 +46,10 @@
                                 <asp:Label runat="server">Parts: </asp:Label>
                             </asp:TableHeaderCell>
                             <asp:TableHeaderCell>
-                                <asp:Label runat="server">Current: </asp:Label>
+                                <asp:Label runat="server">Current Stat: </asp:Label>
                             </asp:TableHeaderCell>
                             <asp:TableHeaderCell>
-                                <asp:Label runat="server">Upgrade: </asp:Label>
+                                <asp:Label runat="server">Upgraded Stat: </asp:Label>
                             </asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                         <asp:TableRow>
@@ -64,7 +64,7 @@
                                 <asp:Label runat="server" ID="CurrentProcessStatLbl"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:TextBox runat="server" ID="UpgradeProcessTxtBox" Enabled="false"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="UpgradeProcessTxtBox" Width="85px" Enabled="false" style="text-align:center;"></asp:TextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
@@ -79,7 +79,7 @@
                                 <asp:Label runat="server" ID="CurrentGPUStatLbl"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:TextBox runat="server" ID="UpgradeGPUTxtbox" Enabled="false"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="UpgradeGPUTxtbox" Width="85px" Enabled="false"></asp:TextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
@@ -94,7 +94,7 @@
                                 <asp:Label runat="server" ID="CurrentMemStatLbl"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:TextBox runat="server" ID="UpgradeMemTxtBox" Enabled="false"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="UpgradeMemTxtBox" Width="85px" Enabled="false"></asp:TextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
@@ -109,7 +109,7 @@
                                 <asp:Label runat="server" ID="CurrentPowStatLbl"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:TextBox runat="server" ID="UpgradePowTxtBox" Enabled="false"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="UpgradePowTxtBox" Width="85px" Enabled="false"></asp:TextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
