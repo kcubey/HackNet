@@ -587,7 +587,7 @@
     <Compile Include="Security\Base32.cs" />
     <Compile Include="Security\MailClient.cs" />
     <Compile Include="Security\Message.cs" />
-    <Compile Include="Security\Messaging.cs" />
+    <Compile Include="Security\MessageLogic.cs" />
     <Compile Include="Security\OTPTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Authenticate.cs" />
