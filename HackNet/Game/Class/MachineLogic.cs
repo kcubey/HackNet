@@ -11,8 +11,6 @@ namespace HackNet.Game.Class
     public class MachineLogic
     {
 
-
-
         internal static void UpdateMachine(Machines m)
         {
             using (DataContext db = new DataContext())
