@@ -31,7 +31,7 @@ namespace HackNet.Data
             Machines machines = new Machines();
             machines.UserId = user.UserID;
             machines.MachineName = user.UserName + "'s Machine";
-            List<Items> defaultItemList = ItemLogic.GetDefaultParts();
+            List<Items> defaultItemList = ItemLogic.GetDefaultParts(db);
 
             machines.MachineProcessor = defaultItemList[0].ItemName;
             machines.MachineGraphicCard = defaultItemList[1].ItemName;

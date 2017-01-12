@@ -11,68 +11,51 @@ namespace HackNet.Game.Class
     public class ItemLogic
     {
         // Inventory Logic
-        internal static List<Items> GetUserInvItems(Users user, int itemType)
+        internal static List<Items> GetUserInvItems(Users user, int itemType, DataContext db)
         {
-            try
+            var query = from inv in db.InventoryItem where inv.UserId == user.UserID select inv;
+
+            // For debugging Atm
+            List<InventoryItem> invlist = query.ToList();
+            List<Items> itmList = new List<Items>();
+            foreach (InventoryItem inv in invlist)
             {
-                using (DataContext db = new DataContext())
+                for (int i = 0; i < inv.Quantity; i++)
                 {
-                    var query = from inv in db.InventoryItem where inv.UserId == user.UserID select inv;
-
-                    // For debugging Atm
-                    List<InventoryItem> invlist = query.ToList();
-                    List<Items> itmList = new List<Items>();
-                    foreach (InventoryItem inv in invlist)
-                    {
-                        for (int i = 0; i < inv.Quantity; i++)
-                        {
-                            itmList.Add(Items.GetItem(inv.ItemId));
-                        }
-                    }
-                    if (itemType !=-1)
-                    {
-                        itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
-                    }
-                    return itmList;
+                    itmList.Add(Items.GetItem(inv.ItemId));
                 }
-
             }
-            catch (EntityCommandExecutionException)
+            if (itemType != -1)
             {
-                throw new ConnectionException("Database link failure has occured");
-
+                itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
             }
+            return itmList;
+
         }
 
         // Default Machine Parts
-        internal static List<Items> GetDefaultParts()
+        internal static List<Items> GetDefaultParts(DataContext db)
         {
             List<Items> itmlist;
-            using (DataContext db = new DataContext())
-            {
-                var query = from i in db.Items where i.ItemId == 11 || i.ItemId == 8 || i.ItemId == 9 || i.ItemId == 10 select i;
-                itmlist = query.ToList();
-            }
+            var query = from i in db.Items where i.ItemId == 11 || i.ItemId == 8 || i.ItemId == 9 || i.ItemId == 10 select i;
+            itmlist = query.ToList();
             return itmlist;
         }
 
         // Store Default Parts
-        internal static void StoreDefaultParts(List<Items> itmlist)
+        internal static void StoreDefaultParts(DataContext db)
         {
             InventoryItem inv;
-            using(DataContext db=new DataContext())
+            foreach (Items i in GetDefaultParts(db))
             {
-                foreach(Items i in itmlist)
-                {
-                    inv = new InventoryItem(Authenticate.GetCurrentUser().UserID,i.ItemId,1);
-                    db.InventoryItem.Add(inv);
-                    db.SaveChanges();
-                }
+                inv = new InventoryItem(Authenticate.GetCurrentUser().UserID, i.ItemId, 1);
+                db.InventoryItem.Add(inv);
+                db.SaveChanges();
             }
         }
 
         // Does Item integrity check
-        internal static bool ItemIntegrityCheck(List<Items> itmlist,Items i)
+        internal static bool ItemIntegrityCheck(List<Items> itmlist, Items i)
         {
 
 

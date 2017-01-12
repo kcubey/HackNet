@@ -20,9 +20,9 @@ namespace HackNet.Game
             using (DataContext db = new DataContext())
             {
                 // Machines.DefaultMachine(Authenticate.GetCurrentUser(), db);
-                Machines m = Authenticate.GetCurrentUser().Machine;
+                Machines m = Machines.GetUserMachine(Authenticate.GetCurrentUser(),db);
                 Session["Machines"] = m;
-                List<Items> InvItmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1);
+                List<Items> InvItmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1,db);
 
                 // Store into Encrypted Viewstate
                 ViewState["InvetoryList"] = InvItmList;

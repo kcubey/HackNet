@@ -16,13 +16,16 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadInventory(ProcessList,1);
-            LoadInventory(GPUList ,4);
+            using (DataContext db=new DataContext())
+            {
+                LoadInventory(ProcessList, 1,db);
+                LoadInventory(GPUList, 4,db);
+            }
         }
 
-        private void LoadInventory(DataList dl,int itemType)
+        private void LoadInventory(DataList dl,int itemType,DataContext db)
         {
-            List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType);
+            List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType,db);
             if (ilist.Count!=0)
             {
                 string imageurlstring;

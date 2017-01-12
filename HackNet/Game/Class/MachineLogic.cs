@@ -33,12 +33,6 @@ namespace HackNet.Game.Class
 
         }
 
-        // Temp Filter?
-        internal static List<Items> FilterItems(List<Items> InvList, int itemType)
-        {
-            InvList.RemoveAll(element => element.ItemType != (ItemType)itemType);
-            return InvList;
-        }
 
         // Load Item into Machine Upgrade Panel
         internal static void LoadItemIntoList(DropDownList ddList,List<Items> InvList,int itemType)

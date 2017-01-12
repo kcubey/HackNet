@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using HackNet.Loggers;
 using System.Collections.Generic;
 using System.Web.Security;
+using HackNet.Game.Class;
 
 namespace HackNet.Security
 {
@@ -257,7 +258,8 @@ namespace HackNet.Security
 						// TODO: Actual email verification (WL)
 					}
 					Machines.DefaultMachine(createduser, db);
-					AuthLogger.Instance.UserRegistered();
+                    ItemLogic.StoreDefaultParts(db);
+                    AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
 				} else
 				{
