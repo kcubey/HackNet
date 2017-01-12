@@ -422,7 +422,6 @@
     <Compile Include="Data\MissionData.cs" />
     <Compile Include="Data\PackageItems.cs" />
     <Compile Include="Data\Packages.cs" />
-    <Compile Include="Data\UserIPList.cs" />
     <Compile Include="Data\UserKeyStore.cs" />
     <Compile Include="Data\Users.cs" />
     <Compile Include="Game.Master.cs">
@@ -439,8 +438,6 @@
     <Compile Include="Game\Chat.aspx.designer.cs">
       <DependentUpon>Chat.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Class\ItemLogic.cs" />
-    <Compile Include="Game\Class\MachineLogic.cs" />
     <Compile Include="Game\Currency.aspx.cs">
       <DependentUpon>Currency.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
