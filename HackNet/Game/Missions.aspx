@@ -71,7 +71,6 @@
                         <asp:ListItem Value="2" Text="Europe"></asp:ListItem>
                         <asp:ListItem Value="3" Text="South Asia"></asp:ListItem>
                     </asp:DropDownList>
-
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
                     <asp:DataList ID="AtkListView" runat="server" RepeatLayout="Table" Width="100%">

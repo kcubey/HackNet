@@ -18,11 +18,11 @@ namespace HackNet.Game.Gameplay
         {
             if (!IsPostBack)
             {
-                Cache["Configure"] = false;
-                Cache["PWDCalculated"] = false;
-                Cache["Bypass"] = false;
-                Cache["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
-                LoadScanInfo((List<string>)Cache["ScanList"]);
+                ViewState["Configure"] = false;
+                ViewState["PWDCalculated"] = false;
+                ViewState["Bypass"] = false;
+                ViewState["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
 
@@ -38,7 +38,7 @@ namespace HackNet.Game.Gameplay
             }
         }
 
-        // this is to load the possible password list
+        // This is to load the possible password list
         private void LoadPwdListToGrid(List<string> arrList)
         {
             DataTable dt = new DataTable();
@@ -69,9 +69,9 @@ namespace HackNet.Game.Gameplay
         // This is the command prompt that does everything
         protected void SubCmdBtn_Click(object sender, EventArgs e)
         {          
-            if ((bool)Cache["Configure"])
+            if ((bool)ViewState["Configure"])
             {
-                if ((bool)Cache["PWDCalculated"] == false)
+                if ((bool)ViewState["PWDCalculated"] == false)
                 {
                     if (CmdTextBox.Text == "run hydra")
                     {
@@ -80,8 +80,8 @@ namespace HackNet.Game.Gameplay
                         int r = rnd.Next(pwdList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
                         Session["AnswerForPwd"] = pwdList[r];
-                        Cache["PWDCalculated"] = true;
-                        LoadScanInfo((List<string>)Cache["ScanList"]);
+                        ViewState["PWDCalculated"] = true;
+                        LoadScanInfo(ViewState["ScanList"] as List<string>);
                         LoadPwdListToGrid(pwdList);
                         CmdError.Text = "hydra is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
@@ -89,7 +89,7 @@ namespace HackNet.Game.Gameplay
                     }
                     else
                     {
-                        LoadScanInfo((List<string>)Cache["ScanList"]);
+                        LoadScanInfo(ViewState["ScanList"] as List<string>);
                         CmdError.Text = "Unrecognised Command";
                         CmdError.ForeColor = System.Drawing.Color.Red;
                         CmdTextBox.Text = string.Empty;
@@ -97,7 +97,7 @@ namespace HackNet.Game.Gameplay
                 }
                 else
                 {
-                    if ((bool)Cache["Bypass"] == false)
+                    if ((bool)ViewState["Bypass"] == false)
                     {
                         if (CmdTextBox.Text.Equals(Session["AnswerForPwd"].ToString()))
                         {
@@ -105,11 +105,11 @@ namespace HackNet.Game.Gameplay
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
                             LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
-                            Cache["Bypass"] = true;
+                            ViewState["Bypass"] = true;
                         }
                         else
                         {
-                            LoadScanInfo((List<string>)Cache["ScanList"]);
+                            LoadScanInfo(ViewState["ScanList"] as List<string>);
                             CmdError.Text = "Wrong Password";
                             CmdError.ForeColor = System.Drawing.Color.Red;
                             CmdTextBox.Text = string.Empty;
@@ -140,7 +140,7 @@ namespace HackNet.Game.Gameplay
             }
             else
             {
-                LoadScanInfo((List<string>)Cache["ScanList"]);
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
                 CmdError.Text = "hydra has not been configure";
                 CmdError.ForeColor = System.Drawing.Color.Red;
                 CmdTextBox.Text = string.Empty;
@@ -174,15 +174,15 @@ namespace HackNet.Game.Gameplay
                 TargetTxtBox.Enabled = false;
                 TargetAtkTypeList.Enabled = false;
                 // Set bool to true so that SubCmdBtn_Click() can check if hydra is configured
-                Cache["Configure"] = true;
+                ViewState["Configure"] = true;
                 
-                LoadScanInfo((List<string>)Cache["ScanList"]);
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
                 ErrorLbl.ForeColor = System.Drawing.Color.Green;
                 ErrorLbl.Text = "Successful Configurations";
             }
             else
             {
-                LoadScanInfo((List<string>)Cache["ScanList"]);
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
                 ErrorLbl.ForeColor = System.Drawing.Color.Red;
                 ErrorLbl.Text = error;
 
@@ -222,7 +222,7 @@ namespace HackNet.Game.Gameplay
 
         protected void ExitBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~Missions.aspx");
+            Response.Redirect("../Missions.aspx");
         }
     }
 }
