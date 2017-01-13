@@ -11,7 +11,6 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            transactionError.Text = Session["transactionError"].ToString();
         }
 
        

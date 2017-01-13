@@ -8,8 +8,10 @@
 		<div class="panel-body">
             <h4>Your purchase has been confirmed!</h4>
             <hr />
-            You have purchased <asp:Label ID="packageBought" runat="server" Text="Package A" ForeColor="Red"></asp:Label> at 
-            <asp:Label ID="packagePrice" runat="server" Text="SGD$10" ForeColor="Red"></asp:Label>.
+            You have purchased <asp:Label ID="packageDetailsLbl" runat="server" forecolor="Red"></asp:Label>
+
+            <br />
+            Your transaction ID is <asp:Label ID="transactionId" runat="server"></asp:Label>
 
             <br /><br />
             An email has been sent to you regarding your purchase.
