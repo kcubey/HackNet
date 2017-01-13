@@ -9,6 +9,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
+    [Serializable]
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,7 +31,6 @@ namespace HackNet.Data
                     if (itemType ==-1)
                     {
                         itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
-                        System.Diagnostics.Debug.WriteLine("Name: " + itm.ItemName);
                     }
                     else
                     {                    
@@ -54,8 +54,16 @@ namespace HackNet.Data
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from i in db.Items where i.ItemType == (ItemType)itemType select i ;
-                    return query.ToList();
+                    if (itemType != -1)
+                    {
+                        var query = from i in db.Items where i.ItemType == (ItemType)itemType select i;
+                        return query.ToList();
+                    }
+                    else
+                    {
+                        var query = from i in db.Items select i;
+                        return query.ToList();
+                    }
                 }
             }
             catch (EntityCommandExecutionException)
@@ -65,6 +73,7 @@ namespace HackNet.Data
             }
         
         }
+
 
     }
 
