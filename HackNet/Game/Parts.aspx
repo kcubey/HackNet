@@ -4,6 +4,172 @@
 
     <link rel="stylesheet" href="/Market1/market1.css" />
 
+
+        <div class="row">
+            <h3>Market</h3>
+            <hr />
+            <div class="col-xs-3">
+                <!-- required for floating -->
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs tabs-left" style="width:20%;">
+                    <li class="active"><a href="#All" data-toggle="tab">All</a></li>
+                    <li><a href="#processor" data-toggle="tab">Processor</a></li>
+                    <li><a href="#graphicscard" data-toggle="tab">Graphics Card</a></li>
+                    <li><a href="#memory" data-toggle="tab">Memory</a></li>
+                    <li><a href="#powersupply" data-toggle="tab">Power Supply</a></li>
+                    <li><a href="#booster" data-toggle="tab">Booster</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-9" style="float:left ;">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!--ALL-->
+                    <div class="tab-pane active" id="All">
+                        <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <!--Processor-->
+                    <div class="tab-pane" id="processor">
+                        <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <!--Graphics Card-->
+                    <div class="tab-pane" id="graphicscard">
+                        <asp:DataList ID="graphicslist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <!--Memory-->
+                    <div class="tab-pane" id="memory">
+                        <asp:DataList ID="memorylist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <!--Power Supply-->
+                    <div class="tab-pane" id="powersupply">
+                        <asp:DataList ID="powersuplist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <!--Booster-->
+                    <div class="tab-pane" id="booster">
+                        <asp:DataList ID="boosterlist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="container-fluid" style="color: black; background-color: gray;">
+        <h2>Item Editor</h2>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemName"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:DropDownList runat="server" ID="ItemTypeList">
+                <asp:ListItem Value="1">Processor</asp:ListItem>
+                <asp:ListItem Value="4">Graphic Card</asp:ListItem>
+                <asp:ListItem Value="2">Memory</asp:ListItem>
+                <asp:ListItem Value="3">Power Supply</asp:ListItem>
+                <asp:ListItem Value="0">Booster</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:FileUpload ID="UploadPhoto" runat="server" />
+            <asp:Image ID="imgViewFile" runat="server" />
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemDesc" TextMode="MultiLine"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemPrice"></asp:TextBox>
+        </div>
+        <div class="form-group row">
+            <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
+            <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
+        </div>
+        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
+    </div>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
     <fieldset>
         <legend>Market</legend>
 
@@ -59,96 +225,4 @@
         <asp:Button runat="server" ID="btnAddListing" CssClass="btn btn-default" OnClick="btnAddListing_Click" Text="Add Listing" />
 
     </fieldset>
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>Left Tabs</h3>
-            <hr />
-            <div class="col-xs-3">
-                <!-- required for floating -->
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs tabs-left">
-                    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                    <li><a href="#profile" data-toggle="tab">Profile</a></li>
-                    <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-9">
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home">
-                        <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
-                            <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-                                <br />
-                                <asp:Image ID="itemImg" runat="server"
-                                    Width="200px" Height="200px"
-                                    ImageUrl='<%#Eval("ItemPic")%>' />
-                                <br />
-                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </div>
-                    <div class="tab-pane" id="profile">Profile Tab.</div>
-                    <div class="tab-pane" id="messages">Messages Tab.</div>
-                    <div class="tab-pane" id="settings">Settings Tab.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <div class="container-fluid" style="color: black; background-color: gray;">
-        <h2>Item Editor</h2>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemName"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:DropDownList runat="server" ID="ItemTypeList">
-                <asp:ListItem Value="1">Processor</asp:ListItem>
-                <asp:ListItem Value="4">Graphic Card</asp:ListItem>
-                <asp:ListItem Value="2">Memory</asp:ListItem>
-                <asp:ListItem Value="3">Power Supply</asp:ListItem>
-                <asp:ListItem Value="0">Booster</asp:ListItem>
-            </asp:DropDownList>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:FileUpload ID="UploadPhoto" runat="server" />
-            <asp:Image ID="imgViewFile" runat="server" />
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemDesc" TextMode="MultiLine"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemPrice"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
-        </div>
-        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
-    </div>
 </asp:Content>
