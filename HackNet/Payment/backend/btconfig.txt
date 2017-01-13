@@ -1,27 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿using System.Net;
 using Braintree;
 using System.Configuration;
 
-//Braintree file
-
-namespace HackNet.App_Code
+namespace HackNet
 {
     public class BraintreeConfiguration : IBraintreeConfiguration
     {
-        /*
-        BraintreeGateway gateway = new BraintreeGateway
-        {
-            Environment = Braintree.Environment.SANDBOX,
-            MerchantId = "697v7np6yxddsf8r",
-            PublicKey = "vmfb4gw9bf6nn759",
-            PrivateKey = "654f35d55d2b2b246a907333faddc204"
-        };
-        */
-
         public string Environment { get; set; }
         public string MerchantId { get; set; }
         public string PublicKey { get; set; }
@@ -30,12 +14,8 @@ namespace HackNet.App_Code
 
         public IBraintreeGateway CreateGateway()
         {
-            /*
-            Environment = System.Environment.GetEnvironmentVariable("Braintree.Environment.SANDBOX");
-            MerchantId = System.Environment.GetEnvironmentVariable("697v7np6yxddsf8r");
-            PublicKey = System.Environment.GetEnvironmentVariable("vmfb4gw9bf6nn759");
-            PrivateKey = System.Environment.GetEnvironmentVariable("654f35d55d2b2b246a907333faddc204");
-            */
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
             Environment = System.Environment.GetEnvironmentVariable("BraintreeEnvironment");
             MerchantId = System.Environment.GetEnvironmentVariable("BraintreeMerchantId");

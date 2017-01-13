@@ -9,5 +9,7 @@
 	<asp:Label ID="Msg4" runat="server" /><br />
 	<asp:Label ID="Msg5" runat="server" /><br />
 	<asp:Label ID="Msg6" runat="server" /><br />
-	<asp:Label ID="Msg7" runat="server" /><br />
+	<asp:Label ID="UDetails1" runat="server" /><br />
+	<asp:Label ID="UDetails2" runat="server" /><br />
+	<asp:Label ID="UDetails3" runat="server" /><br />
 </asp:Content>

@@ -8,7 +8,8 @@
 			<h3 class="panel-title">Re - Authentication</h3>
 		</div>
 		<div class="panel-body">
-            You have chosen to buy <asp:Label ID="PackageLbl" runat="server" Text="Package A" ForeColor="Red" Font-Bold="True" ></asp:Label>.
+            You have chosen to buy <asp:Label ID="packageNameLbl" runat="server" ForeColor="Red" Font-Bold="True" ></asp:Label>
+            at <asp:Label ID="packagePriceLbl" runat="server" ForeColor="Red"></asp:Label>.
             <br />Please enter your details below for re-authentication.
             <hr />
 
@@ -50,12 +51,12 @@
 			
             <asp:Button ID="AuthButton"
                 Text="Authenticate"
-				CssClass="btn btn-primary loginBtn"
+				CssClass="btn btn-success"
 				OnClick="AuthClick"
 				CausesValidation="true"
 				runat="server" />
             
-            <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-primary loginBtn"	OnClick="CancelClick" runat="server" />
+            <asp:Button ID="CancelButton" causesvalidation="false" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
         
         </div>
 	</div>

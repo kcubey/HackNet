@@ -18,37 +18,17 @@ namespace HackNet.Data
 		// Foreign key references
 		public virtual Users User { get; set; }
 
-        // May combine this both methods together
-        internal static List<InventoryItem> GetUserInvList(Users user)
+
+        public InventoryItem()
         {
-            int userid = user.UserID;
-            try
-            {
-                using (DataContext db = new DataContext())
-                {
-                    var query = from inv in db.InventoryItem where inv.UserId == userid select inv;
-                    return query.ToList();
-                }
 
-            }
-            catch (EntityCommandExecutionException)
-            {
-                throw new ConnectionException("Database link failure has occured");
-
-            }
+        }
+        public InventoryItem(int userid,int itemid,int quantity)
+        {
+            this.UserId = userid;
+            this.ItemId = itemid;
+            this.Quantity = quantity;
         }
 
-        internal static List<Items> GetUserInvItems(List<InventoryItem> invList,int itemType)
-        {
-            List<Items> itemsList=new List<Items>();
-            foreach(InventoryItem inv in invList)
-            {
-                for(int i = 0; i < inv.Quantity; i++)
-                {
-                    itemsList.Add(Items.GetItem(inv.ItemId, itemType));
-                }
-            }
-            return itemsList;
-        }
     }
 }

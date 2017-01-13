@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using HackNet.Security;
+using HackNet.Game.Class;
 
 namespace HackNet.Game
 {
@@ -15,16 +16,17 @@ namespace HackNet.Game
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadInventory(AllPartList,-1);
-            LoadInventory(ProcessList,1);
-            LoadInventory(GPUList ,4);
+            using (DataContext db=new DataContext())
+            {
+                LoadInventory(ProcessList, 1,db);
+                LoadInventory(GPUList, 4,db);
+            }
         }
 
-        private void LoadInventory(DataList dl,int itemType)
+        private void LoadInventory(DataList dl,int itemType,DataContext db)
         {
-            List<InventoryItem> invList = InventoryItem.GetUserInvList(Authenticate.GetCurrentUser());
-            List<Items> ilist = InventoryItem.GetUserInvItems(invList,itemType);
-            if (ilist[0]!=null)
+            List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType,db);
+            if (ilist.Count!=0)
             {
                 string imageurlstring;
                 string url;
@@ -69,10 +71,8 @@ namespace HackNet.Game
 
         protected void AddItemIntoUserBtn_Click(object sender, EventArgs e)
         {
-            InventoryItem invitem = new InventoryItem();
-            invitem.UserId = int.Parse(UserIDLbl.Text);
-            invitem.ItemId = int.Parse(ItemIDLbl.Text);
-            invitem.Quantity = int.Parse(QuanLbl.Text);
+
+            InventoryItem invitem = new InventoryItem(int.Parse(UserIDLbl.Text), int.Parse(ItemIDLbl.Text), int.Parse(QuanLbl.Text));
             using (DataContext db = new DataContext())
             {
                 db.InventoryItem.Add(invitem);

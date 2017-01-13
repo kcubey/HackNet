@@ -9,6 +9,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
+    [Serializable]
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,12 +31,10 @@ namespace HackNet.Data
                     if (itemType ==-1)
                     {
                         itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
-                        System.Diagnostics.Debug.WriteLine("Name: " + itm.ItemName);
                     }
                     else
                     {                    
-                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();
-                        
+                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();                      
                     }
                 }
             }

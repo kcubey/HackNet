@@ -76,12 +76,30 @@ namespace HackNet.Auth {
         protected global::System.Web.UI.WebControls.Label Msg6;
         
         /// <summary>
-        /// Msg7 control.
+        /// UDetails1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Msg7;
+        protected global::System.Web.UI.WebControls.Label UDetails1;
+        
+        /// <summary>
+        /// UDetails2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UDetails2;
+        
+        /// <summary>
+        /// UDetails3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UDetails3;
     }
 }

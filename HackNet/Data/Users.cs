@@ -83,6 +83,7 @@ namespace HackNet.Data
 			}
 		}
 
+
 		// Find users by email or username
 		internal static Users FindByEmail(string email, DataContext db = null)
 		{
@@ -91,14 +92,11 @@ namespace HackNet.Data
 			try
 			{
 				if (db != null)
-					user = (from u in db.Users
-						where u.Email == email
-						select u).FirstOrDefault();
+					user = db.Users.Where(x => x.Email == email).FirstOrDefault();
 				else
-					using (DataContext db1 = new DataContext())
-						user = (from u in db1.Users
-								where u.Email == email
-								select u).FirstOrDefault();
+					using (DataContext ldb = new DataContext())
+						user = ldb.Users.Where(x => x.Email == email).FirstOrDefault();
+
 
 			} catch (EntityCommandExecutionException)
 			{
@@ -118,14 +116,10 @@ namespace HackNet.Data
 			try
 			{
 				if (db != null)
-					user = (from u in db.Users
-						where u.UserName == username
-						select u).FirstOrDefault();
+					user = db.Users.Where(x => x.UserName == username).FirstOrDefault();
 				else
-					using (DataContext db1 = new DataContext())
-						user = (from u in db1.Users
-								where u.UserName == username
-								select u).FirstOrDefault();
+					using (DataContext ldb = new DataContext())
+						user = ldb.Users.Where(x => x.UserName == username).FirstOrDefault();
 
 			} catch (EntityCommandExecutionException)
 			{

@@ -15,9 +15,7 @@
         <script src="/Payment/backend/JSv3HostedFields.js" lang="javascript" type="text/javascript"></script>
     -->
         <!-- all-->
-        <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
-        <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
-
+        
     <link rel="stylesheet" href="/payment/backend/paymentCSS.css" />
 
     <div class="panel panel-default">
@@ -25,7 +23,6 @@
 			<h3 class="panel-title">Payment</h3>
 		</div>
 		<div class="panel-body">
-            <h1>Confirm your Details</h1><hr />
             <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
             <p>You have chosen to use REAL currency to pay for premium items.
                 <br />
@@ -33,30 +30,23 @@
             </p>
 
             <h3>Payment Details</h3>
-                <asp:DropDownList ID="PackageList" runat="server" ForeColor="Black" 
-                    AutoPostBack="true" onselectedindexchanged="pkgConfirm_indexChange">
-                    <asp:ListItem Text="Package A - SGD$10" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="Package B - SGD$20" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="Package C - SGD$30" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="Package D - SGD$40" Value="3"></asp:ListItem>
-                </asp:DropDownList>
-            <br />
-            <asp:Label ID="pkgConfirm" runat="server"></asp:Label>
+            <asp:Label ID="packageDetailsLbl" runat="server" forecolor="Red"></asp:Label>
    
-            <br /><br />
-            <h3>Pay by Paypal or Credit Card</h3>
             <hr /><p>For Paypal, click on the Paypal button. For Credit Card, enter a valid card number and expiration date.</p>
     
             <div class="dropinBox">
                 <div id="payment-form"></div>
             </div>
 
-            <input type="hidden" name="fake-valid-nonce">
-
-            <asp:LinkButton id="checkoutLnkBtn" runat="server" type="submit" CssClass="btn btn-success" Text="Checkout" Font-Size="Large" onclick="checkoutClick"></asp:LinkButton>
-
+            <br />
+            <asp:Button id="checkoutBtn" runat="server" CssClass="btn btn-success" Text="Checkout" onclick="checkoutClick"></asp:Button>
+            <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
         </div>
     </div>
+
+    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
+    <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
+
 
 <!--
     <h3>JS v3</h3>

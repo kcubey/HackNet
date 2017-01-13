@@ -131,7 +131,6 @@
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:FileUpload ID="UploadPhoto" runat="server" />
-            <asp:Image ID="imgViewFile" runat="server" />
         </div>
         <div class="form-group row">
             <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>

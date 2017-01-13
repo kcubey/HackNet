@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using HackNet.Loggers;
 using System.Collections.Generic;
 using System.Web.Security;
+using HackNet.Game.Class;
 
 namespace HackNet.Security
 {
@@ -183,16 +184,22 @@ namespace HackNet.Security
 		 *  UserKeyStore related methods
 		 */
 
-		internal UserKeyStore GetKeyStore(DataContext db)
+		internal UserKeyStore GetKeyStore(DataContext db, string password = null, byte[] salt = null)
 		{
 			Users u = Users.FindByEmail(Email, db);
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
-			if (u.UserKeyStore == null)
+			if (u.UserKeyStore == null && password != null) // If user does not have an existing key store
 			{
+				string keyPair = Crypt.Instance.GenerateRsaParameters();
+				string pubKey = Crypt.Instance.RemovePrivateKey(keyPair);
+				byte[] aesIv = Crypt.Instance.Generate(16);
+				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, aesIv);
+				byte[] keyPairBytes = Encoding.UTF8.GetBytes(keyPair);
+				byte[] encKeyPair = Crypt.Instance.EncryptAes(keyPairBytes, aesKey);
 				UserKeyStore uks = new UserKeyStore
 				{
-					RsaPub = null,
-					RsaPriv = new byte[0],
+					RsaPub = pubKey,
+					RsaPriv = aesIv,
 					TOTPSecret = null,
 					UserId = u.UserID
 				};
@@ -231,8 +238,11 @@ namespace HackNet.Security
 				Registered = DateTime.Now,
 				LastLogin = DateTime.Now,
 				Coins = 0,
-				ByteDollars = 0
+				ByteDollars = 0,
+				TotalExp = 0,
+				AccessLevel = AccessLevel.User
 			};
+
 			u.UpdatePassword(password);
 
 			using (DataContext db = new DataContext())
@@ -242,7 +252,7 @@ namespace HackNet.Security
 				Debug.WriteLine("User creation attempted");
 
 				Users createduser = Users.FindByEmail(email, db);
-				if (createduser != null)
+				if (createduser is Users)
 				{
 					using (MailClient mc = new MailClient(createduser.Email))
 					{
@@ -251,13 +261,17 @@ namespace HackNet.Security
 						mc.AddLine("We hope you enjoy your gaming experience with us,");
 						mc.AddLine("Kindly verify your email address by clicking on the link below");
 						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
+						// TODO: Actual email verification (WL)
 					}
-					AuthLogger.Instance.UserRegistered();
+					Machines.DefaultMachine(createduser, db);
+                    ItemLogic.StoreDefaultParts(db);
+                    AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
+				} else
+				{
+					throw new RegistrationException("User cannot be registered due to an error (NOT_TYPE_USER)");
 				}
 			}
-
-			return RegisterResult.OtherException;
 		}
 
 		// Check if authenticated

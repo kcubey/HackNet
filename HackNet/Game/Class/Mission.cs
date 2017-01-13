@@ -10,10 +10,6 @@ namespace HackNet.Game
 {
     public class Mission
     {
-        internal MissionData mis { get; set;}
-        internal string foldername { get; set; }
-        internal DateTime lastmodified { get; set; }
-
         // Randome Generation
         public static string GetRandomIp()
         {
