@@ -2,15 +2,17 @@
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace HackNet.Game.Class
 {
     public class ItemLogic
     {
-        // Inventory Logic
+        // Get all Items owned by user
         internal static List<Items> GetUserInvItems(Users user, int itemType, DataContext db)
         {
             var query = from inv in db.InventoryItem where inv.UserId == user.UserID select inv;
@@ -30,6 +32,36 @@ namespace HackNet.Game.Class
                 itmList.RemoveAll(element => element.ItemType != (ItemType)itemType);
             }
             return itmList;
+
+        }
+
+        // Load Items into Datalist
+        internal static void LoadInventory(DataList dl, List<Items> itmlist, int itemType)
+        {
+            if (itmlist.Count != 0)
+            {
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("ItemName", typeof(string));
+                dt.Columns.Add("ItemPic", typeof(string));
+                foreach (Items i in itmlist)
+                {
+                    if (i.ItemType == (ItemType)itemType)
+                    {
+                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                        url = "data:image/png;base64," + imageurlstring;
+                        dt.Rows.Add(i.ItemName, url);
+                    }
+                }
+                dl.DataSource = dt;
+                dl.DataBind();
+            }
+            else
+            {
+                dl.DataSource = null;
+                dl.DataBind();
+            }
 
         }
 

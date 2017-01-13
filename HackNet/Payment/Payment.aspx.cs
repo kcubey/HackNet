@@ -16,6 +16,20 @@ namespace HackNet.Payment
     public partial class Payment : System.Web.UI.Page
     {
         protected int price;
+        public string clientToken;
+        private BraintreeGateway gateway = new BraintreeGateway
+        {
+            Environment = Braintree.Environment.SANDBOX,
+            PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
+            PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
+            MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
+
+            /*
+            PublicKey = "YOURPUBLICKEYHERE",
+            PrivateKey = "YOURPRIVATEKEYHERE",
+            MerchantId = "YOURMERCHANTIDHERE"
+            */
+        };
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +40,15 @@ namespace HackNet.Payment
             packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() +" - $" + Session["packageprice"].ToString();
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
+            //Generate event form (asp.net only hack)
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (!IsPostBack)
+            {
+                //Generate a client token
+                clientToken = gateway.ClientToken.generate();
+            }
 
             Debug.WriteLine("exit pageload payment");
         }
@@ -43,64 +66,41 @@ namespace HackNet.Payment
             Response.Redirect("~/game/market");
         }
 
-        public void checkoutClick(Object sender, EventArgs e)
+        protected void checkoutClick(Object sender, EventArgs e)
         {
             Debug.WriteLine("enter checkoutclick");
 
-            Debug.WriteLine("create gateway");
-            BraintreeGateway Gateway = new BraintreeGateway
+            //Get the nonce & device data from the client
+            var nonce = Request.Form["payment_method_nonce"];
+            var deviceData = Request.Form["device_data"];
+
+            //Create auth
+            var request = new TransactionRequest
             {
-                Environment = Braintree.Environment.SANDBOX,
-                PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
-                PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
-                MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
-
-                /*
-                PublicKey = "YOURPUBLICKEYHERE",
-                PrivateKey = "YOURPRIVATEKEYHERE",
-                MerchantId = "YOURMERCHANTIDHERE"
-                */
+                Amount = (decimal)price / 100,
+                PaymentMethodNonce = nonce,
+                DeviceData = deviceData
             };
-            Debug.WriteLine("gateway done");
 
-            Debug.WriteLine("create transactionRequest");
-            TransactionRequest transactionRequest = new TransactionRequest
-            {
-                Amount = (decimal)price/100,
-                PaymentMethodNonce = "fake-valid-nonce",
-                Options = new TransactionOptionsRequest
-                {
-                    SubmitForSettlement = true
-                }
-            };
-            Debug.WriteLine("transactionRequest done");
+            //Send transaction request to server
+            Result<Transaction> result = gateway.Transaction.Sale(request);
 
-            Debug.WriteLine("submit transactionRequest");
-            Result<Transaction> result = Gateway.Transaction.Sale(transactionRequest);
-            Debug.WriteLine("transactionRequest submitted");
-
-            Debug.WriteLine("check result");
             if (result.IsSuccess())
             {
+                //Transaction is successful
+                string transactionId = string.Format(result.Target.Id);
+                Session["transactionId"] = transactionId;
                 Debug.WriteLine("successful");
                 Response.Redirect("~/payment/checkout");
                 Debug.WriteLine("redirect checkout");
-            }
 
+
+            }
             else
             {
-                Debug.WriteLine("failed");
-                string errorMessages = "";
-                foreach (ValidationError error in result.Errors.DeepAll())
-                {
-                    errorMessages += "Error: " + (int)error.Code + " - " + error.Message + "\n";
-                }
-
-                Debug.WriteLine("store message");
-                Session["transactionError"] = errorMessages;
+                //Something went wrong
                 Response.Redirect("~/payment/retry");
                 Debug.WriteLine("fail redirect");
-
             }
 
             Debug.WriteLine("exit checkoutclick");
