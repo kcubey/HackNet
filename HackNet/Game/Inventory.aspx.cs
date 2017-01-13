@@ -18,37 +18,13 @@ namespace HackNet.Game
         {
             using (DataContext db=new DataContext())
             {
-                LoadInventory(ProcessList, 1,db);
-                LoadInventory(GPUList, 4,db);
-                LoadInventory(AllPartList,-1,db);
+                List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1, db);
+                ItemLogic.LoadInventory(AllPartList, ilist, -1);
+                ItemLogic.LoadInventory(ProcessList, ilist, 1);
+                ItemLogic.LoadInventory(GPUList, ilist, 4);
+                ItemLogic.LoadInventory(MemoryList, ilist, 2);
+                ItemLogic.LoadInventory(PowerSupList, ilist, 3);
             }
-        }
-
-        private void LoadInventory(DataList dl,int itemType,DataContext db)
-        {
-            List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), itemType,db);
-            if (ilist.Count!=0)
-            {
-                string imageurlstring;
-                string url;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("ItemName", typeof(string));
-                dt.Columns.Add("ItemPic", typeof(string));
-                foreach (Items i in ilist)
-                {
-                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                    url = "data:image/png;base64," + imageurlstring;
-                    dt.Rows.Add(i.ItemName, url);
-                }
-                dl.DataSource = dt;
-                dl.DataBind();
-            }
-            else
-            {
-                dl.DataSource = null;
-                dl.DataBind();
-            }
-            
         }
 
         protected void btnAddItem_Click(object sender, EventArgs e)

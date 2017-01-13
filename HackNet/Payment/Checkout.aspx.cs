@@ -13,16 +13,23 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string packageName = "A";
+            string packageName = Session["packageId"].ToString();
+            string packagePrice = Session["packageprice"].ToString();
+            string transactionDetails = Session["transactionId"].ToString();
+
+            transactionId.Text = transactionDetails;
+            packageDetailsLbl.Text = "Package " + packageName + " at $" + packagePrice;
+
 
             Users u = Authenticate.GetCurrentUser();
             using (MailClient mc = new MailClient(u.Email))
             {
                 mc.Subject = "Purchase from HackNet";
-            	mc.AddLine("Thank you for buying Package "+packageName +"!");
+            	mc.AddLine("Thank you for buying Package "+packageName + " at $" + packagePrice + "!");
+                mc.AddLine("Your Transaction Id is "+transactionDetails);
             	mc.AddLine("We hope you enjoy your gaming experience with us.");
                 mc.AddLine("");
-            	mc.AddLine("If you did not conduct this purchase, please contact our Support staff at support@haxnet.azurewebsites.net.");
+            	mc.AddLine("If you did not conduct this purchase, please contact our Support staff at support@haxnet.azurewebsites.net, quoting your transaction ID.");
                 mc.AddLine("");
                 mc.AddLine("Thank you.");
             	mc.Send(u.FullName);
