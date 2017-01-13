@@ -117,7 +117,7 @@ namespace HackNet.Security
 						issueDate: DateTime.Now,
 						expiration: DateTime.Now.AddMinutes(HttpContext.Current.Session.Timeout),
 						isPersistent: false,
-						userData: u.UserID + "," + u.UserName + "," + (int)u.AccessLevel
+						userData: u.UserID + ";" + u.UserName + ";" + (int)u.AccessLevel
 				);
 
 				string encryptedTicket = FormsAuthentication.Encrypt(ticket);
@@ -167,12 +167,18 @@ namespace HackNet.Security
 				Debug.WriteLine("Malformed base32 secret length: " + b32sec.Length);
 				return false;
 			}
+
 			using (DataContext db = new DataContext()) {
 				if (b32sec == null)
 					AuthLogger.Instance.TOTPDisabled();
 				else
 					AuthLogger.Instance.TOTPChanged();
-				Users.FindByEmail(Email, db);
+
+				UserKeyStore uks = Users.FindByEmail(Email, db).UserKeyStore;
+
+				if (uks == null)
+					throw new KeyStoreException("Key store does not exist");
+
 				db.SaveChanges();
 				return true;
 			}
@@ -197,6 +203,10 @@ namespace HackNet.Security
 		{
 			Users u = Users.FindByEmail(Email, db);
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+
+			if (!(u.UserKeyStore is UserKeyStore))
+				throw new KeyStoreException("UserKeyStore is not valid"); 
+
 			return u.UserKeyStore.TOTPSecret;
 		}
 
@@ -341,7 +351,7 @@ namespace HackNet.Security
 			FormsIdentity ident = HttpContext.Current.User.Identity as FormsIdentity;
 			if (ident == null)
 				throw new AuthException("Forms Authentication Identity is not authenticated");
-			string[] UserData = ident.Ticket.UserData.Split(',');
+			string[] UserData = ident.Ticket.UserData.Split(';');
 			if (UserData.Length != 3)
 				throw new AuthException("UserData is of incorrect length");
 

@@ -52,4 +52,12 @@ namespace HackNet.Security
 		internal MailException(string str) : base(str) { }
 		internal MailException(string str, Exception inner) : base(str, inner) { }
 	}
+
+	[Serializable]
+	internal class KeyStoreException : Exception
+	{
+		internal KeyStoreException() : base() { }
+		internal KeyStoreException(string str) : base(str) { }
+		internal KeyStoreException(string str, Exception inner) : base(str, inner) { }
+	}
 }
