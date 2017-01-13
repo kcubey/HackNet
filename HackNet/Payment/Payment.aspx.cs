@@ -17,19 +17,8 @@ namespace HackNet.Payment
     {
         protected int price;
         public string clientToken;
-        private BraintreeGateway gateway = new BraintreeGateway
-        {
-            Environment = Braintree.Environment.SANDBOX,
-            PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
-            PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
-            MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
-
-            /*
-            PublicKey = "YOURPUBLICKEYHERE",
-            PrivateKey = "YOURPRIVATEKEYHERE",
-            MerchantId = "YOURMERCHANTIDHERE"
-            */
-        };
+        private BraintreeGateway gateway;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,13 +30,27 @@ namespace HackNet.Payment
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
-            //Generate event form (asp.net only hack)
-            ClientScript.GetPostBackEventReference(this, string.Empty);
-
-            if (!IsPostBack)
+            gateway = new BraintreeGateway
             {
-                //Generate a client token
+                Environment = Braintree.Environment.SANDBOX,
+                PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
+                PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
+                MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
+
+                /*
+                PublicKey = "YOURPUBLICKEYHERE",
+                PrivateKey = "YOURPRIVATEKEYHERE",
+                MerchantId = "YOURMERCHANTIDHERE"
+                */
+            };
+
+            try
+            {
                 clientToken = gateway.ClientToken.generate();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex)
             }
 
             Debug.WriteLine("exit pageload payment");
