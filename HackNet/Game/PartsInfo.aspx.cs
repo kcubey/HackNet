@@ -14,7 +14,42 @@ namespace HackNet.Game
         {
             Items item = (Items)Session["Item"];
             ItemName.Text = item.ItemName;
+            ItemTypeLbl.Text = FindItemType((int)item.ItemType);
+            ItemPrice.Text = item.ItemPrice.ToString();
+            ItemDesc.Text = item.ItemDesc.ToString();
+            string imageurlstring = Convert.ToBase64String(item.ItemPic, 0, item.ItemPic.Length);
+            ItemImageLoaded.ImageUrl="data:image/png;base64," + imageurlstring;
+
             //ItemDes.Text = item.ItemDesc;
+        }
+
+        private string FindItemType(int itemtype)
+        {
+            if (itemtype == 1)
+            {
+                return "Processor";
+            }
+            else if (itemtype == 2)
+            {
+                return "Random Access Memory";
+            }
+            else if (itemtype == 3)
+            {
+                return "Power Supply";
+            }
+            else if (itemtype == 4)
+            {
+                return "Graphics Processing Unit";
+            }
+            else if (itemtype == 0)
+            {
+                return "Booster";
+            }
+            else
+            {
+                return "";
+            }
+
         }
     }
 }

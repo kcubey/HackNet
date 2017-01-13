@@ -13,6 +13,24 @@ namespace HackNet.Game {
     public partial class PartsInfo {
         
         /// <summary>
+        /// ItemImageLoaded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ItemImageLoaded;
+        
+        /// <summary>
+        /// ItemTypeLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemTypeLbl;
+        
+        /// <summary>
         /// ItemName control.
         /// </summary>
         /// <remarks>
@@ -22,12 +40,21 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label ItemName;
         
         /// <summary>
-        /// ItemDes control.
+        /// ItemPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ItemDes;
+        protected global::System.Web.UI.WebControls.Label ItemPrice;
+        
+        /// <summary>
+        /// ItemDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemDesc;
     }
 }

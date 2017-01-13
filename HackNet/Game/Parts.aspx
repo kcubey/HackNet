@@ -11,13 +11,17 @@
             <div style="background-color: #ff0000; float: left; width: 15%; margin-left: 0.5%; height: auto;">
                 <h1>Parts</h1>
                 <p>
-                    <input type="checkbox" name="cpu" value="CPU">CPU</p>
+                    <input type="checkbox" name="cpu" value="CPU">CPU
+                </p>
                 <p>
-                    <input type="checkbox" name="powersupply" value="Power Supply">Power supply</p>
+                    <input type="checkbox" name="powersupply" value="Power Supply">Power supply
+                </p>
                 <p>
-                    <input type="checkbox" name="graphics" value="Graphics">Graphics</p>
+                    <input type="checkbox" name="graphics" value="Graphics">Graphics
+                </p>
                 <p>
-                    <input type="checkbox" name="ram" value="RAM">RAM</p>
+                    <input type="checkbox" name="ram" value="RAM">RAM
+                </p>
             </div>
             <div class="customscrollbar" style="background-color: #4cff00; float: left; width: 82%; padding-left: 1%; margin-left: 1%; margin-right: 0.5%; height: 400px; overflow: scroll; overflow-x: hidden;">
                 <div style="float: left; width: 31%; height: 230px; margin: 1%; background-color: #ff6a00;">randombox left</div>
@@ -64,17 +68,44 @@
     <br />
     <br />
     <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Left Tabs</h3>
+            <hr />
+            <div class="col-xs-3">
+                <!-- required for floating -->
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs tabs-left">
+                    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                    <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                    <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                            <ItemTemplate>
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <br />
+                                <asp:Image ID="itemImg" runat="server"
+                                    Width="200px" Height="200px"
+                                    ImageUrl='<%#Eval("ItemPic")%>' />
+                                <br />
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+                    <div class="tab-pane" id="profile">Profile Tab.</div>
+                    <div class="tab-pane" id="messages">Messages Tab.</div>
+                    <div class="tab-pane" id="settings">Settings Tab.</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
-        <ItemTemplate>
-            <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-            <br />
-            <asp:Image ID="itemImg" runat="server"
-                Width="200px" Height="200px"
-                ImageUrl='<%#Eval("ItemPic")%>' />
-            <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
-        </ItemTemplate>
-    </asp:DataList>
 
     <br />
     <br />

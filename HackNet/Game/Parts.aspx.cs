@@ -32,7 +32,7 @@ namespace HackNet.Game
             {
                 imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
-                dt.Rows.Add(i.ItemId,i.ItemName, url);
+                dt.Rows.Add(i.ItemId,i.ItemName,url);
             }
 
             //ProcessList.DataSource = dt;
