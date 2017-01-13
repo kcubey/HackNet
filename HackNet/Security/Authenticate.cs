@@ -137,7 +137,7 @@ namespace HackNet.Security
 				using (DataContext db = new DataContext())
 				{
 					Users u = Users.FindByEmail(this.Email, db);
-					string sec = GetKeyStore(db).TOTPSecret;
+					string sec = GetTotpSecret(db);
 					if (!string.IsNullOrEmpty(sec))
 						return true;
 					else
@@ -151,9 +151,7 @@ namespace HackNet.Security
 			if (base32sec == null)
 				using (DataContext db = new DataContext())
 				{
-					var u = Users.FindByEmail(Email, db);
-					var uks = GetKeyStore(db);
-					base32sec = uks.TOTPSecret;
+					base32sec = GetTotpSecret(db);
 				}
 			using (OTPTool ot = new OTPTool(base32sec))
 			{
@@ -174,7 +172,7 @@ namespace HackNet.Security
 					AuthLogger.Instance.TOTPDisabled();
 				else
 					AuthLogger.Instance.TOTPChanged();
-				GetKeyStore(db).TOTPSecret = b32sec;
+				Users.FindByEmail(Email, db);
 				db.SaveChanges();
 				return true;
 			}
@@ -184,29 +182,36 @@ namespace HackNet.Security
 		 *  UserKeyStore related methods
 		 */
 
-		internal UserKeyStore GetKeyStore(DataContext db, string password = null, byte[] salt = null)
+		internal KeyStore GetKeyStore(DataContext db, string password, byte[] salt)
 		{
 			Users u = Users.FindByEmail(Email, db);
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
-			if (u.UserKeyStore == null && password != null) // If user does not have an existing key store
+
+			// Convert to object from data layer
+			KeyStore ks = new KeyStore(u.UserKeyStore, password, salt);
+
+			return ks;
+		}
+
+		internal string GetTotpSecret(DataContext db)
+		{
+			Users u = Users.FindByEmail(Email, db);
+			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+			return u.UserKeyStore.TOTPSecret;
+		}
+
+		internal string GetRsaPublic(string email = null)
+		{
+			using (DataContext db = new DataContext())
 			{
-				string keyPair = Crypt.Instance.GenerateRsaParameters();
-				string pubKey = Crypt.Instance.RemovePrivateKey(keyPair);
-				byte[] aesIv = Crypt.Instance.Generate(16);
-				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, aesIv);
-				byte[] keyPairBytes = Encoding.UTF8.GetBytes(keyPair);
-				byte[] encKeyPair = Crypt.Instance.EncryptAes(keyPairBytes, aesKey);
-				UserKeyStore uks = new UserKeyStore
-				{
-					RsaPub = pubKey,
-					RsaPriv = aesIv,
-					TOTPSecret = null,
-					UserId = u.UserID
-				};
-				db.UserKeyStore.Add(uks);
-				db.SaveChanges();
+				Users u;
+				if (email == null)
+					u = Users.FindByEmail(this.Email, db);
+				else
+					u = Users.FindByEmail(email, db);
+				db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+				return u.UserKeyStore.RsaPub;
 			}
-			return u.UserKeyStore;
 		}
 
 		/*
