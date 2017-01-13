@@ -20,6 +20,7 @@ namespace HackNet.Game
             {
                 LoadInventory(ProcessList, 1,db);
                 LoadInventory(GPUList, 4,db);
+                LoadInventory();
             }
         }
 
