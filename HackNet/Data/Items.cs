@@ -67,6 +67,7 @@ namespace HackNet.Data
         
         }
 
+
     }
 
     public enum ItemType
