@@ -184,16 +184,22 @@ namespace HackNet.Security
 		 *  UserKeyStore related methods
 		 */
 
-		internal UserKeyStore GetKeyStore(DataContext db)
+		internal UserKeyStore GetKeyStore(DataContext db, string password = null, byte[] salt = null)
 		{
 			Users u = Users.FindByEmail(Email, db);
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
-			if (u.UserKeyStore == null)
+			if (u.UserKeyStore == null && password != null) // If user does not have an existing key store
 			{
+				string keyPair = Crypt.Instance.GenerateRsaParameters();
+				string pubKey = Crypt.Instance.RemovePrivateKey(keyPair);
+				byte[] aesIv = Crypt.Instance.Generate(16);
+				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, aesIv);
+				byte[] keyPairBytes = Encoding.UTF8.GetBytes(keyPair);
+				byte[] encKeyPair = Crypt.Instance.EncryptAes(keyPairBytes, aesKey);
 				UserKeyStore uks = new UserKeyStore
 				{
-					RsaPub = null,
-					RsaPriv = new byte[0],
+					RsaPub = pubKey,
+					RsaPriv = aesIv,
 					TOTPSecret = null,
 					UserId = u.UserID
 				};
