@@ -40,7 +40,7 @@ namespace HackNet.Security
             WebClient wc = new WebClient();
             var googleReply = wc.DownloadString(
                                 string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}",
-								ConfigurationManager.AppSettings["MailServerLogin"],
+								ConfigurationManager.AppSettings["ReCaptchaPrivKey"],
                                 EncodedResponse
                                 ));
             var captchaResponse = JsonConvert.DeserializeObject<Captcha>(googleReply);
