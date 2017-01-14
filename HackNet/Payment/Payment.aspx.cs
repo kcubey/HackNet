@@ -50,7 +50,7 @@ namespace HackNet.Payment
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex)
+				Debug.WriteLine(ex);
             }
 
             Debug.WriteLine("exit pageload payment");
