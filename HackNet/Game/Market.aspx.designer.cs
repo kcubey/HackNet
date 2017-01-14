@@ -22,31 +22,31 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Label warning;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// packageButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton packageButton;
         
         /// <summary>
-        /// Image1 control.
+        /// packageImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Image packageImage;
         
         /// <summary>
-        /// Label1 control.
+        /// packageName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label packageName;
         
         /// <summary>
         /// packageNo control.
@@ -58,13 +58,13 @@ namespace HackNet.Market {
         protected global::System.Web.UI.WebControls.Label packageNo;
         
         /// <summary>
-        /// Label7 control.
+        /// packagePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label packagePrice;
         
         /// <summary>
         /// packageCost control.

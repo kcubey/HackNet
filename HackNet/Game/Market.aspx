@@ -13,12 +13,12 @@
 			    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
                 <p>These premium packages require the use of REAL money.</p> 
 
-                <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                    <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                     <br /><br />
-                    <asp:Label ID="Label1" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                    <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                         <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
-                        <asp:Label ID="Label7" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
+                        <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
                         <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="10"></asp:Label>
                 </asp:LinkButton>
 
@@ -85,7 +85,8 @@
         </div>
 	</div>
 
-    <script>
+ <!--
+       <script>
         $('#pages').change(function (ev) {
             var total = $('#pages').val() * 2;
             $('#totall').html((total).toFixed(0));
@@ -101,14 +102,14 @@
             document.getElementById("coinTotal").innerHTML = total;
             // $('#coinTotal').html(total);
         });
-
+            
         $('#buckTextBox1').change(function (ev) {
            var total = $('#buckTextBox1').val() * 2;
            document.getElementById("coinTotal").innerHTML = total;
            // $('#coinTotal').html(total);
         });
     </script>
-        
+       --> 
 
     <!-- Item repeater
 
