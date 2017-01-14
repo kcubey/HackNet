@@ -30,7 +30,7 @@ namespace HackNet.Auth {
 				switch(result)
 				{
 					case (AuthResult.Success):
-						LoginSuccess(email);
+						LoginSuccess(email, auth.TempKeyStore);
 						break;
 					case (AuthResult.PasswordIncorrect):
 						Msg.Text = "User and/or password not found (1)";
@@ -45,18 +45,20 @@ namespace HackNet.Auth {
 			}
         }
 
-		private void LoginSuccess(string email)
+		private void LoginSuccess(string email, KeyStore ks)
 		{
 			using (Authenticate a = new Authenticate(email))
 			{
 				if (a.Is2FAEnabled)
 				{
+					Session["TempKeyStore"] = ks;
 					Session["Cookie"] = a.AuthCookie;
 					Session["PasswordSuccess"] = email;
 					Session["ReturnUrl"] = Request.QueryString["ReturnUrl"];
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
+					Session["KeyStore"] = ks;
 					Session["ReturnUrl"] = null;
 					Response.Cookies.Add(a.AuthCookie);
 					if (Request.QueryString["ReturnUrl"] != null)

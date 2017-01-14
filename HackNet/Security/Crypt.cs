@@ -32,7 +32,7 @@ namespace HackNet.Security
 				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 				{
 					rsa.FromXmlString(parameters);
-					cipherBytes = rsa.Encrypt(plainBytes, false);
+					cipherBytes = rsa.Encrypt(plainBytes, true);
 				}
 			return cipherBytes;
 		}
@@ -41,11 +41,18 @@ namespace HackNet.Security
 		public byte[] DecryptRsa(byte[] cipherBytes, string parameters)
 		{
 			byte[] plainBytes = new byte[0];
+			RSAParameters rparam = new RSAParameters();
 			if (cipherBytes.Length > 0)
 				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 				{
 					rsa.FromXmlString(parameters);
-					plainBytes = rsa.Decrypt(cipherBytes, false);
+					rparam = rsa.ExportParameters(true);
+				}
+				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+				{
+					RSACryptoServiceProvider.UseMachineKeyStore = true;
+					rsa.ImportParameters(rparam);
+					plainBytes = rsa.Decrypt(cipherBytes, true);
 				}
 			return plainBytes;
 		}

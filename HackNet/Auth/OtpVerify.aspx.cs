@@ -15,6 +15,8 @@ namespace HackNet.Auth
 		{
 			if (!(Session["Cookie"] is HttpCookie))
 				Response.Redirect("~/Default");
+			if (!(Session["TempKeyStore"] is KeyStore))
+				Response.Redirect("~/Default");
 		}
 
 		protected void ConfirmOTP(object sender, EventArgs e)
@@ -24,6 +26,7 @@ namespace HackNet.Auth
 				Response.Redirect("~/Default");
 				return;
 			}
+
 			
 			string email = Session["PasswordSuccess"] as string;
 			if (email == null)
@@ -59,6 +62,7 @@ namespace HackNet.Auth
 			string returnurl = Session["ReturnUrl"] as string;
 			HttpCookie cookie = Session["Cookie"] as HttpCookie;
 			Response.Cookies.Add(cookie);
+			Session["KeyStore"] = Session["TempKeyStore"];
 			Session["ReturnUrl"] = null;
 			Session["LoginSuccess"] = null;
 			Session["Cookie"] = null;

@@ -21,7 +21,7 @@ namespace HackNet.Security
 				// Convert each message into decrypted form
 				foreach(Messages dbMsg in dbMessages)
 				{
-					decryptedMessages.Add(Message.FromDatabase(dbMsg, Viewer, ks.rsaPrivate));
+					decryptedMessages.Add(new Message(dbMsg, Viewer, ks.rsaPrivate));
 				}
 			}
 			return decryptedMessages;
@@ -44,7 +44,7 @@ namespace HackNet.Security
 				}
 				
 				// Convert the message to database format while encrypting it
-				Messages dbMsg = msg.ToDatabase(sPubKey, rPubKey);
+				Messages dbMsg = msg.ToDatabase(rPubKey, sPubKey);
 
 				// Add to database
 				db.Messages.Add(dbMsg);

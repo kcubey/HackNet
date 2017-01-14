@@ -9,11 +9,13 @@ namespace HackNet.Security
 {
 	public class Message
 	{
-		internal int SenderId { get; private set; }
-		internal int RecipientId { get; private set; }
-		internal string Content { get; private set; }
-		internal DateTime Timestamp { get; private set; }
-		internal byte[] SHA1Sum { get; private set; }
+		public int SenderId { get; private set; }
+		public int RecipientId { get; private set; }
+		public string Content { get; private set; }
+		public DateTime Timestamp { get; private set; }
+		public byte[] SHA1Sum { get; private set; }
+
+		public int MessageId  { get; private set; } // Only if made from constructor
 
 		// Convert to database type
 		internal Messages ToDatabase(string RPubKey, string SPubKey)
@@ -30,7 +32,7 @@ namespace HackNet.Security
 			return dbMsg;
 		}
 
-		internal static Message FromDatabase(Messages dbMsg, int ViewerId, string PrivKey)
+		internal Message(Messages dbMsg, int ViewerId, string PrivKey)
 		{
 			byte[] msgBytes;
 			string msgString;
@@ -44,14 +46,15 @@ namespace HackNet.Security
 				msgBytes = new byte[0];
 
 			// Convert bytes to string
-			if (msgBytes.Length != 0 && msgBytes == null)
+			if (msgBytes.Length != 0 && msgBytes != null)
 				msgString = Encoding.UTF8.GetString(msgBytes);
 			else
 				msgString = "Message content could not be shown.";
 
-			Message msg = new Message(dbMsg.SenderId, dbMsg.ReceiverId, msgString, dbMsg.Timestamp);
-
-			return msg;
+			SenderId = dbMsg.SenderId;
+			RecipientId = dbMsg.ReceiverId;
+			Content = msgString;
+			Timestamp = dbMsg.Timestamp;
 		}
 
 		// Message creation

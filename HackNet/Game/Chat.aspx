@@ -15,6 +15,26 @@
 	<div class="chatsection">
 		<div class="ChatTitle">Chatting with Wuggle</div>
 		<ol class="chat">
+			<asp:DataList ID="ChatDataList" runat="server" DataKeyField="MessageId" DataSourceID="MessageDataSource">
+				<ItemTemplate>
+					<li class="other">
+						<div class="msg">
+							<div class="user"><asp:Label ID="LblMsgSender" Text='<%# Eval("SenderId") %>' runat="server"/></div>
+							<p><asp:Label ID="LblMsgContent" Text='<%# Eval("Content") %>' runat="server"/></p>
+							<time><asp:Label ID="LblMsgTimestamp" Text='<%# Eval("Timestamp") %>' runat="server"/></time>
+						</div>
+					</li>
+				</ItemTemplate>
+			</asp:DataList>
+			<asp:ObjectDataSource ID="MessageDataSource" runat="server"
+				OldValuesParameterFormatString="original_{0}"
+				SelectMethod="RetrieveMessages" TypeName="HackNet.Game.Chat">
+			</asp:ObjectDataSource>
+		</ol>
+	</div>
+	<div class="chatsection">
+		<div class="ChatTitle">Chatting with Wuggle</div>
+		<ol class="chat">
 			<li class="other">
 				<div class="msg">
 					<div class="user">Wuggle<span class="range admin">Admin</span></div>
