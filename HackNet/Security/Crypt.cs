@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -76,7 +77,6 @@ namespace HackNet.Security
 		public byte[] DeriveKey(string passwd, byte[] salt, byte[] initvector)
 		{
 			byte[] derivedKey;
-			initvector = new byte[] { 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01 };
 
 			if (passwd == null || salt == null || initvector == null)
 				throw new ArgumentNullException("Key derivation failed due to null argument");
@@ -90,44 +90,51 @@ namespace HackNet.Security
 		}
 
 
-		public byte[] EncryptAes(byte[] plainBytes, byte[] keyBytes)
+		public byte[] EncryptAes(byte[] plainBytes, byte[] keyBytes, byte[] ivBytes)
 		{
 			byte[] cipherBytes = new byte[0];
-			try
+			using (AesManaged aes = new AesManaged())
 			{
-				using (AesManaged aes = new AesManaged())
+				aes.BlockSize = 128;
+				aes.KeySize = 192;
+				aes.Mode = CipherMode.CBC;
+				aes.Padding = PaddingMode.PKCS7;
+				aes.Key = keyBytes;
+				aes.IV = ivBytes;
+
+				using (MemoryStream ms = new MemoryStream())
 				{
-					aes.BlockSize = 128;
-					aes.Mode = CipherMode.CBC;
-					aes.Padding = PaddingMode.PKCS7;
-					aes.Key = keyBytes;
-					ICryptoTransform transform = aes.CreateEncryptor();
-					cipherBytes = transform.TransformFinalBlock(plainBytes, 0, cipherBytes.Length);
+					using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
+					{
+						cs.Write(plainBytes, 0, plainBytes.Length);
+					}
+					cipherBytes = ms.ToArray();
 				}
-			} catch (Exception e)
-			{
-				Debug.WriteLine("Exception caught: " + e.StackTrace);
 			}
+
 			return cipherBytes;
 		}
 
-		public byte[] DecryptAes(byte[] cipherBytes, byte[] keyBytes)
+		public byte[] DecryptAes(byte[] cipherBytes, byte[] keyBytes, byte[] ivBytes)
 		{
 			byte[] plainBytes = new byte[0];
-			try
+			using (AesManaged aes = new AesManaged())
 			{
-				using (AesManaged aes = new AesManaged())
+				aes.BlockSize = 128;
+				aes.KeySize = 192;
+				aes.Mode = CipherMode.CBC;
+				aes.Padding = PaddingMode.PKCS7;
+				aes.Key = keyBytes;
+				aes.IV = ivBytes;
+
+				using (MemoryStream ms = new MemoryStream())
 				{
-					aes.BlockSize = 128;
-					aes.Mode = CipherMode.CBC;
-					aes.Padding = PaddingMode.PKCS7;
-					aes.Key = keyBytes;
-					ICryptoTransform transform = aes.CreateDecryptor();
-					plainBytes = transform.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
+					using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
+					{
+						cs.Write(cipherBytes, 0, cipherBytes.Length);
+					}
+					plainBytes = ms.ToArray();
 				}
-			} catch (Exception e)
-			{
-				Debug.WriteLine("Exception caught: " + e.StackTrace);
 			}
 			return plainBytes;
 		}

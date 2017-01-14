@@ -88,11 +88,30 @@ namespace HackNet.Security
 				Users u = Users.FindByEmail(this.Email, db);
 				if (u == null)
 					return AuthResult.UserNotFound;
+
 				AuthResult oldpwres = ValidateLogin(oldpass);
 				if (oldpwres != AuthResult.Success)
 					return oldpwres;
+
+				db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+
+				// Get the user key store and decrypt their private key
+				UserKeyStore uks = u.UserKeyStore;
+				byte[] aesKey = Crypt.Instance.DeriveKey(oldpass, u.Salt, uks.DesIv);
+				byte[] rsaPrivBytes = Crypt.Instance.DecryptAes(uks.RsaPriv, aesKey, uks.AesIv);
+
+				// Do the password update
 				u.UpdatePassword(newpass);
+
+				// Encrypt the private key again
+				byte[] newAesIv = Crypt.Instance.Generate(16);
+				uks.AesIv = newAesIv;
+				byte[] newAesKey = Crypt.Instance.DeriveKey(newpass, u.Salt, uks.DesIv);
+				byte[] newRsaPrivEnc = Crypt.Instance.EncryptAes(rsaPrivBytes, newAesKey, newAesIv);
+				uks.RsaPriv = newRsaPrivEnc;
+
 				db.SaveChanges();
+
 				AuthLogger.Instance.PasswordFail(u.Email, u.UserID);
 				return AuthResult.Success;
 			}
@@ -188,14 +207,18 @@ namespace HackNet.Security
 
 			using (DataContext db = new DataContext())
 			{
+				if (!Global.IsInUnitTest)
 				if (b32sec == null)
 					AuthLogger.Instance.TOTPDisabled();
 				else
 					AuthLogger.Instance.TOTPChanged();
 
-				UserKeyStore uks = Users.FindByEmail(Email, db).UserKeyStore;
+				Users u = Users.FindByEmail(Email, db);
+				db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
 
-				if (uks == null)
+				if (u.UserKeyStore != null)
+					u.UserKeyStore.TOTPSecret = b32sec;
+				else
 					throw new KeyStoreException("Key store does not exist");
 
 				db.SaveChanges();
@@ -300,8 +323,8 @@ namespace HackNet.Security
 						// TODO: Actual email verification (WL)
 					}
 					Machines.DefaultMachine(createduser, db);
-					ItemLogic.StoreDefaultParts(db);
-					AuthLogger.Instance.UserRegistered();
+					ItemLogic.StoreDefaultParts(db, u.UserID);
+					AuthLogger.Instance.UserRegistered(u.Email, u.UserID);
 					return RegisterResult.Success;
 				}
 				else
@@ -314,6 +337,9 @@ namespace HackNet.Security
 		// Check if authenticated
 		internal static bool IsAuthenticated(string email = null)
 		{
+			if (Global.IsInUnitTest)
+				return true;
+
 			if (HttpContext.Current == null)
 				throw new AuthException("Current HTTP Context is NULL");
 
@@ -330,6 +356,7 @@ namespace HackNet.Security
 		// Get email of authenticated user
 		internal static string GetEmail()
 		{
+
 			if (!IsAuthenticated())
 				throw new AuthException("User is not logged in");
 
@@ -338,6 +365,7 @@ namespace HackNet.Security
 
 		internal static int GetUserId()
 		{
+
 			string[] UserData = GetUserData();
 			int UserId;
 			if (!int.TryParse(UserData[0], out UserId))
@@ -348,6 +376,7 @@ namespace HackNet.Security
 
 		internal static string GetUserName()
 		{
+
 			string[] UserData = GetUserData();
 
 			return UserData[1];
@@ -355,6 +384,9 @@ namespace HackNet.Security
 
 		internal static AccessLevel GetAccessLevel()
 		{
+			if (Global.IsInUnitTest)
+				return AccessLevel.User;
+
 			string[] UserData = GetUserData();
 			int AccessLevelNum;
 			if (!int.TryParse(UserData[2], out AccessLevelNum))
@@ -368,6 +400,9 @@ namespace HackNet.Security
 
 		private static string[] GetUserData()
 		{
+			if (Global.IsInUnitTest)
+				return new string[] { "6", "UnitTester" , "hacknet@wlgoh.com" };
+
 			if (!IsAuthenticated())
 				throw new AuthException("User is not logged in");
 

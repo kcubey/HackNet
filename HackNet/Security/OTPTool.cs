@@ -144,7 +144,7 @@ namespace HackNet.Security
 			}
 		}
 
-		private int OTPNow
+		internal int OTPNow
 		{
 			get
 			{

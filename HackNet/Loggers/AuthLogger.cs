@@ -52,6 +52,7 @@ namespace HackNet.Loggers
 
 		internal void PasswordChanged()
 		{
+
 			LogEntry entry = new LogEntry()
 			{
 				EmailAddress = Authenticate.GetEmail(),
@@ -115,12 +116,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void UserRegistered()
+		internal void UserRegistered(string email, int userId)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = email,
+				UserId = userId,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "New user has been registered"

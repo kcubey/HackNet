@@ -75,12 +75,12 @@ namespace HackNet.Game.Class
         }
 
         // Store Default Parts
-        internal static void StoreDefaultParts(DataContext db)
+        internal static void StoreDefaultParts(DataContext db, int userid)
         {
             InventoryItem inv;
             foreach (Items i in GetDefaultParts(db))
             {
-                inv = new InventoryItem(Authenticate.GetCurrentUser().UserID, i.ItemId, 1);
+                inv = new InventoryItem(userid, i.ItemId, 1);
                 db.InventoryItem.Add(inv);
                 db.SaveChanges();
             }

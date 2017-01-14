@@ -67,6 +67,9 @@ namespace HackNet.Loggers
 
 		internal void LogToFile(LogEntry entry)
 		{
+			if (Global.IsInUnitTest)
+				return;
+
 			string severity = Enum.GetName(typeof(LogSeverity), entry.Severity);
 			string type = Enum.GetName(typeof(LogType), entry.Type);
 			string time = DateTime.Now.ToString();
@@ -98,6 +101,12 @@ namespace HackNet.Loggers
 
 		internal string GetIP()
 		{
+			if (Global.IsInUnitTest)
+				return "Test Environment";
+
+			if (HttpContext.Current == null)
+				throw new SecurityException("HttpContext not found while executing.");
+
 			HttpContext context = HttpContext.Current;
 			HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
 			string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];

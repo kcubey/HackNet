@@ -27,9 +27,10 @@ namespace HackNet.Security
 			// Should only execute when user has a keystore
 			if (uks is UserKeyStore)
 			{
+				byte[] desIv = uks.DesIv;
 				byte[] aesIv = uks.AesIv;
-				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, aesIv);
-				byte[] rsaBytes = Crypt.Instance.DecryptAes(uks.RsaPriv, aesKey);
+				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, desIv);
+				byte[] rsaBytes = Crypt.Instance.DecryptAes(uks.RsaPriv, aesKey, aesIv);
 				string rsaPrivate = Encoding.UTF8.GetString(rsaBytes);
 
 				this.aesIv = uks.AesIv;
@@ -46,20 +47,29 @@ namespace HackNet.Security
 			}
 		}
 
+		/// <summary>
+		/// CENTRALISED METHOD FOR CREATING USERKEYSTORES
+		/// </summary>
 		internal static UserKeyStore DefaultDbKeyStore(string password, byte[] salt, int userId)
 		{
 			UserKeyStore uks;
 
-			byte[] iv = Crypt.Instance.Generate(8);
-			byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, iv);
+			// Required to derive key from password
+			byte[] desIv = Crypt.Instance.Generate(8); 
+
+			// Required to decrypt the RSA key
+			byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, desIv);
+			byte[] aesIv = Crypt.Instance.Generate(16);
+
 			string rsaString = Crypt.Instance.GenerateRsaParameters();
 			byte[] rsaStringBytes = Encoding.UTF8.GetBytes(rsaString);
-			byte[] rsaEncrypted = Crypt.Instance.EncryptAes(rsaStringBytes, aesKey);
+			byte[] rsaEncrypted = Crypt.Instance.EncryptAes(rsaStringBytes, aesKey, aesIv);
 			string rsaPublic = Crypt.Instance.RemovePrivateKey(rsaString);
 
 			uks = new UserKeyStore()
 			{
-				AesIv = iv,
+				AesIv = aesIv,
+				DesIv = desIv,
 				TOTPSecret = null,
 				RsaPub = rsaPublic,
 				RsaPriv = rsaEncrypted,

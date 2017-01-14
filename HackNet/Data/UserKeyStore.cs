@@ -19,6 +19,8 @@ namespace HackNet.Data
 
 		public byte[] AesIv { get; set; } // Blank array if not enabled
 
+		public byte[] DesIv { get; set; }
+
 		public string TOTPSecret { get; set; } // Null if not enabled
 
 		// Foreign key references

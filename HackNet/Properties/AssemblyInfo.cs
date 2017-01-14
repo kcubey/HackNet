@@ -19,6 +19,9 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
+// This line makes internal code visible to our Unit Testing Project
+[assembly: InternalsVisibleTo("HackNetTests")]
+
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("4b9e26c3-23a6-49ee-a983-f2f33a52a645")]
 
