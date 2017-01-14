@@ -40,24 +40,34 @@ namespace HackNet.Security
 				this.rsaBytes = uks.RsaPriv;
 				this.UserId = uks.UserId;
 
-			} else {
-				// Should only execute when user does not have a keystore
-				string keyPair = Crypt.Instance.GenerateRsaParameters();
-				byte[] aesIv = Crypt.Instance.Generate(16);
-
-				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, aesIv);
-				byte[] keyPairBytes = Encoding.UTF8.GetBytes(keyPair);
-
-				this.rsaPublic = Crypt.Instance.RemovePrivateKey(keyPair);
-				this.rsaPrivate = keyPair;
-				this.aesKey = aesKey;
-				this.aesIv = aesIv;
-				this.TOTPSecret = null;
-				this.rsaBytes = Crypt.Instance.EncryptAes(keyPairBytes, aesKey);
-				this.UserId = uks.UserId;
+			} else
+			{
+				throw new KeyStoreException("KeyStore is in invalid state");
 			}
 		}
 
+		internal static UserKeyStore DefaultDbKeyStore(string password, byte[] salt, int userId)
+		{
+			UserKeyStore uks;
+
+			byte[] iv = Crypt.Instance.Generate(8);
+			byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, iv);
+			string rsaString = Crypt.Instance.GenerateRsaParameters();
+			byte[] rsaStringBytes = Encoding.UTF8.GetBytes(rsaString);
+			byte[] rsaEncrypted = Crypt.Instance.EncryptAes(rsaStringBytes, aesKey);
+			string rsaPublic = Crypt.Instance.RemovePrivateKey(rsaString);
+
+			uks = new UserKeyStore()
+			{
+				AesIv = iv,
+				TOTPSecret = null,
+				RsaPub = rsaPublic,
+				RsaPriv = rsaEncrypted,
+				UserId = userId
+			};
+
+			return uks;
+		}
 
 	}
 }

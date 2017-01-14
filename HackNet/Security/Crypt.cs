@@ -72,16 +72,19 @@ namespace HackNet.Security
 			return publicXml;
 		}
 
-		// Derive AES key from plaintext
+		// Derive AES key from plaintext (64 bytes, 512 bits)
 		public byte[] DeriveKey(string passwd, byte[] salt, byte[] initvector)
 		{
 			byte[] derivedKey;
+			initvector = new byte[] { 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01 };
 
 			if (passwd == null || salt == null || initvector == null)
 				throw new ArgumentNullException("Key derivation failed due to null argument");
 
-			using (var kdf = new Rfc2898DeriveBytes(passwd, salt))
-				derivedKey = kdf.CryptDeriveKey("AES", "SHA1", 128, initvector);
+			using (var kdf = new Rfc2898DeriveBytes(passwd, salt, 1000))
+				derivedKey = kdf.CryptDeriveKey("3DES", "SHA1", 192, initvector);
+
+			Debug.WriteLine("Derived Key Length: " + derivedKey.Length);
 
 			return derivedKey;
 		}
@@ -175,13 +178,19 @@ namespace HackNet.Security
 		// Generate bytes from RNGCryptoServiceProvider
 		internal byte[] Generate(int size)
 		{
-			if (size == 0) // Guard clause
+			if (size < 1) // Guard clause
 				return null;
 			byte[] random = new byte[size];
 			using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
 				rng.GetBytes(random);
 			return random;
 		}
+
+		internal byte[] GenerateIv()
+		{
+			return Generate(8);
+		}
+
 
 
 	}

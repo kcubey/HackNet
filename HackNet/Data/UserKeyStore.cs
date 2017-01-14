@@ -23,5 +23,6 @@ namespace HackNet.Data
 
 		// Foreign key references
 		public virtual Users User { get; set; }
+
 	}
 }

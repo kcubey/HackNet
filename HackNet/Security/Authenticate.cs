@@ -14,7 +14,10 @@ namespace HackNet.Security
 {
 	internal class Authenticate : IDisposable
 	{
-		internal string Email { get; private set; } 
+		internal string Email { get; private set; }
+
+		internal KeyStore TempKeyStore { get; private set; }
+
 		Stopwatch sw = new Stopwatch();
 
 		internal Authenticate()
@@ -38,7 +41,6 @@ namespace HackNet.Security
 			using (DataContext db = new DataContext())
 			{
 				Users user = Users.FindByEmail(this.Email, db);
-
 				if (user == null)
 				{
 					AuthLogger.Instance.UserNotFound(Email);
@@ -48,19 +50,35 @@ namespace HackNet.Security
 					return AuthResult.EmailNotVerified;
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
-				byte[] bHash = Crypt.Instance.Hash(bPassword, user.Salt);
+				byte[] bSalt = user.Salt;
+				byte[] bHash = Crypt.Instance.Hash(bPassword, bSalt);
+
 				if (user.Hash.SequenceEqual(bHash))
 				{
 					AuthLogger.Instance.PasswordSuccess(user.Email, user.UserID);
-					return AuthResult.Success;
 				}
 				else
 				{
 					AuthLogger.Instance.PasswordFail(user.Email, user.UserID);
 					return AuthResult.PasswordIncorrect;
 				}
+
+				try
+				{
+					db.Entry(user).Reference(usr => usr.UserKeyStore).Load();
+					if (user.UserKeyStore == null)
+					{
+						user.UserKeyStore = KeyStore.DefaultDbKeyStore(password, bSalt, user.UserID);
+						db.SaveChanges();
+					}
+					TempKeyStore = new KeyStore(user.UserKeyStore, password, bSalt);
+					return AuthResult.Success;
+
+				} catch (KeyStoreException) { 
+					return AuthResult.KeyStoreInvalid;
+				}
 			}
-			throw new AuthException("Error connecting to database");
+			throw new AuthException("Login has no result, database failure might have occured.");
 		}
 
 		internal AuthResult UpdatePassword(string oldpass, string newpass)
@@ -101,7 +119,7 @@ namespace HackNet.Security
 						default:
 							return new string[0];
 					}
-						
+
 				}
 			}
 		}
@@ -168,7 +186,8 @@ namespace HackNet.Security
 				return false;
 			}
 
-			using (DataContext db = new DataContext()) {
+			using (DataContext db = new DataContext())
+			{
 				if (b32sec == null)
 					AuthLogger.Instance.TOTPDisabled();
 				else
@@ -205,7 +224,7 @@ namespace HackNet.Security
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
 
 			if (!(u.UserKeyStore is UserKeyStore))
-				throw new KeyStoreException("UserKeyStore is not valid"); 
+				throw new KeyStoreException("UserKeyStore is not valid");
 
 			return u.UserKeyStore.TOTPSecret;
 		}
@@ -267,6 +286,8 @@ namespace HackNet.Security
 				Debug.WriteLine("User creation attempted");
 
 				Users createduser = Users.FindByEmail(email, db);
+				createduser.UserKeyStore = KeyStore.DefaultDbKeyStore(password, createduser.Salt, createduser.UserID);
+
 				if (createduser is Users)
 				{
 					using (MailClient mc = new MailClient(createduser.Email))
@@ -279,10 +300,11 @@ namespace HackNet.Security
 						// TODO: Actual email verification (WL)
 					}
 					Machines.DefaultMachine(createduser, db);
-                    ItemLogic.StoreDefaultParts(db);
-                    AuthLogger.Instance.UserRegistered();
+					ItemLogic.StoreDefaultParts(db);
+					AuthLogger.Instance.UserRegistered();
 					return RegisterResult.Success;
-				} else
+				}
+				else
 				{
 					throw new RegistrationException("User cannot be registered due to an error (NOT_TYPE_USER)");
 				}
@@ -338,20 +360,23 @@ namespace HackNet.Security
 			if (!int.TryParse(UserData[2], out AccessLevelNum))
 				throw new AuthException("AccessLevel is not an integer");
 
-			if (!Enum.IsDefined(typeof(AccessLevel), (AccessLevel) AccessLevelNum))
+			if (!Enum.IsDefined(typeof(AccessLevel), (AccessLevel)AccessLevelNum))
 				throw new AuthException("Invalid Access Level" + AccessLevelNum);
 
-			return (AccessLevel) AccessLevelNum;
+			return (AccessLevel)AccessLevelNum;
 		}
 
 		private static string[] GetUserData()
 		{
 			if (!IsAuthenticated())
 				throw new AuthException("User is not logged in");
+
 			FormsIdentity ident = HttpContext.Current.User.Identity as FormsIdentity;
 			if (ident == null)
 				throw new AuthException("Forms Authentication Identity is not authenticated");
+
 			string[] UserData = ident.Ticket.UserData.Split(';');
+
 			if (UserData.Length != 3)
 				throw new AuthException("UserData is of incorrect length");
 
@@ -362,11 +387,13 @@ namespace HackNet.Security
 		internal static Users GetCurrentUser(bool ReadOnly = true, DataContext db = null)
 		{
 			string email = GetEmail();
+
 			if (ReadOnly == false && db == null)
 			{
 				Debug.WriteLine("GetCurrentUser raised an error!");
 				throw new ArgumentNullException("DataContext cannot be null if it is not read-only");
 			}
+
 			if (ReadOnly == true)
 				using (DataContext db1 = new DataContext())
 				{
@@ -391,7 +418,7 @@ namespace HackNet.Security
 
 
 		}
-		
+
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls
 
@@ -435,7 +462,8 @@ namespace HackNet.Security
 		UserNotFound = 1,
 		PasswordIncorrect = 2,
 		EmailNotVerified = 3,
-		OtherError = 4
+		OtherError = 4,
+		KeyStoreInvalid = 5
 	}
 
 	internal enum RegisterResult
