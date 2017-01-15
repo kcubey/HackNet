@@ -353,6 +353,20 @@ namespace HackNet.Security
 			}
 		}
 
+		/// <summary>
+		/// Gives UserID from Username input
+		/// </summary>
+		/// <param name="username">The user's username</param>
+		/// <returns>The user's UserId</returns>
+		internal static int ConvertUsernameToId(string username)
+		{
+			Users u = Users.FindByUsername(username);
+			if (u == null)
+				return -1;
+			else
+				return u.UserID;
+		}
+
 		// Get email of authenticated user
 		internal static string GetEmail()
 		{

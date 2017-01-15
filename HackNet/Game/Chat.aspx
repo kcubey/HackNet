@@ -9,13 +9,17 @@
 			<h3 class="panel-title">HackNet Chat</h3>
 		</div>
 		<div class="panel-body">
-			Select a recipient <asp:TextBox placeholder="Enter Username" runat="server" CssClass="form-control" />
+			Select a recipient <asp:TextBox ID="ReceiverId" placeholder="Enter Username" runat="server" CssClass="form-control" />
+			<asp:Button ID="ButtonChooseRecipient" runat="server"
+						OnClick="ButtonChooseRecipient_Click" class="btn btn-info" 
+						Text="Go!" /> <br />
 		</div>
+		<asp:Label ID="Msg" runat="server" />
 	</div>
 	<div class="chatsection">
 		<div class="ChatTitle">Chatting with Wuggle</div>
 		<ol class="chat">
-			<asp:DataList ID="ChatDataList" runat="server" DataKeyField="MessageId" DataSourceID="MessageDataSource">
+			<asp:DataList ID="ChatDataList" runat="server" DataKeyField="MessageId" DataSourceID="MessageDataSource" Visible="false">
 				<ItemTemplate>
 					<li class="other">
 						<div class="msg">
@@ -33,7 +37,7 @@
 		</ol>
 	</div>
 	<div class="chatsection">
-		<div class="ChatTitle">Chatting with Wuggle</div>
+		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
 		<ol class="chat">
 			<li class="other">
 				<div class="msg">
