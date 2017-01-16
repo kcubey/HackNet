@@ -17,33 +17,37 @@ namespace HackNet.Payment
     {
         protected int price;
         public string clientToken;
-        private BraintreeGateway gateway;
-        
+
+        private BraintreeGateway gateway = new BraintreeGateway
+        {
+            Environment = Braintree.Environment.SANDBOX,
+            PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
+            PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
+            MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
+
+            /*
+            PublicKey = "YOURPUBLICKEYHERE",
+            PrivateKey = "YOURPRIVATEKEYHERE",
+            MerchantId = "YOURMERCHANTIDHERE"
+            */
+        };
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine("enter pageload payment.aspx");
-
-            Debug.WriteLine("enter pageload payment.aspxwrite form id");
             Form.ID = "checkout-form";
             packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() +" - $" + Session["packageprice"].ToString();
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
-            gateway = new BraintreeGateway
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            if (!IsPostBack)
             {
-                Environment = Braintree.Environment.SANDBOX,
-                PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
-                PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
-                MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
+                //Generate a client token
+                clientToken = gateway.ClientToken.generate();
+            }
 
-                /*
-                PublicKey = "YOURPUBLICKEYHERE",
-                PrivateKey = "YOURPRIVATEKEYHERE",
-                MerchantId = "YOURMERCHANTIDHERE"
-                */
-            };
-
+            /*
             try
             {
                 clientToken = gateway.ClientToken.generate();
@@ -52,16 +56,14 @@ namespace HackNet.Payment
             {
 				Debug.WriteLine(ex);
             }
+            */
 
-            Debug.WriteLine("exit pageload payment");
         }
 
         public void getPkgPrice()
         {
             //below code to convert for gateway
-            Debug.WriteLine("enter getpkgprice");
             price = Convert.ToInt32(Session["packagePrice"])*100;
-            Debug.WriteLine("exit getpkgprice");
         }
 
         public void CancelClick(Object sender, EventArgs e)
@@ -71,18 +73,14 @@ namespace HackNet.Payment
 
         protected void checkoutClick(Object sender, EventArgs e)
         {
-            Debug.WriteLine("enter checkoutclick");
-
             //Get the nonce & device data from the client
             var nonce = Request.Form["payment_method_nonce"];
-            var deviceData = Request.Form["device_data"];
 
             //Create auth
             var request = new TransactionRequest
             {
                 Amount = (decimal)price / 100,
                 PaymentMethodNonce = nonce,
-                DeviceData = deviceData
             };
 
             //Send transaction request to server
@@ -91,22 +89,16 @@ namespace HackNet.Payment
             if (result.IsSuccess())
             {
                 //Transaction is successful
-                string transactionId = string.Format(result.Target.Id);
+                string transactionId = result.Target.Id.ToString();
                 Session["transactionId"] = transactionId;
-                Debug.WriteLine("successful");
+
                 Response.Redirect("~/payment/checkout");
-                Debug.WriteLine("redirect checkout");
-
-
             }
             else
             {
                 //Something went wrong
                 Response.Redirect("~/payment/retry");
-                Debug.WriteLine("fail redirect");
             }
-
-            Debug.WriteLine("exit checkoutclick");
 
         }
     }
