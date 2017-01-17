@@ -16,7 +16,10 @@ namespace HackNet.Security
 			{
 				// DB Query for messages that match query
 				List<Messages> dbMessages = 
-					db.Messages.Where(m => m.SenderId == Sender && m.ReceiverId == Receiver).ToList();
+					db.Messages.Where(m => 
+					(m.SenderId == Sender && m.ReceiverId == Receiver) || 
+					(m.ReceiverId == Sender && m.SenderId == Receiver)
+					).ToList();
 
 				// Convert each message into decrypted form
 				foreach(Messages dbMsg in dbMessages)

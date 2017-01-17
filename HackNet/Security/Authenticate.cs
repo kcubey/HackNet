@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Text;
-using HackNet.Data;
 using System.Text.RegularExpressions;
-using HackNet.Loggers;
-using System.Collections.Generic;
 using System.Web.Security;
+
+using HackNet.Data;
+using HackNet.Loggers;
 using HackNet.Game.Class;
 
 namespace HackNet.Security
@@ -365,6 +365,24 @@ namespace HackNet.Security
 				return -1;
 			else
 				return u.UserID;
+		}
+
+
+		/// <summary>
+		/// Gives Username from UserID input
+		/// </summary>
+		/// <param name="id">The user's userid</param>
+		/// <returns>The user's username</returns>
+		internal static string ConvertIdToUsername(int id)
+		{
+			using (DataContext db = new DataContext())
+			{
+				Users u = db.Users.Find(id);
+				if (u == null)
+					return null;
+				else
+					return u.UserName;
+			}
 		}
 
 		// Get email of authenticated user
