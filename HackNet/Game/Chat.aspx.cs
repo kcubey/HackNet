@@ -11,17 +11,13 @@ namespace HackNet.Game
 	public partial class Chat : System.Web.UI.Page
 	{
 		private static Dictionary<int, string> usernames = new Dictionary<int, string>();
-		private int otherUserId { get; set; }
-		private string otherUsername { get; set; }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
 			{
 				if (Session["KeyStore"] == null)
-					Response.Redirect("~/Default", true);
-
-
+					Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
 			}
 		}
 		

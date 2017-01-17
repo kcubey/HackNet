@@ -61,19 +61,19 @@ footer {
   color: black; }
 
 /* LOGIN STUFF */
-.loginTable {
+.formTable {
   margin-bottom: 25px;
   width: 650px; }
-  .loginTable input {
+  .formTable input {
     background-color: black;
     color: white; }
-  .loginTable input[type="text"], .loginTable input[type="password"] {
+  .formTable input[type="text"], .formTable input[type="password"] {
     width: 240px; }
-  .loginTable input[type="radio"] {
+  .formTable input[type="radio"] {
     margin: 0; }
-  .loginTable td:nth-child(3) {
+  .formTable td:nth-child(3) {
     width: 200px; }
-  .loginTable tr, .loginTable td {
+  .formTable tr, .formTable td {
     padding: 0 5px 10px 0; }
 
 .form-control:focus {

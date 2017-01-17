@@ -17,7 +17,7 @@
 		</div>
 		<div class="panel-body">
             <asp:Label ID="Msg" ForeColor="Red" runat="server"/>
-			<table runat="server" class="loginTable">
+			<table runat="server" class="formTable">
 				<tr>
 					<td><strong>Email:</strong></td>
 					<td>

@@ -49,13 +49,13 @@ namespace HackNet {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PrivateLeft;
         
         /// <summary>
-        /// PrivateLeftAnchor control.
+        /// PrivateLeftLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor PrivateLeftAnchor;
+        protected global::System.Web.UI.WebControls.HyperLink PrivateLeftLink;
         
         /// <summary>
         /// PrivateRight control.
