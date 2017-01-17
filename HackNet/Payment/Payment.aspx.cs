@@ -16,9 +16,8 @@ namespace HackNet.Payment
     public partial class Payment : System.Web.UI.Page
     {
         protected int price;
-        public string clientToken;
 
-        private BraintreeGateway gateway = new BraintreeGateway
+        protected BraintreeGateway gateway = new BraintreeGateway
         {
             Environment = Braintree.Environment.SANDBOX,
             PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
@@ -32,12 +31,26 @@ namespace HackNet.Payment
             */
         };
 
+        public string clientToken;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Form.ID = "checkout-form";
-            packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() +" - $" + Session["packageprice"].ToString();
+            try
+            {
+                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+            }
+            catch
+            {
+                Response.Redirect("~/game/market");
+            }
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
+            Debug.WriteLine("pubKey " + ConfigurationManager.AppSettings["BraintreePublicKey"].ToString());
+            Debug.WriteLine("privKey " + ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString());
+            Debug.WriteLine("merhID " + ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString());
+
 
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
