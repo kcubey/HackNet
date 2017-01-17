@@ -62,7 +62,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" runat="server" href="~/">HackNet<span class="blinking">_</span></a>
+					<a class="navbar-brand" runat="server" href="~/Default">HackNet<span class="blinking">_</span></a>
 				</div>
 				<div class="navbar-collapse navbar-right collapse" id="mainnav">
 					<ul class="nav navbar-nav">
