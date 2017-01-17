@@ -93,5 +93,41 @@ namespace HackNet.Game.Class
 
             return false;
         }
+
+        // Add item to user inventory
+        internal static void AddItemToInventory(Users user, int itemid,int quantity=1)
+        {
+            using(DataContext db=new DataContext())
+            {
+                InventoryItem invitem;
+                if(CheckInventoryItem(db,user,itemid, out invitem))
+                {
+                    invitem.Quantity += quantity;
+                    db.SaveChanges();
+                }else
+                {
+                    invitem.ItemId = itemid;
+                    invitem.UserId = user.UserID;
+                    invitem.Quantity = quantity;
+                    db.InventoryItem.Add(invitem);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        // Check if item is in inventory
+        private static bool CheckInventoryItem(DataContext db, Users user, int itemid, out InventoryItem invItem)
+        {
+
+            invItem = (from i in db.InventoryItem where i.UserId == user.UserID && i.ItemId == itemid select i).FirstOrDefault();
+            if(invItem == null)
+            {
+                return false;
+                
+            }else
+            {
+                return true;
+            }
+        }
     }
 }
