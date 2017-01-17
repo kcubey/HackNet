@@ -163,8 +163,13 @@ namespace HackNet.Loggers
 								   && DateTime.Compare(sf.End, log.Timestamp) >= 0
 								   && DateTime.Compare(sf.Start, log.Timestamp) <= 0
 								   select log).ToList();
-				foreach (Logs l in logs)
-					results.Add(LogEntry.ConvertFromDB(l));
+				foreach (Logs l in logs) {
+					LogEntry entry = LogEntry.ConvertFromDB(l);
+					if (sf.UserId == entry.UserId || sf.UserId == -1)
+					{
+						results.Add(entry);
+					}
+				}
 			}
 			return results;
 		}

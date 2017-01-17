@@ -10,60 +10,69 @@
 namespace HackNet.Admin {
     
     
-    public partial class Logs {
+    public partial class MissionMgmt {
         
         /// <summary>
-        /// DDCategory control.
+        /// MisName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDCategory;
+        protected global::System.Web.UI.WebControls.TextBox MisName;
         
         /// <summary>
-        /// StartDT control.
+        /// MisDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StartDT;
+        protected global::System.Web.UI.WebControls.TextBox MisDesc;
         
         /// <summary>
-        /// EndDT control.
+        /// AtkTypeList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EndDT;
+        protected global::System.Web.UI.WebControls.DropDownList AtkTypeList;
         
         /// <summary>
-        /// UserID control.
+        /// RecomLvlList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserID;
+        protected global::System.Web.UI.WebControls.DropDownList RecomLvlList;
         
         /// <summary>
-        /// Msg control.
+        /// MisExp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Msg;
+        protected global::System.Web.UI.WebControls.TextBox MisExp;
         
         /// <summary>
-        /// ResultGrid control.
+        /// MisCoin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ResultGrid;
+        protected global::System.Web.UI.WebControls.TextBox MisCoin;
+        
+        /// <summary>
+        /// btnAddMis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddMis;
     }
 }

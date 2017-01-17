@@ -18,15 +18,20 @@
 					<asp:ListItem Value="Error" Text="Error" />
 				</asp:DropDownList>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				Start Date / Time
 				<asp:TextBox CssClass="form-control" runat="server" ID="StartDT" type="date"/>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				End Date / Time
 				<asp:TextBox CssClass="form-control" runat="server" ID="EndDT" type="date"/>				
-			</div>	
+			</div>
 			<div class="col-md-3">
+				User ID (-1 for all)
+				<asp:TextBox type="number" CssClass="form-control" runat="server" ID="UserID"/>				
+			</div>	
+			<div class="col-md-1">
+				<br />
 				<asp:Button CssClass="btn btn-success" Text="Submit" runat="server" OnClick="SubmitBtn_Click"/>			
 			</div>
 			<asp:Label ID="Msg" runat="server" ForeColor="Red" />

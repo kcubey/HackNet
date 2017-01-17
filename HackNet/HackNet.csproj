@@ -182,6 +182,7 @@
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\ItemMgmt.aspx" />
     <Content Include="Admin\Logs.aspx" />
+    <Content Include="Admin\MissionMgmt.aspx" />
     <Content Include="anonymousedited.jpg" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
@@ -362,6 +363,13 @@
     </Compile>
     <Compile Include="Admin\Logs.aspx.designer.cs">
       <DependentUpon>Logs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MissionMgmt.aspx.cs">
+      <DependentUpon>MissionMgmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\MissionMgmt.aspx.designer.cs">
+      <DependentUpon>MissionMgmt.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

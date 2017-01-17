@@ -20,6 +20,7 @@
 					<li><asp:HyperLink runat="server" Text="Admin Dashboard" NavigateUrl="~/Admin/Default" /></li>
 
 					<li><asp:HyperLink runat="server" Text="User Management" NavigateUrl="~/Admin/UserMgmt" /></li>
+					<li><asp:HyperLink runat="server" Text="Mission Management" NavigateUrl="~/Admin/MissionMgmt" /></li>
 					<li><asp:HyperLink runat="server" Text="Item Management" NavigateUrl="~/Admin/ItemMgmt" /></li>
 
 					<li><asp:HyperLink runat="server" Text="HackNet Logs" NavigateUrl="~/Admin/Logs" /></li>

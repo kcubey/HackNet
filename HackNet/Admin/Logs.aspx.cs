@@ -13,8 +13,9 @@ namespace HackNet.Admin
 {
 	public partial class Logs : System.Web.UI.Page
 	{
-		private static DateTime DEFAULT_START = new DateTime(1970, 1, 1);
-		private static DateTime DEFAULT_END = DateTime.Now; 
+		private static readonly DateTime DEFAULT_START = new DateTime(1970, 1, 1);
+		private static readonly DateTime DEFAULT_END = DateTime.Now;
+		private static readonly int DEFAULT_USERID = -1;
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -77,7 +78,15 @@ namespace HackNet.Admin
 			}
 
 			DateTime start, end = DateTime.Now;
-			bool parseOK = true;
+			int userid;
+			bool uidParseOK = true, parseOK = true;
+
+			// Checking for input for UserID
+			if (string.IsNullOrWhiteSpace(UserID.Text))
+				userid = DEFAULT_USERID;
+			else
+				uidParseOK = int.TryParse(UserID.Text, out userid);
+
 
 			// Checking for input for start
 			if (string.IsNullOrWhiteSpace(StartDT.Text))
@@ -85,18 +94,20 @@ namespace HackNet.Admin
 			else
 				parseOK = DateTime.TryParse(StartDT.Text, out start);
 
+
 			// Checking for input for end
 			if (string.IsNullOrWhiteSpace(EndDT.Text))
 				end = DEFAULT_END;
 			else
-				parseOK = (parseOK && DateTime.TryParse(EndDT.Text, out end)); // Binary OR operator
+				parseOK = (parseOK && DateTime.TryParse(EndDT.Text, out end));
+
 			// Return result
 			if (!parseOK)
 				Msg.Text = "Either start or end date is invalid.";
 
 			sf.Start = start;
 			sf.End = end;
-
+			sf.UserId = userid;
 			return sf;
 		}
 

@@ -9,10 +9,29 @@
 			<h3 class="panel-title">HackNet Chat</h3>
 		</div>
 		<div class="panel-body">
-			Select a recipient <asp:TextBox ID="ReceiverId" placeholder="Enter Username" runat="server" CssClass="form-control" />
-			<asp:Button ID="ButtonChooseRecipient" runat="server"
-						OnClick="ButtonChooseRecipient_Click" class="btn btn-info" 
-						Text="Go!" /> <br />
+			<div class="col-md-3">
+				Select a recipient
+				<asp:TextBox ID="ReceiverId" placeholder="Enter Username"
+							runat="server" CssClass="form-control"/>
+			</div>
+			<div class="col-md-3">
+				<br />
+				<asp:Button ID="ButtonChooseRecipient" runat="server"
+							OnClick="ButtonChooseRecipient_Click" class="btn btn-info" 
+							Text="Find Recipient" /> <br />
+			</div>
+			<div class="col-md-3">
+				<br />
+				<asp:Label ID="Button1" runat="server"
+					OnClick="ButtonChooseRecipient_Click"
+					Text="Enter a username" /> <br />
+			</div>
+			<div class="col-md-3">
+				<br />
+				<asp:Button ID="ButtonLoadChat" runat="server"
+					OnClick="ButtonLoadChat_Click" class="btn btn-info" 
+					Text="Load Chat" /> <br />
+			</div>
 		</div>
 		<asp:Label ID="Msg" runat="server" />
 	</div>
