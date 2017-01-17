@@ -41,7 +41,7 @@ namespace HackNetTests
 
 		[TestMethod]
 		public void UserChangePW()
-		{
+		{ 
 			using (Authenticate a = new Authenticate("hacknet@wlgoh.com"))
 			{
 				AuthResult Result1 = a.UpdatePassword("Qwerty12345", "Asdfgh12345");
