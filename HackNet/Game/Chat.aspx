@@ -20,43 +20,28 @@
 							OnClick="ButtonChooseRecipient_Click" class="btn btn-info" 
 							Text="Find Recipient" /> <br />
 			</div>
-			<div class="col-md-3">
-				<br />
-				<asp:Label ID="Button1" runat="server"
-					OnClick="ButtonChooseRecipient_Click"
-					Text="Enter a username" /> <br />
-			</div>
-			<div class="col-md-3">
-				<br />
-				<asp:Button ID="ButtonLoadChat" runat="server"
-					OnClick="ButtonLoadChat_Click" class="btn btn-info" 
-					Text="Load Chat" /> <br />
-			</div>
 		</div>
 		<asp:Label ID="Msg" runat="server" />
 	</div>
-	<div class="chatsection">
-		<div class="ChatTitle">Chatting with Wuggle</div>
+	<div class="chatsection" ID="ChatWindow" runat="server" visible="false">
+		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
 		<ol class="chat">
-			<asp:DataList ID="ChatDataList" runat="server" DataKeyField="MessageId" DataSourceID="MessageDataSource" Visible="false">
+			<asp:Repeater ID="ChatRepeater" runat="server">
 				<ItemTemplate>
-					<li class="other">
+					<li class="<%# ThisOrOther( (int) Eval("SenderId") ) %>">
 						<div class="msg">
-							<div class="user"><asp:Label ID="LblMsgSender" Text='<%# Eval("SenderId") %>' runat="server"/></div>
+							<div class="user"><asp:Label ID="LblMsgSender" Text='<%# GetUsername( (int) Eval("SenderId") ) %>' runat="server"/></div>
 							<p><asp:Label ID="LblMsgContent" Text='<%# Eval("Content") %>' runat="server"/></p>
 							<time><asp:Label ID="LblMsgTimestamp" Text='<%# Eval("Timestamp") %>' runat="server"/></time>
 						</div>
 					</li>
 				</ItemTemplate>
-			</asp:DataList>
-			<asp:ObjectDataSource ID="MessageDataSource" runat="server"
-				OldValuesParameterFormatString="original_{0}"
-				SelectMethod="RetrieveMessages" TypeName="HackNet.Game.Chat">
-			</asp:ObjectDataSource>
+			</asp:Repeater>
 		</ol>
 	</div>
+	<!--
 	<div class="chatsection">
-		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
+		<div class="ChatTitle">Chatting with</div>
 		<ol class="chat">
 			<li class="other">
 				<div class="msg">
@@ -96,7 +81,9 @@
 			</li>
 		</ol>
 	</div>
+	-->
 	<div>
-		<textarea placeholder="Say something"></textarea><input type="submit" class="send" value="" />
+		<textarea placeholder="Say something"></textarea>
+		<input type="submit" class="send" value="" />
 	</div>
 </asp:Content>

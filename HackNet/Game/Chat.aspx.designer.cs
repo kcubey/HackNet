@@ -31,24 +31,6 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button ButtonChooseRecipient;
         
         /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Button1;
-        
-        /// <summary>
-        /// ButtonLoadChat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonLoadChat;
-        
-        /// <summary>
         /// Msg control.
         /// </summary>
         /// <remarks>
@@ -58,22 +40,13 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label Msg;
         
         /// <summary>
-        /// ChatDataList control.
+        /// ChatWindow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList ChatDataList;
-        
-        /// <summary>
-        /// MessageDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource MessageDataSource;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChatWindow;
         
         /// <summary>
         /// LblRecipient control.
@@ -83,5 +56,14 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblRecipient;
+        
+        /// <summary>
+        /// ChatRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater ChatRepeater;
     }
 }
