@@ -214,7 +214,11 @@ namespace HackNet.Game.Gameplay
                 // Title
                 SummaryTitle.Text = "Mission Failed!";
                 SummaryTitle.ForeColor = System.Drawing.Color.Red;
-
+                MisNameLbl.Text = mis.MissionName;
+                MisIPLbl.Text = mis.MissionIP;
+                MisSumLbl.Text = "Mission Failed due to incorrect file choosen.";
+                MisExpLbl.Text = "0";
+                MisCoinLbl.Text = "0";
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
             }
