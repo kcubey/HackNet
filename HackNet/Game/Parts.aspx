@@ -24,7 +24,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!--ALL-->
-                    <div class="tab-pane active" id="All">
+                    <div class="tab-pane fade in active" id="All">
                         <asp:DataList ID="PartsList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -38,7 +38,7 @@
                         </asp:DataList>
                     </div>
                     <!--Processor-->
-                    <div class="tab-pane" id="processor">
+                    <div class="tab-pane fade in" id="processor">
                         <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -52,7 +52,7 @@
                         </asp:DataList>
                     </div>
                     <!--Graphics Card-->
-                    <div class="tab-pane" id="graphicscard">
+                    <div class="tab-pane fade in" id="graphicscard">
                         <asp:DataList ID="graphicslist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -66,7 +66,7 @@
                         </asp:DataList>
                     </div>
                     <!--Memory-->
-                    <div class="tab-pane" id="memory">
+                    <div class="tab-pane fade in" id="memory">
                         <asp:DataList ID="memorylist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -80,7 +80,7 @@
                         </asp:DataList>
                     </div>
                     <!--Power Supply-->
-                    <div class="tab-pane" id="powersupply">
+                    <div class="tab-pane fade in" id="powersupply">
                         <asp:DataList ID="powersuplist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
@@ -94,7 +94,7 @@
                         </asp:DataList>
                     </div>
                     <!--Booster-->
-                    <div class="tab-pane" id="booster">
+                    <div class="tab-pane fade in" id="booster">
                         <asp:DataList ID="boosterlist" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
