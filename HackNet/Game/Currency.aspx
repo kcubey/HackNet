@@ -34,30 +34,30 @@
             <div class="col-xs-9" style="float:left ;">
                 <!-- Tab panes -->
                 <div class="tab-content">
+
                     <!--Conversion-->
                     <div class="tab-pane fade in active" id="conversion">
-                        
+                        Enter the number of bucks you wish to convert to coins.
+                        <hr />
                         <asp:UpdatePanel ID="ConversionPanel" runat="server">
-                        <ContentTemplate>
-        
-                        <br />Bucks:
-                        <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
-                        <asp:RangeValidator 
-                            ID="buckValidator" ControlToValidate="buckTextBox" 
-                            MinimumValue="0" Type="Integer" runat="server"
-                            ErrorMessage="* Please enter a valid number" ForeColor="Red">
-                        </asp:RangeValidator>
-                       <br />
-                       <asp:RegularExpressionValidator 
-                            ID="buckExValidator" runat="server" 
-                            ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d+$"
-                            ControlToValidate="buckTextBox" ForeColor="Red">
-                       </asp:RegularExpressionValidator>
-                            <!-- expressions: ^[1-9]\d$ || ^\d+$ || ^[0-9]*$ but allows space-->
+                            <ContentTemplate>
+                                <br />Bucks:
+                                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                <asp:RangeValidator 
+                                    ID="buckValidator" ControlToValidate="buckTextBox" 
+                                    MinimumValue="0" Type="Integer" runat="server"
+                                    ErrorMessage="* Please enter a valid number" ForeColor="Red">
+                                </asp:RangeValidator>
+                               <br />
+                               <asp:RegularExpressionValidator 
+                                    ID="buckExValidator" runat="server" 
+                                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d+$"
+                                    ControlToValidate="buckTextBox" ForeColor="Red">
+                               </asp:RegularExpressionValidator>
+                                    <!-- expressions: ^[1-9]\d$ || ^\d+$ || ^[0-9]*$ but allows space-->
 
-                        <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
-                
-                        </ContentTemplate>
+                               <br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
+                            </ContentTemplate>
                         </asp:UpdatePanel>
                         <br /><br />
 
@@ -67,6 +67,9 @@
 
                     <!--Packages-->
                     <div class="tab-pane fade in" id="packages">
+                        <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
+                        <br />These premium packages require the use of REAL money.
+                        <hr />
                         <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br /><br />
@@ -99,8 +102,6 @@
                             <br /><br />
                             <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package 5 - SGD$350"></asp:Label>
                         </asp:LinkButton>
-
-
                     </div>
 
                      <!--Memory-->
@@ -117,6 +118,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+
                 </div>
             </div>
         </div>
