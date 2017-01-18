@@ -52,6 +52,8 @@ namespace HackNet.Loggers
 
 		internal void PasswordChanged()
 		{
+			if (Global.IsInUnitTest)
+				return;
 
 			LogEntry entry = new LogEntry()
 			{

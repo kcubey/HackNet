@@ -40,6 +40,33 @@ namespace HackNet {
         protected global::System.Web.UI.WebControls.Label LevelsLbl;
         
         /// <summary>
+        /// ExpProgressLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ExpProgressLbl;
+        
+        /// <summary>
+        /// TotalProgressLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalProgressLbl;
+        
+        /// <summary>
+        /// progressbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl progressbar;
+        
+        /// <summary>
         /// CoinsLbl control.
         /// </summary>
         /// <remarks>

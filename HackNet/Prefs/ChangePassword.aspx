@@ -13,7 +13,7 @@
 		</div>
 		<div class="panel-body">
 
-			<table runat="server" class="loginTable">
+			<table runat="server" class="formTable">
 				<tr>
 					<td><strong>Username:</strong></td>
 					<td>

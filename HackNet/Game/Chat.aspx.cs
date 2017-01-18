@@ -10,18 +10,14 @@ namespace HackNet.Game
 {
 	public partial class Chat : System.Web.UI.Page
 	{
-		private int otherUserId { get; set; }
-		private string otherUsername { get; set; }
+		private static Dictionary<int, string> usernames = new Dictionary<int, string>();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
 			{
 				if (Session["KeyStore"] == null)
-					Response.Redirect("~/Default", true);
-
-				Message msg = new Message(Authenticate.GetUserId(), 1, "Hello, Recipient!");
-				MessageLogic.SendMessage(msg);
+					Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
 			}
 		}
 		
@@ -48,25 +44,51 @@ namespace HackNet.Game
 				return;
 			} else
 			{
-				otherUserId = userid;
-				otherUsername = username;
+				ViewState["thisParty"] = Authenticate.GetUserId();
+				ViewState["otherParty"] = userid;
+				ChatWindow.Visible = true;
+				ChatRepeater.DataSource = RetrieveMessages(username, userid);
+				ChatRepeater.DataBind();
+
+				Message msg = new Message(Authenticate.GetUserId(), userid, "Hello, User " + userid);
+				MessageLogic.SendMessage(msg);
+
 				return;
 			}
 		}
 
-		protected void ButtonLoadChat_Click(object sender, EventArgs e)
+		public List<Message> RetrieveMessages(string otherUsername, int otherId)
 		{
-			ChatDataList.DataBind();
-		}
-
-		public List<Message> RetrieveMessages()
-		{
+			List<Message> msgs;
 			KeyStore ks = Session["KeyStore"] as KeyStore;
 			int viewerId = Authenticate.GetUserId();
-			int otherId = otherUserId;
-			// int otherId = Authenticate.ConvertUsernameToId(otherUsername);
 			LblRecipient.Text = otherUsername;
-			return MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks);
+			return msgs;
+		}
+
+		public string GetUsername(int userid)
+		{
+			if (!usernames.ContainsKey(userid)) // Caching in dictionary to reduce DB calls
+			{
+				string username = Authenticate.ConvertIdToUsername(userid);
+				usernames.Add(userid, username);
+				return username;
+			} else
+			{
+				return usernames[userid];
+			}
+		}
+
+		public string ThisOrOther(int userid)
+		{
+			if (userid == (int) ViewState["thisParty"])
+			{
+				return "self";
+			} else
+			{
+				return "other";
+			}
 		}
 	}
 }

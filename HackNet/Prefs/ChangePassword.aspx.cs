@@ -17,7 +17,7 @@ namespace HackNet.Prefs
 			Users u = Authenticate.GetCurrentUser();
 			LoggedInUsername.Text = u.UserName;
 			LoggedInName.Text = u.FullName;
-			RegisteredDate.Text = u.Registered.ToString();
+			RegisteredDate.Text = u.Registered.ToLongDateString();
 		}
 
 		protected void ChangePassClick(object sender, EventArgs e)

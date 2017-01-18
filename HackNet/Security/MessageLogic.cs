@@ -16,7 +16,10 @@ namespace HackNet.Security
 			{
 				// DB Query for messages that match query
 				List<Messages> dbMessages = 
-					db.Messages.Where(m => m.SenderId == Sender && m.ReceiverId == Receiver).ToList();
+					db.Messages.Where(m => 
+					(m.SenderId == Sender && m.ReceiverId == Receiver) || 
+					(m.ReceiverId == Sender && m.SenderId == Receiver)
+					).ToList();
 
 				// Convert each message into decrypted form
 				foreach(Messages dbMsg in dbMessages)
@@ -39,8 +42,8 @@ namespace HackNet.Security
 
 				// Get the UserKeyStore object of the users
 				using (Authenticate a = new Authenticate()) {
-					sPubKey = a.GetRsaPublic(sEmail);
-					rPubKey = a.GetRsaPublic(rEmail);
+					sPubKey = a.GetRsaPublic(db, sEmail);
+					rPubKey = a.GetRsaPublic(db, rEmail);
 				}
 				
 				// Convert the message to database format while encrypting it

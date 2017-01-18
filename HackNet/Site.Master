@@ -20,12 +20,12 @@
 <body>
 	<script>
 		$(window).keydown(function (e) {
-			if ((e.metaKey || e.ctrlKey) && (e.metaKey || e.shiftKey)  && e.keyCode == 90) {
+			if ((e.metaKey || e.ctrlKey) && (e.metaKey || e.shiftKey) && e.keyCode == 90) {
 				console.log("Control-A KEY PRESSED");
 				location.assign(<% =ResolveUrl("~/Default/") %>);
 				e.preventDefault();
 				return false;
-			} 
+			}
 		});
 
 		window.setInterval(function () {
@@ -62,7 +62,8 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" runat="server" href="~/">HackNet<span class="blinking">_</span></a>
+					<a class="navbar-brand" runat="server" href="~/">
+						 HackNet<span class="blinking">_</span></a>
 				</div>
 				<div class="navbar-collapse navbar-right collapse" id="mainnav">
 					<ul class="nav navbar-nav">
@@ -75,7 +76,9 @@
 						</li>
 
 						<li id="PrivateLeft" visible="false" runat="server">
-							<a id="PrivateLeftAnchor" runat="server">HELLO, Player!</a>
+							<asp:HyperLink ID="PrivateLeftLink" NavigateUrl="~/Default" runat="server">
+								Welcome, Player!
+							</asp:HyperLink>
 						</li>
 
 						<li id="PrivateRight" visible="false" runat="server">
@@ -83,15 +86,34 @@
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Preferences
 							</a>
 							<ul class="dropdown-menu" runat="server">
-								<li><asp:HyperLink NavigateUrl="#" runat="server"><i class="fa fa-user" aria-hidden="true"></i> Profile</asp:HyperLink></li>
+								<li>
+									<asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">
+										<i class="fa fa-user" aria-hidden="true"></i> User Options
+									</asp:HyperLink>
+								</li>
+								<li>
+									<asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">
+										<i class="fa fa-lock" aria-hidden="true"></i> Review Security
+									</asp:HyperLink></li>
+								<li runat="server" visible="false" id="ap">
+									<asp:HyperLink NavigateUrl="~/Admin/Default" runat="server">
+										<i class="fa fa-key" aria-hidden="true"></i>Administration
+									</asp:HyperLink>
+								</li>
+
 								<li role="separator" class="divider"></li>
-								<li><asp:HyperLink NavigateUrl="~/Prefs/ProfileSettings" runat="server">User Options</asp:HyperLink></li>
-								<li><asp:HyperLink NavigateUrl="~/Prefs/AccessLogs" runat="server">Account Security</asp:HyperLink></li>
-								<li runat="server" visible="false" ID="ap"><asp:HyperLink NavigateUrl="~/Admin/Default" runat="server">Administration</asp:HyperLink></li>
+								<li>
+									<asp:HyperLink NavigateUrl="#" runat="server">
+										<i class="fa fa-question-circle" aria-hidden="true"></i> About Us & FAQ
+									</asp:HyperLink>
+								</li>
+
 								<li role="separator" class="divider"></li>
-								<li><asp:HyperLink NavigateUrl="#" runat="server">About Us & FAQ</asp:HyperLink></li>
-								<li role="separator" class="divider"></li>
-								<li><asp:HyperLink NavigateUrl="/Auth/SignOut.aspx" runat="server">Sign Out</asp:HyperLink></li>
+								<li>
+									<asp:HyperLink NavigateUrl="/Auth/SignOut.aspx" runat="server">
+										<i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
+									</asp:HyperLink>
+								</li>
 							</ul>
 						</li>
 					</ul>
