@@ -14,16 +14,14 @@ namespace HackNet.Game
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!IsPostBack)
-			{
-				if (Session["KeyStore"] == null)
-					Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
-			}
+			if (Session["KeyStore"] == null)
+				Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
 		}
 		
 		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
 		{
-			int userid = -1;
+			int otherid = -1;
+			int currentid = Authenticate.GetUserId();
 			string username;
 
 			// Validate Username
@@ -33,27 +31,30 @@ namespace HackNet.Game
 				return;
 			} else
 			{
-				userid = Authenticate.ConvertUsernameToId(ReceiverId.Text);
+				otherid = Authenticate.ConvertUsernameToId(ReceiverId.Text);
 				username = ReceiverId.Text;
 			}
 
-			// Validate UserID
-			if (userid == -1)
+			// Validate UserID exists
+			if (otherid == -1)
 			{
 				Msg.Text = "No recipient by this username was found";
 				return;
-			} else
+
+			} else if (otherid == currentid)
+			{
+				Msg.Text = "You cannot start a conversation with yourself!";
+				return;
+
+			} else if (otherid != currentid && otherid > 0)
 			{
 				ViewState["thisParty"] = Authenticate.GetUserId();
-				ViewState["otherParty"] = userid;
-				ChatWindow.Visible = true;
-				ChatRepeater.DataSource = RetrieveMessages(username, userid);
+				ViewState["otherParty"] = otherid;
+				ToggleWindows();
+				ChatRepeater.DataSource = RetrieveMessages(username, otherid);
 				ChatRepeater.DataBind();
-
-				Message msg = new Message(Authenticate.GetUserId(), userid, "Hello, User " + userid);
-				MessageLogic.SendMessage(msg);
-
 				return;
+
 			}
 		}
 
@@ -89,6 +90,42 @@ namespace HackNet.Game
 			{
 				return "other";
 			}
+		}
+
+		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
+		{
+			ToggleWindows();
+		}
+
+		protected void SendMsg_Click(object sender, EventArgs e)
+		{
+			int currentuser = Authenticate.GetUserId();
+			int otheruser = (int) ViewState["otherParty"];
+			string content = MessageToSend.Text;
+
+			content = HttpUtility.HtmlEncode(content);
+
+			Message msg = new Message(currentuser, otheruser, content);
+			MessageLogic.SendMessage(msg);
+		}
+
+		protected void ToggleWindows()
+		{
+			if (SelectRecipientWindow.Visible == true)
+			{
+				SelectRecipientWindow.Visible = false;
+				ChatWindow.Visible = true;
+			} else
+			{
+				SelectRecipientWindow.Visible = true;
+				ChatWindow.Visible = false;
+			}
+		}
+
+		protected void ChatWindow_Load(object sender, EventArgs e)
+		{
+			if (Session["KeyStore"] == null)
+				Msg.Text = "Error decrypting messages, KS is NULL!";
 		}
 	}
 }

@@ -4,12 +4,12 @@
 	<link rel="stylesheet" href="../Content/Chat.css" />
 </asp:Content>
 <asp:Content ID="ChatContent" ContentPlaceHolderID="GameContent" runat="server">
-	<div class="panel panel-default">
+	<div class="panel panel-default" ID="SelectRecipientWindow" runat="server">
 		<div class="panel-heading">
 			<h3 class="panel-title">HackNet Chat</h3>
 		</div>
 		<div class="panel-body">
-			<div class="col-md-3">
+			<div runat="server" class="col-md-3">
 				Select a recipient
 				<asp:TextBox ID="ReceiverId" placeholder="Enter Username"
 							runat="server" CssClass="form-control"/>
@@ -23,23 +23,25 @@
 		</div>
 		<asp:Label ID="Msg" runat="server" />
 	</div>
-	<div class="chatsection" ID="ChatWindow" runat="server" visible="false">
+	<div class="chatsection" ID="ChatWindow" runat="server" visible="false" onload="ChatWindow_Load">
 		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
 		<div class="panel panel-default">
 			<div class="panel-body" style="background-color:midnightblue">
 				<div class="col-md-1">
 					<br />
-					<asp:Button ID="ChangeRecipientBtn" runat="server" Text="Change Recipient" CssClass="btn btn-info" />
+					<asp:Button ID="ChangeRecipientBtn" runat="server" Text="Change Recipient"
+						 CssClass="btn btn-info" OnClick="ChangeRecipientBtn_Click" />
 				</div>
 				<div class="col-md-7"></div>
 				<div class="col-md-3">
 					Send a message:
 					<asp:TextBox ID="MessageToSend" runat="server" 
-								 CssClass="form-control input-xxlarge" />
+								 CssClass="form-control" />
 				</div>
 				<div class="col-md-1">
 					<br />
-					<asp:Button ID="SendMsg" Text="Send" runat="server" CssClass="btn btn-info"/>
+					<asp:Button ID="SendMsg" Text="Send" runat="server" 
+						CssClass="btn btn-info" OnClick="SendMsg_Click" />
 				</div>
 			</div>
 		</div>
