@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
 
@@ -132,11 +133,25 @@ namespace HackNet.Game
             List<string> pwdList = new List<string>();
             for (int i = 0; i < 10; i++)
             {
-                string password = Membership.GeneratePassword(10, 4);
-                pwdList.Add(password);
+                string password = Membership.GeneratePassword(50, 0);
+                password= Regex.Replace(password, @"[^a-zA-Z0-9]", m => "");
+                pwdList.Add(password.Substring(0, 10));
             }
             return pwdList;
         }
 
+
+        // Gameplay for SQLInjection
+        public static List<string> LoadURLList()
+        {
+            List<string> urlList = new List<string>();
+            urlList.Add("www.hostlogin.com/signin");
+            urlList.Add("www.sqllogin.com/signin");
+            urlList.Add("www.masterbox.com/signin");
+            urlList.Add("www.remotehost.com/signin");
+            urlList.Add("www.localhost.com/signin");
+
+            return urlList;
+        }
     }
 }

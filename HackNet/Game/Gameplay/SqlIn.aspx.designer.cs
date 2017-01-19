@@ -10,97 +10,16 @@
 namespace HackNet.Game.Gameplay {
     
     
-    public partial class PwdAtk {
+    public partial class SqlIn {
         
         /// <summary>
-        /// SummaryTitle control.
+        /// TargetIPTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SummaryTitle;
-        
-        /// <summary>
-        /// MisNameLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisNameLbl;
-        
-        /// <summary>
-        /// MisIPLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisIPLbl;
-        
-        /// <summary>
-        /// MisSumLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisSumLbl;
-        
-        /// <summary>
-        /// MisExpLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisExpLbl;
-        
-        /// <summary>
-        /// MisCoinLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MisCoinLbl;
-        
-        /// <summary>
-        /// ExitBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ExitBtn;
-        
-        /// <summary>
-        /// TargetIPLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TargetIPLbl;
-        
-        /// <summary>
-        /// TargetPortLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TargetPortLbl;
-        
-        /// <summary>
-        /// TargetTxtBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TargetTxtBox;
+        protected global::System.Web.UI.WebControls.TextBox TargetIPTxtBox;
         
         /// <summary>
         /// TargetAtkTypeList control.
@@ -110,15 +29,6 @@ namespace HackNet.Game.Gameplay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TargetAtkTypeList;
-        
-        /// <summary>
-        /// ConfigBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConfigBtn;
         
         /// <summary>
         /// ErrorLbl control.
@@ -139,13 +49,13 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator IPValidator;
         
         /// <summary>
-        /// TargetRegValidator control.
+        /// ConfigSQL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator TargetRegValidator;
+        protected global::System.Web.UI.WebControls.Button ConfigSQL;
         
         /// <summary>
         /// LogPanel control.
@@ -193,21 +103,39 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator CmdRegValidator;
         
         /// <summary>
-        /// NautilusView control.
+        /// URLListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList NautilusView;
+        protected global::System.Web.UI.WebControls.DataList URLListView;
         
         /// <summary>
-        /// PwdListView control.
+        /// UsrNamTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList PwdListView;
+        protected global::System.Web.UI.WebControls.TextBox UsrNamTxtBox;
+        
+        /// <summary>
+        /// PassTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PassTxtBox;
+        
+        /// <summary>
+        /// LoginBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LoginBtn;
     }
 }

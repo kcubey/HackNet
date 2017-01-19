@@ -79,7 +79,7 @@ namespace HackNet.Game
         {
             int packageId = Convert.ToInt32(packageNo.Text);
             int packagePrice = Convert.ToInt32(packageCost.Text);
-            // change to retreive package id & price from button
+            //KTODO change to retreive package id & price from button
 
             Session["packageId"] = packageId;
             Session["packagePrice"] = packagePrice;

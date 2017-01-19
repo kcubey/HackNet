@@ -111,8 +111,11 @@ namespace HackNet.Game
             if ((bool)Cache["SelectedMis"])
             {
                 if (Mission.checkMissionType(attackType))
-                {
-                    Response.Redirect("Gameplay/PwdAtk.aspx");
+                {  
+                    if(attackType=="PWDATK")
+                        Response.Redirect("Gameplay/PwdAtk.aspx");
+                    if(attackType=="SQLIN")
+                        Response.Redirect("Gameplay/SqlIn.aspx");
                 }
                 else
                 {

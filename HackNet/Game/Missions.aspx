@@ -137,7 +137,12 @@
             <asp:Label runat="server" Text="username@HackNet:~#" Width="20%"></asp:Label>
             <asp:TextBox runat="server" ID="AtkTextBx" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
             <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
-            <asp:Label runat="server" ID="CMDError" ></asp:Label>
+            <asp:Label runat="server" ID="CMDError" ></asp:Label><br />
+            <asp:RegularExpressionValidator runat="server" ID="CmdRegValidator"
+                            ControlToValidate="AtkTextBx" 
+                            ForeColor="Red" 
+                            ErrorMessage="Invalid Input" 
+                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
         </div>
 
     </div>

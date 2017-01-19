@@ -103,9 +103,20 @@
                         </asp:DropDownList>
                     </fieldset>
                     <br />
-                    <asp:Label runat="server" ID="ErrorLbl"></asp:Label>
-                    <br />
                     <asp:Button runat="server" ID="ConfigBtn" CssClass="btn-primary" Text="Configure" OnClick="ConfigBtn_Click" />
+                    <br />
+                       <asp:Label runat="server" ID="ErrorLbl"></asp:Label>
+                    <br />
+                    <asp:RegularExpressionValidator ID="IPValidator" runat="server"
+                                ForeColor="Red"
+                                ErrorMessage="Please enter a valid IP address"
+                                ControlToValidate="TargetIPLbl"
+                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
+                      <asp:RegularExpressionValidator runat="server" ID="TargetRegValidator"
+                            ControlToValidate="TargetTxtBox" 
+                            ForeColor="Red" 
+                            ErrorMessage="Invalid Input" 
+                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
                 </div>
 
             </div>
@@ -143,6 +154,12 @@
                         <asp:TextBox runat="server" ID="CmdTextBox" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
                         <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" Style="float: right;" />
                         <asp:Label runat="server" ID="CmdError"></asp:Label>
+                        <br />
+                        <asp:RegularExpressionValidator runat="server" ID="CmdRegValidator"
+                            ControlToValidate="CmdTextBox" 
+                            ForeColor="Red" 
+                            ErrorMessage="Invalid Input" 
+                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="panel panel-default">
