@@ -17,6 +17,8 @@
         <!-- all-->
         
     <link rel="stylesheet" href="/payment/backend/paymentCSS.css" />
+    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
+
 
     <div class="panel panel-default">
 		<div class="panel-heading">
@@ -38,15 +40,20 @@
                 <div id="payment-form"></div>
             </div>
 
+             <script>
+                braintree.setup("<%=clientToken%>", "dropin", {
+                container: "payment-form",
+                id: "checkout-form"
+                });
+            </script>
+
             <br />
-            <asp:Button id="checkoutBtn" runat="server" CssClass="btn btn-success" Text="Checkout" onclick="checkoutClick"></asp:Button>
+            <asp:Button ID="checkoutBtn" runat="server" Text="Checkout" OnClick="checkoutClick" CssClass="btn btn-success" />
+            <asp:Button ID="Button1" Text="test" CssClass="btn btn-success"	runat="server" onclick="testClick"/>
             <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
         </div>
     </div>
-
-    <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
-    <script src="/Payment/backend/paymentJS.js" lang="javascript" type="text/javascript"></script>
-
+   
 
 <!--
     <h3>JS v3</h3>

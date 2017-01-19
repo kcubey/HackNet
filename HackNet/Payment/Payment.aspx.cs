@@ -15,7 +15,7 @@ namespace HackNet.Payment
 {
     public partial class Payment : System.Web.UI.Page
     {
-        protected int price;
+        protected Decimal price;
 
         protected BraintreeGateway gateway = new BraintreeGateway
         {
@@ -23,12 +23,6 @@ namespace HackNet.Payment
             PublicKey = ConfigurationManager.AppSettings["BraintreePublicKey"].ToString(),
             PrivateKey = ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString(),
             MerchantId = ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString(),
-
-            /*
-            PublicKey = "YOURPUBLICKEYHERE",
-            PrivateKey = "YOURPRIVATEKEYHERE",
-            MerchantId = "YOURMERCHANTIDHERE"
-            */
         };
 
         public string clientToken;
@@ -36,21 +30,18 @@ namespace HackNet.Payment
         protected void Page_Load(object sender, EventArgs e)
         {
             Form.ID = "checkout-form";
+            Debug.WriteLine(Form.ID);
             try
             {
                 packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
             }
             catch
             {
-                Response.Redirect("~/game/market");
+                Response.Redirect("~/game/currency");
             }
+
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
-
-            Debug.WriteLine("pubKey " + ConfigurationManager.AppSettings["BraintreePublicKey"].ToString());
-            Debug.WriteLine("privKey " + ConfigurationManager.AppSettings["BraintreePrivateKey"].ToString());
-            Debug.WriteLine("merhID " + ConfigurationManager.AppSettings["BraintreeMerchantId"].ToString());
-
 
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
@@ -58,25 +49,8 @@ namespace HackNet.Payment
             {
                 //Generate a client token
                 clientToken = gateway.ClientToken.generate();
+                Debug.WriteLine(clientToken);
             }
-
-            /*
-            try
-            {
-                clientToken = gateway.ClientToken.generate();
-            }
-            catch (Exception ex)
-            {
-				Debug.WriteLine(ex);
-            }
-            */
-
-        }
-
-        public void getPkgPrice()
-        {
-            //below code to convert for gateway
-            price = Convert.ToInt32(Session["packagePrice"])*100;
         }
 
         public void CancelClick(Object sender, EventArgs e)
@@ -84,35 +58,55 @@ namespace HackNet.Payment
             Response.Redirect("~/game/market");
         }
 
-        protected void checkoutClick(Object sender, EventArgs e)
+        public void testClick(Object sender, EventArgs e)
         {
-            //Get the nonce & device data from the client
-            var nonce = Request.Form["payment_method_nonce"];
+            //KTODO: Delete function and related button
+            string alert = "demp";
+            Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
+        }
 
+        public void checkoutClick(Object sender, EventArgs e)
+        {
+            Debug.WriteLine("Enter checkoutclick event");
+            price = Convert.ToDecimal(Session["packageprice"]);
+            Debug.WriteLine("package price = " +price);
+
+            //Get the nonce & device data from the client
+            //var nonce = Request.Form["payment_method_nonce"];
+            var nonce = Request.Form["payment_method_nonce"];
+            var deviceData = Request.Form["device_data"];
+            Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
+            
             //Create auth
             var request = new TransactionRequest
             {
-                Amount = (decimal)price / 100,
+                Amount = price,
                 PaymentMethodNonce = nonce,
+                DeviceData = deviceData
             };
+            Debug.WriteLine("transaction request made");
 
             //Send transaction request to server
             Result<Transaction> result = gateway.Transaction.Sale(request);
+            Debug.WriteLine("transaction sent to server");
 
             if (result.IsSuccess())
             {
+                Debug.WriteLine("is success");
                 //Transaction is successful
                 string transactionId = result.Target.Id.ToString();
                 Session["transactionId"] = transactionId;
+
+                //KTODO = Add in code to add items to invo
 
                 Response.Redirect("~/payment/checkout");
             }
             else
             {
+                Debug.WriteLine("is fail");
                 //Something went wrong
                 Response.Redirect("~/payment/retry");
             }
-
         }
     }
 }

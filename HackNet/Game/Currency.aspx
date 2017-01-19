@@ -41,7 +41,7 @@
                         <hr />
                         <asp:UpdatePanel ID="ConversionPanel" runat="server">
                             <ContentTemplate>
-                                <br />Bucks:
+                                Bucks:
                                 <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 <asp:RangeValidator 
                                     ID="buckValidator" ControlToValidate="buckTextBox" 
