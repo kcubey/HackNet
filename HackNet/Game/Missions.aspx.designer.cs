@@ -121,6 +121,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label CMDError;
         
         /// <summary>
+        /// CmdRegValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator CmdRegValidator;
+        
+        /// <summary>
         /// AtkName control.
         /// </summary>
         /// <remarks>
