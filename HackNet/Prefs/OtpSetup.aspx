@@ -20,7 +20,7 @@
 				<div class="col-md-12 col-xs-12">
 					<p>Please authenticate again by entering your password</p>
 					<br />
-					<table class="loginTable">
+					<table class="formTable">
 						<tr>
 							<td><strong>Current Password:  </strong></td>
 							<td>
@@ -49,7 +49,7 @@
 						<li>Enter the current six-digit numerical passcode from the application to verify that your device is properly configured</li>
 					</ol>
 					<br />
-					<table class="loginTable">
+					<table class="formTable">
 						<tr>
 							<td><strong>Generated OTP:  </strong></td>
 							<td>
@@ -75,7 +75,7 @@
 				<div class="col-md-12">
 					<p><strong>To disable your Two-Factor Authentication, please enter your OTP for the last time</strong></p>
 					<br />
-					<table class="loginTable">
+					<table class="formTable">
 						<tr>
 							<td><strong>Generated OTP:  </strong></td>
 							<td>

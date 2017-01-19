@@ -45,14 +45,22 @@ namespace HackNet.Data
             }
         }
 
-        public static List<MissionData> GetMisList(int recomLvl)
+        public static List<MissionData> GetMisList(int recomLvl=-1)
         {           
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from mis in db.MissionData where mis.RecommendLevel == (RecommendLevel)recomLvl select mis;
-                    return query.ToList();
+                    if (recomLvl != -1)
+                    {
+                        var query = from mis in db.MissionData where mis.RecommendLevel == (RecommendLevel)recomLvl select mis;
+                        return query.ToList();
+                    }
+                    else
+                    {
+                        var query = from mis in db.MissionData select mis;
+                        return query.ToList();
+                    }
                 }
             }
             catch (EntityCommandExecutionException)

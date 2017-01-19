@@ -13,7 +13,12 @@ namespace HackNet.Auth
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			FormsAuthentication.SignOut();
-			Response.Redirect("~/Auth/SignIn");
+
+			string returnurl = Request.QueryString["ReturnUrl"];
+			if (returnurl == null)
+				Response.Redirect("~/Auth/SignIn");
+			else
+				Response.Redirect("~/Auth/SignIn?ReturnUrl=" + returnurl);
 		}
 	}
 }

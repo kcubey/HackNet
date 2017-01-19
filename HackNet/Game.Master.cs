@@ -20,11 +20,16 @@ namespace HackNet
 			int expNeededForNextLevel = u.Level.TotalForNextLevel();
 			int expNeededInThisLevel = expNeededForNextLevel - expNeededForThisLvl;
 			int expObtainedInThisLevel = u.TotalExp - expNeededForThisLvl;
-			double percentageToNextLevel = ((double) u.TotalExp / expNeededForNextLevel) * 100;
-			int intPctToNextLevel = Convert.ToInt32(percentageToNextLevel);
-			string progressionStatement = string.Format(" {0} / {1} ({2} %)", u.TotalExp, expNeededForNextLevel, intPctToNextLevel);
-			ExpProgressLbl.Text = progressionStatement;
+			double percentageToNextLevel = ((double) expObtainedInThisLevel / expNeededInThisLevel) * 100;
+			int intPctToNextLevel = Convert.ToInt32( Math.Floor(percentageToNextLevel) );
 
+			string progressionStatement = string.Format(" {0} / {1} ({2} %)",
+													expObtainedInThisLevel,
+													expNeededInThisLevel,
+													intPctToNextLevel);
+
+			ExpProgressLbl.Text = progressionStatement;
+			TotalProgressLbl.Text = "Total Exp: " + u.TotalExp;
 			progressbar.Attributes["style"] = "width: " + intPctToNextLevel + "%";
 			progressbar.Attributes["aria-valuenow"] = intPctToNextLevel.ToString(); ;
 

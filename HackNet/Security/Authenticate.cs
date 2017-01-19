@@ -12,6 +12,10 @@ using HackNet.Game.Class;
 
 namespace HackNet.Security
 {
+
+	/// <summary>
+	/// HackNet's Authentication and Security Tools
+	/// </summary>
 	internal class Authenticate : IDisposable
 	{
 		internal string Email { get; private set; }
@@ -20,12 +24,19 @@ namespace HackNet.Security
 
 		Stopwatch sw = new Stopwatch();
 
+		/// <summary>
+		/// Constructor for the authenticate class, should be used for authenticated HttpContexts only
+		/// </summary>
 		internal Authenticate()
 		{
-			Email = GetCurrentUser(ReadOnly: true).Email;
+			Email = GetEmail();
 			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
 
+		/// <summary>
+		/// Constructor for the authenticate class, creates an authenticate entity for a user
+		/// </summary>
+		/// <param name="email">The user's email address</param>
 		internal Authenticate(string email)
 		{
 			// To ensure email casing is correct
@@ -33,9 +44,13 @@ namespace HackNet.Security
 			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
 
-		/*
-		 * PASSWORD CONF INSTANCE METHODS
-		 */
+
+		/// <summary>
+		/// Validate the user's password
+		/// </summary>
+		/// <param name="password">The user's password</param>
+		/// <param name="checkEmailValidity">Whether to check if the email address is verified</param>
+		/// <returns></returns>
 		internal AuthResult ValidateLogin(string password, bool checkEmailValidity = true)
 		{
 			using (DataContext db = new DataContext())
@@ -81,6 +96,12 @@ namespace HackNet.Security
 			throw new AuthException("Login has no result, database failure might have occured.");
 		}
 
+		/// <summary>
+		/// Update the user's password
+		/// </summary>
+		/// <param name="oldpass">Old password to validate</param>
+		/// <param name="newpass">Intended password to be changed</param>
+		/// <returns>AuthResult Success if password is changed successfully</returns>
 		internal AuthResult UpdatePassword(string oldpass, string newpass)
 		{
 			using (DataContext db = new DataContext())
@@ -112,12 +133,14 @@ namespace HackNet.Security
 
 				db.SaveChanges();
 
-				AuthLogger.Instance.PasswordFail(u.Email, u.UserID);
+				AuthLogger.Instance.PasswordChanged();
 				return AuthResult.Success;
 			}
 		}
 
-		// Returns a string array containing the user's roles
+		/// <summary>
+		/// Returns a string array containing the user's roles
+		/// </summary>
 		internal string[] UserRoles
 		{
 			get
@@ -143,6 +166,9 @@ namespace HackNet.Security
 			}
 		}
 
+		/// <summary>
+		/// Generates an authentication cookie for this user
+		/// </summary>
 		internal HttpCookie AuthCookie
 		{
 			get
@@ -164,9 +190,9 @@ namespace HackNet.Security
 			}
 		}
 
-		/*
-		 * 2FA CONF INSTANCE METHODS
-		 */
+		/// <summary>
+		/// Checks if 2FA has been enabled by the user
+		/// </summary>
 		internal bool Is2FAEnabled
 		{
 			get
@@ -183,6 +209,12 @@ namespace HackNet.Security
 			}
 		}
 
+		/// <summary>
+		/// Validates the user's 2FA input
+		/// </summary>
+		/// <param name="totp">The 2FA code entered</param>
+		/// <param name="base32sec">OPTIONAL: Base32 secret to check against</param>
+		/// <returns></returns>
 		internal OtpResult Validate2FA(string totp, string base32sec = null)
 		{
 			if (base32sec == null)
@@ -197,6 +229,11 @@ namespace HackNet.Security
 			throw new Exception("TOTP Generation Exception");
 		}
 
+		/// <summary>
+		/// Sets the 2FA secret for this user
+		/// </summary>
+		/// <param name="b32sec">The Base32 secret to set</param>
+		/// <returns></returns>
 		internal bool Set2FASecret(string b32sec)
 		{
 			if (b32sec != null && b32sec.Length != 16)
@@ -226,10 +263,13 @@ namespace HackNet.Security
 			}
 		}
 
-		/*
-		 *  UserKeyStore related methods
-		 */
-
+		/// <summary>
+		/// Get the user's decrypted KeyStore
+		/// </summary>
+		/// <param name="db">DataContext Entity</param>
+		/// <param name="password">Password of the current user</param>
+		/// <param name="salt">Salt of the user's password</param>
+		/// <returns>Decrypted keystore</returns>
 		internal KeyStore GetKeyStore(DataContext db, string password, byte[] salt)
 		{
 			Users u = Users.FindByEmail(Email, db);
@@ -241,6 +281,11 @@ namespace HackNet.Security
 			return ks;
 		}
 
+		/// <summary>
+		/// Gets the 2FA Secret of this user
+		/// </summary>
+		/// <param name="db">DataContext entity for database connections</param>
+		/// <returns>2FA Secret of this user</returns>
 		internal string GetTotpSecret(DataContext db)
 		{
 			Users u = Users.FindByEmail(Email, db);
@@ -252,23 +297,28 @@ namespace HackNet.Security
 			return u.UserKeyStore.TOTPSecret;
 		}
 
-		internal string GetRsaPublic(string email = null)
+		/// <summary>
+		/// Gets the encryption (public) RSA key of this user
+		/// </summary>
+		/// <param name="db">DataContext entity</param>
+		/// <param name="email">OPTIONAL: The user's email address</param>
+		/// <returns>User's RSA Encryption key</returns>
+		internal string GetRsaPublic(DataContext db, string email = null)
 		{
-			using (DataContext db = new DataContext())
-			{
-				Users u;
-				if (email == null)
-					u = Users.FindByEmail(this.Email, db);
-				else
-					u = Users.FindByEmail(email, db);
-				db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
-				return u.UserKeyStore.RsaPub;
-			}
+			Users u;
+			if (email == null)
+				u = Users.FindByEmail(this.Email, db);
+			else
+				u = Users.FindByEmail(email, db);
+			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
+			return u.UserKeyStore.RsaPub;
 		}
 
-		/*
-		 *  Authentication STATIC methods
-		 */
+		/// <summary>
+		/// STATIC: Checks if password given meets the minimum strength requirements
+		/// </summary>
+		/// <param name="password">Password to check for</param>
+		/// <returns></returns>
 		internal static bool PasswordStrong(string password)
 		{
 			if (password.Length < 8)
@@ -280,7 +330,10 @@ namespace HackNet.Security
 		}
 
 
-		// User creation method (adds to database)
+		/// <summary>
+		/// Creates a user and adds to database
+		/// </summary>
+		/// <returns>Result of registration</returns>
 		internal static RegisterResult CreateUser(string email, string username, string fullname, string password, DateTime birthdate)
 		{
 			if (Users.FindByEmail(email) != null)
@@ -334,7 +387,11 @@ namespace HackNet.Security
 			}
 		}
 
-		// Check if authenticated
+		/// <summary>
+		/// Checks if the current user is authenticated
+		/// </summary>
+		/// <param name="email">Checks if the authenticated user has this email</param>
+		/// <returns>Whether the current user is authenticated</returns>
 		internal static bool IsAuthenticated(string email = null)
 		{
 			if (Global.IsInUnitTest)
@@ -385,7 +442,10 @@ namespace HackNet.Security
 			}
 		}
 
-		// Get email of authenticated user
+		/// <summary>
+		/// Gets the email address of the current user, no DB required
+		/// </summary>
+		/// <returns></returns>
 		internal static string GetEmail()
 		{
 
@@ -395,6 +455,10 @@ namespace HackNet.Security
 			return HttpContext.Current.User.Identity.Name;
 		}
 
+		/// <summary>
+		/// Gets the User ID of the current user, no DB required
+		/// </summary>
+		/// <returns></returns>
 		internal static int GetUserId()
 		{
 
@@ -406,6 +470,10 @@ namespace HackNet.Security
 			return UserId;
 		}
 
+		/// <summary>
+		/// Gets the username of the current user, no DB required
+		/// </summary>
+		/// <returns></returns>
 		internal static string GetUserName()
 		{
 
@@ -414,6 +482,10 @@ namespace HackNet.Security
 			return UserData[1];
 		}
 
+		/// <summary>
+		/// Gets the AccessLevel enum of the current user, no DB required
+		/// </summary>
+		/// <returns></returns>
 		internal static AccessLevel GetAccessLevel()
 		{
 			if (Global.IsInUnitTest)
@@ -430,6 +502,10 @@ namespace HackNet.Security
 			return (AccessLevel)AccessLevelNum;
 		}
 
+		/// <summary>
+		/// PRIVATE: Read the user data and parse into string array
+		/// </summary>
+		/// <returns></returns>
 		private static string[] GetUserData()
 		{
 			if (Global.IsInUnitTest)
@@ -451,6 +527,12 @@ namespace HackNet.Security
 		}
 
 
+		/// <summary>
+		/// Get the user entity of the current logged in user
+		/// </summary>
+		/// <param name="ReadOnly">OPTIONAL: Whether to enable EF tracking on the user</param>
+		/// <param name="db">OPTIONAL: If not readonly, provide database context</param>
+		/// <returns></returns>
 		internal static Users GetCurrentUser(bool ReadOnly = true, DataContext db = null)
 		{
 			string email = GetEmail();
@@ -523,6 +605,9 @@ namespace HackNet.Security
 
 	}
 
+	/// <summary>
+	/// Authentication result enum
+	/// </summary>
 	internal enum AuthResult
 	{
 		Success = 0,
@@ -533,6 +618,9 @@ namespace HackNet.Security
 		KeyStoreInvalid = 5
 	}
 
+	/// <summary>
+	/// Registration result enum
+	/// </summary>
 	internal enum RegisterResult
 	{
 		Success = 0,
@@ -542,6 +630,9 @@ namespace HackNet.Security
 		OtherException = 4
 	}
 
+	/// <summary>
+	/// One-time password validation result
+	/// </summary>
 	public enum OtpResult
 	{
 		Success = 0,

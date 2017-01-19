@@ -25,7 +25,7 @@
 				(Google Authenticator, Authy, etc..)
 			</p>
 			<asp:Label ID="UID" ForeColor="blue" runat="server" /><br />
-			<table runat="server" class="loginTable">
+			<table runat="server" class="formTable">
 				<tr>
 					<td><strong>OTP:</strong></td>
 					<td>

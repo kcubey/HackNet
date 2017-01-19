@@ -7,40 +7,43 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="panel panel-default">
 		<div class="panel-body">
-				<div class="col-sm-12 col-md-2" style="display: inline-block;">
-					<asp:Image runat="server" ImageUrl="~/Content/Images/hackerpic.jpg" Height="96px" Width="96px" />
+			<div class="col-sm-12 col-md-2" style="display: inline-block;">
+				<asp:Image runat="server" ImageUrl="~/Content/Images/hackerpic.jpg" Height="96px" Width="96px" />
+			</div>
+			<div class="col-sm-12 col-md-5">
+				<div class="row">
+					<asp:Label runat="server" ID="PlayerName">ERROR</asp:Label>
 				</div>
-				<div class="col-sm-12 col-md-5">
-					<div class="row">
-						<asp:Label runat="server" ID="PlayerName">ERROR</asp:Label>
-					</div>
-					<div class="row">
-						Level
+				<div class="row">
+					Level
                         <asp:Label runat="server" ID="LevelsLbl" Font-Bold="true"></asp:Label>
-					</div>
+				</div>
 
-					<div class="row">
-						<div class="progress">
-							<div ID="progressbar" runat="server" 
-								class="progress-bar progress-bar-success progress-bar-striped active"
-								 role="progressbar" aria-valuemin="0" aria-valuemax="100">
-							</div>
+				<div class="row">
+
+					<asp:Label runat="server" ID="ExpProgressLbl"></asp:Label>
+					<br />
+					<asp:Label runat="server" ID="TotalProgressLbl"></asp:Label>
+					<div class="progress" style="margin-bottom: 0; background-color:lightgray;">
+						<div id="progressbar" runat="server"
+							class="progress-bar progress-bar-success progress-bar-striped active"
+							role="progressbar" aria-valuemin="0" aria-valuemax="100">
 						</div>
-						<asp:Label runat="server" ID="ExpProgressLbl"></asp:Label>
 					</div>
 				</div>
-				<div class="col-sm-12 col-md-3">
-				</div>
-				<div class="col-sm-12 col-md-2">
-					<div class="row" style="text-align: right">
-						Coins
+			</div>
+			<div class="col-sm-12 col-md-3">
+			</div>
+			<div class="col-sm-12 col-md-2">
+				<div class="row" style="text-align: right">
+					Coins
                         <asp:Label runat="server" ID="CoinsLbl" Text="x" Font-Bold="true"></asp:Label>
-					</div>
-					<div class="row" style="text-align: right">
-						Bucks
-                        <asp:Label runat="server" ID="BucksLbl" Text="x" Font-Bold="true"></asp:Label>
-					</div>
 				</div>
+				<div class="row" style="text-align: right">
+					Bucks
+                        <asp:Label runat="server" ID="BucksLbl" Text="x" Font-Bold="true"></asp:Label>
+				</div>
+			</div>
 		</div>
 	</div>
 	<nav class="navbar navbar-default">
@@ -52,7 +55,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<span class="navbar-brand" style="color:greenyellow;"><i class="fa fa-compass" aria-hidden="true"></i> MENU</span>
+				<span class="navbar-brand" style="color: greenyellow;"><i class="fa fa-compass" aria-hidden="true"></i>MENU</span>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,9 +73,9 @@
 						<asp:LinkButton runat="server" Text="Inventory" OnClick="LnkInv" /></li>
 					<li>
 						<asp:LinkButton runat="server" Text="Chat" OnClick="LnkChat" /></li>
-                    <li>
+					<li>
 						<asp:LinkButton runat="server" Text="Market1" OnClick="LnkMkt1" /></li>
-		<!--			<li class="dropdown">
+					<!--			<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Market <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li>

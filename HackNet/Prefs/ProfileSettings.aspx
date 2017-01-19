@@ -13,36 +13,50 @@
 		</div>
 		<div class="panel-body">
 			<h4>User Details</h4>
-			<table class="loginTable">
+			<table class="formTable">
 				<tr>
 					<td>
 						<label>Username: </label>
 					</td>
 					<td>
-						<asp:TextBox CssClass="form-control" ID="usernameTxt" runat="server" Font-Size="Medium"></asp:TextBox></td>
+						<asp:TextBox CssClass="form-control" ID="usernameTxt" runat="server" />
+					</td>
+					<td>
+						<asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="usernameTxt" ForeColor="Red"
+							ErrorMessage="Username is required." Text="*" runat="server" />
+						<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+							ErrorMessage="Username can only contain alphanumerics and underscores, and at least 4 characters"
+							ControlToValidate="usernameTxt" Display="None" ValidationExpression="^[a-zA-Z_]{4,14}$" />
+					</td>
 				</tr>
 				<tr>
 					<td>
 						<label>E-mail: </label>
 					</td>
 					<td>
-						<asp:TextBox CssClass="form-control" ID="emailTxt" runat="server" Font-Size="Medium"></asp:TextBox>
+						<asp:TextBox CssClass="form-control" ID="emailTxt" runat="server" />
+					</td>
+					<td>
+						<asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="emailTxt" ForeColor="Red"
+							ErrorMessage="Email Address is required." Text="*" runat="server" />
+						<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
+							ErrorMessage="Last name can only contain alphabets and spaces up to 50 characters"
+							ControlToValidate="emailTxt" Display="None" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label>First Name: </label>
+						<label>Full Name: </label>
 					</td>
 					<td>
-						<asp:TextBox CssClass="form-control" ID="FNameTxt" runat="server" Font-Size="Medium"></asp:TextBox>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Last Name: </label>
+						<asp:TextBox CssClass="form-control" ID="fnameTxt" runat="server" />
 					</td>
 					<td>
-						<asp:TextBox CssClass="form-control" ID="LNameTxt" runat="server" Font-Size="Medium"></asp:TextBox>
+						<asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="fnameTxt" ForeColor="Red"
+							ErrorMessage="Full Name is required" Text="*" runat="server" />
+						<asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
+							ErrorMessage="Full name can only contain alphabets and spaces up to 50 characters"
+							ControlToValidate="fnameTxt" Display="None" ValidationExpression="^[a-zA-Z ]{1,50}$" />
 					</td>
 				</tr>
 				<tr>
@@ -50,19 +64,20 @@
 						<label>Date of Birth: </label>
 					</td>
 					<td>
-						<asp:TextBox CssClass="form-control" ID="DobTxt" runat="server" Font-Size="Medium"></asp:TextBox>
+						<asp:TextBox CssClass="form-control" ID="DobTxt" runat="server" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Password to Confirm: </label>
+					</td>
+					<td>
+						<asp:TextBox type="password" CssClass="form-control" ID="CfmPasswordTxt" runat="server" />
 					</td>
 				</tr>
 			</table>
-			<h4>Contact Preferences</h4>
-			<table>
-				<tr>
-					<td>
-						<input type="checkbox" class="form-control" /></td>
-					<td>Receive marketing information about HackNet</td>
-				</tr>
-			</table>
-			<asp:Label ID="Msg" runat="server" />
+			<asp:Label ID="Msg" runat="server" ForeColor="Red" />
+			<br />
 			<asp:Button ID="ProfileChangeBtn"
 				Text="Update Details"
 				CssClass="btn btn-info"

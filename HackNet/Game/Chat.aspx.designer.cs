@@ -13,6 +13,15 @@ namespace HackNet.Game {
     public partial class Chat {
         
         /// <summary>
+        /// SelectRecipientWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SelectRecipientWindow;
+        
+        /// <summary>
         /// ReceiverId control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,33 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblRecipient;
+        
+        /// <summary>
+        /// ChangeRecipientBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ChangeRecipientBtn;
+        
+        /// <summary>
+        /// MessageToSend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MessageToSend;
+        
+        /// <summary>
+        /// SendMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SendMsg;
         
         /// <summary>
         /// ChatRepeater control.

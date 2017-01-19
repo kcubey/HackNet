@@ -42,8 +42,8 @@ namespace HackNet.Security
 
 				// Get the UserKeyStore object of the users
 				using (Authenticate a = new Authenticate()) {
-					sPubKey = a.GetRsaPublic(sEmail);
-					rPubKey = a.GetRsaPublic(rEmail);
+					sPubKey = a.GetRsaPublic(db, sEmail);
+					rPubKey = a.GetRsaPublic(db, rEmail);
 				}
 				
 				// Convert the message to database format while encrypting it
