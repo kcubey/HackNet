@@ -10,7 +10,7 @@ namespace HackNet.Security
 {
 	public class MessageLogic
 	{
-		public static List<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
+		public static ICollection<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
 		{
 			List<Message> decryptedMessages = new List<Message>();
 			List<Messages> dbMsgList;
@@ -19,7 +19,7 @@ namespace HackNet.Security
 			using (DataContext db = new DataContext())
 			{
 				// DB Query for messages that match query
-				IOrderedQueryable<Messages> dbMsgQueryable = db.Messages.Where(m =>
+				var dbMsgQueryable = db.Messages.Where(m =>
 						(m.SenderId == Sender && m.ReceiverId == Receiver) ||
 						(m.ReceiverId == Sender && m.SenderId == Receiver)).OrderByDescending(m => m.MsgId);
 
@@ -72,6 +72,41 @@ namespace HackNet.Security
 				// Add to database
 				db.Messages.Add(dbMsg);
 				db.SaveChanges();
+			}
+		}
+
+		public static ICollection<string> RetrieveRecents(int viewerId)
+		{
+			List<string> recents = new List<string>();
+			List<int> recentIds = new List<int>();
+
+			if (viewerId <= 0)
+				return recents;
+
+			using (DataContext db = new DataContext())
+			{
+				List<Messages> templist = 
+					db.Messages.Where(m => (m.SenderId == viewerId || m.ReceiverId == viewerId)).ToList();
+
+				foreach(Messages m in templist)
+				{
+					if (!recentIds.Contains(m.ReceiverId))
+						recentIds.Add(m.ReceiverId);
+
+					if (!recentIds.Contains(m.SenderId))
+						recentIds.Add(m.SenderId);
+				}
+
+				recentIds.Remove(viewerId);
+
+				foreach (int id in recentIds)
+				{
+					Users u = db.Users.Find(id);
+					if (u != null)
+						recents.Add(u.UserName);
+				}
+
+				return recents;
 			}
 		}
 	}

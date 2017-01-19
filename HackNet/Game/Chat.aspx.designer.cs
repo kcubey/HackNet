@@ -49,6 +49,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button ButtonChooseRecipient;
         
         /// <summary>
+        /// RecentsDataList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList RecentsDataList;
+        
+        /// <summary>
         /// Msg control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button ChangeRecipientBtn;
         
         /// <summary>
+        /// ReloadBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ReloadBtn;
+        
+        /// <summary>
         /// MessageToSend control.
         /// </summary>
         /// <remarks>
@@ -110,15 +128,6 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SendMsg;
-        
-        /// <summary>
-        /// TestBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button TestBtn;
         
         /// <summary>
         /// ChatRepeater control.

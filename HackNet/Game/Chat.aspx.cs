@@ -16,8 +16,12 @@ namespace HackNet.Game
 		{
 			if (Session["KeyStore"] == null)
 				Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
+
+			RecentsDataList.DataSource = GetRecents();
+			RecentsDataList.DataBind();
 		}
 		
+		// 
 		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
 		{
 			int otherid = -1;
@@ -58,44 +62,7 @@ namespace HackNet.Game
 			}
 		}
 
-		public List<Message> RetrieveMessages(int otherId, int limit = 10)
-		{
-			if (otherId <= 0)
-			{
-				return new List<Message>();
-			}
-			List<Message> msgs;
-			KeyStore ks = Session["KeyStore"] as KeyStore;
-			int viewerId = Authenticate.GetUserId();
-			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit);
-			return msgs;
-		}
-
-		public string GetUsername(int userid)
-		{
-			if (!usernames.ContainsKey(userid)) // Caching in dictionary to reduce DB calls
-			{
-				string username = Authenticate.ConvertIdToUsername(userid);
-				usernames.Add(userid, username);
-				return username;
-			} else
-			{
-				return usernames[userid];
-			}
-		}
-
-		public string ThisOrOther(int userid)
-		{
-			if (userid == (int) ViewState["thisParty"])
-			{
-				return "self";
-			} else
-			{
-				return "other";
-			}
-		}
-
+		
 		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
 		{
 			ToggleWindows();
@@ -121,19 +88,8 @@ namespace HackNet.Game
 			MessageLogic.SendMessage(msg);
 
 			ChatUpdatePanel.Update();
-		}
-
-		protected void ToggleWindows()
-		{
-			if (SelectRecipientWindow.Visible == true)
-			{
-				SelectRecipientWindow.Visible = false;
-				ChatWindow.Visible = true;
-			} else
-			{
-				SelectRecipientWindow.Visible = true;
-				ChatWindow.Visible = false;
-			}
+			ChatUpdatePanel.Update();
+			ClientScript.RegisterStartupScript(this.GetType(), "updp", "Update_UpdatePanel()", true);
 		}
 
 		protected void ChatWindow_Load(object sender, EventArgs e)
@@ -155,5 +111,73 @@ namespace HackNet.Game
 			ChatRepeater.DataSource = RetrieveMessages(otherid);
 			ChatRepeater.DataBind();
 		}
+
+		// Utility methods
+		public string ThisOrOther(int userid)
+		{
+			if (userid == (int)ViewState["thisParty"])
+			{
+				return "self";
+			}
+			else
+			{
+				return "other";
+			}
+		}
+
+		protected List<string> GetRecents()
+		{
+			int id = Authenticate.GetUserId();
+			return MessageLogic.RetrieveRecents(id).ToList();
+		}
+
+		protected void ToggleWindows()
+		{
+			if (SelectRecipientWindow.Visible == true)
+			{
+				SelectRecipientWindow.Visible = false;
+				ChatWindow.Visible = true;
+			}
+			else
+			{
+				SelectRecipientWindow.Visible = true;
+				ChatWindow.Visible = false;
+			}
+		}
+
+		protected void SetRecipient(object sender, EventArgs e)
+		{
+			ReceiverId.Text = (sender as LinkButton).CommandArgument;
+		}
+
+		public string GetUsername(int userid)
+		{
+			if (!usernames.ContainsKey(userid)) // Caching in dictionary to reduce DB calls
+			{
+				string username = Authenticate.ConvertIdToUsername(userid);
+				usernames.Add(userid, username);
+				return username;
+			}
+			else
+			{
+				return usernames[userid];
+			}
+		}
+
+		public List<Message> RetrieveMessages(int otherId, int limit = 10)
+		{
+			if (otherId <= 0)
+			{
+				return new List<Message>();
+			}
+			List<Message> msgs;
+			KeyStore ks = Session["KeyStore"] as KeyStore;
+			int viewerId = Authenticate.GetUserId();
+			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit).ToList();
+			return msgs;
+		}
+
+
 	}
 }
