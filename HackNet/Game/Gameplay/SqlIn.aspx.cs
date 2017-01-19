@@ -75,7 +75,17 @@ namespace HackNet.Game.Gameplay
 
         protected void SubCmdBtn_Click(object sender, EventArgs e)
         {
-
+            if ((bool)ViewState["Configure"])
+            {
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
+                LoadPossURLList(URLListView);
+            }
+            else
+            {
+                LoadScanInfo(ViewState["ScanList"] as List<string>);
+                CmdError.Text = "";
+                CmdError.ForeColor = System.Drawing.Color.Red;
+            }
         }
 
         protected void LoginBtn_Click(object sender, EventArgs e)
