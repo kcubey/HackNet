@@ -58,13 +58,13 @@ namespace HackNet.Game
 			}
 		}
 
-		public List<Message> RetrieveMessages(string otherUsername, int otherId)
+		public List<Message> RetrieveMessages(string otherUsername, int otherId, int limit = 10)
 		{
 			List<Message> msgs;
 			KeyStore ks = Session["KeyStore"] as KeyStore;
 			int viewerId = Authenticate.GetUserId();
 			LblRecipient.Text = otherUsername;
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit);
 			return msgs;
 		}
 
@@ -101,12 +101,18 @@ namespace HackNet.Game
 		{
 			int currentuser = Authenticate.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];
+			string otherusername = Authenticate.ConvertIdToUsername(otheruser);
 			string content = MessageToSend.Text;
+
+			MessageToSend.Text = "";
 
 			content = HttpUtility.HtmlEncode(content);
 
 			Message msg = new Message(currentuser, otheruser, content);
 			MessageLogic.SendMessage(msg);
+
+			ChatRepeater.DataSource = RetrieveMessages(otherusername, otheruser);
+			ChatRepeater.DataBind();
 		}
 
 		protected void ToggleWindows()

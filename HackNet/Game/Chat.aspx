@@ -34,9 +34,11 @@
 				</div>
 				<div class="col-md-7"></div>
 				<div class="col-md-3">
+					<asp:Panel runat="server" DefaultButton="SendMsg">
 					Send a message:
 					<asp:TextBox ID="MessageToSend" runat="server" 
 								 CssClass="form-control" />
+					</asp:Panel>
 				</div>
 				<div class="col-md-1">
 					<br />
@@ -45,6 +47,8 @@
 				</div>
 			</div>
 		</div>
+		<asp:UpdatePanel ID="ChatUpdatePanel" UpdateMode="Always" runat="server">
+		<ContentTemplate>
 		<ol class="chat">
 			<asp:Repeater ID="ChatRepeater" runat="server">
 				<ItemTemplate>
@@ -58,6 +62,8 @@
 				</ItemTemplate>
 			</asp:Repeater>
 		</ol>
+		</ContentTemplate>
+		</asp:UpdatePanel>
 	</div>
 	<!--
 	<div class="chatsection">
@@ -102,8 +108,4 @@
 		</ol>
 	</div>
 	-->
-	<div>
-		<textarea placeholder="Say something"></textarea>
-		<input type="submit" class="send" value="" />
-	</div>
 </asp:Content>

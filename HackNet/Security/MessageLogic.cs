@@ -1,6 +1,7 @@
 ﻿using HackNet.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -9,23 +10,42 @@ namespace HackNet.Security
 {
 	public class MessageLogic
 	{
-		public static List<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks)
+		public static List<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
 		{
 			List<Message> decryptedMessages = new List<Message>();
+			List<Messages> dbMsgList;
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
 			using (DataContext db = new DataContext())
 			{
 				// DB Query for messages that match query
-				List<Messages> dbMessages = 
-					db.Messages.Where(m => 
-					(m.SenderId == Sender && m.ReceiverId == Receiver) || 
-					(m.ReceiverId == Sender && m.SenderId == Receiver)
-					).ToList();
+				IOrderedQueryable<Messages> dbMsgQueryable = db.Messages.Where(m =>
+						(m.SenderId == Sender && m.ReceiverId == Receiver) ||
+						(m.ReceiverId == Sender && m.SenderId == Receiver)).OrderByDescending(m => m.MsgId);
+
+				int rows = dbMsgQueryable.Count();
+
+				// If the number of rows exceeds the number of rows, return all the rows
+				if (amount > rows)
+					amount = -1;
+
+				// Get the specified number of rows from the database
+				if (amount > 0)
+					dbMsgList = dbMsgQueryable.Take(amount).ToList();
+				else
+					dbMsgList = dbMsgQueryable.ToList();
+				sw.Stop();
+				Debug.WriteLine("Messages retrieval took: " + sw.ElapsedMilliseconds + "ms");
 
 				// Convert each message into decrypted form
-				foreach(Messages dbMsg in dbMessages)
+				sw.Reset();
+				sw.Start();
+				foreach (Messages dbMsg in dbMsgList)
 				{
 					decryptedMessages.Add(new Message(dbMsg, Viewer, ks.rsaPrivate));
 				}
+				sw.Stop();
+				Debug.WriteLine("Messages decryption took: " + sw.ElapsedMilliseconds + "ms");
 			}
 			return decryptedMessages;
 		}

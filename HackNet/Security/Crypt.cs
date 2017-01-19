@@ -165,7 +165,7 @@ namespace HackNet.Security
 				hashedbytes = kdf.GetBytes(128);
 			// Stop the stopwatch
 			sw.Stop();
-			Debug.WriteLine("TIME ELAPSED" + sw.Elapsed);
+			Debug.WriteLine("Hashing time elapsed: " + sw.ElapsedMilliseconds + "ms");
 			// Return the hash
 			return hashedbytes;
 		}

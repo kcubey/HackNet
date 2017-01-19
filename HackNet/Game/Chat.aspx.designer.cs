@@ -94,6 +94,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button SendMsg;
         
         /// <summary>
+        /// ChatUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel ChatUpdatePanel;
+        
+        /// <summary>
         /// ChatRepeater control.
         /// </summary>
         /// <remarks>
