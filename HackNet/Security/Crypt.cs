@@ -47,8 +47,9 @@ namespace HackNet.Security
 				{
 					rsa.FromXmlString(parameters);
 					rparam = rsa.ExportParameters(true);
+					plainBytes = rsa.Decrypt(cipherBytes, true);
 				}
-				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+			using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 				{
 					RSACryptoServiceProvider.UseMachineKeyStore = true;
 					rsa.ImportParameters(rparam);

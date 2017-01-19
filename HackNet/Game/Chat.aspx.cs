@@ -51,19 +51,23 @@ namespace HackNet.Game
 				ViewState["thisParty"] = Authenticate.GetUserId();
 				ViewState["otherParty"] = otherid;
 				ToggleWindows();
-				ChatRepeater.DataSource = RetrieveMessages(username, otherid);
+				ChatRepeater.DataSource = RetrieveMessages(otherid);
 				ChatRepeater.DataBind();
 				return;
 
 			}
 		}
 
-		public List<Message> RetrieveMessages(string otherUsername, int otherId, int limit = 10)
+		public List<Message> RetrieveMessages(int otherId, int limit = 10)
 		{
+			if (otherId <= 0)
+			{
+				return new List<Message>();
+			}
 			List<Message> msgs;
 			KeyStore ks = Session["KeyStore"] as KeyStore;
 			int viewerId = Authenticate.GetUserId();
-			LblRecipient.Text = otherUsername;
+			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
 			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit);
 			return msgs;
 		}
@@ -99,6 +103,11 @@ namespace HackNet.Game
 
 		protected void SendMsg_Click(object sender, EventArgs e)
 		{
+			if (string.IsNullOrWhiteSpace(MessageToSend.Text))
+			{
+				return;
+			}
+
 			int currentuser = Authenticate.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];
 			string otherusername = Authenticate.ConvertIdToUsername(otheruser);
@@ -111,8 +120,7 @@ namespace HackNet.Game
 			Message msg = new Message(currentuser, otheruser, content);
 			MessageLogic.SendMessage(msg);
 
-			ChatRepeater.DataSource = RetrieveMessages(otherusername, otheruser);
-			ChatRepeater.DataBind();
+			ChatUpdatePanel.Update();
 		}
 
 		protected void ToggleWindows()
@@ -132,6 +140,20 @@ namespace HackNet.Game
 		{
 			if (Session["KeyStore"] == null)
 				Msg.Text = "Error decrypting messages, KS is NULL!";
+		}
+
+		protected void ChatRepeater_Load(object sender, EventArgs e)
+		{
+			base.OnLoad(e);
+			int otherid;
+
+			if (ViewState["otherParty"] != null)
+				otherid = (int)ViewState["otherParty"];
+			else
+				otherid = -1;
+
+			ChatRepeater.DataSource = RetrieveMessages(otherid);
+			ChatRepeater.DataBind();
 		}
 	}
 }

@@ -2,8 +2,18 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="GameHeadPH" runat="server">
 	<link rel="stylesheet" href="../Content/Chat.css" />
+	<script type="text/javascript">
+        function Update_UpdatePanel() {
+            document.getElementById('ChatUpdateTrigger').click()
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="ChatContent" ContentPlaceHolderID="GameContent" runat="server">
+
+	<div style="display:none">
+        <asp:Button ID="HidnReload" runat="server" />
+    </div>
+	
 	<div class="panel panel-default" ID="SelectRecipientWindow" runat="server">
 		<div class="panel-heading">
 			<h3 class="panel-title">HackNet Chat</h3>
@@ -25,6 +35,11 @@
 	</div>
 	<div class="chatsection" ID="ChatWindow" runat="server" visible="false" onload="ChatWindow_Load">
 		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
+		<asp:UpdatePanel ID="ChatUpdatePanel" ChildrenAsTriggers="true" UpdateMode="Conditional" runat="server">
+		<Triggers>
+			<asp:AsyncPostBackTrigger runat="server" ControlID="SendMsg" EventName="Click" />
+		</Triggers>
+		<ContentTemplate>
 		<div class="panel panel-default">
 			<div class="panel-body" style="background-color:midnightblue">
 				<div class="col-md-1">
@@ -44,13 +59,14 @@
 					<br />
 					<asp:Button ID="SendMsg" Text="Send" runat="server" 
 						CssClass="btn btn-info" OnClick="SendMsg_Click" />
+					<asp:Button ID="TestBtn" runat="server" OnClientClick="Update_UpdatePanel()" CausesValidation="false"
+						 Text="Reload" CssClass="btn btn-info" />
 				</div>
 			</div>
 		</div>
-		<asp:UpdatePanel ID="ChatUpdatePanel" UpdateMode="Always" runat="server">
-		<ContentTemplate>
+
 		<ol class="chat">
-			<asp:Repeater ID="ChatRepeater" runat="server">
+			<asp:Repeater ID="ChatRepeater" runat="server" OnLoad="ChatRepeater_Load">
 				<ItemTemplate>
 					<li class="<%# ThisOrOther( (int) Eval("SenderId") ) %>">
 						<div class="msg">
