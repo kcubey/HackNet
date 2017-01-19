@@ -16,6 +16,11 @@ namespace HackNet.Game.Gameplay
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["MissionData"] as MissionData == null)
+            {
+                // prevent path travesel?
+                Response.Redirect("../Missions.aspx");
+            }
             if (!IsPostBack)
             {
                 ViewState["Configure"] = false;
@@ -205,6 +210,13 @@ namespace HackNet.Game.Gameplay
                 MisExpLbl.Text = mis.MissionExp.ToString();
                 MisCoinLbl.Text = mis.MissionCoin.ToString();            
 
+                using(DataContext db =new DataContext())
+                {
+                    Users u = Authenticate.GetCurrentUser(false,db);
+                    u.TotalExp = u.TotalExp + mis.MissionExp;
+                    System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
+                    db.SaveChanges();
+                }
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
 

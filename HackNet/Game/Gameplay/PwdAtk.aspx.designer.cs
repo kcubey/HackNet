@@ -112,6 +112,15 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.DropDownList TargetAtkTypeList;
         
         /// <summary>
+        /// ConfigBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConfigBtn;
+        
+        /// <summary>
         /// ErrorLbl control.
         /// </summary>
         /// <remarks>
@@ -121,13 +130,22 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.Label ErrorLbl;
         
         /// <summary>
-        /// ConfigBtn control.
+        /// IPValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConfigBtn;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator IPValidator;
+        
+        /// <summary>
+        /// TargetRegValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator TargetRegValidator;
         
         /// <summary>
         /// LogPanel control.
@@ -164,6 +182,15 @@ namespace HackNet.Game.Gameplay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label CmdError;
+        
+        /// <summary>
+        /// CmdRegValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator CmdRegValidator;
         
         /// <summary>
         /// NautilusView control.
