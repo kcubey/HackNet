@@ -7,135 +7,135 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HackNet.Game {
+namespace HackNet.Game.Gameplay {
     
     
-    public partial class Chat {
+    public partial class SqlIn {
         
         /// <summary>
-        /// HidnReload control.
+        /// TargetIPTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button HidnReload;
+        protected global::System.Web.UI.WebControls.TextBox TargetIPTxtBox;
         
         /// <summary>
-        /// SelectRecipientWindow control.
+        /// TargetAtkTypeList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SelectRecipientWindow;
+        protected global::System.Web.UI.WebControls.DropDownList TargetAtkTypeList;
         
         /// <summary>
-        /// ReceiverId control.
+        /// ErrorLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ReceiverId;
+        protected global::System.Web.UI.WebControls.Label ErrorLbl;
         
         /// <summary>
-        /// ButtonChooseRecipient control.
+        /// IPValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonChooseRecipient;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator IPValidator;
         
         /// <summary>
-        /// RecentsDataList control.
+        /// ConfigSQL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList RecentsDataList;
+        protected global::System.Web.UI.WebControls.Button ConfigSQL;
         
         /// <summary>
-        /// Msg control.
+        /// LogPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Msg;
+        protected global::System.Web.UI.WebControls.Panel LogPanel;
         
         /// <summary>
-        /// ChatWindow control.
+        /// CmdTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChatWindow;
+        protected global::System.Web.UI.WebControls.TextBox CmdTextBox;
         
         /// <summary>
-        /// LblRecipient control.
+        /// SubCmdBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblRecipient;
+        protected global::System.Web.UI.WebControls.Button SubCmdBtn;
         
         /// <summary>
-        /// ChatUpdatePanel control.
+        /// CmdError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel ChatUpdatePanel;
+        protected global::System.Web.UI.WebControls.Label CmdError;
         
         /// <summary>
-        /// ChangeRecipientBtn control.
+        /// CmdRegValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ChangeRecipientBtn;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator CmdRegValidator;
         
         /// <summary>
-        /// ReloadBtn control.
+        /// URLListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ReloadBtn;
+        protected global::System.Web.UI.WebControls.DataList URLListView;
         
         /// <summary>
-        /// MessageToSend control.
+        /// UsrNamTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MessageToSend;
+        protected global::System.Web.UI.WebControls.TextBox UsrNamTxtBox;
         
         /// <summary>
-        /// SendMsg control.
+        /// PassTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SendMsg;
+        protected global::System.Web.UI.WebControls.TextBox PassTxtBox;
         
         /// <summary>
-        /// ChatRepeater control.
+        /// LoginBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater ChatRepeater;
+        protected global::System.Web.UI.WebControls.Button LoginBtn;
     }
 }

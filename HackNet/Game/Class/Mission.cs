@@ -140,5 +140,18 @@ namespace HackNet.Game
             return pwdList;
         }
 
+
+        // Gameplay for SQLInjection
+        public static List<string> LoadURLList()
+        {
+            List<string> urlList = new List<string>();
+            urlList.Add("www.hostlogin.com/signin");
+            urlList.Add("www.sqllogin.com/signin");
+            urlList.Add("www.masterbox.com/signin");
+            urlList.Add("www.remotehost.com/signin");
+            urlList.Add("www.localhost.com/signin");
+
+            return urlList;
+        }
     }
 }
