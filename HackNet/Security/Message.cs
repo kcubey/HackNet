@@ -12,10 +12,12 @@ namespace HackNet.Security
 		public int MessageId { get; private set; } // Only if destined from database
 
 		public int SenderId { get; private set; }
-		public int ConversationId { get; private set; }
 
-		public byte[] AesKeyBytes { get; private set; } // Only if destined for database
-		public string Content { get; private set; }
+		public int RecipientId { get; private set; }
+
+		public int ConversationId { get; internal set; }
+
+		public string Content { get; internal set; }
 
 		public DateTime Timestamp { get; private set; }
 
@@ -39,21 +41,16 @@ namespace HackNet.Security
 		}
 
 		// Message creation
-		internal Message(int SenderId, string Content)
+		internal Message(int senderId, int convId, string msgContent)
 		{
-			this.SenderId = SenderId;
-			this.Content = Content;
+			SenderId = senderId;
+			RecipientId = convId;
+			Content = msgContent;
 			Timestamp = DateTime.Now;
+
 		}
 
-		internal Message(int SenderId, string Content, DateTime Timestamp)
-		{
-			this.SenderId = SenderId;
-			this.Content = Content;
-			this.Timestamp = Timestamp;
-		}
-
-		internal SecureMessage ToDatabase(int recipientId)
+		internal SecureMessage ToDatabase(int recipientId, byte[] aesKeyBytes)
 		{
 			byte[] contentBytes = Encoding.UTF8.GetBytes(Content);
 			byte[] generatedIv = Crypt.Instance.GenerateIv("AES");
@@ -61,7 +58,8 @@ namespace HackNet.Security
 			SecureMessage dbMsg = new SecureMessage()
 			{
 				SenderId = SenderId,
-				Message = Crypt.Instance.EncryptAes(contentBytes, AesKeyBytes, generatedIv),
+				Message = Crypt.Instance.EncryptAes(contentBytes, aesKeyBytes, generatedIv),
+				ConId = ConversationId,
 				Timestamp = Timestamp,
 				EncryptionIV = generatedIv,
 			};
