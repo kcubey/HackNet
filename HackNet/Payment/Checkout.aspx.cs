@@ -13,6 +13,21 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
+            try
+            {
+                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+            }
+            catch
+            {
+                Response.Redirect("~/game/currency");
+            }
+            */
+            if (Session["packageId"] == null)
+            {
+                Response.Redirect("~/game/market1");
+            }
+
             string packageName = Session["packageId"].ToString();
             string packagePrice = Session["packageprice"].ToString();
             string transactionDetails = Session["transactionId"].ToString();
@@ -34,6 +49,9 @@ namespace HackNet.Payment
                 mc.AddLine("Thank you.");
             	mc.Send(u.FullName);
             }
+
+            Session["packageId"] = null;
+            Session["packageprice"] = null;
         }
     }
 }

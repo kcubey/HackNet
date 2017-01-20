@@ -31,14 +31,13 @@ namespace HackNet.Payment
         {
             Form.ID = "checkout-form";
             Debug.WriteLine(Form.ID);
-            try
+
+            if (Session["packageId"] == null)
             {
-                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+                Response.Redirect("~/game/market1");
             }
-            catch
-            {
-                Response.Redirect("~/game/currency");
-            }
+
+            packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
 
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
@@ -58,13 +57,6 @@ namespace HackNet.Payment
             Response.Redirect("~/game/market");
         }
 
-        public void testClick(Object sender, EventArgs e)
-        {
-            //KTODO: Delete function and related button
-            string alert = "demp";
-            Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
-        }
-
         public void checkoutClick(Object sender, EventArgs e)
         {
             Debug.WriteLine("Enter checkoutclick event");
@@ -72,18 +64,19 @@ namespace HackNet.Payment
             Debug.WriteLine("package price = " +price);
 
             //Get the nonce & device data from the client
+            var nonce = "fake-valid-nonce";
+            
             //var nonce = Request.Form["payment_method_nonce"];
-
-            var nonce = Request.Form["payment_method_nonce"];
-            var deviceData = Request.Form["device_data"];
-            Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
+            //var deviceData = Request.Form["device_data"];
+            //Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
+            Debug.WriteLine("nonce: " +nonce);
             
             //Create auth
             var request = new TransactionRequest
             {
                 Amount = price,
                 PaymentMethodNonce = nonce,
-                DeviceData = deviceData
+               // DeviceData = deviceData
             };
             Debug.WriteLine("transaction request made");
 
