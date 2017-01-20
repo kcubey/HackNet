@@ -67,7 +67,7 @@ namespace HackNet.Data
 		// Simple method for password hash and salt updating
 		internal void UpdatePassword(string newpassword)
 		{
-			Salt = Crypt.Instance.Generate(64);
+			Salt = Crypt.Instance.GenerateSalt();
 			Hash = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(newpassword), Salt);
 		}
 

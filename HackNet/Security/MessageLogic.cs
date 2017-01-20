@@ -8,7 +8,7 @@ using System.Web;
 
 namespace HackNet.Security
 {
-	public class MessageLogic
+	public static class MessageLogic
 	{
 		public static ICollection<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
 		{
@@ -59,10 +59,11 @@ namespace HackNet.Security
 				string sEmail = db.Users.Find(msg.SenderId).Email;
 
 				// Get the UserKeyStore object of the users
-				using (Authenticate a = new Authenticate()) {
-					sPubKey = a.GetRsaPublic(db, sEmail);
+				using (Authenticate a = new Authenticate())
+				{
+					//sPubKey = a.GetRsaPublic(db, sEmail);
 				}
-				
+
 				// Convert the message to database format while encrypting it
 				SecureMessage dbMsg = msg.ToDatabase(new byte[0]);
 
@@ -94,6 +95,53 @@ namespace HackNet.Security
 				}
 
 				return recents;
+			}
+		}
+
+
+		/// <summary>
+		/// Creates a conversation between 2 parties if it does not exist.
+		/// </summary>
+		/// <param name="PartyA">User ID of Party A</param>
+		/// <param name="PartyB">User ID of Party B</param>
+		/// <returns></returns>
+		public static int GetConversationId(int PartyA, int PartyB)
+		{
+			using (DataContext db = new DataContext())
+			{
+				Conversation conv = db.Conversation.Where(c =>
+										(c.UserAId == PartyA && c.UserBId == PartyB) ||
+										(c.UserBId == PartyA && c.UserAId == PartyB)).FirstOrDefault();
+				if (conv == null)
+					using (Authenticate a = new Authenticate())
+					{
+						byte[] symmAesKey = Crypt.Instance.GenerateAesKey();
+						string rsaA = a.GetRsaPublic(db, PartyA);
+						string rsaB = a.GetRsaPublic(db, PartyB);
+						byte[] encryptedAesKeyA = Crypt.Instance.EncryptRsa(symmAesKey, rsaA);
+						byte[] encryptedAesKeyB = Crypt.Instance.EncryptRsa(symmAesKey, rsaB);
+						Conversation newConv = new Conversation()
+						{
+							KeyA = encryptedAesKeyA,
+							KeyB = encryptedAesKeyB,
+							UnreadForA = false,
+							UnreadForB = false,
+							UserAId = PartyA,
+							UserBId = PartyB
+						};
+
+						db.Conversation.Add(conv);
+						db.SaveChanges();
+
+						conv = db.Conversation.Where(c => (c.UserAId == PartyA && c.UserBId == PartyB)).FirstOrDefault();
+
+					}
+
+				if (conv == null)
+					throw new ChatException("Conversation could not be loaded.");
+
+				return conv.ConId;
+
 			}
 		}
 	}

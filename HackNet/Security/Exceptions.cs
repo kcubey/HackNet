@@ -60,4 +60,12 @@ namespace HackNet.Security
 		internal KeyStoreException(string str) : base(str) { }
 		internal KeyStoreException(string str, Exception inner) : base(str, inner) { }
 	}
+
+	[Serializable]
+	internal class ChatException : Exception
+	{
+		internal ChatException() : base() { }
+		internal ChatException(string str) : base(str) { }
+		internal ChatException(string str, Exception inner) : base(str, inner) { }
+	}
 }

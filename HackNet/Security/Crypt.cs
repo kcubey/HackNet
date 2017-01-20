@@ -104,7 +104,6 @@ namespace HackNet.Security
 			using (AesManaged aes = new AesManaged())
 			{
 				aes.BlockSize = 128;
-				aes.KeySize = 192;
 				aes.Mode = CipherMode.CBC;
 				aes.Padding = PaddingMode.PKCS7;
 				aes.Key = keyBytes;
@@ -129,7 +128,6 @@ namespace HackNet.Security
 			using (AesManaged aes = new AesManaged())
 			{
 				aes.BlockSize = 128;
-				aes.KeySize = 192;
 				aes.Mode = CipherMode.CBC;
 				aes.Padding = PaddingMode.PKCS7;
 				aes.Key = keyBytes;
@@ -205,12 +203,21 @@ namespace HackNet.Security
 		{
 			switch (alg.ToUpper()) {
 				case "DES":
-					return Generate(8);
+					return Generate(8); // 64 bits
 				case "AES":
 				default:
-					return Generate(16);
+					return Generate(16); // 128 bits
 			}
+		}
 
+		internal byte[] GenerateAesKey()
+		{
+			return Generate(24); // 256 bits
+		}
+
+		internal byte[] GenerateSalt()
+		{
+			return Generate(64); // 512 bits
 		}
 	}
 }
