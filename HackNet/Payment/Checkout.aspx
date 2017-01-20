@@ -11,11 +11,10 @@
             You have purchased <asp:Label ID="packageDetailsLbl" runat="server" forecolor="Red"></asp:Label>
 
             <br />
-            Your transaction ID is <asp:Label ID="transactionId" runat="server"></asp:Label>
+            Your transaction ID is <asp:Label ID="transactionId" runat="server" ForeColor="Red"></asp:Label>
 
             <br /><br />
-            An email has been sent to you regarding your purchase.
-            <br />Thank you!
+            An email has been sent to you regarding your purchase, thank you!
         </div>
     </div>
        

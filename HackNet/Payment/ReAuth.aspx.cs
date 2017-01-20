@@ -14,21 +14,21 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["packageId"] == null)
+            {
+                Response.Redirect("~/game/market1");
+            }
             DataContext ctx = new DataContext();
-            try
-            {
-                packageNameLbl.Text = "Package " + Session["packageId"].ToString();
-                packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
-            }
-            catch
-            {
-                Response.Redirect("~/game/currency");
-            }
+            
+            packageNameLbl.Text = "Package " + Session["packageId"].ToString();
+            packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
         }
 
         public void CancelClick(Object sender, EventArgs e)
         {
             Response.Redirect("~/game/currency");
+            Session["packageId"] = null;
+            Session["packageprice"] = null;
         }
 
         protected void AuthClick(object sender, EventArgs e)

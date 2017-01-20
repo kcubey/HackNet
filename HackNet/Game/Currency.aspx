@@ -9,6 +9,13 @@
     <!-- the jScrollPane script -->
     <script type="text/javascript" src="jquery.jscrollpane.min.js"></script>
 
+    <script>
+        function showPopup() {
+            $('#popupConfirmation').modal('show');
+        }
+    </script>
+    
+
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
     <style>
@@ -65,7 +72,7 @@
 <!-- ============================= -->
 
                         <asp:Button ID="openButton" class="btn btn-info btn-lg" data-toggle="modal" 
-                            data-target="#popupConfirmation" runat="server" Text="OPen Modal" onclick="modalButton_Click"/>
+                            data-target="#popupConfirmation" runat="server" Text="OPen Modal"/>
                         
                         <div id="popupConfirmation" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -86,11 +93,7 @@
                             </div>
                         </div>
 
-
-
-
-
-
+                        <!-- KTODO: change alert to modal-->
 
                     </div>
 
@@ -105,9 +108,11 @@
                             <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                             <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
                             <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="10"></asp:Label>
+                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1000"></asp:Label>
                         </asp:LinkButton>
                         
+                        <!-- KTODO: make packages dynamic -->
+
                         <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br /><br />
