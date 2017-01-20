@@ -16,8 +16,8 @@ namespace HackNetTests
 		public void CryptAes()
 		{
 			string before = "This is a very secret AES message";
-			byte[] testKey = Crypt.Instance.Generate(24);
-			byte[] randomIv = Crypt.Instance.Generate(16);
+			byte[] testKey = Crypt.Instance.GenerateAesKey();
+			byte[] randomIv = Crypt.Instance.GenerateIv("AES");
 			byte[] beforeEnc = Encoding.UTF8.GetBytes(before);
 			byte[] encrypted = Crypt.Instance.EncryptAes(beforeEnc, testKey, randomIv);
 			byte[] decrypted = Crypt.Instance.DecryptAes(encrypted, testKey, randomIv);

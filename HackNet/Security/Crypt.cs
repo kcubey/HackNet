@@ -104,7 +104,6 @@ namespace HackNet.Security
 			using (AesManaged aes = new AesManaged())
 			{
 				aes.BlockSize = 128;
-				aes.KeySize = 192;
 				aes.Mode = CipherMode.CBC;
 				aes.Padding = PaddingMode.PKCS7;
 				aes.Key = keyBytes;
@@ -129,7 +128,6 @@ namespace HackNet.Security
 			using (AesManaged aes = new AesManaged())
 			{
 				aes.BlockSize = 128;
-				aes.KeySize = 192;
 				aes.Mode = CipherMode.CBC;
 				aes.Padding = PaddingMode.PKCS7;
 				aes.Key = keyBytes;
@@ -191,22 +189,35 @@ namespace HackNet.Security
 		}
 
 		// Generate bytes from RNGCryptoServiceProvider
-		internal byte[] Generate(int size)
+		internal byte[] Generate(int bytes)
 		{
-			if (size < 1) // Guard clause
+			if (bytes < 1) // Guard clause
 				return null;
-			byte[] random = new byte[size];
+			byte[] random = new byte[bytes];
 			using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
 				rng.GetBytes(random);
 			return random;
 		}
 
-		internal byte[] GenerateIv()
+		internal byte[] GenerateIv(string alg)
 		{
-			return Generate(8);
+			switch (alg.ToUpper()) {
+				case "DES":
+					return Generate(8); // 64 bits
+				case "AES":
+				default:
+					return Generate(16); // 128 bits
+			}
 		}
 
+		internal byte[] GenerateAesKey()
+		{
+			return Generate(24); // 256 bits
+		}
 
-
+		internal byte[] GenerateSalt()
+		{
+			return Generate(64); // 512 bits
+		}
 	}
 }

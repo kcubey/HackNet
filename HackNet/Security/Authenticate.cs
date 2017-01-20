@@ -125,7 +125,7 @@ namespace HackNet.Security
 				u.UpdatePassword(newpass);
 
 				// Encrypt the private key again
-				byte[] newAesIv = Crypt.Instance.Generate(16);
+				byte[] newAesIv = Crypt.Instance.GenerateIv("AES");
 				uks.AesIv = newAesIv;
 				byte[] newAesKey = Crypt.Instance.DeriveKey(newpass, u.Salt, uks.DesIv);
 				byte[] newRsaPrivEnc = Crypt.Instance.EncryptAes(rsaPrivBytes, newAesKey, newAesIv);
@@ -303,13 +303,15 @@ namespace HackNet.Security
 		/// <param name="db">DataContext entity</param>
 		/// <param name="email">OPTIONAL: The user's email address</param>
 		/// <returns>User's RSA Encryption key</returns>
-		internal string GetRsaPublic(DataContext db, string email = null)
+		internal string GetRsaPublic(DataContext db, int userid = -1)
 		{
 			Users u;
-			if (email == null)
-				u = Users.FindByEmail(this.Email, db);
+
+			if (userid == -1)
+				u = Users.FindByEmail(Email, db);
 			else
-				u = Users.FindByEmail(email, db);
+				u = db.Users.Find(userid);
+
 			db.Entry(u).Reference(usr => usr.UserKeyStore).Load();
 			return u.UserKeyStore.RsaPub;
 		}
