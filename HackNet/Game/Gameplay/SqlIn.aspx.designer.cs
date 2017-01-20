@@ -13,6 +13,69 @@ namespace HackNet.Game.Gameplay {
     public partial class SqlIn {
         
         /// <summary>
+        /// SummaryTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SummaryTitle;
+        
+        /// <summary>
+        /// MisNameLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisNameLbl;
+        
+        /// <summary>
+        /// MisIPLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisIPLbl;
+        
+        /// <summary>
+        /// MisSumLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisSumLbl;
+        
+        /// <summary>
+        /// MisExpLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisExpLbl;
+        
+        /// <summary>
+        /// MisCoinLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MisCoinLbl;
+        
+        /// <summary>
+        /// ExitBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ExitBtn;
+        
+        /// <summary>
         /// TargetIPTxtBox control.
         /// </summary>
         /// <remarks>
@@ -112,30 +175,39 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.DataList URLListView;
         
         /// <summary>
-        /// UsrNamTxtBox control.
+        /// UsrName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UsrNamTxtBox;
+        protected global::System.Web.UI.WebControls.TextBox UsrName;
         
         /// <summary>
-        /// PassTxtBox control.
+        /// Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PassTxtBox;
+        protected global::System.Web.UI.WebControls.TextBox Password;
         
         /// <summary>
-        /// LoginBtn control.
+        /// LoginErrorLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button LoginBtn;
+        protected global::System.Web.UI.WebControls.Label LoginErrorLbl;
+        
+        /// <summary>
+        /// SQLCodeList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList SQLCodeList;
     }
 }
