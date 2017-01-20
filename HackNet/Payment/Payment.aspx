@@ -38,19 +38,28 @@
     
             <div class="dropinBox">
                 <div id="payment-form"></div>
+                <input type="hidden" name="payment_method_nonce" id="payment_method_nonce"/>
             </div>
 
-             <script>
-                braintree.setup("<%=clientToken%>", "dropin", {
-                container: "payment-form",
-                id: "checkout-form"
-                });
-            </script>
-
             <br />
-            <asp:Button ID="checkoutBtn" runat="server" Text="Checkout" OnClick="checkoutClick" CssClass="btn btn-success" />
+            <asp:Button ID="checkoutBtn" type='submit' runat="server" Text="Checkout" OnClick="checkoutClick" CssClass="btn btn-success" />
             <asp:Button ID="Button1" Text="test" CssClass="btn btn-success"	runat="server" onclick="testClick"/>
             <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-success"	OnClick="CancelClick" runat="server" />
+
+            <script>
+                var button = document.querySelector("#checkoutBtn");
+                braintree.setup("<%=clientToken%>", "dropin", {
+                container: 'payment-form',
+                form: 'checkout-form',
+                onPaymentMethodReceived: function(obj){
+                    button.addEventListener('click', function (event) {
+                    var payment_method_nonce = document.getElementById("payment_method_nonce");
+                    payment_method_nonce.value = "fake-valid-nonce";
+                    form.submit();
+                        }
+                   }
+                });
+            </script>
         </div>
     </div>
    

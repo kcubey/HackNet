@@ -34,7 +34,6 @@ namespace HackNet.Game
             Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
 
             LoadInventory(memorylist, 2);
-
         }
 
         public void buckTextBox_TextChanged(Object sender, EventArgs e)
@@ -48,6 +47,7 @@ namespace HackNet.Game
             Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
 
             ClearText();
+            //KTODO: Refresh/reload with updated values
         }
 
         public void Calculate()
@@ -91,7 +91,7 @@ namespace HackNet.Game
             numBuck = Convert.ToInt32(Session["numBuck"]);
             numCoin = Convert.ToInt32(Session["numCoin"]);
 
-            message = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+            message = "Now converting " + numBuck + " buck(s) to " + numCoin + " coins?";
 
             int newBuck = dbBuck - numBuck;
             int newCoin = dbCoin + numCoin;
@@ -109,6 +109,32 @@ namespace HackNet.Game
             }
 
             PrintMessage(message);
+        }
+
+        public void modalButton_Click(Object sender, EventArgs e)
+        {
+            numBuck = Convert.ToInt32(Session["numBuck"]);
+            numCoin = Convert.ToInt32(Session["numCoin"]);
+
+            messageLabel.Text = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+        }
+
+        public void mcButton_Click(Object sender, EventArgs e)
+        {
+            int newBuck = dbBuck - numBuck;
+            int newCoin = dbCoin + numCoin;
+
+            using (DataContext db = new DataContext())
+            {
+                Users u = Authenticate.GetCurrentUser(false, db);
+                u.ByteDollars = newBuck;
+                u.Coins = newCoin;
+
+                db.SaveChanges();
+                Debug.WriteLine("user now has " + u.ByteDollars + " bucks and " + u.Coins + " coins");
+                //dbBuck = u.ByteDollars;
+                dbCoin = u.Coins;
+            }
         }
 
         public void ClearText()
