@@ -67,6 +67,33 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button ConversionButton;
         
         /// <summary>
+        /// openButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button openButton;
+        
+        /// <summary>
+        /// headerconvert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label headerconvert;
+        
+        /// <summary>
+        /// messageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label messageLabel;
+        
+        /// <summary>
         /// warning control.
         /// </summary>
         /// <remarks>

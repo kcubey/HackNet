@@ -73,6 +73,7 @@ namespace HackNet.Payment
 
             //Get the nonce & device data from the client
             //var nonce = Request.Form["payment_method_nonce"];
+
             var nonce = Request.Form["payment_method_nonce"];
             var deviceData = Request.Form["device_data"];
             Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);

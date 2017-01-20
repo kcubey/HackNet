@@ -47,8 +47,9 @@ namespace HackNet.Security
 				{
 					rsa.FromXmlString(parameters);
 					rparam = rsa.ExportParameters(true);
+					plainBytes = rsa.Decrypt(cipherBytes, true);
 				}
-				using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+			using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
 				{
 					RSACryptoServiceProvider.UseMachineKeyStore = true;
 					rsa.ImportParameters(rparam);
@@ -165,7 +166,7 @@ namespace HackNet.Security
 				hashedbytes = kdf.GetBytes(128);
 			// Stop the stopwatch
 			sw.Stop();
-			Debug.WriteLine("TIME ELAPSED" + sw.Elapsed);
+			Debug.WriteLine("Hashing time elapsed: " + sw.ElapsedMilliseconds + "ms");
 			// Return the hash
 			return hashedbytes;
 		}

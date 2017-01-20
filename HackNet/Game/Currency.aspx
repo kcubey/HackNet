@@ -62,6 +62,35 @@
                         <br /><br />
 
                         <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
+<!-- ============================= -->
+
+                        <asp:Button ID="openButton" class="btn btn-info btn-lg" data-toggle="modal" 
+                            data-target="#popupConfirmation" runat="server" Text="OPen Modal" onclick="modalButton_Click"/>
+                        
+                        <div id="popupConfirmation" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <asp:Label ID="headerconvert" runat="server" Text="*WARNING*" ForeColor="Blue" Font-Size="Large"></asp:Label>
+                                    </div>
+                                    <div class="modal-body" style="color: black;">
+                                        <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button CssClass="btn btn-default" runat="server" OnClick="mcButton_Click" Text="Continue" />
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
 
                     </div>
 

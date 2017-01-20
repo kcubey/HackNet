@@ -16,8 +16,12 @@ namespace HackNet.Game
 		{
 			if (Session["KeyStore"] == null)
 				Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
+
+			RecentsDataList.DataSource = GetRecents();
+			RecentsDataList.DataBind();
 		}
 		
+		// 
 		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
 		{
 			int otherid = -1;
@@ -51,21 +55,99 @@ namespace HackNet.Game
 				ViewState["thisParty"] = Authenticate.GetUserId();
 				ViewState["otherParty"] = otherid;
 				ToggleWindows();
-				ChatRepeater.DataSource = RetrieveMessages(username, otherid);
+				ChatRepeater.DataSource = RetrieveMessages(otherid);
 				ChatRepeater.DataBind();
 				return;
 
 			}
 		}
 
-		public List<Message> RetrieveMessages(string otherUsername, int otherId)
+		
+		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
 		{
-			List<Message> msgs;
-			KeyStore ks = Session["KeyStore"] as KeyStore;
-			int viewerId = Authenticate.GetUserId();
-			LblRecipient.Text = otherUsername;
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks);
-			return msgs;
+			ToggleWindows();
+		}
+
+		protected void SendMsg_Click(object sender, EventArgs e)
+		{
+			if (string.IsNullOrWhiteSpace(MessageToSend.Text))
+			{
+				return;
+			}
+
+			int currentuser = Authenticate.GetUserId();
+			int otheruser = (int) ViewState["otherParty"];
+			string otherusername = Authenticate.ConvertIdToUsername(otheruser);
+			string content = MessageToSend.Text;
+
+			MessageToSend.Text = "";
+
+			content = HttpUtility.HtmlEncode(content);
+
+			Message msg = new Message(currentuser, otheruser, content);
+			MessageLogic.SendMessage(msg);
+
+			ChatUpdatePanel.Update();
+			ChatUpdatePanel.Update();
+			ClientScript.RegisterStartupScript(this.GetType(), "updp", "Update_UpdatePanel()", true);
+		}
+
+		protected void ChatWindow_Load(object sender, EventArgs e)
+		{
+			if (Session["KeyStore"] == null)
+				Msg.Text = "Error decrypting messages, KS is NULL!";
+		}
+
+		protected void ChatRepeater_Load(object sender, EventArgs e)
+		{
+			base.OnLoad(e);
+			int otherid;
+
+			if (ViewState["otherParty"] != null)
+				otherid = (int)ViewState["otherParty"];
+			else
+				otherid = -1;
+
+			ChatRepeater.DataSource = RetrieveMessages(otherid);
+			ChatRepeater.DataBind();
+		}
+
+		// Utility methods
+		public string ThisOrOther(int userid)
+		{
+			if (userid == (int)ViewState["thisParty"])
+			{
+				return "self";
+			}
+			else
+			{
+				return "other";
+			}
+		}
+
+		protected List<string> GetRecents()
+		{
+			int id = Authenticate.GetUserId();
+			return MessageLogic.RetrieveRecents(id).ToList();
+		}
+
+		protected void ToggleWindows()
+		{
+			if (SelectRecipientWindow.Visible == true)
+			{
+				SelectRecipientWindow.Visible = false;
+				ChatWindow.Visible = true;
+			}
+			else
+			{
+				SelectRecipientWindow.Visible = true;
+				ChatWindow.Visible = false;
+			}
+		}
+
+		protected void SetRecipient(object sender, EventArgs e)
+		{
+			ReceiverId.Text = (sender as LinkButton).CommandArgument;
 		}
 
 		public string GetUsername(int userid)
@@ -75,57 +157,27 @@ namespace HackNet.Game
 				string username = Authenticate.ConvertIdToUsername(userid);
 				usernames.Add(userid, username);
 				return username;
-			} else
+			}
+			else
 			{
 				return usernames[userid];
 			}
 		}
 
-		public string ThisOrOther(int userid)
+		public List<Message> RetrieveMessages(int otherId, int limit = 10)
 		{
-			if (userid == (int) ViewState["thisParty"])
+			if (otherId <= 0)
 			{
-				return "self";
-			} else
-			{
-				return "other";
+				return new List<Message>();
 			}
+			List<Message> msgs;
+			KeyStore ks = Session["KeyStore"] as KeyStore;
+			int viewerId = Authenticate.GetUserId();
+			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit).ToList();
+			return msgs;
 		}
 
-		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
-		{
-			ToggleWindows();
-		}
 
-		protected void SendMsg_Click(object sender, EventArgs e)
-		{
-			int currentuser = Authenticate.GetUserId();
-			int otheruser = (int) ViewState["otherParty"];
-			string content = MessageToSend.Text;
-
-			content = HttpUtility.HtmlEncode(content);
-
-			Message msg = new Message(currentuser, otheruser, content);
-			MessageLogic.SendMessage(msg);
-		}
-
-		protected void ToggleWindows()
-		{
-			if (SelectRecipientWindow.Visible == true)
-			{
-				SelectRecipientWindow.Visible = false;
-				ChatWindow.Visible = true;
-			} else
-			{
-				SelectRecipientWindow.Visible = true;
-				ChatWindow.Visible = false;
-			}
-		}
-
-		protected void ChatWindow_Load(object sender, EventArgs e)
-		{
-			if (Session["KeyStore"] == null)
-				Msg.Text = "Error decrypting messages, KS is NULL!";
-		}
 	}
 }
