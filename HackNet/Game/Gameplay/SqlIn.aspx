@@ -1,9 +1,74 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SqlIn.aspx.cs" Inherits="HackNet.Game.Gameplay.SqlIn" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" ViewStateEncryptionMode="Always" CodeBehind="SqlIn.aspx.cs" Inherits="HackNet.Game.Gameplay.SqlIn" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
-
+        function CancelReturnKey() {
+            if (window.event.keyCode == 13)
+                return false;
+        }
     </script>
+    <div id="missionSumModel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <asp:Label runat="server" ID="SummaryTitle" Font-Size="Larger"></asp:Label>
+                </div>
+                <div class="modal-body">
+                    <asp:Table runat="server" ForeColor="Black" CssClass="table">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell ColumnSpan="4">Mission Summary</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission Name: </label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisNameLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission IP Address:</label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisIPLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Mission Summary:</label>
+                            </asp:TableCell>
+                            <asp:TableCell ColumnSpan="3">
+                                <asp:Label runat="server" ID="MisSumLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Rewards</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>EXP: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="MisExpLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <label>Coins Earned: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="MisCoinLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="ExitBtn" runat="server" CssClass="btn btn-default" OnClick="ExitBtn_Click" Text="Exit" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div onkeypress="return CancelReturnKey();">
         <div class="row" style="border: 1px solid black; margin-left: 0; margin-right: 0;">
             <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black; padding: 0;">
@@ -101,19 +166,46 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-left: 0; margin-right: 0;">
-            <div class="panel panel-default">
-                <div class="panel-header" style="background-color: crimson;">
-                    <h4 style="text-align: center; margin-bottom: 0;">Browser</h4>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-header" style="background-color: crimson;">
+                        <h4 style="text-align: center; margin-bottom: 0;">Browser</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="main-login-form">
+                            <div class="login-group">
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Username: " />
+                                    <asp:TextBox runat="server" Enabled="false" CssClass="form-control" ID="UsrName" />
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Password: " />
+                                    <asp:TextBox runat="server" Enabled="false" CssClass="form-control" ID="Password" />
+                                </div>
+                            </div>
+                            <asp:Button runat="server" CssClass="btn btn-default" Text="Login" OnClick="LoginBtn_Click" />
+                            <asp:Label runat="server" ID="LoginErrorLbl" />
+                            
+                        </div>
+
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <asp:Label runat="server" Text="Username: "></asp:Label>
-                    <asp:TextBox runat="server" ID="UsrNamTxtBox"></asp:TextBox>
-                    <br />
-                    <asp:Label runat="server" Text="Password"></asp:Label>
-                    <asp:TextBox runat="server" ID="PassTxtBox"></asp:TextBox>
-                    <br />
-                    <asp:Button runat="server" CssClass="btn-primary" ID="LoginBtn" OnClick="LoginBtn_Click" Text="Login" />
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <div class="panel panel-default" style="height: 219px;">
+                    <div class="panel-header" style="background-color: crimson;">
+                        <h4 style="text-align: center; margin-bottom: 0;">Injection Code</h4>
+                    </div>
+                    <div class="panel-body" style="background-color: black;">
+                        <asp:DataList runat="server" ID="SQLCodeList">
+                            <ItemTemplate>
+                                <li>
+                                    <asp:Label runat="server" Text='<%#Eval("SQLCode") %>'></asp:Label>
+                                </li>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
                 </div>
             </div>
         </div>

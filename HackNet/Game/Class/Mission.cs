@@ -153,5 +153,15 @@ namespace HackNet.Game
 
             return urlList;
         }
+
+        public static List<string> LoadSQLCode()
+        {
+            List<string> codeList = new List<string>();
+            codeList.Add("'OR 1=1--*");
+            codeList.Add("adminbypass-'*/--");
+            codeList.Add("' DROP ALL TABLES;--");
+
+            return codeList;
+        }
     }
 }

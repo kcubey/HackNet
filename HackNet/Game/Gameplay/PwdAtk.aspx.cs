@@ -84,7 +84,7 @@ namespace HackNet.Game.Gameplay
                         Random rnd = new Random();
                         int r = rnd.Next(pwdList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
-                        Session["AnswerForPwd"] = pwdList[r];
+                        ViewState["AnswerForPwd"] = pwdList[r];
                         ViewState["PWDCalculated"] = true;
                         LoadScanInfo(ViewState["ScanList"] as List<string>);
                         LoadPwdListToGrid(pwdList);
@@ -104,7 +104,7 @@ namespace HackNet.Game.Gameplay
                 {
                     if ((bool)ViewState["Bypass"] == false)
                     {
-                        if (CmdTextBox.Text.Equals(Session["AnswerForPwd"].ToString()))
+                        if (CmdTextBox.Text.Equals(ViewState["AnswerForPwd"].ToString()))
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
