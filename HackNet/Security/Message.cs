@@ -10,7 +10,7 @@ namespace HackNet.Security
 	public class Message
 	{
 		public int SenderId { get; private set; }
-		public int RecipientId { get; private set; }
+		public int ConversationId { get; private set; }
 		public string Content { get; private set; }
 		public DateTime Timestamp { get; private set; }
 		public byte[] SHA1Sum { get; private set; }
@@ -18,30 +18,27 @@ namespace HackNet.Security
 		public int MessageId  { get; private set; } // Only if made from constructor
 
 		// Convert to database type
-		internal Messages ToDatabase(string RPubKey, string SPubKey)
+		internal SecureMessage ToDatabase(byte[] sharedAesKey)
 		{
 			byte[] contentBytes = Encoding.UTF8.GetBytes(Content);
-			Messages dbMsg = new Messages()
+			byte[] MessageIV = Crypt.Instance.GenerateIv("AES");
+			SecureMessage dbMsg = new SecureMessage()
 			{
 				SenderId = SenderId,
-				ReceiverId = RecipientId,
-				ReceiverEncrypted = Crypt.Instance.EncryptRsa(contentBytes, RPubKey),
-				SenderEncrypted = Crypt.Instance.EncryptRsa(contentBytes, SPubKey),
+				Message = Crypt.Instance.EncryptAes(contentBytes, sharedAesKey, MessageIV),
 				Timestamp = Timestamp
 			};
 			return dbMsg;
 		}
 
-		internal Message(Messages dbMsg, int ViewerId, string PrivKey)
+		internal Message(SecureMessage dbMsg, int ViewerId, byte[] aesKey)
 		{
 			byte[] msgBytes;
 			string msgString;
 
 			// Identify which one from DB to decrypt
 			if (dbMsg.SenderId == ViewerId) // When viewer is SENDER
-				msgBytes = Crypt.Instance.DecryptRsa(dbMsg.SenderEncrypted, PrivKey);
-			else if (dbMsg.ReceiverId == ViewerId) // When viewer is RECEIVER
-				msgBytes = Crypt.Instance.DecryptRsa(dbMsg.ReceiverEncrypted, PrivKey);
+				msgBytes = Crypt.Instance.DecryptAes(dbMsg.Message, aesKey, dbMsg.EncryptionIV);
 			else // Something isnt right, maybe an exception should be thrown
 				msgBytes = new byte[0];
 
@@ -52,7 +49,6 @@ namespace HackNet.Security
 				msgString = "Message content could not be shown.";
 
 			SenderId = dbMsg.SenderId;
-			RecipientId = dbMsg.ReceiverId;
 			Content = msgString;
 			Timestamp = dbMsg.Timestamp;
 		}
@@ -61,7 +57,6 @@ namespace HackNet.Security
 		internal Message(int SenderId, int RecipientId, string Content)
 		{
 			this.SenderId = SenderId;
-			this.RecipientId = RecipientId;
 			this.Content = Content;
 			Timestamp = DateTime.Now;
 			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));
@@ -70,7 +65,6 @@ namespace HackNet.Security
 		internal Message(int SenderId, int RecipientId, string Content, DateTime Timestamp)
 		{
 			this.SenderId = SenderId;
-			this.RecipientId = RecipientId;
 			this.Content = Content;
 			this.Timestamp = Timestamp;
 			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));

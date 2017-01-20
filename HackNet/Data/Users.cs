@@ -64,10 +64,6 @@ namespace HackNet.Data
 
 		public virtual ICollection<InventoryItem> Inventory { get; set; }
 
-		public virtual ICollection<Messages> SentMessages { get; set; }
-
-		public virtual ICollection<Messages> ReceivedMessages { get; set; }
-
 		// Simple method for password hash and salt updating
 		internal void UpdatePassword(string newpassword)
 		{

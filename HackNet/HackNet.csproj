@@ -431,7 +431,8 @@
     <Compile Include="Data\Logs.cs" />
     <Compile Include="Data\Machines.cs" />
     <Compile Include="Data\MarketListings.cs" />
-    <Compile Include="Data\Messages.cs" />
+    <Compile Include="Data\Conversation.cs" />
+    <Compile Include="Data\SecureMessage.cs" />
     <Compile Include="Data\MissionData.cs" />
     <Compile Include="Data\PackageItems.cs" />
     <Compile Include="Data\Packages.cs" />

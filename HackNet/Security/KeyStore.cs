@@ -55,7 +55,7 @@ namespace HackNet.Security
 			UserKeyStore uks;
 
 			// Required to derive key from password
-			byte[] desIv = Crypt.Instance.Generate(8); 
+			byte[] desIv = Crypt.Instance.GenerateIv("DES"); 
 
 			// Required to decrypt the RSA key
 			byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, desIv);

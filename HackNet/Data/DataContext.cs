@@ -29,7 +29,8 @@ namespace HackNet.Data
 		public DbSet<Machines> Machines { get; set; }
 		public DbSet<MissionData> MissionData { get; set; }
         public DbSet<AttackData> AttackData { get; set; }
-        public DbSet<Messages> Messages { get; set; }
+		public DbSet<Conversation> Conversation { get; set; }
+        public DbSet<SecureMessage> SecureMessage { get; set; }
 		public DbSet<Items> Items { get; set; }
 		public DbSet<InventoryItem> InventoryItem { get; set; }
 		public DbSet<Packages> Packages { get; set; }
@@ -58,16 +59,26 @@ namespace HackNet.Data
 						.HasForeignKey(ifk => ifk.UserId)
 						.WillCascadeOnDelete(false);
 
-			// Messages
-			modelBuilder.Entity<Messages>()
-						.HasRequired(ms => ms.Sender)
-						.WithMany(snd => snd.SentMessages)
-						.HasForeignKey(msf => msf.SenderId)
+			// Conversations
+			modelBuilder.Entity<Conversation>()
+						.HasRequired(conv => conv.UserA)
+						.WithMany()
 						.WillCascadeOnDelete(false);
-			modelBuilder.Entity<Messages>()
-						.HasRequired(mr => mr.Receiver)
-						.WithMany(rcv => rcv.ReceivedMessages)
-						.HasForeignKey(mrf => mrf.ReceiverId)
+
+			modelBuilder.Entity<Conversation>()
+						.HasRequired(conv => conv.UserB)
+						.WithMany()
+						.WillCascadeOnDelete(false);
+
+			// SecureMessage
+			modelBuilder.Entity<SecureMessage>()
+						.HasRequired(msg => msg.Sender)
+						.WithMany()
+						.WillCascadeOnDelete(false);
+
+			modelBuilder.Entity<SecureMessage>()
+						.HasRequired(msg => msg.Conversation)
+						.WithMany()
 						.WillCascadeOnDelete(false);
 
 		}
