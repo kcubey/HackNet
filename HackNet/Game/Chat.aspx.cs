@@ -84,7 +84,7 @@ namespace HackNet.Game
 
 			content = HttpUtility.HtmlEncode(content);
 
-			Message msg = new Message(currentuser, otheruser, content);
+			Message msg = new Message(currentuser, content);
 			MessageLogic.SendMessage(msg);
 
 			ChatUpdatePanel.Update();
@@ -170,11 +170,11 @@ namespace HackNet.Game
 			{
 				return new List<Message>();
 			}
-			List<Message> msgs;
+			List<Message> msgs = new List<Message>();
 			KeyStore ks = Session["KeyStore"] as KeyStore;
 			int viewerId = Authenticate.GetUserId();
 			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit).ToList();
+			//msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit).ToList();
 			return msgs;
 		}
 

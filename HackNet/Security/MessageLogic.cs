@@ -10,17 +10,19 @@ namespace HackNet.Security
 {
 	public static class MessageLogic
 	{
-		public static ICollection<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
+		public static ICollection<Message> RetrieveMessages(int conversationId, KeyStore ks, int amount = -1)
 		{
 			List<Message> decryptedMessages = new List<Message>();
 			List<SecureMessage> dbMsgList;
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 			using (DataContext db = new DataContext())
-			{
+			{ 
+
 				// DB Query for messages that match query
-				var dbMsgQueryable = db.SecureMessage.Where(m =>
-						(m.SenderId == Sender || m.SenderId == Receiver)).OrderByDescending(m => m.MsgId);
+				var dbMsgQueryable = db.SecureMessage
+										.Where(m => (m.ConId == conversationId))
+										.OrderByDescending(m => m.MsgId);
 
 				int rows = dbMsgQueryable.Count();
 
@@ -41,7 +43,7 @@ namespace HackNet.Security
 				sw.Start();
 				foreach (SecureMessage dbMsg in dbMsgList)
 				{
-					// TODO: decryptedMessages.Add(new Message(dbMsg, Viewer, new ));
+					//decryptedMessages.Add(new Message(dbMsg, , new ));
 				}
 				sw.Stop();
 				Debug.WriteLine("Messages decryption took: " + sw.ElapsedMilliseconds + "ms");
@@ -65,10 +67,10 @@ namespace HackNet.Security
 				}
 
 				// Convert the message to database format while encrypting it
-				SecureMessage dbMsg = msg.ToDatabase(new byte[0]);
+				//SecureMessage dbMsg = msg.ToDatabase(new byte[0]);
 
 				// Add to database
-				db.SecureMessage.Add(dbMsg);
+				//db.SecureMessage.Add(dbMsg);
 				db.SaveChanges();
 			}
 		}
