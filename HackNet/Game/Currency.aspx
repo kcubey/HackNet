@@ -72,7 +72,7 @@
 <!-- ============================= -->
 
                         <asp:Button ID="openButton" class="btn btn-info btn-lg" data-toggle="modal" 
-                            data-target="#popupConfirmation" runat="server" Text="OPen Modal"/>
+                            data-target="#popupConfirmation" runat="server" type="button" Text="OPen Modal"/>
                         
                         <div id="popupConfirmation" class="modal fade" role="dialog">
                             <div class="modal-dialog">

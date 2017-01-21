@@ -33,14 +33,18 @@ namespace HackNet.Payment
             string transactionDetails = Session["transactionId"].ToString();
 
             transactionId.Text = transactionDetails;
-            packageDetailsLbl.Text = "Package " + packageName + " at $" + packagePrice;
+            string message = "Package " + packageName + " at $" + packagePrice;
+            packageDetailsLbl.Text = message;
+
+            Session["packageId"] = null;
+            Session["packageprice"] = null;
 
 
             Users u = Authenticate.GetCurrentUser();
             using (MailClient mc = new MailClient(u.Email))
             {
                 mc.Subject = "Purchase from HackNet";
-            	mc.AddLine("Thank you for buying Package "+packageName + " at $" + packagePrice + "!");
+            	mc.AddLine("Thank you for buying " +message + "!");
                 mc.AddLine("Your Transaction Id is "+transactionDetails);
             	mc.AddLine("We hope you enjoy your gaming experience with us.");
                 mc.AddLine("");
@@ -49,9 +53,6 @@ namespace HackNet.Payment
                 mc.AddLine("Thank you.");
             	mc.Send(u.FullName);
             }
-
-            Session["packageId"] = null;
-            Session["packageprice"] = null;
         }
     }
 }
