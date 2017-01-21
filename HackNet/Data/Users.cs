@@ -62,6 +62,8 @@ namespace HackNet.Data
 
 		public UserKeyStore UserKeyStore { get; set; }
 
+		public virtual ICollection<Conversation> Conversations { get; set; }
+
 		public virtual ICollection<InventoryItem> Inventory { get; set; }
 
 		// Simple method for password hash and salt updating

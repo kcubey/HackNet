@@ -17,8 +17,11 @@ namespace HackNet.Game
 			if (Session["KeyStore"] == null)
 				Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
 
-			RecentsDataList.DataSource = GetRecents();
-			RecentsDataList.DataBind();
+			if (!IsPostBack)
+			{
+				RecentsDataList.DataSource = GetRecents();
+				RecentsDataList.DataBind();
+			}
 		}
 		
 		// 
@@ -54,18 +57,14 @@ namespace HackNet.Game
 			{
 				ViewState["thisParty"] = Authenticate.GetUserId();
 				ViewState["otherParty"] = otherid;
+
 				ToggleWindows();
+				LblRecipient.Text = Authenticate.ConvertIdToUsername(otherid);
 				ChatRepeater.DataSource = RetrieveMessages(otherid);
 				ChatRepeater.DataBind();
 				return;
 
 			}
-		}
-
-		
-		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
-		{
-			ToggleWindows();
 		}
 
 		protected void SendMsg_Click(object sender, EventArgs e)
@@ -77,7 +76,7 @@ namespace HackNet.Game
 
 			int currentuser = Authenticate.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];
-			string otherusername = Authenticate.ConvertIdToUsername(otheruser);
+			var keyStore = Session["KeyStore"] as KeyStore;
 			string content = MessageToSend.Text;
 
 			MessageToSend.Text = "";
@@ -85,11 +84,14 @@ namespace HackNet.Game
 			content = HttpUtility.HtmlEncode(content);
 
 			Message msg = new Message(currentuser, otheruser, content);
-			MessageLogic.SendMessage(msg);
+			MessageLogic.SendMessage(msg, keyStore);
 
-			ChatUpdatePanel.Update();
-			ChatUpdatePanel.Update();
 			ClientScript.RegisterStartupScript(this.GetType(), "updp", "Update_UpdatePanel()", true);
+		}
+
+		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
+		{
+			ToggleWindows();
 		}
 
 		protected void ChatWindow_Load(object sender, EventArgs e)
@@ -170,11 +172,11 @@ namespace HackNet.Game
 			{
 				return new List<Message>();
 			}
-			List<Message> msgs;
+			List<Message> msgs = new List<Message>();
 			KeyStore ks = Session["KeyStore"] as KeyStore;
 			int viewerId = Authenticate.GetUserId();
-			LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, viewerId, ks, limit).ToList();
+			//LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, ks, limit).ToList();
 			return msgs;
 		}
 

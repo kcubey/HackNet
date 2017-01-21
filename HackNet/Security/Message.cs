@@ -9,66 +9,61 @@ namespace HackNet.Security
 {
 	public class Message
 	{
+		public int MessageId { get; private set; } // Only if destined from database
+
 		public int SenderId { get; private set; }
-		public int ConversationId { get; private set; }
-		public string Content { get; private set; }
+
+		public int RecipientId { get; private set; }
+
+		public int ConversationId { get; internal set; }
+
+		public string Content { get; internal set; }
+
 		public DateTime Timestamp { get; private set; }
-		public byte[] SHA1Sum { get; private set; }
 
-		public int MessageId  { get; private set; } // Only if made from constructor
 
-		// Convert to database type
-		internal SecureMessage ToDatabase(byte[] sharedAesKey)
+		/// <summary>
+		/// Created Message with information from database
+		/// </summary>
+		/// <param name="dbMsg"></param>
+		/// <param name="aesKey"></param>
+		internal Message(SecureMessage dbMsg, byte[] aesKey)
 		{
-			byte[] contentBytes = Encoding.UTF8.GetBytes(Content);
-			byte[] MessageIV = Crypt.Instance.GenerateIv("AES");
-			SecureMessage dbMsg = new SecureMessage()
-			{
-				SenderId = SenderId,
-				Message = Crypt.Instance.EncryptAes(contentBytes, sharedAesKey, MessageIV),
-				Timestamp = Timestamp
-			};
-			return dbMsg;
-		}
-
-		internal Message(SecureMessage dbMsg, int ViewerId, byte[] aesKey)
-		{
-			byte[] msgBytes;
-			string msgString;
-
-			// Identify which one from DB to decrypt
-			if (dbMsg.SenderId == ViewerId) // When viewer is SENDER
-				msgBytes = Crypt.Instance.DecryptAes(dbMsg.Message, aesKey, dbMsg.EncryptionIV);
-			else // Something isnt right, maybe an exception should be thrown
-				msgBytes = new byte[0];
-
-			// Convert bytes to string
-			if (msgBytes.Length != 0 && msgBytes != null)
-				msgString = Encoding.UTF8.GetString(msgBytes);
-			else
-				msgString = "Message content could not be shown.";
+			byte[] msgEncrypted = dbMsg.Message;
+			byte[] msgIv = dbMsg.EncryptionIV;
+			byte[] msgBytes = Crypt.Instance.DecryptAes(dbMsg.Message, aesKey, msgIv);
+			string msgString = Encoding.UTF8.GetString(msgBytes);
 
 			SenderId = dbMsg.SenderId;
 			Content = msgString;
 			Timestamp = dbMsg.Timestamp;
+			ConversationId = dbMsg.ConId;
 		}
 
 		// Message creation
-		internal Message(int SenderId, int RecipientId, string Content)
+		internal Message(int senderId, int convId, string msgContent)
 		{
-			this.SenderId = SenderId;
-			this.Content = Content;
+			SenderId = senderId;
+			RecipientId = convId;
+			Content = msgContent;
 			Timestamp = DateTime.Now;
-			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));
+
 		}
 
-		internal Message(int SenderId, int RecipientId, string Content, DateTime Timestamp)
+		internal SecureMessage ToDatabase(int recipientId, byte[] aesKeyBytes)
 		{
-			this.SenderId = SenderId;
-			this.Content = Content;
-			this.Timestamp = Timestamp;
-			SHA1Sum = Crypt.Instance.Hash(Encoding.UTF8.GetBytes(Content));
-		}
+			byte[] contentBytes = Encoding.UTF8.GetBytes(Content);
+			byte[] generatedIv = Crypt.Instance.GenerateIv("AES");
 
+			SecureMessage dbMsg = new SecureMessage()
+			{
+				SenderId = SenderId,
+				Message = Crypt.Instance.EncryptAes(contentBytes, aesKeyBytes, generatedIv),
+				ConId = ConversationId,
+				Timestamp = Timestamp,
+				EncryptionIV = generatedIv,
+			};
+			return dbMsg;
+		}
 	}
 }

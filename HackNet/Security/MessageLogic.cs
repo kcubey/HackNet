@@ -10,17 +10,33 @@ namespace HackNet.Security
 {
 	public static class MessageLogic
 	{
-		public static ICollection<Message> RetrieveMessages(int Sender, int Receiver, int Viewer, KeyStore ks, int amount = -1)
+		public static ICollection<Message> RetrieveMessages(int retriever, int other, KeyStore ks, int amount = -1)
 		{
-			List<Message> decryptedMessages = new List<Message>();
-			List<SecureMessage> dbMsgList;
+			ICollection<Message> decryptedMessages = new List<Message>();
+			List<SecureMessage> dbMsgList = null;
+			byte[] convAesKey = null;
+
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 			using (DataContext db = new DataContext())
 			{
+				var dbConv = GetConversation(retriever, other, db);
+
+				if (dbConv == null)
+					throw new ChatException("Message could not be retrieved");
+
+				if (retriever == dbConv.UserAId)
+					convAesKey = Crypt.Instance.DecryptRsa(dbConv.KeyA, ks.rsaPrivate);
+				else if (retriever == dbConv.UserBId)
+					convAesKey = Crypt.Instance.DecryptRsa(dbConv.KeyB, ks.rsaPrivate);
+
+				if (convAesKey == null)
+					throw new ChatException("Message could not be decrypted (AES from RSA)");
+
 				// DB Query for messages that match query
-				var dbMsgQueryable = db.SecureMessage.Where(m =>
-						(m.SenderId == Sender || m.SenderId == Receiver)).OrderByDescending(m => m.MsgId);
+				var dbMsgQueryable = db.SecureMessage
+										.Where(m => (m.ConId == dbConv.ConId))
+										.OrderByDescending(m => m.MsgId);
 
 				int rows = dbMsgQueryable.Count();
 
@@ -33,39 +49,43 @@ namespace HackNet.Security
 					dbMsgList = dbMsgQueryable.Take(amount).ToList();
 				else
 					dbMsgList = dbMsgQueryable.ToList();
-				sw.Stop();
-				Debug.WriteLine("Messages retrieval took: " + sw.ElapsedMilliseconds + "ms");
 
 				// Convert each message into decrypted form
-				sw.Reset();
-				sw.Start();
 				foreach (SecureMessage dbMsg in dbMsgList)
 				{
-					// TODO: decryptedMessages.Add(new Message(dbMsg, Viewer, new ));
+					decryptedMessages.Add(new Message(dbMsg, convAesKey));
 				}
 				sw.Stop();
-				Debug.WriteLine("Messages decryption took: " + sw.ElapsedMilliseconds + "ms");
+				Debug.WriteLine("Messages retrieval & decryption took: " + sw.ElapsedMilliseconds + "ms");
 			}
 			return decryptedMessages;
 		}
 
-		public static void SendMessage(Message msg)
+		public static void SendMessage(Message msg, KeyStore ks)
 		{
+			byte[] convAesKey = null;
+			int recipientId = -1;
+
 			using (DataContext db = new DataContext())
 			{
-				string sPubKey;
+				var conv = GetConversation(msg.SenderId, msg.RecipientId, db);
+				msg.ConversationId = conv.ConId;
 
-				// Get the email address of concerned users
-				string sEmail = db.Users.Find(msg.SenderId).Email;
-
-				// Get the UserKeyStore object of the users
-				using (Authenticate a = new Authenticate())
+				if (msg.SenderId == conv.UserAId)
 				{
-					//sPubKey = a.GetRsaPublic(db, sEmail);
+					convAesKey = Crypt.Instance.DecryptRsa(conv.KeyA, ks.rsaPrivate);
+					recipientId = conv.UserBId;
+				}
+				else if (msg.SenderId == conv.UserBId)
+				{
+					convAesKey = Crypt.Instance.DecryptRsa(conv.KeyB, ks.rsaPrivate);
+					recipientId = conv.UserAId;
 				}
 
-				// Convert the message to database format while encrypting it
-				SecureMessage dbMsg = msg.ToDatabase(new byte[0]);
+				SecureMessage dbMsg = msg.ToDatabase(recipientId, convAesKey);
+
+				if (convAesKey == null || recipientId == -1)
+					throw new ChatException("Recipient invalid or message could not be encrypted");
 
 				// Add to database
 				db.SecureMessage.Add(dbMsg);
@@ -104,45 +124,43 @@ namespace HackNet.Security
 		/// </summary>
 		/// <param name="PartyA">User ID of Party A</param>
 		/// <param name="PartyB">User ID of Party B</param>
-		/// <returns></returns>
-		public static int GetConversationId(int PartyA, int PartyB)
+		/// <returns>Returns the existing/new conversation entity</returns>
+		public static Conversation GetConversation(int PartyA, int PartyB, DataContext db)
 		{
-			using (DataContext db = new DataContext())
-			{
-				Conversation conv = db.Conversation.Where(c =>
-										(c.UserAId == PartyA && c.UserBId == PartyB) ||
-										(c.UserBId == PartyA && c.UserAId == PartyB)).FirstOrDefault();
-				if (conv == null)
-					using (Authenticate a = new Authenticate())
+			Conversation conv = db.Conversation.Where(c =>
+									(c.UserAId == PartyA && c.UserBId == PartyB) ||
+									(c.UserBId == PartyA && c.UserAId == PartyB)).FirstOrDefault();
+			if (conv == null)
+				using (Authenticate a = new Authenticate())
+				{
+					byte[] symmAesKey = Crypt.Instance.GenerateAesKey();
+					string rsaA = a.GetRsaPublic(db, PartyA);
+					string rsaB = a.GetRsaPublic(db, PartyB);
+					byte[] encryptedAesKeyA = Crypt.Instance.EncryptRsa(symmAesKey, rsaA);
+					byte[] encryptedAesKeyB = Crypt.Instance.EncryptRsa(symmAesKey, rsaB);
+					Conversation newConv = new Conversation()
 					{
-						byte[] symmAesKey = Crypt.Instance.GenerateAesKey();
-						string rsaA = a.GetRsaPublic(db, PartyA);
-						string rsaB = a.GetRsaPublic(db, PartyB);
-						byte[] encryptedAesKeyA = Crypt.Instance.EncryptRsa(symmAesKey, rsaA);
-						byte[] encryptedAesKeyB = Crypt.Instance.EncryptRsa(symmAesKey, rsaB);
-						Conversation newConv = new Conversation()
-						{
-							KeyA = encryptedAesKeyA,
-							KeyB = encryptedAesKeyB,
-							UnreadForA = false,
-							UnreadForB = false,
-							UserAId = PartyA,
-							UserBId = PartyB
-						};
+						KeyA = encryptedAesKeyA,
+						KeyB = encryptedAesKeyB,
+						UnreadForA = false,
+						UnreadForB = false,
+						UserAId = PartyA,
+						UserBId = PartyB
+					};
 
-						db.Conversation.Add(conv);
-						db.SaveChanges();
+					db.Conversation.Add(newConv);
+					db.SaveChanges();
 
-						conv = db.Conversation.Where(c => (c.UserAId == PartyA && c.UserBId == PartyB)).FirstOrDefault();
+					conv = db.Conversation.Where(c => (c.UserAId == PartyA && c.UserBId == PartyB)).FirstOrDefault();
 
-					}
+				}
 
-				if (conv == null)
-					throw new ChatException("Conversation could not be loaded.");
+			if (conv == null)
+				throw new ChatException("Conversation could not be loaded.");
 
-				return conv.ConId;
+			return conv;
 
-			}
 		}
+		
 	}
 }

@@ -61,23 +61,13 @@ namespace HackNet.Data
 
 			// Conversations
 			modelBuilder.Entity<Conversation>()
-						.HasRequired(conv => conv.UserA)
-						.WithMany()
-						.WillCascadeOnDelete(false);
-
-			modelBuilder.Entity<Conversation>()
 						.HasRequired(conv => conv.UserB)
-						.WithMany()
+						.WithMany(u => u.Conversations)
 						.WillCascadeOnDelete(false);
 
 			// SecureMessage
 			modelBuilder.Entity<SecureMessage>()
-						.HasRequired(msg => msg.Sender)
-						.WithMany()
-						.WillCascadeOnDelete(false);
-
-			modelBuilder.Entity<SecureMessage>()
-						.HasRequired(msg => msg.Conversation)
+						.HasRequired(m => m.Conversation)
 						.WithMany()
 						.WillCascadeOnDelete(false);
 
