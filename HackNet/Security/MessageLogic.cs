@@ -16,7 +16,7 @@ namespace HackNet.Security
 			List<SecureMessage> dbMsgList = null;
 			byte[] convAesKey = null;
 
-			Stopwatch sw = new Stopwatch();
+			Stopwatch sw = new Stopwatch();                                        
 			sw.Start();
 			using (DataContext db = new DataContext())
 			{
