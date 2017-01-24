@@ -9,5 +9,6 @@
     <asp:Label runat="server" ID="ItemPrice">SGD</asp:Label>
     <br />
     <asp:Label runat="server" ID="ItemDesc"></asp:Label>
-
+    <br />
+    <asp:Button runat="server" ID="BuyBtn" OnClick="BuyBtn_Click" />
 </asp:Content>

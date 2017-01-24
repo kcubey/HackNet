@@ -1,4 +1,6 @@
 ﻿using HackNet.Data;
+using HackNet.Game.Class;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +52,12 @@ namespace HackNet.Game
                 return "";
             }
 
+        }
+
+        protected void BuyBtn_Click(object sender, EventArgs e)
+        {
+            Items item = (Items)Session["Item"];
+            ItemLogic.AddItemToInventory(Authenticate.GetCurrentUser(),item.ItemId);
         }
     }
 }
