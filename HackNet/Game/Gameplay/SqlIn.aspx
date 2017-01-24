@@ -6,6 +6,9 @@
             if (window.event.keyCode == 13)
                 return false;
         }
+        function showFinishPrompt() {
+            $('#missionSumModel').modal('show');
+        }
     </script>
     <div id="missionSumModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -85,13 +88,11 @@
                         <legend style="font-size: 15px;">Connection Options</legend>
                         <label style="width: 20%;" class="col-xs-3 col-form-label">Brwoser Type: </label>
                         <asp:DropDownList ID="TargetAtkTypeList" runat="server">
-                            <asp:ListItem>==Select Attack Type==</asp:ListItem>
                             <asp:ListItem>FireFox</asp:ListItem>
                             <asp:ListItem>Opera</asp:ListItem>
                             <asp:ListItem>Google Chrome</asp:ListItem>
                             <asp:ListItem>Internet Explorer</asp:ListItem>
                         </asp:DropDownList>
-                        <asp:RequiredFieldValidator runat="server" ControlToValidate="TargetAtkTypeList"></asp:RequiredFieldValidator>
                     </fieldset>
                     <br />
                     <asp:Label runat="server" ID="ErrorLbl"></asp:Label><br />
@@ -138,11 +139,6 @@
                         <asp:Button runat="server" OnClick="SubCmdBtn_Click" ID="SubCmdBtn" Text="Submit" CssClass="btn btn-default" Width="10%" Style="float: right;" />
                         <asp:Label runat="server" ID="CmdError"></asp:Label>
                         <br />
-                        <asp:RegularExpressionValidator runat="server" ID="CmdRegValidator"
-                            ControlToValidate="CmdTextBox"
-                            ForeColor="Red"
-                            ErrorMessage="Invalid Input"
-                            ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i"></asp:RegularExpressionValidator>
                     </div>
                 </div>
             </div>
@@ -179,15 +175,18 @@
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="Username: " />
                                     <asp:TextBox runat="server" Enabled="false" CssClass="form-control" ID="UsrName" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="UsrName"  ValidationGroup="Login"/>
                                 </div>
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="Password: " />
                                     <asp:TextBox runat="server" Enabled="false" CssClass="form-control" ID="Password" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" ValidationGroup="Login" />
+
                                 </div>
                             </div>
-                            <asp:Button runat="server" CssClass="btn btn-default" Text="Login" OnClick="LoginBtn_Click" />
+                            <asp:Button runat="server" CssClass="btn btn-default" Text="Login" OnClick="LoginBtn_Click" ValidationGroup="Login"/>
+                            <br />
                             <asp:Label runat="server" ID="LoginErrorLbl" />
-                            
                         </div>
 
                     </div>
@@ -201,7 +200,7 @@
                     <div class="panel-body" style="background-color: black;">
                         <asp:DataList runat="server" ID="SQLCodeList">
                             <ItemTemplate>
-                                <li>
+                                <li class="list-group-item">
                                     <asp:Label runat="server" Text='<%#Eval("SQLCode") %>'></asp:Label>
                                 </li>
                             </ItemTemplate>

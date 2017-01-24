@@ -14,12 +14,12 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (Session["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
             }
-            
+
             if (!IsPostBack)
             {
                 ViewState["URLCalculated"] = false;
@@ -48,7 +48,7 @@ namespace HackNet.Game.Gameplay
             List<string> urlList = Mission.LoadURLList();
             DataTable dt = new DataTable();
             dt.Columns.Add("PossURL", typeof(string));
-            foreach(string s in urlList)
+            foreach (string s in urlList)
             {
                 dt.Rows.Add(s);
             }
@@ -92,9 +92,9 @@ namespace HackNet.Game.Gameplay
         {
             if ((bool)ViewState["Configure"])
             {
-                if((bool)ViewState["URLCalculated"] == false)
+                if ((bool)ViewState["URLCalculated"] == false)
                 {
-                    if(CmdTextBox.Text=="run SQLInjection")
+                    if (CmdTextBox.Text == "run SQLInjection")
                     {
                         // Calculation of URL and picking correct URL for attack
                         List<string> urlList = Mission.LoadURLList();
@@ -130,7 +130,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.Text = "URL is correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
-                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
+                            LoadScanInfo(Mission.LoadSuccessURL((MissionData)Session["MissionData"]));
                             ViewState["Bypass"] = true;
 
                             // Enable the browser
@@ -153,7 +153,7 @@ namespace HackNet.Game.Gameplay
                         CmdTextBox.Enabled = false;
                     }
                 }
-                
+
 
             }
             else
@@ -166,43 +166,35 @@ namespace HackNet.Game.Gameplay
 
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
-            if (UsrName.Text != "" || Password.Text != "")
+
+            if (UsrName.Text.Equals("adminbypass-'*/--") && Password.Text.Equals("' DROP ALL TABLES;--"))
             {
-                if (UsrName.Text.Equals("adminbypass-'*/--") && Password.Text.Equals("' DROP ALL TABLES;--"))
+                MissionData mis = (MissionData)Session["MissionData"];
+                // Title
+                SummaryTitle.Text = "Congratulations, Mission Completed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Green;
+                // Summary
+                MisNameLbl.Text = mis.MissionName;
+                MisIPLbl.Text = mis.MissionIP;
+                MisSumLbl.Text = "";
+                MisExpLbl.Text = mis.MissionExp.ToString();
+                MisCoinLbl.Text = mis.MissionCoin.ToString();
+
+                using (DataContext db = new DataContext())
                 {
-                    MissionData mis = (MissionData)Session["MissionData"];
-                    // Title
-                    SummaryTitle.Text = "Congratulations, Mission Completed!";
-                    SummaryTitle.ForeColor = System.Drawing.Color.Green;
-                    // Summary
-                    MisNameLbl.Text = mis.MissionName;
-                    MisIPLbl.Text = mis.MissionIP;
-                    MisSumLbl.Text = "";
-                    MisExpLbl.Text = mis.MissionExp.ToString();
-                    MisCoinLbl.Text = mis.MissionCoin.ToString();
-
-                    using (DataContext db = new DataContext())
-                    {
-                        Users u = Authenticate.GetCurrentUser(false, db);
-                        u.TotalExp = u.TotalExp + mis.MissionExp;
-                        System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
-                        db.SaveChanges();
-                    }
-
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+                    Users u = Authenticate.GetCurrentUser(false, db);
+                    u.TotalExp = u.TotalExp + mis.MissionExp;
+                    System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
+                    db.SaveChanges();
                 }
-                else
-                {
 
-                }
-            }else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+            }
+            else
             {
-                UsrName.Text = string.Empty;
-                Password.Text = string.Empty;
-                LoginErrorLbl.Text = "Error, please input SQL Code for BOTH fields";
-                LoginErrorLbl.ForeColor = System.Drawing.Color.Red;
 
             }
+
         }
         protected void ExitBtn_Click(object sender, EventArgs e)
         {
