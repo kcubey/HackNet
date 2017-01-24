@@ -91,6 +91,7 @@
                             <asp:ListItem>Google Chrome</asp:ListItem>
                             <asp:ListItem>Internet Explorer</asp:ListItem>
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="TargetAtkTypeList"></asp:RequiredFieldValidator>
                     </fieldset>
                     <br />
                     <asp:Label runat="server" ID="ErrorLbl"></asp:Label><br />
@@ -141,7 +142,7 @@
                             ControlToValidate="CmdTextBox"
                             ForeColor="Red"
                             ErrorMessage="Invalid Input"
-                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
+                            ValidationExpression="/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/i"></asp:RegularExpressionValidator>
                     </div>
                 </div>
             </div>
