@@ -52,4 +52,6 @@
     <div style="margin-left:85%;">
     <asp:Button runat="server" ID="BuyBtn" CssClass="btn btn-default"  OnClick="BuyBtn_Click" Text="Buy Now"/>
     </div>
+    <br />
+    <br />
 </asp:Content>
