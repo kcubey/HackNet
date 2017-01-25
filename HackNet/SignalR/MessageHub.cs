@@ -23,6 +23,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
 		public void CauseRefresh()
 		{
 			Clients.All.doAlert();
+
 		}
     }
 }
