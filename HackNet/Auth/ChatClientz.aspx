@@ -18,6 +18,7 @@
 	<div class="container">
 		<input type="text" id="message" />
 		<input type="button" id="sendmessage" value="Send" />
+		<input type="button" id="refresh" value="Send" />
 		<input type="hidden" id="displayname" />
 		<ul id="discussion"></ul>
 	</div>
@@ -36,10 +37,13 @@
                 // Html encode display name and message.
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(msg).html();
-                // Add the message to the page.
-                $('#discussion').append('<li><strong>' + encodedName
-                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+                $('#discussion').append('<li><strong>' + encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
             };
+
+			chat.client.doAlert = function () {
+				alert("hi");
+			};
+
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
             // Set initial focus to message input box.
@@ -52,6 +56,10 @@
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
+
+				$('#refresh').click(function () {
+					chat.server.causeRefresh();
+				})
             });
         });
 	</script>

@@ -12,17 +12,16 @@ namespace HackNet.Game.Gameplay
 {
     public partial class PwdAtk : System.Web.UI.Page
     {
-       
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["MissionData"] as MissionData == null)
+            if (Cache["MissionData"] as MissionData == null)
             {
-                // prevent path travesel?
+                // prevent path travesel
                 Response.Redirect("../Missions.aspx");
             }
             if (!IsPostBack)
             {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
                 ViewState["Configure"] = false;
                 ViewState["PWDCalculated"] = false;
                 ViewState["Bypass"] = false;
@@ -197,38 +196,54 @@ namespace HackNet.Game.Gameplay
         protected void StealLinkBtn_Command(object sender, CommandEventArgs e)
         {
             MissionData mis = (MissionData)Session["MissionData"];
+
             string stolenFile = e.CommandArgument.ToString();
-            if (Mission.CheckStolenFile(stolenFile))
+            if (mis.MissionType == 0)
             {
-                // Title
-                SummaryTitle.Text = "Congratulations, Mission Completed!";
-                SummaryTitle.ForeColor = System.Drawing.Color.Green;
-                // Summary
-                MisNameLbl.Text = mis.MissionName;
-                MisIPLbl.Text = mis.MissionIP;
-                MisSumLbl.Text = "";
-                MisExpLbl.Text = mis.MissionExp.ToString();
-                MisCoinLbl.Text = mis.MissionCoin.ToString();            
-
-                using(DataContext db =new DataContext())
+                if (Mission.CheckStolenFile(stolenFile))
                 {
-                    Users u = Authenticate.GetCurrentUser(false,db);
-                    u.TotalExp = u.TotalExp + mis.MissionExp;
-                    System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
-                    db.SaveChanges();
+                    // Title
+                    SummaryTitle.Text = "Congratulations, Mission Completed!";
+                    SummaryTitle.ForeColor = System.Drawing.Color.Green;
+                    // Summary
+                    MisNameLbl.Text = mis.MissionName;
+                    MisIPLbl.Text = mis.MissionIP;
+                    MisSumLbl.Text = "Some perpetrators uses these methods to gain access to companies to actually steal theri client information. As such, this could be prevented if firewall rules and other configurations were set up correctly.";
+                    MisExpLbl.Text = mis.MissionExp.ToString();
+                    MisCoinLbl.Text = mis.MissionCoin.ToString();
+
+                    using (DataContext db = new DataContext())
+                    {
+                        Users u = Authenticate.GetCurrentUser(false, db);
+                        u.TotalExp = u.TotalExp + mis.MissionExp;
+                        System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
+                        db.SaveChanges();
+                    }
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+
                 }
+                else
+                {
+                    // Title
+                    SummaryTitle.Text = "Mission Failed!";
+                    SummaryTitle.ForeColor = System.Drawing.Color.Red;
+                    MisNameLbl.Text = mis.MissionName;
+                    MisIPLbl.Text = mis.MissionIP;
+                    MisSumLbl.Text = "Mission Failed due to incorrect file choosen.";
+                    MisExpLbl.Text = "0";
+                    MisCoinLbl.Text = "0";
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
-
-            }
-            else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
+                }
+            }else
             {
                 // Title
                 SummaryTitle.Text = "Mission Failed!";
                 SummaryTitle.ForeColor = System.Drawing.Color.Red;
                 MisNameLbl.Text = mis.MissionName;
                 MisIPLbl.Text = mis.MissionIP;
-                MisSumLbl.Text = "Mission Failed due to incorrect file choosen.";
+                MisSumLbl.Text = "Mission Failed due to incorrect type of attack choosen";
                 MisExpLbl.Text = "0";
                 MisCoinLbl.Text = "0";
 

@@ -1,9 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" ViewStateEncryptionMode="Always" CodeBehind="PwdAtk.aspx.cs" Inherits="HackNet.Game.Gameplay.PwdAtk" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="../../Content/Tutorial/introjs.css" rel="stylesheet">
     <script>
         function showFinishPrompt() {
             $('#missionSumModel').modal('show');
+        }
+        function showTutorial() {
+            javascript: introJs().start();
         }
         function CancelReturnKey() {
             if (window.event.keyCode == 13)
@@ -74,7 +78,7 @@
 
     <div onkeypress="return CancelReturnKey();">
         <div class="row" style="border: 1px solid black; margin-left: 0; margin-right: 0;">
-            <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black; padding: 0;">
+            <div class="col-xs-12 col-sm-6 col-md-8" style="border: 1px solid black; padding: 0;" data-step="1" data-intro="This is hydra, it is a tool used by numerous hackers around the world, what it does is, it does a brute force attack into the computer system of a company in efforts to gain access to the server." data-position='right'>
                 <div class="panel-header" style="background-color: slategray; margin: 0; padding: 5px;">
                     <h3 style="margin: 0;">
                         <asp:Image ImageUrl="~/Content/Images/kali.png" Width="25px" runat="server" />
@@ -105,18 +109,18 @@
                     <br />
                     <asp:Button runat="server" ID="ConfigBtn" CssClass="btn-primary" Text="Configure" OnClick="ConfigBtn_Click" />
                     <br />
-                       <asp:Label runat="server" ID="ErrorLbl"></asp:Label>
+                    <asp:Label runat="server" ID="ErrorLbl"></asp:Label>
                     <br />
                     <asp:RegularExpressionValidator ID="IPValidator" runat="server"
-                                ForeColor="Red"
-                                ErrorMessage="Please enter a valid IP address"
-                                ControlToValidate="TargetIPLbl"
-                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
-                      <asp:RegularExpressionValidator runat="server" ID="TargetRegValidator"
-                            ControlToValidate="TargetTxtBox" 
-                            ForeColor="Red" 
-                            ErrorMessage="Invalid Input" 
-                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
+                        ForeColor="Red"
+                        ErrorMessage="Please enter a valid IP address"
+                        ControlToValidate="TargetIPLbl"
+                        ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
+                    <asp:RegularExpressionValidator runat="server" ID="TargetRegValidator"
+                        ControlToValidate="TargetTxtBox"
+                        ForeColor="Red"
+                        ErrorMessage="Invalid Input"
+                        ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
                 </div>
 
             </div>
@@ -125,10 +129,11 @@
                     <h3 style="margin: 0;">
                         <asp:Image ImageUrl="~/Content/Images/kali.png" Width="25px" runat="server" />
                         Instruction
+                        
+            <a class="glyphicon glyphicon-question-sign" runat="server" id="HelpBtn" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();" data-step="5" data-intro="This is the whole game interface, if you are lost during the game, you can refer to this button again to look through the tutorial again" data-position='right'></a>
                     </h3>
                 </div>
                 <div class="panel-body" style="background-color: #f5f5f5; min-height: 300px;">
-                    <h4 style="color: black;">Steps for Password Attack</h4>
                     <ol class="list-group" style="color: black;">
                         <li class="list-group-item">1. Configure hydra</li>
                         <li class="list-group-item">2. Run hydra</li>
@@ -141,7 +146,7 @@
 
         <div class="row">
             <div class="col-md-9">
-                <div class="panel panel-default">
+                <div class="panel panel-default" data-step="2" data-intro="This is the command prompt which you allows you to type in commands to do specific tasks." data-position='right'>
                     <div class="panel-header" style="background-color: grey;">
                         <h4 style="text-align: center; margin-bottom: 0;">@HackNetHost:~
                         </h4>
@@ -156,13 +161,13 @@
                         <asp:Label runat="server" ID="CmdError"></asp:Label>
                         <br />
                         <asp:RegularExpressionValidator runat="server" ID="CmdRegValidator"
-                            ControlToValidate="CmdTextBox" 
-                            ForeColor="Red" 
-                            ErrorMessage="Invalid Input" 
+                            ControlToValidate="CmdTextBox"
+                            ForeColor="Red"
+                            ErrorMessage="Invalid Input"
                             ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-default" data-step="3" data-intro="This is the nautilas, it is a graphical interface that most servers use to help navigate around files and directories." data-position='right'>
                     <div class="panel-header" style="background-color: grey;">
                         <h4 style="text-align: center; margin-bottom: 0;">Nautilus
                         </h4>
@@ -204,7 +209,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel panel-default" style="height: 390px;">
+                <div class="panel panel-default" style="height: 390px;" data-step="4" data-intro="This is where a list of passwords would be generated." data-position='right'>
                     <div class="panel-header" style="background-color: grey;">
                         <h4 style="text-align: center; margin-bottom: 0;">Hacked Password List
                         </h4>
@@ -227,4 +232,5 @@
 
     </div>
 
+    <script type="text/javascript" src="../../Content/Tutorial/intro.js"></script>
 </asp:Content>

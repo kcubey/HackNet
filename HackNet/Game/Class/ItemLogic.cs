@@ -85,15 +85,7 @@ namespace HackNet.Game.Class
                 db.SaveChanges();
             }
         }
-
-        // Does Item integrity check
-        internal static bool ItemIntegrityCheck(List<Items> itmlist, Items i)
-        {
-
-
-            return false;
-        }
-
+        
         // Add item to user inventory
         internal static void AddItemToInventory(Users user, int itemid,int quantity=1)
         {
@@ -128,6 +120,12 @@ namespace HackNet.Game.Class
             {
                 return true;
             }
+        }
+
+        // Get a reward for mission
+        internal static void GetRewardForMis(DataContext db, int misLevelRequire)
+        {
+
         }
     }
 }

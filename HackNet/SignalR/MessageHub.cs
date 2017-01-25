@@ -19,5 +19,11 @@ namespace Microsoft.AspNet.SignalR.Messaging
         {
 			Clients.All.broadcastMessage(name, msg);
         }
+
+		public void CauseRefresh()
+		{
+			Clients.All.doAlert();
+
+		}
     }
 }
