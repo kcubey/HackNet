@@ -153,6 +153,15 @@ namespace HackNet.Game
 
             return urlList;
         }
+        public static List<string> LoadSuccessURL(MissionData mis, string command = null)
+        {
+            List<string> succList = new List<string>();
+            succList.Add("======================================");
+            succList.Add("Successful connection to the host ");
+            succList.Add("Running .....");
+
+            return succList;
+        }
 
         public static List<string> LoadSQLCode()
         {
