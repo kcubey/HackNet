@@ -107,39 +107,20 @@
         };
 
 		chat.client.doAlert = function () {
-			alert("hi");
 			Update_UpdatePanel();
 			$('#SendMsg').click(function () {
 				chat.server.causeRefresh();
 			})
 		};
 
-        // Get the user name and store it to prepend to messages.
-        // $('#displayname').val(prompt('Enter your name:', ''));
-            
-		// Set initial focus to message input box.
-		// $('#message').focus();
-
         // Start the connection.
         $.connection.hub.start().done(function () {
-            $('#sendmessage').on('click', function () {
-                // Call the Send method on the hub.
-                chat.server.sendMessage($('#displayname').val(), $('#message').val());
-                // Clear text box and reset focus for next comment.
-                $('#message').val('').focus();
-            });
-
-			$('#SendMsg').on('click', function () {
+			$(document).on('click', '#SendMsg', function () {
 				chat.server.causeRefresh();
 			});
         });
 
 		function Update_UpdatePanel() {
-			setTimeout(function () {
-				document.getElementById("ReloadBtn").click();
-				alert("CLICKED");
-			}, 400);
-
 			setTimeout(function () {
 				document.getElementById("ReloadBtn").click();
 			}, 2000);
