@@ -103,14 +103,24 @@ namespace HackNet.Security
 
 			using (DataContext db = new DataContext())
 			{
-				// TODO: new implementation
+				List<Conversation> convs = 
+								db.Conversation.Where(c => 
+								(c.UserAId == viewerId 
+								|| c.UserBId == viewerId)).ToList();
 
-				recentIds.Remove(viewerId);
+				foreach(Conversation c in convs)
+				{
+					if (c.UserAId != viewerId)
+						recentIds.Add(c.UserAId);
+
+					if (c.UserBId != viewerId)
+						recentIds.Add(c.UserBId);
+				}
 
 				foreach (int id in recentIds)
 				{
 					Users u = db.Users.Find(id);
-					if (u != null)
+					if (u != null && id != viewerId)
 						recents.Add(u.UserName);
 				}
 
