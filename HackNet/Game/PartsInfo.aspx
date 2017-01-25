@@ -5,6 +5,12 @@
         @import url(http://fonts.googleapis.com/css?family=Anonymous+Pro);
 
         /* Global */
+        html{
+            overflow: hidden;
+        }
+        body{
+          font-family: 'Exo', monospace; 
+        }
         .line-1{
             float:left;
             margin: 0 auto;
@@ -13,7 +19,7 @@
 
         /* Animation */
         .anim-typewriter{
-          animation: typewriter 0.5s steps(3) 1s 1 normal both;
+          animation: typewriter 0.4s steps(3) 1s 1 normal both;
         }
         @keyframes typewriter{
           from{width: 0;}

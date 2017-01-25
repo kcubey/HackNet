@@ -18,6 +18,21 @@
             color: white;
             border: 0px solid #333;
         }
+        .viewMoreButton {
+            color:#B6C5BE;
+        }
+        .viewMoreButton:hover {
+            color:#fff;
+            text-decoration:none;
+        }
+        .viewMoreButton:focus {
+            color:#fff;
+            text-decoration:none;
+        }
+        .viewMoreButton:visited {
+            color:#fff;
+            text-decoration:none;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
@@ -41,7 +56,7 @@
                         <li><a href="#booster" data-toggle="tab">Booster</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-9" style="float: left;">
+                <div class="col-xs-9" style="float: left; height: 580px; overflow: scroll; overflow-x: hidden;">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <!--ALL-->
@@ -55,7 +70,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton CssClass="viewMoreButton" runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -156,6 +171,14 @@
     <br />
     <br />
     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Item Editor</h2>
@@ -193,18 +216,7 @@
         <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
     </div>
 
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
+    <!--
     <fieldset>
         <legend>Market</legend>
 
@@ -240,14 +252,6 @@
         </div>
     </fieldset>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 
     <fieldset>
         <h2>Add New Market Listing</h2>
@@ -260,4 +264,5 @@
         <asp:Button runat="server" ID="btnAddListing" CssClass="btn btn-default" OnClick="btnAddListing_Click" Text="Add Listing" />
 
     </fieldset>
+    -->
 </asp:Content>
