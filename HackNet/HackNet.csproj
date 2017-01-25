@@ -234,7 +234,11 @@
     <Content Include="Content\GeneratedSite.min.css">
       <DependentUpon>GeneratedSite.css</DependentUpon>
     </Content>
+    <Content Include="Content\Images\asushardware.jpg" />
+    <Content Include="Content\Images\bitcoin-mining.jpg" />
+    <Content Include="Content\Images\comhardwarepic.jpg" />
     <Content Include="Content\Images\console.png" />
+    <Content Include="Content\Images\greenlights.jpg" />
     <Content Include="Content\Images\hackerpic.jpg" />
     <Content Include="Content\Images\denim.png" />
     <Content Include="Content\Images\hekingbg.jpg" />

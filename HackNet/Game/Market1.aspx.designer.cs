@@ -11,5 +11,23 @@ namespace HackNet.Market {
     
     
     public partial class Market1 {
+        
+        /// <summary>
+        /// imgbtn1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgbtn1;
+        
+        /// <summary>
+        /// imgbtn2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgbtn2;
     }
 }
