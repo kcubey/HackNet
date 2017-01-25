@@ -14,18 +14,19 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["MissionData"] as MissionData == null)
+            
+            if (Cache["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
             }
 
             if (!IsPostBack)
             {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
                 ViewState["URLCalculated"] = false;
                 ViewState["Bypass"] = false;
                 ViewState["Configure"] = false;
-                ViewState["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
+                ViewState["ScanList"] = Mission.scanMission(Cache["MissionData"] as MissionData, Authenticate.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -71,7 +72,7 @@ namespace HackNet.Game.Gameplay
 
         protected void ConfigSQL_Click(object sender, EventArgs e)
         {
-            MissionData m = Session["MissionData"] as MissionData;
+            MissionData m = Cache["MissionData"] as MissionData;
 
             if (TargetIPTxtBox.Text.Equals(m.MissionIP))
             {
@@ -94,7 +95,7 @@ namespace HackNet.Game.Gameplay
             {
                 if ((bool)ViewState["URLCalculated"] == false)
                 {
-                    if (CmdTextBox.Text == "run SQLInjection")
+                    if (CmdTextBox.Text == "run SQLInjector")
                     {
                         // Calculation of URL and picking correct URL for attack
                         List<string> urlList = Mission.LoadURLList();
@@ -107,7 +108,7 @@ namespace HackNet.Game.Gameplay
                         // Load messages and cmd panel
                         LoadScanInfo(ViewState["ScanList"] as List<string>);
                         LoadPossURLList(URLListView);
-                        CmdError.Text = "SQLInjection is running......";
+                        CmdError.Text = "SQLInjector is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
                         CmdTextBox.Text = string.Empty;
                     }
@@ -130,7 +131,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.Text = "URL is correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
-                            LoadScanInfo(Mission.LoadSuccessURL((MissionData)Session["MissionData"]));
+                            LoadScanInfo(Mission.LoadSuccessURL(Cache["MissionData"] as MissionData));
                             ViewState["Bypass"] = true;
 
                             // Enable the browser
@@ -166,33 +167,36 @@ namespace HackNet.Game.Gameplay
 
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
+            MissionData mis = Cache["MissionData"] as MissionData;
 
-            if (UsrName.Text.Equals("adminbypass-'*/--") && Password.Text.Equals("' DROP ALL TABLES;--"))
+            if (mis.MissionType == (MissionType)3)
             {
-                MissionData mis = (MissionData)Session["MissionData"];
-                // Title
-                SummaryTitle.Text = "Congratulations, Mission Completed!";
-                SummaryTitle.ForeColor = System.Drawing.Color.Green;
-                // Summary
-                MisNameLbl.Text = mis.MissionName;
-                MisIPLbl.Text = mis.MissionIP;
-                MisSumLbl.Text = "";
-                MisExpLbl.Text = mis.MissionExp.ToString();
-                MisCoinLbl.Text = mis.MissionCoin.ToString();
-
-                using (DataContext db = new DataContext())
+                if (UsrName.Text.Equals("adminbypass-'*/--") && Password.Text.Equals("' DROP ALL TABLES;--"))
                 {
-                    Users u = Authenticate.GetCurrentUser(false, db);
-                    u.TotalExp = u.TotalExp + mis.MissionExp;
-                    System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
-                    db.SaveChanges();
+                    // Title
+                    SummaryTitle.Text = "Congratulations, Mission Completed!";
+                    SummaryTitle.ForeColor = System.Drawing.Color.Green;
+                    // Summary
+                    MisNameLbl.Text = mis.MissionName;
+                    MisIPLbl.Text = mis.MissionIP;
+                    MisSumLbl.Text = "";
+                    MisExpLbl.Text = mis.MissionExp.ToString();
+                    MisCoinLbl.Text = mis.MissionCoin.ToString();
+
+                    using (DataContext db = new DataContext())
+                    {
+                        Users u = Authenticate.GetCurrentUser(false, db);
+                        u.TotalExp = u.TotalExp + mis.MissionExp;
+                        System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
+                        db.SaveChanges();
+                    }
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
                 }
+                else
+                {
 
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
-            }
-            else
-            {
-
+                }
             }
 
         }

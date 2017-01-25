@@ -94,7 +94,7 @@ namespace HackNet.Game
             MissionTitleLbl.Text = mis.MissionName;
             MisDesLbl.Text = mis.MissionDesc;
 
-            Session["MissionData"] = mis;
+            Cache["MissionData"] = mis;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
@@ -102,7 +102,7 @@ namespace HackNet.Game
         protected void AttackLink_Click(object sender, EventArgs e)
         {
             Cache["SelectedMis"] = true;
-            LoadScanInformation((MissionData)Session["MissionData"]);
+            LoadScanInformation(Cache["MissionData"] as MissionData);
         }
 
         protected void SubCmdBtn_Click(object sender, EventArgs e)
@@ -127,7 +127,6 @@ namespace HackNet.Game
             {
                 CMDError.Text = "Please Choose a Mission";
                 CMDError.ForeColor = System.Drawing.Color.Red;
-               
             }
         }
 

@@ -14,7 +14,7 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
             using (DataContext db = new DataContext())
             {
                 // Machines.DefaultMachine(Authenticate.GetCurrentUser(), db);
