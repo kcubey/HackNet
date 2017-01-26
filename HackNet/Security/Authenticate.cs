@@ -45,6 +45,8 @@ namespace HackNet.Security
 				throw new UserException("Authenticate instance failed to create due to non-existent user");
 			}
 
+			Email = email;
+
 			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
 
