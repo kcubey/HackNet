@@ -174,6 +174,7 @@ namespace HackNet.Game
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
+            /*
             Items item = new Items();
             item.ItemName = ItemName.Text;
             item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
@@ -189,6 +190,7 @@ namespace HackNet.Game
                 db.Items.Add(item);
                 db.SaveChanges();
             }
+            */
         }
 
         protected void btnAddListing_Click(object sender, EventArgs e)
