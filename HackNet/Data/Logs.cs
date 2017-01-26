@@ -19,7 +19,6 @@ namespace HackNet.Data
 		[Required]
 		public int Type { get; set; }
 
-		[Required]
 		public DateTime Timestamp { get; set; }
 
 		[Required]
