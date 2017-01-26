@@ -32,6 +32,15 @@ namespace HackNet.Game
             buckValidator.MaximumValue = dbBuck.ToString();
             Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
 
+            if (!IsPostBack)
+            {
+                using (DataContext db = new DataContext())
+                {
+                    Users u = CurrentUser.Entity(false, db);
+                    dbBuck = u.ByteDollars;
+                    dbCoin = u.Coins;
+                }
+            }
             LoadInventory(memorylist, 2);
             LoadInventory(packageDL, 5);
         }
@@ -175,19 +184,26 @@ namespace HackNet.Game
             }
         }
         /*
-                private void LoadPackages(Repeater rpt, int itemType) //change to LoadPackages
+                private void LoadPackages(Repeater rpt) //change to LoadPackages
                 {
 
-                    List<Items> ilist = Data.Items.GetItems(itemType);
-                    if (ilist.Count != 0)
+                    List<Packages> pList = Data.Packages.GetPackages;
+                    if (pList.Count != 0)
                 {
-                    Items item = new Items();
-                    item.ItemName = ItemName.Text;
-                    item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
-
-                        rpt.DataSource = dt;
-                        rpt.DataBind();
+                    string imageurlstring;
+                    string url;
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("PackageId", typeof(int));
+                    dt.Columns.Add("Quantity", typeof(string));
+                    dt.Columns.Add("Price", typeof(double));
+                    foreach (Packages p in pList)
+                    {
+                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                        url = "data:image/png;base64," + imageurlstring;
                     }
+
+                rpt.DataSource = dt;
+                rpt.DataBind();
                     else
                     {
                         rpt.DataSource = null;
@@ -195,6 +211,7 @@ namespace HackNet.Game
                     }
 
                 }
+
                 */
 
         //modified from btnAddListing_Click

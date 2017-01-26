@@ -59,12 +59,8 @@ namespace HackNet.Data
                     }
                     else
                     {
-                        do
-                        {
-                            var query = from i in db.Items select i;
-                            return query.ToList();
-                        }
-                        while (itemType != 5);
+                        var query = from i in db.Items where (itemType != 5) select i;
+                        return query.ToList();
                         
                     }
                 }
