@@ -1,7 +1,9 @@
-﻿using System;
+﻿using HackNet.Security;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 
@@ -17,5 +19,40 @@ namespace HackNet.Data
         public byte[] PackagePic { get; set; }
 
         public double Price { get; set; }
-	}
+
+        internal static List<Packages> GetPackageList()
+        {
+            List<Packages> itemList = new List<Packages>();
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    var query = from i in db.Packages select i;
+                    return query.ToList();
+                }
+            }
+            catch (EntityCommandExecutionException)
+            {
+                throw new ConnectionException("Database link failure has occured");
+            }
+        }
+
+        internal static Packages GetPackage(int id, int itemType = -1)
+        {
+            Packages pkg = new Data.Packages();
+            try
+            {
+                using (DataContext db = new DataContext())
+                {
+                    pkg = (from i in db.Packages where i.PackageId == id select i).FirstOrDefault();
+                }
+            }
+            catch (EntityCommandExecutionException)
+            {
+                throw new ConnectionException("Database link failure has occured");
+            }
+            return pkg;
+        }
+    }
+}
 }

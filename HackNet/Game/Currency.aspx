@@ -20,7 +20,23 @@
 
     <style>
         .customscrollbar{
+        }
 
+        .nav-tabs > li > a{
+            color:limegreen;
+        }
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+            background-color:rgba(10, 10, 10, 0.9);
+            color: white;
+            border: 0px solid #333;
+        }
+
+        .nav > li a:hover {
+            background-color: rgba(10, 10, 10, 0.9);
+            color: white;
+            border: 0px solid #333;
         }
     </style>
 
@@ -105,7 +121,8 @@
                         <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br />
-                            <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="test description" Font-Size="Smaller"></asp:Label>
+                            <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text="100" Font-Size="Smaller"></asp:Label>
+                            <asp:Label ID="packageItem" CssClass="redirectLbl" runat="server" Text="Bucks" Font-Size="Smaller"></asp:Label>
                             <br />
                             <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                             <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
@@ -130,8 +147,9 @@
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
                                 <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< % #Eval("PackagePic")%>'  BackColor="Transparent" />
                                     <br />
+                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='< % # Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
                                     <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackageDesc")%>' Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
