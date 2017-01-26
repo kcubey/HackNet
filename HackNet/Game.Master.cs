@@ -77,7 +77,7 @@ namespace HackNet
 
         protected void LnkMkt1(object sender, EventArgs e)
         {
-            Response.Redirect("~/Game/Market1");
+            Response.Redirect("~/Game/MarketOld");
         }
         #endregion
 

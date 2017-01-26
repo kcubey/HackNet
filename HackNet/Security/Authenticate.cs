@@ -67,7 +67,8 @@ namespace HackNet.Security
 					AuthLogger.Instance.UserNotFound(Email);
 					return AuthResult.UserNotFound;
 				}
-				if (checkEmailValidity && user.AccessLevel == AccessLevel.Unverified)
+
+				if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
 					return AuthResult.EmailNotVerified;
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
@@ -374,15 +375,8 @@ namespace HackNet.Security
 
 				if (createduser is Users)
 				{
-					using (MailClient mc = new MailClient(createduser.Email))
-					{
-						mc.Subject = "Verify your Email Address";
-						mc.AddLine("Thank you for registering with HackNet!");
-						mc.AddLine("We hope you enjoy your gaming experience with us,");
-						mc.AddLine("Kindly verify your email address by clicking on the link below");
-						mc.Send(createduser.FullName, "Verify Email", "https://haxnet.azurewebsites.net/");
-						// TODO: Actual email verification (WL)
-					}
+					EmailConfirm.SendEmailForConfirmation(createduser);
+
 					Machines.DefaultMachine(createduser, db);
 					ItemLogic.StoreDefaultParts(db, u.UserID);
 					AuthLogger.Instance.UserRegistered(u.Email, u.UserID);

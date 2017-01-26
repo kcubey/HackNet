@@ -24,26 +24,35 @@ namespace HackNet.Auth {
         protected void LoginClick(object sender, EventArgs e)
         {
 			string email = Email.Text.ToLower();
-			using (Authenticate auth = new Authenticate(email))
-            {
-				AuthResult result = auth.ValidateLogin(UserPass.Text);
-				switch(result)
+			try
+			{
+				using (Authenticate auth = new Authenticate(email))
 				{
-					case (AuthResult.Success):
-						LoginSuccess(email, auth.TempKeyStore);
-						break;
-					case (AuthResult.PasswordIncorrect):
-						Msg.Text = "User and/or password not found (1)";
-						break;
-					case (AuthResult.UserNotFound):
-						Msg.Text = "User and/or password not found (2)";
-						break;
-					default:
-						Msg.Text = "Unhandled error has occured";
-						break;
+					AuthResult result = auth.ValidateLogin(UserPass.Text);
+					switch (result)
+					{
+						case AuthResult.Success:
+							LoginSuccess(email, auth.TempKeyStore);
+							break;
+						case AuthResult.PasswordIncorrect:
+							Msg.Text = "User and/or password not found (1)";
+							break;
+						case AuthResult.UserNotFound:
+							Msg.Text = "User and/or password not found (2)";
+							break;
+						case AuthResult.EmailNotVerified:
+							Msg.Text = "Email has not been verified";
+							break;
+						default:
+							Msg.Text = "Unhandled error has occured";
+							break;
+					}
 				}
+			} catch (UserException ex)
+			{
+				Msg.Text = "User and/or password not found (2)";
 			}
-        }
+		}
 
 		private void LoginSuccess(string email, KeyStore ks)
 		{

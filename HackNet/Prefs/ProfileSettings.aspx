@@ -26,7 +26,7 @@
 							ErrorMessage="Username is required." Text="*" runat="server" />
 						<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
 							ErrorMessage="Username can only contain alphanumerics and underscores, and at least 4 characters"
-							ControlToValidate="usernameTxt" Display="None" ValidationExpression="^[a-zA-Z_]{4,14}$" />
+							ControlToValidate="usernameTxt" Display="None" ValidationExpression="^[a-zA-Z0-9_]{4,14}$" />
 					</td>
 				</tr>
 				<tr>

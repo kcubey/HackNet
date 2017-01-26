@@ -1,181 +1,88 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Market.aspx.cs" Inherits="HackNet.Market.Market" %>
-
+﻿<%@ Page Title="Market" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Market.aspx.cs" Inherits="HackNet.Game.Market" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
 
-    <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
+    <link rel="stylesheet" href="/Market1/market1.css" />
 
-    <div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Market - Currency</h3>
-		</div>
-		<div class="panel-body">
-            <div id="marketArea">
-			    <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
-                <p>These premium packages require the use of REAL money.</p> 
-
-                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
-                        <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="10"></asp:Label>
-                </asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                    <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package 2 - SGD$100"></asp:Label>
-                </asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                    <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package 3 - SGD$50"></asp:Label>
-                </asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
-                    <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package 4 - SGD$20"></asp:Label>
-                </asp:LinkButton>
-
-                <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
-                    <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                    <br /><br />
-                    <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package 5 - SGD$350"></asp:Label>
-                </asp:LinkButton>
-            </div>
-            
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            
-            <div id="convertArea">
-                <asp:UpdatePanel ID="ConversionPanel" runat="server">
-                <ContentTemplate>
-        
-                <br />Bucks:
-                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
-                <asp:RangeValidator 
-                    ID="buckValidator" ControlToValidate="buckTextBox" 
-                    MinimumValue="0" Type="Integer" runat="server"
-                    ErrorMessage="* Please enter a valid number" ForeColor="Red">
-                </asp:RangeValidator>
-               <br />
-               <asp:RegularExpressionValidator 
-                    ID="buckExValidator" runat="server" 
-                    ErrorMessage="* Please use whole numbers only" ValidationExpression="^\d+$"
-                    ControlToValidate="buckTextBox" ForeColor="Red">
-               </asp:RegularExpressionValidator>
-                    <!-- expressions: ^[1-9]\d$ || ^\d+$ || ^[0-9]*$ but allows space-->
-
-                <br /><br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
-                
-                </ContentTemplate>
-                </asp:UpdatePanel>
- <!--               <hr />
-                demo code
-                Pages: <input type="number" class="form-control" id="pages" step="1"/>
-                <br/><br/>
-                Total: <span id="totall">0</span>
- -->   
-                <br /><br />
-
-                <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
-                </div>
-        </div>
-	</div>
-
- <!--
-       <script>
-        $('#pages').change(function (ev) {
-            var total = $('#pages').val() * 2;
-            $('#totall').html((total).toFixed(0));
-        });
-
-        $('#pages').keyup(function (ev) {
-            var total = $('#pages').val() * 2;
-            $('#totall').html((total).toFixed(0));
-        });
-
-        $('#buckTextBox1').keyup(function(ev){
-            var total = $('#buckTextBox1').val() * 2;
-            document.getElementById("coinTotal").innerHTML = total;
-            // $('#coinTotal').html(total);
-        });
-            
-        $('#buckTextBox1').change(function (ev) {
-           var total = $('#buckTextBox1').val() * 2;
-           document.getElementById("coinTotal").innerHTML = total;
-           // $('#coinTotal').html(total);
-        });
-    </script>
-       --> 
-
-    <!-- Item repeater
-
-        ===For Current===
-    <asp:Repeater ID="Repeater1" runat="server">
-        <ItemTemplate>
-            <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< % Eval("ItemPic")%>'  BackColor="Transparent" />
-                <br /><br />
-                <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                    <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< % Eval("PackageId")%>'></asp:Label>
-                    <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                    <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='< % Eval("PackagePrice")%>'></asp:Label>
-            </asp:LinkButton>
-        </ItemTemplate>
-    </asp:Repeater>
-    
-        ===Example===
-        <asp:Repeater ID="repPosts" runat="server">
-            <ItemTemplate>
-                <figure class="postSnip">
-                    <img class="postImg" runat="server" src='<[]%# Eval("PostImage") %>' >
-                        <img class="postImg" src="https://67.media.tumblr.com/93446adc3eeb10d4a492f8ce2eb70760/tumblr_o8pil6Czqe1rk63wco2_500.gif">
-                    <figcaption class="postTitle">
-                        <asp:Label ID="lblPostTitle" runat="server" Text='<[]%# Eval("PostName") %>'
-                            onclick='window.location="IdeasPost?PostId=<[]%# Eval("PostId") %>"' />
-                       <a href='IdeasPost?PostId=<[]%# Eval("PostId") %>' 
-                           title='<[]%# Eval("PostName") %>' id="postTitleAnchor"><[]%# Eval("PostName") %></a>
-                    </figcaption>
-                    <figcaption class="postContent">
-                        <asp:Label ID="lblPostDescription" runat="server" Text='<[]%# Eval("PostDescription") %>' />
-                    </figcaption>
-	            </figure>
-            </ItemTemplate>
-        </asp:Repeater>
-
-        *** Remove[] brackets
-    -->
-    
-    
-    <!--
-        
-        ACCORDION: 
-
-        <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].onclick = function () {
-                this.classList.toggle("active");
-                this.nextElementSibling.classList.toggle("show");
-            }
+    <style>
+        .PartsDiv {
+            background: url(../Content/Images/asushardware.jpg) no-repeat 0 0;
+            background-color: #4b5320;
+            color:#fff;
+            font-size:20px;
+            float: left;
+            width: 48.92%;
+            margin-left: 1%;
+            padding-top: 200px;
+            padding-bottom: 200px;
+            /*padding-left:22%;*/
+            -webkit-transition-duration: 1s;
+            -moz-transition-duration: 1s;
+            -o-transition-duration: 1s;
+            transition-duration: 1s;
         }
-    </script>
+        .PartsDiv:hover {
+            background: url(../Content/Images/comhardwarepic.jpg) no-repeat fixed center;
+            background-color:#000000; 
+            color:#fff;
+            font-size:20px;
+            -webkit-transition: background-color 0.5s ease-out;
+            -moz-transition: background-color 0.5s ease-out;
+            -o-transition: background-color 0.5s ease-out;
+            transition: background-color 0.5s ease-out;
+        }
+        .CurrencyDiv {
+            background: url(../Content/Images/bitcoin-mining.jpg) no-repeat 0 0;
+            background-color:#505823; 
+            color:#fff;
+            font-size:20px;
+            float:right; 
+            width:48.92%; 
+            margin-right:1%; 
+            padding-top:200px; 
+            padding-bottom:200px; 
+            /*padding-left:22%;*/
+            -webkit-transition-duration: 1s;
+            -moz-transition-duration: 1s;
+            -o-transition-duration: 1s;
+            transition-duration: 1s;
+        }
+        .CurrencyDiv:hover {
+            background: url(../Content/Images/greenlights.jpg) no-repeat fixed center;
+            background-color:#000000; 
+            color:#fff;
+            font-size:20px;
+            -webkit-transition: background-color 0.5s ease-out;
+            -moz-transition: background-color 0.5s ease-out;
+            -o-transition: background-color 0.5s ease-out;
+            transition: background-color 0.5s ease-out;
+        }
+    </style>
 
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-       <p>testing</p>
-    </div>
+    <fieldset>
+        <legend>Market</legend>
+        <!--
+        <div>Parts</div>
+            <div>CPU</div>
+            <div>Power Supply</div>
+            <div>Graphics</div>
+            <div>RAM</div>
+        <div>Currency</div>
+            <div>Coins</div>
+            <div>ByteDollar</div>
+        -->
+        
+        
+        <!--Left div--><!--  GeneratedSite.css textarea max width  -->
+        <asp:Button Style="max-width:none;" runat="server" class="PartsDiv" Text="Parts" OnClick="LnkPts" />
+        <!--Right div--><!--  GeneratedSite.css textarea max width  -->
+        <asp:Button Style="max-width:none;" runat="server" class="CurrencyDiv" Text="Currency" OnClick="LnkCurr"/>
 
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-        <p>testing</p>
-    </div>
-    -->
-       
+        <!--Trying ImageButton-->
+        <!--
+        <asp:ImageButton ID="imgbtn1" Style="max-width:none;" runat="server" ImageUrl="../Content/Images/console.png" Text="Parts" OnClick="LnkPts" />
+        <asp:ImageButton ID="imgbtn2" Style="max-width:none;" runat="server" ImageUrl="../Content/Images/console.png" Text="Currency" OnClick="LnkCurr"/>
+        -->
+        
+    </fieldset>
 
 </asp:Content>

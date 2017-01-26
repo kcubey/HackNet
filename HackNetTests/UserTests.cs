@@ -17,11 +17,11 @@ namespace HackNetTests
 			using (DataContext db = new DataContext())
 			{
 				Users u = Users.FindByEmail("hacknet@wlgoh.com", db);
-				u.AccessLevel = AccessLevel.Unverified;
+				u.AccessLevel = AccessLevel.Staff;
 				db.SaveChanges();
 
 				u = Users.FindByEmail("hacknet@wlgoh.com", db);
-				Assert.AreEqual(u.AccessLevel, AccessLevel.Unverified);
+				Assert.AreEqual(u.AccessLevel, AccessLevel.User);
 
 				u.AccessLevel = AccessLevel.User;
 				db.SaveChanges();
