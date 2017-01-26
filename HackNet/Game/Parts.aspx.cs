@@ -89,7 +89,7 @@ namespace HackNet.Game
 
             Items item = Data.Items.GetItem(id);
             Session["Item"] = item;
-            Server.Transfer("PartsInfo.aspx", true);
+            Response.Redirect("PartsInfo.aspx",true);
         }
     }
 }

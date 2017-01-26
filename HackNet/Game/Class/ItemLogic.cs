@@ -98,6 +98,7 @@ namespace HackNet.Game.Class
                     db.SaveChanges();
                 }else
                 {
+                    invitem = new InventoryItem();
                     invitem.ItemId = itemid;
                     invitem.UserId = user.UserID;
                     invitem.Quantity = quantity;
