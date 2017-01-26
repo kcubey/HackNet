@@ -57,6 +57,8 @@ namespace HackNet.Data
 
 		public AccessLevel AccessLevel { get; set; }
 
+		public string EmailConfirmation { get; set; }
+
 		// Foreign Key References
 		public Machines Machine { get; set; }
 
