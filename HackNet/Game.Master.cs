@@ -11,7 +11,7 @@ namespace HackNet
         {
 			if (!IsPostBack)
 			{
-				Users u = Authenticate.GetCurrentUser();
+				Users u = CurrentUser.Entity();
 				PlayerName.Text = u.UserName;
 				CoinsLbl.Text = u.Coins.ToString();
 				BucksLbl.Text = u.ByteDollars.ToString();

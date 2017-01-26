@@ -28,7 +28,7 @@ namespace HackNet.Game
 		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
 		{
 			int otherid = -1;
-			int currentid = Authenticate.GetUserId();
+			int currentid = CurrentUser.GetUserId();
 			string username;
 
 			// Validate Username
@@ -55,7 +55,7 @@ namespace HackNet.Game
 
 			} else if (otherid != currentid && otherid > 0)
 			{
-				ViewState["thisParty"] = Authenticate.GetUserId();
+				ViewState["thisParty"] = CurrentUser.GetUserId();
 				ViewState["otherParty"] = otherid;
 
 				ToggleWindows();
@@ -74,7 +74,7 @@ namespace HackNet.Game
 				return;
 			}
 
-			int currentuser = Authenticate.GetUserId();
+			int currentuser = CurrentUser.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];
 			var keyStore = Session["KeyStore"] as KeyStore;
 			string content = MessageToSend.Text;
@@ -129,7 +129,7 @@ namespace HackNet.Game
 
 		protected List<string> GetRecents()
 		{
-			int id = Authenticate.GetUserId();
+			int id = CurrentUser.GetUserId();
 			return MessageLogic.RetrieveRecents(id).ToList();
 		}
 
@@ -174,7 +174,7 @@ namespace HackNet.Game
 			}
 			List<Message> msgs = new List<Message>();
 			KeyStore ks = Session["KeyStore"] as KeyStore;
-			int viewerId = Authenticate.GetUserId();
+			int viewerId = CurrentUser.GetUserId();
 			//LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
 			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, ks, limit).ToList();
 			return msgs;

@@ -16,7 +16,7 @@ namespace HackNet.Prefs
 		{
 			if (!IsPostBack)
 			{
-				Users u = Authenticate.GetCurrentUser();
+				Users u = CurrentUser.Entity();
 				usernameTxt.Text = u.UserName;
 				emailTxt.Text = u.Email;
 				fnameTxt.Text = u.FullName;
@@ -31,7 +31,7 @@ namespace HackNet.Prefs
 			using (Authenticate a = new Authenticate())
 			using (DataContext db = new DataContext())
 			{
-				Users u = Authenticate.GetCurrentUser(false, db);
+				Users u = CurrentUser.Entity(false, db);
 
 				if (a.ValidateLogin(CfmPasswordTxt.Text) != AuthResult.Success)
 				{

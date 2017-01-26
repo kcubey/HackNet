@@ -67,7 +67,7 @@ namespace HackNet.Auth
 			Session["LoginSuccess"] = null;
 			Session["Cookie"] = null;
 			if (returnurl != null)
-				Response.Redirect("~" + Session["ReturnUrl"]);
+				Response.Redirect(returnurl);
 			else
 				Response.Redirect("~/Default");
 		}
