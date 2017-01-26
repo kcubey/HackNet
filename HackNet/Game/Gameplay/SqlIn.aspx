@@ -1,10 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" ViewStateEncryptionMode="Always" CodeBehind="SqlIn.aspx.cs" Inherits="HackNet.Game.Gameplay.SqlIn" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="../../Content/Tutorial/introjs.css" rel="stylesheet">
     <script type="text/javascript">
         function CancelReturnKey() {
             if (window.event.keyCode == 13)
                 return false;
+        }
+        function showTutorial() {
+            javascript: introJs().start();
         }
         function showFinishPrompt() {
             $('#missionSumModel').modal('show');
@@ -94,6 +98,14 @@
                             <asp:ListItem>Internet Explorer</asp:ListItem>
                         </asp:DropDownList>
                     </fieldset>
+                    <fieldset style="margin-top: 2%;">
+                        <legend style="font-size:15px;">Page Attribute</legend>
+                        <label style="width: 20%;" class="col-xs-3 col-form-label">Cookie: </label>
+                        <asp:TextBox runat="server" CssClass="form-control" Text="id=c60b7d91100007akt=1721892845667485|et=1095|cs=2adawdasd" Enabled="false" />
+                        <br />
+                        <label style="width: 20%;" class="col-xs-3 col-form-label">CharSet: </label>
+                        <asp:TextBox runat="server" CssClass="form-control" Text="utf-8" Enabled="false" />
+                    </fieldset>
                     <br />
                     <asp:Label runat="server" ID="ErrorLbl"></asp:Label><br />
                     <asp:RegularExpressionValidator ID="IPValidator" runat="server"
@@ -102,6 +114,7 @@
                         ControlToValidate="TargetIPTxtBox"
                         ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
                     <asp:Button runat="server" ID="ConfigSQL" CssClass="btn-primary" Text="Configure" OnClick="ConfigSQL_Click" />
+
                 </div>
             </div>
             <div class="col-xs-6 col-md-4" style="border: 1px solid black; padding: 0;">
@@ -109,6 +122,7 @@
                     <h3 style="margin: 0;">
                         <asp:Image ImageUrl="~/Content/Images/kali.png" Width="25px" runat="server" />
                         Instruction
+                         <a class="glyphicon glyphicon-question-sign" runat="server" id="HelpBtn" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();" data-step="5" data-intro="This is the whole game interface, if you are lost during the game, you can refer to this button again to look through the tutorial again" data-position='right'></a>
                     </h3>
                 </div>
                 <div class="panel-body" style="background-color: #f5f5f5; min-height: 300px;">
@@ -175,7 +189,7 @@
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="Username: " />
                                     <asp:TextBox runat="server" Enabled="false" CssClass="form-control" ID="UsrName" />
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="UsrName"  ValidationGroup="Login"/>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="UsrName" ValidationGroup="Login" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="Password: " />
@@ -184,7 +198,7 @@
 
                                 </div>
                             </div>
-                            <asp:Button runat="server" CssClass="btn btn-default" Text="Login" OnClick="LoginBtn_Click" ValidationGroup="Login"/>
+                            <asp:Button runat="server" CssClass="btn btn-default" Text="Login" OnClick="LoginBtn_Click" ValidationGroup="Login" />
                             <br />
                             <asp:Label runat="server" ID="LoginErrorLbl" />
                         </div>
@@ -210,4 +224,6 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="../../Content/Tutorial/intro.js"></script>
 </asp:Content>

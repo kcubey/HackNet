@@ -60,13 +60,13 @@
 					<asp:Panel runat="server" DefaultButton="SendMsg">
 					Send a message:
 					<asp:TextBox ID="MessageToSend" runat="server" 
-								 CssClass="form-control" />
+								 ClientIDMode="Static" CssClass="form-control" />
 					</asp:Panel>
 				</div>
 				<div class="col-md-1">
 					<br />
-					<asp:Button ID="SendMsg" Text="Send" runat="server" 
-						CssClass="btn btn-info" OnClick="SendMsg_Click" OnClientClick="Update_UpdatePanel()" 
+					<asp:Button ID="SendMsg" Text="Send" runat="server" ClientIDMode="Static"
+						CssClass="btn btn-info" OnClick="SendMsg_Click" 
 						/>
 				</div>
 			</div>
@@ -88,12 +88,39 @@
 		</ContentTemplate>
 		</asp:UpdatePanel>
 	</div>
+	<!--Script references. -->
+	<script src="../Scripts/jquery-3.1.1.min.js"></script>
+	<script src="../SignalR/jquery.color-2.1.2.min.js"></script>
+	<script src="../Scripts/jquery.signalR-2.2.1.js"></script>
+	<script src="../SignalR/hubs"></script>
+	<!--Add script to update the page and send messages.-->
 	<script type="text/javascript">
-		function Update_UpdatePanel() {
-			setTimeout(function () {
-				document.getElementById("ReloadBtn").click();
-			}, 400);
+        var chat = $.connection.ChatClientz;
 
+        // Declare a proxy to reference the hub.
+        // Create a function that the hub can call to broadcast messages.
+        chat.client.broadcastMessage = function (name, msg) {
+            // Html encode display name and message.
+            var encodedName = $('<div />').text(name).html();
+            var encodedMsg = $('<div />').text(msg).html();
+            $('#discussion').append('<li><strong>' + encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+        };
+
+		chat.client.doAlert = function () {
+			Update_UpdatePanel();
+			$('#SendMsg').click(function () {
+				chat.server.causeRefresh();
+			})
+		};
+
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+			$(document).on('click', '#SendMsg', function () {
+				chat.server.causeRefresh();
+			});
+        });
+
+		function Update_UpdatePanel() {
 			setTimeout(function () {
 				document.getElementById("ReloadBtn").click();
 			}, 2000);

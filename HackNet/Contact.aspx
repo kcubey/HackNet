@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="HackNet.Contact" %>
-
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .emaila, .emaila:hover, .emaila:focus, .emaila:visited{
+            color:black;
+        }
+
+    </style>
     <h2><%: Title %>.</h2>
     <address>
         One Microsoft Way<br />
@@ -10,8 +15,8 @@
     </address>
 
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Support:</strong>   <a class="emaila" href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a class="emaila" href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
 
     <h3>Get in touch with us</h3>
