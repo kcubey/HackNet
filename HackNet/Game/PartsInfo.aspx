@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="PartsInfo.aspx.cs" Inherits="HackNet.Game.PartsInfo" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="GameContent" runat="server">
+    <script type="text/javascript">
+        function ShowTransactionBox() {
+            $('#PartTransactionModel').modal('show');
+        }
+    </script>
     <style>
         /* Google Fonts */
         @import url(http://fonts.googleapis.com/css?family=Anonymous+Pro);
@@ -30,6 +35,39 @@
           to{border-right-color: transparent;}
         }
     </style>
+    <div id="PartTransactionModel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" Text="Transaction Completed" />
+                </div>
+                <div class="modal-body">
+                    <asp:Table runat="server" ForeColor="Black">
+                        <asp:TableHeaderRow>
+                            <asp:TableCell>
+                                <asp:Label runat="server" Text="Item Name: " />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemNameLbl" />
+                            </asp:TableCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label runat="server" Text="Item Price: " />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemPriceLbl" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button runat="server" ID="ExitBtn" CssClass="btn btn-default" OnClick="ExitBtn_Click" Text="Exit" />
+                </div>
+            </div>
+        </div>
+    </div>
     <div>
         <div style="float:left; width:20%;"> <!-- Left -->
             <asp:Image runat="server" ID="ItemImageLoaded" Width="200px" Height="200px"/>
