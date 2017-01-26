@@ -25,7 +25,7 @@ namespace HackNet.Game
         {
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 dbBuck = u.ByteDollars;
                 dbCoin = u.Coins;
             }
@@ -99,7 +99,7 @@ namespace HackNet.Game
 
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 u.ByteDollars = newBuck;
                 u.Coins = newCoin;
 
@@ -127,7 +127,7 @@ namespace HackNet.Game
 
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 u.ByteDollars = newBuck;
                 u.Coins = newCoin;
 

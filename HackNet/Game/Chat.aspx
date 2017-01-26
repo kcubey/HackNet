@@ -59,7 +59,7 @@
 				<div class="col-md-3">
 					<asp:Panel runat="server" DefaultButton="SendMsg">
 					Send a message:
-					<asp:TextBox ID="MessageToSend" runat="server" 
+					<asp:TextBox ID="MessageToSend" runat="server" autocomplete="off"
 								 ClientIDMode="Static" CssClass="form-control" />
 					</asp:Panel>
 				</div>

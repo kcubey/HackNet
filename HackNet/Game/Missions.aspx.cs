@@ -77,7 +77,7 @@ namespace HackNet.Game
 
         private void LoadScanInformation(MissionData mis)
         {
-            List<string> arrList = Mission.scanMission(mis, Authenticate.GetEmail(), true);
+            List<string> arrList = Mission.scanMission(mis, CurrentUser.GetEmail(), true);
 
             for (int i = 0; i < arrList.Count; i++)
             {
@@ -119,7 +119,7 @@ namespace HackNet.Game
                 }
                 else
                 {
-                    LoadScanInformation((MissionData)Session["MissionData"]);
+                    LoadScanInformation(Cache["MissionData"] as MissionData);
                     CMDError.Text = "Invalid Attack Type";
                     CMDError.ForeColor = System.Drawing.Color.Red;
                 }

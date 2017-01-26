@@ -57,8 +57,8 @@ namespace HackNet.Loggers
 
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Password was changed by user"
@@ -70,8 +70,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "One-time password authentication failed"
@@ -83,8 +83,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "One-time password authentication successful"
@@ -96,8 +96,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "One-time password authentication reconfigured by user"
@@ -109,8 +109,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "One-time password authentication disabled by user"

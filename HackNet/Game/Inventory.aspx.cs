@@ -18,7 +18,7 @@ namespace HackNet.Game
         {
             using (DataContext db=new DataContext())
             {
-                List<Items> ilist = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1, db);
+                List<Items> ilist = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1, db);
                 ItemLogic.LoadInventory(AllPartList, ilist, -1);
                 ItemLogic.LoadInventory(ProcessList, ilist, 1);
                 ItemLogic.LoadInventory(GPUList, ilist, 4);

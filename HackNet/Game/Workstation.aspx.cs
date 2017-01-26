@@ -17,10 +17,10 @@ namespace HackNet.Game
             ScriptManager.RegisterStartupScript(this, this.GetType(), "HelpBtn", "showTutorial();", true);
             using (DataContext db = new DataContext())
             {
-                // Machines.DefaultMachine(Authenticate.GetCurrentUser(), db);
-                Machines m = Machines.GetUserMachine(Authenticate.GetCurrentUser(),db);
+                // Machines.DefaultMachine(CurrentUser.Entity(), db);
+                Machines m = Machines.GetUserMachine(CurrentUser.Entity(),db);
                 Session["Machines"] = m;
-                List<Items> InvItmList = ItemLogic.GetUserInvItems(Authenticate.GetCurrentUser(), -1,db);
+                List<Items> InvItmList = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1,db);
 
                 // Store into Encrypted Viewstate
                 ViewState["InvetoryList"] = InvItmList;

@@ -40,7 +40,7 @@ namespace HackNet.Payment
             Session["packageprice"] = null;
 
 
-            Users u = Authenticate.GetCurrentUser();
+            Users u = CurrentUser.Entity();
             using (MailClient mc = new MailClient(u.Email))
             {
                 mc.Subject = "Purchase from HackNet";

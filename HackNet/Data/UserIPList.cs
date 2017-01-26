@@ -19,7 +19,7 @@ namespace HackNet.Data
 
         internal static bool CheckUserIPList(string IP,DataContext db)
         {
-            Users user = Authenticate.GetCurrentUser();
+            Users user = CurrentUser.Entity();
 
             var query = from uip in db.UserIPList where uip.UserId == user.UserID select uip;
 

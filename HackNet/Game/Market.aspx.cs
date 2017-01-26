@@ -27,7 +27,7 @@ namespace HackNet.Market
             //updating only
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 //u.ByteDollars = 50;
                 //u.Coins = 1200;
                 //u.ByteDollars;
@@ -102,7 +102,7 @@ namespace HackNet.Market
 
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 u.ByteDollars = newBuck;
                 u.Coins = newCoin;
 
