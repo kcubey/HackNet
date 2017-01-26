@@ -14,6 +14,8 @@ namespace HackNet.Data
 
 		public string Description { get; set; }
 
-		public double Price { get; set; }
+        public byte[] PackagePic { get; set; }
+
+        public double Price { get; set; }
 	}
 }
