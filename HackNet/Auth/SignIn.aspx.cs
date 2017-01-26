@@ -15,7 +15,7 @@ namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (Authenticate.IsAuthenticated())
+			if (CurrentUser.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
 
 			DataContext ctx = new DataContext();
@@ -49,22 +49,27 @@ namespace HackNet.Auth {
 		{
 			using (Authenticate a = new Authenticate(email))
 			{
+				string redir = Request.QueryString["ReturnUrl"];
+
+				if (string.IsNullOrWhiteSpace(redir))
+					redir = "~/Default";
+				else if (redir.Equals("/"))
+					redir = "~/Default";
+				else
+					redir = Request.QueryString["ReturnUrl"];
+					
 				if (a.Is2FAEnabled)
 				{
 					Session["TempKeyStore"] = ks;
 					Session["Cookie"] = a.AuthCookie;
 					Session["PasswordSuccess"] = email;
-					Session["ReturnUrl"] = Request.QueryString["ReturnUrl"];
+					Session["ReturnUrl"] = redir;
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
 					Session["KeyStore"] = ks;
-					Session["ReturnUrl"] = null;
 					Response.Cookies.Add(a.AuthCookie);
-					if (Request.QueryString["ReturnUrl"] != null)
-						Response.Redirect("~" + Request.QueryString["ReturnUrl"]);
-					else
-						Response.Redirect("~/Default");
+					Response.Redirect(redir);
 				}
 			}
 		}

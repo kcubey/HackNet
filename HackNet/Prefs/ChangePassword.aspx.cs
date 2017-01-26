@@ -14,7 +14,7 @@ namespace HackNet.Prefs
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Users u = Authenticate.GetCurrentUser();
+			Users u = CurrentUser.Entity();
 			LoggedInUsername.Text = u.UserName;
 			LoggedInName.Text = u.FullName;
 			RegisteredDate.Text = u.Registered.ToLongDateString();

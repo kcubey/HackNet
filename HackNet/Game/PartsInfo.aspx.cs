@@ -63,7 +63,7 @@ namespace HackNet.Game
         protected void BuyBtn_Click(object sender, EventArgs e)
         {
             Items item = (Items)Session["Item"];
-            ItemLogic.AddItemToInventory(Authenticate.GetCurrentUser(),item.ItemId);
+            ItemLogic.AddItemToInventory(CurrentUser.Entity(),item.ItemId);
         }
     }
 }

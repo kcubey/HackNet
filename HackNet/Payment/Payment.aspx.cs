@@ -34,7 +34,7 @@ namespace HackNet.Payment
 
             if (Session["packageId"] == null)
             {
-                Response.Redirect("~/game/market1");
+                Response.Redirect("~/game/market1", true);
             }
 
             packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();

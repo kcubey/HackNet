@@ -646,6 +646,8 @@
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\Base32.cs" />
+    <Compile Include="Security\CurrentUser.cs" />
+    <Compile Include="Security\EmailConfirm.cs" />
     <Compile Include="Security\KeyStore.cs" />
     <Compile Include="Security\MailClient.cs" />
     <Compile Include="Security\Message.cs" />

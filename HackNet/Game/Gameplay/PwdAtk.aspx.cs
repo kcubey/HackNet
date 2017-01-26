@@ -25,7 +25,7 @@ namespace HackNet.Game.Gameplay
                 ViewState["Configure"] = false;
                 ViewState["PWDCalculated"] = false;
                 ViewState["Bypass"] = false;
-                ViewState["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], Authenticate.GetEmail(), false);
+                ViewState["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], CurrentUser.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -214,7 +214,7 @@ namespace HackNet.Game.Gameplay
 
                     using (DataContext db = new DataContext())
                     {
-                        Users u = Authenticate.GetCurrentUser(false, db);
+                        Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
                         System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
                         db.SaveChanges();

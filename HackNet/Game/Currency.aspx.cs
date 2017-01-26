@@ -14,7 +14,6 @@ namespace HackNet.Game
 {
     public partial class Currency : System.Web.UI.Page
     {
-
         protected int dbBuck;
         protected int dbCoin;
         protected int numBuck;
@@ -26,7 +25,7 @@ namespace HackNet.Game
         {
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 dbBuck = u.ByteDollars;
                 dbCoin = u.Coins;
             }
@@ -34,8 +33,10 @@ namespace HackNet.Game
             Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
 
             LoadInventory(memorylist, 2);
+            LoadInventory(packageDL, 5);
         }
 
+        #region Payment stuff
         public void buckTextBox_TextChanged(Object sender, EventArgs e)
         {
             Calculate();
@@ -91,14 +92,14 @@ namespace HackNet.Game
             numBuck = Convert.ToInt32(Session["numBuck"]);
             numCoin = Convert.ToInt32(Session["numCoin"]);
 
-            message = "Now converting " + numBuck + " buck(s) to " + numCoin + " coins?";
+            message = "Now converting " + numBuck + " buck(s) to " + numCoin + " coins.";
 
             int newBuck = dbBuck - numBuck;
             int newCoin = dbCoin + numCoin;
 
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 u.ByteDollars = newBuck;
                 u.Coins = newCoin;
 
@@ -126,7 +127,7 @@ namespace HackNet.Game
 
             using (DataContext db = new DataContext())
             {
-                Users u = Authenticate.GetCurrentUser(false, db);
+                Users u = CurrentUser.Entity(false, db);
                 u.ByteDollars = newBuck;
                 u.Coins = newCoin;
 
@@ -143,7 +144,9 @@ namespace HackNet.Game
             convertedCoinLabel.Text = string.Empty;
         }
 
-        private void LoadInventory(DataList dl, int itemType)
+#endregion
+
+        private void LoadInventory(DataList dl, int itemType) //change to LoadPackages
         {
 
             List<Items> ilist = Data.Items.GetItems(itemType);
@@ -171,35 +174,44 @@ namespace HackNet.Game
                 dl.DataBind();
             }
         }
-
-        protected void btnAddItem_Click(object sender, EventArgs e)
+/*
+        private void LoadPackages(Repeater rpt, int itemType) //change to LoadPackages
         {
-            /*
-            Items item = new Items();
-            item.ItemName = ItemName.Text;
-            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
 
-            Stream strm = UploadPhoto.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            item.ItemPic = br.ReadBytes((int)strm.Length);
-            item.ItemDesc = ItemDesc.Text;
-            item.ItemPrice = Int32.Parse(ItemPrice.Text);
-            item.ItemBonus = Int32.Parse(ItemStat.Text);
-            using (DataContext db = new DataContext())
+            List<Items> ilist = Data.Items.GetItems(itemType);
+            if (ilist.Count != 0)
             {
-                db.Items.Add(item);
-                db.SaveChanges();
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("PackageNo", typeof(int));
+                dt.Columns.Add("PackagePrice", typeof(string));
+                dt.Columns.Add("PackagePic", typeof(string));
+                foreach (Items i in ilist)
+                {
+                    imageurlstring = Convert.ToBase64String(i.PackagePic, 0, i.PackagePic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(i.ItemId, i.ItemName, url);
+                }
+
+                rpt.DataSource = dt;
+                rpt.DataBind();
             }
-            */
+            else
+            {
+                rpt.DataSource = null;
+                rpt.DataBind();
+            }
         }
-
-        protected void btnAddListing_Click(object sender, EventArgs e)
+        */
+        //modified from btnAddListing_Click
+        protected void btnAddPackage_Click(object sender, EventArgs e)
         {
-            MarketListings mklist = new MarketListings();
+            Packages pklist = new Packages();
 
             using (DataContext db = new DataContext())
             {
-                db.MarketListings.Add(mklist);
+                db.Packages.Add(pklist);
                 db.SaveChanges();
             }
         }
@@ -210,6 +222,15 @@ namespace HackNet.Game
 
             Items item = Data.Items.GetItem(id);
             Session["Item"] = item;
+            Server.Transfer("PartsInfo.aspx", true);
+        }
+
+        protected void ViewMorePkg_Command(object sender, CommandEventArgs e)
+        {
+            int id = int.Parse(e.CommandArgument.ToString());
+
+      //      Packages pks = Data.Packages.GetDetails(id);
+      //      Session["Item"] = pks;
             Server.Transfer("PartsInfo.aspx", true);
         }
     }

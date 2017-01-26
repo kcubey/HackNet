@@ -10,14 +10,14 @@ using System.Web.UI.WebControls;
 namespace HackNet {
     public partial class SiteMaster : MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
-            if (Authenticate.IsAuthenticated())
+            if (CurrentUser.IsAuthenticated())
             {
 				PrivateLeft.Visible = true;
 				PrivateRight.Visible = true;
 
-                PrivateLeftLink.Text = "Hello, " + Authenticate.GetUserName();
+                PrivateLeftLink.Text = "Hello, " + CurrentUser.GetUserName();
 
-				AccessLevel al = Authenticate.GetAccessLevel();
+				AccessLevel al = CurrentUser.GetAccessLevel();
 				if (al == AccessLevel.Admin || al == AccessLevel.Staff)
 				{
 					ap.Visible = true;

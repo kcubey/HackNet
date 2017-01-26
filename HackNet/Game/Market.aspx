@@ -116,10 +116,14 @@
         ===For Current===
     <asp:Repeater ID="Repeater1" runat="server">
         <ItemTemplate>
-            <asp:LinkButton ID="LinkButton1" class="redirectButton" runat="server" postbackurl="/payment/reauth.aspx" Font-Underline="False">
-            <asp:Image ID="Image1" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-            <br /><br />
-            <asp:Label ID="pkgCLbl" CssClass="redirectLbl" runat="server" Text="Package C - SGD$50"></asp:Label></asp:LinkButton>
+            <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< % Eval("ItemPic")%>'  BackColor="Transparent" />
+                <br /><br />
+                <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                    <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< % Eval("PackageId")%>'></asp:Label>
+                    <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
+                    <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='< % Eval("PackagePrice")%>'></asp:Label>
+            </asp:LinkButton>
         </ItemTemplate>
     </asp:Repeater>
     

@@ -9,7 +9,7 @@
         function showPopupattacksummary() {
             $('#attackSummaryModel').modal('show');
         }
-       
+
     </script>
     <div id="attackTypeModel" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -136,17 +136,17 @@
         <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white;">
             <asp:Label runat="server" Text="username@HackNet:~#" Width="20%"></asp:Label>
             <asp:TextBox runat="server" ID="AtkTextBx" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
-            <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" style="float:right;" />
-            <asp:Label runat="server" ID="CMDError" ></asp:Label><br />
+            <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" Style="float: right;" />
+            <asp:Label runat="server" ID="CMDError"></asp:Label><br />
             <asp:RegularExpressionValidator runat="server" ID="CmdRegValidator"
-                            ControlToValidate="AtkTextBx" 
-                            ForeColor="Red" 
-                            ErrorMessage="Invalid Input" 
-                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
+                ControlToValidate="AtkTextBx"
+                ForeColor="Red"
+                ErrorMessage="Invalid Input"
+                ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
         </div>
 
     </div>
-    
+
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Attack Info Editor</h2>
         <div class="form-group row">
@@ -203,6 +203,6 @@
         </div>
         <asp:Button runat="server" ID="btnAddMis" CssClass="btn btn-default" OnClick="btnAddMis_Click" Text="Add Item" />
     </div>
-    
+
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
 </asp:Content>

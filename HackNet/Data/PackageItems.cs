@@ -11,11 +11,13 @@ namespace HackNet.Data
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int PackageId { get; set; }
-		
-		[ForeignKey("Item")]
-		public int ItemId { get; set; }
 
-		public int Quantity { get; set; }
+        [ForeignKey("Item")]
+        public int ItemId { get; set; }
+
+        public int ItemName { get; set; }
+
+        public int Quantity { get; set; }
 
 		// Foreign key references
 		public Items Item { get; set; }

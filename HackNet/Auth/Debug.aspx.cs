@@ -16,17 +16,17 @@ namespace HackNet.Auth
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (Authenticate.IsAuthenticated())
+			if (CurrentUser.IsAuthenticated())
 			{
-				UDetails1.Text = "User ID: " + Authenticate.GetUserId().ToString();
-				UDetails2.Text = "Username: " + Authenticate.GetUserName();
-				UDetails3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), Authenticate.GetAccessLevel());
+				UDetails1.Text = "User ID: " + CurrentUser.GetUserId().ToString();
+				UDetails2.Text = "Username: " + CurrentUser.GetUserId();
+				UDetails3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), CurrentUser.GetAccessLevel());
 			}
 		}
 
 		protected void SendMail()
 		{
-			Users u = Authenticate.GetCurrentUser();
+			Users u = CurrentUser.Entity();
 			using (MailClient mc = new MailClient(u.Email))
 			{
 				mc.Subject = "Verify your Email Address";

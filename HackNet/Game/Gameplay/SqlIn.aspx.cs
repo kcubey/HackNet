@@ -26,7 +26,7 @@ namespace HackNet.Game.Gameplay
                 ViewState["URLCalculated"] = false;
                 ViewState["Bypass"] = false;
                 ViewState["Configure"] = false;
-                ViewState["ScanList"] = Mission.scanMission(Cache["MissionData"] as MissionData, Authenticate.GetEmail(), false);
+                ViewState["ScanList"] = Mission.scanMission(Cache["MissionData"] as MissionData, CurrentUser.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -185,7 +185,7 @@ namespace HackNet.Game.Gameplay
 
                     using (DataContext db = new DataContext())
                     {
-                        Users u = Authenticate.GetCurrentUser(false, db);
+                        Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
                         System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
                         db.SaveChanges();

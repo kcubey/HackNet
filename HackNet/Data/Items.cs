@@ -41,11 +41,9 @@ namespace HackNet.Data
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
-
             }
             return itm;
         }
-
 
         internal static List<Items> GetItems(int itemType)
         {
@@ -61,20 +59,21 @@ namespace HackNet.Data
                     }
                     else
                     {
-                        var query = from i in db.Items select i;
-                        return query.ToList();
+                        do
+                        {
+                            var query = from i in db.Items select i;
+                            return query.ToList();
+                        }
+                        while (itemType != 5);
+                        
                     }
                 }
             }
             catch (EntityCommandExecutionException)
             {
                 throw new ConnectionException("Database link failure has occured");
-
             }
-        
         }
-
-
     }
 
     public enum ItemType
@@ -83,7 +82,8 @@ namespace HackNet.Data
         PartRam = 2,
         PartPower = 3,
         PartGpu = 4,
-        Bonus = 0
+        Bonus = 0,
+        Currency =5
     }
 
    
@@ -104,6 +104,8 @@ namespace HackNet.Data
                     return true;
                 case ItemType.Bonus:
                     return false;
+                case ItemType.Currency:
+                    return true;
                 default:
                     return false;
             }
