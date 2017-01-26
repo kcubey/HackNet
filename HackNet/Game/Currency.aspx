@@ -104,36 +104,40 @@
                         <hr />
                         <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br /><br />
+                            <br />
+                            <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="test description" Font-Size="Smaller"></asp:Label>
+                            <br />
                             <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                             <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
                             <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
                             <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1000"></asp:Label>
                         </asp:LinkButton>
 
-
+<!-- REpeater
                         <asp:DataList ID="packageDL" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <asp:Label ID="itemName" runat="server" Text='< % #Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
                                 <br />
                                 <asp:Image ID="itemImg" runat="server"
                                     Width="200px" Height="200px"
-                                    ImageUrl='<%#Eval("PackagePic")%>' />
+                                    ImageUrl='< % #Eval("PackagePic")%>' />
                                 <br />
-                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='< % #Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:DataList>
 
-                        <!-- REpeater
+                        
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
                                 <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< % Eval("PackagePic")%>'  BackColor="Transparent" />
-                                    <br /><br />
+                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                                    <br />
+                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackageDesc")%>' Font-Size="Smaller"></asp:Label>
+                                    <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< % Eval("PackageId")%>'></asp:Label>
+                                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackageNo")%>'></asp:Label>
                                         <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='< % Eval("PackagePrice")%>'></asp:Label>
+                                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackagePrice")%>'></asp:Label>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -201,7 +205,8 @@
             <asp:Label runat="server" Text="Buck Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:TextBox runat="server" ID="buckQuantity"></asp:TextBox>
         </div>
-        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddBuckPackage_Click" Text="Add Buck Package" />
+        <!-- <asp:Button  ID="btnAddItem" CssClass="btn btn-default" OnClick=btnAddBuckPackage_Click" Text="Add Buck Package" />-->
+        <asp:Button runat="server" ID="btnAddPkg" CssClass="btn btn-default" Text="Add Buck Package" />
     </div>
 
     
