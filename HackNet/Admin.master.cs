@@ -12,7 +12,7 @@ namespace HackNet
 	{
 		protected void Page_Init(object sender, EventArgs e)
 		{
-			switch(Authenticate.GetAccessLevel())
+			switch(CurrentUser.GetAccessLevel())
 			{
 				case AccessLevel.Admin:
 				case AccessLevel.Staff:

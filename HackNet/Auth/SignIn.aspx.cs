@@ -15,7 +15,7 @@ namespace HackNet.Auth {
 	public partial class SignIn : System.Web.UI.Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (Authenticate.IsAuthenticated())
+			if (CurrentUser.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
 
 			DataContext ctx = new DataContext();

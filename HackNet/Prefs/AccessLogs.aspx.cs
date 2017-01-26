@@ -25,7 +25,7 @@ namespace HackNet.Prefs
 					Type = LogType.Security,
 					Start = DEFAULT_START,
 					End = DEFAULT_END,
-					UserId = Authenticate.GetUserId()
+					UserId = CurrentUser.GetUserId()
 				};
 				ResultGrid.DataSource = GetDataTable(sf);
 				ResultGrid.DataBind();
@@ -71,7 +71,7 @@ namespace HackNet.Prefs
 			sf.Start = start;
 			sf.End = end;
 			sf.Type = LogType.Security;
-			sf.UserId = Authenticate.GetUserId();
+			sf.UserId = CurrentUser.GetUserId();
 
 			return sf;
 		}

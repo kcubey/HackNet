@@ -27,8 +27,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "Mission completed: " + missionname + ", Rewards: " + rewards
@@ -40,8 +40,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = string.Format("Item was purchased from market: {0} for {1}", purchaseditem, cost)
@@ -53,8 +53,8 @@ namespace HackNet.Loggers
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = Authenticate.GetEmail(),
-				UserId = Authenticate.GetUserId(),
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = string.Format("Item was sold to market: {0} for {1}", solditem, cost)
