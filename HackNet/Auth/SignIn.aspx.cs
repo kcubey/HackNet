@@ -49,22 +49,27 @@ namespace HackNet.Auth {
 		{
 			using (Authenticate a = new Authenticate(email))
 			{
+				string redir = Request.QueryString["ReturnUrl"];
+
+				if (string.IsNullOrWhiteSpace(redir))
+					redir = "~/Default";
+				else if (redir.Equals("/"))
+					redir = "~/Default";
+				else
+					redir = Request.QueryString["ReturnUrl"];
+					
 				if (a.Is2FAEnabled)
 				{
 					Session["TempKeyStore"] = ks;
 					Session["Cookie"] = a.AuthCookie;
 					Session["PasswordSuccess"] = email;
-					Session["ReturnUrl"] = "~" + Request.QueryString["ReturnUrl"];
+					Session["ReturnUrl"] = redir;
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
 					Session["KeyStore"] = ks;
-					string redir = Request.QueryString["ReturnUrl"];
 					Response.Cookies.Add(a.AuthCookie);
-					if (Request.QueryString["ReturnUrl"] != null)
-						Response.Redirect("~" + redir);
-					else
-						Response.Redirect("~/Default");
+					Response.Redirect(redir);
 				}
 			}
 		}
