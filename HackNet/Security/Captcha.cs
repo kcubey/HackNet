@@ -8,7 +8,7 @@ namespace HackNet.Security
     public class Captcha
     {
         [JsonProperty("success")]
-        private string _Success;
+        private string _Success; // Boolean value true/false
         public string Success
         {
             get
@@ -22,7 +22,7 @@ namespace HackNet.Security
         }
 
         [JsonProperty("error-codes")]
-        private List<string> _ErrorCodes;
+        private List<string> _ErrorCodes; // List of error codes
         public List<string> ErrorCodes
         {
             get
@@ -38,13 +38,12 @@ namespace HackNet.Security
         public static bool Validate(string EncodedResponse)
         {
             WebClient wc = new WebClient();
-            var googleReply = wc.DownloadString(
+            string googleReply = wc.DownloadString(
                                 string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}",
 								ConfigurationManager.AppSettings["ReCaptchaPrivKey"],
                                 EncodedResponse
                                 ));
-            var captchaResponse = JsonConvert.DeserializeObject<Captcha>(googleReply);
-            System.Diagnostics.Debug.WriteLine(captchaResponse.Success);
+            Captcha captchaResponse = JsonConvert.DeserializeObject<Captcha>(googleReply);
             return captchaResponse.Success.Contains("true");
         }
     }
