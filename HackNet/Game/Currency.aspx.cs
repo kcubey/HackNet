@@ -14,7 +14,6 @@ namespace HackNet.Game
 {
     public partial class Currency : System.Web.UI.Page
     {
-
         protected int dbBuck;
         protected int dbCoin;
         protected int numBuck;
@@ -34,8 +33,10 @@ namespace HackNet.Game
             Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
 
             LoadInventory(memorylist, 2);
+            LoadInventory(packageDL, 5);
         }
 
+        #region Payment stuff
         public void buckTextBox_TextChanged(Object sender, EventArgs e)
         {
             Calculate();
@@ -143,7 +144,9 @@ namespace HackNet.Game
             convertedCoinLabel.Text = string.Empty;
         }
 
-        private void LoadInventory(DataList dl, int itemType)
+#endregion
+
+        private void LoadInventory(DataList dl, int itemType) //change to LoadPackages
         {
 
             List<Items> ilist = Data.Items.GetItems(itemType);
@@ -172,33 +175,23 @@ namespace HackNet.Game
             }
         }
 
-        protected void btnAddItem_Click(object sender, EventArgs e)
+        //modified from btnAddListing_Click
+        protected void btnAddPackage_Click(object sender, EventArgs e)
         {
-            Items item = new Items();
-            item.ItemName = ItemName.Text;
-            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
+            Packages pklist = new Packages();
 
-            Stream strm = UploadPhoto.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            item.ItemPic = br.ReadBytes((int)strm.Length);
-            item.ItemDesc = ItemDesc.Text;
-            item.ItemPrice = Int32.Parse(ItemPrice.Text);
-            item.ItemBonus = Int32.Parse(ItemStat.Text);
             using (DataContext db = new DataContext())
             {
-                db.Items.Add(item);
+                db.Packages.Add(pklist);
                 db.SaveChanges();
             }
         }
 
-        protected void btnAddListing_Click(object sender, EventArgs e)
+        protected void DisplayPackage(object sender, EventArgs e)
         {
-            MarketListings mklist = new MarketListings();
-
             using (DataContext db = new DataContext())
             {
-                db.MarketListings.Add(mklist);
-                db.SaveChanges();
+
             }
         }
 

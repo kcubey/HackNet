@@ -157,6 +157,24 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label packageCost;
         
         /// <summary>
+        /// packageDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList packageDL;
+        
+        /// <summary>
+        /// packageRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater packageRepeater;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>
@@ -274,24 +292,6 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.DataList memorylist;
         
         /// <summary>
-        /// ItemName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ItemName;
-        
-        /// <summary>
-        /// ItemTypeList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ItemTypeList;
-        
-        /// <summary>
         /// UploadPhoto control.
         /// </summary>
         /// <remarks>
@@ -310,31 +310,22 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Image imgViewFile;
         
         /// <summary>
-        /// ItemDesc control.
+        /// packPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ItemDesc;
+        protected global::System.Web.UI.WebControls.TextBox packPrice;
         
         /// <summary>
-        /// ItemPrice control.
+        /// buckQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ItemPrice;
-        
-        /// <summary>
-        /// ItemStat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ItemStat;
+        protected global::System.Web.UI.WebControls.TextBox buckQuantity;
         
         /// <summary>
         /// btnAddItem control.

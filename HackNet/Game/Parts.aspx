@@ -142,6 +142,7 @@
                 <asp:ListItem Value="2">Memory</asp:ListItem>
                 <asp:ListItem Value="3">Power Supply</asp:ListItem>
                 <asp:ListItem Value="0">Booster</asp:ListItem>
+                <asp:ListItem Value="5">Currency</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="form-group row">
