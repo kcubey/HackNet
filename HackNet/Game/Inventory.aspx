@@ -18,15 +18,20 @@
                     <div class="tab-pane fade in active" id="tab1default">
                         <asp:DataList ID="AllPartList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px" style="margin:0 auto;">
                             <ItemTemplate>
-                                <div style="width:300px">
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
+                                <div style="width:300px;margin:0 auto;" ">
+                                <asp:Label ID="itemName" runat="server" Height="50px" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
                                 <br />
                                 <asp:Image ID="itemImg" runat="server" 
                                     Width="200px" Height="200px"     
                                     ImageUrl='<%#Eval("ItemPic")%>'/>
+                                    <br />
+                                    <asp:LinkButton runat="server" ID="ViewItem" CssClass="btn btn-default" OnCommand="ViewItem_Command" CommandArgument='<%#Eval("ItemId") %>' Text="View" />
                                 </div>
+                                <hr />
                             </ItemTemplate>
+
                         </asp:DataList>
+                        
                     </div>
                     <div class="tab-pane fade" id="tab2default">
                         <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px" style="margin:0 auto;">

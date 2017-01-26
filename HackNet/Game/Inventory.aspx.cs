@@ -56,5 +56,10 @@ namespace HackNet.Game
                 db.SaveChanges();
             }
         }
+
+        protected void ViewItem_Command(object sender, CommandEventArgs e)
+        {
+
+        }
     }
 }

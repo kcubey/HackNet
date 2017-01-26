@@ -27,10 +27,9 @@ namespace HackNet.Security
 		/// <summary>
 		/// Constructor for the authenticate class, should be used for authenticated HttpContexts only
 		/// </summary>
-		internal Authenticate()
+		internal Authenticate() : this(CurrentUser.GetEmail())
 		{
-			Email = CurrentUser.GetEmail();
-			Debug.WriteLine("Creating new authenticate instance for " + Email);
+
 		}
 
 		/// <summary>
@@ -40,7 +39,14 @@ namespace HackNet.Security
 		internal Authenticate(string email)
 		{
 			// To ensure email casing is correct
-			Email = Users.FindByEmail(email: email).Email;
+			Users u = Users.FindByEmail(email);
+			if (u == null)
+			{
+				throw new UserException("Authenticate instance failed to create due to non-existent user");
+			}
+
+			Email = email;
+
 			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
 

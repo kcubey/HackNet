@@ -45,18 +45,24 @@ namespace HackNet.Game.Class
                 DataTable dt = new DataTable();
                 dt.Columns.Add("ItemName", typeof(string));
                 dt.Columns.Add("ItemPic", typeof(string));
+                dt.Columns.Add("ItemId", typeof(int));
                 foreach (Items i in itmlist)
                 {
-                    if (i.ItemType == (ItemType)itemType)
+                    if (itemType != -1)
                     {
-                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                        url = "data:image/png;base64," + imageurlstring;
-                        dt.Rows.Add(i.ItemName, url);
+                        if (i.ItemType == (ItemType)itemType)
+                        {
+                            imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                            url = "data:image/png;base64," + imageurlstring;
+
+                            dt.Rows.Add(i.ItemName, url, i.ItemId);
+                        }
                     }else
                     {
                         imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                         url = "data:image/png;base64," + imageurlstring;
-                        dt.Rows.Add(i.ItemName, url);
+
+                        dt.Rows.Add(i.ItemName, url, i.ItemId);
                     }
                 }
                 dl.DataSource = dt;
