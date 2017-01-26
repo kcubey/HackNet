@@ -144,7 +144,7 @@ namespace HackNet.Game
             convertedCoinLabel.Text = string.Empty;
         }
 
-#endregion
+        #endregion
 
         private void LoadInventory(DataList dl, int itemType) //change to LoadPackages
         {
@@ -174,36 +174,29 @@ namespace HackNet.Game
                 dl.DataBind();
             }
         }
-/*
-        private void LoadPackages(Repeater rpt, int itemType) //change to LoadPackages
-        {
-
-            List<Items> ilist = Data.Items.GetItems(itemType);
-            if (ilist.Count != 0)
-            {
-                string imageurlstring;
-                string url;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("PackageNo", typeof(int));
-                dt.Columns.Add("PackagePrice", typeof(string));
-                dt.Columns.Add("PackagePic", typeof(string));
-                foreach (Items i in ilist)
+        /*
+                private void LoadPackages(Repeater rpt, int itemType) //change to LoadPackages
                 {
-                    imageurlstring = Convert.ToBase64String(i.PackagePic, 0, i.PackagePic.Length);
-                    url = "data:image/png;base64," + imageurlstring;
-                    dt.Rows.Add(i.ItemId, i.ItemName, url);
-                }
 
-                rpt.DataSource = dt;
-                rpt.DataBind();
-            }
-            else
-            {
-                rpt.DataSource = null;
-                rpt.DataBind();
-            }
-        }
-        */
+                    List<Items> ilist = Data.Items.GetItems(itemType);
+                    if (ilist.Count != 0)
+                {
+                    Items item = new Items();
+                    item.ItemName = ItemName.Text;
+                    item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
+
+                        rpt.DataSource = dt;
+                        rpt.DataBind();
+                    }
+                    else
+                    {
+                        rpt.DataSource = null;
+                        rpt.DataBind();
+                    }
+
+                }
+                */
+
         //modified from btnAddListing_Click
         protected void btnAddPackage_Click(object sender, EventArgs e)
         {
@@ -229,8 +222,8 @@ namespace HackNet.Game
         {
             int id = int.Parse(e.CommandArgument.ToString());
 
-      //      Packages pks = Data.Packages.GetDetails(id);
-      //      Session["Item"] = pks;
+            //      Packages pks = Data.Packages.GetDetails(id);
+            //      Session["Item"] = pks;
             Server.Transfer("PartsInfo.aspx", true);
         }
     }
