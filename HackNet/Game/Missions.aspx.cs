@@ -119,7 +119,7 @@ namespace HackNet.Game
                 }
                 else
                 {
-                    LoadScanInformation((MissionData)Session["MissionData"]);
+                    LoadScanInformation(Cache["MissionData"] as MissionData);
                     CMDError.Text = "Invalid Attack Type";
                     CMDError.ForeColor = System.Drawing.Color.Red;
                 }
