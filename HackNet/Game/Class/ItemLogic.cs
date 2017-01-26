@@ -52,6 +52,11 @@ namespace HackNet.Game.Class
                         imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                         url = "data:image/png;base64," + imageurlstring;
                         dt.Rows.Add(i.ItemName, url);
+                    }else
+                    {
+                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                        url = "data:image/png;base64," + imageurlstring;
+                        dt.Rows.Add(i.ItemName, url);
                     }
                 }
                 dl.DataSource = dt;

@@ -66,7 +66,15 @@ namespace HackNet.Game
             System.Diagnostics.Debug.WriteLine("Item ID: "+item.ItemId);
             ItemLogic.AddItemToInventory(CurrentUser.Entity(),item.ItemId);
 
+            ItemNameLbl.Text = item.ItemName;
+            ItemPriceLbl.Text = item.ItemPrice.ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
 
+        }
+
+        protected void ExitBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Parts.aspx",true);
         }
     }
 }
