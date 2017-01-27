@@ -17,6 +17,8 @@ namespace HackNet.Game
 			if (Session["KeyStore"] == null)
 				Response.Redirect("~/Auth/SignOut?ReturnUrl=/Game/Chat", true);
 
+			MessageToSend.MaxLength = 11000;
+
 			if (!IsPostBack)
 			{
 				RecentsDataList.DataSource = GetRecents();
@@ -70,9 +72,10 @@ namespace HackNet.Game
 		protected void SendMsg_Click(object sender, EventArgs e)
 		{
 			if (string.IsNullOrWhiteSpace(MessageToSend.Text))
-			{
 				return;
-			}
+
+			if (MessageToSend.MaxLength > 10000)
+				return;
 
 			int currentuser = CurrentUser.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];
