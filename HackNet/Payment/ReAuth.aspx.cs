@@ -16,7 +16,7 @@ namespace HackNet.Payment
         {
             if (Session["packageId"] == null)
             {
-                Response.Redirect("~/game/market1", true);
+                Response.Redirect("~/game/market", true);
             }
             DataContext ctx = new DataContext();
             
