@@ -74,8 +74,11 @@ namespace HackNet.Game
 			if (string.IsNullOrWhiteSpace(MessageToSend.Text))
 				return;
 
-			if (MessageToSend.MaxLength > 10000)
+			if (MessageToSend.Text.Length > 10000)
+			{
+				Msg1.Text = "Message is too long! (max 10000 chars)"
 				return;
+			}
 
 			int currentuser = CurrentUser.GetUserId();
 			int otheruser = (int) ViewState["otherParty"];

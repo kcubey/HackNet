@@ -57,6 +57,7 @@
 				</div>
 				<div class="col-md-5"></div>
 				<div class="col-md-3">
+					<asp:Label ID="Msg1" runat="server" />
 					<asp:Panel runat="server" DefaultButton="SendMsg">
 					Send a message:
 					<asp:TextBox ID="MessageToSend" runat="server" autocomplete="off"
