@@ -74,9 +74,12 @@ namespace HackNet.Game
 			if (string.IsNullOrWhiteSpace(MessageToSend.Text))
 				return;
 
+			if (Msg1.Text != "")
+				Msg1.Text = "";
+
 			if (MessageToSend.Text.Length > 10000)
 			{
-				Msg1.Text = "Message is too long! (max 10000 chars)";
+				Msg1.Text = "Message is too long! (Max 10000 characters)";
 				return;
 			}
 
@@ -97,7 +100,7 @@ namespace HackNet.Game
 
 		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
 		{
-			ToggleWindows();
+			Response.Redirect("~/Game/Chat");
 		}
 
 		protected void ChatWindow_Load(object sender, EventArgs e)
