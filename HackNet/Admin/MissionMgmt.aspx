@@ -46,12 +46,7 @@
                                 ForeColor="Red"
                                 ErrorMessage="Please enter a valid IP address"
                                 ControlToValidate="EditIP"
-                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
-                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                ForeColor="Red"
-                                ErrorMessage="Invalid Input for Mission Description"
-                                ControlToValidate="EditMisDesc"
-                                ValidationExpression="^[a-zA-Z'.\s]{1,500}$" /><br />
+                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" />
                         </div>
                     </div>
                 </div>
