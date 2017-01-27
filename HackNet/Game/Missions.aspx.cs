@@ -94,7 +94,7 @@ namespace HackNet.Game
             MissionTitleLbl.Text = mis.MissionName;
             MisDesLbl.Text = mis.MissionDesc;
 
-            Cache["MissionData"] = mis;
+            Session["MissionData"] = mis;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackSummaryModel", "showPopupattacksummary();", true);
         }
@@ -102,7 +102,7 @@ namespace HackNet.Game
         protected void AttackLink_Click(object sender, EventArgs e)
         {
             Cache["SelectedMis"] = true;
-            LoadScanInformation(Cache["MissionData"] as MissionData);
+            LoadScanInformation(Session["MissionData"] as MissionData);
         }
 
         protected void SubCmdBtn_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace HackNet.Game
                 }
                 else
                 {
-                    LoadScanInformation(Cache["MissionData"] as MissionData);
+                    LoadScanInformation(Session["MissionData"] as MissionData);
                     CMDError.Text = "Invalid Attack Type";
                     CMDError.ForeColor = System.Drawing.Color.Red;
                 }

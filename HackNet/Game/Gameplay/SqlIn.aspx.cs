@@ -15,7 +15,7 @@ namespace HackNet.Game.Gameplay
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            if (Cache["MissionData"] as MissionData == null)
+            if (Session["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
             }
@@ -26,7 +26,7 @@ namespace HackNet.Game.Gameplay
                 ViewState["URLCalculated"] = false;
                 ViewState["Bypass"] = false;
                 ViewState["Configure"] = false;
-                ViewState["ScanList"] = Mission.scanMission(Cache["MissionData"] as MissionData, CurrentUser.GetEmail(), false);
+                ViewState["ScanList"] = Mission.scanMission(Session["MissionData"] as MissionData, CurrentUser.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -72,7 +72,7 @@ namespace HackNet.Game.Gameplay
 
         protected void ConfigSQL_Click(object sender, EventArgs e)
         {
-            MissionData m = Cache["MissionData"] as MissionData;
+            MissionData m = Session["MissionData"] as MissionData;
 
             if (TargetIPTxtBox.Text.Equals(m.MissionIP))
             {
@@ -131,7 +131,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.Text = "URL is correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
-                            LoadScanInfo(Mission.LoadSuccessURL(Cache["MissionData"] as MissionData));
+                            LoadScanInfo(Mission.LoadSuccessURL(Session["MissionData"] as MissionData));
                             ViewState["Bypass"] = true;
 
                             // Enable the browser
@@ -167,7 +167,7 @@ namespace HackNet.Game.Gameplay
 
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
-            MissionData mis = Cache["MissionData"] as MissionData;
+            MissionData mis = Session["MissionData"] as MissionData;
 
             if (mis.MissionType == (MissionType)3)
             {

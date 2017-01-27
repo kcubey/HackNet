@@ -14,9 +14,8 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Cache["MissionData"] as MissionData == null)
+            if (Session["MissionData"] as MissionData == null)
             {
-                // prevent path travesel
                 Response.Redirect("../Missions.aspx");
             }
             if (!IsPostBack)
