@@ -14,7 +14,7 @@
                     <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" Text="Item Information"></asp:Label>
                 </div>
                 <div class="modal-body">
-                    <asp:Table runat="server" ForeColor="Black">
+                    <asp:Table runat="server" ForeColor="Black" CssClass="table">
                         <asp:TableRow>
                             <asp:TableCell Width="100px">
                                  <asp:Label runat="server" Text="Item Name: " />
@@ -32,8 +32,8 @@
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell Width="100px">
-                                 <asp:Label runat="server" Text="Item Description" />
+                            <asp:TableCell Width="110px">
+                                 <asp:Label runat="server" Text="Item Description: " />
                             </asp:TableCell>
                             <asp:TableCell>
                                 <asp:Label runat="server" ID="ItemDescLbl" />
@@ -163,55 +163,5 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="color: black; background-color: gray;">
-        <h2>Add Item into inventory</h2>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="UserID " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="UserIDLbl"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item ID: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemIDLbl"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Quantiy: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="QuanLbl"></asp:TextBox>
-        </div>
-        <asp:Button runat="server" ID="AddItemIntoUserBtn" Text="Add Item" OnClick="AddItemIntoUserBtn_Click" />
-    </div>
-
-    <div class="container-fluid" style="color: black; background-color: gray;">
-        <h2>Item Editor</h2>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemName"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:DropDownList runat="server" ID="ItemTypeList">
-                <asp:ListItem Value="1">Processor</asp:ListItem>
-                <asp:ListItem Value="4">Graphic Card</asp:ListItem>
-                <asp:ListItem Value="2">Memory</asp:ListItem>
-                <asp:ListItem Value="3">Power Supply</asp:ListItem>
-                <asp:ListItem Value="0">Booster</asp:ListItem>
-            </asp:DropDownList>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:FileUpload ID="UploadPhoto" runat="server" />
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemDesc" TextMode="MultiLine"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemPrice"></asp:TextBox>
-        </div>
-        <div class="form-group row">
-            <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
-            <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
-        </div>
-        <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
-    </div>
+   
 </asp:Content>
