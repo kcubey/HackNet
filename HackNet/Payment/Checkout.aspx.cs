@@ -25,7 +25,7 @@ namespace HackNet.Payment
             */
             if (Session["packageId"] == null)
             {
-                Response.Redirect("~/game/market1");
+                Response.Redirect("~/game/market", true);
             }
 
             string packageName = Session["packageId"].ToString();

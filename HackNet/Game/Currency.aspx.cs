@@ -32,15 +32,7 @@ namespace HackNet.Game
             buckValidator.MaximumValue = dbBuck.ToString();
             Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
 
-            if (!IsPostBack)
-            {
-                using (DataContext db = new DataContext())
-                {
-                    Users u = CurrentUser.Entity(false, db);
-                    dbBuck = u.ByteDollars;
-                    dbCoin = u.Coins;
-                }
-            }
+            
             LoadInventory(memorylist, 2);
             LoadInventory(packageDL, 5);
         }
@@ -54,10 +46,7 @@ namespace HackNet.Game
         public void PrintMessage(String message)
         {
             string alert = message;
-            Response.Write("<script type='text/javascript'>alert('" + alert + "');</script>");
-
-            ClearText();
-            //KTODO: Refresh/reload with updated values
+            Response.Write("<script type='text/javascript'>alert('" + alert + "');document.location.href='currency.aspx';</script>");
         }
 
         public void Calculate()
@@ -93,7 +82,7 @@ namespace HackNet.Game
 
             Session["packageId"] = packageId;
             Session["packagePrice"] = packagePrice;
-            Response.Redirect("~/payment/Reauth");
+            Response.Redirect("~/payment/Reauth",true);
         }
 
         public void ConversionButton_Click(Object sender, EventArgs e)
@@ -114,11 +103,11 @@ namespace HackNet.Game
 
                 db.SaveChanges();
                 Debug.WriteLine("user now has " + u.ByteDollars + " bucks and " + u.Coins + " coins");
-                //dbBuck = u.ByteDollars;
-                dbCoin = u.Coins;
             }
 
             PrintMessage(message);
+
+            
         }
 
         public void modalButton_Click(Object sender, EventArgs e)

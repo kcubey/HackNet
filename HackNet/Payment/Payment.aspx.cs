@@ -34,7 +34,7 @@ namespace HackNet.Payment
 
             if (Session["packageId"] == null)
             {
-                Response.Redirect("~/game/market1", true);
+                Response.Redirect("~/game/market", true);
             }
 
             packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
@@ -50,11 +50,16 @@ namespace HackNet.Payment
                 clientToken = gateway.ClientToken.generate();
                 Debug.WriteLine(clientToken);
             }
+
+            if (IsPostBack)
+            {
+                checkoutClickA();
+            }
         }
 
         public void CancelClick(Object sender, EventArgs e)
         {
-            Response.Redirect("~/game/market");
+            Response.Redirect("~/game/market", true);
         }
 
         public void checkoutClick(Object sender, EventArgs e)
@@ -93,13 +98,60 @@ namespace HackNet.Payment
 
                 //KTODO = Add in code to add items to invo
 
-                Response.Redirect("~/payment/checkout");
+                Response.Redirect("~/payment/checkout", true);
             }
             else
             {
                 Debug.WriteLine("is fail");
                 //Something went wrong
-                Response.Redirect("~/payment/retry");
+                Response.Redirect("~/payment/retry", true);
+            }
+        }
+
+
+        public void checkoutClickA()
+        {
+            Debug.WriteLine("Enter checkoutclickA event");
+            price = Convert.ToDecimal(Session["packageprice"]);
+            Debug.WriteLine("package price = " + price);
+
+            //Get the nonce & device data from the client
+            var nonce = "fake-valid-nonce";
+
+            //var nonce = Request.Form["payment_method_nonce"];
+            //var deviceData = Request.Form["device_data"];
+            //Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
+            Debug.WriteLine("nonce: " + nonce);
+
+            //Create auth
+            var request = new TransactionRequest
+            {
+                Amount = price,
+                PaymentMethodNonce = nonce,
+                // DeviceData = deviceData
+            };
+            Debug.WriteLine("transaction request made");
+
+            //Send transaction request to server
+            Result<Transaction> result = gateway.Transaction.Sale(request);
+            Debug.WriteLine("transaction sent to server");
+
+            if (result.IsSuccess())
+            {
+                Debug.WriteLine("is success");
+                //Transaction is successful
+                string transactionId = result.Target.Id.ToString();
+                Session["transactionId"] = transactionId;
+
+                //KTODO = Add in code to add items to invo
+
+                Response.Redirect("~/payment/checkout", true);
+            }
+            else
+            {
+                Debug.WriteLine("is fail");
+                //Something went wrong
+                Response.Redirect("~/payment/retry", true);
             }
         }
     }

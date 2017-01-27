@@ -88,7 +88,7 @@ namespace HackNet.Game
 
         protected void MarLnkBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Market1.aspx");
+            Response.Redirect("Market.aspx");
         }
     }
 }
