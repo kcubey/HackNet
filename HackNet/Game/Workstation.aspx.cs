@@ -83,7 +83,7 @@ namespace HackNet.Game
             }
 
             MachineLogic.UpdateMachine(m);
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect("Workstation.aspx",true);
         }
 
         protected void MarLnkBtn_Click(object sender, EventArgs e)

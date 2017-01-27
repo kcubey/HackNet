@@ -67,7 +67,7 @@ namespace HackNet.Game
             ItemDescLbl.Text = itm.ItemDesc;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ItemViewModel", "showItemPopUp();", true);
-
+            
         }
     }
 }
