@@ -13,6 +13,33 @@ namespace HackNet.Game {
     public partial class Inventory {
         
         /// <summary>
+        /// ItemNameLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemNameLbl;
+        
+        /// <summary>
+        /// ItemTypeLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemTypeLbl;
+        
+        /// <summary>
+        /// ItemDescLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemDescLbl;
+        
+        /// <summary>
         /// AllPartList control.
         /// </summary>
         /// <remarks>
