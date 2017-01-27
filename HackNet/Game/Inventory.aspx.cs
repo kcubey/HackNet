@@ -5,9 +5,9 @@ using System.IO;
 using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 using HackNet.Security;
 using HackNet.Game.Class;
+using System.Web.UI;
 
 namespace HackNet.Game
 {
@@ -18,7 +18,7 @@ namespace HackNet.Game
         {
             using (DataContext db=new DataContext())
             {
-                List<Items> ilist = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1, db);
+                System.Collections.Generic.List<Items> ilist = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1, db);
                 ItemLogic.LoadInventory(AllPartList, ilist, -1);
                 ItemLogic.LoadInventory(ProcessList, ilist, 1);
                 ItemLogic.LoadInventory(GPUList, ilist, 4);
@@ -59,6 +59,14 @@ namespace HackNet.Game
 
         protected void ViewItem_Command(object sender, CommandEventArgs e)
         {
+            int itemid = int.Parse(e.CommandArgument.ToString());
+            Items itm = HackNet.Data.Items.GetItem(itemid);
+
+            ItemNameLbl.Text = itm.ItemName;
+            ItemTypeLbl.Text = itm.ItemType.ToString();
+            ItemDescLbl.Text = itm.ItemDesc;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ItemViewModel", "showItemPopUp();", true);
 
         }
     }
