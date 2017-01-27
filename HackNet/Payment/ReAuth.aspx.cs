@@ -16,7 +16,7 @@ namespace HackNet.Payment
         {
             if (Session["packageId"] == null)
             {
-                Response.Redirect("~/game/market1");
+                Response.Redirect("~/game/market1", true);
             }
             DataContext ctx = new DataContext();
             
@@ -26,7 +26,7 @@ namespace HackNet.Payment
 
         public void CancelClick(Object sender, EventArgs e)
         {
-            Response.Redirect("~/game/currency");
+            Response.Redirect("~/game/currency", true);
             Session["packageId"] = null;
             Session["packageprice"] = null;
         }
@@ -60,7 +60,7 @@ namespace HackNet.Payment
             using (Authenticate a = new Authenticate(email))
             {
                 Response.Cookies.Add(a.AuthCookie);
-                Response.Redirect("~/payment/payment");
+                Response.Redirect("~/payment/payment", true);
             }
         }
 
