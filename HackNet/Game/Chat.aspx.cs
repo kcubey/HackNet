@@ -76,7 +76,7 @@ namespace HackNet.Game
 
 			if (MessageToSend.Text.Length > 10000)
 			{
-				Msg1.Text = "Message is too long! (max 10000 chars)"
+				Msg1.Text = "Message is too long! (max 10000 chars)";
 				return;
 			}
 
