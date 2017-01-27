@@ -149,7 +149,8 @@ namespace HackNet.Game
 
 		protected void SetRecipient(object sender, EventArgs e)
 		{
-			ReceiverId.Text = (sender as LinkButton).CommandArgument;
+			if (sender is LinkButton)
+				ReceiverId.Text = (sender as LinkButton).CommandArgument;
 		}
 
 		public string GetUsername(int userid)

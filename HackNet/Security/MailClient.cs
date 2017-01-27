@@ -67,8 +67,9 @@ namespace HackNet.Security
 			{
 				client.Send(mail);
 				return true;
-			} catch (Exception)
+			} catch (Exception e)
 			{
+				System.Diagnostics.Debug.WriteLine(e.StackTrace);
 				return false;
 			}
 		}
