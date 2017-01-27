@@ -30,7 +30,7 @@
                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="DarkRed"
                     DisplayMode="BulletList" ShowSummary="true" HeaderText="Errors:" />
                 <asp:Label ID="Msg" ForeColor="red" runat="server" />
-                <table runat="server" class="regTable">
+                <table runat="server" ID="RegistrationTable" class="regTable">
 
                     <tr>
                         <td><strong>E-mail Address:</strong></td>
@@ -69,7 +69,7 @@
                                 ErrorMessage="Username is required." Text="*" runat="server" />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                                 ErrorMessage="Username can only contain alphanumerics and underscores, and at least 4 characters"
-                                ControlToValidate="UserName" Display="None" ValidationExpression="^[a-zA-Z_]{4,14}$" />
+                                ControlToValidate="UserName" Display="None" ValidationExpression="^[a-zA-Z0-9_]{4,14}$" />
                         </td>
                     </tr>
                     <tr>

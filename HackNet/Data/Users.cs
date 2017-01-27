@@ -185,7 +185,6 @@ internal class Level
 
 public enum AccessLevel
 {
-	Unverified = -1,
 	User = 0,
 	Staff = 1,
 	Admin = 2

@@ -215,6 +215,7 @@
     <None Include="App_Data\Secrets.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Auth\ConfirmEmail.aspx" />
     <Content Include="Auth\Debug.aspx" />
     <Content Include="Auth\OtpVerify.aspx" />
     <Content Include="Auth\SignIn.aspx" />
@@ -266,13 +267,13 @@
     <Content Include="Game\Gameplay\SqlIn.aspx" />
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Inventory.aspx" />
-    <Content Include="Game\Market1.aspx" />
+    <Content Include="Game\Market.aspx" />
     <Content Include="Game\Missions.aspx" />
     <Content Include="Game\Parts.aspx" />
     <Content Include="Game\PartsInfo.aspx" />
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
-    <Content Include="Game\Market.aspx" />
+    <Content Include="Game\MarketOld.aspx" />
     <Content Include="Payment\backend\btconfig.txt" />
     <Content Include="Payment\backend\checkoutcontrol.txt" />
     <Content Include="Payment\backend\ibtconfig.txt" />
@@ -419,6 +420,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\ConfirmEmail.aspx.cs">
+      <DependentUpon>ConfirmEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\ConfirmEmail.aspx.designer.cs">
+      <DependentUpon>ConfirmEmail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auth\Debug.aspx.cs">
       <DependentUpon>Debug.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -528,12 +536,12 @@
     <Compile Include="Game\Inventory.aspx.designer.cs">
       <DependentUpon>Inventory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Market1.aspx.cs">
-      <DependentUpon>Market1.aspx</DependentUpon>
+    <Compile Include="Game\Market.aspx.cs">
+      <DependentUpon>Market.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Game\Market1.aspx.designer.cs">
-      <DependentUpon>Market1.aspx</DependentUpon>
+    <Compile Include="Game\Market.aspx.designer.cs">
+      <DependentUpon>Market.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Missions.aspx.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
@@ -567,12 +575,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Game\Market.aspx.cs">
-      <DependentUpon>Market.aspx</DependentUpon>
+    <Compile Include="Game\MarketOld.aspx.cs">
+      <DependentUpon>MarketOld.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Game\Market.aspx.designer.cs">
-      <DependentUpon>Market.aspx</DependentUpon>
+    <Compile Include="Game\MarketOld.aspx.designer.cs">
+      <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />

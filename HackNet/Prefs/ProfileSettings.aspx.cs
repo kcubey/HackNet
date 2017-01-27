@@ -26,7 +26,6 @@ namespace HackNet.Prefs
 
 		protected void ProfileChange_Click(object sender, EventArgs e)
 		{
-			Page.Validate();
 			string whatschanged = "";
 			using (Authenticate a = new Authenticate())
 			using (DataContext db = new DataContext())
@@ -64,6 +63,7 @@ namespace HackNet.Prefs
 				if (!emailTxt.Text.Equals(u.Email))
 				{
 					u.Email = emailTxt.Text;
+					EmailConfirm.SendEmailForConfirmation(u);
 					whatschanged += "Email ";
 				}
 
@@ -79,6 +79,12 @@ namespace HackNet.Prefs
 					db.SaveChanges();
 					Msg.ForeColor = System.Drawing.Color.GreenYellow;
 					Msg.Text = "Changes saved successfully!";
+
+					if (whatschanged.Contains("Email"))
+					{
+						Msg.Text += " Kindly check your new email to re-verify";
+					}
+
 				} else
 				{
 					Msg.Text = "No changes were made.";

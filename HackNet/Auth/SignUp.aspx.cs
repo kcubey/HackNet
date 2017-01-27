@@ -1,12 +1,9 @@
 ﻿using HackNet.Security;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using static HackNet.Security.Authenticate;
 
 namespace HackNet.Auth
 {
@@ -14,7 +11,10 @@ namespace HackNet.Auth
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			if (CurrentUser.IsAuthenticated())
+			{
+				Response.Redirect("~/Default", true);
+			}
 		}
 
 		protected void RegisterClick(object sender, EventArgs e)
@@ -47,7 +47,8 @@ namespace HackNet.Auth
 			{
 				case RegisterResult.Success:
 					Msg.ForeColor = System.Drawing.Color.LimeGreen;
-					Msg.Text = "Registration successful";
+					RegistrationTable.Visible = false;
+					Msg.Text = "Registration successful, please check your email to confirm it";
 					break;
 				case RegisterResult.EmailTaken:
 					Msg.Text = "Email has already been registered with another user";

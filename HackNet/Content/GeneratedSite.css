@@ -84,16 +84,17 @@ footer {
   display: none; }
 
 /* Styling for Sign Up page*/
-.regTable {
-  background-color: rgba(10, 10, 10, 0.9); }
-  .regTable input[type="text"], .regTable input[type="password"] {
-    width: 270px; }
-  .regTable td:nth-child(1) {
-    width: 180px; }
-  .regTable td:nth-child(3) {
-    width: 200px; }
-  .regTable tr, .regTable td {
-    padding: 0 5px 10px 0; }
+.regTable input[type="text"], .regTable input[type="password"] {
+  width: 270px; }
+
+.regTable td:nth-child(1) {
+  width: 180px; }
+
+.regTable td:nth-child(3) {
+  width: 200px; }
+
+.regTable tr, .regTable td {
+  padding: 0 5px 10px 0; }
 
 /* Styling for OTP page */
 .otpTable td {
