@@ -63,7 +63,9 @@ namespace HackNet.Security
 				try
 				{
 					Secret = Base32.ToBytes(value);
-				} catch { };
+				} catch {
+					System.Diagnostics.Debug.WriteLine("B32 Conversion FAILED: " + Secret);
+				};
 			}
 		}
 

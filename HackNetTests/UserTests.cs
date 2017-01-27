@@ -21,7 +21,7 @@ namespace HackNetTests
 				db.SaveChanges();
 
 				u = Users.FindByEmail("hacknet@wlgoh.com", db);
-				Assert.AreEqual(u.AccessLevel, AccessLevel.User);
+				Assert.AreEqual(u.AccessLevel, AccessLevel.Staff);
 
 				u.AccessLevel = AccessLevel.User;
 				db.SaveChanges();
