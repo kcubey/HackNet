@@ -25,24 +25,31 @@ namespace HackNet.Data
         public int MissionCoin { get; set; }
 
 
-        public static MissionData GetMissionData(int missId)
+        public static MissionData GetMissionData(int missId,bool ReadOnly=true,DataContext db=null)
         {
-            try
+           
+            if (ReadOnly == true)
             {
-                using(DataContext db=new DataContext())
+                using(DataContext db1=new DataContext())
                 {
                     MissionData mis;
-                    mis = (from m in db.MissionData
+                    mis = (from m in db1.MissionData
                            where m.MissionId == missId
                            select m).FirstOrDefault();
 
                     return mis;
                 }
-            }
-            catch (EntityCommandExecutionException)
+            }else
             {
-                throw new ConnectionException("Database link failure has occured");
+                MissionData mis;
+                mis = (from m in db.MissionData
+                       where m.MissionId == missId
+                       select m).FirstOrDefault();
+
+                return mis;
             }
+            
+                
         }
 
         public static List<MissionData> GetMisList(int recomLvl=-1)

@@ -31,13 +31,13 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditMisName;
         
         /// <summary>
-        /// EditIP control.
+        /// EditMisIP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditIP;
+        protected global::System.Web.UI.WebControls.TextBox EditMisIP;
         
         /// <summary>
         /// EditMisType control.
@@ -56,6 +56,24 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EditMisDesc;
+        
+        /// <summary>
+        /// EditMisExp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EditMisExp;
+        
+        /// <summary>
+        /// EditMisCoin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EditMisCoin;
         
         /// <summary>
         /// MisNameValidator control.
