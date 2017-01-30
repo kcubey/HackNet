@@ -306,8 +306,6 @@
     <Content Include="SignalR\jquery-1.10.2.min.js" />
     <Content Include="SignalR\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR\SignalR.StockTicker.js" />
-    <Content Include="SignalR\StockTicker.css" />
-    <Content Include="SignalR\StockTicker.html" />
     <Content Include="Styling.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -690,11 +688,7 @@
       <DependentUpon>ChatClientz.aspx</DependentUpon>
     </Compile>
     <Compile Include="SignalR\Startup.cs" />
-    <Compile Include="SignalR\MessageSignal.cs" />
-    <Compile Include="SignalR\Stock.cs" />
-    <Compile Include="SignalR\StockTicker.cs" />
     <Compile Include="SignalR\MessageHub.cs" />
-    <Compile Include="SignalR\StockTickerHub.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

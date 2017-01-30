@@ -21,7 +21,12 @@ namespace Microsoft.AspNet.SignalR.Messaging
 		public void CauseRefresh()
 		{
 			Clients.All.doRefresh();
-
 		}
-    }
+
+		public static void ServerCauseRefresh()
+		{
+			var signalrcon = GlobalHost.ConnectionManager.GetHubContext<MessageHub>();
+			signalrcon.Clients.All.doRefresh();
+		}
+	}
 }

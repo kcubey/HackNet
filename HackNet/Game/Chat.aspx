@@ -1,7 +1,36 @@
 ﻿<%@ Page Title="Messaging" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Chat.aspx.cs" Inherits="HackNet.Game.Chat" %>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="GameHeadPH" runat="server">
-	<link rel="stylesheet" href="../Content/Chat.css" />
+		<!--Script references. -->
+		<script src="../Scripts/jquery-3.1.1.min.js"></script>
+		<script src="../SignalR/jquery.color-2.1.2.min.js"></script>
+		<script src="../Scripts/jquery.signalR-2.2.1.js"></script>
+		<script src="../SignalR/hubs"></script>
+		<link rel="stylesheet" href="../Content/Chat.css" />
+	
+		<script type="text/javascript">
+		
+        var chat = $.connection.ChatClientz;
+
+		chat.client.doRefresh = function () {
+			updatePanel();
+		};
+
+        // Start the connection.
+        $.connection.hub.start().done();
+		
+		function updateScroll(){
+			var element = document.getElementById("chatdiv");
+			element.scrollTop = element.scrollHeight;
+		}
+		
+        function updatePanel() {
+        	setTimeout(function () {
+        		document.getElementById("ReloadBtn").click();
+        	}, 1500);
+			updateScroll(); 
+        }
+	</script>
 </asp:Content>
 <asp:Content ID="ChatContent" ContentPlaceHolderID="GameContent" runat="server">
 
@@ -38,7 +67,7 @@
 		</div>
 		<asp:Label ID="Msg" runat="server" />
 	</div>
-	<div class="chatsection" ID="ChatWindow" runat="server" visible="false" onload="ChatWindow_Load">
+	<div class="chatsection" ID="ChatWindow" runat="server" visible="false" onload="ChatWindow_Load" >
 		<div class="ChatTitle">Chatting with <asp:Label ID="LblRecipient" runat="server" /></div>
 		<asp:UpdatePanel ID="ChatUpdatePanel" ChildrenAsTriggers="true" UpdateMode="Conditional" runat="server">
 		<Triggers>
@@ -95,46 +124,11 @@
 		</asp:UpdatePanel>
 	</div>
 
-	<!--Script references. -->
-	<script src="../Scripts/jquery-3.1.1.min.js"></script>
-	<script src="../SignalR/jquery.color-2.1.2.min.js"></script>
-	<script src="../Scripts/jquery.signalR-2.2.1.js"></script>
-	<script src="../SignalR/hubs"></script>
+	<script type="text/javascript">
+			$('#chatdiv').scrollTop($('#chatdiv')[0].scrollHeight);
+	</script>
+
 
 	<!--Add script to update the page and send messages.-->
-	<script type="text/javascript">
-		$('#chatdiv').scrollTop($('#chatdiv')[0].scrollHeight);
 
-        var chat = $.connection.ChatClientz;
-
-        // Declare a proxy to reference the hub.
-        // Create a function that the hub can call to broadcast messages.
-        chat.client.broadcastMessage = function (name, msg) {
-            // Html encode display name and message.
-            var encodedName = $('<div />').text(name).html();
-            var encodedMsg = $('<div />').text(msg).html();
-            $('#discussion').append('<li><strong>' + encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
-        };
-
-		chat.client.doRefresh = function () {
-			Update_UpdatePanel();
-			$('#SendMsg').click(function () {
-				chat.server.causeRefresh();
-			})
-		};
-
-        // Start the connection.
-        $.connection.hub.start().done(function () {
-			$(document).on('click', '#SendMsg', function () {
-				chat.server.causeRefresh();
-			});
-        });
-
-		function Update_UpdatePanel() {
-			setTimeout(function () {
-				document.getElementById("ReloadBtn").click();
-				$('#chatdiv').scrollTop($('#chatdiv')[0].scrollHeight);
-			}, 2000);
-		}
-	</script>
 </asp:Content>

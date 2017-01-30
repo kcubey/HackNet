@@ -1,4 +1,5 @@
 ﻿using HackNet.Security;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace HackNet.Game
 	{
 		private static Dictionary<int, string> usernames = new Dictionary<int, string>();
 
+		/*
+		 *  EVENT BASED METHODS
+		 */
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["KeyStore"] == null)
@@ -26,48 +30,6 @@ namespace HackNet.Game
 			}
 		}
 		
-		// 
-		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
-		{
-			int otherid = -1;
-			int currentid = CurrentUser.GetUserId();
-			string username;
-
-			// Validate Username
-			if (string.IsNullOrWhiteSpace(ReceiverId.Text))
-			{
-				Msg.Text = "Username entered is empty";
-				return;
-			} else
-			{
-				otherid = Authenticate.ConvertUsernameToId(ReceiverId.Text);
-				username = ReceiverId.Text;
-			}
-
-			// Validate UserID exists
-			if (otherid == -1)
-			{
-				Msg.Text = "No recipient by this username was found";
-				return;
-
-			} else if (otherid == currentid)
-			{
-				Msg.Text = "You cannot start a conversation with yourself!";
-				return;
-
-			} else if (otherid != currentid && otherid > 0)
-			{
-				ViewState["thisParty"] = CurrentUser.GetUserId();
-				ViewState["otherParty"] = otherid;
-
-				ToggleWindows();
-				LblRecipient.Text = Authenticate.ConvertIdToUsername(otherid);
-				ChatRepeater.DataSource = RetrieveMessages(otherid);
-				ChatRepeater.DataBind();
-				return;
-
-			}
-		}
 
 		protected void SendMsg_Click(object sender, EventArgs e)
 		{
@@ -94,6 +56,8 @@ namespace HackNet.Game
 
 			Message msg = new Message(currentuser, otheruser, content);
 			MessageLogic.SendMessage(msg, keyStore);
+
+			Microsoft.AspNet.SignalR.Messaging.MessageHub.ServerCauseRefresh();
 		}
 
 		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
@@ -119,7 +83,55 @@ namespace HackNet.Game
 
 			ChatRepeater.DataSource = RetrieveMessages(otherid);
 			ChatRepeater.DataBind();
+
+			if (ChatWindow.Visible)
+				ScriptManager.RegisterStartupScript(this, GetType(), "Javascript", "javascript:updateScroll();", true);
 		}
+
+		protected void ButtonChooseRecipient_Click(object sender, EventArgs e)
+		{
+			int otherid = -1;
+			int currentid = CurrentUser.GetUserId();
+			string username;
+
+			// Validate Username
+			if (string.IsNullOrWhiteSpace(ReceiverId.Text))
+			{
+				Msg.Text = "Username entered is empty";
+				return;
+			}
+			else
+			{
+				otherid = Authenticate.ConvertUsernameToId(ReceiverId.Text);
+				username = ReceiverId.Text;
+			}
+
+			// Validate UserID exists
+			if (otherid == -1)
+			{
+				Msg.Text = "No recipient by this username was found";
+				return;
+
+			}
+			else if (otherid == currentid)
+			{
+				Msg.Text = "You cannot start a conversation with yourself!";
+				return;
+
+			}
+			else if (otherid != currentid && otherid > 0)
+			{
+				ViewState["thisParty"] = CurrentUser.GetUserId();
+				ViewState["otherParty"] = otherid;
+
+				ToggleWindows();
+				LblRecipient.Text = Authenticate.ConvertIdToUsername(otherid);
+				ChatRepeater.DataSource = RetrieveMessages(otherid);
+				ChatRepeater.DataBind();
+				return;
+			}
+		}
+
 
 		protected void SetRecipient(object sender, EventArgs e)
 		{
@@ -135,7 +147,23 @@ namespace HackNet.Game
 			}
 		}
 
-		// Utility methods
+		/*
+		 * OTHER METHODS
+		 */
+		public List<Message> RetrieveMessages(int otherId, int limit = 10)
+		{
+			if (otherId <= 0)
+			{
+				return new List<Message>();
+			}
+			List<Message> msgs = new List<Message>();
+			KeyStore ks = Session["KeyStore"] as KeyStore;
+			int viewerId = CurrentUser.GetUserId();
+			//LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
+			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, ks).ToList();
+			return msgs;
+		}
+
 		public string ThisOrOther(int userid)
 		{
 			if (userid == (int)ViewState["thisParty"])
@@ -194,19 +222,7 @@ namespace HackNet.Game
 			}
 		}
 
-		public List<Message> RetrieveMessages(int otherId, int limit = 10)
-		{
-			if (otherId <= 0)
-			{
-				return new List<Message>();
-			}
-			List<Message> msgs = new List<Message>();
-			KeyStore ks = Session["KeyStore"] as KeyStore;
-			int viewerId = CurrentUser.GetUserId();
-			//LblRecipient.Text = Authenticate.ConvertIdToUsername(otherId);
-			msgs = MessageLogic.RetrieveMessages(viewerId, otherId, ks, limit).ToList();
-			return msgs;
-		}
+
 
 
 	}
