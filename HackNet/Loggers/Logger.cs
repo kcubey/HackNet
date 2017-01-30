@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -12,18 +13,22 @@ namespace HackNet.Loggers
 {
 	public abstract class Logger
 	{
-		private AuthLogger Auth;
-		private static DataContext db;
+		private static readonly string path = HttpRuntime.AppDomainAppPath + "App_Data\\HackNet.log";
 
-		public Logger()
-		{
-			if (db == null)
-				db = new DataContext();
-		}
-
-		internal abstract void Log(LogEntry entry);
+		internal abstract void Log(LogEntry le);
 
 		internal abstract List<LogEntry> Retrieve(SearchFilter sf);
+
+		internal void MasterLog(LogEntry entry)
+		{
+			Thread t = new Thread(delegate ()
+			{
+				LogToDB(entry);
+				LogToFile(entry);
+				LogConsole(entry);
+			});
+			t.Start();
+		}
 
 		internal static Logger GetRetriever(SearchFilter sf)
 		{
@@ -42,27 +47,30 @@ namespace HackNet.Loggers
 
 		internal int LogToDB(LogEntry entry)
 		{
-			if (entry.UserId == 0 && entry.EmailAddress != null)
+			using (DataContext db = new DataContext())
 			{
-				// Get related user
-				Users u = Users.FindByEmail(entry.EmailAddress, db);
-				// Check if user is null or does it actually exist
-				if (u == null)
-					entry.UserId = 0;
-				else
-					entry.UserId = u.UserID;
+				if (entry.UserId == 0 && entry.EmailAddress != null)
+				{
+					// Get related user
+					Users u = Users.FindByEmail(entry.EmailAddress, db);
+					// Check if user is null or does it actually exist
+					if (u == null)
+						entry.UserId = 0;
+					else
+						entry.UserId = u.UserID;
+				}
+
+				// Convert to EF supported type
+				Logs dblog = null;
+				if (entry.IsValid)
+					dblog = entry.ConvertToDB();
+
+				// Add and save changes
+				if (dblog != null)
+					db.Logs.Add(dblog);
+
+				return db.SaveChanges();
 			}
-
-			// Convert to EF supported type
-			Logs dblog = null;
-			if (entry.IsValid)
-				dblog = entry.ConvertToDB();
-
-			// Add and save changes
-			if (dblog != null)
-				db.Logs.Add(dblog);
-
-			return db.SaveChanges();
 		}
 
 		internal void LogToFile(LogEntry entry)
@@ -73,18 +81,40 @@ namespace HackNet.Loggers
 			string severity = Enum.GetName(typeof(LogSeverity), entry.Severity);
 			string type = Enum.GetName(typeof(LogType), entry.Type);
 			string time = DateTime.Now.ToString();
-			string directory = HttpRuntime.AppDomainAppPath + "App_Data\\HackNet.log";
-			string LogString = string.Format("[{0} {1}] {2}: {3} by {4}", severity, time, type, entry.Description, entry.IPAddress);
-			try
+			
+			using (FileStream fs = new FileStream(path, FileMode.Append, FileAccess.Write))
+			using (StreamWriter sw = new StreamWriter(fs))
 			{
-				File.AppendAllText(directory, LogString + Environment.NewLine);
-			} catch (UnauthorizedAccessException)
-			{
-				System.Diagnostics.Debug.WriteLine("File logging failed with exception (UnauthorizedAccessException)");
-			} catch (SecurityException)
-			{
-				System.Diagnostics.Debug.WriteLine("File logging failed with exception (SecurityException)");
+				try
+				{
+
+					string LogString = string.Format("[{0} {1}] {2}: {3} by {4}",
+										severity, time, type, entry.Description, entry.IPAddress);
+
+					sw.WriteLine(LogString);
+					sw.Flush();
+				} catch (UnauthorizedAccessException)
+				{
+					System.Diagnostics.Debug.WriteLine("File logging failed with exception (UnauthorizedAccessException)");
+				} catch (SecurityException)
+				{
+					System.Diagnostics.Debug.WriteLine("File logging failed with exception (SecurityException)");
+				} finally
+				{
+					sw.Close();
+				}
 			}
+		}
+
+		internal static string GetLogFile()
+		{
+			string allLines;
+			using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read))
+			using (StreamReader sr = new StreamReader(fs))
+			{
+				allLines = sr.ReadToEnd();
+			}
+			return allLines;
 		}
 
 		internal void LogConsole(LogEntry entry)

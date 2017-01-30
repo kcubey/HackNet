@@ -146,14 +146,7 @@ namespace HackNet.Loggers
 		internal override void Log(LogEntry entry)
 		{
 			entry.Type = LogType.Security;
-			Thread t = new Thread(delegate () 
-				{
-					LogToDB(entry);
-					LogToFile(entry);
-					LogConsole(entry);
-				}
-			);
-			t.Start();
+			MasterLog(entry);
 		}
 
 		internal override List<LogEntry> Retrieve(SearchFilter sf)

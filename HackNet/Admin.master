@@ -24,7 +24,7 @@
 					<li><asp:HyperLink runat="server" Text="Item Management" NavigateUrl="~/Admin/ItemMgmt" /></li>
 
 					<li><asp:HyperLink runat="server" Text="HackNet Logs" NavigateUrl="~/Admin/Logs" /></li>
-					<li><asp:HyperLink runat="server" Text="Local Logs" NavigateUrl="~/Admin/TextLogs" /></li>
+					<li><asp:HyperLink runat="server" Text="Local Logs" NavigateUrl="~/Admin/LocalLogs" /></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

@@ -61,20 +61,13 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="collapsible">
 				<ul class="nav navbar-nav">
-					<li>
-						<asp:LinkButton runat="server" Text="Home" OnClick="LnkHome" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Workstation" OnClick="LnkWsn" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Missions" OnClick="LnkMis" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Mission Logs" OnClick="LnkMLog" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Inventory" OnClick="LnkInv" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Chat" OnClick="LnkChat" /></li>
-					<li>
-						<asp:LinkButton runat="server" Text="Market" OnClick="LnkMkt" /></li>
+					<li><asp:HyperLink runat="server" Text="Home" NavigateUrl="~/Game/Home" /></li>
+					<li><asp:HyperLink runat="server" Text="Workstation" NavigateUrl="~/Game/Workstation" /></li>
+					<li><asp:HyperLink runat="server" Text="Missions" NavigateUrl="~/Game/Missions" /></li>
+					<li><asp:HyperLink runat="server" Text="Mission Logs" NavigateUrl="~/Game/MissionLogs" /></li>
+					<li><asp:HyperLink runat="server" Text="Inventory" NavigateUrl="~/Game/Inventory" /></li>
+					<li><asp:HyperLink runat="server" Text="Chat" NavigateUrl="~/Game/Chat" /></li>
+					<li><asp:HyperLink runat="server" Text="Market" NavigateUrl="~/Game/Market" /></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

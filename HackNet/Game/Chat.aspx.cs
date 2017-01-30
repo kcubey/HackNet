@@ -94,8 +94,6 @@ namespace HackNet.Game
 
 			Message msg = new Message(currentuser, otheruser, content);
 			MessageLogic.SendMessage(msg, keyStore);
-
-			ClientScript.RegisterStartupScript(this.GetType(), "updp", "Update_UpdatePanel()", true);
 		}
 
 		protected void ChangeRecipientBtn_Click(object sender, EventArgs e)
@@ -123,6 +121,20 @@ namespace HackNet.Game
 			ChatRepeater.DataBind();
 		}
 
+		protected void SetRecipient(object sender, EventArgs e)
+		{
+			if (sender is LinkButton)
+			{
+				string recipient = (sender as LinkButton).CommandArgument;
+				if (recipient.Contains(" (UNREAD)"))
+					ReceiverId.Text = recipient.Replace(" (UNREAD)", "");
+				else
+					ReceiverId.Text = recipient;
+
+				ButtonChooseRecipient_Click(sender, e);
+			}
+		}
+
 		// Utility methods
 		public string ThisOrOther(int userid)
 		{
@@ -139,7 +151,17 @@ namespace HackNet.Game
 		protected List<string> GetRecents()
 		{
 			int id = CurrentUser.GetUserId();
-			return MessageLogic.RetrieveRecents(id).ToList();
+			var list = new List<string>();
+			var dict = new Dictionary<string, bool>(MessageLogic.RetrieveRecents(id));
+			foreach (var each in dict)
+			{
+				if (each.Value == true)
+					list.Add(each.Key + " (UNREAD)");
+				else
+					list.Add(each.Key);
+			}
+
+			return list;
 		}
 
 		protected void ToggleWindows()
@@ -156,11 +178,7 @@ namespace HackNet.Game
 			}
 		}
 
-		protected void SetRecipient(object sender, EventArgs e)
-		{
-			if (sender is LinkButton)
-				ReceiverId.Text = (sender as LinkButton).CommandArgument;
-		}
+
 
 		public string GetUsername(int userid)
 		{

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace HackNet.Security
@@ -26,9 +27,23 @@ namespace HackNet.Security
 					throw new ChatException("Message could not be retrieved");
 
 				if (retriever == dbConv.UserAId)
+				{
 					convAesKey = Crypt.Instance.DecryptRsa(dbConv.KeyA, ks.rsaPrivate);
+					if (dbConv.UnreadForA == true)
+					{
+						dbConv.UnreadForA = false;
+						db.SaveChanges();
+					}
+				}
 				else if (retriever == dbConv.UserBId)
+				{
 					convAesKey = Crypt.Instance.DecryptRsa(dbConv.KeyB, ks.rsaPrivate);
+					if (dbConv.UnreadForB == true)
+					{
+						dbConv.UnreadForB = false;
+						db.SaveChanges();
+					}
+				}
 
 				if (convAesKey == null)
 					throw new ChatException("Message could not be decrypted (AES from RSA)");
@@ -55,10 +70,11 @@ namespace HackNet.Security
 				{
 					decryptedMessages.Add(new Message(dbMsg, convAesKey));
 				}
+
 				sw.Stop();
 				Debug.WriteLine("Messages retrieval & decryption took: " + sw.ElapsedMilliseconds + "ms");
 			}
-			return decryptedMessages;
+			return decryptedMessages.Reverse().ToList();
 		}
 
 		public static void SendMessage(Message msg, KeyStore ks)
@@ -70,6 +86,9 @@ namespace HackNet.Security
 			{
 				var conv = GetConversation(msg.SenderId, msg.RecipientId, db);
 				msg.ConversationId = conv.ConId;
+
+				// Non-blocking execution of setting unread
+				Task.Run(() => SetUnread(conv.ConId, msg.RecipientId));
 
 				if (msg.SenderId == conv.UserAId)
 				{
@@ -93,10 +112,25 @@ namespace HackNet.Security
 			}
 		}
 
-		public static ICollection<string> RetrieveRecents(int viewerId)
+		public static void SetUnread(int convId, int unreadFor) // Should be run non-blocking
 		{
-			List<string> recents = new List<string>();
-			List<int> recentIds = new List<int>();
+			using (DataContext db = new DataContext())
+			{
+				Conversation c = db.Conversation.Find(convId);
+
+				if (c.UserAId == unreadFor)
+					c.UnreadForA = true;
+				else if (c.UserBId == unreadFor)
+					c.UnreadForB = true;
+
+				db.SaveChanges();
+			}
+		}
+
+		public static IDictionary<string, bool> RetrieveRecents(int viewerId)
+		{
+			Dictionary<string, bool> recents = new Dictionary<string, bool>();
+			Dictionary<int, bool> recentIds = new Dictionary<int, bool>();
 
 			if (viewerId <= 0)
 				return recents;
@@ -110,18 +144,18 @@ namespace HackNet.Security
 
 				foreach(Conversation c in convs)
 				{
-					if (c.UserAId != viewerId)
-						recentIds.Add(c.UserAId);
+					if (c.UserAId == viewerId)
+						recentIds.Add(c.UserBId, c.UnreadForA);
 
-					if (c.UserBId != viewerId)
-						recentIds.Add(c.UserBId);
+					if (c.UserBId == viewerId)
+						recentIds.Add(c.UserAId, c.UnreadForB);
 				}
 
-				foreach (int id in recentIds)
+				foreach (var each in recentIds)
 				{
-					Users u = db.Users.Find(id);
-					if (u != null && id != viewerId)
-						recents.Add(u.UserName);
+					Users u = db.Users.Find(each.Key);
+					if (u != null && each.Key != viewerId)
+						recents.Add(u.UserName, each.Value);
 				}
 
 				return recents;
@@ -169,7 +203,6 @@ namespace HackNet.Security
 				throw new ChatException("Conversation could not be loaded.");
 
 			return conv;
-
 		}
 		
 	}

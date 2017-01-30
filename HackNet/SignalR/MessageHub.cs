@@ -8,8 +8,6 @@ namespace Microsoft.AspNet.SignalR.Messaging
     [HubName("ChatClientz")]
     public class MessageHub : Hub
     {
-        private readonly MessageSignal _msg;
-
         public MessageHub()
         {
 
@@ -22,7 +20,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
 
 		public void CauseRefresh()
 		{
-			Clients.All.doAlert();
+			Clients.All.doRefresh();
 
 		}
     }

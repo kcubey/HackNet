@@ -20,11 +20,11 @@
 			</div>
 			<div class="col-md-2">
 				Start Date / Time
-				<asp:TextBox CssClass="form-control" runat="server" ID="StartDT" type="date"/>
+				<asp:TextBox CssClass="form-control" TextMode="DateTime" runat="server" ID="StartDT" />
 			</div>
 			<div class="col-md-2">
 				End Date / Time
-				<asp:TextBox CssClass="form-control" runat="server" ID="EndDT" type="date"/>				
+				<asp:TextBox CssClass="form-control" TextMode="DateTime" runat="server" ID="EndDT" />				
 			</div>
 			<div class="col-md-3">
 				User ID (-1 for all)

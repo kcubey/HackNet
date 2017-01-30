@@ -46,8 +46,25 @@
 				<asp:AsyncPostBackTrigger ControlID="SendMsg" />
 		</Triggers>
 		<ContentTemplate>
+
+		<!-- Message repeater for each message -->
+		<ol class="chat" style="max-height:400px; overflow: scroll;" id="chatdiv">
+			<asp:Repeater ID="ChatRepeater" runat="server" OnLoad="ChatRepeater_Load">
+				<ItemTemplate>
+					<li class="<%# ThisOrOther( (int) Eval("SenderId") ) %>">
+						<div class="msg">
+							<div class="user"><asp:Label ID="LblMsgSender" Text='<%# GetUsername( (int) Eval("SenderId") ) %>' runat="server"/></div>
+							<p><asp:Label ID="LblMsgContent" Text='<%# Eval("Content") %>' runat="server"/></p>
+							<time><asp:Label ID="LblMsgTimestamp" Text='<%# Eval("Timestamp") %>' runat="server"/></time>
+						</div>
+					</li>
+				</ItemTemplate>
+			</asp:Repeater>
+		</ol>
+
+		<!-- Controls for user -->
 		<div class="panel panel-default">
-			<div class="panel-body" style="background-color:midnightblue">
+			<div class="panel-body" style="background-color:navy">
 				<div class="col-md-3">
 					<br />
 					<asp:Button ID="ChangeRecipientBtn" runat="server" Text="Change Recipient"
@@ -74,29 +91,20 @@
 			</div>
 		</div>
 
-		<ol class="chat">
-			<asp:Repeater ID="ChatRepeater" runat="server" OnLoad="ChatRepeater_Load">
-				<ItemTemplate>
-					<li class="<%# ThisOrOther( (int) Eval("SenderId") ) %>">
-						<div class="msg">
-							<div class="user"><asp:Label ID="LblMsgSender" Text='<%# GetUsername( (int) Eval("SenderId") ) %>' runat="server"/></div>
-							<p><asp:Label ID="LblMsgContent" Text='<%# Eval("Content") %>' runat="server"/></p>
-							<time><asp:Label ID="LblMsgTimestamp" Text='<%# Eval("Timestamp") %>' runat="server"/></time>
-						</div>
-					</li>
-				</ItemTemplate>
-			</asp:Repeater>
-		</ol>
 		</ContentTemplate>
 		</asp:UpdatePanel>
 	</div>
+
 	<!--Script references. -->
 	<script src="../Scripts/jquery-3.1.1.min.js"></script>
 	<script src="../SignalR/jquery.color-2.1.2.min.js"></script>
 	<script src="../Scripts/jquery.signalR-2.2.1.js"></script>
 	<script src="../SignalR/hubs"></script>
+
 	<!--Add script to update the page and send messages.-->
 	<script type="text/javascript">
+		$('#chatdiv').scrollTop($('#chatdiv')[0].scrollHeight);
+
         var chat = $.connection.ChatClientz;
 
         // Declare a proxy to reference the hub.
@@ -108,7 +116,7 @@
             $('#discussion').append('<li><strong>' + encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
         };
 
-		chat.client.doAlert = function () {
+		chat.client.doRefresh = function () {
 			Update_UpdatePanel();
 			$('#SendMsg').click(function () {
 				chat.server.causeRefresh();
@@ -125,6 +133,7 @@
 		function Update_UpdatePanel() {
 			setTimeout(function () {
 				document.getElementById("ReloadBtn").click();
+				$('#chatdiv').scrollTop($('#chatdiv')[0].scrollHeight);
 			}, 2000);
 		}
 	</script>

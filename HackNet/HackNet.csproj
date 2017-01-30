@@ -205,6 +205,7 @@
     <Content Include="About.aspx" />
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\ItemMgmt.aspx" />
+    <Content Include="Admin\LocalLogs.aspx" />
     <Content Include="Admin\Logs.aspx" />
     <Content Include="Admin\MissionMgmt.aspx" />
     <Content Include="anonymousedited.jpg" />
@@ -268,6 +269,7 @@
     <Content Include="Game\Home.aspx" />
     <Content Include="Game\Inventory.aspx" />
     <Content Include="Game\Market.aspx" />
+    <Content Include="Game\MissionLogs.aspx" />
     <Content Include="Game\Missions.aspx" />
     <Content Include="Game\Parts.aspx" />
     <Content Include="Game\PartsInfo.aspx" />
@@ -396,6 +398,13 @@
     </Compile>
     <Compile Include="Admin\ItemMgmt.aspx.designer.cs">
       <DependentUpon>ItemMgmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LocalLogs.aspx.cs">
+      <DependentUpon>LocalLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LocalLogs.aspx.designer.cs">
+      <DependentUpon>LocalLogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Logs.aspx.cs">
       <DependentUpon>Logs.aspx</DependentUpon>
@@ -542,6 +551,13 @@
     </Compile>
     <Compile Include="Game\Market.aspx.designer.cs">
       <DependentUpon>Market.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Game\MissionLogs.aspx.cs">
+      <DependentUpon>MissionLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Game\MissionLogs.aspx.designer.cs">
+      <DependentUpon>MissionLogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game\Missions.aspx.cs">
       <DependentUpon>Missions.aspx</DependentUpon>

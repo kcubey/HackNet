@@ -153,24 +153,15 @@
     -moz-user-select: none;
     -ms-user-select: none;
 }
-.msg .user .range.admin {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 300;
-    color: #6aea96;
-    padding: 2px;
-    border-radius: 3px;
-    border: solid 1px #6aea96;
-    background: rgba(255,255,255,0);
-    margin-left: 5px;
-}
+
 .msg p {
-    font-size: 13px;
+    font-size: 20px;
 	text-align:left;
     margin: 0 0 2px 0;
     color: #777;
     transition: all .2s ease;
 }
+
 .msg img {
     position: relative;
     display: block;
@@ -186,7 +177,7 @@
 }
 
 .msg time {
-    font-size: 0.7rem;
+    font-size: 1rem;
     color: rgba(0,0,0,.35);
     margin-top: 3px;
     float: right;
@@ -305,7 +296,7 @@ textarea:focus {
         font-size: 11px;
     }
     .msg .user {
-        font-size: 13px;
+        font-size: 20px;
     }
     .msg img {
         width: 300px;

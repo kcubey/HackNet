@@ -10,11 +10,11 @@
 		<div class="panel-body">
 			<div class="col-md-3">
 				Start Date / Time
-				<asp:TextBox CssClass="form-control" runat="server" ID="StartDT" type="date"/>
+				<asp:TextBox CssClass="form-control" runat="server" ID="StartDT" TextMode="DateTime" />
 			</div>
 			<div class="col-md-3">
 				End Date / Time
-				<asp:TextBox CssClass="form-control" runat="server" ID="EndDT" type="date"/>				
+				<asp:TextBox CssClass="form-control" runat="server" ID="EndDT" extMode="DateTime"/>				
 			</div>	
 			<div class="col-md-3">
 				<br />

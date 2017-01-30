@@ -12,7 +12,7 @@ using HackNet.Loggers;
 using System.Web.Security;
 
 namespace HackNet.Auth {
-	public partial class SignIn : System.Web.UI.Page {
+	public partial class SignIn : Page {
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (CurrentUser.IsAuthenticated())
@@ -48,7 +48,7 @@ namespace HackNet.Auth {
 							break;
 					}
 				}
-			} catch (UserException ex)
+			} catch (UserException)
 			{
 				Msg.Text = "User and/or password not found (2)";
 			}
