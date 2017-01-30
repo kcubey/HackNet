@@ -54,13 +54,15 @@ namespace HackNet.Admin
         protected void EditMisBtn_Command(object sender, CommandEventArgs e)
         {
 
-            MissionData m = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
-            EditMisID.Text = m.MissionId.ToString();
-            EditMisName.Text = m.MissionName;
-            EditIP.Text = m.MissionIP;
-            EditMisType.Text = m.MissionType.ToString();
-            EditMisDesc.Text = m.MissionDesc;
-
+            MissionData mission = MissionData.GetMissionData(int.Parse(e.CommandArgument.ToString()));
+            Cache["MissionData"] = mission.MissionId;
+            EditMisID.Text = mission.MissionId.ToString();
+            EditMisName.Text = mission.MissionName;
+            EditMisIP.Text = mission.MissionIP;
+            EditMisType.Text = mission.MissionType.ToString();
+            EditMisDesc.Text = mission.MissionDesc;
+            EditMisExp.Text = mission.MissionExp.ToString();
+            EditMisCoin.Text = mission.MissionCoin.ToString();
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "EditMissionModel", "showEditMissionModel()", true);
 
@@ -68,7 +70,16 @@ namespace HackNet.Admin
 
         protected void UpdateMissionInfoBtn_Click(object sender, EventArgs e)
         {
-
+            using (DataContext db=new DataContext())
+            {
+                MissionData m = MissionData.GetMissionData((int)Cache["MissionData"], false,db) ;
+                m.MissionName = EditMisName.Text;
+                m.MissionIP = EditMisIP.Text;
+                m.MissionDesc = EditMisDesc.Text;
+                m.MissionExp = int.Parse(EditMisExp.Text);
+                m.MissionCoin = int.Parse(EditMisCoin.Text);
+                db.SaveChanges();
+            }
         }
     }
 }

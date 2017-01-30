@@ -14,6 +14,7 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Session["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
@@ -215,7 +216,6 @@ namespace HackNet.Game.Gameplay
                     {
                         Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
-                        System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
                         db.SaveChanges();
                     }
 
