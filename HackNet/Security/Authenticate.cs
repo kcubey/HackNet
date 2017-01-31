@@ -75,13 +75,15 @@ namespace HackNet.Security
                 string userip = GetIP();
                 if (UserIPList.CheckUserIPList(userip, user, db))
                 {
+                    Debug.WriteLine("CHK TRUE");
                     MailClient m = new MailClient(Email);
                     m.Subject = "Unrecognised login from IP Address "+userip;
                     m.AddLine("An unrecognised login has been found");
-                    m.AddLine("If this wasn't you, please contact us");
+                    m.AddLine("If this wasn't you, please contact us.");
                     m.Send(user.FullName,"Contact Us","https://haxnet.azurewebsites.net/Contact");
                 }else
                 {
+                    Debug.WriteLine("CHK FALSE");
 
                 }
 
