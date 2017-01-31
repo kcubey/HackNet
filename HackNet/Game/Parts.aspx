@@ -180,6 +180,7 @@
     <br />
     <br />
 
+    <!-- Add Item -->
     <div class="container-fluid" style="color: black; background-color: gray;">
         <h2>Item Editor</h2>
         <div class="form-group row">
@@ -216,6 +217,40 @@
         </div>
         <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
     </div>
+    <!-- /Add Item -->
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!-- Delete Item -->
+    <div class="container-fluid" style="color: black; background-color: gray;">
+        <h2>Item Deleter</h2>
+        <div class="form-group row">
+            <asp:DropDownList ID="ddlParts" runat="server">
+                <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                <asp:ListItem Text="Processors" Value="1"></asp:ListItem>
+                <asp:ListItem Text="Graphics" Value="2"></asp:ListItem>
+                <asp:ListItem Text="Memory" Value="3"></asp:ListItem>
+                <asp:ListItem Text="Power Supply" Value="4"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div>
+                <asp:Button ID="btnSubmitDdl" runat="server" 
+                    Text="Click to Retrieve Value" onclick="btnSubmitDdl_Click" /></div>
+        <div class="form-group row">
+            Selected Item Text: <asp:Label ID="lblSelectedText" runat="server"></asp:Label>
+        </div>
+        <div class="form-group row">
+            Selected Item Value: <asp:Label ID="lblSelectedValue" runat="server"></asp:Label>
+        </div>
+    </div>
+    <!-- /Delete Item -->
 
     <!--
     <fieldset>
