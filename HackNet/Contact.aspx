@@ -7,16 +7,10 @@
 
     </style>
     <h2><%: Title %>.</h2>
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
 
     <address>
-        <strong>Support:</strong>   <a class="emaila" href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a class="emaila" href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Support:</strong>   <a class="emaila" href="mailto:support@hacknet.com">support@hacknet.com</a><br />
+        <strong>Marketing:</strong> <a class="emaila" href="mailto:marketing@hacknet.com">marketing@hacknet.com</a>
     </address>
 
     <h3>Get in touch with us</h3>

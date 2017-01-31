@@ -258,6 +258,7 @@
     <Content Include="Content\Images\page2.png" />
     <Content Include="Content\Tutorial\intro.js" />
     <Content Include="Content\Tutorial\introjs.css" />
+    <Content Include="Error.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -477,6 +478,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\AttackData.cs" />
+    <Compile Include="Data\Confirmations.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Data\DataLogging.cs" />
     <Compile Include="Data\InventoryItem.cs" />
@@ -492,6 +494,13 @@
     <Compile Include="Data\UserIPList.cs" />
     <Compile Include="Data\UserKeyStore.cs" />
     <Compile Include="Data\Users.cs" />
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Game.Master.cs">
       <DependentUpon>Game.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
