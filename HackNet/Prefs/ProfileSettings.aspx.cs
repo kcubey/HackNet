@@ -63,7 +63,7 @@ namespace HackNet.Prefs
 				if (!emailTxt.Text.Equals(u.Email))
 				{
 					u.Email = emailTxt.Text;
-					EmailConfirm.SendEmailForConfirmation(u);
+					EmailConfirm.SendEmailForConfirmation(u, db);
 					whatschanged += "Email ";
 				}
 
