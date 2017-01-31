@@ -139,6 +139,42 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button btnAddItem;
         
         /// <summary>
+        /// ddlParts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlParts;
+        
+        /// <summary>
+        /// btnSubmitDdl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmitDdl;
+        
+        /// <summary>
+        /// lblSelectedText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelectedText;
+        
+        /// <summary>
+        /// lblSelectedValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelectedValue;
+        
+        /// <summary>
         /// Listingtitle control.
         /// </summary>
         /// <remarks>

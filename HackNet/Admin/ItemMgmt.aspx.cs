@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using System.Web.UI;
 
 namespace HackNet.Admin
 {
@@ -34,11 +35,12 @@ namespace HackNet.Admin
             DataTable dt = new DataTable();
             dt.Columns.Add("ItemName", typeof(string));
             dt.Columns.Add("ItemPic", typeof(string));
+            dt.Columns.Add("ItemID", typeof(int));
             foreach (Items i in ilist)
             {
                 imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
-                dt.Rows.Add(i.ItemName, url);
+                dt.Rows.Add(i.ItemName, url,i.ItemId);
             }
 
             //ProcessList.DataSource = dt;
@@ -79,5 +81,38 @@ namespace HackNet.Admin
 
             }
         }
+
+        protected void EditItemBTn_Command(object sender, CommandEventArgs e)
+        {
+            int itemid = int.Parse(e.CommandArgument.ToString());
+            Items i = HackNet.Data.Items.GetItem(itemid);
+
+            EditItemID.Text = i.ItemId.ToString();
+            EditItemName.Text = i.ItemName.ToString();
+            EditItemType.Text = i.ItemType.ToString();
+            EditItemDesc.Text = i.ItemDesc.ToString();
+            EditItemPrice.Text = i.ItemPrice.ToString();
+            EditItemBonus.Text = i.ItemBonus.ToString();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "EditItemModal", "showEditItemModal()", true);
+
+        }
+
+        /*
+        protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
+        {
+            using (DataContext db = new DataContext())
+            {
+                //MissionData m = MissionData.GetMissionData((int)Cache["MissionData"], false, db);
+                Items i = Data.Items.GetItem();
+                i.ItemId = EditItemID.Text;
+                i.ItemName = EditItemName.Text;
+                i.ItemType = EditItemType.Text;
+                i.ItemDesc = EditItemDesc.Text;
+                i.ItemPrice = EditItemPrice.Text;
+                db.SaveChanges();
+            }
+        }
+        */
     }
 }

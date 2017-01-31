@@ -1,6 +1,45 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.master" AutoEventWireup="true" CodeBehind="ItemMgmt.aspx.cs" Inherits="HackNet.Admin.ItemMgmt" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminPanelContent" runat="server">
 
+    <script>
+        function showEditItemModal() {
+            $('#EditItemModal').modal('show');
+        }
+    </script>
+
+    <div id="EditItemModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" Text="Edit Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Item ID" ID="EditItemID" />
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Item Name" ID="EditItemName" />
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Item Type" ID="EditItemType" />
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Item Description" ID="EditItemDesc" />
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Item Price" ID="EditItemPrice" />
+                </div>
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Bonus" ID="EditItemBonus" />
+                </div>
+                <div class="modal-footer">
+                    <asp:Button runat="server" ID="UpdatePartsInfoBtn" CssClass="btn btn-default" Text="Update" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
@@ -24,11 +63,13 @@
                                 <asp:Image ID="itemImg" runat="server" 
                                     Width="200px" Height="200px"     
                                     ImageUrl='<%#Eval("ItemPic")%>'/>
+                                <br />
+                                <asp:LinkButton runat="server" ID="EditItemBTn" OnCommand="EditItemBTn_Command" CommandArgument='<%# Eval("ItemID")%>' Text="Edit" />
                             </ItemTemplate>
                         </asp:DataList>
 
                         <div class="container-fluid" style="color: black; background-color: gray;">
-                            <h2>Item Editor</h2>
+                            <h2>Add Item</h2>
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
                                 <asp:TextBox runat="server" ID="ItemName"></asp:TextBox>
