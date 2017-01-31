@@ -29,45 +29,50 @@ namespace HackNet.Security
 			if (u == null)
 				return false;
 
-			if (u.EmailConfirmation == null)
+			if (u.AccessLevel != AccessLevel.Unconfirmed)
 				return true;
 			else
 				return false;
 		}
 
-		public static EmailConfirmResult ValidateCode(string email, string code)
+		public static EmailConfirmResult EmailValidate(string email, string code)
 		{
+			if (code == null)
+				throw new ArgumentNullException("Code cannot be null");
+
 			using (DataContext db = new DataContext())
 			{
-				Users u = Users.FindByEmail(email, db);
+				Users usr = db.Users.Where(u => u.Email == email).FirstOrDefault();
 
-				if (u == null)
-				{
+				if (usr == null)
 					return EmailConfirmResult.UserNotFound;
-				}
-				else if (u.EmailConfirmation == null)
+
+				List<Confirmations> confirms =
+								db.Confirmations
+								.Where(c => c.Email == email)
+								.ToList();
+
+				foreach (var c in confirms)
 				{
-					return EmailConfirmResult.AlreadyConfirmed;
+					if (c.Expiry > DateTime.Now)
+					{
+						if (c.Type == ConfirmType.EmailConfirm && c.Code == code)
+						{
+							c.Code = null;
+							usr.AccessLevel = AccessLevel.User;
+							db.SaveChanges();
+							return EmailConfirmResult.Success;
+						}
+					}
 				}
-				else if (!code.Equals(u.EmailConfirmation))
-				{
-					return EmailConfirmResult.Failed;
-				}
-				else if (code.Equals(u.EmailConfirmation))
-				{
-					u.EmailConfirmation = null;
-					return EmailConfirmResult.Success;
-				}
-				else
-				{
-					return EmailConfirmResult.OtherError;
-				}
+
+				return EmailConfirmResult.Failed;
 			}
 		}
 
 		private static string GenerateString()
 		{
-			byte[] strBytes = new byte[16];
+			byte[] strBytes = new byte[12];
 			using (RNGCryptoServiceProvider rngcsp = new RNGCryptoServiceProvider())
 			{
 				rngcsp.GetBytes(strBytes);
@@ -81,8 +86,7 @@ namespace HackNet.Security
 	{
 		Success = 0,
 		Failed = 1,
-		AlreadyConfirmed = 2,
-		UserNotFound = 3,
-		OtherError = 4
+		UserNotFound = 2,
+		OtherError = 3
 	}
 }

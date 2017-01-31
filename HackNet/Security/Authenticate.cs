@@ -373,7 +373,7 @@ namespace HackNet.Security
 				Coins = 0,
 				ByteDollars = 0,
 				TotalExp = 0,
-				AccessLevel = AccessLevel.User
+				AccessLevel = AccessLevel.Unconfirmed
 			};
 
 			u.UpdatePassword(password);

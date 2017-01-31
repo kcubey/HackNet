@@ -76,14 +76,14 @@ namespace HackNet.Prefs
 
 				if (!whatschanged.Equals(""))
 				{
-					db.SaveChanges();
 					Msg.ForeColor = System.Drawing.Color.GreenYellow;
 					Msg.Text = "Changes saved successfully!";
-
 					if (whatschanged.Contains("Email"))
 					{
 						Msg.Text += " Kindly check your new email to re-verify";
+						u.AccessLevel = AccessLevel.Unconfirmed;
 					}
+					db.SaveChanges();
 
 				} else
 				{

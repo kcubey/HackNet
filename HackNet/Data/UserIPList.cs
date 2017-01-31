@@ -17,11 +17,8 @@ namespace HackNet.Data
         public string UserIPStored { get; set; }
 
 
-        internal static bool CheckUserIPList(string IP,DataContext db)
+        internal static bool CheckUserIPList(string IP, DataContext db)
         {
-
-            return true;
-
             Users user = CurrentUser.Entity();
 
             var query = from uip in db.UserIPList where uip.UserId == user.UserID select uip;
