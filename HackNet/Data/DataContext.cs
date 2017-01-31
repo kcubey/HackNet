@@ -25,6 +25,7 @@ namespace HackNet.Data
 		public DbSet<Users> Users { get; set; }
 		public DbSet<UserKeyStore> UserKeyStore { get; set; }
         public DbSet<UserIPList> UserIPList { get; set; }
+		public DbSet<Confirmations> Confirmations { get; set; }
 		public DbSet<Logs> Logs { get; set; }
 		public DbSet<Machines> Machines { get; set; }
 		public DbSet<MissionData> MissionData { get; set; }

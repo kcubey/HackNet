@@ -9,6 +9,7 @@ using System.Web.Security;
 using HackNet.Data;
 using HackNet.Loggers;
 using HackNet.Game.Class;
+using System.Security;
 
 namespace HackNet.Security
 {
@@ -61,14 +62,27 @@ namespace HackNet.Security
 		{
 			using (DataContext db = new DataContext())
 			{
-				Users user = Users.FindByEmail(this.Email, db);
+             
+                Users user = Users.FindByEmail(this.Email, db);
+
 				if (user == null)
 				{
 					AuthLogger.Instance.UserNotFound(Email);
 					return AuthResult.UserNotFound;
 				}
 
-				if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
+                // Check IP
+                string userip = GetIP();
+                if (UserIPList.CheckUserIPList(userip, db))
+                {
+                    MailClient m = new MailClient(Email);
+                    m.Subject = "Unrecognised login from IP Address "+userip;
+                    m.AddLine("An unrecognised login has been found");
+                    m.AddLine("If this wasn't you, please contact us");
+                    m.Send(user.FullName,"Contact Us","https://haxnet.azurewebsites.net/Contact");
+                }
+
+                if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
 					return AuthResult.EmailNotVerified;
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
@@ -424,10 +438,45 @@ namespace HackNet.Security
 			}
 		}
 
+        /// <summary>
+        /// Get User IP Address
+        /// </summary>
+        internal string GetIP()
+        {
+            if (Global.IsInUnitTest)
+                return "Test Environment";
+
+            if (HttpContext.Current == null)
+                throw new SecurityException("HttpContext not found while executing.");
+
+            HttpContext context = HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            string userIp = "NIL";
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    userIp = addresses[0];
+                }
+            }
+            else
+            {
+                userIp = context.Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            if (userIp.Equals("::1"))
+            {
+                userIp = "127.0.0.1";
+            }
+
+            return userIp;
+        }
 
 
-		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
 
 		protected virtual void Dispose(bool disposing)
 		{
