@@ -73,7 +73,7 @@ namespace HackNet.Security
 
                 // Check IP
                 string userip = GetIP();
-                if (UserIPList.CheckUserIPList(userip, db))
+                if (UserIPList.CheckUserIPList(userip, user, db))
                 {
                     MailClient m = new MailClient(Email);
                     m.Subject = "Unrecognised login from IP Address "+userip;
