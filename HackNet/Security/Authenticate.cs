@@ -389,7 +389,7 @@ namespace HackNet.Security
 
 				if (createduser is Users)
 				{
-					EmailConfirm.SendEmailForConfirmation(createduser);
+					EmailConfirm.SendEmailForConfirmation(createduser, db);
 
 					Machines.DefaultMachine(createduser, db);
 					ItemLogic.StoreDefaultParts(db, u.UserID);
