@@ -392,7 +392,13 @@ namespace HackNet.Security
 				Users createduser = Users.FindByEmail(email, db);
 				createduser.UserKeyStore = KeyStore.DefaultDbKeyStore(password, createduser.Salt, createduser.UserID);
 
-				if (createduser is Users)
+                UserIPList uip = new UserIPList();
+                uip.UserId = createduser.UserID;
+                uip.UserIPStored = GetIP();
+                db.UserIPList.Add(uip);
+                db.SaveChanges();
+
+                if (createduser is Users)
 				{
 					EmailConfirm.SendEmailForConfirmation(createduser, db);
 
@@ -446,7 +452,7 @@ namespace HackNet.Security
         /// <summary>
         /// Get User IP Address
         /// </summary>
-        internal string GetIP()
+        internal static string GetIP()
         {
             if (Global.IsInUnitTest)
                 return "Test Environment";
