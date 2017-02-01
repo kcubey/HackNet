@@ -26,7 +26,7 @@ namespace HackNet.Game.Gameplay
                 ViewState["URLCalculated"] = false;
                 ViewState["Bypass"] = false;
                 ViewState["Configure"] = false;
-                ViewState["ScanList"] = Mission.scanMission(Session["MissionData"] as MissionData, CurrentUser.GetEmail(), false);
+                ViewState["ScanList"] = MissionLogic.scanMission(Session["MissionData"] as MissionData, CurrentUser.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -46,7 +46,7 @@ namespace HackNet.Game.Gameplay
         // This is to load the possible URL for attack
         private void LoadPossURLList(DataList dl)
         {
-            List<string> urlList = Mission.LoadURLList();
+            List<string> urlList = MissionLogic.LoadURLList();
             DataTable dt = new DataTable();
             dt.Columns.Add("PossURL", typeof(string));
             foreach (string s in urlList)
@@ -59,7 +59,7 @@ namespace HackNet.Game.Gameplay
 
         private void LoadSQLList(DataList dl)
         {
-            List<string> urlList = Mission.LoadSQLCode();
+            List<string> urlList = MissionLogic.LoadSQLCode();
             DataTable dt = new DataTable();
             dt.Columns.Add("SQLCode", typeof(string));
             foreach (string s in urlList)
@@ -98,7 +98,7 @@ namespace HackNet.Game.Gameplay
                     if (CmdTextBox.Text == "run SQLInjector")
                     {
                         // Calculation of URL and picking correct URL for attack
-                        List<string> urlList = Mission.LoadURLList();
+                        List<string> urlList = MissionLogic.LoadURLList();
                         Random rnd = new Random();
                         int r = rnd.Next(urlList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is " + urlList[r]);
@@ -131,7 +131,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.Text = "URL is correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
-                            LoadScanInfo(Mission.LoadSuccessURL(Session["MissionData"] as MissionData));
+                            LoadScanInfo(MissionLogic.LoadSuccessURL(Session["MissionData"] as MissionData));
                             ViewState["Bypass"] = true;
 
                             // Enable the browser

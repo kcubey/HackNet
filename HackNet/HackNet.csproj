@@ -302,7 +302,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
-    <Content Include="Auth\ChatClientz.aspx" />
     <Content Include="SignalR\ChatClientz.html" />
     <Content Include="SignalR\jquery-1.10.2.min.js" />
     <Content Include="SignalR\jquery.color-2.1.2.min.js" />
@@ -573,7 +572,7 @@
     <Compile Include="Game\Missions.aspx.designer.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Class\Mission.cs" />
+    <Compile Include="Game\Class\MissionLogic.cs" />
     <Compile Include="Game\Parts.aspx.cs">
       <DependentUpon>Parts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -689,13 +688,6 @@
     <Compile Include="Security\Captcha.cs" />
     <Compile Include="Security\Crypt.cs" />
     <Compile Include="Security\Exceptions.cs" />
-    <Compile Include="Auth\ChatClientz.aspx.cs">
-      <DependentUpon>ChatClientz.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Auth\ChatClientz.aspx.designer.cs">
-      <DependentUpon>ChatClientz.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SignalR\Startup.cs" />
     <Compile Include="SignalR\MessageHub.cs" />
     <Compile Include="Site.Master.cs">
