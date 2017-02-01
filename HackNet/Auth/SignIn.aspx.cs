@@ -96,7 +96,7 @@ namespace HackNet.Auth {
 			Uri absoluteUri;
 			if (Uri.TryCreate(url, UriKind.Absolute, out absoluteUri))
 			{
-				return this.Request.Url.Host.Equals(absoluteUri.Host, StringComparison.OrdinalIgnoreCase);
+				return Request.Url.Host.Equals(absoluteUri.Host, StringComparison.OrdinalIgnoreCase);
 			}
 			else
 			{

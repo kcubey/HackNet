@@ -610,6 +610,7 @@
       <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\PaymentLogger.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
     <Compile Include="Loggers\SearchFilter.cs" />
     <Compile Include="Loggers\Exceptions.cs" />

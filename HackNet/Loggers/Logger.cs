@@ -47,6 +47,7 @@ namespace HackNet.Loggers
 				case LogType.Security:
 					return AuthLogger.Instance;
 				case LogType.Payment:
+					return PaymentLogger.Instance;
 				case LogType.Profile:
 				case LogType.Error:
 				default:
