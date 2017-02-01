@@ -14,7 +14,7 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataList1.DataSource = LoadInventory(1);
+            DataList1.DataSource = LoadInventory(-1);
             DataList1.DataBind();
 
             ProcessList.DataSource = LoadInventory(1);
@@ -86,8 +86,7 @@ namespace HackNet.Admin
         {
             int itemid = int.Parse(e.CommandArgument.ToString());
             Items i = HackNet.Data.Items.GetItem(itemid);
-
-            EditItemID.Text = i.ItemId.ToString();
+            Cache["ItemID"] = itemid;
             EditItemName.Text = i.ItemName.ToString();
             EditItemType.Text = i.ItemType.ToString();
             EditItemDesc.Text = i.ItemDesc.ToString();
@@ -98,21 +97,20 @@ namespace HackNet.Admin
 
         }
 
-        /*
+        
         protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
-                //MissionData m = MissionData.GetMissionData((int)Cache["MissionData"], false, db);
-                Items i = Data.Items.GetItem();
-                i.ItemId = EditItemID.Text;
+                Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()),-1,false,db);
                 i.ItemName = EditItemName.Text;
-                i.ItemType = EditItemType.Text;
                 i.ItemDesc = EditItemDesc.Text;
-                i.ItemPrice = EditItemPrice.Text;
+                i.ItemPrice = int.Parse(EditItemPrice.Text);
+                i.ItemBonus = int.Parse(EditItemBonus.Text);
+
                 db.SaveChanges();
             }
         }
-        */
+        
     }
 }

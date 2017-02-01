@@ -15,26 +15,30 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <asp:Label runat="server" Text="Edit Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
                 </div>
+                
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item ID" ID="EditItemID" />
+                    <asp:Label runat="server" Text="Item Name" />
+                    <asp:TextBox runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
+
                 </div>
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Name" ID="EditItemName" />
+                    <asp:Label runat="server" Text="Item Type" />
+                    <asp:TextBox runat="server" ID="EditItemType" Enabled="false" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Type" ID="EditItemType" />
+                    <asp:Label runat="server" Text="Item Description" />
+                    <asp:TextBox runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Description" ID="EditItemDesc" />
+                    <asp:Label runat="server" Text="Item Price" />
+                    <asp:TextBox runat="server" ID="EditItemPrice" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Price" ID="EditItemPrice" />
-                </div>
-                <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Bonus" ID="EditItemBonus" />
+                    <asp:Label runat="server" Text="Bonus" />
+                    <asp:TextBox runat="server" ID="EditItemBonus" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-footer">
-                    <asp:Button runat="server" ID="UpdatePartsInfoBtn" CssClass="btn btn-default" Text="Update" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" OnClick="UpdatePartsInfoBtn_Click" />
                 </div>
             </div>
         </div>
