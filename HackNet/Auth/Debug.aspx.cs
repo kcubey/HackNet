@@ -22,6 +22,7 @@ namespace HackNet.Auth
 				UDetails2.Text = "Username: " + CurrentUser.GetUserId();
 				UDetails3.Text = "Access Level: " + Enum.GetName(typeof(AccessLevel), CurrentUser.GetAccessLevel());
 			}
+			Msg.Text = Request.ServerVariables["HTTP_HOST"];
 		}
 
 		protected void SendMail()
