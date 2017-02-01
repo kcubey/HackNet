@@ -48,7 +48,7 @@ namespace HackNet.Game
             dtAttack.Columns.Add("AttackPic1", typeof(string));
             foreach(AttackData atkdata in atkdatalist)
             { 
-                imageurlstring = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+                imageurlstring = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
                 dtAttack.Rows.Add(atkdata.AttackId,atkdata.AttackName,atkdata.AttackInfo,url);
             }
@@ -138,7 +138,7 @@ namespace HackNet.Game
             AttackData atkdata = AttackData.GetAttackData(Int32.Parse(e.CommandArgument.ToString()));
             AttackTypeHeaderLbl.Text = atkdata.AttackName;
             AttackTypeInfo.Text = atkdata.AttackInfo;
-            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
             AtkTypePic1.ImageUrl = "data:image/png;base64," + atkpicurl;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
