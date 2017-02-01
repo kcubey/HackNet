@@ -77,7 +77,7 @@ namespace HackNet.Game
 
         private void LoadScanInformation(MissionData mis)
         {
-            List<string> arrList = Mission.scanMission(mis, CurrentUser.GetEmail(), true);
+            List<string> arrList = MissionLogic.scanMission(mis, CurrentUser.GetEmail(), true);
 
             for (int i = 0; i < arrList.Count; i++)
             {
@@ -110,7 +110,7 @@ namespace HackNet.Game
             string attackType = AtkTextBx.Text;
             if ((bool)Cache["SelectedMis"])
             {
-                if (Mission.checkMissionType(attackType))
+                if (MissionLogic.checkMissionType(attackType))
                 {  
                     if(attackType=="PWDATK")
                         Response.Redirect("Gameplay/PwdAtk.aspx");
@@ -144,43 +144,5 @@ namespace HackNet.Game
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
-        
-        // For temp only
-        protected void btnAddMis_Click(object sender, EventArgs e)
-        {
-            MissionData misdata = new MissionData();
-            misdata.MissionName = MisName.Text;
-            misdata.MissionDesc = MisDesc.Text;
-            misdata.MissionIP = Mission.GetRandomIp();
-            misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
-            misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
-            misdata.MissionExp = int.Parse(MisExp.Text);
-            misdata.MissionCoin = int.Parse(MisCoin.Text);
-            using (DataContext db=new DataContext())
-            {
-                db.MissionData.Add(misdata);
-                db.SaveChanges();
-            }
-            //LoadMissionList();
-        }
-       
-        protected void btnAtkInfo_Click(object sender, EventArgs e)
-        {
-            AttackData atkdata = new AttackData();
-            atkdata.AttackName = AtkName.Text;
-            atkdata.AttackInfo = AtkInfo.Text;
-
-            Stream strm = UploadAttack1.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            atkdata.AttackPic1 = br.ReadBytes((int)strm.Length);
-
-            using(DataContext db=new DataContext())
-            {
-                db.AttackData.Add(atkdata);
-                db.SaveChanges();
-            }
-        }
-
-      
     }
 }

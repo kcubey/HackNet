@@ -572,7 +572,7 @@
     <Compile Include="Game\Missions.aspx.designer.cs">
       <DependentUpon>Missions.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Game\Class\Mission.cs" />
+    <Compile Include="Game\Class\MissionLogic.cs" />
     <Compile Include="Game\Parts.aspx.cs">
       <DependentUpon>Parts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

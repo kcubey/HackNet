@@ -24,7 +24,7 @@ namespace HackNet.Admin
             MissionData misdata = new MissionData();
             misdata.MissionName = MisName.Text;
             misdata.MissionDesc = MisDesc.Text;
-            misdata.MissionIP = Mission.GetRandomIp();
+            misdata.MissionIP = MissionLogic.GetRandomIp();
             misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
             misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
             misdata.MissionExp = int.Parse(MisExp.Text);
