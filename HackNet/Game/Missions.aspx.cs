@@ -48,7 +48,7 @@ namespace HackNet.Game
             dtAttack.Columns.Add("AttackPic1", typeof(string));
             foreach(AttackData atkdata in atkdatalist)
             { 
-                imageurlstring = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+                imageurlstring = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
                 dtAttack.Rows.Add(atkdata.AttackId,atkdata.AttackName,atkdata.AttackInfo,url);
             }
@@ -77,7 +77,7 @@ namespace HackNet.Game
 
         private void LoadScanInformation(MissionData mis)
         {
-            List<string> arrList = Mission.scanMission(mis, CurrentUser.GetEmail(), true);
+            List<string> arrList = MissionLogic.scanMission(mis, CurrentUser.GetEmail(), true);
 
             for (int i = 0; i < arrList.Count; i++)
             {
@@ -110,7 +110,7 @@ namespace HackNet.Game
             string attackType = AtkTextBx.Text;
             if ((bool)Cache["SelectedMis"])
             {
-                if (Mission.checkMissionType(attackType))
+                if (MissionLogic.checkMissionType(attackType))
                 {  
                     if(attackType=="PWDATK")
                         Response.Redirect("Gameplay/PwdAtk.aspx");
@@ -138,49 +138,11 @@ namespace HackNet.Game
             AttackData atkdata = AttackData.GetAttackData(Int32.Parse(e.CommandArgument.ToString()));
             AttackTypeHeaderLbl.Text = atkdata.AttackName;
             AttackTypeInfo.Text = atkdata.AttackInfo;
-            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
             AtkTypePic1.ImageUrl = "data:image/png;base64," + atkpicurl;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
-        
-        // For temp only
-        protected void btnAddMis_Click(object sender, EventArgs e)
-        {
-            MissionData misdata = new MissionData();
-            misdata.MissionName = MisName.Text;
-            misdata.MissionDesc = MisDesc.Text;
-            misdata.MissionIP = Mission.GetRandomIp();
-            misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
-            misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
-            misdata.MissionExp = int.Parse(MisExp.Text);
-            misdata.MissionCoin = int.Parse(MisCoin.Text);
-            using (DataContext db=new DataContext())
-            {
-                db.MissionData.Add(misdata);
-                db.SaveChanges();
-            }
-            //LoadMissionList();
-        }
-       
-        protected void btnAtkInfo_Click(object sender, EventArgs e)
-        {
-            AttackData atkdata = new AttackData();
-            atkdata.AttackName = AtkName.Text;
-            atkdata.AttackInfo = AtkInfo.Text;
-
-            Stream strm = UploadAttack1.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            atkdata.AttackPic1 = br.ReadBytes((int)strm.Length);
-
-            using(DataContext db=new DataContext())
-            {
-                db.AttackData.Add(atkdata);
-                db.SaveChanges();
-            }
-        }
-
-      
     }
 }

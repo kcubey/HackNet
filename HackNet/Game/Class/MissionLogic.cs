@@ -9,15 +9,22 @@ using System.Web.Security;
 
 namespace HackNet.Game
 {
-    public class Mission
+    public class MissionLogic
     {
-        // Randome Generation
+        /// <summary>
+        /// Generation of a random IP to store for missions
+        /// </summary>
+        /// <returns></returns>
         public static string GetRandomIp()
         {
             Random _random = new Random();
             return string.Format("{0}.{1}.{2}.{3}", _random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255));
         }
 
+        /// <summary>
+        /// Generation of random MAC address to store for missions
+        /// </summary>
+        /// <returns></returns>
         public static string GetRandomMacAddress()
         {
             var random = new Random();
@@ -27,6 +34,10 @@ namespace HackNet.Game
             return result.TrimEnd(':');
         }
 
+        /// <summary>
+        /// Generate a random system that the mission is on
+        /// </summary>
+        /// <returns></returns>
         private static string GetrandomSystem()
         {
             List<string> sysList = new List<string>();
@@ -40,7 +51,13 @@ namespace HackNet.Game
             return system;
         }
 
-        // Scanning for general stuff
+        /// <summary>
+        /// Graphical Event for scanning
+        /// </summary>
+        /// <param name="mission"></param>
+        /// <param name="username"></param>
+        /// <param name="cond"></param>
+        /// <returns></returns>
         public static List<string> scanMission(MissionData mission, string username,bool cond)
         {
             Random rnd = new Random();
@@ -78,7 +95,11 @@ namespace HackNet.Game
             return scanList;
         }
 
-        //Check mission type
+        /// <summary>
+        /// Input validation for types of missions
+        /// </summary>
+        /// <param name="atkType"></param>
+        /// <returns></returns>
         public static bool checkMissionType(string atkType)
         {
             if (atkType.Equals("PWDATK"))
@@ -93,7 +114,7 @@ namespace HackNet.Game
             return false;
         }
 
-        // Gameplay for Password Attack
+        // Gameplay methods for Password Attack Game Mode
 
         public static List<string> LoadNautilus()
         {

@@ -13,7 +13,16 @@ namespace HackNet.Loggers
 {
 	public abstract class Logger
 	{
-		private static readonly string path = HttpRuntime.AppDomainAppPath + "App_Data\\HackNet.log";
+		private static string path
+		{
+			get
+			{
+				if (Global.IsInUnitTest)
+					return "";
+
+				return HttpRuntime.AppDomainAppPath + "App_Data\\HackNet.log";
+			}
+		}
 
 		internal abstract void Log(LogEntry le);
 

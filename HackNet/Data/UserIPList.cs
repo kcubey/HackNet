@@ -16,23 +16,30 @@ namespace HackNet.Data
         [Required]
         public string UserIPStored { get; set; }
 
-
-        internal static bool CheckUserIPList(string IP,DataContext db)
+        public static void StoreUserIP(Users u, string IP, DataContext db)
         {
-            Users user = CurrentUser.Entity();
-
-            var query = from uip in db.UserIPList where uip.UserId == user.UserID select uip;
+            UserIPList uip = new UserIPList();
+            uip.UserId = u.UserID;
+            uip.UserIPStored = IP;
+            db.UserIPList.Add(uip);
+            db.SaveChanges();
+        }
+        
+        internal static bool CheckUserIPList(string IP, Users u, DataContext db)
+        {
+            var query = from uip in db.UserIPList where uip.UserId == u.UserID select uip;
 
             List<UserIPList> uipList = query.ToList();
+            var match = uipList.FirstOrDefault(IPToChk =>IPToChk.UserIPStored.Contains(IP));
 
-            foreach(UserIPList uip in uipList)
+            if (match == null)
             {
-                if (!uip.UserIPStored.Equals(IP))
-                {
-                    return false;
-                }
-            }
-            return true;          
+                StoreUserIP(u, IP, db);
+                return true;
+            }else
+            {
+                return false;
+            }     
         }
     }
 }

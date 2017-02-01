@@ -31,13 +31,14 @@ namespace HackNet.Payment
         {
             Form.ID = "checkout-form";
             Debug.WriteLine(Form.ID);
-
-            if (Session["packageId"] == null)
+            try
             {
-                Response.Redirect("~/game/market", true);
+                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
             }
-
-            packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+            catch
+            {
+                Response.Redirect("~/game/currency", true);
+            }
 
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
@@ -55,6 +56,7 @@ namespace HackNet.Payment
             {
                 checkoutClickA();
             }
+
         }
 
         public void CancelClick(Object sender, EventArgs e)

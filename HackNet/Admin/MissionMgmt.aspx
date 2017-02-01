@@ -54,12 +54,23 @@
                                 ForeColor="Red"
                                 ErrorMessage="Please enter a valid IP address"
                                 ControlToValidate="EditMisIP"
-                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" />
+                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
+                            <asp:RegularExpressionValidator ID="MisExpValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please Enter Only Numbers for Mission Exp"
+                                ControlToValidate="EditMisExp"
+                                ValidationExpression="^\d+$" /><br />
+                            <asp:RegularExpressionValidator ID="MisCoinValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please Enter Only Numbers for Mission Coin"
+                                ControlToValidate="EditMisCoin"
+                                ValidationExpression="^\d+$" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" ID="UpdateMissionInfoBtn" OnClick="UpdateMissionInfoBtn_Click" Text="Update" />
+                    <asp:Button runat="server" CssClass="btn btn-default" ID="DeleteMissionBtn" OnClick="DeleteMissionBtn_Click" Text="Delete" />
                 </div>
             </div>
         </div>
@@ -70,7 +81,7 @@
             <asp:Label runat="server" Text="Mission Management Panel" Font-Size="Large" Style="padding: 2%;" ForeColor="White"></asp:Label>
         </div>
         <div class="panel-body" style="color: black; background-color: black;">
-            <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="AdminMissionView" OnLoad="AdminMissionView_Load">
+            <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="AdminMissionView" >
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

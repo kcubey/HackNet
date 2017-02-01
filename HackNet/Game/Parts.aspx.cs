@@ -91,5 +91,15 @@ namespace HackNet.Game
             Session["Item"] = item;
             Response.Redirect("PartsInfo.aspx",true);
         }
+
+        protected void btnSubmitDdl_Click(object sender, EventArgs e)
+        {
+
+            //Retrieve Selected Text from Dropdown
+            lblSelectedText.Text = ddlParts.SelectedItem.Text;
+
+            //Retrieve Selected Value from Dropdown
+            lblSelectedValue.Text = ddlParts.SelectedValue;
+        }
     }
 }
