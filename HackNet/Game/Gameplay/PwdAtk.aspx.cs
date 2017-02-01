@@ -25,7 +25,7 @@ namespace HackNet.Game.Gameplay
                 ViewState["Configure"] = false;
                 ViewState["PWDCalculated"] = false;
                 ViewState["Bypass"] = false;
-                ViewState["ScanList"] = Mission.scanMission((MissionData)Session["MissionData"], CurrentUser.GetEmail(), false);
+                ViewState["ScanList"] = MissionLogic.scanMission((MissionData)Session["MissionData"], CurrentUser.GetEmail(), false);
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
             }
         }
@@ -79,7 +79,7 @@ namespace HackNet.Game.Gameplay
                 {
                     if (CmdTextBox.Text == "run hydra")
                     {
-                        List<string> pwdList = Mission.LoadPwdList();
+                        List<string> pwdList = MissionLogic.LoadPwdList();
                         Random rnd = new Random();
                         int r = rnd.Next(pwdList.Count);
                         System.Diagnostics.Debug.WriteLine("The answer is "+pwdList[r]);
@@ -108,7 +108,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
-                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
+                            LoadScanInfo(MissionLogic.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             ViewState["Bypass"] = true;
                         }
                         else
@@ -122,9 +122,9 @@ namespace HackNet.Game.Gameplay
                     {
                         if (CmdTextBox.Text.Equals("run nautilus"))
                         {
-                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"], "run nautilus"));
+                            LoadScanInfo(MissionLogic.LoadSuccessPwd((MissionData)Session["MissionData"], "run nautilus"));
                             // run method to load the datalist for nautilus
-                            List<string> infoList = Mission.LoadNautilus();
+                            List<string> infoList = MissionLogic.LoadNautilus();
                             LoadNautilus(infoList);
                     
                             CmdError.Text = "Nautilus is running....";
@@ -134,7 +134,7 @@ namespace HackNet.Game.Gameplay
                         }
                         else
                         {
-                            LoadScanInfo(Mission.LoadSuccessPwd((MissionData)Session["MissionData"]));
+                            LoadScanInfo(MissionLogic.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             CmdError.Text = "Unrecognised Command";
                             CmdError.ForeColor = System.Drawing.Color.Red;
                             CmdTextBox.Text = string.Empty;
@@ -200,7 +200,7 @@ namespace HackNet.Game.Gameplay
             string stolenFile = e.CommandArgument.ToString();
             if (mis.MissionType == 0)
             {
-                if (Mission.CheckStolenFile(stolenFile))
+                if (MissionLogic.CheckStolenFile(stolenFile))
                 {
                     // Title
                     SummaryTitle.Text = "Congratulations, Mission Completed!";

@@ -185,6 +185,7 @@ internal class Level
 
 public enum AccessLevel
 {
+	Unconfirmed = -1,
 	User = 0,
 	Staff = 1,
 	Admin = 2

@@ -31,12 +31,8 @@ namespace HackNet.Auth
 
 		protected void Confirm(string email, string cfmcode)
 		{
-			switch (EmailConfirm.ValidateCode(email, cfmcode))
+			switch (EmailConfirm.EmailValidate(email, cfmcode))
 			{
-				case EmailConfirmResult.AlreadyConfirmed:
-					Msg.Text = "Email address has already been confirmed";
-					ConfirmTable.Visible = false;
-					break;
 				case EmailConfirmResult.Failed:
 					Msg.Text = "Email address confirmation code failed";
 					break;

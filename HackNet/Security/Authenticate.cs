@@ -73,13 +73,18 @@ namespace HackNet.Security
 
                 // Check IP
                 string userip = GetIP();
-                if (UserIPList.CheckUserIPList(userip, db))
+                if (UserIPList.CheckUserIPList(userip, user, db))
                 {
+                    Debug.WriteLine("CHK TRUE");
                     MailClient m = new MailClient(Email);
                     m.Subject = "Unrecognised login from IP Address "+userip;
                     m.AddLine("An unrecognised login has been found");
-                    m.AddLine("If this wasn't you, please contact us");
+                    m.AddLine("If this wasn't you, please contact us.");
                     m.Send(user.FullName,"Contact Us","https://haxnet.azurewebsites.net/Contact");
+                }else
+                {
+                    Debug.WriteLine("CHK FALSE");
+
                 }
 
                 if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
@@ -373,7 +378,7 @@ namespace HackNet.Security
 				Coins = 0,
 				ByteDollars = 0,
 				TotalExp = 0,
-				AccessLevel = AccessLevel.User
+				AccessLevel = AccessLevel.Unconfirmed
 			};
 
 			u.UpdatePassword(password);
@@ -387,9 +392,15 @@ namespace HackNet.Security
 				Users createduser = Users.FindByEmail(email, db);
 				createduser.UserKeyStore = KeyStore.DefaultDbKeyStore(password, createduser.Salt, createduser.UserID);
 
-				if (createduser is Users)
+                UserIPList uip = new UserIPList();
+                uip.UserId = createduser.UserID;
+                uip.UserIPStored = GetIP();
+                db.UserIPList.Add(uip);
+                db.SaveChanges();
+
+                if (createduser is Users)
 				{
-					EmailConfirm.SendEmailForConfirmation(createduser);
+					EmailConfirm.SendEmailForConfirmation(createduser, db);
 
 					Machines.DefaultMachine(createduser, db);
 					ItemLogic.StoreDefaultParts(db, u.UserID);
@@ -441,7 +452,7 @@ namespace HackNet.Security
         /// <summary>
         /// Get User IP Address
         /// </summary>
-        internal string GetIP()
+        internal static string GetIP()
         {
             if (Global.IsInUnitTest)
                 return "Test Environment";

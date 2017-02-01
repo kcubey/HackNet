@@ -18,6 +18,8 @@ namespace HackNet.Data
 
 		public string Code { get; set; }
 
+		public DateTime Expiry { get; set; }
+
 		public ConfirmType Type { get; set; }
 	}
 

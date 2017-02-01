@@ -14,14 +14,17 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                LoadMissionView();
+            }
         }
         protected void btnAddMis_Click(object sender, EventArgs e)
         {
             MissionData misdata = new MissionData();
             misdata.MissionName = MisName.Text;
             misdata.MissionDesc = MisDesc.Text;
-            misdata.MissionIP = Mission.GetRandomIp();
+            misdata.MissionIP = MissionLogic.GetRandomIp();
             misdata.MissionType = (MissionType)Int32.Parse(AtkTypeList.SelectedItem.Value);
             misdata.RecommendLevel = (RecommendLevel)Int32.Parse(RecomLvlList.SelectedItem.Value);
             misdata.MissionExp = int.Parse(MisExp.Text);
@@ -31,24 +34,28 @@ namespace HackNet.Admin
                 db.MissionData.Add(misdata);
                 db.SaveChanges();
             }
-            //LoadMissionList();
+            LoadMissionView();
+
         }
 
-        protected void AdminMissionView_Load(object sender, EventArgs e)
+
+        private void LoadMissionView()
         {
             List<MissionData> misList = MissionData.GetMisList(-1);
             DataTable dt = new DataTable();
             dt.Columns.Add("MissionID", typeof(int));
             dt.Columns.Add("MissionName", typeof(string));
             dt.Columns.Add("MissionIP", typeof(string));
-            foreach(MissionData m in misList)
+            if (misList.Count != 0)
             {
-                dt.Rows.Add(m.MissionId,m.MissionName,m.MissionIP);
+                foreach (MissionData m in misList)
+                {
+                    dt.Rows.Add(m.MissionId, m.MissionName, m.MissionIP);
+                }
+
+                AdminMissionView.DataSource = dt;
+                AdminMissionView.DataBind();
             }
-            AdminMissionView.DataSource = dt;
-            AdminMissionView.DataBind();
-
-
         }
 
         protected void EditMisBtn_Command(object sender, CommandEventArgs e)
@@ -80,6 +87,17 @@ namespace HackNet.Admin
                 m.MissionCoin = int.Parse(EditMisCoin.Text);
                 db.SaveChanges();
             }
+        }
+
+        protected void DeleteMissionBtn_Click(object sender, EventArgs e)
+        {
+            using(DataContext db=new DataContext())
+            {
+                MissionData m = MissionData.GetMissionData((int)Cache["MissionData"], false, db);
+                db.MissionData.Remove(m);
+                db.SaveChanges();
+            }
+            LoadMissionView();
         }
     }
 }

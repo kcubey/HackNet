@@ -13,7 +13,7 @@ namespace HackNet.Data
     public partial class Items
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ItemId { get; set; }           
+        public int ItemId { get; set; }
         public string ItemName { get; set; }
         public ItemType ItemType { get; set; }
         public byte[] ItemPic { get; set; }
@@ -21,28 +21,40 @@ namespace HackNet.Data
         public int ItemPrice { get; set; }
         public int ItemBonus { get; set; }
 
-        internal static Items GetItem(int id, int itemType=-1)
+        internal static Items GetItem(int id, int itemType = -1, bool ReadOnly = true, DataContext db = null)
         {
-            Items itm = new Data.Items();
-            try
+            if (ReadOnly)
             {
-                using(DataContext db=new DataContext())
+                using (DataContext db1 = new DataContext())
                 {
-                    if (itemType ==-1)
+                    Items itm = new Data.Items();
+                    if (itemType == -1)
                     {
-                        itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
+                        itm = (from i in db1.Items where i.ItemId == id select i).FirstOrDefault();
                     }
                     else
-                    {                    
-                        itm = (from i in db.Items where(i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();                      
+                    {
+                        itm = (from i in db1.Items where (i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();
                     }
+                    return itm;
                 }
             }
-            catch (EntityCommandExecutionException)
+            else
             {
-                throw new ConnectionException("Database link failure has occured");
+                Items itm;
+                if (itemType == -1)
+                {
+                    itm = (from i in db.Items where i.ItemId == id select i).FirstOrDefault();
+                }
+                else
+                {
+                    itm = (from i in db.Items where (i.ItemId == id && i.ItemType == (ItemType)itemType) select i).FirstOrDefault();
+                }
+
+                return itm;
             }
-            return itm;
+
+     
         }
 
         internal static List<Items> GetItems(int itemType)
@@ -61,7 +73,7 @@ namespace HackNet.Data
                     {
                         var query = from i in db.Items where (itemType != 5) select i;
                         return query.ToList();
-                        
+
                     }
                 }
             }
@@ -79,10 +91,10 @@ namespace HackNet.Data
         PartPower = 3,
         PartGpu = 4,
         Bonus = 0,
-        Currency =5
+        Currency = 5
     }
 
-   
+
     public static class ItemTypeExtension
     {
 

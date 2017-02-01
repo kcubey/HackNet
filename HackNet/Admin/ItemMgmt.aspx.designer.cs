@@ -13,22 +13,13 @@ namespace HackNet.Admin {
     public partial class ItemMgmt {
         
         /// <summary>
-        /// EditItemID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemID;
-        
-        /// <summary>
         /// EditItemName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemName;
+        protected global::System.Web.UI.WebControls.TextBox EditItemName;
         
         /// <summary>
         /// EditItemType control.
@@ -37,7 +28,7 @@ namespace HackNet.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemType;
+        protected global::System.Web.UI.WebControls.TextBox EditItemType;
         
         /// <summary>
         /// EditItemDesc control.
@@ -46,7 +37,7 @@ namespace HackNet.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemDesc;
+        protected global::System.Web.UI.WebControls.TextBox EditItemDesc;
         
         /// <summary>
         /// EditItemPrice control.
@@ -55,7 +46,7 @@ namespace HackNet.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemPrice;
+        protected global::System.Web.UI.WebControls.TextBox EditItemPrice;
         
         /// <summary>
         /// EditItemBonus control.
@@ -64,7 +55,7 @@ namespace HackNet.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EditItemBonus;
+        protected global::System.Web.UI.WebControls.TextBox EditItemBonus;
         
         /// <summary>
         /// UpdatePartsInfoBtn control.

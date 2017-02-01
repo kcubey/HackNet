@@ -81,7 +81,7 @@ namespace HackNet.Security
 			return publicXml;
 		}
 
-		// Derive AES key from plaintext (64 bytes, 512 bits)
+		// Derive 3DES key from plaintext (192 bits)
 		public byte[] DeriveKey(string passwd, byte[] salt, byte[] initvector)
 		{
 			byte[] derivedKey;
