@@ -11,8 +11,17 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["packageId"] == null || Session["packageprice"] == null)
+                {
+                    Response.Redirect("~/game/market", true);
+                }
+            }
+            catch
+            {
+                Response.Redirect("~/game/market", true);
+            }
         }
-
-       
     }
 }

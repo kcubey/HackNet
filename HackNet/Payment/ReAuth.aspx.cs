@@ -14,14 +14,18 @@ namespace HackNet.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["packageId"] == null)
+            try
+            {
+                DataContext ctx = new DataContext();
+
+                packageNameLbl.Text = "Package " + Session["packageId"].ToString();
+                packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
+            }
+            catch
             {
                 Response.Redirect("~/game/market", true);
             }
-            DataContext ctx = new DataContext();
             
-            packageNameLbl.Text = "Package " + Session["packageId"].ToString();
-            packagePriceLbl.Text = "$" + Session["packageprice"].ToString();
         }
 
         public void CancelClick(Object sender, EventArgs e)
@@ -33,7 +37,15 @@ namespace HackNet.Payment
 
         protected void AuthClick(object sender, EventArgs e)
         {
+            Users u = CurrentUser.Entity();
+            string currentEmail = u.Email;
+
             string email = Email.Text.ToLower();
+
+            if (email != currentEmail)
+            {
+                Response.Redirect("~/game/currency", true);
+            }
             using (Authenticate auth = new Authenticate(email))
             {
                 AuthResult result = auth.ValidateLogin(UserPass.Text);

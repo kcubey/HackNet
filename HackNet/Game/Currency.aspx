@@ -2,13 +2,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
 
     <link rel="stylesheet" href="/Market1/market1.css" />
-    <!-- this cssfile can be found in the jScrollPane package -->
+    <!-- this cssfile can be found in the jScrollPane package 
     <link rel="stylesheet" type="text/css" href="jquery.jscrollpane.css" />
-    <!-- latest jQuery direct from google's CDN -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <!-- the jScrollPane script -->
-    <script type="text/javascript" src="jquery.jscrollpane.min.js"></script>
-
+    <!-- latest jQuery direct from google's CDN
+    script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- the jScrollPane script
+    script type="text/javascript" src="jquery.jscrollpane.min.js"></script
+-->
     <script>
         function showPopup() {
             $('#popupConfirmation').modal('show');
@@ -60,7 +60,7 @@
 
                     <!--Conversion-->
                     <div class="tab-pane fade in active" id="conversion">
-                        Enter the number of bucks you wish to convert to coins.
+                        Enter the number of bucks you wish to convert to coins. Click on 'Convert' once you are done.
                         <hr />
                         <asp:UpdatePanel ID="ConversionPanel" runat="server">
                             <ContentTemplate>

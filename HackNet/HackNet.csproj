@@ -277,9 +277,6 @@
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\MarketOld.aspx" />
-    <Content Include="Payment\backend\btconfig.txt" />
-    <Content Include="Payment\backend\checkoutcontrol.txt" />
-    <Content Include="Payment\backend\ibtconfig.txt" />
     <Content Include="Payment\backend\JSv2.js" />
     <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
@@ -612,7 +609,6 @@
     <Compile Include="Loggers\GameLogger.cs" />
     <Compile Include="Loggers\LogEntry.cs" />
     <Compile Include="Loggers\Logger.cs" />
-    <Compile Include="Payment\backend\IBraintreeConfiguration.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
