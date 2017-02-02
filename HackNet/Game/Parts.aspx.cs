@@ -26,28 +26,35 @@ namespace HackNet.Game
         {
 
             List<Items> ilist = Data.Items.GetItems(itemType);
-            if (ilist.Count != 0)
-            {
-                string imageurlstring;
-                string url;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("ItemNo", typeof(int));
-                dt.Columns.Add("ItemName", typeof(string));
-                dt.Columns.Add("ItemPic", typeof(string));
-                foreach (Items i in ilist)
+            try {
+                if (ilist.Count != 0)
                 {
-                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                    url = "data:image/png;base64," + imageurlstring;
-                    dt.Rows.Add(i.ItemId, i.ItemName, url);
-                }
+                    string imageurlstring;
+                    string url;
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("ItemNo", typeof(int));
+                    dt.Columns.Add("ItemName", typeof(string));
+                    dt.Columns.Add("ItemPic", typeof(string));
+                    foreach (Items i in ilist)
+                    {
+                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                        url = "data:image/png;base64," + imageurlstring;
+                        dt.Rows.Add(i.ItemId, i.ItemName, url);
+                    }
 
-                dl.DataSource = dt;
-                dl.DataBind();
+                    dl.DataSource = dt;
+                    dl.DataBind();
+                }
+                else
+                {
+                    dl.DataSource = null;
+                    dl.DataBind();
+                }
             }
-            else
+            catch (Exception ggez)
             {
-                dl.DataSource = null;
-                dl.DataBind();
+                Console.WriteLine("Error " + ggez);
+                throw new Exception("Error Code : " + ggez);
             }
         }
 
