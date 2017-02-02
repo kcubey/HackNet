@@ -18,24 +18,24 @@
                 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Name" />
-                    <asp:TextBox runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
 
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Type" />
-                    <asp:TextBox runat="server" ID="EditItemType" Enabled="false" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemType" Enabled="false" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Description" />
-                    <asp:TextBox runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Price" />
-                    <asp:TextBox runat="server" ID="EditItemPrice" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemPrice" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Bonus" />
-                    <asp:TextBox runat="server" ID="EditItemBonus" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemBonus" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" OnClick="UpdatePartsInfoBtn_Click" />
