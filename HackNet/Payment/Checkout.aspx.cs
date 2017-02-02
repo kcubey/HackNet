@@ -40,7 +40,7 @@ namespace HackNet.Payment
             mc.AddLine("If you did not conduct this purchase, please contact our Support staff at support@haxnet.azurewebsites.net, quoting your transaction ID.");
             mc.AddLine("");
             mc.AddLine("Thank you.");
-            mc.Send(u.FullName, "Purchase Made", "https://haxnet.azurewebsites.net/");
+            mc.Send(u.FullName, "Contact Us", "https://haxnet.azurewebsites.net/");
 
             transactionId.Text = transactionDetails;
             packageDetailsLbl.Text = message;
