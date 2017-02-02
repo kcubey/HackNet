@@ -30,8 +30,6 @@ namespace HackNet.Game
                 dbCoin = u.Coins;
             }
             buckValidator.MaximumValue = dbBuck.ToString();
-            Debug.WriteLine("user has " + dbBuck + " bucks and " + dbCoin + " coins");
-
             
             LoadInventory(memorylist, 2);
             LoadInventory(packageDL, 5);
@@ -70,7 +68,6 @@ namespace HackNet.Game
             catch (Exception ex)
             {
                 ClearText();
-                Debug.WriteLine(ex);
             }
         }
 
@@ -102,11 +99,9 @@ namespace HackNet.Game
                 u.Coins = newCoin;
 
                 db.SaveChanges();
-                Debug.WriteLine("user now has " + u.ByteDollars + " bucks and " + u.Coins + " coins");
             }
 
             PrintMessage(message);
-
             
         }
 
@@ -116,6 +111,8 @@ namespace HackNet.Game
             numCoin = Convert.ToInt32(Session["numCoin"]);
 
             messageLabel.Text = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "popupConfirmation", "showPopup();", true);
+
         }
 
         public void mcButton_Click(Object sender, EventArgs e)
@@ -130,7 +127,6 @@ namespace HackNet.Game
                 u.Coins = newCoin;
 
                 db.SaveChanges();
-                Debug.WriteLine("user now has " + u.ByteDollars + " bucks and " + u.Coins + " coins");
                 //dbBuck = u.ByteDollars;
                 dbCoin = u.Coins;
             }
@@ -146,7 +142,6 @@ namespace HackNet.Game
 
         private void LoadInventory(DataList dl, int itemType) //change to LoadPackages
         {
-
             List<Items> ilist = Data.Items.GetItems(itemType);
             if (ilist.Count != 0)
             {
