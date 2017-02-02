@@ -22,6 +22,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemName;
         
         /// <summary>
+        /// RegularExpressionValidatorForEditItemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForEditItemName;
+        
+        /// <summary>
         /// EditItemType control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemDesc;
         
         /// <summary>
+        /// RegularExpressionValidatorForItemDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemDesc;
+        
+        /// <summary>
         /// EditItemPrice control.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,15 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EditItemPrice;
+        
+        /// <summary>
+        /// RegularExpressionValidatorForItemPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemPrice;
         
         /// <summary>
         /// EditItemBonus control.
@@ -58,6 +85,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemBonus;
         
         /// <summary>
+        /// RegularExpressionValidatorForItemBonus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemBonus;
+        
+        /// <summary>
         /// UpdatePartsInfoBtn control.
         /// </summary>
         /// <remarks>
@@ -67,6 +103,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.Button UpdatePartsInfoBtn;
         
         /// <summary>
+        /// DeletePartsInfoBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeletePartsInfoBtn;
+        
+        /// <summary>
         /// DataList1 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +119,42 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList DataList1;
+        
+        /// <summary>
+        /// ProcessList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList ProcessList;
+        
+        /// <summary>
+        /// GPUList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList GPUList;
+        
+        /// <summary>
+        /// MemoryList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList MemoryList;
+        
+        /// <summary>
+        /// PowerSupList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList PowerSupList;
         
         /// <summary>
         /// ItemName control.
@@ -146,23 +227,5 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddItem;
-        
-        /// <summary>
-        /// GPUList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList GPUList;
-        
-        /// <summary>
-        /// ProcessList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList ProcessList;
     }
 }
