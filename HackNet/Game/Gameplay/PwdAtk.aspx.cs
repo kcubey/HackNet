@@ -1,4 +1,5 @@
 ﻿using HackNet.Data;
+using HackNet.Game.Class;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (Session["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
@@ -211,12 +211,18 @@ namespace HackNet.Game.Gameplay
                     MisSumLbl.Text = "Some perpetrators uses these methods to gain access to companies to actually steal theri client information. As such, this could be prevented if firewall rules and other configurations were set up correctly.";
                     MisExpLbl.Text = mis.MissionExp.ToString();
                     MisCoinLbl.Text = mis.MissionCoin.ToString();
+                    
 
                     using (DataContext db = new DataContext())
                     {
                         Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
                         db.SaveChanges();
+                        
+                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity(),db));
+                        ItemNameLbl.Text = i.ItemName;
+                        ItemBonusLbl.Text = i.ItemBonus.ToString();
+                        ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);

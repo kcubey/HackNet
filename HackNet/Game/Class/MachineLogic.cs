@@ -11,6 +11,10 @@ namespace HackNet.Game.Class
     public class MachineLogic
     {
 
+        /// <summary>
+        /// Update the Machine
+        /// </summary>
+        /// <param name="m"></param>
         internal static void UpdateMachine(Machines m)
         {
             using (DataContext db = new DataContext())
@@ -33,8 +37,13 @@ namespace HackNet.Game.Class
 
         }
 
-
-        // Load Item into Machine Upgrade Panel
+        
+        /// <summary>
+        /// Load Item into Machine Upgrade Panel
+        /// </summary>
+        /// <param name="ddList"></param>
+        /// <param name="InvList"></param>
+        /// <param name="itemType"></param>
         internal static void LoadItemIntoList(DropDownList ddList,List<Items> InvList,int itemType)
         {
             if (InvList.Count != 0)
@@ -51,6 +60,14 @@ namespace HackNet.Game.Class
                 ddList.Items.Add("No Parts in Inventory");
                 ddList.Enabled = false;
             }
+        }
+
+        internal static int CalculateMachineLuck(Machines m)
+        {
+            double totalstat =200;
+            double playerstat = m.Attack + m.Defence + m.Health + m.Speed;
+            int ratio = (int)Math.Round((double)(100 * playerstat) / totalstat);
+            return ratio;
         }
     }
 }
