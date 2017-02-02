@@ -30,9 +30,7 @@ namespace HackNet.Game
                 dbCoin = u.Coins;
             }
             buckValidator.MaximumValue = dbBuck.ToString();
-            
-            LoadInventory(memorylist, 2);
-            //LoadInventory(packageDL, 5);
+
         }
 
         #region Payment stuff
@@ -79,7 +77,7 @@ namespace HackNet.Game
 
             Session["packageId"] = packageId;
             Session["packagePrice"] = packagePrice;
-            Response.Redirect("~/payment/Reauth",true);
+            Response.Redirect("~/payment/Reauth", true);
         }
 
         public void ConversionButton_Click(Object sender, EventArgs e)
@@ -102,7 +100,7 @@ namespace HackNet.Game
             }
 
             PrintMessage(message);
-            
+
         }
 
         public void modalButton_Click(Object sender, EventArgs e)

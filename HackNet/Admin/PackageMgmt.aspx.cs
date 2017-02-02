@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -14,13 +15,13 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private DataTable LoadInventory(int itemType)
         {
             List<Items> ilist = Data.Items.GetItems(itemType);
-            
+
             DataTable dt = new DataTable();
             dt.Columns.Add("ItemName", typeof(string));
             dt.Columns.Add("ItemID", typeof(int));
@@ -28,28 +29,26 @@ namespace HackNet.Admin
             {
                 dt.Rows.Add(i.ItemName, i.ItemId);
             }
-
-            //ProcessList.DataSource = dt;
-            //ProcessList.DataBind();
             return dt;
         }
 
-
         protected void btnAddPackage_Click(object sender, EventArgs e)
         {
-            Packages package = new Packages();
+            Packages pkg = new Packages();
             PackageItems pkgItems = new PackageItems();
-            package.Description = pkgDesc.Text; //add textbox
-            //package.Price = Int32.Parse(packagePrice.Text); //add textbox
+            pkg.Description = pkgDesc.Text;
+            pkg.Price = Int32.Parse(pkgPrice.Text);
 
-            pkgItems.PackageId = package.PackageId;
-            //.ItemId = ItemName.ID; // add dropdown and get from current list of items, thereafter must select
-            //pkgItems.Quantity = quantity.Text; //add textbox
+            pkgItems.PackageId = pkg.PackageId;
+            pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
+            pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
 
             using (DataContext db = new DataContext())
             {
-                db.Packages.Add(package);
+                db.Packages.Add(pkg);
+                Debug.WriteLine("pkg success add");
                 db.PackageItems.Add(pkgItems);
+                Debug.WriteLine("pkgitems success add");
                 db.SaveChanges();
             }
         }
@@ -66,6 +65,8 @@ namespace HackNet.Admin
         protected void SelectedItem_Command(object sender, CommandEventArgs e)
         {
             int itemid = int.Parse(e.CommandArgument.ToString());
+            Session["itemId"] = itemid;
+            Debug.WriteLine("itemid: " + itemid);
             Items i = HackNet.Data.Items.GetItem(itemid);
             selectedItemLbl.Text = i.ItemName.ToString();
         }

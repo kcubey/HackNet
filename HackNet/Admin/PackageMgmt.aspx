@@ -9,7 +9,7 @@
 
     
                             
-
+<!-- =============== START MODAL CONTENT ============== -->
     <div id="EditItemModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -46,19 +46,86 @@
             </div>
         </div>
     </div>
+<!-- =============== END MODAL CONTENT ============== -->
 
     <div class="container-fluid">
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-tabs">
               <!--      <li class="active"><a href="#tab1default" data-toggle="tab">All</a></li> -->
-                    <li><a href="#tab1default" data-toggle="tab">Add</a></li>
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Add</a></li>
                     <li><a href="#tab2default" data-toggle="tab">Edit</a></li>
                 </ul>
             </div>
             <div class="panel-body">
                 <div class="tab-content">
+<!-- ========== START TAB 1 CONTENT - ADD PACKAGE ========== -->                    
                     <div class="tab-pane fade in active" id="tab1default">
+                        <h2>Add Packages</h2>
+                        <div class="container-fluid" style="color: black; background-color: gray;">
+                            <br />
+                            <asp:UpdatePanel ID="AddPackagePanel" runat="server">
+                                <ContentTemplate>
+                                    <div class="form-group row">
+                                        <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                        <asp:DropDownList runat="server" ID="itemTypeDDL" OnSelectedIndexChanged="DisplayItems" AutoPostBack="true">
+                                            <asp:ListItem Value="-2">Choose An Item Type</asp:ListItem>
+                                            <asp:ListItem Value="1">Processor</asp:ListItem>
+                                            <asp:ListItem Value="4">Graphic Card</asp:ListItem>
+                                            <asp:ListItem Value="2">Memory</asp:ListItem>
+                                            <asp:ListItem Value="3">Power Supply</asp:ListItem>
+                                            <asp:ListItem Value="0">Booster</asp:ListItem>
+                                            <asp:ListItem Value="5">Currency</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="form-group row">
+                                        <asp:Label runat="server" Text="Item List: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                        <asp:DataList ID="SelectionDataList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                                            <ItemTemplate>
+                                                <div style="margin: 10px;">
+                                                    <asp:LinkButton runat="server" ID="itemName" OnCommand="SelectedItem_Command" 
+                                                        CommandArgument='<%# Eval("ItemID")%>' forecolor="Black" Text='<%#Eval("ItemName") %>' />
+                                                </div>
+                                        
+                                            </ItemTemplate>
+                                        </asp:DataList>
+                                    </div>
+                                    <div class="form-group row">
+                                        <asp:Label runat="server" Text="Item Selected: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                        <asp:Label runat="server" id="selectedItemLbl" forecolor="White" Text=""></asp:Label>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgDesc" TextMode="MultiLine"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Package Price ($): " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgPrice"></asp:TextBox>
+                                <asp:RegularExpressionValidator 
+                                    ID="priceValidator" runat="server" 
+                                    ErrorMessage="* Enter up to 2 decimal places only" ValidationExpression="^[0-9]{0,6}(\.[0-9]{1,2})?$"
+                                    ControlToValidate="pkgQuantity" ForeColor="Red">
+                               </asp:RegularExpressionValidator>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgQuantity"></asp:TextBox>
+                                <asp:RegularExpressionValidator 
+                                    ID="quantityValidator" runat="server" 
+                                    ErrorMessage="* Enter whole numbers only" ValidationExpression="^\d+$"
+                                    ControlToValidate="pkgQuantity" ForeColor="Red">
+                               </asp:RegularExpressionValidator>
+                            </div>
+                            <asp:Button runat="server" ID="addPackage" CssClass="btn btn-default" OnClick="btnAddPackage_Click" Text="Add Package" />
+                            <br /><br />
+                        </div>
+                    </div>
+<!-- ================= END TAB 1 CONTENT  ================== -->                    
+
+<!-- ========== START TAB 2 CONTENT - ADD PACKAGE ========== -->                    
+                    <div class="tab-pane fade" id="tab2default">
                         <h2>Items</h2>
 
                         <asp:DataList ID="DataList1" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
@@ -109,88 +176,7 @@
                             <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
                         </div>
                     </div>
-
-                    <div class="tab-pane fade" id="tab2default">
-                        <h2>Add Packages</h2>
-                        <div class="container-fluid" style="color: black; background-color: gray;">
-                            <br />
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:DropDownList runat="server" ID="itemTypeDDL" OnSelectedIndexChanged="DisplayItems" AutoPostBack="true">
-                                    <asp:ListItem Value="-2">Choose An Item Type</asp:ListItem>
-                                    <asp:ListItem Value="1">Processor</asp:ListItem>
-                                    <asp:ListItem Value="4">Graphic Card</asp:ListItem>
-                                    <asp:ListItem Value="2">Memory</asp:ListItem>
-                                    <asp:ListItem Value="3">Power Supply</asp:ListItem>
-                                    <asp:ListItem Value="0">Booster</asp:ListItem>
-                                    <asp:ListItem Value="5">Currency</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item List: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:DataList ID="SelectionDataList" runat="server" RepeatColumns="3" RepeatLayout="Table">
-                                    <ItemTemplate>
-                                        <div style="margin: 10px;">
-                                            <asp:LinkButton runat="server" ID="itemName" OnCommand="SelectedItem_Command" 
-                                                CommandArgument='<%# Eval("ItemID")%>' forecolor="Black" Text='<%#Eval("ItemName") %>' />
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:DataList>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Selected: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:Label runat="server" id="selectedItemLbl" forecolor="White" Text=""></asp:Label>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgDesc" TextMode="MultiLine"></asp:TextBox>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Package Price ($): " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgPrice"></asp:TextBox>
-                                <asp:RegularExpressionValidator 
-                                    ID="priceValidator" runat="server" 
-                                    ErrorMessage="* Enter up to 2 decimal places only" ValidationExpression="^[0-9]{0,6}(\.[0-9]{1,2})?$"
-                                    ControlToValidate="pkgQuantity" ForeColor="Red">
-                               </asp:RegularExpressionValidator>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgQuantity"></asp:TextBox>
-                                <asp:RegularExpressionValidator 
-                                    ID="quantityValidator" runat="server" 
-                                    ErrorMessage="* Enter whole numbers only" ValidationExpression="^\d+$"
-                                    ControlToValidate="pkgQuantity" ForeColor="Red">
-                               </asp:RegularExpressionValidator>
-                            </div>
-                            <asp:Button runat="server" ID="addPackage" CssClass="btn btn-default" OnClick="btnAddPackage_Click" Text="Add Package" />
-                            <br /><br />
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab3default">
-                        <asp:DataList ID="GPUList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
-                            <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-                                <br />
-                                <asp:Image ID="itemImg" runat="server" 
-                                    Width="200px" Height="200px"     
-                                    ImageUrl='<%#Eval("ItemPic")%>'/>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab4default">
-                        <asp:DataList ID="ProcessList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
-                            <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-                                <br />
-                                <asp:Image ID="itemImg" runat="server" 
-                                    Width="200px" Height="200px"     
-                                    ImageUrl='<%#Eval("ItemPic")%>'/>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </div>
+<!-- ================= END TAB 2 CONTENT  ================== -->                                        
                 </div>
             </div>
         </div>
