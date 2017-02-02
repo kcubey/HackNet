@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Core;
 using System.Collections.Generic;
 using HackNet.Game.Class;
+using System;
 
 namespace HackNet.Data
 {
+    [Serializable]
     public partial class Machines
     {
         [Key, ForeignKey("User")]

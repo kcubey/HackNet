@@ -21,7 +21,7 @@ namespace HackNet.Game
                 Machines m = Machines.GetUserMachine(CurrentUser.Entity(),db);
                 Session["Machines"] = m;
                 List<Items> InvItmList = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1,db);
-
+                
                 // Store into Encrypted Viewstate
                 ViewState["InvetoryList"] = InvItmList;
 

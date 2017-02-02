@@ -51,7 +51,7 @@
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableHeaderRow>
-                            <asp:TableHeaderCell>Rewards</asp:TableHeaderCell>
+                            <asp:TableHeaderCell  ColumnSpan="4">Rewards</asp:TableHeaderCell>
                         </asp:TableHeaderRow>
                         <asp:TableRow>
                             <asp:TableCell>
