@@ -32,7 +32,7 @@ namespace HackNet.Game
             buckValidator.MaximumValue = dbBuck.ToString();
             
             LoadInventory(memorylist, 2);
-            LoadInventory(packageDL, 5);
+            //LoadInventory(packageDL, 5);
         }
 
         #region Payment stuff
@@ -216,15 +216,6 @@ namespace HackNet.Game
 
             Items item = Data.Items.GetItem(id);
             Session["Item"] = item;
-            Server.Transfer("PartsInfo.aspx", true);
-        }
-
-        protected void ViewMorePkg_Command(object sender, CommandEventArgs e)
-        {
-            int id = int.Parse(e.CommandArgument.ToString());
-
-            //      Packages pks = Data.Packages.GetDetails(id);
-            //      Session["Item"] = pks;
             Server.Transfer("PartsInfo.aspx", true);
         }
     }

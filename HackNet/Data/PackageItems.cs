@@ -15,8 +15,6 @@ namespace HackNet.Data
         [ForeignKey("Item")]
         public int ItemId { get; set; }
 
-        public int ItemName { get; set; }
-
         public int Quantity { get; set; }
 
 		// Foreign key references

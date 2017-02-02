@@ -16,8 +16,6 @@ namespace HackNet.Data
 
 		public string Description { get; set; }
 
-        public byte[] PackagePic { get; set; }
-
         public double Price { get; set; }
 
         internal static List<Packages> GetPackageList()
@@ -53,5 +51,6 @@ namespace HackNet.Data
             }
             return pkg;
         }
+
     }
 }

@@ -58,21 +58,6 @@
 
                             </div>
                         </div>
-<!-- ===========AJAX Modal============-->
-    <asp:Button ID="btnOpenPopUp" runat="server" text="Open PopUp" />
-     <asp:Label ID="lblHidden" runat="server" Text=""></asp:Label>
-        <ajaxToolkit:ModalPopupExtender ID="mpePopUp" runat="server" TargetControlID="lblHidden" PopupControlID="divPopUp" BackgroundCssClass="modalBackground"></ajaxToolkit:ModalPopupExtender>
-
-        <div id="divPopUp" class="pnlBackGround">
-     <div id="Header" class="header" >MyHeader</div>
-     <div id="main" class="main">Main PopUp </div>
-     <div id="buttons">
-          <div id="DivbtnOK" class="buttonOK"><asp:Button id="btnOk" runat="server" text="Ok" /></div>
-          <div id="Divbtncancel" class="buttonOK"><asp:Button id="btnCancel" runat="server" text="Cancel" /></div>
-     </div>
-</div>
-
-<!-- =========== End AJAX Modal=============-->
 
 
     <div class="panel panel-default">
@@ -149,19 +134,6 @@
                         </asp:LinkButton>
 
 <!-- REpeater
-                        <asp:DataList ID="packageDL" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
-                            <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='< % #Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-                                <br />
-                                <asp:Image ID="itemImg" runat="server"
-                                    Width="200px" Height="200px"
-                                    ImageUrl='< % #Eval("PackagePic")%>' />
-                                <br />
-                                <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='< % #Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:DataList>
-
-                        
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
                                 <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
@@ -178,30 +150,13 @@
                             </ItemTemplate>
                         </asp:Repeater>
                         -->
+
                         <!-- KTODO: make packages dynamic -->
 
                         <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br /><br />
                             <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package 2 - SGD$100"></asp:Label>
-                        </asp:LinkButton>
-
-                        <asp:LinkButton ID="LinkButton3" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                            <asp:Image ID="Image3" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br /><br />
-                            <asp:Label ID="Label3" CssClass="redirectLbl" runat="server" Text="Package 3 - SGD$50"></asp:Label>
-                        </asp:LinkButton>
-
-                        <asp:LinkButton ID="LinkButton4" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
-                            <asp:Image ID="Image4" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br /><br />
-                            <asp:Label ID="Label4" CssClass="redirectLbl" runat="server" Text="Package 4 - SGD$20"></asp:Label>
-                        </asp:LinkButton>
-
-                        <asp:LinkButton ID="LinkButton5" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False"> 
-                            <asp:Image ID="Image5" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br /><br />
-                            <asp:Label ID="Label5" CssClass="redirectLbl" runat="server" Text="Package 5 - SGD$350"></asp:Label>
                         </asp:LinkButton>
                     </div>
 
@@ -241,7 +196,7 @@
             <asp:Label runat="server" Text="Buck Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
             <asp:TextBox runat="server" ID="buckQuantity"></asp:TextBox>
         </div>
-        <!-- <asp:Button  ID="btnAddItem" CssClass="btn btn-default" OnClick=btnAddBuckPackage_Click" Text="Add Buck Package" />-->
+        <!-- <asp:Button ADD RUNAT SERVER ID="btnAddItem" CssClass="btn btn-default" OnClick=btnAddBuckPackage_Click" Text="Add Buck Package" />-->
         <asp:Button runat="server" ID="btnAddPkg" CssClass="btn btn-default" Text="Add Buck Package" />
     </div>
 
