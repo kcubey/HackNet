@@ -205,5 +205,23 @@ namespace HackNet.Security
 			return conv;
 		}
 		
+		public static void QuitAllConversations(Users u, DataContext db)
+		{
+			List<Conversation> convs =	db.Conversation
+										.Where(c => c.UserAId == u.UserID 
+										|| c.UserBId == u.UserID).ToList();
+
+			foreach (var c in convs)
+			{
+				List<SecureMessage> msgs = db.SecureMessage.Where(msg => msg.ConId == c.ConId).ToList();
+
+				foreach (var m in msgs)
+					db.SecureMessage.Remove(m);
+				
+				db.Conversation.Remove(c);
+			}
+
+			db.SaveChanges();
+		}
 	}
 }

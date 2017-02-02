@@ -13,22 +13,34 @@ using System.Web.Security;
 
 namespace HackNet.Auth {
 	public partial class SignIn : Page {
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (CurrentUser.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
 
-			DataContext ctx = new DataContext();
+			if (BlockList.CheckBlocked(Authenticate.GetIP()))
+				Msg.Text = "You have had too many attempts, your IP has been blocked";
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
+			if (BlockList.CheckBlocked(Authenticate.GetIP()))
+			{
+				Msg.Text = "You have had too many attempts, your IP has been blocked";
+				return;
+			}
+
+			// Force email lowercase before validating
 			string email = Email.Text.ToLower();
+			string ip = Authenticate.GetIP();
 			try
 			{
 				using (Authenticate auth = new Authenticate(email))
 				{
+					// ValidateLogin generates a KeyStore and stores it as a temp variable
 					AuthResult result = auth.ValidateLogin(UserPass.Text);
+
 					switch (result)
 					{
 						case AuthResult.Success:
@@ -36,12 +48,15 @@ namespace HackNet.Auth {
 							break;
 						case AuthResult.PasswordIncorrect:
 							Msg.Text = "User and/or password not found (1)";
+							BlockList.AddOrUpdateAttempt(ip);
 							break;
 						case AuthResult.UserNotFound:
 							Msg.Text = "User and/or password not found (2)";
+							BlockList.AddOrUpdateAttempt(ip);
 							break;
 						case AuthResult.EmailNotVerified:
-							Msg.Text = "Email has not been verified";
+							Msg.Text = "Email has not been verified, a confirmation email will be sent to you shortly";
+							BlockList.AddOrUpdateAttempt(ip);
 							break;
 						default:
 							Msg.Text = "Unhandled error has occured";
@@ -54,6 +69,11 @@ namespace HackNet.Auth {
 			}
 		}
 
+		/// <summary>
+		/// Executed on successful login
+		/// </summary>
+		/// <param name="email"></param>
+		/// <param name="ks"></param>
 		private void LoginSuccess(string email, KeyStore ks)
 		{
 			using (Authenticate a = new Authenticate(email))
@@ -76,6 +96,7 @@ namespace HackNet.Auth {
 					Session["Cookie"] = a.AuthCookie;
 					Session["PasswordSuccess"] = email;
 					Session["ReturnUrl"] = redir;
+					Session["UserId"] = a.UserId;
 					Response.Redirect("~/Auth/OtpVerify");
 				} else
 				{
@@ -86,6 +107,7 @@ namespace HackNet.Auth {
 			}
 		}
 
+		// Method to validate for Open Redirect vulnerability
 		private bool IsLocalUrl(string url)
 		{
 			if (string.IsNullOrEmpty(url))

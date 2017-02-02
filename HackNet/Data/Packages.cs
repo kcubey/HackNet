@@ -25,8 +25,8 @@ namespace HackNet.Data
             {
                 using (DataContext db = new DataContext())
                 {
-                    var query = from i in db.Packages select i;
-                    return query.ToList();
+					var query = from i in db.Packages select i;
+					return query.ToList();
                 }
             }
             catch (EntityCommandExecutionException)

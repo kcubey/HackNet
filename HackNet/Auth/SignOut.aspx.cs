@@ -12,13 +12,21 @@ namespace HackNet.Auth
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			// Call the FormsAuthentication SignOut method to remove the cookie
 			FormsAuthentication.SignOut();
 
+			// Removes all information regarding this session
+			Session.RemoveAll();
+
 			string returnurl = Request.QueryString["ReturnUrl"];
+			
+			// Redirect back to sign in page
 			if (returnurl == null)
 				Response.Redirect("~/Auth/SignIn");
 			else
 				Response.Redirect("~/Auth/SignIn?ReturnUrl=" + returnurl);
+
+
 		}
 	}
 }

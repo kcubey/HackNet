@@ -40,7 +40,7 @@
 					<td><strong>Password:</strong></td>
 					<td>
 						<asp:TextBox ID="UserPass" CssClass="pwdfield form-control" TextMode="Password" runat="server" />
-						<a href="lostpw.aspx" runat="server">Forgot your password?</a>
+						<asp:HyperLink NavigateUrl="~/Auth/ResetPassword.aspx" runat="server">Forgot your password?</asp:HyperLink>
 					</td>
 					<td>
 						<asp:RequiredFieldValidator

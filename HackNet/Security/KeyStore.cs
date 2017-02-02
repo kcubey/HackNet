@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
@@ -27,10 +28,18 @@ namespace HackNet.Security
 			// Should only execute when user has a keystore
 			if (uks is UserKeyStore)
 			{
+				byte[] aesKey, rsaBytes;
 				byte[] desIv = uks.DesIv;
 				byte[] aesIv = uks.AesIv;
-				byte[] aesKey = Crypt.Instance.DeriveKey(password, salt, desIv);
-				byte[] rsaBytes = Crypt.Instance.DecryptAes(uks.RsaPriv, aesKey, aesIv);
+				try
+				{
+					aesKey = Crypt.Instance.DeriveKey(password, salt, desIv);
+					rsaBytes = Crypt.Instance.DecryptAes(uks.RsaPriv, aesKey, aesIv);
+				} catch (CryptographicException)
+				{
+					throw new KeyStoreException("KeyStore is in invalid state");
+				}
+
 				string rsaPrivate = Encoding.UTF8.GetString(rsaBytes);
 
 				this.aesIv = uks.AesIv;

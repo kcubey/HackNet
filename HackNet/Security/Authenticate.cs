@@ -5,11 +5,12 @@ using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Security;
+using System.Security;
+using System.Collections.Generic;
 
 using HackNet.Data;
 using HackNet.Loggers;
 using HackNet.Game.Class;
-using System.Security;
 
 namespace HackNet.Security
 {
@@ -20,6 +21,8 @@ namespace HackNet.Security
 	internal class Authenticate : IDisposable
 	{
 		internal string Email { get; private set; }
+
+		internal int UserId { get; private set; }
 
 		internal KeyStore TempKeyStore { get; private set; }
 
@@ -41,12 +44,14 @@ namespace HackNet.Security
 		{
 			// To ensure email casing is correct
 			Users u = Users.FindByEmail(email);
+
 			if (u == null)
 			{
 				throw new UserException("Authenticate instance failed to create due to non-existent user");
 			}
 
-			Email = email;
+			Email = u.Email;
+			UserId = u.UserID;
 
 			Debug.WriteLine("Creating new authenticate instance for " + Email);
 		}
@@ -84,11 +89,14 @@ namespace HackNet.Security
                 }else
                 {
                     Debug.WriteLine("CHK FALSE");
-
                 }
 
-                if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
+				if (checkEmailValidity && !EmailConfirm.IsEmailValidated(user))
+				{
+					EmailConfirm.SendEmailForConfirmation(user, db);
+					
 					return AuthResult.EmailNotVerified;
+				}
 
 				byte[] bPassword = Encoding.UTF8.GetBytes(password);
 				byte[] bSalt = user.Salt;
@@ -121,6 +129,8 @@ namespace HackNet.Security
 			}
 			throw new AuthException("Login has no result, database failure might have occured.");
 		}
+
+
 
 		/// <summary>
 		/// Update the user's password
@@ -449,10 +459,11 @@ namespace HackNet.Security
 			}
 		}
 
-        /// <summary>
-        /// Get User IP Address
-        /// </summary>
-        internal static string GetIP()
+
+		/// <summary>
+		/// Get User IP Address
+		/// </summary>
+		internal static string GetIP()
         {
             if (Global.IsInUnitTest)
                 return "Test Environment";
@@ -479,10 +490,10 @@ namespace HackNet.Security
 
             if (userIp.Equals("::1"))
             {
-                userIp = "127.0.0.1";
+                userIp = "127.0.0.1:0000";
             }
 
-            return userIp;
+            return userIp.Split(':')[0]; // remove dem ports -wl
         }
 
 

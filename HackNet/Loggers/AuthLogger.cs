@@ -66,12 +66,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPFail()
+		internal void TOTPFail(string email, int userid)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = CurrentUser.GetEmail(),
-				UserId = CurrentUser.GetUserId(),
+				EmailAddress = email,
+				UserId = userid,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
 				Description = "One-time password authentication failed"
@@ -79,12 +79,12 @@ namespace HackNet.Loggers
 			Log(entry);
 		}
 
-		internal void TOTPSuccess()
+		internal void TOTPSuccess(string email, int userid)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = CurrentUser.GetEmail(),
-				UserId = CurrentUser.GetUserId(),
+				EmailAddress = email,
+				UserId = userid,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = "One-time password authentication successful"

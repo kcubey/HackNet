@@ -217,6 +217,7 @@
     <None Include="App_Data\Secrets.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Auth\ResetPassword.aspx" />
     <Content Include="Auth\ConfirmEmail.aspx" />
     <Content Include="Auth\Debug.aspx" />
     <Content Include="Auth\OtpVerify.aspx" />
@@ -259,7 +260,7 @@
     <Content Include="Content\Images\page2.png" />
     <Content Include="Content\Tutorial\intro.js" />
     <Content Include="Content\Tutorial\introjs.css" />
-    <Content Include="Error.aspx" />
+    <Content Include="Public\Error.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -432,6 +433,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Auth\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Auth\ConfirmEmail.aspx.cs">
       <DependentUpon>ConfirmEmail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -498,11 +506,11 @@
     <Compile Include="Data\UserIPList.cs" />
     <Compile Include="Data\UserKeyStore.cs" />
     <Compile Include="Data\Users.cs" />
-    <Compile Include="Error.aspx.cs">
+    <Compile Include="Public\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Error.aspx.designer.cs">
+    <Compile Include="Public\Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Game.Master.cs">
@@ -610,6 +618,7 @@
       <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\ProfileLogger.cs" />
     <Compile Include="Loggers\PaymentLogger.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
     <Compile Include="Loggers\SearchFilter.cs" />
@@ -681,6 +690,7 @@
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\Base32.cs" />
+    <Compile Include="Security\BlockList.cs" />
     <Compile Include="Security\CurrentUser.cs" />
     <Compile Include="Security\EmailConfirm.cs" />
     <Compile Include="Security\KeyStore.cs" />

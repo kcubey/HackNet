@@ -1,24 +1,34 @@
-﻿<%@ Page Title="Confirm Email" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ConfirmEmail.aspx.cs" Inherits="HackNet.Auth.ConfirmEmail" %>
+﻿<%@ Page Title="Reset Password" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="HackNet.Auth.ResetPassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-		<div class="jumbotron">
+	
+	<div class="jumbotron">
 		<h1><%= Page.Title %></h1>
-		<p>Confirm your E-Mail to gain full access!<span class="blinking">_</span></p>
+		<p>Forgot your password? Reset it!<span class="blinking">_</span></p>
 	</div>
-    	<ol class="breadcrumb" style="margin-bottom: 5px;">
+
+    <ol class="breadcrumb" style="margin-bottom: 5px;">
 		<li><a href="<%= ResolveUrl("~/Auth/signin") %>">Authentication</a></li>
-		<li><a href="<%= ResolveUrl("~/Auth/signup") %>">Registration</a></li>
-		<li class="active">Email Confirmation</li>
+		<li><a href="<%= ResolveUrl("~/Auth/signin") %>">Others</a></li>
+		<li class="active">Password Reset</li>
 	</ol>
+
    	<br />
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Confirm Email
+			Reset Password
 		</div>
 		<div class="panel-body">
-            <asp:Label ID="Msg" ForeColor="Red" runat="server"/>
-			<table runat="server" id="ConfirmTable" class="formTable">
+            <asp:Label ID="Msg" 
+				ForeColor="Orange" 
+				runat="server" 
+				Text="You will lose access to ALL your chats as your key depends on your old password"/>
+
+			<br />
+
+			<table runat="server" id="ResetTable" class="formTable">
 				<tr>
 					<td><strong>Email:</strong></td>
 					<td>
@@ -37,25 +47,12 @@
 							runat="server" />
 					</td>
 				</tr>
-				<tr>
-					<td><strong>Code:</strong></td>
-					<td>
-						<asp:TextBox ID="EmailCode" CssClass="pwdfield form-control" runat="server" />
-					</td>
-					<td>
-						<asp:RequiredFieldValidator
-							ID="EmailCodeValidator"
-							ControlToValidate="EmailCode"
-							ErrorMessage="*"
-							runat="server" />
-					</td>
-				</tr>
 			</table>
 			<br />
-			<asp:Button ID="EmailConfirmBtn"
-				Text="Confirm Email"
+			<asp:Button ID="ResetPasswordBtn"
+				Text="Send Reset Link"
 				CssClass="btn btn-primary loginBtn"
-				OnClick="EmailConfirm_Click"
+				OnClick="SendResetLink_Click"
 				CausesValidation="true"
 				runat="server" />
 		</div>

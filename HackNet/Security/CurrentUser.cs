@@ -138,10 +138,17 @@ namespace HackNet.Security
 					Users user = (from u in db1.Users
 								  where u.Email == email
 								  select u).FirstOrDefault();
-					if (user != null)
+
+					if (user is Users)
+					{
 						return user;
+					}
 					else
-						throw new UserException("User not found");
+					{
+						System.Diagnostics.Debug.WriteLine("==== ERROR: User is not logged in / null / does not exist ====");
+						FormsAuthentication.SignOut();
+						return null;
+					}
 				}
 			else
 			{
