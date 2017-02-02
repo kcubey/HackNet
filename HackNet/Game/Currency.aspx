@@ -134,6 +134,24 @@
                             <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1000"></asp:Label>
                         </asp:LinkButton>
 
+                        <asp:Repeater ID="packageRepeater" runat="server">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                                    <br />
+                                    <!--<asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" r//unat="s@erver" Text='< %#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>-->
+                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
+                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text=" bucks" Font-Size="Smaller"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
+                                        <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
+                                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='<%#Eval("Price")%>'></asp:Label>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+
                         <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br /><br />
@@ -142,23 +160,8 @@
                         </div>
 <!-- ================= end Packages tab ====================== -->
 
-<!-- REpeater
-                        <asp:Repeater ID="packageRepeater" runat="server">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< % #Eval("PackagePic")%>'  BackColor="Transparent" />
-                                    <br />
-                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='< % # Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
-                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackageDesc")%>' Font-Size="Smaller"></asp:Label>
-                                    <br />
-                                    <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackageNo")%>'></asp:Label>
-                                        <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='< % # Eval("PackagePrice")%>'></asp:Label>
-                                </asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:Repeater>
--->
+<!-- REpeater-->
+                        
 
 <!-- KTODO: make packages dynamic -->
                     

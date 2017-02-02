@@ -46,12 +46,14 @@ namespace HackNet.Payment
 
             if (!IsPostBack)
             {
+                //Generate client token
                 clientToken = gateway.ClientToken.generate();
             }
 
             if (IsPostBack)
             {
                 checkoutClickA();
+                //KTODO: Change to modal then checkout
             }
 
         }
@@ -72,20 +74,25 @@ namespace HackNet.Payment
                 Response.Redirect("~/game/currency", true);
             }
 
+            //set nonce
             var nonce = "fake-valid-nonce";
 
+            //create transaction request
             var request = new TransactionRequest
             {
                 Amount = price,
                 PaymentMethodNonce = nonce,
             };
 
+            //send transaction request to server
             Result<Transaction> result = gateway.Transaction.Sale(request);
 
+            //transaction is successful
             if (result.IsSuccess())
             {
                 try
                 {
+                    //get transaction id
                     string transactionId = result.Target.Id.ToString();
                     Session["transactionId"] = transactionId;
                 }
@@ -97,6 +104,7 @@ namespace HackNet.Payment
 
                 Response.Redirect("~/payment/checkout", true);
             }
+            //transaction fail
             else
             {
                 Response.Redirect("~/payment/retry", true);

@@ -175,6 +175,15 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label packageCost;
         
         /// <summary>
+        /// packageRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater packageRepeater;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>
@@ -200,14 +209,5 @@ namespace HackNet.Game {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// packageRepeater control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater packageRepeater;
     }
 }

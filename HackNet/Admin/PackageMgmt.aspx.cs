@@ -35,20 +35,26 @@ namespace HackNet.Admin
         protected void btnAddPackage_Click(object sender, EventArgs e)
         {
             Packages pkg = new Packages();
-            PackageItems pkgItems = new PackageItems();
             pkg.Description = pkgDesc.Text;
-            pkg.Price = Int32.Parse(pkgPrice.Text);
 
-            pkgItems.PackageId = pkg.PackageId;
-            pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
-            pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
+            string strPrice = pkgPrice.Text;
+            pkg.Price = Convert.ToDouble(strPrice.Replace(" ", ""));
 
             using (DataContext db = new DataContext())
             {
                 db.Packages.Add(pkg);
-                Debug.WriteLine("pkg success add");
+                db.SaveChanges();
+                Session["pkgId"] = pkg.PackageId;
+            }
+
+            PackageItems pkgItems = new PackageItems();
+            pkgItems.PackageId = Convert.ToInt32(Session["pkgId"]);
+            pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
+            pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
+            
+            using (DataContext db = new DataContext())
+            {
                 db.PackageItems.Add(pkgItems);
-                Debug.WriteLine("pkgitems success add");
                 db.SaveChanges();
             }
         }
