@@ -20,7 +20,7 @@ namespace HackNet.Data
 
         internal static List<Packages> GetPackageList()
         {
-            List<Packages> itemList = new List<Packages>();
+            List<Packages> pkgList = new List<Packages>();
             try
             {
                 using (DataContext db = new DataContext())
@@ -35,7 +35,7 @@ namespace HackNet.Data
             }
         }
 
-        internal static Packages GetPackage(int id, int itemType = -1)
+        internal static Packages GetPackage(int id)
         {
             Packages pkg = new Data.Packages();
             try
