@@ -208,6 +208,7 @@
     <Content Include="Admin\LocalLogs.aspx" />
     <Content Include="Admin\Logs.aspx" />
     <Content Include="Admin\MissionMgmt.aspx" />
+    <Content Include="Admin\PackageMgmt.aspx" />
     <Content Include="anonymousedited.jpg" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
@@ -415,6 +416,13 @@
     <Compile Include="Admin\MissionMgmt.aspx.designer.cs">
       <DependentUpon>MissionMgmt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\PackageMgmt.aspx.cs">
+      <DependentUpon>PackageMgmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PackageMgmt.aspx.designer.cs">
+      <DependentUpon>PackageMgmt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -602,6 +610,7 @@
       <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\PaymentLogger.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
     <Compile Include="Loggers\SearchFilter.cs" />
     <Compile Include="Loggers\Exceptions.cs" />

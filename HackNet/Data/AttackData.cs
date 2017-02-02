@@ -17,9 +17,7 @@ namespace HackNet.Data
         [Required]
         public string AttackName { get; set; }
         public string AttackInfo { get; set; }
-        public byte[] AttackPic1 { get; set; }
-        public byte[] AttackPic2 { get; set; }
-        public byte[] AttackPic3 { get; set; }
+        public byte[] AttackPic { get; set; }
 
         public static AttackData GetAttackData(int atkid)
         {
