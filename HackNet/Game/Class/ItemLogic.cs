@@ -12,7 +12,13 @@ namespace HackNet.Game.Class
 {
     public class ItemLogic
     {
-        // Get all Items owned by user
+        /// <summary>
+        /// Get User owned Items
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="itemType"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         internal static List<Items> GetUserInvItems(Users user, int itemType, DataContext db)
         {
             var query = from inv in db.InventoryItem where inv.UserId == user.UserID select inv;
@@ -35,7 +41,12 @@ namespace HackNet.Game.Class
 
         }
 
-        // Load Items into Datalist
+        /// <summary>
+        /// Load Item into DataList for Inventory
+        /// </summary>
+        /// <param name="dl"></param>
+        /// <param name="itmlist"></param>
+        /// <param name="itemType"></param>
         internal static void LoadInventory(DataList dl, List<Items> itmlist, int itemType)
         {
             if (itmlist.Count != 0)
@@ -77,7 +88,11 @@ namespace HackNet.Game.Class
 
         }
 
-        // Default Machine Parts
+        /// <summary>
+        /// Get the Default Parts
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
         internal static List<Items> GetDefaultParts(DataContext db)
         {
             List<Items> itmlist;
@@ -86,7 +101,11 @@ namespace HackNet.Game.Class
             return itmlist;
         }
 
-        // Store Default Parts
+        /// <summary>
+        /// Store Default Parts into User Inventory
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="userid"></param>
         internal static void StoreDefaultParts(DataContext db, int userid)
         {
             InventoryItem inv;
@@ -98,7 +117,12 @@ namespace HackNet.Game.Class
             }
         }
 
-        // Add item to user inventory
+        /// <summary>
+        /// Add item into user invetory
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="itemid"></param>
+        /// <param name="quantity"></param>
         internal static void AddItemToInventory(Users user, int itemid, int quantity = 1)
         {
             using (DataContext db = new DataContext())
@@ -137,6 +161,14 @@ namespace HackNet.Game.Class
             }
         }
 
+        /// <summary>
+        /// Using probability to get a random Item for reward
+        /// </summary>
+        /// <param name="normstat"></param>
+        /// <param name="rarestat"></param>
+        /// <param name="probability"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
         private static Items GetItemsForRewards(int normstat, int rarestat, int probability, DataContext db)
         {
             List<Items> normList = (from i in db.Items where i.ItemBonus < normstat && i.ItemBonus > 0 select i).ToList();
