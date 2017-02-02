@@ -54,7 +54,17 @@
                                 ForeColor="Red"
                                 ErrorMessage="Please enter a valid IP address"
                                 ControlToValidate="EditMisIP"
-                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" />
+                                ValidationExpression="([0-9]{1,3}\.|\*\.){3}([0-9]{1,3}|\*){1}" /><br />
+                            <asp:RegularExpressionValidator ID="MisExpValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please Enter Only Numbers for Mission Exp"
+                                ControlToValidate="EditMisExp"
+                                ValidationExpression="^\d+$" /><br />
+                            <asp:RegularExpressionValidator ID="MisCoinValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please Enter Only Numbers for Mission Coin"
+                                ControlToValidate="EditMisCoin"
+                                ValidationExpression="^\d+$" />
                         </div>
                     </div>
                 </div>

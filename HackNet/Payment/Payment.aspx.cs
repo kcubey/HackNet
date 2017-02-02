@@ -30,14 +30,14 @@ namespace HackNet.Payment
         protected void Page_Load(object sender, EventArgs e)
         {
             Form.ID = "checkout-form";
-            Debug.WriteLine(Form.ID);
-
-            if (Session["packageId"] == null)
+            try
             {
-                Response.Redirect("~/game/market", true);
+                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
             }
-
-            packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+            catch
+            {
+                Response.Redirect("~/game/currency", true);
+            }
 
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
@@ -46,15 +46,14 @@ namespace HackNet.Payment
 
             if (!IsPostBack)
             {
-                //Generate a client token
                 clientToken = gateway.ClientToken.generate();
-                Debug.WriteLine(clientToken);
             }
 
             if (IsPostBack)
             {
                 checkoutClickA();
             }
+
         }
 
         public void CancelClick(Object sender, EventArgs e)
@@ -64,46 +63,42 @@ namespace HackNet.Payment
 
         public void checkoutClick(Object sender, EventArgs e)
         {
-            Debug.WriteLine("Enter checkoutclick event");
-            price = Convert.ToDecimal(Session["packageprice"]);
-            Debug.WriteLine("package price = " +price);
+            try
+            {
+                price = Convert.ToDecimal(Session["packageprice"]);
+            }
+            catch
+            {
+                Response.Redirect("~/game/currency", true);
+            }
 
-            //Get the nonce & device data from the client
             var nonce = "fake-valid-nonce";
-            
-            //var nonce = Request.Form["payment_method_nonce"];
-            //var deviceData = Request.Form["device_data"];
-            //Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
-            Debug.WriteLine("nonce: " +nonce);
-            
-            //Create auth
+
             var request = new TransactionRequest
             {
                 Amount = price,
                 PaymentMethodNonce = nonce,
-               // DeviceData = deviceData
             };
-            Debug.WriteLine("transaction request made");
 
-            //Send transaction request to server
             Result<Transaction> result = gateway.Transaction.Sale(request);
-            Debug.WriteLine("transaction sent to server");
 
             if (result.IsSuccess())
             {
-                Debug.WriteLine("is success");
-                //Transaction is successful
-                string transactionId = result.Target.Id.ToString();
-                Session["transactionId"] = transactionId;
-
+                try
+                {
+                    string transactionId = result.Target.Id.ToString();
+                    Session["transactionId"] = transactionId;
+                }
+                catch
+                {
+                    Response.Redirect("~/game/currency", true);
+                }
                 //KTODO = Add in code to add items to invo
 
                 Response.Redirect("~/payment/checkout", true);
             }
             else
             {
-                Debug.WriteLine("is fail");
-                //Something went wrong
                 Response.Redirect("~/payment/retry", true);
             }
         }
@@ -111,35 +106,27 @@ namespace HackNet.Payment
 
         public void checkoutClickA()
         {
-            Debug.WriteLine("Enter checkoutclickA event");
-            price = Convert.ToDecimal(Session["packageprice"]);
-            Debug.WriteLine("package price = " + price);
+            try
+            {
+                price = Convert.ToDecimal(Session["packageprice"]);
+            }
+            catch
+            {
+                Response.Redirect("~/game/currency", true);
+            }
 
-            //Get the nonce & device data from the client
             var nonce = "fake-valid-nonce";
 
-            //var nonce = Request.Form["payment_method_nonce"];
-            //var deviceData = Request.Form["device_data"];
-            //Debug.WriteLine("nonce: " +nonce +" and device" +deviceData);
-            Debug.WriteLine("nonce: " + nonce);
-
-            //Create auth
             var request = new TransactionRequest
             {
                 Amount = price,
                 PaymentMethodNonce = nonce,
-                // DeviceData = deviceData
             };
-            Debug.WriteLine("transaction request made");
 
-            //Send transaction request to server
             Result<Transaction> result = gateway.Transaction.Sale(request);
-            Debug.WriteLine("transaction sent to server");
 
             if (result.IsSuccess())
             {
-                Debug.WriteLine("is success");
-                //Transaction is successful
                 string transactionId = result.Target.Id.ToString();
                 Session["transactionId"] = transactionId;
 
@@ -149,8 +136,6 @@ namespace HackNet.Payment
             }
             else
             {
-                Debug.WriteLine("is fail");
-                //Something went wrong
                 Response.Redirect("~/payment/retry", true);
             }
         }

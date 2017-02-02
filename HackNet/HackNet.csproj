@@ -208,6 +208,7 @@
     <Content Include="Admin\LocalLogs.aspx" />
     <Content Include="Admin\Logs.aspx" />
     <Content Include="Admin\MissionMgmt.aspx" />
+    <Content Include="Admin\PackageMgmt.aspx" />
     <Content Include="anonymousedited.jpg" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\Database.config" />
@@ -277,9 +278,6 @@
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
     <Content Include="Game\MarketOld.aspx" />
-    <Content Include="Payment\backend\btconfig.txt" />
-    <Content Include="Payment\backend\checkoutcontrol.txt" />
-    <Content Include="Payment\backend\ibtconfig.txt" />
     <Content Include="Payment\backend\JSv2.js" />
     <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
@@ -417,6 +415,13 @@
     </Compile>
     <Compile Include="Admin\MissionMgmt.aspx.designer.cs">
       <DependentUpon>MissionMgmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PackageMgmt.aspx.cs">
+      <DependentUpon>PackageMgmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PackageMgmt.aspx.designer.cs">
+      <DependentUpon>PackageMgmt.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -605,13 +610,13 @@
       <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
+    <Compile Include="Loggers\PaymentLogger.cs" />
     <Compile Include="Loggers\AuthLogger.cs" />
     <Compile Include="Loggers\SearchFilter.cs" />
     <Compile Include="Loggers\Exceptions.cs" />
     <Compile Include="Loggers\GameLogger.cs" />
     <Compile Include="Loggers\LogEntry.cs" />
     <Compile Include="Loggers\Logger.cs" />
-    <Compile Include="Payment\backend\IBraintreeConfiguration.cs" />
     <Compile Include="Payment\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

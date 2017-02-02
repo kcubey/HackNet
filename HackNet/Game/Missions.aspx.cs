@@ -48,7 +48,7 @@ namespace HackNet.Game
             dtAttack.Columns.Add("AttackPic1", typeof(string));
             foreach(AttackData atkdata in atkdatalist)
             { 
-                imageurlstring = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+                imageurlstring = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
                 dtAttack.Rows.Add(atkdata.AttackId,atkdata.AttackName,atkdata.AttackInfo,url);
             }
@@ -138,11 +138,28 @@ namespace HackNet.Game
             AttackData atkdata = AttackData.GetAttackData(Int32.Parse(e.CommandArgument.ToString()));
             AttackTypeHeaderLbl.Text = atkdata.AttackName;
             AttackTypeInfo.Text = atkdata.AttackInfo;
-            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic1, 0, atkdata.AttackPic1.Length);
+            string atkpicurl = Convert.ToBase64String(atkdata.AttackPic, 0, atkdata.AttackPic.Length);
             AtkTypePic1.ImageUrl = "data:image/png;base64," + atkpicurl;
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
 
+        //Temp
+        protected void btnAtkInfo_Click(object sender, EventArgs e)
+        {
+            AttackData atkdata = new AttackData();
+            atkdata.AttackName = AtkName.Text;
+            atkdata.AttackInfo = AtkInfo.Text;
+
+            Stream strm = UploadAttack1.PostedFile.InputStream;
+            BinaryReader br = new BinaryReader(strm);
+            atkdata.AttackPic = br.ReadBytes((int)strm.Length);
+
+            using (DataContext db = new DataContext())
+            {
+                db.AttackData.Add(atkdata);
+                db.SaveChanges();
+            }
+        }
     }
 }
