@@ -40,6 +40,26 @@
         }
     </style>
 
+    <div id="popupConfirmation" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <asp:Label ID="headerconvert" runat="server" Text="*WARNING*" ForeColor="Blue" Font-Size="Large"></asp:Label>
+                                    </div>
+                                    <div class="modal-body" style="color: black;">
+                                        <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button id="updateFromModal" CssClass="btn btn-default" runat="server" OnClick="mcButton_Click" Text="Continue" />
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
     <div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Market - Currency</h3>
@@ -88,27 +108,10 @@
 <!-- ============================= -->
 
                         <asp:Button ID="openButton" class="btn btn-info btn-lg" data-toggle="modal" 
-                            data-target="#popupConfirmation" runat="server" type="button" Text="OPen Modal"/>
+                            data-target="#popupConfirmation" runat="server" type="button" onclick="mcButton_Click" Text="OPen Modal"/>
+                                <asp:LinkButton runat="server" ID="EditItemBTn" OnCommand="mcButton_Click" Text="Edit" />
                         
-                        <div id="popupConfirmation" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <asp:Label ID="headerconvert" runat="server" Text="*WARNING*" ForeColor="Blue" Font-Size="Large"></asp:Label>
-                                    </div>
-                                    <div class="modal-body" style="color: black;">
-                                        <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <asp:Button CssClass="btn btn-default" runat="server" OnClick="mcButton_Click" Text="Continue" />
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+                        
                         <!-- KTODO: change alert to modal-->
 
                     </div>

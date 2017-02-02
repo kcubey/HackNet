@@ -33,8 +33,6 @@ namespace HackNet.Payment
             Users u = CurrentUser.Entity();
             MailClient mc = new MailClient(u.Email);
             mc.Subject = "Hacknet Purchase";
-            mc.AddLine("addline");
-            mc.AddLine("This content was User-Generated from ");
             mc.AddLine("Thank you for buying " + message + "!");
             mc.AddLine("Your Transaction Id is " + transactionDetails);
             mc.AddLine("We hope you enjoy your gaming experience with us.");
@@ -46,11 +44,13 @@ namespace HackNet.Payment
 
             transactionId.Text = transactionDetails;
             packageDetailsLbl.Text = message;
-            //Session["packageId"] = null;
-            //Session["packageprice"] = null;
-
         }
-
+        protected void Page_Unload()
+        {
+            Session.Abandon();
+            Debug.WriteLine("package id: " + Session["packageId"]);
+            Debug.WriteLine("package price: " + Session["packageprice"]);
+        }
 
     }
 }

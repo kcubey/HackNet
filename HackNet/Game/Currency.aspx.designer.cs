@@ -13,6 +13,33 @@ namespace HackNet.Game {
     public partial class Currency {
         
         /// <summary>
+        /// headerconvert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label headerconvert;
+        
+        /// <summary>
+        /// messageLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label messageLabel;
+        
+        /// <summary>
+        /// updateFromModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button updateFromModal;
+        
+        /// <summary>
         /// ConversionPanel control.
         /// </summary>
         /// <remarks>
@@ -76,22 +103,13 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Button openButton;
         
         /// <summary>
-        /// headerconvert control.
+        /// EditItemBTn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label headerconvert;
-        
-        /// <summary>
-        /// messageLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label messageLabel;
+        protected global::System.Web.UI.WebControls.LinkButton EditItemBTn;
         
         /// <summary>
         /// warning control.
