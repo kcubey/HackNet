@@ -15,8 +15,6 @@ namespace HackNet.Game.Gameplay
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
-
             if (Session["MissionData"] as MissionData == null)
             {
                 Response.Redirect("../Missions.aspx");
@@ -222,7 +220,9 @@ namespace HackNet.Game.Gameplay
                         db.SaveChanges();
                         
                         Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity(),db));
-
+                        ItemNameLbl.Text = i.ItemName;
+                        ItemBonusLbl.Text = i.ItemBonus.ToString();
+                        ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
