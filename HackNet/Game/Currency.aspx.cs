@@ -196,18 +196,7 @@ namespace HackNet.Game
 
                 */
 
-        //modified from btnAddListing_Click
-        protected void btnAddPackage_Click(object sender, EventArgs e)
-        {
-            Packages pklist = new Packages();
-
-            using (DataContext db = new DataContext())
-            {
-                db.Packages.Add(pklist);
-                db.SaveChanges();
-            }
-        }
-
+        
         protected void ViewMore_Command(object sender, CommandEventArgs e)
         {
             int id = int.Parse(e.CommandArgument.ToString());
