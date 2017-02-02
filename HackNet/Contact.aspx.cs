@@ -10,15 +10,9 @@ using HackNet.Data;
 
 namespace HackNet {
     public partial class Contact : Page {
-        protected void Page_Load(object sender, EventArgs e) {
-
-            string message = "this is a message";
-            Users u = CurrentUser.Entity();
-            MailClient mc = new MailClient(u.Email);
-            mc.Subject = "hellosubj";
-            mc.AddLine("addline" +message);
-            mc.AddLine("This content was User-Generated from ");
-            mc.Send("HackNet Team", "go to website", "www.pussy.com");
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {

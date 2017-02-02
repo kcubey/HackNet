@@ -58,6 +58,21 @@
 
                             </div>
                         </div>
+<!-- ===========AJAX Modal============-->
+    <asp:Button ID="btnOpenPopUp" runat="server" text="Open PopUp" />
+     <asp:Label ID="lblHidden" runat="server" Text=""></asp:Label>
+        <ajaxToolkit:ModalPopupExtender ID="mpePopUp" runat="server" TargetControlID="lblHidden" PopupControlID="divPopUp" BackgroundCssClass="modalBackground"></ajaxToolkit:ModalPopupExtender>
+
+        <div id="divPopUp" class="pnlBackGround">
+     <div id="Header" class="header" >MyHeader</div>
+     <div id="main" class="main">Main PopUp </div>
+     <div id="buttons">
+          <div id="DivbtnOK" class="buttonOK"><asp:Button id="btnOk" runat="server" text="Ok" /></div>
+          <div id="Divbtncancel" class="buttonOK"><asp:Button id="btnCancel" runat="server" text="Cancel" /></div>
+     </div>
+</div>
+
+<!-- =========== End AJAX Modal=============-->
 
 
     <div class="panel panel-default">
