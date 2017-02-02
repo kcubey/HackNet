@@ -23,6 +23,11 @@ namespace HackNet.Admin
             GPUList.DataSource = LoadInventory(4);
             GPUList.DataBind();
 
+            MemoryList.DataSource = LoadInventory(2);
+            MemoryList.DataBind();
+
+            PowerSupList.DataSource = LoadInventory(3);
+            PowerSupList.DataBind();
 
         }
 
@@ -40,7 +45,7 @@ namespace HackNet.Admin
             {
                 imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
                 url = "data:image/png;base64," + imageurlstring;
-                dt.Rows.Add(i.ItemName, url,i.ItemId);
+                dt.Rows.Add(i.ItemName, url, i.ItemId);
             }
 
             //ProcessList.DataSource = dt;
@@ -97,12 +102,12 @@ namespace HackNet.Admin
 
         }
 
-        
+
         protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
-                Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()),-1,false,db);
+                Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
                 i.ItemName = EditItemName.Text;
                 i.ItemDesc = EditItemDesc.Text;
                 i.ItemPrice = int.Parse(EditItemPrice.Text);
@@ -111,6 +116,19 @@ namespace HackNet.Admin
                 db.SaveChanges();
             }
         }
-        
+
+        protected void DeletePartsInfoBtn_Click(object sender, EventArgs e)
+        {
+            using (DataContext db = new DataContext())
+            {
+                Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
+                i.ItemName = EditItemName.Text;
+                i.ItemDesc = EditItemDesc.Text;
+                i.ItemPrice = int.Parse(EditItemPrice.Text);
+                i.ItemBonus = int.Parse(EditItemBonus.Text);
+
+                db.SaveChanges();
+            }
+        }
     }
 }
