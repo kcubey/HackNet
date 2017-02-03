@@ -9,7 +9,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public partial class PackageItems
+	public partial class PackItem
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int PackageId { get; set; }
@@ -22,14 +22,14 @@ namespace HackNet.Data
 		// Foreign key references
 		public Items Item { get; set; }
 
-        internal static PackageItems GetPackageItems(int pkgId)
+        internal static PackItem GetPackageItems(int pkgId)
         {
-            PackageItems pkgItems = new Data.PackageItems();
+            PackItem pkgItems = new Data.PackItem();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    pkgItems = (from i in db.PackageItems where i.PackageId == pkgId select i).FirstOrDefault();
+                    pkgItems = (from i in db.PackItem where i.PackageId == pkgId select i).FirstOrDefault();
                 }
             }
             catch (EntityCommandExecutionException)

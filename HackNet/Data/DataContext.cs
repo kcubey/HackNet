@@ -35,7 +35,7 @@ namespace HackNet.Data
 		public DbSet<Items> Items { get; set; }
 		public DbSet<InventoryItem> InventoryItem { get; set; }
 		public DbSet<Pack> Package { get; set; }
-		public DbSet<PackageItems> PackageItems { get; set; }
+		public DbSet<PackItem> PackItem { get; set; }
 		public DbSet<MarketListings> MarketListings { get; set; }
         
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
