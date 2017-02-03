@@ -19,6 +19,7 @@
 				<ul class="nav navbar-nav">
 					<li><asp:HyperLink runat="server" Text="Admin Dashboard" NavigateUrl="~/Admin/Default" /></li>
 
+					<li><asp:HyperLink runat="server" Text="User Inventory Management" NavigateUrl="~/Admin/UserInventory" /></li>
 					<li><asp:HyperLink runat="server" Text="Mission Management" NavigateUrl="~/Admin/MissionMgmt" /></li>
 					<li><asp:HyperLink runat="server" Text="Item Management" NavigateUrl="~/Admin/ItemMgmt" /></li>
 					<li><asp:HyperLink runat="server" Text="Package Management" NavigateUrl="~/Admin/PackageMgmt" /></li>
