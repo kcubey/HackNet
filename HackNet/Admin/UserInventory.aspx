@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminPanelContent" runat="server">
     <div class="panel panel-default">
         <div class="panel-header">
-            <asp:Label runat="server" Text="User Iventory Panel" Font-Size="Large" Style="padding: 2%;" ForeColor="White"></asp:Label>
+            <asp:Label runat="server" Text="User Inventory Panel" Font-Size="Large" Style="padding: 2%;" ForeColor="White"></asp:Label>
         </div>
         <div class="panel-body" style="color: black; background-color: black;">
             <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="AdminUsersView" OnLoad="AdminUsersView_Load">
@@ -15,6 +15,9 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+        </div>
+        <div class="panel-header">
+            <asp:Label runat="server" ID="UserInvLbl" Font-Size="Large" Style="padding: 2%;" ForeColor="White"></asp:Label>
         </div>
         <div class="panel-body" style="color: black; background-color: black;">
             <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="UserInvView">

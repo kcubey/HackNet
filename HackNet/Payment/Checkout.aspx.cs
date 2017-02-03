@@ -20,9 +20,9 @@ namespace HackNet.Payment
         { 
             if (Session["packageId"] is string && Session["packageprice"] is string && Session["transactionId"] is string)
             {
-                string packageName = Session["packageId"].ToString();
-                string packagePrice = Session["packageprice"].ToString();
-                transactionDetails = Session["transactionId"].ToString();
+                string packageName = Session["packageId"] as string;
+                string packagePrice = Session["packageprice"] as string;
+                transactionDetails = Session["transactionId"] as string;
                 message = "Package " + packageName + " at $" + packagePrice;
             }else
             {

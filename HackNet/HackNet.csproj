@@ -509,7 +509,7 @@
     <Compile Include="Data\Conversation.cs" />
     <Compile Include="Data\SecureMessage.cs" />
     <Compile Include="Data\MissionData.cs" />
-    <Compile Include="Data\PackageItems.cs" />
+    <Compile Include="Data\PackItem.cs" />
     <Compile Include="Data\Pack.cs" />
     <Compile Include="Data\UserIPList.cs" />
     <Compile Include="Data\UserKeyStore.cs" />

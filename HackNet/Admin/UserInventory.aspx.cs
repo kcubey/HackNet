@@ -15,7 +15,8 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
+           
         }
 
        
@@ -48,25 +49,39 @@ namespace HackNet.Admin
         }
         protected void ViewUserInventory_Command(object sender, CommandEventArgs e)
         {
-            int id = int.Parse(e.CommandArgument.ToString());
+            int userid = int.Parse(e.CommandArgument.ToString());
+            Cache["UserId"] = userid;
             List<Items> usrItemList = new List<Items>();
+            Users u;
             using (DataContext db=new DataContext())
             {
-                /*
-                Users u = Users.FindByEmail();
-                List<Items> usrItemList = ItemLogic.GetUserInvItems(u,-1,db);
-
-                */
+                u = db.Users.Find(userid);
+                usrItemList = ItemLogic.GetUserInvItems(u,-1,db); 
             }
-            foreach(Items i in usrItemList)
-            {
-                DataTable dt = new DataTable();
 
-            }
+            UserInvLbl.Text = u.UserName+"'s Inventory";
+            ItemLogic.LoadUserManageInvetory(usrItemList, UserInvView);
         }
         protected void DeleteItem_Command(object sender, CommandEventArgs e)
         {
+            if(Cache["UserId"] is int)
+            {
+                int itemid = int.Parse(e.CommandArgument.ToString());
+                int userid = int.Parse(Cache["UserId"].ToString());
+                using (DataContext db = new DataContext())
+                {
+                    InventoryItem invitem = db.InventoryItem.Where(x => x.UserId ==userid && x.ItemId==itemid).FirstOrDefault();
+                    db.InventoryItem.Remove(invitem);
+                    db.SaveChanges();
+                }
+                
+            }
+            else
+            {
 
+            }
+           
+            
         }
     }
 }

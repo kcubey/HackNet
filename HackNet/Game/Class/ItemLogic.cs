@@ -87,7 +87,29 @@ namespace HackNet.Game.Class
             }
 
         }
-
+        
+        public static void LoadUserManageInvetory(List<Items> usrItemList,GridView gv)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ItemID", typeof(int));
+            dt.Columns.Add("Item Name", typeof(string));
+            dt.Columns.Add("Item Bonus", typeof(int));
+            if (usrItemList.Count != 0)
+            {
+                foreach (Items i in usrItemList)
+                {
+                    dt.Rows.Add(i.ItemId, i.ItemName, i.ItemBonus);
+                }
+                gv.DataSource = dt;
+                gv.DataBind();
+            }else
+            {
+                gv.DataSource = null;
+                gv.DataBind();
+            }
+           
+        }
+        
         /// <summary>
         /// Get the Default Parts
         /// </summary>
