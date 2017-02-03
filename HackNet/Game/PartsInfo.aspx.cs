@@ -64,7 +64,7 @@ namespace HackNet.Game
         {
             if (Session["Item"] is Items)
             {
-                Items item = (Items)Session["Item"];
+                Items item = Session["Item"] as Items;
                 System.Diagnostics.Debug.WriteLine("Item ID: " + item.ItemId);
                 ItemLogic.AddItemToInventory(CurrentUser.Entity(), item.ItemId);
 

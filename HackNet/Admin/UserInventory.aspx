@@ -17,9 +17,15 @@
             </asp:GridView>
         </div>
         <div class="panel-body" style="color: black; background-color: black;">
-            <asp:DataList runat="server" ID="UserInventoryList">
-
-            </asp:DataList>
+            <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="UserInvView">
+                <Columns>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:LinkButton runat="server" CssClass="btn btn-default" Text="Delete" ID="DeleteItem" OnCommand="DeleteItem_Command" CommandArgument='<%#Bind("ItemID") %>'></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
         </div>
         <div class="panel-footer" style="background-color: #262526;">
         </div>
