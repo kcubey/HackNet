@@ -38,7 +38,7 @@ namespace HackNet.Payment
             Form.ID = "checkout-form";
             try
             {
-                Packages pkg = Session["pkg"] as Packages;
+                Pack pkg = Session["pkg"] as Pack;
                 PackageItems pkgItems = Session["pkgItems"] as PackageItems;
                 if (pkg == null)
                 {
