@@ -56,11 +56,9 @@ namespace HackNet.Auth
 
 		private void LoginSuccess() {
 
-			SessionValidate();
-
 			string returnurl = Session["ReturnUrl"] as string;
 			HttpCookie cookie = Session["Cookie"] as HttpCookie;
-			string email = Session["LoginSuccess"] as string;
+			string email = Session["PasswordSuccess"] as string;
 			int userid = (int) Session["UserId"];
 
 			AuthLogger.Instance.TOTPSuccess(email, userid);
