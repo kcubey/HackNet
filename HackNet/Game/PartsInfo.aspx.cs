@@ -62,14 +62,19 @@ namespace HackNet.Game
 
         protected void BuyBtn_Click(object sender, EventArgs e)
         {
-            Items item = (Items)Session["Item"];
-            System.Diagnostics.Debug.WriteLine("Item ID: "+item.ItemId);
-            ItemLogic.AddItemToInventory(CurrentUser.Entity(),item.ItemId);
+            if (Session["Item"] is Items)
+            {
+                Items item = (Items)Session["Item"];
+                System.Diagnostics.Debug.WriteLine("Item ID: " + item.ItemId);
+                ItemLogic.AddItemToInventory(CurrentUser.Entity(), item.ItemId);
 
-            ItemNameLbl.Text = item.ItemName;
-            ItemPriceLbl.Text = item.ItemPrice.ToString();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
-
+                ItemNameLbl.Text = item.ItemName;
+                ItemPriceLbl.Text = item.ItemPrice.ToString();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
+            }else
+            {
+                Response.Redirect("Parts.aspx", true);
+            }
         }
 
         protected void ExitBtn_Click(object sender, EventArgs e)
