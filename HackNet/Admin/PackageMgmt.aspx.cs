@@ -30,7 +30,7 @@ namespace HackNet.Admin
                 dt.Rows.Add(i.ItemName, i.ItemId);
             }
             return dt;
-            //KTODO: Change to package related
+            //KTODO: ADd for edit package
         }
 
         protected void btnAddPackage_Click(object sender, EventArgs e)
