@@ -14,26 +14,20 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try {
+            if(Session["Item"] is Items)
+            {
                 Items item = Session["Item"] as Items;
-                if (item == null)
-                {
-                    Response.Redirect("Parts.aspx", true);
-                }
-                else
-                {
+               
                     ItemName.Text = item.ItemName;
                     ItemTypeLbl.Text = FindItemType((int)item.ItemType);
                     ItemPrice.Text = item.ItemPrice.ToString();
                     ItemDesc.Text = item.ItemDesc.ToString();
                     string imageurlstring = Convert.ToBase64String(item.ItemPic, 0, item.ItemPic.Length);
                     ItemImageLoaded.ImageUrl = "data:image/png;base64," + imageurlstring;
-                }
             }
-            catch (Exception ggez)
+            else
             {
-                Console.WriteLine("Error : " + ggez);
-                throw new Exception("Error Code : " + ggez);
+                Response.Redirect("Parts.aspx", true);
             }
         }
 
