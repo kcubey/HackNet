@@ -125,15 +125,16 @@
                         <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
                             <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                             <br />
-                            <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text="100" Font-Size="Smaller"></asp:Label>
+                            <asp:Label ID="packageQuantity" CssClass="redirectLbl" runat="server" Text="50" Font-Size="Smaller"></asp:Label>
                             <asp:Label ID="packageItem" CssClass="redirectLbl" runat="server" Text="Bucks" Font-Size="Smaller"></asp:Label>
                             <br />
                             <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                             <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
                             <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1000"></asp:Label>
+                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1.99"></asp:Label>
                         </asp:LinkButton>
 
+<!-- ================= repeater ====================== -->
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
                                 <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
@@ -150,14 +151,7 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
-
-
-                        <asp:LinkButton ID="LinkButton2" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                            <asp:Image ID="Image2" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br /><br />
-                            <asp:Label ID="Label2" CssClass="redirectLbl" runat="server" Text="Package 2 - SGD$100"></asp:Label>
-                        </asp:LinkButton>
-                        </div>
+                    </div>
 <!-- ================= end Packages tab ====================== -->
 
 <!-- REpeater-->

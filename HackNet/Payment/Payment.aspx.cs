@@ -9,7 +9,8 @@ using Braintree;
 using System.Configuration;
 using System.Net;
 using System.Diagnostics;
-
+using HackNet.Data;
+using HackNet.Security;
 
 namespace HackNet.Payment
 {
@@ -95,6 +96,19 @@ namespace HackNet.Payment
                     //get transaction id
                     string transactionId = result.Target.Id.ToString();
                     Session["transactionId"] = transactionId;
+
+                    int addBuck = Convert.ToInt32(Session["itemQuantity"]);
+
+                    using (DataContext db = new DataContext())
+                    {
+                        Users u = CurrentUser.Entity(false, db);
+                        int currBuck = u.ByteDollars;
+                        int newBuck = currBuck + addBuck;
+                        u.ByteDollars = newBuck;
+
+                        db.SaveChanges();
+                        //dbBuck = u.ByteDollars;
+                    }
                 }
                 catch
                 {
@@ -138,9 +152,19 @@ namespace HackNet.Payment
                 string transactionId = result.Target.Id.ToString();
                 Session["transactionId"] = transactionId;
 
-                //KTODO = Add in code to add items to invo
+                int addBuck = Convert.ToInt32(Session["itemQuantity"]);
 
-                Response.Redirect("~/payment/checkout", true);
+                using (DataContext db = new DataContext())
+                {
+                    Users u = CurrentUser.Entity(false, db);
+                    int currBuck = u.ByteDollars;
+                    int newBuck = currBuck + addBuck;
+                    u.ByteDollars = newBuck;
+
+                    db.SaveChanges();
+                    //dbBuck = u.ByteDollars;
+
+                    Response.Redirect("~/payment/checkout", true);
             }
             else
             {
