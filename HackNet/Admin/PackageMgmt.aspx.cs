@@ -34,7 +34,7 @@ namespace HackNet.Admin
 
         protected void btnAddPackage_Click(object sender, EventArgs e)
         {
-            Packages pkg = new Packages();
+            Pack pkg = new Pack();
             pkg.Description = pkgDesc.Text;
 
             string strPrice = pkgPrice.Text;
@@ -42,7 +42,7 @@ namespace HackNet.Admin
 
             using (DataContext db = new DataContext())
             {
-                db.Packages.Add(pkg);
+                db.Package.Add(pkg);
                 db.SaveChanges();
                 Session["pkgId"] = pkg.PackageId;
             }

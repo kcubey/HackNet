@@ -9,7 +9,7 @@ using System.Web;
 
 namespace HackNet.Data
 {
-	public partial class Packages
+	public partial class Pack
 	{
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int PackageId { get; set; }
@@ -18,14 +18,14 @@ namespace HackNet.Data
 
         public double Price { get; set; }
 
-        internal static List<Packages> GetPackageList()
+        internal static List<Pack> GetPackageList()
         {
-            List<Packages> pkgList = new List<Packages>();
+            List<Pack> pkgList = new List<Pack>();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-					var query = from i in db.Packages select i;
+					var query = from i in db.Package select i;
 					return query.ToList();
                 }
             }
@@ -35,14 +35,14 @@ namespace HackNet.Data
             }
         }
 
-        internal static Packages GetPackage(int id)
+        internal static Pack GetPackage(int id)
         {
-            Packages pkg = new Data.Packages();
+            Pack pkg = new Data.Pack();
             try
             {
                 using (DataContext db = new DataContext())
                 {
-                    pkg = (from i in db.Packages where i.PackageId == id select i).FirstOrDefault();
+					pkg = (from i in db.Package where i.PackageId == id select i).FirstOrDefault();
                 }
             }
             catch (EntityCommandExecutionException)
