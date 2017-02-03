@@ -86,7 +86,6 @@
                                                     <asp:LinkButton runat="server" ID="itemName" OnCommand="SelectedItem_Command" 
                                                         CommandArgument='<%# Eval("ItemID")%>' forecolor="Black" Text='<%#Eval("ItemName") %>' />
                                                 </div>
-                                        
                                             </ItemTemplate>
                                         </asp:DataList>
                                     </div>
@@ -124,57 +123,19 @@
                     </div>
 <!-- ================= END TAB 1 CONTENT  ================== -->                    
 
-<!-- ========== START TAB 2 CONTENT - ADD PACKAGE ========== -->                    
+<!-- ========== START TAB 2 CONTENT - EDIT PACKAGE ========== -->                    
                     <div class="tab-pane fade" id="tab2default">
-                        <h2>Items</h2>
-
-                        <asp:DataList ID="DataList1" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                        <h2>Edit Package</h2>
+                        Click on the package to edit.
+                        <asp:Label runat="server" Text="Item List: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                        <asp:DataList ID="EditPackage" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
-                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large"></asp:Label>
-                                <br />
-                                <asp:Image ID="itemImg" runat="server" 
-                                    Width="200px" Height="200px"     
-                                    ImageUrl='<%#Eval("ItemPic")%>'/>
-                                <br />
-                                <asp:LinkButton runat="server" ID="EditItemBTn" OnCommand="EditItemBTn_Command" CommandArgument='<%# Eval("ItemID")%>' Text="Edit" />
-                            </ItemTemplate>
-                        </asp:DataList>
-
-                        <div class="container-fluid" style="color: black; background-color: gray;">
-                            <h2>Add Item</h2>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="ItemName"></asp:TextBox>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:DropDownList runat="server" ID="ItemTypeList">
-                                    <asp:ListItem Value="1">Processor</asp:ListItem>
-                                    <asp:ListItem Value="4">Graphic Card</asp:ListItem>
-                                    <asp:ListItem Value="2">Memory</asp:ListItem>
-                                    <asp:ListItem Value="3">Power Supply</asp:ListItem>
-                                    <asp:ListItem Value="0">Booster</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:FileUpload ID="UploadPhoto" runat="server" />
-                                <asp:Image ID="imgViewFile" runat="server" />
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="ItemDesc" TextMode="MultiLine"></asp:TextBox>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="ItemPrice"></asp:TextBox>
-                            </div>
-                            <div class="form-group row">
-                                <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="ItemStat"></asp:TextBox>
-                            </div>
-                            <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
-                        </div>
+                                <div style="margin: 10px;">
+                                    <asp:LinkButton runat="server" ID="itemName" OnCommand="SelectedItem_Command" 
+                                        CommandArgument='<%# Eval("ItemID")%>' forecolor="Black" Text='<%#Eval("ItemName") %>' />
+                                </div>
+                             </ItemTemplate>
+                         </asp:DataList>
                     </div>
 <!-- ================= END TAB 2 CONTENT  ================== -->                                        
                 </div>

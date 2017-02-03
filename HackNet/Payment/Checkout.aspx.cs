@@ -25,7 +25,7 @@ namespace HackNet.Payment
                 transactionDetails = Session["transactionId"].ToString();
                 message = "Package " + packageName + " at $" + packagePrice;
             }
-            catch
+            catch(Exception NullReferenceException)
             {
                 Response.Redirect("~/game/currency", true);
             }

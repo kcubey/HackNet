@@ -17,6 +17,11 @@ namespace HackNet.Payment
     public partial class Payment : System.Web.UI.Page
     {
         protected Decimal price;
+        protected int pkgId;
+        protected int pkgItemId;
+        protected string pkgItemName;
+        protected int pkgItemQuantity;
+        protected double pkgPrice;
 
         protected BraintreeGateway gateway = new BraintreeGateway
         {
@@ -33,7 +38,19 @@ namespace HackNet.Payment
             Form.ID = "checkout-form";
             try
             {
-                packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+                Packages pkg = Session["pkg"] as Packages;
+                PackageItems pkgItems = Session["pkgItems"] as PackageItems;
+                if (pkg == null)
+                {
+                    Response.Redirect("~/game/currency", true);
+                }
+                pkgId = pkg.PackageId;
+                pkgPrice = pkg.Price;
+                pkgItemQuantity = pkgItems.Quantity;
+                pkgItemId = pkgItems.ItemId;
+
+                //packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+                packageDetailsLbl.Text = "Package " + pkgId + " - $" + pkgPrice;
             }
             catch
             {
@@ -68,7 +85,7 @@ namespace HackNet.Payment
         {
             try
             {
-                price = Convert.ToDecimal(Session["packageprice"]);
+                price = Convert.ToDecimal(pkgPrice);
             }
             catch
             {
@@ -97,17 +114,31 @@ namespace HackNet.Payment
                     string transactionId = result.Target.Id.ToString();
                     Session["transactionId"] = transactionId;
 
-                    int addBuck = Convert.ToInt32(Session["itemQuantity"]);
+                    Items i = HackNet.Data.Items.GetItem(pkgItemId);
+                    pkgItemName = i.ItemName.ToString();
+                    int addItemQty = pkgItemQuantity;
 
                     using (DataContext db = new DataContext())
                     {
                         Users u = CurrentUser.Entity(false, db);
-                        int currBuck = u.ByteDollars;
-                        int newBuck = currBuck + addBuck;
-                        u.ByteDollars = newBuck;
-
+                        if (pkgItemName == "Buck")
+                        {
+                            int currBuck = u.ByteDollars;
+                            int newBuck = currBuck + addItemQty;
+                            u.ByteDollars = newBuck;
+                        }
+                        else if (pkgItemName == "Coin")
+                        {
+                            int currCoin = u.Coins;
+                            int newCoin = currCoin + addItemQty;
+                            u.Coins = newCoin;
+                        }
+                        else
+                        {
+                            Game.Class.ItemLogic.AddItemToInventory(u, pkgItemId, addItemQty);
+                        }
+                        
                         db.SaveChanges();
-                        //dbBuck = u.ByteDollars;
                     }
                 }
                 catch
@@ -130,7 +161,7 @@ namespace HackNet.Payment
         {
             try
             {
-                price = Convert.ToDecimal(Session["packageprice"]);
+                price = Convert.ToDecimal(pkgPrice);
             }
             catch
             {
@@ -165,6 +196,7 @@ namespace HackNet.Payment
                     //dbBuck = u.ByteDollars;
 
                     Response.Redirect("~/payment/checkout", true);
+                }
             }
             else
             {

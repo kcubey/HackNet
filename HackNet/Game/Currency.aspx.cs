@@ -113,7 +113,10 @@ namespace HackNet.Game
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
 
-            int packagePrice = int.Parse(e.CommandArgument.ToString());
+            Packages pkg = Data.Packages.GetPackage(packageId);
+            PackageItems pkgItems = Data.PackageItems.GetPackageItems(packageId);
+            Session["pkg"] = pkg;
+            Session["pkgItems"] = pkgItems;
             //KTODO change to retreive package id & price from button
 
             Session["packageId"] = packageId;
