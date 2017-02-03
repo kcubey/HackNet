@@ -18,9 +18,7 @@ namespace HackNet.Admin
            
            
         }
-
-       
-
+        
         protected void AdminUsersView_Load(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
