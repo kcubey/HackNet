@@ -113,7 +113,7 @@ namespace HackNet.Game
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
 
-            Packages pkg = Data.Packages.GetPackage(packageId);
+            Pack pkg = Data.Pack.GetPackage(packageId);
             PackageItems pkgItems = Data.PackageItems.GetPackageItems(packageId);
             Session["pkg"] = pkg;
             Session["pkgItems"] = pkgItems;

@@ -34,7 +34,7 @@ namespace HackNet.Data
         public DbSet<SecureMessage> SecureMessage { get; set; }
 		public DbSet<Items> Items { get; set; }
 		public DbSet<InventoryItem> InventoryItem { get; set; }
-		public DbSet<Packages> Packages { get; set; }
+		public DbSet<Pack> Package { get; set; }
 		public DbSet<PackageItems> PackageItems { get; set; }
 		public DbSet<MarketListings> MarketListings { get; set; }
         
