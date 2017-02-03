@@ -117,16 +117,22 @@ namespace HackNet.Admin
             }
         }
 
+        protected void ConfirmDeletePartsInfoBtn_Click(object sender, EventArgs e)
+        {
+            
+            ConfirmDeleteItemName.Text = EditItemName.Text;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "DeleteItemModal", "showDeleteItemModal()", true);
+        }
+
         protected void DeletePartsInfoBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
                 Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
-                i.ItemName = EditItemName.Text;
-                i.ItemDesc = EditItemDesc.Text;
-                i.ItemPrice = int.Parse(EditItemPrice.Text);
-                i.ItemBonus = int.Parse(EditItemBonus.Text);
-
+                InventoryItem inv = db.InventoryItem.Where(x => x.ItemId == i.ItemId).FirstOrDefault();
+                db.InventoryItem.Remove(inv);
+                db.Items.Remove(i);
                 db.SaveChanges();
             }
         }

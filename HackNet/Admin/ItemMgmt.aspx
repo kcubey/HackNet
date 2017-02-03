@@ -5,8 +5,29 @@
         function showEditItemModal() {
             $('#EditItemModal').modal('show');
         }
+        function showDeleteItemModal() {
+            $('#DeleteItemModal').modal('show');
+        }
     </script>
-
+    <!-- DeleteItem -->
+    <div id="DeleteItemModal" class="modal fade" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <asp:Label runat="server" Text="Confirm Delete Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
+            </div>
+            <div class="modal-body" style="color: black">
+                <p>Are you sure you want to permamently delete this</p>
+                <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmDeleteItemName"></asp:Label>
+            </div>
+            <div class="modal-footer">
+                <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="DeleteItemBtn" OnClick="DeletePartsInfoBtn_Click" />
+                <asp:Button runat="server" CssClass="btn btn-default" Text="No" ID="Close"  data-dismiss="modal"  />
+            </div>
+        </div>
+    </div>
+    <!-- EditItem -->
     <div id="EditItemModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -79,7 +100,7 @@
                 <!-- Buttons -->
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" OnClick="UpdatePartsInfoBtn_Click" />
-                    <asp:Button runat="server" CssClass="btn btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="DeletePartsInfoBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="ConfirmDeletePartsInfoBtn_Click" />
                 </div>
             </div>
         </div>

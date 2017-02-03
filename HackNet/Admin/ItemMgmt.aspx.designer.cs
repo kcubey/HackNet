@@ -13,6 +13,33 @@ namespace HackNet.Admin {
     public partial class ItemMgmt {
         
         /// <summary>
+        /// ConfirmDeleteItemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ConfirmDeleteItemName;
+        
+        /// <summary>
+        /// DeleteItemBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteItemBtn;
+        
+        /// <summary>
+        /// Close control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Close;
+        
+        /// <summary>
         /// EditItemName control.
         /// </summary>
         /// <remarks>
