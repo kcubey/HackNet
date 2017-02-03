@@ -48,14 +48,14 @@ namespace HackNet.Admin
                 Session["pkgId"] = pkg.PackageId;
             }
 
-            PackageItems pkgItems = new PackageItems();
+            PackItem pkgItems = new PackItem();
             pkgItems.PackageId = Convert.ToInt32(Session["pkgId"]);
             pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
             pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
             
             using (DataContext db = new DataContext())
             {
-                db.PackageItems.Add(pkgItems);
+                db.PackItem.Add(pkgItems);
                 db.SaveChanges();
             }
         }

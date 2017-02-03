@@ -19,6 +19,7 @@ namespace HackNet.Data
 
 		protected override void Seed(DataContext context)
 		{
+
 			if (!context.Users.Any())
 				InitUsers().ForEach(s => context.Users.AddOrUpdate(s));
             /*
