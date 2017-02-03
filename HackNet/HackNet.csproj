@@ -507,6 +507,7 @@
     <Compile Include="Data\Machines.cs" />
     <Compile Include="Data\MarketListings.cs" />
     <Compile Include="Data\Conversation.cs" />
+    <Compile Include="Data\MissionLog.cs" />
     <Compile Include="Data\SecureMessage.cs" />
     <Compile Include="Data\MissionData.cs" />
     <Compile Include="Data\PackItem.cs" />
@@ -514,6 +515,7 @@
     <Compile Include="Data\UserIPList.cs" />
     <Compile Include="Data\UserKeyStore.cs" />
     <Compile Include="Data\Users.cs" />
+    <Compile Include="Loggers\MissionLogLogic.cs" />
     <Compile Include="Public\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
