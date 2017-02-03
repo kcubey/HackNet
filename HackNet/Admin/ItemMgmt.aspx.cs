@@ -14,24 +14,49 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadAdminItem(-1, AllItemList);
-
+            if (Cache["AllItemList"] as List<Items> ==null)
+            {
+                List<Items> allItems = Data.Items.GetItems(-1);
+                Cache["AllItemList"] = allItems;
+                LoadAdminItem(-1, allItems, AllItemList);
+                LoadAdminItem(1, allItems, ProcessItemList);
+                LoadAdminItem(4, allItems, GraphicItemList);
+                LoadAdminItem(2, allItems, MemoryItemList);
+                LoadAdminItem(3, allItems, PowerItemList);
+            }else
+            {
+                List<Items> allItems = Cache["AllItemList"] as List<Items>;
+                LoadAdminItem(-1, allItems, AllItemList);
+                LoadAdminItem(1, allItems, ProcessItemList);
+                LoadAdminItem(4, allItems, GraphicItemList);
+                LoadAdminItem(2, allItems, MemoryItemList);
+                LoadAdminItem(3, allItems, PowerItemList);
+            }
         }
-        private void LoadAdminItem(int itemType,DataList dl)
+        private void LoadAdminItem(int itemType,List<Items> itemlist,DataList dl)
         {
-
-            List<Items> ilist = Data.Items.GetItems(itemType);
             string imageurlstring;
             string url;
             DataTable dt = new DataTable();
             dt.Columns.Add("ItemName", typeof(string));
             dt.Columns.Add("ItemPic", typeof(string));
             dt.Columns.Add("ItemID", typeof(int));
-            foreach (Items i in ilist)
+            foreach (Items i in itemlist)
             {
-                imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                url = "data:image/png;base64," + imageurlstring;
-                dt.Rows.Add(i.ItemName, url, i.ItemId);
+                if (itemType != -1)
+                {
+                    if (i.ItemType == (ItemType)itemType)
+                    {
+                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                        url = "data:image/png;base64," + imageurlstring;
+                        dt.Rows.Add(i.ItemName, url, i.ItemId);
+                    }
+                }else
+                {
+                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(i.ItemName, url, i.ItemId);
+                }
             }
 
             dl.DataSource = dt;
