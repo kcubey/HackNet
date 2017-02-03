@@ -114,7 +114,7 @@
                                 <asp:LinkButton r@unat="s@erver" ID="EditItemBTn" OnCommand="mcButton_Click" Text="Edit" />
 -->
                         
-<!-- KTODO: change alert to modal-->
+<!-- KTODO minor: change alert to modal-->
 
 
 <!-- ================= Packages tab ====================== -->
@@ -141,8 +141,8 @@
                                         OnCommand="buyPackage_Command"  CommandArgument='<%#Eval("PackageId")%>' Font-Underline="False">
                                     <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                                     <br />
-                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
-                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="" Font-Size="Smaller"></asp:Label>
+                             <!--       <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='< % #Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>-->
+                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                                         <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>

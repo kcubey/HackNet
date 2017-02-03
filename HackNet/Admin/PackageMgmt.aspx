@@ -131,8 +131,15 @@
                         <asp:DataList ID="EditPackage" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <div style="margin: 10px;">
-                                    <asp:LinkButton runat="server" ID="itemName" OnCommand="SelectedItem_Command" 
-                                        CommandArgument='<%# Eval("ItemID")%>' forecolor="Black" Text='<%#Eval("ItemName") %>' />
+                                    <asp:LinkButton runat="server" ID="itemName" OnCommand="EditPackage_Command" 
+                                        CommandArgument='<%# Eval("PackageID")%>' forecolor="Black">
+                                        <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="Description" Font-Size="Smaller"></asp:Label>
+                                        <br />
+                                        <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                                            <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
+                                            <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
+                                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='<%#Eval("Price")%>'></asp:Label>
+                                    </asp:LinkButton>
                                 </div>
                              </ItemTemplate>
                          </asp:DataList>

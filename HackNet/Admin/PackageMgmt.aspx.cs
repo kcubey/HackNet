@@ -30,6 +30,7 @@ namespace HackNet.Admin
                 dt.Rows.Add(i.ItemName, i.ItemId);
             }
             return dt;
+            //KTODO: Change to package related
         }
 
         protected void btnAddPackage_Click(object sender, EventArgs e)
@@ -76,31 +77,11 @@ namespace HackNet.Admin
             selectedItemLbl.Text = i.ItemName.ToString();
         }
 
-        /*
-        protected void btnAddItem_Click(object sender, EventArgs e)
+        protected void EditPackage_Command(object sender, CommandEventArgs e)
         {
-            Items item = new Items();
-            item.ItemName = ItemName.Text;
-            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
-
-            Stream strm = UploadPhoto.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            item.ItemPic = br.ReadBytes((int)strm.Length);
-            item.ItemDesc = ItemDesc.Text;
-            item.ItemPrice = Int32.Parse(ItemPrice.Text);
-            item.ItemBonus = Int32.Parse(ItemStat.Text);
-            using (DataContext db = new DataContext())
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-            }
-        }
-        */
-        protected void EditItemBTn_Command(object sender, CommandEventArgs e)
-        {
-            int itemid = int.Parse(e.CommandArgument.ToString());
-            Items i = HackNet.Data.Items.GetItem(itemid);
-            Cache["ItemID"] = itemid;
+            int packageId = int.Parse(e.CommandArgument.ToString());
+            Items i = HackNet.Data.Items.GetItem(packageId);
+            Cache["ItemID"] = packageId;
             EditItemName.Text = i.ItemName.ToString();
             EditItemType.Text = i.ItemType.ToString();
             EditItemDesc.Text = i.ItemDesc.ToString();
@@ -108,6 +89,7 @@ namespace HackNet.Admin
             EditItemBonus.Text = i.ItemBonus.ToString();
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "EditItemModal", "showEditItemModal()", true);
+            //KTODO: Change to package related
         }
 
         protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
@@ -122,6 +104,7 @@ namespace HackNet.Admin
 
                 db.SaveChanges();
             }
+            //KTODO: Change ti package related
         }
 
     }
