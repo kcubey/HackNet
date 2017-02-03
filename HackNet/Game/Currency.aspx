@@ -137,12 +137,12 @@
 <!-- ================= repeater ====================== -->
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
-                                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
+                                <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" 
+                                        OnCommand="buyPackage_Command"  CommandArgument='<%#Eval("PackageId")%>' Font-Underline="False">
                                     <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
                                     <br />
-                                    <!--<asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" r//unat="s@erver" Text='< %#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>-->
-                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
-                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text=" bucks" Font-Size="Smaller"></asp:Label>
+                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
+                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="" Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                                         <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
@@ -151,15 +151,14 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
+<!-- KTODO: make packages dynamic:
+        change imageurl-->
+<!-- ================= end repeater ====================== -->
                     </div>
 <!-- ================= end Packages tab ====================== -->
 
-<!-- REpeater-->
-                        
 
-<!-- KTODO: make packages dynamic -->
-                    
-
+                 
                 </div>
             </div>
         </div>

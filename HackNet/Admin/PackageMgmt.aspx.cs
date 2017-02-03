@@ -72,11 +72,11 @@ namespace HackNet.Admin
         {
             int itemid = int.Parse(e.CommandArgument.ToString());
             Session["itemId"] = itemid;
-            Debug.WriteLine("itemid: " + itemid);
             Items i = HackNet.Data.Items.GetItem(itemid);
             selectedItemLbl.Text = i.ItemName.ToString();
         }
 
+        /*
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
             Items item = new Items();
@@ -95,7 +95,7 @@ namespace HackNet.Admin
                 db.SaveChanges();
             }
         }
-
+        */
         protected void EditItemBTn_Command(object sender, CommandEventArgs e)
         {
             int itemid = int.Parse(e.CommandArgument.ToString());
