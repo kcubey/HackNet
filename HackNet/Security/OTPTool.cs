@@ -90,23 +90,6 @@ namespace HackNet.Security
 			set { _hmac = value; }
 		}
 
-
-		private byte[] HmacPart1
-		{
-			get { return _hmac.Take(Offset).ToArray(); }
-		}
-
-		private byte[] HmacPart2
-		{
-			get { return _hmac.Skip(Offset).Take(4).ToArray(); }
-		}
-
-		private byte[] HmacPart3
-		{
-			get { return _hmac.Skip(Offset + 4).ToArray(); }
-		}
-
-
 		private int Offset
 		{
 			get { return _offset; }
