@@ -209,6 +209,7 @@
     <Content Include="Admin\Logs.aspx" />
     <Content Include="Admin\MissionMgmt.aspx" />
     <Content Include="Admin\PackageMgmt.aspx" />
+    <Content Include="Admin\UserInventory.aspx" />
     <Content Include="anonymousedited.jpg" />
     <Content Include="App_Data\basic.html" />
     <Content Include="App_Data\HackNet.log" />
@@ -423,6 +424,13 @@
     </Compile>
     <Compile Include="Admin\PackageMgmt.aspx.designer.cs">
       <DependentUpon>PackageMgmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserInventory.aspx.cs">
+      <DependentUpon>UserInventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserInventory.aspx.designer.cs">
+      <DependentUpon>UserInventory.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
