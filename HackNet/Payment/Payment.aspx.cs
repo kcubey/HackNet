@@ -39,7 +39,7 @@ namespace HackNet.Payment
             try
             {
                 Pack pkg = Session["pkg"] as Pack;
-                PackageItems pkgItems = Session["pkgItems"] as PackageItems;
+                PackItem pkgItems = Session["pkgItems"] as PackItem;
                 if (pkg == null)
                 {
                     Response.Redirect("~/game/currency", true);

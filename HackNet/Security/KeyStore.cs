@@ -8,6 +8,7 @@ using System.Web;
 
 namespace HackNet.Security
 {
+	[Serializable]
 	public class KeyStore
 	{
 		internal byte[] aesKey { get; set; }
