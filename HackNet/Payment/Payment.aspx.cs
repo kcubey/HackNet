@@ -71,7 +71,7 @@ namespace HackNet.Payment
             if (IsPostBack)
             {
                 checkoutClickA();
-                //KTODO: Change to modal then checkout
+                //KTODO minor: Change to modal then checkout
             }
 
         }
@@ -139,13 +139,13 @@ namespace HackNet.Payment
                         }
                         
                         db.SaveChanges();
+                        //KTODO = Check items/bucks are added
                     }
                 }
                 catch
                 {
                     Response.Redirect("~/game/currency", true);
                 }
-                //KTODO = Add in code to add items to invo
 
                 Response.Redirect("~/payment/checkout", true);
             }
