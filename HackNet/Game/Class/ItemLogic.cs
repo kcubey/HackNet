@@ -160,7 +160,7 @@ namespace HackNet.Game.Class
                 return true;
             }
         }
-
+        
         /// <summary>
         /// Using probability to get a random Item for reward
         /// </summary>
