@@ -35,28 +35,28 @@ namespace HackNet.Admin
 
         protected void btnAddPackage_Click(object sender, EventArgs e)
         {
-            Pack pkg = new Pack();
-            pkg.Description = pkgDesc.Text;
-
-            string strPrice = pkgPrice.Text;
-            pkg.Price = Convert.ToDouble(strPrice.Replace(" ", ""));
-
             using (DataContext db = new DataContext())
             {
+                Pack pkg = new Pack();
+                pkg.Description = pkgDesc.Text;
+
+                string strPrice = pkgPrice.Text;
+                pkg.Price = Convert.ToDouble(strPrice.Replace(" ", ""));
+
                 db.Package.Add(pkg);
                 db.SaveChanges();
-                Session["pkgId"] = pkg.PackageId;
-            }
 
-            PackageItems pkgItems = new PackageItems();
-            pkgItems.PackageId = Convert.ToInt32(Session["pkgId"]);
-            pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
-            pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
-            
-            using (DataContext db = new DataContext())
-            {
+                Session["pkgId"] = pkg.PackageId;
+
+                PackageItems pkgItems = new PackageItems();
+                pkgItems.PackageId = Convert.ToInt32(Session["pkgId"]);
+                pkgItems.ItemId = Convert.ToInt32(Session["itemId"]);
+                pkgItems.Quantity = Convert.ToInt32(pkgQuantity.Text);
+
                 db.PackageItems.Add(pkgItems);
                 db.SaveChanges();
+
+                Debug.WriteLine("package added");
             }
         }
 
@@ -76,7 +76,7 @@ namespace HackNet.Admin
             Items i = HackNet.Data.Items.GetItem(itemid);
             selectedItemLbl.Text = i.ItemName.ToString();
         }
-
+        
         protected void EditPackage_Command(object sender, CommandEventArgs e)
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
@@ -94,6 +94,7 @@ namespace HackNet.Admin
 
         protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
         {
+            /*
             using (DataContext db = new DataContext())
             {
                 Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
@@ -104,8 +105,9 @@ namespace HackNet.Admin
 
                 db.SaveChanges();
             }
+            */
             //KTODO: Change ti package related
         }
-
+        
     }
 }
