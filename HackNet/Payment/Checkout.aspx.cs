@@ -17,19 +17,18 @@ namespace HackNet.Payment
         protected string message;
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            try
+        { 
+            if (Session["packageId"] is string && Session["packageprice"] is string && Session["transactionId"] is string)
             {
                 string packageName = Session["packageId"].ToString();
                 string packagePrice = Session["packageprice"].ToString();
                 transactionDetails = Session["transactionId"].ToString();
                 message = "Package " + packageName + " at $" + packagePrice;
-            }
-            catch(Exception NullReferenceException)
+            }else
             {
                 Response.Redirect("~/game/currency", true);
             }
-
+               
             Users u = CurrentUser.Entity();
             MailClient mc = new MailClient(u.Email);
             mc.Subject = "Hacknet Purchase";
