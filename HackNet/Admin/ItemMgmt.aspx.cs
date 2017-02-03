@@ -14,24 +14,10 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataList1.DataSource = LoadInventory(-1);
-            DataList1.DataBind();
-
-            ProcessList.DataSource = LoadInventory(1);
-            ProcessList.DataBind();
-
-            GPUList.DataSource = LoadInventory(4);
-            GPUList.DataBind();
-
-            MemoryList.DataSource = LoadInventory(2);
-            MemoryList.DataBind();
-
-            PowerSupList.DataSource = LoadInventory(3);
-            PowerSupList.DataBind();
+            LoadAdminItem(-1, AllItemList);
 
         }
-
-        private DataTable LoadInventory(int itemType)
+        private void LoadAdminItem(int itemType,DataList dl)
         {
 
             List<Items> ilist = Data.Items.GetItems(itemType);
@@ -48,46 +34,11 @@ namespace HackNet.Admin
                 dt.Rows.Add(i.ItemName, url, i.ItemId);
             }
 
-            //ProcessList.DataSource = dt;
-            //ProcessList.DataBind();
-            return dt;
+            dl.DataSource = dt;
+            dl.DataBind();
         }
 
-
-        protected void btnAddItem_Click(object sender, EventArgs e)
-        {
-            Items item = new Items();
-            item.ItemName = ItemName.Text;
-            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
-
-            Stream strm = UploadPhoto.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            item.ItemPic = br.ReadBytes((int)strm.Length);
-            item.ItemDesc = ItemDesc.Text;
-            item.ItemPrice = Int32.Parse(ItemPrice.Text);
-            item.ItemBonus = Int32.Parse(ItemStat.Text);
-            using (DataContext db = new DataContext())
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-            }
-        }
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
-            if (UploadPhoto.HasFile)
-            {
-                Stream strm = UploadPhoto.PostedFile.InputStream;
-                BinaryReader br = new BinaryReader(strm);
-                // this is the thing u need to throw into the database
-                byte[] imageByte = br.ReadBytes((int)strm.Length);
-
-                string base64string = Convert.ToBase64String(imageByte, 0, imageByte.Length);
-                imgViewFile.ImageUrl = "data:image/png;base64," + base64string;
-
-            }
-        }
-
-        protected void EditItemBTn_Command(object sender, CommandEventArgs e)
+        protected void EditItemBtn_Command(object sender, CommandEventArgs e)
         {
             int itemid = int.Parse(e.CommandArgument.ToString());
             Items i = HackNet.Data.Items.GetItem(itemid);
@@ -103,6 +54,7 @@ namespace HackNet.Admin
         }
 
 
+        // Edit of items
         protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
@@ -119,9 +71,7 @@ namespace HackNet.Admin
 
         protected void ConfirmDeletePartsInfoBtn_Click(object sender, EventArgs e)
         {
-            
             ConfirmDeleteItemName.Text = EditItemName.Text;
-
             ScriptManager.RegisterStartupScript(this, this.GetType(), "DeleteItemModal", "showDeleteItemModal()", true);
         }
 
@@ -131,7 +81,11 @@ namespace HackNet.Admin
             {
                 Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
                 InventoryItem inv = db.InventoryItem.Where(x => x.ItemId == i.ItemId).FirstOrDefault();
-                db.InventoryItem.Remove(inv);
+                if (inv != null)
+                {
+                    db.InventoryItem.Remove(inv);
+                }
+
                 db.Items.Remove(i);
                 db.SaveChanges();
             }
