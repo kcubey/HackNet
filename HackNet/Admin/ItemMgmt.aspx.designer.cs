@@ -139,49 +139,49 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.Button DeletePartsInfoBtn;
         
         /// <summary>
-        /// DataList1 control.
+        /// AllItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList DataList1;
+        protected global::System.Web.UI.WebControls.DataList AllItemList;
         
         /// <summary>
-        /// ProcessList control.
+        /// ProcessItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList ProcessList;
+        protected global::System.Web.UI.WebControls.DataList ProcessItemList;
         
         /// <summary>
-        /// GPUList control.
+        /// GraphicItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList GPUList;
+        protected global::System.Web.UI.WebControls.DataList GraphicItemList;
         
         /// <summary>
-        /// MemoryList control.
+        /// MemoryItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList MemoryList;
+        protected global::System.Web.UI.WebControls.DataList MemoryItemList;
         
         /// <summary>
-        /// PowerSupList control.
+        /// PowerItemList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList PowerSupList;
+        protected global::System.Web.UI.WebControls.DataList PowerItemList;
         
         /// <summary>
         /// ItemName control.
@@ -211,15 +211,6 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.FileUpload UploadPhoto;
         
         /// <summary>
-        /// imgViewFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgViewFile;
-        
-        /// <summary>
         /// ItemDesc control.
         /// </summary>
         /// <remarks>
@@ -245,14 +236,5 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ItemStat;
-        
-        /// <summary>
-        /// btnAddItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddItem;
     }
 }
