@@ -54,6 +54,7 @@
                         <li><a href="#memory" data-toggle="tab">Memory</a></li>
                         <li><a href="#powersupply" data-toggle="tab">Power Supply</a></li>
                         <li><a href="#booster" data-toggle="tab">Booster</a></li>
+                        <li><a href="#useritems" data-toggle="tab">Your Items</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-9" style="float: left; height: 580px; overflow: scroll; overflow-x: hidden;">
@@ -70,7 +71,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton CssClass="viewMoreButton" runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton CssClass="viewMoreButton" runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -86,7 +87,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -102,7 +103,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -118,7 +119,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -134,7 +135,7 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>
@@ -150,7 +151,23 @@
                                             Width="200px" Height="200px"
                                             ImageUrl='<%#Eval("ItemPic")%>' />
                                         <br />
-                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemNo") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                        <asp:LinkButton runat="server" ID="ViewMore" CommandArgument='<%#Eval("ItemId") %>' OnCommand="ViewMore_Command" Text="View more"></asp:LinkButton>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:DataList>
+                        </div>
+                        <!--User Items-->
+                        <div class="tab-pane fade in" id="useritems">
+                            <asp:DataList ID="UserInvList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                                <ItemTemplate>
+                                    <div style="margin: 3px;">
+                                        <asp:Label ID="itemName" runat="server" Text='<%#Eval("ItemName") %>' ForeColor="White" Font-Size="Large" Height="50px"></asp:Label>
+                                        <br />
+                                        <asp:Image ID="itemImg" runat="server"
+                                            Width="200px" Height="200px"
+                                            ImageUrl='<%#Eval("ItemPic")%>' />
+                                        <br />
+                                        <asp:LinkButton runat="server" ID="SellItem" CommandArgument='<%#Eval("ItemId") %>' OnCommand="SellItem_Command" Text="Sell Item"></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:DataList>

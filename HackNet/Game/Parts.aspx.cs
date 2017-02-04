@@ -1,4 +1,7 @@
 ﻿using HackNet.Data;
+using HackNet.Game;
+using HackNet.Game.Class;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,49 +17,23 @@ namespace HackNet.Game
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadInventory(PartsList,-1);
-            LoadInventory(ProcessList, 1);
-            LoadInventory(graphicslist, 4);
-            LoadInventory(memorylist, 2);
-            LoadInventory(powersuplist, 3);
-            LoadInventory(boosterlist, 0);
-        }
-
-        private void LoadInventory(DataList dl,int itemType)
-        {
-
-            List<Items> ilist = Data.Items.GetItems(itemType);
-            try {
-                if (ilist.Count != 0)
-                {
-                    string imageurlstring;
-                    string url;
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add("ItemNo", typeof(int));
-                    dt.Columns.Add("ItemName", typeof(string));
-                    dt.Columns.Add("ItemPic", typeof(string));
-                    foreach (Items i in ilist)
-                    {
-                        imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                        url = "data:image/png;base64," + imageurlstring;
-                        dt.Rows.Add(i.ItemId, i.ItemName, url);
-                    }
-
-                    dl.DataSource = dt;
-                    dl.DataBind();
-                }
-                else
-                {
-                    dl.DataSource = null;
-                    dl.DataBind();
-                }
-            }
-            catch (Exception ggez)
+            using (DataContext db = new DataContext())
             {
-                Console.WriteLine("Error " + ggez);
-                throw new Exception("Error Code : " + ggez);
+                
+                List<Items> ilist = Data.Items.GetItems(-1);
+                List<Items> userList = ItemLogic.GetUserInvItems(CurrentUser.Entity(),-1,db);
+
+                ItemLogic.LoadInventory(PartsList, ilist, -1);
+                ItemLogic.LoadInventory(ProcessList, ilist, 1);
+                ItemLogic.LoadInventory(graphicslist, ilist, 4);
+                ItemLogic.LoadInventory(memorylist, ilist, 2);
+                ItemLogic.LoadInventory(powersuplist, ilist, 3);
+                ItemLogic.LoadInventory(boosterlist, ilist, 0);
+                ItemLogic.LoadInventory(UserInvList, userList, -1);
             }
         }
+
+      
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -107,6 +84,11 @@ namespace HackNet.Game
 
             //Retrieve Selected Value from Dropdown
             lblSelectedValue.Text = ddlParts.SelectedValue;
+        }
+
+        protected void SellItem_Command(object sender, CommandEventArgs e)
+        {
+                
         }
     }
 }
