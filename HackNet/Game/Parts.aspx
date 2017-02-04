@@ -56,7 +56,7 @@
                         <li><a href="#useritems" data-toggle="tab">Your Items</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-9" style="float: left; height: 580px; overflow: scroll; overflow-x: hidden;">
+                <div class="col-xs-9" style="float: left; height: 900px; overflow: scroll; overflow-x: hidden;">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <!--ALL-->
