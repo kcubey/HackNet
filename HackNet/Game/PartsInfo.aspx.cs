@@ -22,6 +22,7 @@ namespace HackNet.Game
                     ItemTypeLbl.Text = FindItemType((int)item.ItemType);
                     ItemPrice.Text = item.ItemPrice.ToString();
                     ItemDesc.Text = item.ItemDesc.ToString();
+                    ItemBooster.Text = item.ItemBonus.ToString();
                     string imageurlstring = Convert.ToBase64String(item.ItemPic, 0, item.ItemPic.Length);
                     ItemImageLoaded.ImageUrl = "data:image/png;base64," + imageurlstring;
             }

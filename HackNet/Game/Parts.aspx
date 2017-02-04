@@ -53,7 +53,6 @@
                         <li><a href="#graphicscard" data-toggle="tab">Graphics Card</a></li>
                         <li><a href="#memory" data-toggle="tab">Memory</a></li>
                         <li><a href="#powersupply" data-toggle="tab">Power Supply</a></li>
-                        <li><a href="#booster" data-toggle="tab">Booster</a></li>
                         <li><a href="#useritems" data-toggle="tab">Your Items</a></li>
                     </ul>
                 </div>

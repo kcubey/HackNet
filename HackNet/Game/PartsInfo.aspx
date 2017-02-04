@@ -95,7 +95,7 @@
             <asp:Image runat="server" ID="ItemImageLoaded" Width="200px" Height="200px"/>
         </div>
         <div style="float:left; width:76%; color:#83F52C;" > <!-- Right -->
-            <asp:Label runat="server" ID="ItemTypeLbl"></asp:Label>
+            <asp:Label runat="server" ID="ItemTypeLbl"></asp:Label>&nbsp;+&nbsp;<asp:Label runat="server" ID="ItemBooster"></asp:Label>
             <br />
             <asp:Label runat="server" ID="ItemName"></asp:Label>
             <br />
