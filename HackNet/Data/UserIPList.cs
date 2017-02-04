@@ -31,7 +31,7 @@ namespace HackNet.Data
         
         internal static bool CheckUserIPList(string IP, Users u, DataContext db)
         {
-            var query = from uip in db.UserIPList where uip.UserId == u.UserID select uip;
+			var query = from uip in db.UserIPList where uip.UserId == u.UserID select uip;
 
             List<UserIPList> uipList = query.ToList();
             var match = uipList.FirstOrDefault(IPToChk =>IPToChk.UserIPStored.Contains(IP));
