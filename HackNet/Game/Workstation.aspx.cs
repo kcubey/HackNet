@@ -18,7 +18,7 @@ namespace HackNet.Game
             using (DataContext db = new DataContext())
             {
                 // Machines.DefaultMachine(CurrentUser.Entity(), db);
-                Machines m = Machines.GetUserMachine(CurrentUser.Entity(),db);
+                Machines m = Machines.GetUserMachine(CurrentUser.Entity().UserID,db);
                 Session["Machines"] = m;
                 List<Items> InvItmList = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1,db);
                 

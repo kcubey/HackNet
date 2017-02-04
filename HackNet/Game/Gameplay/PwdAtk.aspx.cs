@@ -219,7 +219,7 @@ namespace HackNet.Game.Gameplay
                         u.TotalExp = u.TotalExp + mis.MissionExp;
                         db.SaveChanges();
                         
-                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity(),db));
+                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID,db));
                         ItemNameLbl.Text = i.ItemName;
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);

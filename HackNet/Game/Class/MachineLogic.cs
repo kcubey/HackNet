@@ -19,7 +19,7 @@ namespace HackNet.Game.Class
         {
             using (DataContext db = new DataContext())
             {
-                Machines mac = Machines.GetUserMachine(CurrentUser.Entity(),db);
+                Machines mac = Machines.GetUserMachine(CurrentUser.Entity().UserID,db);
                 // Name of Machine Part 
                 mac.MachineProcessor = m.MachineProcessor;
                 mac.MachineGraphicCard = m.MachineGraphicCard;
@@ -62,12 +62,29 @@ namespace HackNet.Game.Class
             }
         }
 
+        /// <summary>
+        /// Calculate probability for game
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         internal static int CalculateMachineLuck(Machines m)
         {
             double totalstat =200;
             double playerstat = m.Attack + m.Defence + m.Health + m.Speed;
             int ratio = (int)Math.Round((double)(100 * playerstat) / totalstat);
             return ratio;
+        }
+
+        internal static bool CheckInstalledParts(int UserID,int ItemID)
+        {
+            List<string> ChkPartList;
+            using(DataContext db=new DataContext())
+            {
+                Machines m = Machines.GetUserMachine(UserID,db);
+                ChkPartList = (from mac in db.Machines where mac.UserId == UserID select mac.MachineProcessor).ToList();
+            }
+
+            return false;
         }
     }
 }

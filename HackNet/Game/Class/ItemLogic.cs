@@ -88,6 +88,11 @@ namespace HackNet.Game.Class
 
         }
         
+        /// <summary>
+        /// Load Users inventory for admin to manage
+        /// </summary>
+        /// <param name="usrItemList"></param>
+        /// <param name="gv"></param>
         public static void LoadUserManageInvetory(List<Items> usrItemList,GridView gv)
         {
             DataTable dt = new DataTable();
@@ -110,6 +115,17 @@ namespace HackNet.Game.Class
            
         }
         
+        public static void DeleteItemFromUserInv(int UserID,int ItemID)
+        {
+            using(DataContext db=new DataContext())
+            {
+                InventoryItem invitem = db.InventoryItem.Where(x => x.UserId == UserID && x.ItemId == ItemID).FirstOrDefault();
+                db.InventoryItem.Remove(invitem);
+                db.SaveChanges();
+            }
+        }
+
+
         /// <summary>
         /// Get the Default Parts
         /// </summary>

@@ -67,6 +67,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox ItemQuantityTxtbox;
         
         /// <summary>
+        /// QuantityValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator QuantityValidator;
+        
+        /// <summary>
         /// AddItemToUserInv control.
         /// </summary>
         /// <remarks>

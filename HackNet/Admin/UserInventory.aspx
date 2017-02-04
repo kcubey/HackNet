@@ -31,6 +31,8 @@
             </asp:GridView>
         </div>
         <div class="panel-footer" style="background-color: #262526;">
+            <h2>Add Item to user inventory</h2>
+            <br />
             <div class="form-group row">
                 <asp:Label runat="server" Text="UserID: " CssClass="col-xs-3 col-form-label" />
                 <asp:TextBox runat="server" ID="UserIDTxtbox" Width="280px" ForeColor="Black"></asp:TextBox>
@@ -43,10 +45,14 @@
             <div class="form-group row">
                 <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label" />
                 <asp:TextBox runat="server" ID="ItemQuantityTxtbox" Width="280px" ForeColor="Black" />
+                <asp:RegularExpressionValidator runat="server" ID="QuantityValidator"
+                     ForeColor="Red"
+                     ErrorMessage="Please Enter Only Numbers"
+                     ControlToValidate="ItemQuantityTxtbox"
+                     ValidationExpression="^\d+$" />
             </div>
-            <div class="form-group row">
+            <br />
                 <asp:Button runat="server" ID="AddItemToUserInv" OnClick="AddItemToUserInv_Click" CssClass="btn btn-default" Text="Add Item" />
-            </div>
         </div>
     </div>
 

@@ -56,13 +56,13 @@ namespace HackNet.Data
             
         }
 
-        internal static Machines GetUserMachine(Users user, DataContext db)
+        internal static Machines GetUserMachine(int UserID, DataContext db)
         {
             Machines machines;          
             try
             {
                 machines = (from m in db.Machines
-                            where m.UserId == user.UserID
+                            where m.UserId == UserID
                             select m).FirstOrDefault();
             }
             catch (EntityCommandExecutionException)
