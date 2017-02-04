@@ -115,5 +115,24 @@ namespace HackNet.Admin
                 db.SaveChanges();
             }
         }
+
+        protected void btnAddItem_Click(object sender, EventArgs e)
+        {
+            Items item = new Items();
+            item.ItemName = ItemName.Text;
+            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
+
+            Stream strm = UploadPhoto.PostedFile.InputStream;
+            BinaryReader br = new BinaryReader(strm);
+            item.ItemPic = br.ReadBytes((int)strm.Length);
+            item.ItemDesc = ItemDesc.Text;
+            item.ItemPrice = Int32.Parse(ItemPrice.Text);
+            item.ItemBonus = Int32.Parse(ItemStat.Text);
+            using (DataContext db = new DataContext())
+            {
+                db.Items.Add(item);
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -4,6 +4,9 @@
         function ShowTransactionBox() {
             $('#PartTransactionModel').modal('show');
         }
+        function showNotEnoughCoinsItemModal() {
+            $('#NotEnoughCoinsItemModal').modal('show');
+        }
     </script>
     <style>
         /* Google Fonts */
@@ -35,7 +38,26 @@
           to{border-right-color: transparent;}
         }
     </style>
+    <!-- Not Enough Coins Model -->
+    <div id="NotEnoughCoinsItemModal" class="modal fade" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <asp:Label runat="server" Text="Not Enough Coins" ForeColor="Black" Font-Size="Larger"></asp:Label>
+            </div>
+            <div class="modal-body" style="color: black">
+                <p>Insufficent Funds</p>
+                <p>ProTip : Play more missions</p>
+            </div>
+            <div class="modal-footer">
+                <asp:Button runat="server" CssClass="btn btn-default" Text="No" ID="Close" data-dismiss="modal" />
+            </div>
+        </div>
+    </div>
+    <!-- Part Transaction Model -->
     <div id="PartTransactionModel" class="modal fade" role="dialog">
+        <!-- Modal content -->
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
