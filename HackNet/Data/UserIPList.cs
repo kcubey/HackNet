@@ -11,8 +11,12 @@ namespace HackNet.Data
 {
     public class UserIPList
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int EntryId { get; set; }
+
+        [Required]
         public int UserId { get; set; }
+
         [Required]
         public string UserIPStored { get; set; }
 
