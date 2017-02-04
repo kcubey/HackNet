@@ -19,7 +19,7 @@ namespace HackNet.Game.Class
         {
             using (DataContext db = new DataContext())
             {
-                Machines mac = Machines.GetUserMachine(CurrentUser.Entity().UserID,db);
+                Machines mac = Machines.GetUserMachine(CurrentUser.Entity().UserID, db);
                 // Name of Machine Part 
                 mac.MachineProcessor = m.MachineProcessor;
                 mac.MachineGraphicCard = m.MachineGraphicCard;
@@ -31,27 +31,27 @@ namespace HackNet.Game.Class
                 mac.Attack = m.Attack;
                 mac.Defence = m.Defence;
                 mac.Speed = m.Speed;
-                
+
                 db.SaveChanges();
             }
 
         }
 
-        
+
         /// <summary>
         /// Load Item into Machine Upgrade Panel
         /// </summary>
         /// <param name="ddList"></param>
         /// <param name="InvList"></param>
         /// <param name="itemType"></param>
-        internal static void LoadItemIntoList(DropDownList ddList,List<Items> InvList,int itemType)
+        internal static void LoadItemIntoList(DropDownList ddList, List<Items> InvList, int itemType)
         {
             if (InvList.Count != 0)
             {
                 ddList.Items.Add("===Select Upgrade===");
                 foreach (Items i in InvList)
                 {
-                    if(i.ItemType==(ItemType)itemType)
+                    if (i.ItemType == (ItemType)itemType)
                         ddList.Items.Add(new ListItem(i.ItemName, i.ItemBonus.ToString()));
                 }
             }
@@ -69,22 +69,27 @@ namespace HackNet.Game.Class
         /// <returns></returns>
         internal static int CalculateMachineLuck(Machines m)
         {
-            double totalstat =200;
+            double totalstat = 200;
             double playerstat = m.Attack + m.Defence + m.Health + m.Speed;
             int ratio = (int)Math.Round((double)(100 * playerstat) / totalstat);
             return ratio;
         }
 
-        internal static bool CheckInstalledParts(int UserID,int ItemID)
+        internal static bool CheckInstalledParts(int UserID, int ItemID, DataContext db)
         {
-            List<string> ChkPartList;
-            using(DataContext db=new DataContext())
+            Items i = Items.GetItem(ItemID);
+            Machines m = Machines.GetUserMachine(UserID, db);
+            if (m.MachineProcessor == i.ItemName ||
+                m.MachineMemory == i.ItemName ||
+                m.MachineGraphicCard == i.ItemName ||
+                m.MachinePowerSupply == i.ItemName)
             {
-                Machines m = Machines.GetUserMachine(UserID,db);
-                ChkPartList = (from mac in db.Machines where mac.UserId == UserID select mac.MachineProcessor).ToList();
+                return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 }

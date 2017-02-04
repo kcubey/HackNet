@@ -65,14 +65,15 @@ namespace HackNet.Admin
             {
                 int itemid = int.Parse(e.CommandArgument.ToString());
                 int userid = int.Parse(Cache["UserId"].ToString());
-                using (DataContext db = new DataContext())
+                if (ItemLogic.DeleteItemFromUserInv(userid, itemid))
                 {
-                    InventoryItem invitem = db.InventoryItem.Where(x => x.UserId ==userid && x.ItemId==itemid).FirstOrDefault();
-                    db.InventoryItem.Remove(invitem);
-                    db.SaveChanges();
+                    // Success in deleting
+                    Response.Redirect("UserInventory.aspx", true);
                 }
-                Response.Redirect("UserInventory.aspx", true);
-
+                else
+                {
+                    // Part in used cannot delete
+                }
             }
             else
             {

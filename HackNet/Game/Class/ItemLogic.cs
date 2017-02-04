@@ -115,13 +115,21 @@ namespace HackNet.Game.Class
            
         }
         
-        public static void DeleteItemFromUserInv(int UserID,int ItemID)
+        public static bool DeleteItemFromUserInv(int UserID,int ItemID)
         {
+            
             using(DataContext db=new DataContext())
             {
-                InventoryItem invitem = db.InventoryItem.Where(x => x.UserId == UserID && x.ItemId == ItemID).FirstOrDefault();
-                db.InventoryItem.Remove(invitem);
-                db.SaveChanges();
+                if (!MachineLogic.CheckInstalledParts(UserID, ItemID,db))
+                {
+                    InventoryItem invitem = db.InventoryItem.Where(x => x.UserId == UserID && x.ItemId == ItemID).FirstOrDefault();
+                    db.InventoryItem.Remove(invitem);
+                    db.SaveChanges();
+                    return true;
+                }else
+                {
+                    return false;
+                }
             }
         }
 
