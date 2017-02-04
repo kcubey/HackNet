@@ -20,8 +20,10 @@ namespace HackNet.Game
                
                     ItemName.Text = item.ItemName;
                     ItemTypeLbl.Text = FindItemType((int)item.ItemType);
+                    ItemTypeMeaning.Text = FindItemTypeMeaning((int)item.ItemType);
                     ItemPrice.Text = item.ItemPrice.ToString();
                     ItemDesc.Text = item.ItemDesc.ToString();
+                    ItemBooster.Text = item.ItemBonus.ToString();
                     string imageurlstring = Convert.ToBase64String(item.ItemPic, 0, item.ItemPic.Length);
                     ItemImageLoaded.ImageUrl = "data:image/png;base64," + imageurlstring;
             }
@@ -31,23 +33,50 @@ namespace HackNet.Game
             }
         }
 
+        private string FindItemTypeMeaning(int itemtype)
+        {
+            if (itemtype == 1)
+            {
+                return " HP ";
+            }
+            else if (itemtype == 2)
+            {
+                return " Attack ";
+            }
+            else if (itemtype == 3)
+            {
+                return " Defense ";
+            }
+            else if (itemtype == 4)
+            {
+                return " Speed ";
+            }
+            else if (itemtype == 0)
+            {
+                return "Booster";
+            }
+            else
+            {
+                return "";
+            }
+        }
         private string FindItemType(int itemtype)
         {
             if (itemtype == 1)
             {
-                return "Processor";
+                return "Processor ";
             }
             else if (itemtype == 2)
             {
-                return "Random Access Memory";
+                return "Random Access Memory ";
             }
             else if (itemtype == 3)
             {
-                return "Power Supply";
+                return "Power Supply ";
             }
             else if (itemtype == 4)
             {
-                return "Graphics Processing Unit";
+                return "Graphics Processing Unit ";
             }
             else if (itemtype == 0)
             {

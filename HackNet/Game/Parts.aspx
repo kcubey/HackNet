@@ -36,7 +36,41 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
+    <script type="text/javascript">
+        function showSellItemModal() {
+            $('#SellItemModal').modal('show');
+        }
+    </script>
 
+    <!-- SellItem -->
+    <div id="SellItemModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" Text="Confirm Sell Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <p>Are you sure you want to sell this</p>
+                    <br />
+                    <br />
+                    <!-- This ConfirmSellItem name does not work -->
+                    <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemName"></asp:Label>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <p><span style="color:red;">WARNING</span> : THIS <span style="text-decoration:underline; color:darkred;">CANNOT</span> BE UNDONE</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Not sure what to do with this OnClick="SellItemBtn_Click" It is just broken because method has no defintion-->
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="SellItemBtn" OnClick="SellItemBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="No" ID="Close" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -53,11 +87,10 @@
                         <li><a href="#graphicscard" data-toggle="tab">Graphics Card</a></li>
                         <li><a href="#memory" data-toggle="tab">Memory</a></li>
                         <li><a href="#powersupply" data-toggle="tab">Power Supply</a></li>
-                        <li><a href="#booster" data-toggle="tab">Booster</a></li>
                         <li><a href="#useritems" data-toggle="tab">Your Items</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-9" style="float: left; height: 580px; overflow: scroll; overflow-x: hidden;">
+                <div class="col-xs-9" style="float: left; height: 900px; overflow: scroll; overflow-x: hidden;">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <!--ALL-->

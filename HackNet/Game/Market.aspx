@@ -60,16 +60,6 @@
 
     <fieldset>
         <legend>Market</legend>
-        <!--
-        <div>Parts</div>
-            <div>CPU</div>
-            <div>Power Supply</div>
-            <div>Graphics</div>
-            <div>RAM</div>
-        <div>Currency</div>
-            <div>Coins</div>
-            <div>ByteDollar</div>
-        -->
         
         
         <!--Left div--><!--  GeneratedSite.css textarea max width  -->
