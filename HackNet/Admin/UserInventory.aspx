@@ -31,6 +31,15 @@
             </asp:GridView>
         </div>
         <div class="panel-footer" style="background-color: #262526;">
+            <div class="form-group row">
+                <asp:Label runat="server" Text="UserID: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                <asp:TextBox runat="server" ID="UserIDTxtbox" Width="280px" ForeColor="Black"></asp:TextBox>
+            </div>
+            <div class="form-group row">
+                <asp:Label runat="server" Text="Items: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                <asp:DropDownList runat="server" ID="AllItemsList" OnLoad="AllItemsList_Load" ForeColor="Black">
+                </asp:DropDownList>
+            </div>
         </div>
     </div>
 

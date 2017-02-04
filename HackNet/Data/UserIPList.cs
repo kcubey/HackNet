@@ -16,13 +16,17 @@ namespace HackNet.Data
         [Required]
         public string UserIPStored { get; set; }
 
-        public static void StoreUserIP(Users u, string IP, DataContext db)
+        public static void StoreUserIP(Users u, string IP)
         {
-            UserIPList uip = new UserIPList();
-            uip.UserId = u.UserID;
-            uip.UserIPStored = IP;
-            db.UserIPList.Add(uip);
-            db.SaveChanges();
+            using(DataContext db=new DataContext())
+            {
+                UserIPList uip = new UserIPList();
+                uip.UserId = u.UserID;
+                uip.UserIPStored = IP;
+                db.UserIPList.Add(uip);
+                db.SaveChanges();
+            }
+            
         }
         
         internal static bool CheckUserIPList(string IP, Users u, DataContext db)
@@ -34,7 +38,7 @@ namespace HackNet.Data
 
             if (match == null)
             {
-                StoreUserIP(u, IP, db);
+                StoreUserIP(u, IP);
                 return true;
             }else
             {
