@@ -22,7 +22,7 @@
 		$(window).keydown(function (e) {
 			if ((e.metaKey || e.ctrlKey) && (e.metaKey || e.shiftKey) && e.keyCode == 90) {
 				console.log("Control-A KEY PRESSED");
-				location.assign(<% =ResolveUrl("~/Default/") %>);
+				location.assign(<% =ResolveUrl("~/") %>);
 				e.preventDefault();
 				return false;
 			}
