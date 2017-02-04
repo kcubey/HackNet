@@ -247,7 +247,7 @@
                         <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
                         <asp:TextBox runat="server" ID="ItemStat" ForeColor="black"></asp:TextBox>
                     </div>
-                    
+                    <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
                 </div>
             </div>
         </div>
