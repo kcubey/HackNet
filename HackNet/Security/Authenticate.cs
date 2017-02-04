@@ -405,7 +405,7 @@ namespace HackNet.Security
                 UserIPList uip = new UserIPList();
                 uip.UserId = createduser.UserID;
                 uip.UserIPStored = GetIP();
-                // db.UserIPList.Add(uip);
+                db.UserIPList.Add(uip);
                 db.SaveChanges();
 
                 if (createduser is Users)
