@@ -90,5 +90,10 @@ namespace HackNet.Admin
                 AllItemsList.Items.Add(new ListItem(i.ItemName,i.ItemId.ToString()));
             }
         }
+
+        protected void AddItemToUserInv_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

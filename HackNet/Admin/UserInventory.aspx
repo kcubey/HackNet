@@ -44,6 +44,9 @@
                 <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label" />
                 <asp:TextBox runat="server" ID="ItemQuantityTxtbox" Width="280px" ForeColor="Black" />
             </div>
+            <div class="form-group row">
+                <asp:Button runat="server" ID="AddItemToUserInv" OnClick="AddItemToUserInv_Click" CssClass="btn btn-default" Text="Add Item" />
+            </div>
         </div>
     </div>
 
