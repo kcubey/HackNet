@@ -120,7 +120,7 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="AllItemTab" style="height: 360px; overflow-y: auto;">
+                    <div class="tab-pane fade in active" id="AllItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>All Items</h2>
                         <asp:DataList ID="AllItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px">
                             <ItemTemplate>
@@ -138,7 +138,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
-                    <div class="tab-pane fade" id="ProcessItemTab" style="height: 360px; overflow-y: auto;">
+                    <div class="tab-pane fade" id="ProcessItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Processor</h2>
                         <asp:DataList ID="ProcessItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
                             <ItemTemplate>
@@ -156,7 +156,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
-                    <div class="tab-pane fade" id="GraphicItemTab" style="height: 360px; overflow-y: auto;">
+                    <div class="tab-pane fade" id="GraphicItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Graphic Card</h2>
                         <asp:DataList ID="GraphicItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
                             <ItemTemplate>
@@ -174,7 +174,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
-                    <div class="tab-pane fade" id="MemoryItemTab" style="height: 360px; overflow-y: auto;">
+                    <div class="tab-pane fade" id="MemoryItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Memory</h2>
                         <asp:DataList ID="MemoryItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
                             <ItemTemplate>
@@ -192,7 +192,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
-                    <div class="tab-pane fade" id="PowerItemTab" style="height: 360px; overflow-y: auto;">
+                    <div class="tab-pane fade" id="PowerItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Power Supply</h2>
                         <asp:DataList ID="PowerItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
                             <ItemTemplate>
