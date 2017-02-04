@@ -66,11 +66,19 @@ namespace HackNet.Game
             {
                 Items item = Session["Item"] as Items;
                 System.Diagnostics.Debug.WriteLine("Item ID: " + item.ItemId);
-                ItemLogic.AddItemToInventory(CurrentUser.Entity(), item.ItemId);
+                int usercoins = CurrentUser.Entity().Coins;
+                if (usercoins < item.ItemPrice)
+                {
 
-                ItemNameLbl.Text = item.ItemName;
-                ItemPriceLbl.Text = item.ItemPrice.ToString();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
+                }
+                else {
+                    ItemLogic.AddItemToInventory(CurrentUser.Entity(), item.ItemId);
+
+                    ItemNameLbl.Text = item.ItemName;
+                    ItemPriceLbl.Text = item.ItemPrice.ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
+                }  
+                
             }else
             {
                 Response.Redirect("Parts.aspx", true);

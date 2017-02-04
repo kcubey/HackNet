@@ -18,8 +18,9 @@
                 <asp:Label runat="server" Text="Confirm Delete Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
             </div>
             <div class="modal-body" style="color: black">
-                <p>Are you sure you want to permamently delete this</p>
+                <p>Are you sure you want to <span style="color:#b81111;">permanently</span> delete </p>
                 <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmDeleteItemName"></asp:Label>
+                <p>*Please note that if users have this item it will also be deleted</p>
             </div>
             <div class="modal-footer">
                 <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="DeleteItemBtn" OnClick="DeletePartsInfoBtn_Click" />
@@ -100,7 +101,7 @@
                 <!-- Buttons -->
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" OnClick="UpdatePartsInfoBtn_Click" />
-                    <asp:Button runat="server" CssClass="btn btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="ConfirmDeletePartsInfoBtn_Click" />
+                    <asp:Button runat="server" CssClass="btndelete btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="ConfirmDeletePartsInfoBtn_Click" />
                 </div>
             </div>
         </div>
