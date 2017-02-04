@@ -139,9 +139,9 @@
                             <ItemTemplate>
                                 <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" 
                                         OnCommand="buyPackage_Command"  CommandArgument='<%#Eval("PackageId")%>' Font-Underline="False">
-                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
+                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='<%#Eval("ItemPic")%>'  BackColor="Transparent" />
                                     <br />
-                             <!--       <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='< % #Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>-->
+                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
                                     <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>

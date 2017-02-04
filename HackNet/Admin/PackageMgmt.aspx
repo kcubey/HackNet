@@ -90,27 +90,27 @@
                                         </asp:DataList>
                                     </div>
                                     <div class="form-group row">
-                                        <asp:Label runat="server" Text="Item Selected: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                        <asp:Label runat="server" id="itemSelectLbl" Text="Item Selected: " CssClass="col-xs-3 col-form-label"></asp:Label>
                                         <asp:Label runat="server" id="selectedItemLbl" forecolor="White" Text=""></asp:Label>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <div class="form-group row">
-                                <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgDesc" TextMode="MultiLine"></asp:TextBox>
+                                <asp:Label runat="server" id="descLbl" Text="Package Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgDesc" AutoComplete="false" TextMode="MultiLine"></asp:TextBox>
                             </div>
                             <div class="form-group row">
-                                <asp:Label runat="server" Text="Package Price ($): " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgPrice"></asp:TextBox>
+                                <asp:Label runat="server" id="priceLbl" Text="Package Price ($): " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgPrice" AutoComplete="false" ></asp:TextBox>
                                 <asp:RegularExpressionValidator 
                                     ID="priceValidator" runat="server" 
                                     ErrorMessage="* Enter up to 2 decimal places only" ValidationExpression="^[0-9]{0,6}(\.[0-9]{1,2})?$"
-                                    ControlToValidate="pkgQuantity" ForeColor="Red">
+                                    ControlToValidate="pkgPrice" ForeColor="Red">
                                </asp:RegularExpressionValidator>
                             </div>
                             <div class="form-group row">
-                                <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgQuantity"></asp:TextBox>
+                                <asp:Label runat="server" id="qtyLbl" Text="Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="pkgQuantity" AutoComplete="false" ></asp:TextBox>
                                 <asp:RegularExpressionValidator 
                                     ID="quantityValidator" runat="server" 
                                     ErrorMessage="* Enter whole numbers only" ValidationExpression="^\d+$"
@@ -133,7 +133,7 @@
                                 <div style="margin: 10px;">
                                     <asp:LinkButton runat="server" ID="itemName" OnCommand="EditPackage_Command" 
                                         CommandArgument='<%# Eval("PackageID")%>' forecolor="Black">
-                                        <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text="Description" Font-Size="Smaller"></asp:Label>
+                                        <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
                                         <br />
                                         <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                                             <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>

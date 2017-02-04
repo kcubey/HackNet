@@ -16,12 +16,12 @@ namespace HackNet.Payment
 {
     public partial class Payment : System.Web.UI.Page
     {
-        protected Decimal price;
+        protected Decimal tPrice;
         protected int pkgId;
         protected int pkgItemId;
         protected string pkgItemName;
         protected int pkgItemQuantity;
-        protected double pkgPrice;
+        protected decimal pkgPrice;
 
         protected BraintreeGateway gateway = new BraintreeGateway
         {
@@ -85,7 +85,7 @@ namespace HackNet.Payment
         {
             try
             {
-                price = Convert.ToDecimal(pkgPrice);
+                tPrice = Convert.ToDecimal(pkgPrice);
             }
             catch
             {
@@ -98,7 +98,7 @@ namespace HackNet.Payment
             //create transaction request
             var request = new TransactionRequest
             {
-                Amount = price,
+                Amount = tPrice,
                 PaymentMethodNonce = nonce,
             };
 
@@ -161,7 +161,7 @@ namespace HackNet.Payment
         {
             try
             {
-                price = Convert.ToDecimal(pkgPrice);
+                tPrice = Convert.ToDecimal(pkgPrice);
             }
             catch
             {
@@ -172,7 +172,7 @@ namespace HackNet.Payment
 
             var request = new TransactionRequest
             {
-                Amount = price,
+                Amount = tPrice,
                 PaymentMethodNonce = nonce,
             };
 

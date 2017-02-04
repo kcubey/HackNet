@@ -13,9 +13,10 @@ namespace HackNet.Admin
 {
     public partial class PackageMgmt : System.Web.UI.Page
     {
+        protected int itemType;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private DataTable LoadInventory(int itemType)
@@ -30,7 +31,39 @@ namespace HackNet.Admin
                 dt.Rows.Add(i.ItemName, i.ItemId);
             }
             return dt;
-            //KTODO: ADd for edit package
+        }
+
+        private void LoadPackages(Repeater rpt)
+        {
+            List<Pack> pList = Pack.GetPackageList();
+            if (pList.Count != 0)
+            {
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("PackageId", typeof(int));
+                dt.Columns.Add("Quantity", typeof(int));
+                dt.Columns.Add("Description", typeof(string));
+                dt.Columns.Add("Price", typeof(double));
+                dt.Columns.Add("ItemPic", typeof(string));
+                foreach (Pack p in pList)
+                {
+                    PackItem packItem = PackItem.GetPackageItems(p.PackageId);
+                    Items i = HackNet.Data.Items.GetItem(packItem.ItemId);
+
+                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(p.PackageId, packItem.Quantity, p.Description, p.Price, url);
+                }
+
+                rpt.DataSource = dt;
+                rpt.DataBind();
+            }
+            else
+            {
+                rpt.DataSource = null;
+                rpt.DataBind();
+            }
         }
 
         protected void btnAddPackage_Click(object sender, EventArgs e)
@@ -41,7 +74,7 @@ namespace HackNet.Admin
                 pkg.Description = pkgDesc.Text;
 
                 string strPrice = pkgPrice.Text;
-                pkg.Price = Convert.ToDouble(strPrice.Replace(" ", ""));
+                pkg.Price = Convert.ToDecimal(strPrice.Replace(" ", ""));
 
                 db.Package.Add(pkg);
                 db.SaveChanges();
@@ -55,13 +88,17 @@ namespace HackNet.Admin
                 db.PackItem.Add(pkgItems);
                 db.SaveChanges();
             }
+
+            string alert = "Package Added";
+            Response.Write("<script type='text/javascript'>alert('" + alert + "');document.location.href='PackageMgmt.aspx';</script>");
+
         }
 
         protected void DisplayItems(object sender, EventArgs e)
         {
             selectedItemLbl.Text = string.Empty;
             Items item = new Items();
-            int itemType = Convert.ToInt32(itemTypeDDL.SelectedItem.Value);
+            itemType = Convert.ToInt32(itemTypeDDL.SelectedItem.Value);
             SelectionDataList.DataSource = LoadInventory(itemType);
             SelectionDataList.DataBind();
         }
