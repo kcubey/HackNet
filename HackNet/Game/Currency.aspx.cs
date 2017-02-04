@@ -31,32 +31,41 @@ namespace HackNet.Game
             }
             buckValidator.MaximumValue = dbBuck.ToString();
 
-            DataTable dt = new DataTable();
-            
-            dt.Columns.Add("PackageId", typeof(int));
-            dt.Columns.Add("Description", typeof(string));
-            dt.Columns.Add("Price", typeof(double));
+            LoadPackages(packageRepeater);
 
-            DataRow oItem = dt.NewRow();
-            oItem[0] = "2";
-            oItem[1] = "50";
-            oItem[2] = "1.99";
-            dt.Rows.Add(oItem);
+        }
 
-            oItem = dt.NewRow();
-            oItem[0] = "3";
-            oItem[1] = "70";
-            oItem[2] = "2.59";
-            dt.Rows.Add(oItem);
+        private void LoadPackages(Repeater rpt)
+        {
+            List<Pack> pList = Pack.GetPackageList();
+            if (pList.Count != 0)
+            {
+                string imageurlstring;
+                string url;
+                DataTable dt = new DataTable();
+                dt.Columns.Add("PackageId", typeof(int));
+                dt.Columns.Add("Quantity", typeof(int));
+                dt.Columns.Add("Description", typeof(string));
+                dt.Columns.Add("Price", typeof(double));
+                dt.Columns.Add("ItemPic", typeof(string));
+                foreach (Pack p in pList)
+                {
+                    PackItem packItem = PackItem.GetPackageItems(p.PackageId);
+                    Items i = HackNet.Data.Items.GetItem(packItem.ItemId);
 
-            oItem = dt.NewRow();
-            oItem[0] = "4";
-            oItem[1] = "150";
-            oItem[2] = "4.69";
-            dt.Rows.Add(oItem);
+                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+                    url = "data:image/png;base64," + imageurlstring;
+                    dt.Rows.Add(p.PackageId, packItem.Quantity, p.Description, p.Price, url);
+                }
 
-            packageRepeater.DataSource = dt;
-            packageRepeater.DataBind();
+                rpt.DataSource = dt;
+                rpt.DataBind();
+            }
+            else
+            {
+                rpt.DataSource = null;
+                rpt.DataBind();
+            }
 
         }
 
@@ -102,7 +111,7 @@ namespace HackNet.Game
             int packagePrice = Convert.ToInt32(packageCost.Text);
             int itemQuantity = Convert.ToInt32(packageQuantity.Text);
             //KTODO change to retreive package id & price from button/session
-
+            //KTODO: Change currency/payment/reauth/checkout
             Session["packageId"] = packageId;
             Session["packagePrice"] = packagePrice;
             Session["itemQuantity"] = itemQuantity;
@@ -209,37 +218,10 @@ namespace HackNet.Game
                 dl.DataBind();
             }
         }
-        /*
-                private void LoadPackages(Repeater rpt) //change to LoadPackages
-                {
+        
+                
 
-                    List<Packages> pList = Data.Packages.GetPackageList;
-            if (pList.Count != 0)
-            {
-                string imageurlstring;
-                string url;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("PackageId", typeof(int));
-                dt.Columns.Add("Quantity", typeof(string));
-                dt.Columns.Add("Price", typeof(double));
-                foreach (Packages p in pList)
-                {
-                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                    url = "data:image/png;base64," + imageurlstring;
-                }
-
-                rpt.DataSource = dt;
-                rpt.DataBind();
-            }
-            else
-            {
-                rpt.DataSource = null;
-                rpt.DataBind();
-            }
-
-                }
-
-          */     
+             
 
         
         protected void ViewMore_Command(object sender, CommandEventArgs e)

@@ -85,6 +85,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.DataList SelectionDataList;
         
         /// <summary>
+        /// itemSelectLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label itemSelectLbl;
+        
+        /// <summary>
         /// selectedItemLbl control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.Label selectedItemLbl;
         
         /// <summary>
+        /// descLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label descLbl;
+        
+        /// <summary>
         /// pkgDesc control.
         /// </summary>
         /// <remarks>
@@ -101,6 +119,15 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox pkgDesc;
+        
+        /// <summary>
+        /// priceLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label priceLbl;
         
         /// <summary>
         /// pkgPrice control.
@@ -119,6 +146,15 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator priceValidator;
+        
+        /// <summary>
+        /// qtyLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label qtyLbl;
         
         /// <summary>
         /// pkgQuantity control.
