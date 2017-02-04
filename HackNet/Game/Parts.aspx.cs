@@ -88,7 +88,13 @@ namespace HackNet.Game
 
         protected void SellItem_Command(object sender, CommandEventArgs e)
         {
-                
+            ConfirmSellItemName.Text = ItemName.Text;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "SellItemModal", "showSellItemModal()", true);
+        }
+
+        protected void SellItemBtn_Click(object sender, CommandEventArgs e)
+        {
+
         }
     }
 }
