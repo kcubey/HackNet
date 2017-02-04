@@ -19,8 +19,15 @@
                     <asp:Label runat="server" Text="Confirm Delete Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
                 </div>
                 <div class="modal-body" style="color: black">
-                    <p>Are you sure you want to permamently delete this</p>
+                    <p>Are you sure you want to <span style="color:red; font-size:1em;">PERMAMENTLY</span> delete this</p>
+                    <br />
+                    <br />
                     <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmDeleteItemName"></asp:Label>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <p><span style="color:red;">WARNING</span> : THIS <span style="text-decoration:underline; color:darkred;">CANNOT</span> BE UNDONE</p>
                 </div>
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="DeleteItemBtn" OnClick="DeletePartsInfoBtn_Click" />
@@ -42,6 +49,7 @@
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Name" CssClass="col-xs-3 col-form-label" />
                     <asp:TextBox autocomplete="off" runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
+                    <!--
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemName"
@@ -51,6 +59,7 @@
                         ForeColor="Red"
                         ErrorMessage="Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
+                    -->
                 </div>
                 <!-- Item Type -->
                 <div class="modal-body" style="color: black">
@@ -61,15 +70,17 @@
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Description" CssClass="col-xs-3 col-form-label" />
                     <asp:TextBox autocomplete="off" runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
+                    <!--
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemDesc"
                         ID="RegularExpressionValidatorForItemDesc"
-                        ValidationExpression="^[a-zA-Z0-9'-'._%&+/\s]{0,5000}$"
+                        ValidationExpression="^[a-zA-Z0-9'-'._%&+/\s]{0,10000}$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Maximum 5000 characters allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
+                    -->
                 </div>
                 <!-- Item Price -->
                 <div class="modal-body" style="color: black">
@@ -102,7 +113,7 @@
                 <!-- Buttons -->
                 <div class="modal-footer">
                     <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" ValidationGroup="ItemUpdate" OnClick="UpdatePartsInfoBtn_Click" />
-                    <asp:Button runat="server" CssClass="btn btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="ConfirmDeletePartsInfoBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btndelete btn-default" Text="Delete" ID="DeletePartsInfoBtn" OnClick="ConfirmDeletePartsInfoBtn_Click" />
                 </div>
             </div>
         </div>
