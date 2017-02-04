@@ -11,8 +11,11 @@ namespace HackNet.Data
 {
     public class UserIPList
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Index { get; set; }
+
         public int UserId { get; set; }
+
         [Required]
         public string UserIPStored { get; set; }
 
@@ -21,13 +24,13 @@ namespace HackNet.Data
             UserIPList uip = new UserIPList();
             uip.UserId = u.UserID;
             uip.UserIPStored = IP;
-            db.UserIPList.Add(uip);
+            // db.UserIPList.Add(uip);
             db.SaveChanges();
         }
         
         internal static bool CheckUserIPList(string IP, Users u, DataContext db)
         {
-            var query = from uip in db.UserIPList where uip.UserId == u.UserID select uip;
+			var query = from uip in db.UserIPList where uip.UserId == u.UserID select uip;
 
             List<UserIPList> uipList = query.ToList();
             var match = uipList.FirstOrDefault(IPToChk =>IPToChk.UserIPStored.Contains(IP));
