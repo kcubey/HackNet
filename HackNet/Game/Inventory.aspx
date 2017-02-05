@@ -40,7 +40,7 @@
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
-
+                    <a href="Parts.aspx">Wanna sell or get more parts? Head over to our Market!</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
