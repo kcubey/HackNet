@@ -14,7 +14,7 @@
     </address>
 
     <h3>Get in touch with us</h3>
-    <!-- Subject -->
+    <!-- Subject --> 
     <span title="subject"> Subject </span>
     <asp:TextBox ID="Subjecttxt" runat="server" CssClass="form-control" placeholder="Your Subject" style="Width:100%; border-width:3px;"/> 
     <asp:RegularExpressionValidator
