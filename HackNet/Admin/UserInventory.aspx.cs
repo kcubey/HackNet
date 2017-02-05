@@ -15,7 +15,11 @@ namespace HackNet.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            List<Items> allItems = Data.Items.GetItems(-1);
+            foreach (Items i in allItems)
+            {
+                AllItemsList.Items.Add(new ListItem(i.ItemName, i.ItemId.ToString()));
+            }
         }
         
         protected void AdminUsersView_Load(object sender, EventArgs e)
@@ -82,19 +86,19 @@ namespace HackNet.Admin
            
             
         }
-
-        protected void AllItemsList_Load(object sender, EventArgs e)
-        {
-            List<Items> allItems=Data.Items.GetItems(-1) ;
-            foreach(Items i in allItems)
-            {
-                AllItemsList.Items.Add(new ListItem(i.ItemName,i.ItemId.ToString()));
-            }
-        }
-
+        
         protected void AddItemToUserInv_Click(object sender, EventArgs e)
         {
-
+            InventoryItem invitem = new InventoryItem();
+            invitem.UserId = int.Parse(UserIDTxtbox.Text);
+            invitem.ItemId = int.Parse(AllItemsList.SelectedValue);
+            invitem.Quantity = int.Parse(ItemQuantityTxtbox.Text);
+            using (DataContext db=new DataContext())
+            {
+                db.InventoryItem.Add(invitem);
+                db.SaveChanges();
+                Response.Redirect("UserInventory.aspx", true);
+            }
         }
     }
 }

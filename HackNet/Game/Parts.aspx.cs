@@ -19,9 +19,9 @@ namespace HackNet.Game
         {
             using (DataContext db = new DataContext())
             {
-                
+
                 List<Items> ilist = Data.Items.GetItems(-1);
-                List<Items> userList = ItemLogic.GetUserInvItems(CurrentUser.Entity(),-1,db);
+                List<Items> userList = ItemLogic.GetUserInvItems(CurrentUser.Entity(), -1, db);
 
                 ItemLogic.LoadInventory(PartsList, ilist, -1);
                 ItemLogic.LoadInventory(ProcessList, ilist, 1);
@@ -33,7 +33,7 @@ namespace HackNet.Game
             }
         }
 
-      
+
 
         protected void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -73,7 +73,7 @@ namespace HackNet.Game
 
             Items item = Data.Items.GetItem(id);
             Session["Item"] = item;
-            Response.Redirect("PartsInfo.aspx",true);
+            Response.Redirect("PartsInfo.aspx", true);
         }
 
         protected void btnSubmitDdl_Click(object sender, EventArgs e)
@@ -88,7 +88,35 @@ namespace HackNet.Game
 
         protected void SellItem_Command(object sender, CommandEventArgs e)
         {
-                
+
+            Items i = Data.Items.GetItem(int.Parse(e.CommandArgument.ToString()));
+            Cache["ItemIDToSell"] = i.ItemId;
+            int pricetosell = i.ItemPrice / 2;
+            Cache["PriceToSell"] = pricetosell;
+            ConfirmSellItemName.Text = i.ItemName;
+            ConfirmSellItemPrice.Text = pricetosell.ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "SellItemModal", "showSellItemModal()", true);
+        }
+
+        protected void CfmSellBtn_Click(object sender, EventArgs e)
+        {
+            if (Cache["ItemIDToSell"] is int)
+            {
+                if (ItemLogic.DeleteItemFromUserInv(CurrentUser.Entity().UserID, (int)Cache["ItemIDToSell"]))
+                {
+                    using (DataContext db = new DataContext())
+                    {
+                        Users u = CurrentUser.Entity(false, db);
+                        u.Coins = u.Coins+int.Parse(Cache["PriceToSell"].ToString());
+                        db.SaveChanges();
+                    }
+                    Response.Redirect("Parts.aspx", true);
+                }
+                else
+                {
+                    // need to pop up something
+                }
+            }
         }
     }
 }

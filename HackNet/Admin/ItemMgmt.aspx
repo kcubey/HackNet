@@ -49,7 +49,6 @@
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Name" CssClass="col-xs-3 col-form-label" />
                     <asp:TextBox autocomplete="off" runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
-                    <!--
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemName"
@@ -57,9 +56,8 @@
                         ValidationExpression="^[a-zA-Z0-9'.&+/\s]{1,400}$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Only Special characters allowed are &+. Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
-                    -->
                 </div>
                 <!-- Item Type -->
                 <div class="modal-body" style="color: black">
@@ -70,7 +68,6 @@
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Description" CssClass="col-xs-3 col-form-label" />
                     <asp:TextBox autocomplete="off" runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
-                    <!--
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemDesc"
@@ -80,7 +77,6 @@
                         ForeColor="Red"
                         ErrorMessage="Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
-                    -->
                 </div>
                 <!-- Item Price -->
                 <div class="modal-body" style="color: black">
@@ -93,7 +89,7 @@
                         ValidationExpression="^[0-9]*$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Only numeric allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Only numeric values are allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
                 </div>
                 <!-- Item Bonus -->
@@ -107,7 +103,7 @@
                         ValidationExpression="^[0-9]*$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Only numeric allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Only numeric values are allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
                 </div>
                 <!-- Buttons -->
@@ -127,6 +123,7 @@
                     <li><a href="#GraphicItemTab" data-toggle="tab">Graphics Cards</a></li>
                     <li><a href="#MemoryItemTab" data-toggle="tab">Memory</a></li>
                     <li><a href="#PowerItemTab" data-toggle="tab">Power Supply</a></li>
+                    <li><a href="#CreateItemTab" data-toggle="tab">Add Item</a></li>
                 </ul>
             </div>
             <div class="panel-body">
@@ -221,46 +218,47 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <div class="tab-pane fade" id="CreateItemTab">
+                        <h2>Item Creator</h2>
+                        <div class="container-fluid" style="color: black; background-color: gray;">
+                            <br />
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="ItemName" ForeColor="black"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:DropDownList runat="server" ID="ItemTypeList" ForeColor="black">
+                                    <asp:ListItem Value="1">Processor</asp:ListItem>
+                                    <asp:ListItem Value="4">Graphic Card</asp:ListItem>
+                                    <asp:ListItem Value="2">Memory</asp:ListItem>
+                                    <asp:ListItem Value="3">Power Supply</asp:ListItem>
+                                    <asp:ListItem Value="0">Booster</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:FileUpload ID="UploadPhoto" runat="server" />
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="ItemDesc" ForeColor="black" TextMode="MultiLine" Height="50px" Width="196px"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="ItemPrice" ForeColor="black"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
+                                <asp:TextBox runat="server" ID="ItemStat" ForeColor="black"></asp:TextBox>
+                            </div>
+                            <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
+                        </div>
+                    </div>
                 </div>
 
             </div>
-            <div class="panel-footer" style="background-color: dimgrey;" >
-                <h2>Add Item</h2>
-                <div class="container-fluid" style="color: black; background-color: black; color:white;">
-                    <br />
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:TextBox runat="server" ID="ItemName" ForeColor="black"></asp:TextBox>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DropDownList runat="server" ID="ItemTypeList" ForeColor="black">
-                            <asp:ListItem Value="1">Processor</asp:ListItem>
-                            <asp:ListItem Value="4">Graphic Card</asp:ListItem>
-                            <asp:ListItem Value="2">Memory</asp:ListItem>
-                            <asp:ListItem Value="3">Power Supply</asp:ListItem>
-                            <asp:ListItem Value="0">Booster</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Image: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:FileUpload ID="UploadPhoto" runat="server" />
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:TextBox runat="server" ID="ItemDesc" ForeColor="black" TextMode="MultiLine" Height="50px" Width="196px"></asp:TextBox>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:TextBox runat="server" ID="ItemPrice" ForeColor="black"></asp:TextBox>
-                    </div>
-                    <div class="form-group row">
-                        <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:TextBox runat="server" ID="ItemStat" ForeColor="black"></asp:TextBox>
-                    </div>
-                    <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
-                </div>
-            </div>
+           
         </div>
     </div>
 </asp:Content>

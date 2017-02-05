@@ -2,13 +2,14 @@
 
 <asp:Content ID="HeadCt" ContentPlaceHolderID="GameHeadPH" runat="server">
     <style>
-        .nav-tabs > li > a{
-            color:limegreen;
+        .nav-tabs > li > a {
+            color: limegreen;
         }
+
         .nav-tabs > li.active > a,
         .nav-tabs > li.active > a:hover,
         .nav-tabs > li.active > a:focus {
-            background-color:rgba(10, 10, 10, 0.9);
+            background-color: rgba(10, 10, 10, 0.9);
             color: white;
             border: 0px solid #333;
         }
@@ -18,25 +19,62 @@
             color: white;
             border: 0px solid #333;
         }
+
         .viewMoreButton {
-            color:#B6C5BE;
+            color: #B6C5BE;
         }
-        .viewMoreButton:hover {
-            color:#fff;
-            text-decoration:none;
-        }
-        .viewMoreButton:focus {
-            color:#fff;
-            text-decoration:none;
-        }
-        .viewMoreButton:visited {
-            color:#fff;
-            text-decoration:none;
-        }
+
+            .viewMoreButton:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .viewMoreButton:focus {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .viewMoreButton:visited {
+                color: #fff;
+                text-decoration: none;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
+    <script type="text/javascript">
+        function showSellItemModal() {
+            $('#SellItemModal').modal('show');
+        }
+    </script>
 
+    <!-- SellItem -->
+    <div id="SellItemModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" Text="Confirm Sell Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
+                </div>
+                <div class="modal-body" style="color: black">
+                    <p>Are you sure you want to sell this</p>
+                    <div class="form-group row">
+                        <label class="col-xs-3 col-form-label">Item Name: </label>
+                        <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemName"></asp:Label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xs-3 col-form-label">Item to sell for: </label>
+                        <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemPrice"></asp:Label>
+                    </div>
+                    <p><span style="color: red;">WARNING</span> : THIS <span style="text-decoration: underline; color: darkred;">CANNOT</span> BE UNDONE</p>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="CfmSellBtn" OnClick="CfmSellBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="No" ID="Close" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -53,11 +91,10 @@
                         <li><a href="#graphicscard" data-toggle="tab">Graphics Card</a></li>
                         <li><a href="#memory" data-toggle="tab">Memory</a></li>
                         <li><a href="#powersupply" data-toggle="tab">Power Supply</a></li>
-                        <li><a href="#booster" data-toggle="tab">Booster</a></li>
                         <li><a href="#useritems" data-toggle="tab">Your Items</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-9" style="float: left; height: 580px; overflow: scroll; overflow-x: hidden;">
+                <div class="col-xs-9" style="float: left; height: 900px; overflow: scroll; overflow-x: hidden;">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <!--ALL-->
@@ -258,13 +295,16 @@
             </asp:DropDownList>
         </div>
         <div>
-                <asp:Button ID="btnSubmitDdl" runat="server" 
-                    Text="Click to Retrieve Value" onclick="btnSubmitDdl_Click" /></div>
-        <div class="form-group row">
-            Selected Item Text: <asp:Label ID="lblSelectedText" runat="server"></asp:Label>
+            <asp:Button ID="btnSubmitDdl" runat="server"
+                Text="Click to Retrieve Value" OnClick="btnSubmitDdl_Click" />
         </div>
         <div class="form-group row">
-            Selected Item Value: <asp:Label ID="lblSelectedValue" runat="server"></asp:Label>
+            Selected Item Text:
+            <asp:Label ID="lblSelectedText" runat="server"></asp:Label>
+        </div>
+        <div class="form-group row">
+            Selected Item Value:
+            <asp:Label ID="lblSelectedValue" runat="server"></asp:Label>
         </div>
     </div>
     <!-- /Delete Item -->
