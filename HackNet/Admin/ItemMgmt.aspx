@@ -53,10 +53,10 @@
                         Display="Dynamic"
                         ControlToValidate="EditItemName"
                         ID="RegularExpressionValidatorForEditItemName"
-                        ValidationExpression="^[a-zA-Z0-9'.&+/\s]{1,400}$"
+                        ValidationExpression="^[a-zA-Z0-9\-\s]{1,400}$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Only Special characters allowed are &+. Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Only Special character allowed is -  Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
                 </div>
                 <!-- Item Type -->
