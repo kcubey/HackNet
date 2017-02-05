@@ -67,6 +67,25 @@
                                 <asp:Label runat="server" ID="MisCoinLbl"></asp:Label>
                             </asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Item Name: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemNameLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <label>Item Bonus: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemBonusLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell ColumnSpan="4">
+                                <asp:Image runat="server" ID="ItemImage" />
+                            </asp:TableCell>
+                        </asp:TableRow>
                     </asp:Table>
                 </div>
                 <div class="modal-footer">
@@ -213,8 +232,11 @@
                     </div>
                     <div class="panel-body" style="background-color: black;">
                         <asp:DataList runat="server" ID="SQLCodeList">
+                            <HeaderTemplate>
+                                <h4>SQL Injection Codes</h4>
+                            </HeaderTemplate>
                             <ItemTemplate>
-                                <li class="list-group-item">
+                                <li class="list-group-item" style="background: #666666; width: 220px; margin: 0 auto;">
                                     <asp:Label runat="server" Text='<%#Eval("SQLCode") %>'></asp:Label>
                                 </li>
                             </ItemTemplate>

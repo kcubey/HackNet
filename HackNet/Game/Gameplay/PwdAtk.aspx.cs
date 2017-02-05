@@ -1,5 +1,6 @@
 ﻿using HackNet.Data;
 using HackNet.Game.Class;
+using HackNet.Loggers;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -223,6 +224,11 @@ namespace HackNet.Game.Gameplay
                         ItemNameLbl.Text = i.ItemName;
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+
+                        List<string> itemnamelist = new List<string>();
+                        itemnamelist.Add(i.ItemName);
+                        MissionLogLogic.Store(CurrentUser.Entity().UserID,mis.MissionName,true, itemnamelist);
+
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
@@ -239,6 +245,8 @@ namespace HackNet.Game.Gameplay
                     MisExpLbl.Text = "0";
                     MisCoinLbl.Text = "0";
 
+                    MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false);
+
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
                 }
             }else
@@ -251,6 +259,9 @@ namespace HackNet.Game.Gameplay
                 MisSumLbl.Text = "Mission Failed due to incorrect type of attack choosen";
                 MisExpLbl.Text = "0";
                 MisCoinLbl.Text = "0";
+
+                MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false);
+
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
             }

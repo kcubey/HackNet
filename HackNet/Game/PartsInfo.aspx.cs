@@ -101,8 +101,13 @@ namespace HackNet.Game
 
                 }
                 else {
+                    using(DataContext db=new DataContext())
+                    {
+                        Users u = CurrentUser.Entity(false, db);
+                        u.Coins = u.Coins - item.ItemPrice;
+                        db.SaveChanges();
+                    }
                     ItemLogic.AddItemToInventory(CurrentUser.Entity(), item.ItemId);
-
                     ItemNameLbl.Text = item.ItemName;
                     ItemPriceLbl.Text = item.ItemPrice.ToString();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "PartTransactionModel", "ShowTransactionBox();", true);
