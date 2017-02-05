@@ -16,23 +16,9 @@ namespace HackNet.Admin
         protected int itemType;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            LoadPackages(packageRepeater);
         }
-
-        private DataTable LoadInventory(int itemType)
-        {
-            List<Items> ilist = Data.Items.GetItems(itemType);
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("ItemName", typeof(string));
-            dt.Columns.Add("ItemID", typeof(int));
-            foreach (Items i in ilist)
-            {
-                dt.Rows.Add(i.ItemName, i.ItemId);
-            }
-            return dt;
-        }
-
+        
         private void LoadPackages(Repeater rpt)
         {
             List<Pack> pList = Pack.GetPackageList();
@@ -94,6 +80,20 @@ namespace HackNet.Admin
 
         }
 
+        private DataTable LoadInventory(int itemType)
+        {
+            List<Items> ilist = Data.Items.GetItems(itemType);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ItemName", typeof(string));
+            dt.Columns.Add("ItemID", typeof(int));
+            foreach (Items i in ilist)
+            {
+                dt.Rows.Add(i.ItemName, i.ItemId);
+            }
+            return dt;
+        }
+
         protected void DisplayItems(object sender, EventArgs e)
         {
             selectedItemLbl.Text = string.Empty;
@@ -114,31 +114,51 @@ namespace HackNet.Admin
         protected void EditPackage_Command(object sender, CommandEventArgs e)
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
-            Items i = HackNet.Data.Items.GetItem(packageId);
-            Cache["ItemID"] = packageId;
-            EditItemName.Text = i.ItemName.ToString();
-            EditItemType.Text = i.ItemType.ToString();
-            EditItemDesc.Text = i.ItemDesc.ToString();
-            EditItemPrice.Text = i.ItemPrice.ToString();
-            EditItemBonus.Text = i.ItemBonus.ToString();
+            Pack p = HackNet.Data.Pack.GetPackage(packageId);
+            PackItem pi = HackNet.Data.PackItem.GetPackageItems(packageId);
+            Items i = HackNet.Data.Items.GetItem(pi.ItemId);
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "EditItemModal", "showEditItemModal()", true);
-            //KTODO: Change to package related
+            Session["packageId"] = packageId;
+            Session["packageItemId"] = pi.ItemId;
+            EditPackageId.Text = p.PackageId.ToString();
+            EditItem.Text = i.ItemName.ToString();
+            
+            //changeable fields:
+            EditPackageDesc.Text = p.Description.ToString();
+            EditPackagePrice.Text = p.Price.ToString();
+            EditItemQuantity.Text = pi.Quantity.ToString();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "EditModal", "showEditModal()", true);
         }
 
-        protected void UpdatePartsInfoBtn_Click(object sender, EventArgs e)
+        protected void UpdatePackageBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
-                Items i = Data.Items.GetItem(int.Parse(Cache["ItemID"].ToString()), -1, false, db);
-                i.ItemName = EditItemName.Text;
-                i.ItemDesc = EditItemDesc.Text;
-                i.ItemPrice = int.Parse(EditItemPrice.Text);
-                i.ItemBonus = int.Parse(EditItemBonus.Text);
+                Pack p = HackNet.Data.Pack.GetPackage((int)Session["packageId"]);
+                PackItem pi = HackNet.Data.PackItem.GetPackageItems((int)Session["packageId"]);
+                Items i = HackNet.Data.Items.GetItem((int)Session["packageItemId"]);
 
+                p.Description = EditPackageDesc.Text;
+                p.Price = Convert.ToDecimal(EditPackagePrice.Text);
+                pi.Quantity = Convert.ToInt32(EditItemQuantity.Text);
+                
                 db.SaveChanges();
             }
-            //KTODO: Change ti package related
+            LoadPackages(packageRepeater);
+        }
+
+        protected void DeletePackageBtn_Click(object sender, EventArgs e)
+        {
+            using (DataContext db = new DataContext())
+            {
+                Pack p = HackNet.Data.Pack.GetPackage((int)Session["packageId"]);
+                PackItem pi = HackNet.Data.PackItem.GetPackageItems((int)Session["packageId"]);
+                db.Package.Remove(p);
+                db.PackItem.Remove(pi);
+                db.SaveChanges();
+            }
+            LoadPackages(packageRepeater);
         }
 
     }

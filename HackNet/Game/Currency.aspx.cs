@@ -107,14 +107,14 @@ namespace HackNet.Game
 
         public void buyPackage_Click(Object sender, EventArgs e)
         {
-            int packageId = Convert.ToInt32(packageNo.Text);
-            int packagePrice = Convert.ToInt32(packageCost.Text);
-            int itemQuantity = Convert.ToInt32(packageQuantity.Text);
+         //   int packageId = Convert.ToInt32(packageNo.Text);
+           // int packagePrice = Convert.ToInt32(packageCost.Text);
+            //int itemQuantity = Convert.ToInt32(packageQuantity.Text);
             //KTODO change to retreive package id & price from button/session
             //KTODO: Change currency/payment/reauth/checkout
-            Session["packageId"] = packageId;
-            Session["packagePrice"] = packagePrice;
-            Session["itemQuantity"] = itemQuantity;
+         //   Session["packageId"] = packageId;
+        //    Session["packagePrice"] = packagePrice;
+        //    Session["itemQuantity"] = itemQuantity;
             Response.Redirect("~/payment/Reauth", true);
         }
 
@@ -129,7 +129,7 @@ namespace HackNet.Game
             //KTODO change to retreive package id & price from button
 
             Session["packageId"] = packageId;
-            Session["packagePrice"] = packagePrice;
+    //        Session["packagePrice"] = packagePrice;
             Response.Redirect("~/payment/Reauth", true);
         }
 

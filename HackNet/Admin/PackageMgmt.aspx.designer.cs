@@ -13,49 +13,85 @@ namespace HackNet.Admin {
     public partial class PackageMgmt {
         
         /// <summary>
-        /// EditItemName control.
+        /// EditPackageId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditItemName;
+        protected global::System.Web.UI.WebControls.TextBox EditPackageId;
         
         /// <summary>
-        /// EditItemType control.
+        /// EditPackageDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditItemType;
+        protected global::System.Web.UI.WebControls.TextBox EditPackageDesc;
         
         /// <summary>
-        /// EditItemDesc control.
+        /// EditPackagePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditItemDesc;
+        protected global::System.Web.UI.WebControls.TextBox EditPackagePrice;
         
         /// <summary>
-        /// EditItemPrice control.
+        /// EditItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditItemPrice;
+        protected global::System.Web.UI.WebControls.TextBox EditItem;
         
         /// <summary>
-        /// EditItemBonus control.
+        /// EditItemQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EditItemBonus;
+        protected global::System.Web.UI.WebControls.TextBox EditItemQuantity;
+        
+        /// <summary>
+        /// EditPackagePriceValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator EditPackagePriceValidator;
+        
+        /// <summary>
+        /// EditItemQuantityValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator EditItemQuantityValidator;
+        
+        /// <summary>
+        /// UpdatePackageBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdatePackageBtn;
+        
+        /// <summary>
+        /// DeletePackageBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeletePackageBtn;
         
         /// <summary>
         /// AddPackagePanel control.
@@ -191,5 +227,14 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList EditPackage;
+        
+        /// <summary>
+        /// packageRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater packageRepeater;
     }
 }
