@@ -1,24 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Game.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="HackNet.Payment.Payment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
     
-    <!--
-        <!-- JSv2
-        <!--<script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>-->
-
-        <!-- JS v3
-        <!-- Load the Client component. 
-        <!--<script src="https://js.braintreegateway.com/web/3.6.0/js/client.min.js"></script>
-        <script src="/Payment/backend/JSv3Client.js" lang="javascript" type="text/javascript"></script>
-
-        <!-- Load the Hosted Fields component. 
-        <!--<script src="https://js.braintreegateway.com/web/3.6.0/js/hosted-fields.min.js"></script>
-        <script src="/Payment/backend/JSv3HostedFields.js" lang="javascript" type="text/javascript"></script>
-    -->
-        <!-- all-->
-        
     <link rel="stylesheet" href="/payment/backend/paymentCSS.css" />
     <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
-
 
     <div class="panel panel-default">
 		<div class="panel-heading">
@@ -53,24 +37,4 @@
             </script>
         </div>
     </div>
-   
-
-<!--
-    <h3>JS v3</h3>
-
-    <h6>added from v2</h6>
-    <button id="braintree-paypal-button" class="paypal is-active " title="Pay with PayPal">
-      <span class="paypal-button-logo"></span>
-  </button>
-
-  <br /><label for="card-number">Card Number: </label>
-  <div class="hosted-field" id="card-number"></div>
-
-  <br /><label for="cvv">CVV: </label>
-  <div class="hosted-field" id="cvv"></div>
-
-  <br /><label for="expiration-date">Expiration Date:</label>
-  <div class="hosted-field" id="expiration-date"></div>
-    -->
-
 </asp:Content>

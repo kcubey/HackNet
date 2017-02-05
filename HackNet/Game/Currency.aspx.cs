@@ -105,31 +105,20 @@ namespace HackNet.Game
             }
         }
 
-        public void buyPackage_Click(Object sender, EventArgs e)
-        {
-         //   int packageId = Convert.ToInt32(packageNo.Text);
-           // int packagePrice = Convert.ToInt32(packageCost.Text);
-            //int itemQuantity = Convert.ToInt32(packageQuantity.Text);
-            //KTODO change to retreive package id & price from button/session
-            //KTODO: Change currency/payment/reauth/checkout
-         //   Session["packageId"] = packageId;
-        //    Session["packagePrice"] = packagePrice;
-        //    Session["itemQuantity"] = itemQuantity;
-            Response.Redirect("~/payment/Reauth", true);
-        }
-
         public void buyPackage_Command(Object sender, CommandEventArgs e)
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
 
-            Pack pkg = Data.Pack.GetPackage(packageId);
-            PackItem pkgItems = Data.PackItem.GetPackageItems(packageId);
-            Session["pkg"] = pkg;
-            Session["pkgItems"] = pkgItems;
-            //KTODO change to retreive package id & price from button
+            Pack p = Data.Pack.GetPackage(packageId);
+            PackItem pi = Data.PackItem.GetPackageItems(packageId);
+            Items i = Data.Items.GetItem(pi.ItemId);
 
-            Session["packageId"] = packageId;
-    //        Session["packagePrice"] = packagePrice;
+            Session["packageId"] = p.PackageId;
+            Session["packagePrice"] = p.Price;
+            Session["itemQuantity"] = pi.Quantity;
+            Session["itemId"] = pi.ItemId;
+            Session["itemName"] = i.ItemName;
+
             Response.Redirect("~/payment/Reauth", true);
         }
 
@@ -163,7 +152,7 @@ namespace HackNet.Game
 
             messageLabel.Text = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "popupConfirmation", "showPopup();", true);
-
+            //KTODO: Change UI to modal
         }
 
         public void mcButton_Click(Object sender, EventArgs e)
@@ -190,47 +179,5 @@ namespace HackNet.Game
         }
 
         #endregion
-
-        private void LoadInventory(DataList dl, int itemType) //change to LoadPackages
-        {
-            List<Items> ilist = Data.Items.GetItems(itemType);
-            if (ilist.Count != 0)
-            {
-                string imageurlstring;
-                string url;
-                DataTable dt = new DataTable();
-                dt.Columns.Add("ItemNo", typeof(int));
-                dt.Columns.Add("ItemName", typeof(string));
-                dt.Columns.Add("ItemPic", typeof(string));
-                foreach (Items i in ilist)
-                {
-                    imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
-                    url = "data:image/png;base64," + imageurlstring;
-                    dt.Rows.Add(i.ItemId, i.ItemName, url);
-                }
-
-                dl.DataSource = dt;
-                dl.DataBind();
-            }
-            else
-            {
-                dl.DataSource = null;
-                dl.DataBind();
-            }
-        }
-        
-                
-
-             
-
-        
-        protected void ViewMore_Command(object sender, CommandEventArgs e)
-        {
-            int id = int.Parse(e.CommandArgument.ToString());
-
-            Items item = Data.Items.GetItem(id);
-            Session["Item"] = item;
-            Server.Transfer("PartsInfo.aspx", true);
-        }
     }
 }
