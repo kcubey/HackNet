@@ -232,8 +232,11 @@
                     </div>
                     <div class="panel-body" style="background-color: black;">
                         <asp:DataList runat="server" ID="SQLCodeList">
+                            <HeaderTemplate>
+                                <h4>SQL Injection Codes</h4>
+                            </HeaderTemplate>
                             <ItemTemplate>
-                                <li class="list-group-item">
+                                <li class="list-group-item" style="background: #666666; width: 220px; margin: 0 auto;">
                                     <asp:Label runat="server" Text='<%#Eval("SQLCode") %>'></asp:Label>
                                 </li>
                             </ItemTemplate>
