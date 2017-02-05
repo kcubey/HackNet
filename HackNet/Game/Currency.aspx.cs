@@ -35,7 +35,7 @@ namespace HackNet.Game
 
         }
 
-        private void LoadPackages(Repeater rpt)
+        protected void LoadPackages(Repeater rpt)
         {
             List<Pack> pList = Pack.GetPackageList();
             if (pList.Count != 0)
@@ -69,19 +69,18 @@ namespace HackNet.Game
 
         }
 
-        #region Payment stuff
-        public void buckTextBox_TextChanged(Object sender, EventArgs e)
+        protected void buckTextBox_TextChanged(Object sender, EventArgs e)
         {
             Calculate();
         }
 
-        public void PrintMessage(String message)
+        protected void PrintMessage(String message)
         {
             string alert = message;
             Response.Write("<script type='text/javascript'>alert('" + alert + "');document.location.href='currency.aspx';</script>");
         }
 
-        public void Calculate()
+        protected void Calculate()
         {
             strBuck = buckTextBox.Text;
             try
@@ -105,7 +104,7 @@ namespace HackNet.Game
             }
         }
 
-        public void buyPackage_Command(Object sender, CommandEventArgs e)
+        protected void buyPackage_Command(Object sender, CommandEventArgs e)
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
 
@@ -122,12 +121,10 @@ namespace HackNet.Game
             Response.Redirect("~/payment/Reauth", true);
         }
 
-        public void ConversionButton_Click(Object sender, EventArgs e)
+        protected void ConversionButton_Click(Object sender, EventArgs e)
         {
             numBuck = Convert.ToInt32(Session["numBuck"]);
             numCoin = Convert.ToInt32(Session["numCoin"]);
-
-            message = "Now converting " + numBuck + " buck(s) to " + numCoin + " coins.";
 
             int newBuck = dbBuck - numBuck;
             int newCoin = dbCoin + numCoin;
@@ -140,44 +137,29 @@ namespace HackNet.Game
 
                 db.SaveChanges();
             }
-
+            ClearText();
+            message = "Conversion complete";
             PrintMessage(message);
-
         }
 
-        public void modalButton_Click(Object sender, EventArgs e)
+        protected void confirmConvertBtn_Click(Object sender, EventArgs e)
         {
             numBuck = Convert.ToInt32(Session["numBuck"]);
             numCoin = Convert.ToInt32(Session["numCoin"]);
 
             messageLabel.Text = "Are you sure you want to convert " + numBuck + " buck(s) to " + numCoin + " coins?";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "popupConfirmation", "showPopup();", true);
-            //KTODO: Change UI to modal
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "EditModal", "showEditModal()", true);
         }
 
-        public void mcButton_Click(Object sender, EventArgs e)
+        protected void cancelConvertBtn_Click(object sender, EventArgs e)
         {
-            int newBuck = dbBuck - numBuck;
-            int newCoin = dbCoin + numCoin;
-
-            using (DataContext db = new DataContext())
-            {
-                Users u = CurrentUser.Entity(false, db);
-                u.ByteDollars = newBuck;
-                u.Coins = newCoin;
-
-                db.SaveChanges();
-                //dbBuck = u.ByteDollars;
-                dbCoin = u.Coins;
-            }
+            Response.Redirect("~/game/currency", true);
         }
 
-        public void ClearText()
+        protected void ClearText()
         {
             buckTextBox.Text = string.Empty;
             convertedCoinLabel.Text = string.Empty;
         }
-
-        #endregion
     }
 }

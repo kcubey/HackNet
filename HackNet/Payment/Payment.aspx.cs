@@ -20,6 +20,7 @@ namespace HackNet.Payment
         protected int pkgId;
         protected int pkgItemId;
         protected string pkgItemName;
+        protected string pkgDetails;
         protected int pkgItemQuantity;
         protected decimal pkgPrice;
 
@@ -35,7 +36,6 @@ namespace HackNet.Payment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine("enter payment pageload");
             Form.ID = "checkout-form";
 
             if (Session["packageId"]!=null && Session["packagePrice"]!=null && Session["itemQuantity"]!=null
@@ -48,7 +48,10 @@ namespace HackNet.Payment
                 pkgItemId = (int)Session["itemId"];
                 pkgItemName = (string)Session["itemName"];
 
-                packageDetailsLbl.Text = "Package " + pkgId + " - $" + pkgPrice;
+                pkgDetails = "Package " + pkgId + " - $" + pkgPrice;
+
+                packageDetailsLbl.Text = pkgDetails;
+                modalPackageDetails.Text = pkgDetails;
             }
             else
             {
@@ -68,14 +71,31 @@ namespace HackNet.Payment
 
             if (IsPostBack)
             {
-                checkoutClickA();
-                //KTODO minor: Change to modal then checkout
+                DisplayModal();
             }
+        }
+
+        protected void DisplayModal()
+        {
+            if(Session["packageId"] != null && Session["packagePrice"] != null && Session["itemQuantity"] != null
+                    && Session["itemId"] != null && Session["itemName"] != null)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ConfirmPayModal", "showConfirmPayModal()", true);
+            }
+            else
+            {
+                Response.Redirect("~/game/currency", true);
+            }
+        }
+
+        protected void confirmBtn_Click(Object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ConfirmPayModal", "showConfirmPayModal()", true);
         }
 
         public void CancelClick(Object sender, EventArgs e)
         {
-            Response.Redirect("~/game/market", true);
+            Response.Redirect("~/game/currency", true);
         }
 
         public void checkoutClick(Object sender, EventArgs e)
@@ -89,83 +109,9 @@ namespace HackNet.Payment
                 Response.Redirect("~/game/currency", true);
             }
 
-            //set nonce
-            var nonce = "fake-valid-nonce";
-
-            //create transaction request
-            var request = new TransactionRequest
-            {
-                Amount = tPrice,
-                PaymentMethodNonce = nonce,
-            };
-
-            //send transaction request to server
-            Result<Transaction> result = gateway.Transaction.Sale(request);
-
-            //transaction is successful
-            if (result.IsSuccess())
-            {
-                try
-                {
-                    //get transaction id
-                    string transactionId = result.Target.Id.ToString();
-                    Session["transactionId"] = transactionId;
-
-                    int addItemQty = pkgItemQuantity;
-
-                    using (DataContext db = new DataContext())
-                    {
-                        Users u = CurrentUser.Entity(false, db);
-                        if (pkgItemName == "Buck")
-                        {
-                            int currBuck = u.ByteDollars;
-                            int newBuck = currBuck + addItemQty;
-                            u.ByteDollars = newBuck;
-                        }
-                        else if (pkgItemName == "Coin")
-                        {
-                            int currCoin = u.Coins;
-                            int newCoin = currCoin + addItemQty;
-                            u.Coins = newCoin;
-                        }
-                        else
-                        {
-                            Game.Class.ItemLogic.AddItemToInventory(u, pkgItemId, addItemQty);
-                        }
-                        
-                        db.SaveChanges();
-                    }
-                }
-                catch
-                {
-                    Response.Redirect("~/game/currency", true);
-                }
-
-                Response.Redirect("~/payment/checkout", true);
-            }
-            //transaction fail
-            else
-            {
-                Response.Redirect("~/payment/retry", true);
-            }
-        }
-
-        public void checkoutClickA()
-        {
-            try
-            {
-                Debug.WriteLine("enter try/catch checkpoutA");
-                tPrice = Convert.ToDecimal(pkgPrice);
-            }
-            catch
-            {
-                Response.Redirect("~/game/currency", true);
-            }
-
 
             //set nonce
             var nonce = "fake-valid-nonce";
-            Debug.WriteLine(" set nonce");
 
             //create transaction request
             var request = new TransactionRequest
@@ -211,11 +157,9 @@ namespace HackNet.Payment
                 }
                 catch
                 {
-                Debug.WriteLine("catch @ issuccess");
                     Response.Redirect("~/game/currency", true);
                 }
 
-                Debug.WriteLine("goto checkout");
                 Response.Redirect("~/payment/checkout", true);
             }
             //transaction fail

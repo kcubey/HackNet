@@ -13,15 +13,6 @@ namespace HackNet.Game {
     public partial class Currency {
         
         /// <summary>
-        /// headerconvert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label headerconvert;
-        
-        /// <summary>
         /// messageLabel control.
         /// </summary>
         /// <remarks>
@@ -31,13 +22,22 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label messageLabel;
         
         /// <summary>
-        /// updateFromModal control.
+        /// convertFromModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button updateFromModal;
+        protected global::System.Web.UI.WebControls.Button convertFromModal;
+        
+        /// <summary>
+        /// cancelConvert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancelConvert;
         
         /// <summary>
         /// ConversionPanel control.
@@ -85,13 +85,13 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label convertedCoinLabel;
         
         /// <summary>
-        /// ConversionButton control.
+        /// confirmConvertBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConversionButton;
+        protected global::System.Web.UI.WebControls.Button confirmConvertBtn;
         
         /// <summary>
         /// warning control.

@@ -10,12 +10,10 @@
     script type="text/javascript" src="jquery.jscrollpane.min.js"></script
 -->
     <script>
-        function showPopup() {
-            $('#popupConfirmation').modal('show');
+        function showEditModal() {
+            $('#EditModal').modal('show');
         }
     </script>
-    
-
     <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
     <style>
@@ -40,25 +38,26 @@
         }
     </style>
 
-    <div id="popupConfirmation" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <asp:Label ID="headerconvert" runat="server" Text="*WARNING*" ForeColor="Blue" Font-Size="Large"></asp:Label>
-                                    </div>
-                                    <div class="modal-body" style="color: black;">
-                                        <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <asp:Button id="updateFromModal" CssClass="btn btn-default" runat="server" OnClick="mcButton_Click" Text="Continue" />
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+<!-- =============== START MODAL CONTENT ============== -->
+    <div id="EditModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" Text="*WARNING*" ForeColor="Red" Font-Size="Larger" Font-Bold="True"></asp:Label>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button id="convertFromModal" CssClass="btn btn-default" runat="server" OnClick="ConversionButton_Click" Text="Confirm" />
+                    <asp:Button id="cancelConvert" CssClass="btn btn-default" runat="server" OnClick="cancelConvertBtn_Click" Text="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- =============== END MODAL CONTENT ============== -->
 
     <div class="panel panel-default">
 		<div class="panel-heading">
@@ -100,22 +99,11 @@
                                <br />Coins: <asp:Label ID="convertedCoinLabel" runat="server" Text=""></asp:Label>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                        <br /><br />
-
-                        <asp:Button ID="ConversionButton" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="ConversionButton_Click"/>
+                        <br />
+                        <asp:Button ID="confirmConvertBtn" runat="server" CssClass="btn btn-success" Text="Convert" OnClick="confirmConvertBtn_Click"/>
                     </div>
 
 <!-- ====================== End Conversion tab ===================== -->
-
-<!-- ============ MODAL WIP ================= 
-
-                        <asp:Button ID="openButton" class="btn btn-info btn-lg" data-toggle="modal" 
-                            data-target="#popupConfirmation" r@Sunat="s@erver" type="button" onclick="mcButton_Click" Text="OPen Modal"/>
-                                <asp:LinkButton r@unat="s@erver" ID="EditItemBTn" OnCommand="mcButton_Click" Text="Edit" />
--->
-                        
-<!-- KTODO minor: change alert to modal-->
-
 
 <!-- ================= Packages tab ====================== -->
                     <div class="tab-pane fade in" id="packages">

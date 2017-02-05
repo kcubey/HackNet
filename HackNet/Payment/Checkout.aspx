@@ -3,16 +3,12 @@
     
     <div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Checkout</h3>
+			<h3 class="panel-title">Checkout - Your purchase has been confirmed!</h3>
 		</div>
 		<div class="panel-body">
-            <h4>Your purchase has been confirmed!</h4>
-            <hr />
             You have purchased <asp:Label ID="packageDetailsLbl" runat="server" forecolor="Red"></asp:Label>
-
             <br />
             Your transaction ID is <asp:Label ID="transactionId" runat="server" ForeColor="Red"></asp:Label>
-
             <br /><br />
             An email has been sent to you regarding your purchase, thank you!
         </div>

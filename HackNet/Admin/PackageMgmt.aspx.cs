@@ -150,7 +150,6 @@ namespace HackNet.Admin
                 
                 db.SaveChanges();
             }
-
             PrintMessage("Package updated");
         }
 
