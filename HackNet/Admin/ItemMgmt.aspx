@@ -71,11 +71,11 @@
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemDesc"
-                        ID="RegularExpressionValidatorForItemDesc"
-                        ValidationExpression="^[a-zA-Z0-9'-'._%&+/\s]{0,10000}$"
+                        ID="RegularExpressionValidatorForEditItemDesc"
+                        ValidationExpression="^[a-zA-Z0-9'-'\#\,\?\*\-\(\)\._\&\+\/\s]{0,10000}$"
                         runat="server"
                         ForeColor="Red"
-                        ErrorMessage="Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
+                        ErrorMessage="Only Special characters allowed are '*#?()/&+-_. Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
                     </asp:RegularExpressionValidator>
                 </div>
                 <!-- Item Price -->
@@ -85,7 +85,7 @@
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemPrice"
-                        ID="RegularExpressionValidatorForItemPrice"
+                        ID="RegularExpressionValidatorForEditItemPrice"
                         ValidationExpression="^[0-9]*$"
                         runat="server"
                         ForeColor="Red"
@@ -99,7 +99,7 @@
                     <asp:RegularExpressionValidator
                         Display="Dynamic"
                         ControlToValidate="EditItemBonus"
-                        ID="RegularExpressionValidatorForItemBonus"
+                        ID="RegularExpressionValidatorForEditItemBonus"
                         ValidationExpression="^[0-9]*$"
                         runat="server"
                         ForeColor="Red"
@@ -128,6 +128,7 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
+                    <!-- All Items -->
                     <div class="tab-pane fade in active" id="AllItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>All Items</h2>
                         <asp:DataList ID="AllItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1000px">
@@ -146,6 +147,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <!-- Processor -->
                     <div class="tab-pane fade" id="ProcessItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Processor</h2>
                         <asp:DataList ID="ProcessItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
@@ -164,6 +166,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <!-- Graphics Card -->
                     <div class="tab-pane fade" id="GraphicItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Graphic Card</h2>
                         <asp:DataList ID="GraphicItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
@@ -182,6 +185,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <!-- Memory -->
                     <div class="tab-pane fade" id="MemoryItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Memory</h2>
                         <asp:DataList ID="MemoryItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
@@ -200,6 +204,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <!-- Power Supply -->
                     <div class="tab-pane fade" id="PowerItemTab" style="height: 660px; overflow-y: auto;">
                         <h2>Item - Power Supply</h2>
                         <asp:DataList ID="PowerItemList" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="1065px">
@@ -218,6 +223,7 @@
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
+                    <!-- Add Items -->
                     <div class="tab-pane fade" id="CreateItemTab">
                         <h2>Item Creator</h2>
                         <div class="container-fluid" style="color: black; background-color: gray;">
@@ -225,6 +231,15 @@
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
                                 <asp:TextBox runat="server" ID="ItemName" ForeColor="black"></asp:TextBox>
+                                <asp:RegularExpressionValidator
+                                    Display="Dynamic"
+                                    ControlToValidate="ItemName"
+                                    ID="RegularExpressionValidatorForItemName"
+                                    ValidationExpression="^[a-zA-Z0-9\-\s]{1,400}$"
+                                    runat="server"
+                                    ForeColor="Red"
+                                    ErrorMessage="Only Special character allowed is -  Maximum 400 characters allowed." ValidationGroup="ItemUpdate">
+                                </asp:RegularExpressionValidator>
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
@@ -242,15 +257,42 @@
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="ItemDesc" ForeColor="black" TextMode="MultiLine" Height="50px" Width="196px"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="ItemDesc" ForeColor="black" TextMode="MultiLine" Height="100px" Width="196px"></asp:TextBox>
+                                <asp:RegularExpressionValidator
+                                    Display="Dynamic"
+                                    ControlToValidate="ItemDesc"
+                                    ID="RegularExpressionValidatorForItemDesc"
+                                    ValidationExpression="^[a-zA-Z0-9'-'\#\,\?\*\-\(\)\._\&\+\/\s]{0,10000}$"
+                                    runat="server"
+                                    ForeColor="Red"
+                                    ErrorMessage="Only Special characters allowed are '*#?()/&+-_. Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
+                                </asp:RegularExpressionValidator>
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Price: " CssClass="col-xs-3 col-form-label"></asp:Label>
                                 <asp:TextBox runat="server" ID="ItemPrice" ForeColor="black"></asp:TextBox>
+                                <asp:RegularExpressionValidator
+                                    Display="Dynamic"
+                                    ControlToValidate="ItemPrice"
+                                    ID="RegularExpressionValidatorForItemPrice"
+                                    ValidationExpression="^[0-9]{0,3}$"
+                                    runat="server"
+                                    ForeColor="Red"
+                                    ErrorMessage="Only numeric values are allowed. Maximum value of 999." ValidationGroup="ItemUpdate">
+                                </asp:RegularExpressionValidator>
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" Text="Item Bonus: " CssClass="col-xs-3 col-form-label"></asp:Label>
                                 <asp:TextBox runat="server" ID="ItemStat" ForeColor="black"></asp:TextBox>
+                                <asp:RegularExpressionValidator
+                                    Display="Dynamic"
+                                    ControlToValidate="ItemStat"
+                                    ID="RegularExpressionValidatorForItemStat"
+                                    ValidationExpression="^(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50)$"
+                                    runat="server"
+                                    ForeColor="Red"
+                                    ErrorMessage="Only numeric values are allowed. Minimum value of 1. Maximum value of 50." ValidationGroup="ItemUpdate">
+                                </asp:RegularExpressionValidator>
                             </div>
                             <asp:Button runat="server" ID="btnAddItem" CssClass="btn btn-default" OnClick="btnAddItem_Click" Text="Add Item" />
                         </div>

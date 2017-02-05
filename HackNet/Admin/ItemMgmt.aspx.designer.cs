@@ -76,13 +76,13 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemDesc;
         
         /// <summary>
-        /// RegularExpressionValidatorForItemDesc control.
+        /// RegularExpressionValidatorForEditItemDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemDesc;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForEditItemDesc;
         
         /// <summary>
         /// EditItemPrice control.
@@ -94,13 +94,13 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemPrice;
         
         /// <summary>
-        /// RegularExpressionValidatorForItemPrice control.
+        /// RegularExpressionValidatorForEditItemPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemPrice;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForEditItemPrice;
         
         /// <summary>
         /// EditItemBonus control.
@@ -112,13 +112,13 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox EditItemBonus;
         
         /// <summary>
-        /// RegularExpressionValidatorForItemBonus control.
+        /// RegularExpressionValidatorForEditItemBonus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemBonus;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForEditItemBonus;
         
         /// <summary>
         /// UpdatePartsInfoBtn control.
@@ -193,6 +193,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox ItemName;
         
         /// <summary>
+        /// RegularExpressionValidatorForItemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemName;
+        
+        /// <summary>
         /// ItemTypeList control.
         /// </summary>
         /// <remarks>
@@ -220,6 +229,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox ItemDesc;
         
         /// <summary>
+        /// RegularExpressionValidatorForItemDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemDesc;
+        
+        /// <summary>
         /// ItemPrice control.
         /// </summary>
         /// <remarks>
@@ -229,6 +247,15 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.TextBox ItemPrice;
         
         /// <summary>
+        /// RegularExpressionValidatorForItemPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemPrice;
+        
+        /// <summary>
         /// ItemStat control.
         /// </summary>
         /// <remarks>
@@ -236,6 +263,15 @@ namespace HackNet.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ItemStat;
+        
+        /// <summary>
+        /// RegularExpressionValidatorForItemStat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForItemStat;
         
         /// <summary>
         /// btnAddItem control.
