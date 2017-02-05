@@ -35,28 +35,26 @@ namespace HackNet.Payment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Debug.WriteLine("enter payment pageload");
             Form.ID = "checkout-form";
-            try
-            {
-                Pack pkg = Session["pkg"] as Pack;
-                PackItem pkgItems = Session["pkgItems"] as PackItem;
-                if (pkg == null)
-                {
-                    Response.Redirect("~/game/currency", true);
-                }
-                pkgId = pkg.PackageId;
-                pkgPrice = pkg.Price;
-                pkgItemQuantity = pkgItems.Quantity;
-                pkgItemId = pkgItems.ItemId;
 
-                //packageDetailsLbl.Text = "Package " + Session["packageId"].ToString() + " - $" + Session["packageprice"].ToString();
+            if (Session["packageId"]!=null && Session["packagePrice"]!=null && Session["itemQuantity"]!=null
+                    && Session["itemId"]!=null && Session["itemName"]!=null)
+            {
+                Debug.WriteLine("enter if else");
+                pkgId = (int)Session["packageId"];
+                pkgPrice = (decimal)Session["packagePrice"];
+                pkgItemQuantity = (int)Session["itemQuantity"];
+                pkgItemId = (int)Session["itemId"];
+                pkgItemName = (string)Session["itemName"];
+
                 packageDetailsLbl.Text = "Package " + pkgId + " - $" + pkgPrice;
             }
-            catch
+            else
             {
                 Response.Redirect("~/game/currency", true);
             }
-
+            
             //Braintree codes
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
@@ -73,7 +71,6 @@ namespace HackNet.Payment
                 checkoutClickA();
                 //KTODO minor: Change to modal then checkout
             }
-
         }
 
         public void CancelClick(Object sender, EventArgs e)
@@ -114,8 +111,6 @@ namespace HackNet.Payment
                     string transactionId = result.Target.Id.ToString();
                     Session["transactionId"] = transactionId;
 
-                    Items i = HackNet.Data.Items.GetItem(pkgItemId);
-                    pkgItemName = i.ItemName.ToString();
                     int addItemQty = pkgItemQuantity;
 
                     using (DataContext db = new DataContext())
@@ -139,7 +134,6 @@ namespace HackNet.Payment
                         }
                         
                         db.SaveChanges();
-                        //KTODO = Check items/bucks are added
                     }
                 }
                 catch
@@ -156,11 +150,11 @@ namespace HackNet.Payment
             }
         }
 
-
         public void checkoutClickA()
         {
             try
             {
+                Debug.WriteLine("enter try/catch checkpoutA");
                 tPrice = Convert.ToDecimal(pkgPrice);
             }
             catch
@@ -168,36 +162,63 @@ namespace HackNet.Payment
                 Response.Redirect("~/game/currency", true);
             }
 
-            var nonce = "fake-valid-nonce";
 
+            //set nonce
+            var nonce = "fake-valid-nonce";
+            Debug.WriteLine(" set nonce");
+
+            //create transaction request
             var request = new TransactionRequest
             {
                 Amount = tPrice,
                 PaymentMethodNonce = nonce,
             };
 
+            //send transaction request to server
             Result<Transaction> result = gateway.Transaction.Sale(request);
 
+            //transaction is successful
             if (result.IsSuccess())
             {
-                string transactionId = result.Target.Id.ToString();
-                Session["transactionId"] = transactionId;
-
-                int addBuck = Convert.ToInt32(Session["itemQuantity"]);
-
-                using (DataContext db = new DataContext())
+                try
                 {
-                    Users u = CurrentUser.Entity(false, db);
-                    int currBuck = u.ByteDollars;
-                    int newBuck = currBuck + addBuck;
-                    u.ByteDollars = newBuck;
+                    //get transaction id
+                    string transactionId = result.Target.Id.ToString();
+                    Session["transactionId"] = transactionId;
+                    
+                    using (DataContext db = new DataContext())
+                    {
+                        Users u = CurrentUser.Entity(false, db);
+                        if (pkgItemName == "Buck")
+                        {
+                            int currBuck = u.ByteDollars;
+                            int newBuck = currBuck + pkgItemQuantity;
+                            u.ByteDollars = newBuck;
+                        }
+                        else if (pkgItemName == "Coin")
+                        {
+                            int currCoin = u.Coins;
+                            int newCoin = currCoin + pkgItemQuantity;
+                            u.Coins = newCoin;
+                        }
+                        else
+                        {
+                            Game.Class.ItemLogic.AddItemToInventory(u, pkgItemId, pkgItemQuantity);
+                        }
 
-                    db.SaveChanges();
-                    //dbBuck = u.ByteDollars;
-
-                    Response.Redirect("~/payment/checkout", true);
+                        db.SaveChanges();
+                    }
                 }
+                catch
+                {
+                Debug.WriteLine("catch @ issuccess");
+                    Response.Redirect("~/game/currency", true);
+                }
+
+                Debug.WriteLine("goto checkout");
+                Response.Redirect("~/payment/checkout", true);
             }
+            //transaction fail
             else
             {
                 Response.Redirect("~/payment/retry", true);

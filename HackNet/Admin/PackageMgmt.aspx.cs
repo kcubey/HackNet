@@ -76,8 +76,7 @@ namespace HackNet.Admin
             }
 
             string alert = "Package Added";
-            Response.Write("<script type='text/javascript'>alert('" + alert + "');document.location.href='PackageMgmt.aspx';</script>");
-
+            PrintMessage(alert);
         }
 
         private DataTable LoadInventory(int itemType)
@@ -131,13 +130,19 @@ namespace HackNet.Admin
             ScriptManager.RegisterStartupScript(this, this.GetType(), "EditModal", "showEditModal()", true);
         }
 
+        public void PrintMessage(String message)
+        {
+            string alert = message;
+            Response.Write("<script type='text/javascript'>alert('" + alert + "');document.location.href='packagemgmt.aspx';</script>");
+        }
+
         protected void UpdatePackageBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
-                Pack p = HackNet.Data.Pack.GetPackage((int)Session["packageId"]);
-                PackItem pi = HackNet.Data.PackItem.GetPackageItems((int)Session["packageId"]);
-                Items i = HackNet.Data.Items.GetItem((int)Session["packageItemId"]);
+                Pack p = HackNet.Data.Pack.GetPackage(Convert.ToInt32(Session["packageId"]));
+                PackItem pi = HackNet.Data.PackItem.GetPackageItems(Convert.ToInt32(Session["packageId"]));
+                Items i = HackNet.Data.Items.GetItem(Convert.ToInt32(Session["packageItemId"]));
 
                 p.Description = EditPackageDesc.Text;
                 p.Price = Convert.ToDecimal(EditPackagePrice.Text);
@@ -145,21 +150,21 @@ namespace HackNet.Admin
                 
                 db.SaveChanges();
             }
-            LoadPackages(packageRepeater);
+
+            PrintMessage("Package updated");
         }
 
         protected void DeletePackageBtn_Click(object sender, EventArgs e)
         {
             using (DataContext db = new DataContext())
             {
-                Pack p = HackNet.Data.Pack.GetPackage((int)Session["packageId"]);
-                PackItem pi = HackNet.Data.PackItem.GetPackageItems((int)Session["packageId"]);
+                Pack p = HackNet.Data.Pack.GetPackage(Convert.ToInt32(Session["packageId"]));
+                PackItem pi = HackNet.Data.PackItem.GetPackageItems(Convert.ToInt32(Session["packageId"]));
                 db.Package.Remove(p);
                 db.PackItem.Remove(pi);
                 db.SaveChanges();
             }
-            LoadPackages(packageRepeater);
+            PrintMessage("Package deleted");
         }
-
     }
 }

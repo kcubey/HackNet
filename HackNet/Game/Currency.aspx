@@ -136,8 +136,6 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>
-<!-- KTODO: make packages dynamic:
-        change imageurl-->
 <!-- ================= end repeater ====================== -->
                     </div>
 <!-- ================= end Packages tab ====================== -->

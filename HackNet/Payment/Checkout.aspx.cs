@@ -18,13 +18,14 @@ namespace HackNet.Payment
 
         protected void Page_Load(object sender, EventArgs e)
         { 
-            if (Session["packageId"] is string && Session["packageprice"] is string && Session["transactionId"] is string)
+            if (Session["packageId"]!=null && Session["packagePrice"]!=null && Session["transactionId"]!=null)
             {
-                string packageName = Session["packageId"] as string;
-                string packagePrice = Session["packageprice"] as string;
-                transactionDetails = Session["transactionId"] as string;
+                string packageName = Session["packageId"].ToString();
+                string packagePrice = Session["packagePrice"].ToString();
+                transactionDetails = Session["transactionId"].ToString();
                 message = "Package " + packageName + " at $" + packagePrice;
-            }else
+            }
+            else
             {
                 Response.Redirect("~/game/currency", true);
             }
@@ -47,8 +48,6 @@ namespace HackNet.Payment
         protected void Page_Unload()
         {
             Session.Abandon();
-            Debug.WriteLine("package id: " + Session["packageId"]);
-            Debug.WriteLine("package price: " + Session["packageprice"]);
         }
 
     }
