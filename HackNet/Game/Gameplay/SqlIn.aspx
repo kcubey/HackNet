@@ -67,6 +67,25 @@
                                 <asp:Label runat="server" ID="MisCoinLbl"></asp:Label>
                             </asp:TableCell>
                         </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <label>Item Name: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemNameLbl"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <label>Item Bonus: </label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="ItemBonusLbl"></asp:Label>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell ColumnSpan="4">
+                                <asp:Image runat="server" ID="ItemImage" />
+                            </asp:TableCell>
+                        </asp:TableRow>
                     </asp:Table>
                 </div>
                 <div class="modal-footer">

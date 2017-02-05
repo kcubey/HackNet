@@ -67,6 +67,33 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.WebControls.Label MisCoinLbl;
         
         /// <summary>
+        /// ItemNameLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemNameLbl;
+        
+        /// <summary>
+        /// ItemBonusLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ItemBonusLbl;
+        
+        /// <summary>
+        /// ItemImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ItemImage;
+        
+        /// <summary>
         /// ExitBtn control.
         /// </summary>
         /// <remarks>

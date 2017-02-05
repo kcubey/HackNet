@@ -225,7 +225,9 @@ namespace HackNet.Game.Gameplay
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
-                        MissionLogLogic.Store(CurrentUser.Entity().UserID,mis.MissionName,true);
+                        List<string> itemnamelist = new List<string>();
+                        itemnamelist.Add(i.ItemName);
+                        MissionLogLogic.Store(CurrentUser.Entity().UserID,mis.MissionName,true, itemnamelist);
 
                     }
 

@@ -1,4 +1,6 @@
 ﻿using HackNet.Data;
+using HackNet.Game.Class;
+using HackNet.Loggers;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -189,6 +191,15 @@ namespace HackNet.Game.Gameplay
                         u.TotalExp = u.TotalExp + mis.MissionExp;
                         System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
                         db.SaveChanges();
+
+                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID, db));
+                        ItemNameLbl.Text = i.ItemName;
+                        ItemBonusLbl.Text = i.ItemBonus.ToString();
+                        ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
+
+                        List<string> itemnamelist = new List<string>();
+                        itemnamelist.Add(i.ItemName);
+                        MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, true, itemnamelist);
                     }
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
