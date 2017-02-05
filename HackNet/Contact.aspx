@@ -14,6 +14,7 @@
     </address>
 
     <h3>Get in touch with us</h3>
+    <!-- Subject -->
     <span title="subject"> Subject </span>
     <asp:TextBox ID="Subjecttxt" runat="server" CssClass="form-control" placeholder="Your Subject" style="Width:100%; border-width:3px;"/> 
     <asp:RegularExpressionValidator
@@ -26,6 +27,7 @@
         ErrorMessage="Only Special characters allowed are '*#?()/&+-_. Maximum 200 characters allowed." ValidationGroup="ItemUpdate">
     </asp:RegularExpressionValidator>
     <br />
+    <!-- Content -->
     <span title="content"> Your Message </span>
     <asp:TextBox ID="contenttxt" runat="server" CssClass="form-control" placeholder="Your text here" TextMode="MultiLine" style="Width:100%; height:100px; border-width:3px;"/> 
     <asp:RegularExpressionValidator
@@ -38,6 +40,7 @@
         ErrorMessage="Only Special characters allowed are '*#?()/&+-_. Maximum 10000 characters allowed." ValidationGroup="ItemUpdate">
     </asp:RegularExpressionValidator>
     <br />
+    <!-- User's Email -->
     <span title="useremail"> Your Email </span>
     <asp:TextBox ID="useremail" runat="server" CssClass="form-control" type="email" placeholder="SoWeCanReplyToYou@youremail.com" style="Width:100%; border-width:3px;"/> 
     <asp:RegularExpressionValidator
@@ -50,6 +53,7 @@
         ErrorMessage="Please give a valid email." ValidationGroup="ItemUpdate">
     </asp:RegularExpressionValidator>
     <br />
+    <!-- SubmitButton -->
     <asp:Button ID="btnSubmit" runat="server" CssClass="btn" Text="Submit" OnClick="btnSubmit_Click" style="margin-top:10px;" />
     <br /><br />
     <p style="font-size:0.7em;">*This email will automatically be sent to an admin and reply to your specified email in 2-5 days.</p>
