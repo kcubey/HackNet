@@ -122,18 +122,6 @@
                         <asp:Label ID="warning" runat="server" Text="* WARNING *" ForeColor="Red" Font-Bold="True" Font-Size="Large"></asp:Label>
                         <br />These premium packages require the use of REAL money.
                         <hr />
-                        <asp:LinkButton ID="packageButton" class="redirectButton" runat="server" onclick="buyPackage_Click" Font-Underline="False">
-                            <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl="/payment/backend/package-2.png"  BackColor="Transparent" />
-                            <br />
-                            <asp:Label ID="packageQuantity" CssClass="redirectLbl" runat="server" Text="50" Font-Size="Smaller"></asp:Label>
-                            <asp:Label ID="packageItem" CssClass="redirectLbl" runat="server" Text="Bucks" Font-Size="Smaller"></asp:Label>
-                            <br />
-                            <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                            <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text="1"></asp:Label>
-                            <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text="1.99"></asp:Label>
-                        </asp:LinkButton>
-
 <!-- ================= repeater ====================== -->
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
@@ -141,13 +129,10 @@
                                         OnCommand="buyPackage_Command"  CommandArgument='<%#Eval("PackageId")%>' Font-Underline="False">
                                     <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='<%#Eval("ItemPic")%>'  BackColor="Transparent" />
                                     <br />
-                                    <asp:Label ID="packageBuckQuantity" CssClass="redirectLbl" runat="server" Text='<%#Eval("Quantity")%>' Font-Size="Smaller"></asp:Label>
                                     <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
                                     <br />
                                     <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
                                         <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
-                                        <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                                        <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='<%#Eval("Price")%>'></asp:Label>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </asp:Repeater>

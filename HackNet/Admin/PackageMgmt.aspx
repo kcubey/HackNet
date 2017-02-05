@@ -2,46 +2,64 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminPanelContent" runat="server">
 
     <script>
-        function showEditItemModal() {
-            $('#EditItemModal').modal('show');
+        function showEditModal() {
+            $('#EditModal').modal('show');
         }
     </script>
+    <link rel="stylesheet" href="/payment/backend/redirectimagebutton.css" />
 
     
                             
 <!-- =============== START MODAL CONTENT ============== -->
-    <div id="EditItemModal" class="modal fade" role="dialog">
+    <div id="EditModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <asp:Label runat="server" Text="Edit Item" ForeColor="Black" Font-Size="Larger"></asp:Label>
+                    <asp:Label runat="server" Text="Edit Package" ForeColor="Black" Font-Size="Larger"></asp:Label>
                 </div>
                 
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Name" />
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemName" Width="280px"></asp:TextBox>
+                    <asp:Label runat="server" Text="Package ID: " CssClass="col-xs-3 col-form-label"/>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageId" Enabled="false" Width="280px"></asp:TextBox>
+                </div>
 
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"/>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageDesc" TextMode="MultiLine" Width="280px"></asp:TextBox>
+                </div>
+
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Package Price: " CssClass="col-xs-3 col-form-label"/>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackagePrice" Width="280px"></asp:TextBox>
+                </div>
+
+                <div class="modal-body" style="color: black">
+                    <asp:Label runat="server" Text="Package Item: " CssClass="col-xs-3 col-form-label"/>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItem" Enabled="false" Width="280px"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Type" />
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemType" Enabled="false" Width="280px"></asp:TextBox>
+                    <asp:Label runat="server" Text="Item Quantity: " CssClass="col-xs-3 col-form-label"/>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemQuantity" Width="280px"></asp:TextBox>
                 </div>
-                <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Description" />
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemDesc" Width="280px"></asp:TextBox>
-                </div>
-                <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Item Price" />
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemPrice" Width="280px"></asp:TextBox>
-                </div>
-                <div class="modal-body" style="color: black">
-                    <asp:Label runat="server" Text="Bonus" />
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemBonus" Width="280px"></asp:TextBox>
-                </div>
+                <div class="form-group row">
+                        <div class="col-xs-9">
+                            <asp:RegularExpressionValidator ID="EditPackagePriceValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please enter a decimal number"
+                                ControlToValidate="EditPackagePrice"
+                                ValidationExpression="^[0-9]{0,6}(\.[0-9]{1,2})?$"/><br />
+                            <asp:RegularExpressionValidator ID="EditItemQuantityValidator" runat="server" 
+                                ForeColor="Red"
+                                ErrorMessage="Please enter whole numbers only"
+                                ControlToValidate="EditItemQuantity"
+                                ValidationExpression="^\d+$" />
+                        </div>
+                    </div>
                 <div class="modal-footer">
-         <!--           <asp:Button runatserver CssClass="btn btn-default" Text="Update" ID="UpdatePartsInfoBtn" OnClick="UpdatePartsInfoBtn_Click" />-->
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Update" ID="UpdatePackageBtn" OnClick="UpdatePackageBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Delete" ID="DeletePackageBtn" OnClick="DeletePackageBtn_Click" />
                 </div>
             </div>
         </div>
@@ -127,22 +145,36 @@
                     <div class="tab-pane fade" id="tab2default">
                         <h2>Edit Package</h2>
                         Click on the package to edit.
-                        <asp:Label runat="server" Text="Item List: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                        <asp:DataList ID="EditPackage" runat="server" RepeatColumns="3" RepeatLayout="Table" Width="500px">
+                        <br />
+<!--                            <asp:DataList ID="EditPackage" runat="server" RepeatColumns="1" RepeatLayout="Table" Width="500px">
                             <ItemTemplate>
                                 <div style="margin: 10px;">
                                     <asp:LinkButton runat="server" ID="itemName" OnCommand="EditPackage_Command" 
-                                        CommandArgument='<%# Eval("PackageID")%>' forecolor="Black">
-                                        <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
+                                        CommandArgument='< %# Eval("PackageID")%>' forecolor="Black" Font-Underline="False">
                                         <br />
+                                        <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< %#Eval("ItemPic")%>'  BackColor="Transparent" />
                                         <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                                            <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
+                                            <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< %#Eval("PackageId")%>'></asp:Label>
                                             <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                                            <asp:Label ID="packageCost" CssClass="redirectLbl" runat="server" Text='<%#Eval("Price")%>'></asp:Label>
+                                            <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='< %#Eval("Description")%>'></asp:Label>
                                     </asp:LinkButton>
                                 </div>
                              </ItemTemplate>
-                         </asp:DataList>
+                         </asp:DataList> 
+-->
+                        <asp:Repeater ID="packageRepeater" runat="server">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="itemName" class="redirectButton" runat="server" 
+                                        OnCommand="EditPackage_Command"  CommandArgument='<%#Eval("PackageId")%>' Font-Underline="False">
+                                    <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='<%#Eval("ItemPic")%>'  BackColor="Transparent" />
+                                    <br />
+                                    <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='<%#Eval("Description")%>' Font-Size="Smaller"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
+                                        <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='<%#Eval("PackageId")%>'></asp:Label>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
 <!-- ================= END TAB 2 CONTENT  ================== -->                                        
                 </div>
