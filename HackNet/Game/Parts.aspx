@@ -2,13 +2,14 @@
 
 <asp:Content ID="HeadCt" ContentPlaceHolderID="GameHeadPH" runat="server">
     <style>
-        .nav-tabs > li > a{
-            color:limegreen;
+        .nav-tabs > li > a {
+            color: limegreen;
         }
+
         .nav-tabs > li.active > a,
         .nav-tabs > li.active > a:hover,
         .nav-tabs > li.active > a:focus {
-            background-color:rgba(10, 10, 10, 0.9);
+            background-color: rgba(10, 10, 10, 0.9);
             color: white;
             border: 0px solid #333;
         }
@@ -18,21 +19,25 @@
             color: white;
             border: 0px solid #333;
         }
+
         .viewMoreButton {
-            color:#B6C5BE;
+            color: #B6C5BE;
         }
-        .viewMoreButton:hover {
-            color:#fff;
-            text-decoration:none;
-        }
-        .viewMoreButton:focus {
-            color:#fff;
-            text-decoration:none;
-        }
-        .viewMoreButton:visited {
-            color:#fff;
-            text-decoration:none;
-        }
+
+            .viewMoreButton:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .viewMoreButton:focus {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .viewMoreButton:visited {
+                color: #fff;
+                text-decoration: none;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="GameContent" runat="server">
@@ -53,19 +58,18 @@
                 </div>
                 <div class="modal-body" style="color: black">
                     <p>Are you sure you want to sell this</p>
-                    <br />
-                    <br />
-                    <!-- This ConfirmSellItem name does not work -->
-                    <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemName"></asp:Label>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p><span style="color:red;">WARNING</span> : THIS <span style="text-decoration:underline; color:darkred;">CANNOT</span> BE UNDONE</p>
+                    <div class="form-group row">
+                        <label class="col-xs-3 col-form-label">Item Name: </label>
+                        <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemName"></asp:Label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-xs-3 col-form-label">Item to sell for: </label>
+                        <asp:Label runat="server" ForeColor="Black" Font-Size="Larger" ID="ConfirmSellItemPrice"></asp:Label>
+                    </div>
+                    <p><span style="color: red;">WARNING</span> : THIS <span style="text-decoration: underline; color: darkred;">CANNOT</span> BE UNDONE</p>
                 </div>
                 <div class="modal-footer">
-                    <!-- Not sure what to do with this OnClick="SellItemBtn_Click" It is just broken because method has no defintion-->
-                    <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="SellItemBtn" OnClick="SellItemBtn_Click" />
+                    <asp:Button runat="server" CssClass="btn btn-default" Text="Yes" ID="CfmSellBtn" OnClick="CfmSellBtn_Click" />
                     <asp:Button runat="server" CssClass="btn btn-default" Text="No" ID="Close" data-dismiss="modal" />
                 </div>
             </div>
@@ -291,13 +295,16 @@
             </asp:DropDownList>
         </div>
         <div>
-                <asp:Button ID="btnSubmitDdl" runat="server" 
-                    Text="Click to Retrieve Value" onclick="btnSubmitDdl_Click" /></div>
-        <div class="form-group row">
-            Selected Item Text: <asp:Label ID="lblSelectedText" runat="server"></asp:Label>
+            <asp:Button ID="btnSubmitDdl" runat="server"
+                Text="Click to Retrieve Value" OnClick="btnSubmitDdl_Click" />
         </div>
         <div class="form-group row">
-            Selected Item Value: <asp:Label ID="lblSelectedValue" runat="server"></asp:Label>
+            Selected Item Text:
+            <asp:Label ID="lblSelectedText" runat="server"></asp:Label>
+        </div>
+        <div class="form-group row">
+            Selected Item Value:
+            <asp:Label ID="lblSelectedValue" runat="server"></asp:Label>
         </div>
     </div>
     <!-- /Delete Item -->

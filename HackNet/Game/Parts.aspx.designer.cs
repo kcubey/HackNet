@@ -22,13 +22,22 @@ namespace HackNet.Game {
         protected global::System.Web.UI.WebControls.Label ConfirmSellItemName;
         
         /// <summary>
-        /// SellItemBtn control.
+        /// ConfirmSellItemPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SellItemBtn;
+        protected global::System.Web.UI.WebControls.Label ConfirmSellItemPrice;
+        
+        /// <summary>
+        /// CfmSellBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CfmSellBtn;
         
         /// <summary>
         /// Close control.

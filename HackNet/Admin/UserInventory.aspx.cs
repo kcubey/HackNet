@@ -94,7 +94,15 @@ namespace HackNet.Admin
 
         protected void AddItemToUserInv_Click(object sender, EventArgs e)
         {
-
+            InventoryItem invitem = new InventoryItem();
+            invitem.UserId = int.Parse(UserIDTxtbox.Text);
+            invitem.ItemId = int.Parse(AllItemsList.SelectedValue);
+            invitem.Quantity = int.Parse(ItemQuantityTxtbox.Text);
+            using (DataContext db=new DataContext())
+            {
+                db.InventoryItem.Add(invitem);
+                db.SaveChanges();
+            }
         }
     }
 }
