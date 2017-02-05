@@ -22,6 +22,15 @@ namespace HackNet {
         protected global::System.Web.UI.WebControls.TextBox Subjecttxt;
         
         /// <summary>
+        /// RegularExpressionValidatorForSubjecttxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForSubjecttxt;
+        
+        /// <summary>
         /// contenttxt control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace HackNet {
         protected global::System.Web.UI.WebControls.TextBox contenttxt;
         
         /// <summary>
+        /// RegularExpressionValidatorForcontenttxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForcontenttxt;
+        
+        /// <summary>
         /// useremail control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace HackNet {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox useremail;
+        
+        /// <summary>
+        /// RegularExpressionValidatorForuseremail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorForuseremail;
         
         /// <summary>
         /// btnSubmit control.
