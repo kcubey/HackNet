@@ -39,7 +39,7 @@
             </div>
             <div class="form-group row">
                 <asp:Label runat="server" Text="Items: " CssClass="col-xs-3 col-form-label" />
-                <asp:DropDownList runat="server" ID="AllItemsList" OnLoad="AllItemsList_Load" ForeColor="Black">
+                <asp:DropDownList runat="server" ID="AllItemsList" ForeColor="Black">
                 </asp:DropDownList>
             </div>
             <div class="form-group row">

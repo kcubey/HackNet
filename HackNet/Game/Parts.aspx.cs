@@ -110,6 +110,7 @@ namespace HackNet.Game
                         u.Coins = u.Coins+int.Parse(Cache["PriceToSell"].ToString());
                         db.SaveChanges();
                     }
+                    Response.Redirect("Parts.aspx", true);
                 }
                 else
                 {
