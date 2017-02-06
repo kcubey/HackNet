@@ -23,8 +23,7 @@ namespace HackNet.Loggers
 			}
 		}
 
-
-		internal void PaymentSuccess(string email, int userid)
+		internal void PaymentSuccess(string email, int userid, string transactionid)
 		{
 			LogEntry entry = new LogEntry()
 			{
@@ -32,7 +31,7 @@ namespace HackNet.Loggers
 				UserId = userid,
 				IPAddress = GetIP(),
 				Severity = LogSeverity.WARN,
-				Description = "Payment has been made successfully"
+				Description = "Payment has been made successfully (id: " +transactionid +")"
 			};
 			Log(entry);
 		}

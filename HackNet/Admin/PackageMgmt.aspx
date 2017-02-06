@@ -22,26 +22,26 @@
                 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package ID: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageId" Enabled="false" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageId" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageDesc" TextMode="MultiLine" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageDesc" TextMode="MultiLine" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Price: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackagePrice" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackagePrice" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Item: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItem" Enabled="false" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItem" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Quantity: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemQuantity" Width="280px"></asp:TextBox>
+                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemQuantity" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="form-group row">
                         <div class="col-xs-9">
@@ -86,7 +86,7 @@
                                 <ContentTemplate>
                                     <div class="form-group row">
                                         <asp:Label runat="server" Text="Item Type: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                        <asp:DropDownList runat="server" ID="itemTypeDDL" OnSelectedIndexChanged="DisplayItems" AutoPostBack="true">
+                                        <asp:DropDownList runat="server" ID="itemTypeDDL" Cssclass="btn btn-default dropdown-toggle" OnSelectedIndexChanged="DisplayItems" AutoPostBack="true">
                                             <asp:ListItem Value="-2">Choose An Item Type</asp:ListItem>
                                             <asp:ListItem Value="1">Processor</asp:ListItem>
                                             <asp:ListItem Value="4">Graphic Card</asp:ListItem>
@@ -115,11 +115,11 @@
                             </asp:UpdatePanel>
                             <div class="form-group row">
                                 <asp:Label runat="server" id="descLbl" Text="Package Description: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgDesc" AutoComplete="false" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="pkgDesc" AutoComplete="false" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" id="priceLbl" Text="Package Price ($): " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgPrice" AutoComplete="false" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="pkgPrice" AutoComplete="false" CssClass="form-control"></asp:TextBox>
                                 <asp:RegularExpressionValidator 
                                     ID="priceValidator" runat="server" 
                                     ErrorMessage="* Enter up to 2 decimal places only" ValidationExpression="^[0-9]{0,6}(\.[0-9]{1,2})?$"
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form-group row">
                                 <asp:Label runat="server" id="qtyLbl" Text="Quantity: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                                <asp:TextBox runat="server" ID="pkgQuantity" AutoComplete="false" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="pkgQuantity" AutoComplete="false" CssClass="form-control"></asp:TextBox>
                                 <asp:RegularExpressionValidator 
                                     ID="quantityValidator" runat="server" 
                                     ErrorMessage="* Enter whole numbers only" ValidationExpression="^\d+$"
@@ -146,22 +146,6 @@
                         <h2>Edit Package</h2>
                         Click on the package to edit.
                         <br />
-<!--                            <asp:DataList ID="EditPackage" runat="server" RepeatColumns="1" RepeatLayout="Table" Width="500px">
-                            <ItemTemplate>
-                                <div style="margin: 10px;">
-                                    <asp:LinkButton runat="server" ID="itemName" OnCommand="EditPackage_Command" 
-                                        CommandArgument='< %# Eval("PackageID")%>' forecolor="Black" Font-Underline="False">
-                                        <br />
-                                        <asp:Image ID="packageImage" runat="server" CssClass="redirectImg" ImageUrl='< %#Eval("ItemPic")%>'  BackColor="Transparent" />
-                                        <asp:Label ID="packageName" CssClass="redirectLbl" runat="server" Text="Package "></asp:Label>
-                                            <asp:Label ID="packageNo" CssClass="redirectLbl" runat="server" Text='< %#Eval("PackageId")%>'></asp:Label>
-                                            <asp:Label ID="packagePrice" CssClass="redirectLbl" runat="server" Text=" - $"></asp:Label>
-                                            <asp:Label ID="packageDesc" CssClass="redirectLbl" runat="server" Text='< %#Eval("Description")%>'></asp:Label>
-                                    </asp:LinkButton>
-                                </div>
-                             </ItemTemplate>
-                         </asp:DataList> 
--->
                         <asp:Repeater ID="packageRepeater" runat="server">
                             <ItemTemplate>
                                 <asp:LinkButton ID="itemName" class="redirectButton" runat="server" 
