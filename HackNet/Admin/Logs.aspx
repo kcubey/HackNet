@@ -15,7 +15,6 @@
 					<asp:ListItem Value="Security" Text="Security" Selected="True" />
 					<asp:ListItem Value="Payment" Text="Payment" />
 					<asp:ListItem Value="Profile" Text="Profile" />
-					<asp:ListItem Value="Error" Text="Error" />
 				</asp:DropDownList>
 			</div>
 			<div class="col-md-2">
