@@ -64,9 +64,9 @@
 					<li><asp:HyperLink runat="server" Text="Home" NavigateUrl="~/Game/Home" /></li>
 					<li><asp:HyperLink runat="server" Text="Workstation" NavigateUrl="~/Game/Workstation" /></li>
 					<li><asp:HyperLink runat="server" Text="Missions" NavigateUrl="~/Game/Missions" /></li>
-					<li><asp:HyperLink runat="server" Text="Mission Logs" NavigateUrl="~/Game/MissionLogs" /></li>
 					<li><asp:HyperLink runat="server" Text="Inventory" NavigateUrl="~/Game/Inventory" /></li>
-					<li><asp:HyperLink runat="server" Text="Chat" NavigateUrl="~/Game/Chat" /></li>
+   					<li><asp:HyperLink runat="server" Text="Mission Logs" NavigateUrl="~/Game/MissionLogs" /></li>
+					<li><asp:HyperLink runat="server" Text="Secured Chat" NavigateUrl="~/Game/Chat" /></li>
 					<li><asp:HyperLink runat="server" Text="Market" NavigateUrl="~/Game/Market" /></li>
 				</ul>
 			</div>
