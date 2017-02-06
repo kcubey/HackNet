@@ -10,6 +10,8 @@ using HackNet.Data;
 using HackNet.Loggers;
 
 using System.Web.Security;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace HackNet.Auth {
 	public partial class SignIn : Page {
@@ -19,17 +21,17 @@ namespace HackNet.Auth {
 			if (CurrentUser.IsAuthenticated())
 				Response.Redirect("~/Game/Home");
 
-			if (BlockList.CheckBlocked(Authenticate.GetIP()))
-				Msg.Text = "You have had too many attempts, your IP has been blocked";
+            int delay = RateLimit.Instance.GetDelay(Authenticate.GetIP());
+
+            if (delay > 0)
+            {
+                DelayMsg.Text = @"You have had failed login attempts, your login will be delayed: " + delay + "secs" ;
+            }
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
-			if (BlockList.CheckBlocked(Authenticate.GetIP()))
-			{
-				Msg.Text = "You have had too many attempts, your IP has been blocked";
-				return;
-			}
+            int delaysecs = RateLimit.Instance.GetDelay(Authenticate.GetIP());
 
 			// Force email lowercase before validating
 			string email = Email.Text.ToLower();
@@ -38,6 +40,7 @@ namespace HackNet.Auth {
 			{
 				using (Authenticate auth = new Authenticate(email))
 				{
+
 					// ValidateLogin generates a KeyStore and stores it as a temp variable
 					AuthResult result = auth.ValidateLogin(UserPass.Text);
 
@@ -48,15 +51,15 @@ namespace HackNet.Auth {
 							break;
 						case AuthResult.PasswordIncorrect:
 							Msg.Text = "User and/or password not found (1)";
-							BlockList.AddOrUpdateAttempt(ip);
+							RateLimit.Instance.AddOrUpdateAttempt(ip);
 							break;
 						case AuthResult.UserNotFound:
 							Msg.Text = "User and/or password not found (2)";
-							BlockList.AddOrUpdateAttempt(ip);
+							RateLimit.Instance.AddOrUpdateAttempt(ip);
 							break;
 						case AuthResult.EmailNotVerified:
 							Msg.Text = "Email has not been verified, a confirmation email will be sent to you shortly";
-							BlockList.AddOrUpdateAttempt(ip);
+							RateLimit.Instance.AddOrUpdateAttempt(ip);
 							break;
 						default:
 							Msg.Text = "Unhandled error has occured";
@@ -65,16 +68,21 @@ namespace HackNet.Auth {
 				}
 			} catch (UserException)
 			{
-				Msg.Text = "User and/or password not found (2)";
+				Msg.Text = "User and/or password not found (Error)";
 			}
-		}
 
-		/// <summary>
-		/// Executed on successful login
-		/// </summary>
-		/// <param name="email"></param>
-		/// <param name="ks"></param>
-		private void LoginSuccess(string email, KeyStore ks)
+
+            // Forces a time delay using delayer task specified delay duration
+            Thread.Sleep(TimeSpan.FromSeconds(delaysecs));
+
+        }
+
+        /// <summary>
+        /// Executed on successful login
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="ks"></param>
+        private void LoginSuccess(string email, KeyStore ks)
 		{
 			using (Authenticate a = new Authenticate(email))
 			{

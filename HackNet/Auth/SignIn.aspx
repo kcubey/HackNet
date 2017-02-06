@@ -13,7 +13,7 @@
    	<br />
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Sign In
+			Sign In <asp:Label ID="DelayMsg" ForeColor="Orange" runat="server"/>
 		</div>
 		<div class="panel-body">
             <asp:Label ID="Msg" ForeColor="Red" runat="server"/>

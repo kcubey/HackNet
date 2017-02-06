@@ -689,7 +689,7 @@
       <DependentUpon>ProfileSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\Base32.cs" />
-    <Compile Include="Security\BlockList.cs" />
+    <Compile Include="Security\RateLimit.cs" />
     <Compile Include="Security\CurrentUser.cs" />
     <Compile Include="Security\EmailConfirm.cs" />
     <Compile Include="Security\KeyStore.cs" />

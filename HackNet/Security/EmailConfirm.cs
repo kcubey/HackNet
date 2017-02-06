@@ -24,7 +24,7 @@ namespace HackNet.Security
 
 		public static void SendEmailForConfirmation(Users u, DataContext db)
 		{
-			string code = GenerateString(encode: true);
+			string code = GenerateString();
 
 			Confirmations c = new Confirmations()
 			{
@@ -37,7 +37,9 @@ namespace HackNet.Security
 
 			db.Confirmations.Add(c);
 
-			string link = string.Format("https://haxnet.azurewebsites.net/Auth/ConfirmEmail?Email={0}&Code={1}", u.Email, code);
+            string addr = HttpUtility.UrlEncode(u.Email);
+
+            string link = string.Format("https://haxnet.azurewebsites.net/Auth/ConfirmEmail?Email={0}&Code={1}", addr, code);
 
 			using (MailClient mc = new MailClient(u.Email))
 			{
@@ -56,7 +58,7 @@ namespace HackNet.Security
 			using (DataContext db = new DataContext())
 			using (Authenticate a = new Authenticate(email))
 			{
-				string code = GenerateString(encode: true);
+				string code = GenerateString();
 				Confirmations c = new Confirmations()
 				{
 					Email = a.Email,
@@ -67,7 +69,9 @@ namespace HackNet.Security
 				};
 				db.Confirmations.Add(c);
 
-				string link = string.Format("https://haxnet.azurewebsites.net/Auth/ResetPassword?Email={0}&Code={1}", a.Email, code);
+                string addr = HttpUtility.UrlEncode(a.Email);
+
+				string link = string.Format("https://haxnet.azurewebsites.net/Auth/ResetPassword?Email={0}&Code={1}", addr, code);
 				link = HttpUtility.HtmlAttributeEncode(link); // Encoding for QueryString
 
 				using (MailClient mc = new MailClient(a.Email))
@@ -151,7 +155,7 @@ namespace HackNet.Security
 					{
 						c.Code = null;
 
-						string password = GenerateString(encode: false);
+						string password = GenerateString();
 
 						MessageLogic.QuitAllConversations(u, db);
 
@@ -171,6 +175,7 @@ namespace HackNet.Security
 
 		private static List<Confirmations> GetAllConfirmations(string email, string code, DataContext db)
 		{
+            // Gets a list of all the confirmations where an email and code matches
 			List<Confirmations> confirms =
 							db.Confirmations
 							.Where(c => c.Email == email && c.Code == code)
@@ -179,22 +184,21 @@ namespace HackNet.Security
 			return confirms;
 		}
 
-		private static string GenerateString(bool encode = true)
+		private static string GenerateString()
 		{
-			byte[] strBytes = new byte[12];
-			using (RNGCryptoServiceProvider rngcsp = new RNGCryptoServiceProvider())
-			{
-				rngcsp.GetBytes(strBytes);
-			}
-			string str = Convert.ToBase64String(strBytes);
+            Random random = new Random();
 
-			if (encode == true)
-				return HttpUtility.UrlEncode(str);
-			else
-				return str;
-		}
+            const string chars = 
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-	}
+            // Generate string from an array of possible characters
+            string str = new string(Enumerable.Repeat(chars, 16)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return str;
+        }
+    }
+
 
 	public enum EmailConfirmResult
 	{
