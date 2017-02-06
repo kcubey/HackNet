@@ -13,10 +13,10 @@
    	<br />
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Sign In <asp:Label ID="DelayMsg" ForeColor="Orange" runat="server"/>
+			Sign In 
 		</div>
 		<div class="panel-body">
-            <asp:Label ID="Msg" ForeColor="Red" runat="server"/>
+            <asp:Label ID="Msg" ForeColor="Red" runat="server"/><asp:Label ID="DelayMsg" ForeColor="Orange" runat="server"/>
 			<table runat="server" class="formTable">
 				<tr>
 					<td><strong>Email:</strong></td>

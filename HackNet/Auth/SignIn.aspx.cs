@@ -25,13 +25,15 @@ namespace HackNet.Auth {
 
             if (delay > 0)
             {
-                DelayMsg.Text = @"You have had failed login attempts, your login will be delayed: " + delay + "secs" ;
+                DelayMsg.Text = @" You have had failed logins, your attempt has been delayed: " + delay + "secs" ;
             }
         }
 
         protected void LoginClick(object sender, EventArgs e)
         {
+            // Gets the number of seconds that this user has been delayed for
             int delaysecs = RateLimit.Instance.GetDelay(Authenticate.GetIP());
+            bool delayedloginsuccess = false;
 
 			// Force email lowercase before validating
 			string email = Email.Text.ToLower();
@@ -47,7 +49,8 @@ namespace HackNet.Auth {
 					switch (result)
 					{
 						case AuthResult.Success:
-							LoginSuccess(email, auth.TempKeyStore);
+                            Msg.Text = "Login Successful";
+                            delayedloginsuccess = true;
 							break;
 						case AuthResult.PasswordIncorrect:
 							Msg.Text = "User and/or password not found (1)";
@@ -65,16 +68,17 @@ namespace HackNet.Auth {
 							Msg.Text = "Unhandled error has occured";
 							break;
 					}
-				}
+
+                    // Forces a time delay using delayer task specified delay duration
+                    Thread.Sleep(TimeSpan.FromSeconds(delaysecs));
+
+                    if (delayedloginsuccess == true)
+                        LoginSuccess(email, auth.TempKeyStore);
+                }
 			} catch (UserException)
 			{
 				Msg.Text = "User and/or password not found (Error)";
 			}
-
-
-            // Forces a time delay using delayer task specified delay duration
-            Thread.Sleep(TimeSpan.FromSeconds(delaysecs));
-
         }
 
         /// <summary>
