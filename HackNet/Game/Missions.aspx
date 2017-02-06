@@ -144,23 +144,6 @@
                 ErrorMessage="Invalid Input"
                 ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
         </div>
-        <br />
-        <div class="container-fluid" style="color: black; background-color: gray;">
-            <h2>Attack Info Editor</h2>
-            <div class="form-group row">
-                <asp:Label runat="server" Text="Attack Name: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                <asp:TextBox runat="server" ID="AtkName"></asp:TextBox>
-            </div>
-            <div class="form-group row">
-                <asp:Label runat="server" Text="Attack Information: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                <asp:TextBox runat="server" ID="AtkInfo" TextMode="MultiLine"></asp:TextBox>
-            </div>
-            <div class="form-group row">
-                <asp:Label runat="server" Text="Attack Image1: " CssClass="col-xs-3 col-form-label"></asp:Label>
-                <asp:FileUpload ID="UploadAttack1" runat="server" />
-            </div>
-            <asp:Button runat="server" ID="btnAtkInfo" CssClass="btn btn-default" OnClick="btnAtkInfo_Click" />
-        </div>
     </div>
 
     <script type="text/javascript" src="../Content/Tutorial/intro.js"></script>
