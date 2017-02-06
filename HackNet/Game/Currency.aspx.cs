@@ -50,7 +50,7 @@ namespace HackNet.Game
                 dt.Columns.Add("ItemPic", typeof(string));
                 foreach (Pack p in pList)
                 {
-                    PackItem packItem = PackItem.GetPackageItems(p.PackageId);
+                    PackItem packItem = PackItem.GetPackageItems(p.PackageId, true);
                     Items i = HackNet.Data.Items.GetItem(packItem.ItemId);
 
                     imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
@@ -108,8 +108,8 @@ namespace HackNet.Game
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
 
-            Pack p = Data.Pack.GetPackage(packageId);
-            PackItem pi = Data.PackItem.GetPackageItems(packageId);
+            Pack p = Data.Pack.GetPackage(packageId, true);
+            PackItem pi = Data.PackItem.GetPackageItems(packageId, true);
             Items i = Data.Items.GetItem(pi.ItemId);
 
             Session["packageId"] = p.PackageId;
