@@ -33,28 +33,6 @@ namespace HackNet.Game
             }
         }
 
-
-
-        protected void btnAddItem_Click(object sender, EventArgs e)
-        {
-            Items item = new Items();
-            item.ItemName = ItemName.Text;
-            item.ItemType = (ItemType)Int32.Parse(ItemTypeList.SelectedItem.Value);
-
-            Stream strm = UploadPhoto.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            item.ItemPic = br.ReadBytes((int)strm.Length);
-            item.ItemDesc = ItemDesc.Text;
-            item.ItemPrice = Int32.Parse(ItemPrice.Text);
-            item.ItemBonus = Int32.Parse(ItemStat.Text);
-            using (DataContext db = new DataContext())
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-            }
-        }
-
-
         protected void btnAddListing_Click(object sender, EventArgs e)
         {
             MarketListings mklist = new MarketListings();
@@ -74,16 +52,6 @@ namespace HackNet.Game
             Items item = Data.Items.GetItem(id);
             Session["Item"] = item;
             Response.Redirect("PartsInfo.aspx", true);
-        }
-
-        protected void btnSubmitDdl_Click(object sender, EventArgs e)
-        {
-
-            //Retrieve Selected Text from Dropdown
-            lblSelectedText.Text = ddlParts.SelectedItem.Text;
-
-            //Retrieve Selected Value from Dropdown
-            lblSelectedValue.Text = ddlParts.SelectedValue;
         }
 
         protected void SellItem_Command(object sender, CommandEventArgs e)

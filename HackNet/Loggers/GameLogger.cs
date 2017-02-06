@@ -23,20 +23,33 @@ namespace HackNet.Loggers
 			}
 		}
 
-		internal void MissionCompleted(string missionname, string rewards)
-		{
-			LogEntry entry = new LogEntry()
-			{
-				EmailAddress = CurrentUser.GetEmail(),
-				UserId = CurrentUser.GetUserId(),
-				IPAddress = GetIP(),
-				Severity = LogSeverity.INFO,
-				Description = "Mission completed: " + missionname + ", Rewards: " + rewards
-			};
-			Log(entry);
-		}
+        internal void MissionSuccess(string missionname, string rewards)
+        {
+            LogEntry entry = new LogEntry()
+            {
+                EmailAddress = CurrentUser.GetEmail(),
+                UserId = CurrentUser.GetUserId(),
+                IPAddress = GetIP(),
+                Severity = LogSeverity.INFO,
+                Description = "Mission completed: " + missionname + ", Rewards: " + rewards
+            };
+            Log(entry);
+        }
 
-		internal void ItemPurchased(string purchaseditem, string cost)
+        internal void MissionFail(string missionname)
+        {
+            LogEntry entry = new LogEntry()
+            {
+                EmailAddress = CurrentUser.GetEmail(),
+                UserId = CurrentUser.GetUserId(),
+                IPAddress = GetIP(),
+                Severity = LogSeverity.INFO,
+                Description = "Mission failed: " + missionname
+            };
+            Log(entry);
+        }
+
+        internal void ItemPurchased(string purchaseditem, string cost)
 		{
 			LogEntry entry = new LogEntry()
 			{
@@ -64,7 +77,7 @@ namespace HackNet.Loggers
 
 		internal override void Log(LogEntry entry)
 		{
-			entry.Type = LogType.Security;
+			entry.Type = LogType.Game;
 			MasterLog(entry);
 		}
 

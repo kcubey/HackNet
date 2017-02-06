@@ -9,6 +9,11 @@
             $('#DeleteItemModal').modal('show');
         }
     </script>
+    <style>
+        .nicerastyle{
+            color:#fff;
+        }
+    </style>
     <!-- DeleteItem -->
     <div id="DeleteItemModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -118,12 +123,12 @@
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-tabs">
-                    <li><a href="#AllItemTab" data-toggle="tab">All Items</a></li>
-                    <li><a href="#ProcessItemTab" data-toggle="tab">Processors</a></li>
-                    <li><a href="#GraphicItemTab" data-toggle="tab">Graphics Cards</a></li>
-                    <li><a href="#MemoryItemTab" data-toggle="tab">Memory</a></li>
-                    <li><a href="#PowerItemTab" data-toggle="tab">Power Supply</a></li>
-                    <li><a href="#CreateItemTab" data-toggle="tab">Add Item</a></li>
+                    <li><a href="#AllItemTab" data-toggle="tab" class="nicerastyle">All Items</a></li>
+                    <li><a href="#ProcessItemTab" data-toggle="tab" class="nicerastyle">Processors</a></li>
+                    <li><a href="#GraphicItemTab" data-toggle="tab" class="nicerastyle">Graphics Cards</a></li>
+                    <li><a href="#MemoryItemTab" data-toggle="tab" class="nicerastyle">Memory</a></li>
+                    <li><a href="#PowerItemTab" data-toggle="tab" class="nicerastyle">Power Supply</a></li>
+                    <li><a href="#CreateItemTab" data-toggle="tab" class="nicerastyle">Add Item</a></li>
                 </ul>
             </div>
             <div class="panel-body">
