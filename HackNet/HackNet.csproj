@@ -215,9 +215,7 @@
     <Content Include="App_Data\HackNet.log" />
     <Content Include="Admin.master" />
     <Content Include="App_Data\Database.config" />
-    <None Include="App_Data\Secrets.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="App_Data\Secrets.config" />
     <Content Include="Auth\ResetPassword.aspx" />
     <Content Include="Auth\ConfirmEmail.aspx" />
     <Content Include="Auth\Debug.aspx" />
