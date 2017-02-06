@@ -3,6 +3,8 @@
     
     <link rel="stylesheet" href="/payment/backend/paymentCSS.css" />
     <script src="/Payment/backend/JSv2.js" lang="javascript" type="text/javascript"></script>
+<!--    <script src="https://js.braintreegateway.com/js/braintree-2.30.0.min.js"></script>-->
+
     <script>
         function showConfirmPayModal() {
             $('#ConfirmPayModal').modal('show');
