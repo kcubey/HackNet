@@ -143,23 +143,6 @@ namespace HackNet.Game
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
-
-        //Temp
-        protected void btnAtkInfo_Click(object sender, EventArgs e)
-        {
-            AttackData atkdata = new AttackData();
-            atkdata.AttackName = AtkName.Text;
-            atkdata.AttackInfo = AtkInfo.Text;
-
-            Stream strm = UploadAttack1.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(strm);
-            atkdata.AttackPic = br.ReadBytes((int)strm.Length);
-
-            using (DataContext db = new DataContext())
-            {
-                db.AttackData.Add(atkdata);
-                db.SaveChanges();
-            }
-        }
+        
     }
 }
