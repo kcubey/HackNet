@@ -198,6 +198,8 @@ namespace HackNet.Game.Gameplay
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
                         List<string> itemnamelist = new List<string>();
+                        itemnamelist.Add(mis.MissionExp.ToString());
+                        itemnamelist.Add(mis.MissionCoin.ToString());
                         itemnamelist.Add(i.ItemName);
                         MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, true, itemnamelist);
                     }
