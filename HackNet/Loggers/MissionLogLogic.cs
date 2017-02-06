@@ -31,5 +31,31 @@ namespace HackNet.Loggers
 				db.SaveChanges();
 			}
 		}
+
+        public static IList<string> DeserializeRewards(string dbinput)
+        {
+            List<string> liststr;
+
+            if (dbinput == null) {
+                liststr = new List<string>();
+                return liststr;
+            } else {
+                liststr = JsonConvert.DeserializeObject<List<string>>(dbinput);
+            }
+
+            return liststr;
+        }
+
+        public static IList<MissionLog> Get(int id)
+        {
+            List<MissionLog> ml;
+
+            using (DataContext db = new DataContext())
+            {
+                ml = db.MissionLog.Where(m => m.UserId == id).ToList();
+            }
+
+            return ml;
+        }
 	}
 }
