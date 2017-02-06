@@ -1,8 +1,11 @@
 ﻿using HackNet.Data;
+using HackNet.Loggers;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,7 +21,7 @@ namespace HackNet.Game
 
         protected void MissionLog_Load(object sender, EventArgs e)
         {
-            List<MissionLogs> misLog=new List<MissionLogs>();
+            IList<MissionLog> misLog= MissionLogLogic.Get(CurrentUser.Entity().UserID);
             DataTable dt = new DataTable();
             dt.Columns.Add("Mission Name",typeof(string));
             dt.Columns.Add("Successful",typeof(bool));
@@ -27,9 +30,9 @@ namespace HackNet.Game
 
             if (misLog.Count != 0)
             {
-                foreach (MissionLogs mlog in misLog)
+                foreach (var mlog in misLog)
                 {
-                    dt.Rows.Add();
+                    dt.Rows.Add(mlog.MissionName,mlog.Successful,mlog.Timestamp, ReturnReward(MissionLogLogic.DeserializeRewards(mlog.Rewards)));
                 }
                 MissionLog.DataSource = dt;
                 MissionLog.DataBind();
@@ -39,6 +42,17 @@ namespace HackNet.Game
                 MissionLog.DataSource = null;
                 MissionLog.DataBind();
             }
+        }
+
+        private string ReturnReward(IList<string> rewardList)
+        {
+            string reward ="";
+            foreach (string r in rewardList)
+            {
+                reward += r+ " ;";
+            }
+           
+            return reward;
         }
     }
 }
