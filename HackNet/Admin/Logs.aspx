@@ -15,7 +15,6 @@
 					<asp:ListItem Value="Security" Text="Security" Selected="True" />
 					<asp:ListItem Value="Payment" Text="Payment" />
 					<asp:ListItem Value="Profile" Text="Profile" />
-					<asp:ListItem Value="Error" Text="Error" />
 				</asp:DropDownList>
 			</div>
 			<div class="col-md-2">
@@ -27,7 +26,7 @@
 				<asp:TextBox CssClass="form-control" TextMode="DateTime" runat="server" ID="EndDT" />				
 			</div>
 			<div class="col-md-3">
-				User ID (-1 for all)
+				User ID (-1 for ALL)
 				<asp:TextBox type="number" CssClass="form-control" runat="server" ID="UserID"/>				
 			</div>	
 			<div class="col-md-1">
