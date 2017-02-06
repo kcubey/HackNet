@@ -70,9 +70,10 @@
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-tabs">
-              <!--      <li class="active"><a href="#tab1default" data-toggle="tab">All</a></li> -->
-                    <li class="active"><a href="#tab1default" data-toggle="tab">Add</a></li>
-                    <li><a href="#tab2default" data-toggle="tab">Edit</a></li>
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Add Package</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Edit Package</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">View User Currency</a></li>
+                    <li><a href="#tab4default" data-toggle="tab">Add/Remove Currency</a></li>
                 </ul>
             </div>
             <div class="panel-body">
@@ -160,7 +161,51 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-<!-- ================= END TAB 2 CONTENT  ================== -->                                        
+<!-- ================= END TAB 2 CONTENT  ================== -->    
+
+<!-- ========== START TAB 3 CONTENT - VIEW USER Currency ========== -->                    
+                    <div class="tab-pane fade" id="tab3default">
+                        <h2>View Users' Currency</h2>
+                        <br />
+                        <asp:GridView runat="server" ForeColor="White" BorderStyle="None" CssClass="table" ID="ViewUserCurr" OnLoad="ViewUserCurr_Load">
+                            <Columns>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+<!-- ================= END TAB 3 CONTENT  ================== -->             
+
+<!-- ========== START TAB 4 CONTENT - Add/Remove Currency ========== -->                    
+                    <div class="tab-pane fade" id="tab4default">
+                        <h2>Add/Remove Currency</h2>
+                        <div class="container-fluid" style="color: black; background-color: gray;">
+                            <br />
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="UserID: " CssClass="col-xs-3 col-form-label" />
+                                <asp:TextBox runat="server" ID="UserIDTxtbox" autocomplete="false" CssClass="form-control" Width="280px" ForeColor="Black"></asp:TextBox>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Items: " CssClass="col-xs-3 col-form-label" />
+                                <asp:DropDownList runat="server" ID="userCurrencyDDL" Cssclass="btn btn-default dropdown-toggle" OnSelectedIndexChanged="DisplayItems" AutoPostBack="true">
+                                            <asp:ListItem Value="1">Buck</asp:ListItem>
+                                            <asp:ListItem Value="2">Coin</asp:ListItem>
+                                        </asp:DropDownList>
+                            </div>
+                            <div class="form-group row">
+                                <asp:Label runat="server" Text="Quantity: " CssClass="col-xs-3 col-form-label" />
+                                <asp:TextBox runat="server" ID="userQuantityTxtbox" Autocomplete="false" CssClass="form-control" Width="280px" ForeColor="Black" />
+                                <asp:RegularExpressionValidator runat="server" ID="userQuantityValidator"
+                                     ForeColor="Red"
+                                     ErrorMessage="Please enter a whole number"
+                                     ControlToValidate="userQuantityTxtbox"
+                                     ValidationExpression="^\d+$" />
+                            </div>
+                            <br />
+                            <asp:Button runat="server" ID="AddUserCurrency" OnClick="AddUserCurrency_Click" CssClass="btn btn-default" Text="Add Currency" />
+                            <asp:Button runat="server" ID="RemoveUserCurrency" OnClick="RemoveUserCurrency_Click" CssClass="btn btn-default" Text="Remove Currency" />
+                            <br /><br />
+                        </div>
+                    </div>
+<!-- ================= END TAB 4 CONTENT  ================== -->    
                 </div>
             </div>
         </div>
