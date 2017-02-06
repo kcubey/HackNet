@@ -1,4 +1,5 @@
 ﻿using HackNet.Data;
+using HackNet.Loggers;
 using HackNet.Security;
 using System;
 using System.Collections.Generic;
@@ -57,19 +58,23 @@ namespace HackNet.Prefs
 				// Sequentially check if the details were changed
 				if (!usernameTxt.Text.Equals(u.UserName))
 				{
-					u.UserName = usernameTxt.Text;
+                    ProfileLogger.Instance.ProfileChange("USERNAME", u.UserName, usernameTxt.Text);
+                    u.UserName = usernameTxt.Text;
 					whatschanged += "Username ";
 				}
 
 				if (!emailTxt.Text.Equals(u.Email))
 				{
-					u.Email = emailTxt.Text;
+                    ProfileLogger.Instance.ProfileChange("EMAIL", u.Email, emailTxt.Text);
+
+                    u.Email = emailTxt.Text;
 					EmailConfirm.SendEmailForConfirmation(u, db);
 					whatschanged += "Email ";
 				}
 
 				if (!fnameTxt.Text.Equals(u.FullName))
 				{
+                    ProfileLogger.Instance.ProfileChange("FULLNAME", u.FullName, fnameTxt.Text);
 					u.FullName = fnameTxt.Text;
 					whatschanged += "Name ";
 

@@ -20,8 +20,7 @@
 					<li><asp:HyperLink runat="server" Text="Profile Settings" NavigateUrl="~/Prefs/ProfileSettings" /></li>
 					<li><asp:HyperLink runat="server" Text="Change Password" NavigateUrl="~/Prefs/ChangePassword" /></li>
 					<li><asp:HyperLink runat="server" Text="Configure 2FA" NavigateUrl="~/Prefs/OtpSetup" /></li>
-					<li><asp:HyperLink runat="server" Text="Login Notifications" NavigateUrl="~/Prefs/LoginNotify" /></li>
-					<li><asp:HyperLink runat="server" Text="Security Logs" NavigateUrl="~/Prefs/AccessLogs" /></li>
+					<li><asp:HyperLink runat="server" Text="Review Security" NavigateUrl="~/Prefs/AccessLogs" /></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

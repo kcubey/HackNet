@@ -24,12 +24,12 @@ namespace HackNet.Loggers
 		}
 
 
-		internal void ProfileChange(string email, int userid, string property, string old, string newval)
+		internal void ProfileChange(string property, string old, string newval)
 		{
 			LogEntry entry = new LogEntry()
 			{
-				EmailAddress = email,
-				UserId = userid,
+				EmailAddress = CurrentUser.GetEmail(),
+				UserId = CurrentUser.GetUserId(),
 				IPAddress = GetIP(),
 				Severity = LogSeverity.INFO,
 				Description = string.Format("Profile change ({0}) was made: '{1}' to '{2}'", property, old, newval)
