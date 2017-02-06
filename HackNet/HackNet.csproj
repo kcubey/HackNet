@@ -277,9 +277,7 @@
     <Content Include="Game\PartsInfo.aspx" />
     <Content Include="Game\Workstation.aspx" />
     <Content Include="Index.html" />
-    <Content Include="Game\MarketOld.aspx" />
     <Content Include="Payment\backend\JSv2.js" />
-    <Content Include="Payment\backend\package-2.png" />
     <Content Include="Payment\backend\paymentCSS.css" />
     <Content Include="Payment\backend\redirectImageButton.css" />
     <Content Include="Payment\Checkout.aspx" />
@@ -617,13 +615,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Game\MarketOld.aspx.cs">
-      <DependentUpon>MarketOld.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Game\MarketOld.aspx.designer.cs">
-      <DependentUpon>MarketOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\Configuration.cs" />
     <Compile Include="Loggers\ProfileLogger.cs" />

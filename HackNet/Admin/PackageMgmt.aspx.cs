@@ -1,4 +1,5 @@
 ﻿using HackNet.Data;
+using HackNet.Security;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -164,6 +165,87 @@ namespace HackNet.Admin
                 db.SaveChanges();
             }
             PrintMessage("Package deleted");
+        }
+
+        protected void ViewUserCurr_Load(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("UserID", typeof(string));
+            dt.Columns.Add("Full Name", typeof(string));
+            dt.Columns.Add("User Name", typeof(string));
+            dt.Columns.Add("User Buck", typeof(int));
+            dt.Columns.Add("User Coin", typeof(int));
+            List<Users> allUserList = new List<Users>();
+            using (DataContext db = new DataContext())
+            {
+                allUserList = (from u in db.Users select u).ToList();
+            }
+            if (allUserList.Count != 0)
+            {
+                foreach (Users u in allUserList)
+                {
+                    dt.Rows.Add(u.UserID, u.FullName, u.UserName, u.ByteDollars, u.Coins);
+                }
+                ViewUserCurr.DataSource = dt;
+                ViewUserCurr.DataBind();
+            }
+            else
+            {
+                ViewUserCurr.DataSource = null;
+                ViewUserCurr.DataBind();
+            }
+        }
+
+        protected void AddUserCurrency_Click(object sender, EventArgs e)
+        {
+            int userId = int.Parse(UserIDTxtbox.Text);
+            int currType = int.Parse(userCurrencyDDL.SelectedValue);
+            int currQty = int.Parse(userQuantityTxtbox.Text);
+            using (DataContext db = new DataContext())
+            {
+                Users u = CurrentUser.Entity(false, db);
+                int dbBuck = u.ByteDollars;
+                int dbCoin = u.Coins;
+
+                if (currType == 1)
+                {
+                    int newBuck = dbBuck + currQty;
+                    u.ByteDollars = newBuck;
+                }
+                else if (currType == 2)
+                {
+                    int newCoin = dbCoin + currQty;
+                    u.Coins = newCoin;
+                }
+                db.SaveChanges();
+            }
+            PrintMessage("Currency added");
+        }
+
+        protected void RemoveUserCurrency_Click(object sender, EventArgs e)
+        {
+            int userId = int.Parse(UserIDTxtbox.Text);
+            int currType = int.Parse(userCurrencyDDL.SelectedValue);
+            int currQty = int.Parse(userQuantityTxtbox.Text);
+            using (DataContext db = new DataContext())
+            {
+                Users u = CurrentUser.Entity(false, db);
+                int dbBuck = u.ByteDollars;
+                int dbCoin = u.Coins;
+
+                if (currType == 1)
+                {
+                    int newBuck = dbBuck - currQty;
+                    u.ByteDollars = newBuck;
+                }
+                else if (currType == 2)
+                {
+                    int newCoin = dbCoin - currQty;
+                    u.Coins = newCoin;
+                }
+                db.SaveChanges();
+            }
+            PrintMessage("Currency removed");
         }
     }
 }
