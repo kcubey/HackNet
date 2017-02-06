@@ -11,6 +11,7 @@ using System.Net;
 using System.Diagnostics;
 using HackNet.Data;
 using HackNet.Security;
+using HackNet.Loggers;
 
 namespace HackNet.Payment
 {
@@ -101,6 +102,11 @@ namespace HackNet.Payment
 
         public void checkoutClick(Object sender, EventArgs e)
         {
+
+            Users us = CurrentUser.Entity();
+            string currEmail = us.Email;
+            int currUserId = us.UserID;
+
             try
             {
                 tPrice = Convert.ToDecimal(pkgPrice);
@@ -155,18 +161,25 @@ namespace HackNet.Payment
 
                         db.SaveChanges();
                     }
+
                 }
                 catch
                 {
                     Response.Redirect("~/game/currency", true);
+                    Session.Abandon();
                 }
+
+                PaymentLogger.Instance.PaymentSuccess(currEmail, currUserId, Session["transactionId"].ToString());
 
                 Response.Redirect("~/payment/checkout", true);
             }
             //transaction fail
             else
             {
+                PaymentLogger.Instance.PaymentFailed(currEmail, currUserId);
+
                 Response.Redirect("~/payment/retry", true);
+                Session.Abandon();
             }
         }
     }
