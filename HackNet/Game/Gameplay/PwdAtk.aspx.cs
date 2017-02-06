@@ -218,7 +218,6 @@ namespace HackNet.Game.Gameplay
                     {
                         Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
-                        db.SaveChanges();
                         
                         Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID,db));
                         ItemNameLbl.Text = i.ItemName;
