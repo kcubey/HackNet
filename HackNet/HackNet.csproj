@@ -317,6 +317,8 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Prefs.master" />
     <None Include="Properties\PublishProfiles\HackNet Azure Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\HaxNet - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\HaxNet - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
