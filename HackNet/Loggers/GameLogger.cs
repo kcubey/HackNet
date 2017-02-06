@@ -77,7 +77,7 @@ namespace HackNet.Loggers
 
 		internal override void Log(LogEntry entry)
 		{
-			entry.Type = LogType.Security;
+			entry.Type = LogType.Game;
 			MasterLog(entry);
 		}
 
