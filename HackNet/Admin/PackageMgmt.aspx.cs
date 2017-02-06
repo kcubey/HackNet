@@ -34,7 +34,7 @@ namespace HackNet.Admin
                 dt.Columns.Add("ItemPic", typeof(string));
                 foreach (Pack p in pList)
                 {
-                    PackItem packItem = PackItem.GetPackageItems(p.PackageId);
+                    PackItem packItem = PackItem.GetPackageItems(p.PackageId,true);
                     Items i = HackNet.Data.Items.GetItem(packItem.ItemId);
 
                     imageurlstring = Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
@@ -113,8 +113,8 @@ namespace HackNet.Admin
         protected void EditPackage_Command(object sender, CommandEventArgs e)
         {
             int packageId = int.Parse(e.CommandArgument.ToString());
-            Pack p = HackNet.Data.Pack.GetPackage(packageId);
-            PackItem pi = HackNet.Data.PackItem.GetPackageItems(packageId);
+            Pack p = HackNet.Data.Pack.GetPackage(packageId,true);
+            PackItem pi = HackNet.Data.PackItem.GetPackageItems(packageId, true);
             Items i = HackNet.Data.Items.GetItem(pi.ItemId);
 
             Session["packageId"] = packageId;
@@ -140,9 +140,8 @@ namespace HackNet.Admin
         {
             using (DataContext db = new DataContext())
             {
-                Pack p = HackNet.Data.Pack.GetPackage(Convert.ToInt32(Session["packageId"]));
-                PackItem pi = HackNet.Data.PackItem.GetPackageItems(Convert.ToInt32(Session["packageId"]));
-                Items i = HackNet.Data.Items.GetItem(Convert.ToInt32(Session["packageItemId"]));
+                Pack p = HackNet.Data.Pack.GetPackage(Convert.ToInt32(Session["packageId"]), false,db);
+                PackItem pi = HackNet.Data.PackItem.GetPackageItems(Convert.ToInt32(Session["packageId"]), false, db);
 
                 p.Description = EditPackageDesc.Text;
                 p.Price = Convert.ToDecimal(EditPackagePrice.Text);
@@ -157,10 +156,11 @@ namespace HackNet.Admin
         {
             using (DataContext db = new DataContext())
             {
-                Pack p = HackNet.Data.Pack.GetPackage(Convert.ToInt32(Session["packageId"]));
-                PackItem pi = HackNet.Data.PackItem.GetPackageItems(Convert.ToInt32(Session["packageId"]));
-                db.Package.Remove(p);
+                int packid = int.Parse((Session["packageId"].ToString()));
+                Pack p = db.Package.Where(x => x.PackageId == packid).FirstOrDefault();
+                PackItem pi = db.PackItem.Where(x=>x.PackageId== packid).FirstOrDefault();
                 db.PackItem.Remove(pi);
+                db.Package.Remove(p);
                 db.SaveChanges();
             }
             PrintMessage("Package deleted");

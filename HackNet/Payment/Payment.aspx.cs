@@ -96,6 +96,7 @@ namespace HackNet.Payment
         public void CancelClick(Object sender, EventArgs e)
         {
             Response.Redirect("~/game/currency", true);
+            Session.Abandon();
         }
 
         public void checkoutClick(Object sender, EventArgs e)

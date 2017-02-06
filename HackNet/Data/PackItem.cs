@@ -22,21 +22,24 @@ namespace HackNet.Data
 		// Foreign key references
 		public Items Item { get; set; }
 
-        internal static PackItem GetPackageItems(int pkgId)
+        internal static PackItem GetPackageItems(int pkgId,bool ReadOnly,DataContext db=null)
         {
-            PackItem pkgItems = new Data.PackItem();
-            try
+            if (ReadOnly == true)
             {
-                using (DataContext db = new DataContext())
+                PackItem pkgItems = new Data.PackItem();
+
+                using (DataContext db1 = new DataContext())
                 {
-                    pkgItems = (from i in db.PackItem where i.PackageId == pkgId select i).FirstOrDefault();
+                    pkgItems = (from p in db1.PackItem where p.PackageId == pkgId select p).FirstOrDefault();
                 }
-            }
-            catch (EntityCommandExecutionException)
+                return pkgItems;
+            }else
             {
-                throw new ConnectionException("Database link failure has occured");
+                PackItem pkgItems;
+                pkgItems= (from p in db.PackItem where p.PackageId == pkgId select p).FirstOrDefault();
+                return pkgItems;
             }
-            return pkgItems;
+            
         }
     }
 }

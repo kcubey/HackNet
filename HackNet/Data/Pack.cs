@@ -35,21 +35,25 @@ namespace HackNet.Data
             }
         }
 
-        internal static Pack GetPackage(int id)
+        internal static Pack GetPackage(int id,bool ReadOnly,DataContext db=null)
         {
-            Pack pkg = new Data.Pack();
-            try
+            if (ReadOnly == true)
             {
-                using (DataContext db = new DataContext())
+                Pack pkg = new Data.Pack();
+
+                using (DataContext db1 = new DataContext())
                 {
-					pkg = (from i in db.Package where i.PackageId == id select i).FirstOrDefault();
+                    pkg = (from p in db1.Package where p.PackageId == id select p).FirstOrDefault();
                 }
+
+                return pkg;
             }
-            catch (EntityCommandExecutionException)
+            else
             {
-                throw new ConnectionException("Database link failure has occured");
+                Pack pkg;
+                pkg= (from p in db.Package where p.PackageId == id select p).FirstOrDefault();
+                return pkg;
             }
-            return pkg;
         }
 
     }
