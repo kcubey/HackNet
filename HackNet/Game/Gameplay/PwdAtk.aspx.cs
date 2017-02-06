@@ -225,6 +225,14 @@ namespace HackNet.Game.Gameplay
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
+                        InventoryItem invItem = new InventoryItem();
+                        invItem.UserId = u.UserID;
+                        invItem.ItemId = i.ItemId;
+                        invItem.Quantity = 1;
+
+                        db.InventoryItem.Add(invItem);
+                        db.SaveChanges();
+
                         List<string> RewardList = new List<string>();
                         RewardList.Add("Mission Exp: "+mis.MissionExp.ToString());
                         RewardList.Add("Mission Coin: "+mis.MissionCoin.ToString());
