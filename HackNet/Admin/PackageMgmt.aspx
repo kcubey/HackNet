@@ -22,26 +22,26 @@
                 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package ID: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageId" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox autocomplete="false" runat="server" ID="EditPackageId" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Description: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackageDesc" TextMode="MultiLine" Width="280px" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox autocomplete="false" runat="server" ID="EditPackageDesc" TextMode="MultiLine" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Price: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditPackagePrice" Width="280px" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox autocomplete="false" runat="server" ID="EditPackagePrice" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
 
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Package Item: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItem" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox autocomplete="false" runat="server" ID="EditItem" Enabled="false" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="modal-body" style="color: black">
                     <asp:Label runat="server" Text="Item Quantity: " CssClass="col-xs-3 col-form-label"/>
-                    <asp:TextBox autocomplete="off" runat="server" ID="EditItemQuantity" Width="280px" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox autocomplete="false" runat="server" ID="EditItemQuantity" Width="280px" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="form-group row">
                         <div class="col-xs-9">

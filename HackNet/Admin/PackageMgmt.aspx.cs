@@ -203,7 +203,9 @@ namespace HackNet.Admin
             int currQty = int.Parse(userQuantityTxtbox.Text);
             using (DataContext db = new DataContext())
             {
-                Users u = CurrentUser.Entity(false, db);
+                Users u;
+                u = db.Users.Find(userId);
+
                 int dbBuck = u.ByteDollars;
                 int dbCoin = u.Coins;
 
@@ -229,7 +231,9 @@ namespace HackNet.Admin
             int currQty = int.Parse(userQuantityTxtbox.Text);
             using (DataContext db = new DataContext())
             {
-                Users u = CurrentUser.Entity(false, db);
+                Users u;
+                u = db.Users.Find(userId);
+
                 int dbBuck = u.ByteDollars;
                 int dbCoin = u.Coins;
 
