@@ -83,7 +83,7 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell ColumnSpan="4">
-                                <asp:Image runat="server" ID="ItemImage" />
+                                <asp:Image runat="server" ID="ItemImage" Width="100px" Height="100px" />
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>

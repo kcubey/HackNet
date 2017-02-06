@@ -41,10 +41,7 @@
                     <asp:Label runat="server" Text="Total Number of Item: " CssClass="col-xs-3 col-form-label" ForeColor="White" />
                     <asp:Label runat="server" ID="TotalItemLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
                 </div>
-                <div class="form-group row">
-                    <asp:Label runat="server" Text="Total Items bought: " CssClass="col-xs-3 col-form-label" ForeColor="White" />
-                    <asp:Label runat="server" ID="TotalItemsBoughtLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
-                </div>
+              
             </fieldset>
         </div>
     </div>

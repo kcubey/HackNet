@@ -15,6 +15,8 @@ namespace HackNet.Admin
             using(DataContext db=new DataContext())
             {
                 TotalNumUserLbl.Text=db.Users.Count().ToString();
+                int exp=db.Users.Max(x=>x.TotalExp);
+                TopPlayerLbl.Text = db.Users.Where(x => x.TotalExp == exp).FirstOrDefault().UserName;
                 TotalNumMissionLbl.Text=db.MissionData.Count().ToString();
                 TotalNumPlayedLbl.Text = db.MissionLog.Count().ToString();
                 TotalItemLbl.Text=db.Items.Count().ToString();
