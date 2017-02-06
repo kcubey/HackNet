@@ -140,6 +140,7 @@ namespace HackNet.Game
             ClearText();
             message = "Conversion complete";
             PrintMessage(message);
+            Session.Abandon();
         }
 
         protected void confirmConvertBtn_Click(Object sender, EventArgs e)
@@ -154,6 +155,7 @@ namespace HackNet.Game
         protected void cancelConvertBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/game/currency", true);
+            Session.Abandon();
         }
 
         protected void ClearText()

@@ -32,8 +32,7 @@ namespace HackNet.Payment
         public void CancelClick(Object sender, EventArgs e)
         {
             Response.Redirect("~/game/currency", true);
-            Session["packageId"] = null;
-            Session["packagePrice"] = null;
+            Session.Abandon();
         }
 
         protected void AuthClick(object sender, EventArgs e)
