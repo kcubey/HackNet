@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OtpVerify.aspx.cs" Inherits="HackNet.Auth.OtpVerify" %>
+﻿<%@ Page Title="Verify 2FA" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="OtpVerify.aspx.cs" Inherits="HackNet.Auth.OtpVerify" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadPlaceholder" runat="server">
 </asp:Content>
