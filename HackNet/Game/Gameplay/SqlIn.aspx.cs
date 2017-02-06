@@ -181,18 +181,16 @@ namespace HackNet.Game.Gameplay
                     // Summary
                     MisNameLbl.Text = mis.MissionName;
                     MisIPLbl.Text = mis.MissionIP;
-                    MisSumLbl.Text = "";
+                    MisSumLbl.Text = "Congrats on compleeting the mission.";
                     MisExpLbl.Text = mis.MissionExp.ToString();
                     MisCoinLbl.Text = mis.MissionCoin.ToString();
 
-                    using (DataContext db = new DataContext())
+                    using (DataContext db1 = new DataContext())
                     {
-                        Users u = CurrentUser.Entity(false, db);
+                        Users u = CurrentUser.Entity(false, db1);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
-                        System.Diagnostics.Debug.WriteLine("Total Exp: " + u.TotalExp);
-                        db.SaveChanges();
 
-                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID, db));
+                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID, db1));
                         ItemNameLbl.Text = i.ItemName;
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
@@ -202,8 +200,8 @@ namespace HackNet.Game.Gameplay
                         invItem.ItemId = i.ItemId;
                         invItem.Quantity = 1;
 
-                        db.InventoryItem.Add(invItem);
-                        db.SaveChanges();
+                        db1.InventoryItem.Add(invItem);
+                        db1.SaveChanges();
 
                         List<string> RewardList = new List<string>();
                         RewardList.Add("Mission Exp: " + mis.MissionExp.ToString());
