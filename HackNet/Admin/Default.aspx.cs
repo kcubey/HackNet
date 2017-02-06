@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackNet.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,13 @@ namespace HackNet.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+            using(DataContext db=new DataContext())
+            {
+                TotalNumUserLbl.Text=db.Users.Count().ToString();
+                TotalNumMissionLbl.Text=db.MissionData.Count().ToString();
+                TotalNumPlayedLbl.Text = db.MissionLog.Count().ToString();
+                TotalItemLbl.Text=db.Items.Count().ToString();
+            }
 		}
 	}
 }

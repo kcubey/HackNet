@@ -40,12 +40,30 @@ namespace HackNet.Admin {
         protected global::System.Web.UI.WebControls.Label TotalNumMissionLbl;
         
         /// <summary>
-        /// TotalNumMisPlayedLbl control.
+        /// TotalNumPlayedLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TotalNumMisPlayedLbl;
+        protected global::System.Web.UI.WebControls.Label TotalNumPlayedLbl;
+        
+        /// <summary>
+        /// TotalItemLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalItemLbl;
+        
+        /// <summary>
+        /// TotalItemsBoughtLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalItemsBoughtLbl;
     }
 }

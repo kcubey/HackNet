@@ -8,8 +8,9 @@
     </ol>
 
     <div class="panel panel-default">
-        <div class="panel-header" style="padding: 1%;">
-            <h2>Welcome back Administrator</h2>
+        <div class="jumbotron" style="padding:3%;">
+            <h2>Welcome Back, Admin</h2>
+            <p>Only administrators are allowed to access parts of our administration.</p>
         </div>
         <div class="panel-body" style="color: black; background-color: black;">
             <fieldset>
@@ -31,18 +32,21 @@
                 </div>
                 <div class="form-group row">
                     <asp:Label runat="server" Text="Total times mission was played " CssClass="col-xs-3 col-form-label" ForeColor="White" />
-                    <asp:Label runat="server" ID="TotalNumMisPlayedLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
+                    <asp:Label runat="server" ID="TotalNumPlayedLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend style="color:white;">Item Statistic</legend>
+                <div class="form-group row">
+                    <asp:Label runat="server" Text="Total Number of Item: " CssClass="col-xs-3 col-form-label" ForeColor="White" />
+                    <asp:Label runat="server" ID="TotalItemLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
+                </div>
+                <div class="form-group row">
+                    <asp:Label runat="server" Text="Total Items bought: " CssClass="col-xs-3 col-form-label" ForeColor="White" />
+                    <asp:Label runat="server" ID="TotalItemsBoughtLbl" CssClass="col-xs-3 col-form-label" ForeColor="White" />
                 </div>
             </fieldset>
         </div>
     </div>
-	<ol class="breadcrumb" style="margin-bottom: 5px;">
-		<li><a href="<%= ResolveUrl("~/Default") %>">HackNet</a></li>
-		<li>Administration</li>
-		<li class="active"><%: Page.Title %></li>
-	</ol>
-    <div class="jumbotron">
-        <h1>Welcome Back, Admin</h1>
-        <p>Only administrators are allowed to access parts of our administration.</p>
-    </div>
+	
 </asp:Content>
