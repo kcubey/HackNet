@@ -18,7 +18,7 @@
                 <tr>
                     <td><strong>Email:</strong></td>
 					<td>
-                        <asp:TextBox ID="Email" runat="server" CssClass="form-control" />
+                        <asp:TextBox ID="Email" runat="server" autocomplete="off" CssClass="form-control" />
 					</td>
 					<td>
 					    <asp:RequiredFieldValidator
@@ -37,7 +37,7 @@
 				<tr>
 					<td><strong>Password:</strong></td>
 					<td>
-						<asp:TextBox ID="UserPass" CssClass="pwdfield form-control" TextMode="Password" runat="server" />
+						<asp:TextBox ID="UserPass" CssClass="pwdfield form-control" autocomplete="off" TextMode="Password" runat="server" />
 					</td>
 					<td>
                         <asp:RequiredFieldValidator
@@ -60,16 +60,4 @@
         
         </div>
 	</div>
-
-
-    <!--
-    <h4>Email: </h4>    <asp:TextBox ID="TextBox77" runat="server" ForeColor="Black"></asp:TextBox>
-    <br /><br />
-    <h4>Password: </h4>    <asp:TextBox ID="TextBox23" runat="server" ForeColor="Black"></asp:TextBox>
-    <br /><br />
-    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Authenticate" Font-Size="Large" PostBackUrl="~/Payment/payment.aspx"></asp:LinkButton>
-    <br /><br />
-    <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Back" Font-Size="Large" PostBackUrl="~/Payment/market.aspx"></asp:LinkButton>
-    -->
-
 </asp:Content>

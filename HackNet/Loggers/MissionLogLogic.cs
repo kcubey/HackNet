@@ -9,25 +9,30 @@ namespace HackNet.Loggers
 {
 	public static class MissionLogLogic
 	{
-		public static void Store(int userid, string missionName, bool result, List<string> Rewards = null)
+		public static void Store(int userid, string missionName, bool result, List<string> rewards = null)
 		{
 			JsonSerializer js = new JsonSerializer();
 
-			if (Rewards == null)
-				Rewards = new List<string>();
+			if (rewards == null)
+				rewards = new List<string>();
+
+            if (result == true)
+                GameLogger.Instance.MissionSuccess(missionName, string.Join(",", rewards.ToArray()));
+            else
+                GameLogger.Instance.MissionFail(missionName);
 
 			using (DataContext db = new DataContext())
 			{
 				MissionLog ml = new MissionLog()
 				{
 					MissionName = missionName,
-					Rewards = JsonConvert.SerializeObject(Rewards),
+					Rewards = JsonConvert.SerializeObject(rewards),
 					Timestamp = DateTime.Now,
 					Successful = result,
 					UserId = userid
 				};
 
-				db.MissionLog.Add(ml);
+      			db.MissionLog.Add(ml);
 				db.SaveChanges();
 			}
 		}

@@ -82,7 +82,7 @@
                         <asp:UpdatePanel ID="ConversionPanel" runat="server">
                             <ContentTemplate>
                                 Bucks:
-                                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="buckTextBox" CssClass="form-control" runat="server" autocomplete="off" OnTextChanged="buckTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 <asp:RangeValidator 
                                     ID="buckValidator" ControlToValidate="buckTextBox" 
                                     MinimumValue="0" Type="Integer" runat="server"
