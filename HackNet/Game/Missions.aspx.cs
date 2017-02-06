@@ -18,10 +18,33 @@ namespace HackNet.Game
         DataTable dtAttack;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 Cache["SelectedMis"] = false;
                 LoadAttackList();
+                regatkList_Load();
+            }
+        }
+
+        private void regatkList_Load()
+        {
+            int level = CurrentUser.Entity().Level.GetLevel();
+            regatkList.Items.Add(new ListItem("--Select Region of attack--", "-1"));
+            regatkList.Items.Add(new ListItem("Local", "0"));
+            if (level >= 5 && level < 10)
+            {
+                regatkList.Items.Add(new ListItem("America", "1"));
+            } else if (level>=10 && level <15)
+            {
+                regatkList.Items.Add(new ListItem("America", "1"));
+                regatkList.Items.Add(new ListItem("Europe", "2"));
+            }else if(level >= 15)
+            {
+                regatkList.Items.Add(new ListItem("America", "1"));
+                regatkList.Items.Add(new ListItem("Europe", "2"));
+                regatkList.Items.Add(new ListItem("South East Asia", "3"));
+
             }
         }
 
@@ -33,7 +56,10 @@ namespace HackNet.Game
                 AtkListView.DataSource = null;
                 AtkListView.DataBind();
             }
-            LoadMissionList(recomLvl);
+            else
+            {
+                LoadMissionList(recomLvl);
+            }
         }
 
         private void LoadAttackList()
@@ -143,6 +169,7 @@ namespace HackNet.Game
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "attackTypeModel", "showPopupattackinfo();", true);
         }
-        
+
+       
     }
 }

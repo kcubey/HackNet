@@ -160,7 +160,7 @@
 
                     <br />
                     <br />
-                    <div data-step="1" data-intro="This is how you attack" data-position='right'>
+                    <div data-step="1" data-intro="This is your machine, each of these attributes can be upgraded by obtaining parts. Parts could be found at our Market or by playing our mission." data-position='right'>
                         <div class="form-group row">
                             <asp:Label runat="server" Text="Processor: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
                             <asp:Label runat="server" ID="ProcessorLbl" Font-Size="Larger"></asp:Label>
@@ -198,7 +198,7 @@
                             <asp:Label runat="server" ID="SpeedattrLabel" Font-Size="Larger"></asp:Label>
                         </div>
                     </div>
-                    <div data-step="2" data-intro="This is how you attack" data-position='right'>
+                    <div data-step="2" data-intro="You can choose to upgrade your machine here!" data-position='right'>
                         <asp:LinkButton runat="server" CssClass="btn btn-success" Text="Upgrade" Font-Size="Large" data-toggle="modal" data-target="#upgradeModel"></asp:LinkButton>
                     </div>
                 </div>

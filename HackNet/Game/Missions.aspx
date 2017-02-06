@@ -65,11 +65,6 @@
                     <asp:DropDownList runat="server" AutoPostBack="true" ID="regatkList" OnSelectedIndexChanged="regatkList_SelectedIndexChanged"
                         CssClass="col-xs-4 col-form"
                         BackColor="Black">
-                        <asp:ListItem Value="-1" Text="--Select Region of attack--"></asp:ListItem>
-                        <asp:ListItem Value="0" Text="Local"></asp:ListItem>
-                        <asp:ListItem Value="1" Text="America"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="Europe"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="South Asia"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
