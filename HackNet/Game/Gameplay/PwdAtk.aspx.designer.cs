@@ -184,6 +184,51 @@ namespace HackNet.Game.Gameplay {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor HelpBtn;
         
         /// <summary>
+        /// Step1Lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Step1Lbl;
+        
+        /// <summary>
+        /// Step2Lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Step2Lbl;
+        
+        /// <summary>
+        /// Step3Lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Step3Lbl;
+        
+        /// <summary>
+        /// Step4Lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Step4Lbl;
+        
+        /// <summary>
+        /// Step5Lbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Step5Lbl;
+        
+        /// <summary>
         /// LogPanel control.
         /// </summary>
         /// <remarks>

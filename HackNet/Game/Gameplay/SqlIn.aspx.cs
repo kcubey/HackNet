@@ -82,6 +82,7 @@ namespace HackNet.Game.Gameplay
                 ErrorLbl.Text = "Successful Configurations";
                 ErrorLbl.ForeColor = System.Drawing.Color.Green;
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
+                Step1Lbl.ForeColor = System.Drawing.Color.Green;
             }
             else
             {
@@ -113,6 +114,7 @@ namespace HackNet.Game.Gameplay
                         CmdError.Text = "SQLInjector is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
                         CmdTextBox.Text = string.Empty;
+                        Step2Lbl.ForeColor = System.Drawing.Color.Green;
                     }
                     else
                     {
@@ -140,6 +142,7 @@ namespace HackNet.Game.Gameplay
                             UsrName.Enabled = true;
                             Password.Enabled = true;
                             LoadSQLList(SQLCodeList);
+                            Step3Lbl.ForeColor = System.Drawing.Color.Green;
                         }
                         else
                         {
@@ -185,23 +188,34 @@ namespace HackNet.Game.Gameplay
                     MisExpLbl.Text = mis.MissionExp.ToString();
                     MisCoinLbl.Text = mis.MissionCoin.ToString();
 
-                    using (DataContext db1 = new DataContext())
+                    using (DataContext db = new DataContext())
                     {
-                        Users u = CurrentUser.Entity(false, db1);
+                        Users u = CurrentUser.Entity(false, db);
                         u.TotalExp = u.TotalExp + mis.MissionExp;
 
-                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID, db1));
+                        Items i = ItemLogic.GetRewardForMis(mis.RecommendLevel, Machines.GetUserMachine(CurrentUser.Entity().UserID, db));
                         ItemNameLbl.Text = i.ItemName;
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
-                        InventoryItem invItem = new InventoryItem();
-                        invItem.UserId = u.UserID;
-                        invItem.ItemId = i.ItemId;
-                        invItem.Quantity = 1;
+                        Step4lbl.ForeColor = System.Drawing.Color.Green;
 
-                        db1.InventoryItem.Add(invItem);
-                        db1.SaveChanges();
+                        InventoryItem invItem ;
+
+                        if (ItemLogic.CheckInventoryItem(db, u,i.ItemId,out invItem))
+                        {
+                            invItem.Quantity += 1;
+                            db.SaveChanges();
+                        }else
+                        {
+                            invItem = new InventoryItem();
+                            invItem.UserId = u.UserID;
+                            invItem.ItemId = i.ItemId;
+                            invItem.Quantity = 1;
+                            db.InventoryItem.Add(invItem);
+                        }
+
+                        db.SaveChanges();
 
                         List<string> RewardList = new List<string>();
                         RewardList.Add("Mission Exp: " + mis.MissionExp.ToString());
@@ -214,8 +228,35 @@ namespace HackNet.Game.Gameplay
                 }
                 else
                 {
+                    // Title
+                    SummaryTitle.Text = "Mission Failed!";
+                    SummaryTitle.ForeColor = System.Drawing.Color.Red;
+                    // Summary
+                    MisNameLbl.Text = mis.MissionName;
+                    MisIPLbl.Text = mis.MissionIP;
+                    MisSumLbl.Text = "Mission Failed due to incorrect SQL Inection code choosen";
+                    MisExpLbl.Text = "0";
+                    MisCoinLbl.Text = "0";
+                    ItemImage.Visible = false;
 
+                    List<string> rewardList = new List<string>();
+                    rewardList.Add("Failed Mission no reward");
+                    MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false, rewardList);
                 }
+            }else
+            {
+                // Title
+                SummaryTitle.Text = "Mission Failed!";
+                SummaryTitle.ForeColor = System.Drawing.Color.Red;
+                MisNameLbl.Text = mis.MissionName;
+                MisIPLbl.Text = mis.MissionIP;
+                MisSumLbl.Text = "Mission Failed due to incorrect type of attack choosen";
+                MisExpLbl.Text = "0";
+                MisCoinLbl.Text = "0";
+                ItemImage.Visible = false;
+                List<string> rewardList = new List<string>();
+                rewardList.Add("Failed Mission no reward");
+                MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false, rewardList);
             }
 
         }

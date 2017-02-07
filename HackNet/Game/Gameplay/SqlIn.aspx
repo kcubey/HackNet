@@ -147,10 +147,10 @@
                 <div class="panel-body" style="background-color: #f5f5f5; min-height: 300px;">
                     <h4 style="color: black;">Steps for SQL Injection Attack</h4>
                     <ol class="list-group" style="color: black;">
-                        <li class="list-group-item">1. Configure SQLInjector</li>
-                        <li class="list-group-item">2. Run SQLInjector</li>
-                        <li class="list-group-item">3. Run Browser</li>
-                        <li class="list-group-item">4. Destory Database</li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step1Lbl" ForeColor="Red" Text="1. Configure SQLInjector" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step2Lbl" ForeColor="Red" Text="2. Run SQLInjector" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step3Lbl" ForeColor="Red" Text="3. Run Browser" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step4lbl" ForeColor="Red" Text="4. Destory Database" /></li>
                     </ol>
                 </div>
             </div>
