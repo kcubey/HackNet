@@ -48,6 +48,7 @@ namespace HackNet.Auth
 				case RegisterResult.Success:
 					Msg.ForeColor = System.Drawing.Color.LimeGreen;
 					RegistrationTable.Visible = false;
+                    RegisterButton.Visible = false;
 					Msg.Text = "Registration successful, please check your email to confirm it";
 					break;
 				case RegisterResult.EmailTaken:

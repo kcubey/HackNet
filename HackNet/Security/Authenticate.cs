@@ -377,6 +377,9 @@ namespace HackNet.Security
 			if (Users.FindByEmail(email) != null)
 				return RegisterResult.EmailTaken;
 
+            if (Users.FindByUsername(username) != null)
+                return RegisterResult.UsernameTaken;
+
 			Users u = new Users()
 			{
 				Email = email,
