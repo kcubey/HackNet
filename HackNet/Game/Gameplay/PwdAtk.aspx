@@ -154,10 +154,11 @@
                 </div>
                 <div class="panel-body" style="background-color: #f5f5f5; min-height: 300px;">
                     <ol class="list-group" style="color: black;">
-                        <li class="list-group-item">1. Configure hydra</li>
-                        <li class="list-group-item">2. Run hydra</li>
-                        <li class="list-group-item">3. Gain Root Access</li>
-                        <li class="list-group-item">4. Steal Secret File</li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step1Lbl" ForeColor="Red" Text="1. Configure hydra" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step2Lbl" ForeColor="Red" Text="2. Run hydra" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step3Lbl" ForeColor="Red" Text="3. Enter password to gain root access" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step4Lbl" ForeColor="Red" Text="4. Run nautilas" /></li>
+                        <li class="list-group-item"><asp:Label runat="server" ID="Step5Lbl" ForeColor="Red" Text="5. Steal Secret file" /></li>
                     </ol>
                 </div>
             </div>

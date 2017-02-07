@@ -91,6 +91,7 @@ namespace HackNet.Game.Gameplay
                         CmdError.Text = "hydra is running......";
                         CmdError.ForeColor = System.Drawing.Color.Green;
                         CmdTextBox.Text = string.Empty;
+                        Step2Lbl.ForeColor = System.Drawing.Color.Green;
                     }
                     else
                     {
@@ -111,6 +112,7 @@ namespace HackNet.Game.Gameplay
                             CmdTextBox.Text = string.Empty;
                             LoadScanInfo(MissionLogic.LoadSuccessPwd((MissionData)Session["MissionData"]));
                             ViewState["Bypass"] = true;
+                            Step3Lbl.ForeColor = System.Drawing.Color.Green;
                         }
                         else
                         {
@@ -132,6 +134,7 @@ namespace HackNet.Game.Gameplay
                             CmdError.ForeColor = System.Drawing.Color.Green;
                             CmdTextBox.Text = string.Empty;
                             CmdTextBox.Enabled = false;
+                            Step4Lbl.ForeColor = System.Drawing.Color.Green;
                         }
                         else
                         {
@@ -184,6 +187,7 @@ namespace HackNet.Game.Gameplay
                 LoadScanInfo(ViewState["ScanList"] as List<string>);
                 ErrorLbl.ForeColor = System.Drawing.Color.Green;
                 ErrorLbl.Text = "Successful Configurations";
+                Step1Lbl.ForeColor = System.Drawing.Color.Green;
             }
             else
             {
@@ -212,6 +216,7 @@ namespace HackNet.Game.Gameplay
                     MisSumLbl.Text = "Some perpetrators uses these methods to gain access to companies to actually steal theri client information. As such, this could be prevented if firewall rules and other configurations were set up correctly.";
                     MisExpLbl.Text = mis.MissionExp.ToString();
                     MisCoinLbl.Text = mis.MissionCoin.ToString();
+                    Step5Lbl.ForeColor = System.Drawing.Color.Green;
                     
 
                     using (DataContext db = new DataContext())
@@ -224,18 +229,25 @@ namespace HackNet.Game.Gameplay
                         ItemBonusLbl.Text = i.ItemBonus.ToString();
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
-                        InventoryItem invItem = new InventoryItem();
-                        invItem.UserId = u.UserID;
-                        invItem.ItemId = i.ItemId;
-                        invItem.Quantity = 1;
-
-                        db.InventoryItem.Add(invItem);
-                        db.SaveChanges();
-
+                        InventoryItem invItem;
+                        if (ItemLogic.CheckInventoryItem(db, u, i.ItemId, out invItem))
+                        {
+                            invItem.Quantity += 1;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            invItem = new InventoryItem();
+                            invItem.UserId = u.UserID;
+                            invItem.ItemId = i.ItemId;
+                            invItem.Quantity = 1;
+                            db.InventoryItem.Add(invItem);
+                        }
                         List<string> RewardList = new List<string>();
                         RewardList.Add("Mission Exp: "+mis.MissionExp.ToString());
                         RewardList.Add("Mission Coin: "+mis.MissionCoin.ToString());
                         RewardList.Add("Item: "+i.ItemName);
+
                         MissionLogLogic.Store(CurrentUser.Entity().UserID,mis.MissionName,true, RewardList);
 
                     }
@@ -253,8 +265,11 @@ namespace HackNet.Game.Gameplay
                     MisSumLbl.Text = "Mission Failed due to incorrect file choosen.";
                     MisExpLbl.Text = "0";
                     MisCoinLbl.Text = "0";
-
-                    MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false);
+                    Step5Lbl.ForeColor = System.Drawing.Color.Red;
+                    ItemImage.Visible = false;
+                    List<string> rewardList = new List<string>();
+                    rewardList.Add("Failed Mission no reward");
+                    MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false,rewardList);
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);
                 }
@@ -268,8 +283,11 @@ namespace HackNet.Game.Gameplay
                 MisSumLbl.Text = "Mission Failed due to incorrect type of attack choosen";
                 MisExpLbl.Text = "0";
                 MisCoinLbl.Text = "0";
-
-                MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false);
+                Step5Lbl.ForeColor = System.Drawing.Color.Red;
+                ItemImage.Visible = false;
+                List<string> rewardList = new List<string>();
+                rewardList.Add("Failed Mission no reward");
+                MissionLogLogic.Store(CurrentUser.Entity().UserID, mis.MissionName, false, rewardList);
 
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "missionSumModel", "showFinishPrompt();", true);

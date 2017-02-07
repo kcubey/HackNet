@@ -192,7 +192,7 @@ namespace HackNet.Game.Class
         }
 
         // Check if item is in inventory
-        private static bool CheckInventoryItem(DataContext db, Users user, int itemid, out InventoryItem invItem)
+        public static bool CheckInventoryItem(DataContext db, Users user, int itemid, out InventoryItem invItem)
         {
 
             invItem = (from i in db.InventoryItem where i.UserId == user.UserID && i.ItemId == itemid select i).FirstOrDefault();
