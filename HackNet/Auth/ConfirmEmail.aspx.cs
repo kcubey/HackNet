@@ -15,6 +15,11 @@ namespace HackNet.Auth
 			string email = Request.QueryString["Email"];
 			string cfmcode = Request.QueryString["Code"];
 
+            if (CurrentUser.IsAuthenticated())
+            {
+                Response.Redirect("~/Default", true);
+            }
+
 			if (email != null && cfmcode != null)
 			{
 				Confirm(email, cfmcode);
