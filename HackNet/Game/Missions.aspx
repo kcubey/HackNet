@@ -60,14 +60,14 @@
         <div class="panel panel-body">
             <a class="glyphicon glyphicon-question-sign" style="float: right; color: greenyellow; font-size: 25px; text-decoration: none;" href="javascript:void(0);" onclick="javascript:introJs().start();"></a>
             <div class="col-sm-12 col-md-9">
-                <div class="form-group row" data-step="1" data-intro="This is how you attack" data-position='right'>
+                <div class="form-group row" data-step="1" data-intro="This is a list of places where you can do your mission. You will unlock more places once you gain a higher level." data-position='right'>
                     <asp:Label runat="server" Text="Region of attack: " Font-Size="Larger" CssClass="col-xs-3 col-form-label"></asp:Label>
                     <asp:DropDownList runat="server" AutoPostBack="true" ID="regatkList" OnSelectedIndexChanged="regatkList_SelectedIndexChanged"
                         CssClass="col-xs-4 col-form"
                         BackColor="Black">
                     </asp:DropDownList>
                 </div>
-                <div class="row" data-step="2" data-intro="Ok, wasn't that fun?" data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
+                <div class="row" data-step="2" data-intro="This is the where missions are loaded." data-position='right' style="background-image: url(../Content/Images/mission.png); background-size: cover; height: 300px;">
                     <asp:DataList ID="AtkListView" runat="server" BackColor="Black" RepeatLayout="Table" Width="100%">
                         <HeaderTemplate>
                             <asp:Table runat="server" CssClass="table">
@@ -102,7 +102,7 @@
                     </asp:DataList>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-3" data-step="4" data-intro="Ok, wasn't that fun?" data-position='right'>
+            <div class="col-sm-12 col-md-3" data-step="4" data-intro="This is a list of attack types that you can use to play the mission. It will give a short description on each attack." data-position='right'>
                 <h4>Types of attacks:</h4>
                 <asp:DataList ID="TypeAtkListView" runat="server">
                     <ItemTemplate>
@@ -119,7 +119,7 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default" data-step="5" data-intro="This is your terminal" data-position='right'>
+    <div class="panel panel-default" data-step="5" data-intro="This is your terminal where command output is printed out." data-position='right'>
         <div class="panel-header" style="background-color: grey;">
             <h4 style="text-align: center; margin-bottom: 0;">
                 <asp:Label runat="server" Text="user"></asp:Label>@HackNetHost:~
@@ -128,7 +128,7 @@
         <div class="panel-body" style="border-radius: 0; background-color: #091012; overflow-y: auto; max-height: 400px; height: 250px;">
             <asp:Panel ID="LogPanel" runat="server"></asp:Panel>
         </div>
-        <div class="panel-footer" data-step="6" data-intro="You enter your command here." data-position='right' style="background-color: #091012; border-top: 1px solid white;">
+        <div class="panel-footer" data-step="6" data-intro="This is where you can enter commands to play the game." data-position='right' style="background-color: #091012; border-top: 1px solid white;">
             <asp:Label runat="server" Text="username@HackNet:~#" Width="20%"></asp:Label>
             <asp:TextBox runat="server" ID="AtkTextBx" BackColor="#091012" BorderStyle="None" Style="min-width: 69%; width: 69%; padding: 5px;"></asp:TextBox>
             <asp:Button runat="server" ID="SubCmdBtn" OnClick="SubCmdBtn_Click" Text="Submit" CssClass="btn btn-default" Width="10%" Style="float: right;" />
