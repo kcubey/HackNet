@@ -65,9 +65,16 @@ namespace HackNet.Prefs
 
 				if (!emailTxt.Text.Equals(u.Email))
 				{
-                    ProfileLogger.Instance.ProfileChange("EMAIL", u.Email, emailTxt.Text);
+                    ProfileLogger.Instance.ProfileChange("EMAIL", u.Email, emailTxt.Text.ToLower());
 
-                    u.Email = emailTxt.Text;
+                    Users usr = Users.FindByEmail(u.Email.ToLower());
+                    if (usr != null)
+                    {
+                        Msg.Text = "That email is already registered with HackNet";
+                        return;
+                    }
+
+                    u.Email = emailTxt.Text.ToLower();
 					EmailConfirm.SendEmailForConfirmation(u, db);
 					whatschanged += "Email ";
 				}
