@@ -95,7 +95,7 @@
             <ContentTemplate>
 
                 <!-- Message repeater for each message -->
-                <ol class="chat" style="max-height: 400px; overflow: scroll;" id="chatdiv">
+                <ol class="chat" style="max-height: 400px; overflow-y: scroll; overflow-x: hidden;" id="chatdiv">
                     <asp:Repeater ID="ChatRepeater" runat="server" OnLoad="ChatRepeater_Load">
                         <ItemTemplate>
                             <li class="<%# ThisOrOther( (int) Eval("SenderId") ) %>">
