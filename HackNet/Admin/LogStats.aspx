@@ -55,7 +55,7 @@
 
 	   var options3 = {
 		  chart: {
-			title: 'HackNet Event Count - Past 12 hours by Severity',
+			title: 'HackNet Event Count - Past 24 hours by Severity',
 			subtitle: 'Logged by HackNet Audit Logs',
 		  },
 		  height: 500,
