@@ -13,6 +13,33 @@ namespace HackNet.Admin {
     public partial class UserInventory {
         
         /// <summary>
+        /// OutComeLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label OutComeLbl;
+        
+        /// <summary>
+        /// WarningLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label WarningLbl;
+        
+        /// <summary>
+        /// WarningMessageLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label WarningMessageLbl;
+        
+        /// <summary>
         /// AdminUsersView control.
         /// </summary>
         /// <remarks>

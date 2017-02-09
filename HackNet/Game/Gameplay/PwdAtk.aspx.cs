@@ -230,7 +230,7 @@ namespace HackNet.Game.Gameplay
                         ItemImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(i.ItemPic, 0, i.ItemPic.Length);
 
                         InventoryItem invItem;
-                        if (ItemLogic.CheckInventoryItem(db, u, i.ItemId, out invItem))
+                        if (ItemLogic.CheckInventoryItem(db, u.UserID, i.ItemId, out invItem))
                         {
                             invItem.Quantity += 1;
                             db.SaveChanges();

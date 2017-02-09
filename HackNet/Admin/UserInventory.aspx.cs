@@ -69,14 +69,22 @@ namespace HackNet.Admin
             {
                 int itemid = int.Parse(e.CommandArgument.ToString());
                 int userid = int.Parse(Cache["UserId"].ToString());
+                
                 if (ItemLogic.DeleteItemFromUserInv(userid, itemid))
                 {
                     // Success in deleting
+                    OutComeLbl.Text ="Successful Delete of Item";
+                    WarningLbl.Visible = false;
+                    WarningMessageLbl.Text = "Item Deleted from user inventory.";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "UserInvenModal", "ShowPopUp();", true);
                     Response.Redirect("UserInventory.aspx", true);
                 }
                 else
                 {
+                    OutComeLbl.Text = "Delete Error";
+                    WarningMessageLbl.Text = "Item cannot be deleted from user's inventory as part is used in machine"
                     // Part in used cannot delete
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "UserInvenModal", "ShowPopUp();", true);
                 }
             }
             else
@@ -89,14 +97,23 @@ namespace HackNet.Admin
         
         protected void AddItemToUserInv_Click(object sender, EventArgs e)
         {
-            InventoryItem invitem = new InventoryItem();
-            invitem.UserId = int.Parse(UserIDTxtbox.Text);
-            invitem.ItemId = int.Parse(AllItemsList.SelectedValue);
-            invitem.Quantity = int.Parse(ItemQuantityTxtbox.Text);
+            int userid = int.Parse(Cache["UserId"].ToString());
+            InventoryItem invItem;
             using (DataContext db=new DataContext())
             {
-                db.InventoryItem.Add(invitem);
-                db.SaveChanges();
+                if(ItemLogic.CheckInventoryItem(db, userid, int.Parse(AllItemsList.SelectedValue),out invItem))
+                {
+                    invItem.Quantity = invItem.Quantity + 1;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    invItem=new InventoryItem();
+                    invItem.UserId = userid;
+                    invItem.Quantity = 1;
+                    db.InventoryItem.Add(invItem);
+                    db.SaveChanges();
+                }
                 Response.Redirect("UserInventory.aspx", true);
             }
         }

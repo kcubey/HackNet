@@ -1,6 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.master" AutoEventWireup="true" CodeBehind="UserInventory.aspx.cs" Inherits="HackNet.Admin.UserInventory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminPanelContent" runat="server">
+    <script type="text/javascript">
+        function ShowPopUp() {
+            $('#UserInvenModal').modal('show');
+        }
+    </script>
+    <div id="UserInvenModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <asp:Label runat="server" ID="OutComeLbl" ForeColor="Black" Font-Size="Larger" Font-Bold="true" />
+                </div>
+                <div class="modal-body">
+                    <asp:Label runat="server" ID="WarningLbl" Text="*WARNING*" ForeColor="Red" Font-Size="X-Large" /><br />
+                   <asp:Label runat="server" ID="WarningMessageLbl" ForeColor="Black" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="panel panel-default">
         <div class="panel-header">
             <asp:Label runat="server" Text="User Inventory Panel" Font-Size="Large" Style="padding: 2%;" ForeColor="White"></asp:Label>

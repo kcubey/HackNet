@@ -87,13 +87,13 @@ namespace HackNet.Game.Class
             }
 
         }
-        
+
         /// <summary>
         /// Load Users inventory for admin to manage
         /// </summary>
         /// <param name="usrItemList"></param>
         /// <param name="gv"></param>
-        public static void LoadUserManageInvetory(List<Items> usrItemList,GridView gv)
+        public static void LoadUserManageInvetory(List<Items> usrItemList, GridView gv)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("ItemID", typeof(int));
@@ -107,29 +107,46 @@ namespace HackNet.Game.Class
                 }
                 gv.DataSource = dt;
                 gv.DataBind();
-            }else
+            }
+            else
             {
                 gv.DataSource = null;
                 gv.DataBind();
             }
-           
+
         }
-        
-        public static bool DeleteItemFromUserInv(int UserID,int ItemID)
+
+        /// <summary>
+        /// Delete Item from the User Inventory
+        /// </summary>
+        /// <param name="UserID"></param>
+        /// <param name="ItemID"></param>
+        /// <returns></returns>
+        public static bool DeleteItemFromUserInv(int UserID, int ItemID)
         {
-            
-            using(DataContext db=new DataContext())
+            using (DataContext db = new DataContext())
             {
-                if (!MachineLogic.CheckInstalledParts(UserID, ItemID,db))
+
+                InventoryItem invitem = db.InventoryItem.Where(x => x.UserId == UserID && x.ItemId == ItemID).FirstOrDefault();
+                if (invitem.Quantity > 1)
                 {
-                    InventoryItem invitem = db.InventoryItem.Where(x => x.UserId == UserID && x.ItemId == ItemID).FirstOrDefault();
-                    db.InventoryItem.Remove(invitem);
+                    invitem.Quantity = invitem.Quantity - 1;
                     db.SaveChanges();
                     return true;
-                }else
-                {
-                    return false;
                 }
+                else
+                {
+                    if (!MachineLogic.CheckInstalledParts(UserID, ItemID, db))
+                    {
+                        db.InventoryItem.Remove(invitem);
+                        db.SaveChanges();
+                        return true;
+                    }else
+                    {
+                        return false;
+                    }
+                }
+                
             }
         }
 
@@ -174,7 +191,7 @@ namespace HackNet.Game.Class
             using (DataContext db = new DataContext())
             {
                 InventoryItem invitem;
-                if (CheckInventoryItem(db, user, itemid, out invitem))
+                if (CheckInventoryItem(db, user.UserID, itemid, out invitem))
                 {
                     invitem.Quantity += quantity;
                     db.SaveChanges();
@@ -191,11 +208,18 @@ namespace HackNet.Game.Class
             }
         }
 
-        // Check if item is in inventory
-        public static bool CheckInventoryItem(DataContext db, Users user, int itemid, out InventoryItem invItem)
+        /// <summary>
+        /// Check if item is in inventory
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="userid"></param>
+        /// <param name="itemid"></param>
+        /// <param name="invItem"></param>
+        /// <returns></returns>
+        public static bool CheckInventoryItem(DataContext db, int userid, int itemid, out InventoryItem invItem)
         {
 
-            invItem = (from i in db.InventoryItem where i.UserId == user.UserID && i.ItemId == itemid select i).FirstOrDefault();
+            invItem = (from i in db.InventoryItem where i.UserId == userid && i.ItemId == itemid select i).FirstOrDefault();
             if (invItem == null)
             {
                 return false;
@@ -206,7 +230,7 @@ namespace HackNet.Game.Class
                 return true;
             }
         }
-        
+
         /// <summary>
         /// Using probability to get a random Item for reward
         /// </summary>

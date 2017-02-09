@@ -202,7 +202,7 @@ namespace HackNet.Game.Gameplay
 
                         InventoryItem invItem ;
 
-                        if (ItemLogic.CheckInventoryItem(db, u,i.ItemId,out invItem))
+                        if (ItemLogic.CheckInventoryItem(db, u.UserID,i.ItemId,out invItem))
                         {
                             invItem.Quantity += 1;
                             db.SaveChanges();
