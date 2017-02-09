@@ -13,6 +13,15 @@ namespace HackNet {
     public partial class AdminMaster {
         
         /// <summary>
+        /// AdminHeadContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder AdminHeadContent;
+        
+        /// <summary>
         /// AdminPanelContent control.
         /// </summary>
         /// <remarks>
