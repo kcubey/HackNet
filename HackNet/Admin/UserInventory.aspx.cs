@@ -82,7 +82,7 @@ namespace HackNet.Admin
                 else
                 {
                     OutComeLbl.Text = "Delete Error";
-                    WarningMessageLbl.Text = "Item cannot be deleted from user's inventory as part is used in machine"
+                    WarningMessageLbl.Text = "Item cannot be deleted from user's inventory as part is used in machine";
                     // Part in used cannot delete
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "UserInvenModal", "ShowPopUp();", true);
                 }
