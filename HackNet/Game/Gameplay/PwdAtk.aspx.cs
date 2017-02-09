@@ -105,7 +105,9 @@ namespace HackNet.Game.Gameplay
                 {
                     if ((bool)ViewState["Bypass"] == false)
                     {
-                        if (CmdTextBox.Text.Equals(ViewState["AnswerForPwd"].ToString()))
+                        string inputCommand = "su -root -P " + CmdTextBox.Text;
+                        string AnswerCommnad = "su -root -P " + ViewState["AnswerForPwd"].ToString();
+                        if (inputCommand.Equals(AnswerCommnad))
                         {
                             CmdError.Text = "Password Correct!";
                             CmdError.ForeColor = System.Drawing.Color.Green;
