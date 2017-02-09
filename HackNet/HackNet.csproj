@@ -207,6 +207,7 @@
     <Content Include="Admin\ItemMgmt.aspx" />
     <Content Include="Admin\LocalLogs.aspx" />
     <Content Include="Admin\Logs.aspx" />
+    <Content Include="Admin\LogStats.aspx" />
     <Content Include="Admin\MissionMgmt.aspx" />
     <Content Include="Admin\PackageMgmt.aspx" />
     <Content Include="Admin\UserInventory.aspx" />
@@ -406,6 +407,13 @@
     </Compile>
     <Compile Include="Admin\Logs.aspx.designer.cs">
       <DependentUpon>Logs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LogStats.aspx.cs">
+      <DependentUpon>LogStats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LogStats.aspx.designer.cs">
+      <DependentUpon>LogStats.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\MissionMgmt.aspx.cs">
       <DependentUpon>MissionMgmt.aspx</DependentUpon>
