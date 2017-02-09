@@ -184,7 +184,7 @@
                             ControlToValidate="CmdTextBox"
                             ForeColor="Red"
                             ErrorMessage="Invalid Input"
-                            ValidationExpression="^[a-zA-Z0-9_\s]*$"></asp:RegularExpressionValidator>
+                            ValidationExpression="^[a-zA-Z0-9_\s-]*$"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="panel panel-default" data-step="3" data-intro="This is the nautilas, it is a graphical interface that most servers use to help navigate around files and directories." data-position='right'>
@@ -229,7 +229,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel panel-default" style="height: 390px;" data-step="4" data-intro="This is where a list of passwords would be generated." data-position='right'>
+                <div class="panel panel-default" style="height: 390px;" data-step="4" data-intro="This is where a list of passwords would be generated. To use this list to your advantage, type in 'su -root -P hackedPassword. To hopefully gain root access to the system'" data-position='right'>
                     <div class="panel-header" style="background-color: grey;">
                         <h4 style="text-align: center; margin-bottom: 0;">Hacked Password List
                         </h4>

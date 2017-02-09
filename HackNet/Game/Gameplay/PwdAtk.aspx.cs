@@ -105,7 +105,7 @@ namespace HackNet.Game.Gameplay
                 {
                     if ((bool)ViewState["Bypass"] == false)
                     {
-                        string inputCommand = "su -root -P " + CmdTextBox.Text;
+                        string inputCommand = CmdTextBox.Text;
                         string AnswerCommnad = "su -root -P " + ViewState["AnswerForPwd"].ToString();
                         if (inputCommand.Equals(AnswerCommnad))
                         {
